@@ -135,6 +135,11 @@ async def get_one_rank_info(user_id, uid, role_detail, rankDetail):
         for ph in ph_detail:
             if ph.get("ph_num") == 5:
                 sonata_name = ph.get("ph_name", "")
+                break
+
+            if ph.get("isFull"):
+                sonata_name = ph.get("ph_name", "")
+                break
 
     # 区服
     region_text, region_color = get_region_for_rank(uid)

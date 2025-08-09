@@ -711,8 +711,8 @@ async def which_char(bot: Bot, ev: Event, char: str):
                     choice_idx = int(resp.content[0].data) - 1
                     if 0 <= choice_idx < len(flat_choices):
                         return flat_choices[choice_idx]
-                await bot.send(f"无效序号，请输入范围[1-{len(candidates)}]的数字选择", at_sender=at_sender)
+                await bot.send(f"无效序号，请输入范围[1-{len(candidates)}]的数字选择\n", at_sender=at_sender)
     except asyncio.TimeoutError:
         default_name, default_id = flat_choices[0] if flat_choices else (char, None)
-        await bot.send(f"[鸣潮] 选择超时，已自动使用 {default_name}", at_sender=at_sender)
+        await bot.send(f"[鸣潮] 选择超时，已自动使用 {default_name}\n", at_sender=at_sender)
         return default_name, default_id

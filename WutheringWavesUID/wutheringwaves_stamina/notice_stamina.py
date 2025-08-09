@@ -3,6 +3,8 @@ from typing import Dict, List, Union
 from gsuid_core.logger import logger
 from gsuid_core.segment import MessageSegment
 
+from ..utils.waves_api import waves_api
+from ..utils.api.model import DailyData
 from ..utils.database.models import WavesPush, WavesUser
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 
@@ -40,6 +42,7 @@ async def all_check(
 
     bot_id = user.bot_id
     uid = user.uid
+    token = user.cookie
 
 
     # 当前时间
@@ -58,8 +61,20 @@ async def all_check(
                 uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"}
             )
             if _check:
+                time_refresh = timestamp
+                succ, daily_info = await waves_api.get_daily_info(uid, token)
+                if succ:
+                    daily_info = DailyData.model_validate(daily_info)
+                    refreshTimeStamp = daily_info.energyData.refreshTimeStamp
+                    time_refresh = int(
+                        refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
+                    )
+
                 extended_time = WutheringWavesConfig.get_config("StaminaRemindInterval").data # 分钟
-                time_push = datetime.fromtimestamp(timestamp + int(extended_time) * 60)
+                time_repush = timestamp + int(extended_time) * 60
+
+                time_out = time_refresh if await check(time_refresh, time_repush) else time_repush
+                time_push = datetime.fromtimestamp(time_out)
                 await WavesPush.update_data_by_uid(
                     uid=uid, bot_id=bot_id, **{f"{status}_value": str(time_push)}
                 )
@@ -90,14 +105,11 @@ async def check(
     time: int,
     limit: int,
 ) -> Union[bool, int]:
-    from gsuid_core.logger import logger
     logger.info(f"{time} >?= {limit}")
     if time >= limit:
         return True
     else:
         return False
-
-    return False
 
 
 async def save_push_data(

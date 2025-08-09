@@ -36,13 +36,13 @@ async def change_echo(bot: Bot, ev: Event):
     )
 
     if not waves_api.is_net(uid):
-        return await bot.send("[鸣潮] 国服用户不支持修改角色数据", at_sender)
+        return await bot.send("[鸣潮] 国服用户不支持修改角色数据\n", at_sender)
 
     char = ev.regex_dict.get("char")
     sonata = ev.regex_dict.get("sonata")
     phantom = bool(ev.regex_dict.get("echo"))  # 改为布尔值判断
     if not sonata and not phantom:
-        return await bot.send(f"[鸣潮] 请正确使用命令：\n{PREFIX}改{char}套装合鸣效果 (可使用 【...合鸣一3合鸣二2】 改为3+2合鸣,按顺序修改) --合鸣效果可用前两字缩写 \n{PREFIX}改{char}声骸 --修改当前套装下的首位声骸", at_sender)
+        return await bot.send(f"[鸣潮] 请正确使用命令：\n {PREFIX}改{char}套装合鸣效果 (可使用 [...合鸣一3合鸣二2] 改为3+2合鸣,按顺序修改) --合鸣效果可用前两字缩写 \n {PREFIX}改{char}声骸 --修改当前套装下的首位声骸\n", at_sender)
 
     char_name = alias_to_char_name(char)
     if char == "漂泊者":
@@ -51,20 +51,20 @@ async def change_echo(bot: Bot, ev: Event):
 
     bool_get, old_data = await get_local_all_role_detail(uid)
     if not bool_get:
-        return await bot.send(f"[鸣潮] 用户{uid}数据不存在，请先使用【{PREFIX}分析】上传{char_name_print}角色数据", at_sender)
+        return await bot.send(f"[鸣潮] 用户{uid}数据不存在，请先使用【{PREFIX}分析】上传{char_name_print}角色数据\n", at_sender)
 
     char_id, roleName = await get_char_name_from_local(char_name, old_data)
     if not char_id:
-        return await bot.send(f"[鸣潮] 角色{char_name_print}不存在，请先使用【{PREFIX}分析】上传角色数据", at_sender)
+        return await bot.send(f"[鸣潮] 角色{char_name_print}不存在，请先使用【{PREFIX}分析】上传角色数据\n", at_sender)
     char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', roleName) # 删除"漂泊者·衍射"的符号
 
     bool_change, waves_data = await change_sonata_and_first_echo(bot, char_id, sonata, phantom, old_data)
     if not bool_change or isinstance(waves_data, str):
-        return await bot.send(f"[鸣潮] 修改角色{char_name_print}数据失败，{waves_data}", at_sender)
+        return await bot.send(f"[鸣潮] 修改角色{char_name_print}数据失败，{waves_data}\n", at_sender)
 
     # 覆盖更新
     await save_card_info(uid, waves_data)
-    return await bot.send(f"[鸣潮] 修改角色{char_name_print}数据成功，使用【{PREFIX}{char_name_print}面板】查看您的角色面板", at_sender)
+    return await bot.send(f"[鸣潮] 修改角色{char_name_print}数据成功，使用【{PREFIX}{char_name_print}面板】查看您的角色面板\n", at_sender)
 
 async def get_local_all_role_detail(uid: str) -> tuple[bool, dict]:
     _dir = PLAYER_PATH / uid

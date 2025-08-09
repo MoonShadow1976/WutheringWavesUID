@@ -52,7 +52,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
 
     except Exception as e:
         logger.error(f" [鸣潮][dc卡片识别] 识别结果结构错误：{e}")
-        await bot.send("[鸣潮]识别结果结构错误", at_sender)
+        await bot.send("[鸣潮]识别结果结构错误\n", at_sender)
         return
 
     # 存储用户昵称
@@ -62,7 +62,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
     # char_id = "1506" # 菲比..utils\map\detail_json\char\1506.json
     result = await generate_online_role_detail(char_id)
     if not result: 
-        return await bot.send("[鸣潮]暂未支持的角色，请等待后续更新", at_sender)
+        return await bot.send("[鸣潮]暂未支持的角色，请等待后续更新\n", at_sender)
     waves_data = []
     data = {}
 
@@ -182,7 +182,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
     # 检查声骸数据是否异常
     is_valid, corrected_data = await check_phantom_data(data)
     if not is_valid:
-        await bot.send("[鸣潮]dc卡片识别数据异常！\n或请使用更高分辨率卡片重新识别！", at_sender)
+        await bot.send("[鸣潮]dc卡片识别数据异常！\n或请使用更高分辨率卡片重新识别！\n", at_sender)
         return
     
     # 对比更新
@@ -190,7 +190,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
 
     waves_data.append(update_data)
     await save_card_info(uid, waves_data)
-    await bot.send(f"[鸣潮]dc卡片数据提取成功！识别套装使用默认配置(影响伤害计算不影响声骸评分)\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装合鸣效果】(可使用 【...合鸣一3合鸣二2】 改为3+2合鸣) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
+    await bot.send(f"[鸣潮]dc卡片数据提取成功！识别套装使用默认配置(影响伤害计算不影响声骸评分)\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装合鸣效果】(可使用 [...合鸣一3合鸣二2] 改为3+2合鸣) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
     logger.info(f" [鸣潮][dc卡片识别] 数据识别完毕，用户{uid}的{char_name_print}面板数据已保存到本地！")
     return
 

@@ -416,12 +416,14 @@ async def get_role_need(
             query_list = SPECIAL_CHAR.copy()[char_id]
 
         for char_id in query_list:
-            succ, role_detail_info = await waves_api.get_role_detail_info(
+            role_detail_info = await waves_api.get_role_detail_info(
                 char_id, waves_id, ck
             )
+            if not role_detail_info.success:
+                continue
+            role_detail_info = role_detail_info.data
             if (
-                not succ
-                or not isinstance(role_detail_info, Dict)
+                not isinstance(role_detail_info, Dict)
                 or "role" not in role_detail_info
                 or role_detail_info["role"] is None
                 or "level" not in role_detail_info
@@ -645,9 +647,9 @@ async def draw_char_detail_img(
     if not is_limit_query:
         _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
         if ck:
-            succ, online_list = await waves_api.get_online_list_role(ck)
-            if succ and online_list:
-                online_list_role_model = OnlineRoleList.model_validate(online_list)
+            online_list = await waves_api.get_online_list_role(ck)
+            if online_list.success and online_list.data:
+                online_list_role_model = OnlineRoleList.model_validate(online_list.data)
                 online_role_map = {str(i.roleId): i for i in online_list_role_model}
                 if char_id in online_role_map:
                     is_online_user = True

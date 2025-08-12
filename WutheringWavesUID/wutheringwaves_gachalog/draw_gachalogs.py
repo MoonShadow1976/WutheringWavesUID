@@ -453,34 +453,20 @@ async def get_random_card_polygon(ev: Event):
 
 
 async def draw_uid_avatar(uid, ev, card_img):
-    if waves_api.is_net(uid):
-        title = Image.open(TEXT_PATH / "title.png")
-        base_info_draw = ImageDraw.Draw(title)
-        base_info_draw.text((346, 370), f"特征码:  {uid}", GOLD, waves_font_25, "lm")
+    # 统一国服与国际服头图
+    from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+    account_info= await get_user_detail_info(uid)
 
-        avatar = await draw_pic_with_ring(ev)
-        avatar_ring = Image.open(TEXT_PATH / "avatar_ring.png")
-
-        card_img.paste(avatar, (346, 40), avatar)
-        avatar_ring = avatar_ring.resize((300, 300))
-        card_img.paste(avatar_ring, (340, 35), avatar_ring)
-
-        card_img.paste(title, (0, 0), title)
-
-    else:
-        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
-        account_info= await get_user_detail_info(uid)
-
-        base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
-        base_info_draw = ImageDraw.Draw(base_info_bg)
-        base_info_draw.text(
-            (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-        )
-        base_info_draw.text(
-            (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-        )
-        base_info_bg = base_info_bg.resize((900, 450))
-        card_img.alpha_composite(base_info_bg, (110, 30))
-        #
-        card_polygon = await get_random_card_polygon(ev)
-        card_img.alpha_composite(card_polygon, (80, 0))
+    base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
+    base_info_draw = ImageDraw.Draw(base_info_bg)
+    base_info_draw.text(
+        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
+    )
+    base_info_draw.text(
+        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
+    )
+    base_info_bg = base_info_bg.resize((900, 450))
+    card_img.alpha_composite(base_info_bg, (110, 30))
+    #
+    card_polygon = await get_random_card_polygon(ev)
+    card_img.alpha_composite(card_polygon, (80, 0))

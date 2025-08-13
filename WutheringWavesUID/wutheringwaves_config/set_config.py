@@ -148,14 +148,13 @@ async def set_config_func(ev: Event, uid: str = "0"):
             await gs_subscribe.delete_subscribe("single", task_name_resin, ev)
         else:
             await gs_subscribe.add_subscribe("single", task_name_resin, ev)
-    else:
-        return "该配置项不存在!"
 
-    if option == "on":
-        succeed_msg = "开启至私聊消息!"
-    elif option == "off":
-        succeed_msg = "关闭!"
-    else:
-        succeed_msg = f"开启至群{option}"
+        # 返回结果
+        if option == "on":
+            succeed_msg = "开启至私聊消息!"
+        elif option == "off":
+            succeed_msg = "关闭!"
+        else:
+            succeed_msg = f"开启至群{option}"
 
-    return f"{config_name}已{succeed_msg}\n{other_msg}"
+        return f"{config_name}已{succeed_msg}\n{other_msg}"

@@ -62,9 +62,9 @@ async def all_check(
             )
             if _check:
                 time_refresh = timestamp
-                succ, daily_info = await waves_api.get_daily_info(uid, token)
-                if succ:
-                    daily_info = DailyData.model_validate(daily_info)
+                daily_info_res = await waves_api.get_daily_info(uid, token)
+                if daily_info_res.success:
+                    daily_info = DailyData.model_validate(daily_info_res.data)
                     refreshTimeStamp = daily_info.energyData.refreshTimeStamp
                     time_refresh = int(
                         refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60

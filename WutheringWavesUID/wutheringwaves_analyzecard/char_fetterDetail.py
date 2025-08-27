@@ -90,7 +90,7 @@ async def get_first_echo_id_list(sonata_info):
     logger.debug(f"[鸣潮]获取到套装：{sonata_info}的声骸id列表：{phantom_id_list}")
     return phantom_id_list
 
-async def echo_data_to_cost(char_id, mainProps_first, cost4_counter=0) -> tuple[int, int]:
+async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) -> tuple[int, int]:
     """
     根据主词条判断声骸cost并返回适配ID
     
@@ -129,7 +129,9 @@ async def echo_data_to_cost(char_id, mainProps_first, cost4_counter=0) -> tuple[
         # 获取完整的层级结构
         full_id_list = await get_first_echo_id_list(DETAIL[char_id]['fetterDetail'])
         # 提取 4cost 的列表
-        echo_id_list = [echo_id for item in full_id_list if item["cost"] == 4 for echo_id in item["list"]]
+        cost_4_id_list = [echo_id for item in full_id_list if item["cost"] == 4 for echo_id in item["list"]]
+        cost_3_id_list = [echo_id for item in full_id_list if item["cost"] == 3 for echo_id in item["list"]]
+        # cost_1_id_list = [echo_id for item in full_id_list if item["cost"] == 1 for echo_id in item["list"]]
     except KeyError as e:
         logger.error(f"[鸣潮]角色配置数据缺失: {e}")
         return ECHO_ID_COST_ONE, 1  # 降级处理
@@ -140,11 +142,24 @@ async def echo_data_to_cost(char_id, mainProps_first, cost4_counter=0) -> tuple[
     # ---------- 4cost分配id逻辑 ----------
     def select_cost4_id():
         """选择cost4的ID（实现44111逻辑）"""
-        if len(echo_id_list) >= 2:
-            used_idx = cost4_counter % 2  # 在0和1之间循环
-            return echo_id_list[used_idx]
+        needId= DETAIL[char_id].get("needId") # 指定的声骸id
+        if index == 0 and needId and needId in cost_4_id_list:
+            return needId
+        if len(cost_4_id_list) >= 2:
+            used_idx = cost4_counter % len(cost_4_id_list)  # 在列表之中循环
+            if needId and needId == cost_4_id_list[used_idx]: # 如果指定了id且在列表之中
+                used_idx = (used_idx + 1) % len(cost_4_id_list)
+            return cost_4_id_list[used_idx]
         else:
-            return echo_id_list[0]
+            return cost_4_id_list[0]
+    
+    def select_cost3_id():
+        """选择cost3的ID（实现34311逻辑）"""
+        needId = DETAIL[char_id].get("needId") # 指定的声骸id
+        if index == 0 and needId and needId in cost_3_id_list:
+            return needId
+            
+        return ECHO_ID_COST_THREE
 
     # 处理4cost属性
     if key in FOUR_COST_ATTRS:
@@ -152,7 +167,7 @@ async def echo_data_to_cost(char_id, mainProps_first, cost4_counter=0) -> tuple[
     
     # 处理3cost属性（正则匹配）
     if any(re.fullmatch(p, key) for p in THREE_COST_PATTERNS):
-        return ECHO_ID_COST_THREE, 3
+        return select_cost3_id(), 3
     
     # 处理基础属性
     if key in BASE_COST_ATTRS:
@@ -164,7 +179,7 @@ async def echo_data_to_cost(char_id, mainProps_first, cost4_counter=0) -> tuple[
             if value > t2:
                 return select_cost4_id(), 4
             elif value > t1:
-                return ECHO_ID_COST_THREE, 3
+                return select_cost3_id(), 3
             elif key_little == "生命": # 声骸没拉满时
                 return ECHO_ID_COST_ONE, 1
             else:

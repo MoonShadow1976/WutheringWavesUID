@@ -205,10 +205,10 @@ async def async_ocr(bot: Bot, ev: Event):
     if not bool_d:
         return await bot.send("[鸣潮]Please use chinese card！")
 
-    name, char_id = await which_char(bot, ev, final_result["角色信息"]["角色名"])
+    name, char_id = await which_char(bot, ev, final_result["角色信息"].get("角色名",""))
     if char_id is None:
-        logger.warning(f"[鸣潮][dc卡片识别] 角色{name}识别错误！")
-        return await bot.send(f"[鸣潮]识别结果为角色{name}不存在")
+        logger.warning(f"[鸣潮][dc卡片识别] 角色[{name}]识别错误！")
+        return await bot.send(f"[鸣潮]无法识别的角色名{name}，请确保图片清晰")
     final_result["角色信息"]["角色名"] = name
     final_result["角色信息"]["角色ID"] = char_id
 
@@ -660,6 +660,9 @@ async def ocr_results_to_dict(chain_num, ocr_results):
     return True, final_result
 
 async def which_char(bot: Bot, ev: Event, char: str):
+    if not char.strip(): # 为空
+        return None, None
+
     at_sender = True if ev.group_id else False
     # 角色信息
     candidates = []

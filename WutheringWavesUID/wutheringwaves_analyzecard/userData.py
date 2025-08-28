@@ -42,7 +42,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
         char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', char_name) # 删除"漂泊者·衍射"的符号
 
         if char_id is None:
-            await bot.send(f"[鸣潮]识别结果为角色'{char_name_print}'不存在")
+            await bot.send(f"[鸣潮]识别结果为角色'{char_name_print}'不存在\n", at_sender)
             logger.error(f" [鸣潮][dc卡片识别] 用户{uid}的{char_name_print}识别错误！")
             return
         weapon_name = alias_to_weapon_name(result_dict["武器信息"]["武器名"])

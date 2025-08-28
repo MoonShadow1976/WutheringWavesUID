@@ -151,10 +151,12 @@ async def async_ocr(bot: Bot, ev: Event):
     """
     异步OCR识别函数
     """
+    at_sender = True if ev.group_id else False
+
     api_key_list = WutheringWavesConfig.get_config("OCRspaceApiKeyList").data  # 从控制台获取OCR.space的API密钥
     if api_key_list == []:
         logger.warning("[鸣潮] OCRspace API密钥为空！请检查控制台。")
-        await bot.send("[鸣潮] OCRspace API密钥未配置，请检查控制台。")
+        await bot.send("[鸣潮] OCRspace API密钥未配置，请检查控制台。\n", at_sender)
         return False
 
     # 检查可用引擎
@@ -166,7 +168,7 @@ async def async_ocr(bot: Bot, ev: Event):
 
     bool_i, image = await upload_discord_bot_card(ev)
     if not bool_i:
-        return await bot.send("[鸣潮]获取dc卡片图失败！卡片分析已停止。")
+        return await bot.send("[鸣潮]获取dc卡片图失败！卡片分析已停止。\n", at_sender)
     # 获取dc卡片与共鸣链
     chain_num, cropped_images = await cut_card_to_ocr(image)
 
@@ -182,11 +184,11 @@ async def async_ocr(bot: Bot, ev: Event):
             NEGINE_NUM = 3 # 激活PRO计划
 
         if NEGINE_NUM == 1 and API_KEY == api_key_list[0]:
-            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，请考虑稍后使用。")
+            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，请考虑稍后使用。\n", at_sender)
         elif NEGINE_NUM == 0:
-            return await bot.send("[鸣潮] OCR服务暂时不可用，请稍后再试。")
+            return await bot.send("[鸣潮] OCR服务暂时不可用，请稍后再试。\n", at_sender)
         elif NEGINE_NUM == -1:
-            return await bot.send("[鸣潮] 服务器访问OCR服务失败，请检查服务器网络状态。")
+            return await bot.send("[鸣潮] 服务器访问OCR服务失败，请检查服务器网络状态。\n", at_sender)
         
         ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images)
         logger.info(f"[鸣潮][OCRspace]dc卡片识别数据:\n{ocr_results}")
@@ -195,20 +197,20 @@ async def async_ocr(bot: Bot, ev: Event):
             break
 
     if API_KEY is None:
-        return await bot.send("[鸣潮] OCRspace API密钥不可用！请等待额度恢复或更换密钥")
+        return await bot.send("[鸣潮] OCRspace API密钥不可用！请等待额度恢复或更换密钥\n", at_sender)
     
     if ocr_results[0]['error'] or not ocr_results:
         logger.warning("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。")
-        return await bot.send("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。")
+        return await bot.send("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。\n", at_sender)
 
     bool_d, final_result = await ocr_results_to_dict(chain_num, ocr_results)
     if not bool_d:
-        return await bot.send("[鸣潮]Please use chinese card！")
+        return await bot.send("[鸣潮]Please use chinese card！\n", at_sender)
 
     name, char_id = await which_char(bot, ev, final_result["角色信息"].get("角色名",""))
     if char_id is None:
         logger.warning(f"[鸣潮][dc卡片识别] 角色[{name}]识别错误！")
-        return await bot.send(f"[鸣潮]无法识别的角色名{name}，请确保图片清晰")
+        return await bot.send(f"[鸣潮]无法识别的角色名{name}，请确保图片清晰\n", at_sender)
     final_result["角色信息"]["角色名"] = name
     final_result["角色信息"]["角色ID"] = char_id
 

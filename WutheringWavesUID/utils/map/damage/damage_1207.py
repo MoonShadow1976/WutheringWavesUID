@@ -316,6 +316,10 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_3(attr, role, isSingle=True),
     },
     {
+        "title": "0+1守/0+1离/狼舞·极尾刀",
+        "func": lambda attr, role: calc_damage_10(attr, role),
+    },
+    {
         "title": "狼舞·极总伤",
         "func": lambda attr, role: calc_damage_3(attr, role, isSingle=False),
     },

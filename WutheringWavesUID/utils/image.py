@@ -13,6 +13,7 @@ from PIL import (
     ImageOps,
 )
 
+from ..utils.database.models import WavesUserAvatar
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -246,6 +247,44 @@ async def get_qq_avatar(
     char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
     return char_pic
 
+async def get_discord_avatar(
+    qid: Optional[Union[int, str]] = None,
+    avatar_url: Optional[str] = None,
+    size: int = 640,
+) -> Image.Image:
+    if qid:
+        data = await WavesUserAvatar.select_data(str(qid), "discord")
+        avatar_hash = data.avatar_hash if data else ""
+        avatar_url = f"https://cdn.discordapp.com/avatars/{qid}/{avatar_hash}"
+    elif avatar_url is None:
+        avatar_url = "https://cdn.discordapp.com/embed/avatars/0.png"
+
+    avatar_url = avatar_url + f".png?size={size}" if not avatar_url.endswith(".png") else avatar_url
+    char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
+    return char_pic
+
+
+async def get_qqgroup_avatar(
+    qid: Optional[Union[int, str]] = None,
+    avatar_url: Optional[str] = None,
+    size: int = 640,
+) -> Image.Image:
+    if qid:
+        data = await WavesUserAvatar.select_data(str(qid), "qqgroup")
+        appid = data.avatar_hash if data else ""
+        avatar_url = f"http://q.qlogo.cn/qqapp/{appid}/{qid}/{size}"
+    elif avatar_url is None:
+        avatar_url = f"https://q.qlogo.cn/qqapp/0/0/{size}"
+
+    char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
+    return char_pic
+
+# 获取对应bot_id的头像获取函数
+AVATAR_GETTERS = {
+    "onebot": get_qq_avatar,
+    "discord": get_discord_avatar,
+    "qqgroup": get_qqgroup_avatar
+}
 
 async def get_event_avatar(
     ev: Event,
@@ -259,14 +298,17 @@ async def get_event_avatar(
         from ..utils.at_help import is_valid_at
 
         is_valid_at_param = is_valid_at(ev)
+    
+    get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
 
-    if ev.bot_id == "onebot" and ev.at and is_valid_at_param:
+    # 尝试获取@用户的头像
+    if get_bot_avatar and ev.at and is_valid_at_param:
         try:
-            img = await get_qq_avatar(ev.at, size=size)
+            img = await get_bot_avatar(ev.at, size=size)
         except Exception:
             img = None
 
-    if img is None and "avatar" in ev.sender and ev.sender["avatar"]:
+    if img is None and "avatar" in ev.sender and ev.sender["avatar"]: # qqgroup不返回avatar...
         avatar_url: str = ev.sender["avatar"]
         if avatar_url.startswith(("http", "https")):
             try:
@@ -275,9 +317,10 @@ async def get_event_avatar(
             except Exception:
                 img = None
 
-    if img is None and ev.bot_id == "onebot" and not ev.sender:
+    # 尝试获取使用者头像
+    if img is None and get_bot_avatar:
         try:
-            img = await get_qq_avatar(ev.user_id, size=size)
+            img = await get_bot_avatar(ev.user_id, size=size)
         except Exception:
             img = None
 

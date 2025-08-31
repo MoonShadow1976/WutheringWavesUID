@@ -87,8 +87,63 @@ async def get_guide_pic(guide_path: Path, pattern: re.Pattern, guide_author: str
 async def process_images_new(_dir: Path):
     imgs = []
     try:
-        img = await convert_img(_dir)
-        imgs.append(img)
+        from ..wutheringwaves_config import WutheringWavesConfig
+        segment_bool = WutheringWavesConfig.get_config("GuideSegment").data
+        from PIL import Image
+        with Image.open(_dir) as img:
+            width, height = img.size
+
+            # 计算长宽比（纵边 / 横边）
+            max_side = max(width, height)
+            aspect_ratio = height / width
+
+            # 定义裁切阈值
+            CROP_ASPECT_RATIO = 5    # 长宽比超过 5 时裁切
+            MAX_SINGLE_SIDE = 4000   # 单边最大允许像素（防止过大）
+
+            # 判断是否需要裁切
+            need_crop = False
+            if aspect_ratio > CROP_ASPECT_RATIO:
+                need_crop = True
+                logger.info(f"长宽比 {aspect_ratio:.1f} 超过阈值 {CROP_ASPECT_RATIO}，需要裁切")
+            elif max_side > MAX_SINGLE_SIDE:
+                need_crop = True
+                logger.info(f"单边尺寸 {max_side} 超过阈值 {MAX_SINGLE_SIDE}，需要裁切")
+            
+            if not segment_bool:
+                # 无需裁切，直接发送原图
+                logger.info("控制台未开启‘攻略切段’功能，发送原图")
+                img_bytes = await convert_img(img, is_base64=True)
+                imgs.append(img_bytes)
+            elif not need_crop:
+                # 无需裁切，直接发送原图
+                img_bytes = await convert_img(img, is_base64=True)
+                imgs.append(img_bytes)
+            else:
+                # 裁切方向（纵向）
+                segment_length = min(width * CROP_ASPECT_RATIO, MAX_SINGLE_SIDE)
+                # 计算裁切的段数 
+                # segments = math.ceil(height / segment_length)
+                segments = (height + segment_length - 1) // segment_length
+                # 计算基准高度和余数
+                base_segment_height = height // segments
+                remainder = height % segments
+
+                # 均匀裁切图片
+                current_top = 0
+                for i in range(segments):
+                    # 计算裁切区域
+                    segment_height = base_segment_height + 1 if i < remainder else base_segment_height
+                    bottom = current_top + segment_height
+                    box = (0, current_top, width, bottom)
+
+                    # 裁切并保存
+                    cropped = img.crop(box)
+                    img_bytes = await convert_img(cropped, is_base64=True)
+                    imgs.append(img_bytes)
+
+                    current_top = bottom
+
     except Exception as e:
         logger.warning(f"攻略图片读取失败 {_dir}: {e}")
     return imgs
@@ -96,7 +151,8 @@ async def process_images_new(_dir: Path):
 
 async def send_guide(config, imgs: list, bot: Bot):
     # 处理发送逻辑
-    if "all" in config:
+    # 裁切了 或者 all
+    if "all" in config or len(imgs) > 2:
         await bot.send(imgs)
     elif len(imgs) == 2:
         await bot.send(imgs[1])

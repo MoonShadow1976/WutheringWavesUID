@@ -9,10 +9,12 @@ from gsuid_core.utils.database.base_models import (
     Bind,
     Push,
     User,
+    BaseModel,
     with_session,
 )
 from gsuid_core.utils.database.startup import exec_list
 from gsuid_core.webconsole.mount_app import GsAdminModel, PageSchema, site
+from gsuid_core.logger import logger
 
 exec_list.extend(
     [
@@ -21,12 +23,17 @@ exec_list.extend(
         'ALTER TABLE WavesUser ADD COLUMN bbs_sign_switch TEXT DEFAULT "off"',
         'ALTER TABLE WavesUser ADD COLUMN bat TEXT DEFAULT ""',
         'ALTER TABLE WavesUser ADD COLUMN did TEXT DEFAULT ""',
+        'ALTER TABLE WavesPush ADD COLUMN push_time_value TEXT DEFAULT ""'
     ]
 )
 
 T_WavesBind = TypeVar("T_WavesBind", bound="WavesBind")
 T_WavesUser = TypeVar("T_WavesUser", bound="WavesUser")
+T_WavesUserAvatar = TypeVar("T_WavesUserAvatar", bound="WavesUserAvatar")
 
+class WavesUserAvatar(BaseModel, table=True):
+    __table_args__: Dict[str, Any] = {"extend_existing": True}
+    avatar_hash: str = Field(default="", title="头像哈希")
 
 class WavesBind(Bind, table=True):
     __table_args__: Dict[str, Any] = {"extend_existing": True}
@@ -241,6 +248,11 @@ class WavesUser(User, table=True):
         return list(data)
 
     @classmethod
+    async def get_all_push_user_list(cls: Type[T_WavesUser]) -> List[T_WavesUser]:
+        data = await cls.get_waves_all_user()
+        return [user for user in data if user.push_switch != "off"]
+
+    @classmethod
     @with_session
     async def delete_all_invalid_cookie(cls, session: AsyncSession):
         """删除所有无效缓存"""
@@ -280,6 +292,7 @@ class WavesPush(Push, table=True):
         schema_extra={"json_schema_extra": {"hint": "ww开启体力推送"}},
     )
     resin_value: Optional[int] = Field(title="体力阈值", default=180)
+    push_time_value: Optional[str] = Field(title="推送时间", default="")
     resin_is_push: Optional[str] = Field(title="体力是否已推送", default="off")
 
 
@@ -314,3 +327,12 @@ class WavesPushAdmin(GsAdminModel):
 
     # 配置管理模型
     model = WavesPush
+
+
+@site.register_admin
+class UserAvatar(GsAdminModel):
+    pk_name = "id"
+    page_schema = PageSchema(label="用户哈希管理", icon="fa fa-bullhorn")  # type: ignore
+
+    # 配置管理模型
+    model = WavesUserAvatar

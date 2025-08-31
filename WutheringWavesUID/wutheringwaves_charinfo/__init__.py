@@ -8,9 +8,10 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 from gsuid_core.utils.image.convert import convert_img
 
+from ..utils.waves_api import waves_api
 from ..utils.at_help import is_valid_at, ruser_id
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103
+from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_098
 from ..utils.hint import error_reply
 from ..utils.name_convert import char_name_to_char_id
 from ..utils.resource.constant import SPECIAL_CHAR
@@ -55,6 +56,8 @@ async def send_card_info(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
+    if waves_api.is_net(uid):
+        return await bot.send(error_reply(WAVES_CODE_098))
 
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 
@@ -95,6 +98,8 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
+    if waves_api.is_net(uid):
+        return await bot.send(error_reply(WAVES_CODE_098))
 
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 

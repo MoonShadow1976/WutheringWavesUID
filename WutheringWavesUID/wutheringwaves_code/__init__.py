@@ -19,11 +19,21 @@ url = "https://newsimg.5054399.com/comm/mlcxqcommon/static/wap/js/data_102.js?{}
 
 @sv_waves_code.on_fullmatch((f"code", f"兑换码"))
 async def get_sign_func(bot: Bot, ev: Event):
-    code_list = await get_code_list()
+    # 分别获取结果
+    list1 = await get_code_list()  # 可能返回列表或None
+    list2 = await get_oversea_code_list()  # 可能返回列表或None
+
+    # 安全合并
+    code_list = []
+    if list1 is not None:
+        code_list.extend(list1)
+    if list2 is not None:
+        code_list.extend(list2)
     if not code_list:
         return await bot.send("[获取兑换码失败] 请稍后再试")
 
     msgs = []
+    msgs.append("国际服只能使用已标注的兑换码（前瞻兑换码互通都可使用）")
     for code in code_list:
         is_fail = code.get("is_fail", "0")
         if is_fail == "1":
@@ -54,6 +64,35 @@ async def get_code_list():
     except Exception as e:
         logger.exception("[获取兑换码失败] ", e)
         return
+
+async def get_oversea_code_list():
+    code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@latest/js/oversea_codes.js"
+        
+    # 备选CDN镜像源
+    mirrors = [
+        code_url,
+        code_url.replace("cdn.jsdelivr.net", "fastly.jsdelivr.net"),
+        code_url.replace("cdn.jsdelivr.net", "gcore.jsdelivr.net"),
+        "https://raw.githubusercontent.com/MoonShadow1976/WutheringWaves_OverSea_StaticAssets/main/js/oversea_codes.js"
+    ]
+
+    for url in mirrors:
+        try:
+            async with httpx.AsyncClient(timeout=None) as client:
+                res = await client.get(url, timeout=10)
+
+                if res.status_code != 200:
+                    logger.error(f"[获取兑换码-国际服] 无效响应 {res.status_code}: {url}")
+                    continue
+
+                json_data = res.text.split("=", 1)[1].strip().rstrip(";")
+                logger.debug(f"[获取兑换码-国际服] url:{url}, codeList:{json_data}")
+                return json.loads(json_data)
+        except Exception as e:
+            logger.error(f"[获取兑换码-国际服] 请求失败 {url}: {str(e)}")
+
+    logger.error("[获取兑换码-国际服] 所有镜像源均失败")
+    return [{"order": "国际服兑换码获取失败,请检查服务器网络"}]
 
 
 def is_code_expired(label: str) -> bool:

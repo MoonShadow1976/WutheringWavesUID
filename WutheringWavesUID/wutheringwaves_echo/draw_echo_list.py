@@ -17,7 +17,7 @@ from ..utils.api.model import (
 from ..utils.calc import WuWaCalc
 from ..utils.calculate import calc_phantom_score, get_calc_map, get_valid_color
 from ..utils.char_info_utils import get_all_role_detail_info
-from ..utils.error_reply import WAVES_CODE_102
+from ..utils.error_reply import ERROR_CODE, WAVES_CODE_102, WAVES_CODE_099
 from ..utils.fonts.waves_fonts import (
     waves_font_24,
     waves_font_25,
@@ -41,6 +41,7 @@ from ..utils.imagetool import draw_pic_with_ring
 from ..utils.resource.download_file import get_phantom_img
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import PREFIX
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -57,19 +58,14 @@ class WavesEchoRank(BaseModel):
 
 
 async def get_draw_list(ev: Event, uid: str, user_id: str) -> Union[str, bytes]:
-    _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-    if not ck:
-        return hint.error_reply(WAVES_CODE_102)
-        # 账户数据
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
+    account_info= await get_user_detail_info(uid)
 
     all_role_detail: Optional[Dict[str, RoleDetailData]] = (
         await get_all_role_detail_info(uid)
     )
     if not all_role_detail:
+        if waves_api.is_net(uid):
+            return ERROR_CODE[WAVES_CODE_099]
         return f"[鸣潮] 未找到角色信息, 请先使用[{PREFIX}刷新面板]进行刷新!"
 
     waves_echo_rank = []

@@ -42,7 +42,7 @@ from ..utils.image import (
     add_footer,
     get_attribute,
     get_attribute_effect,
-    get_qq_avatar,
+    AVATAR_GETTERS,
     get_role_pile_old,
     get_square_avatar,
     get_square_weapon,
@@ -53,6 +53,7 @@ from ..utils.resource.constant import SPECIAL_CHAR, SPECIAL_CHAR_NAME
 from ..utils.util import hide_uid
 from ..utils.waves_card_cache import get_card
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
+from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 
 rank_length = 20  # 排行长度
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -72,6 +73,8 @@ class RankInfo(BaseModel):
     roleDetail: RoleDetailData  # 角色明细
     qid: str  # qq id
     uid: str  # uid
+    server: str  # 区服
+    server_color: tuple[int, int, int]  # 区服颜色
     level: int  # 角色等级
     chain: int  # 命座
     chainName: str  # 命座
@@ -134,12 +137,17 @@ async def get_one_rank_info(user_id, uid, role_detail, rankDetail):
             if ph.get("isFull"):
                 sonata_name = ph.get("ph_name", "")
                 break
+                
+    # 区服
+    region_text, region_color = get_region_for_rank(uid)
 
     rankInfo = RankInfo(
         **{
             "roleDetail": role_detail,
             "qid": user_id,
             "uid": uid,
+            "server": region_text,
+            "server_color": region_color,
             "level": role_detail.role.level,
             "chain": role_detail.get_chain_num(),
             "chainName": role_detail.get_chain_name(),
@@ -202,7 +210,14 @@ async def get_rank_info_for_user(
         if not role_detail.phantomData or not role_detail.phantomData.equipPhantomList:
             continue
 
-        rankInfo = await get_one_rank_info(user.user_id, uid, role_detail, rankDetail)
+        rankInfo = None
+        try:
+            rankInfo = await get_one_rank_info(user.user_id, uid, role_detail, rankDetail)
+        except Exception as e:
+            logger.warning(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
+            from ..utils.util import send_master_info
+            await send_master_info(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
+
         if not rankInfo:
             continue
         rankInfoList.append(rankInfo)
@@ -400,6 +415,15 @@ async def draw_rank_img(
         info_block_draw.text((5, 10), f"{rank.chainName}", "white", waves_font_18, "lm")
         bar_bg.alpha_composite(info_block, (190, 30))
 
+        # 区服
+        region_block = Image.new("RGBA", (50, 20), color=(255, 255, 255, 0))
+        region_draw = ImageDraw.Draw(region_block)
+        region_draw.rounded_rectangle(
+            [0, 0, 50, 20], radius=6, fill=rank.server_color + (int(0.9 * 255),)
+        )
+        region_draw.text((25, 10), rank.server, "white", waves_font_16, "mm")
+        bar_bg.alpha_composite(region_block, (100, 80))
+
         # 等级
         info_block = Image.new("RGBA", (60, 20), color=(255, 255, 255, 0))
         info_block_draw = ImageDraw.Draw(info_block)
@@ -557,7 +581,7 @@ async def draw_rank_img(
 
     # 备注
     rank_row_title = "入榜条件"
-    rank_row = f"1.本群内使用命令【{PREFIX}刷新面板】刷新过面板"
+    rank_row = f"1.本群内使用过命令 {PREFIX}练度"
     title_draw.text((20, 420), f"{rank_row_title}", SPECIAL_GOLD, waves_font_16, "lm")
     title_draw.text((90, 420), f"{rank_row}", GREY, waves_font_16, "lm")
     if tokenLimitFlag:
@@ -587,22 +611,28 @@ async def get_avatar(
     qid: Optional[Union[int, str]],
     char_id: Union[int, str],
 ) -> Image.Image:
-    if ev.bot_id == "onebot":
+    try:
+        get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
+        
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(qid)
             if not pic:
-                pic = await get_qq_avatar(qid, size=100)
+                pic = await get_bot_avatar(qid, size=100)
                 pic_cache.set(qid, pic)
         else:
-            pic = await get_qq_avatar(qid, size=100)
+            pic = await get_bot_avatar(qid, size=100)
             pic_cache.set(qid, pic)
-        pic_temp = crop_center_img(pic, 120, 120)
 
+        # 统一处理 crop 和遮罩（onebot/discord 共用逻辑）
+        pic_temp = crop_center_img(pic, 120, 120)
         img = Image.new("RGBA", (180, 180))
         avatar_mask_temp = avatar_mask.copy()
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
-    else:
+    
+    except Exception:
+        # 打印异常，进行降级处理
+        logger.warning("头像获取失败，使用默认头像")
         pic = await get_square_avatar(char_id)
 
         pic_temp = Image.new("RGBA", pic.size)

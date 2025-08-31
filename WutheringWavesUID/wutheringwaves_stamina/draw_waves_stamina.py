@@ -10,6 +10,7 @@ from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from ..wutheringwaves_config.set_config import set_push_time
 from gsuid_core.utils.image.image_tools import crop_center_img
 
 from ..utils.api.model import AccountBaseInfo, DailyData
@@ -240,6 +241,14 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
         else curr_time
     )
     # remain_time = await seconds2hours(refreshTimeStamp - curr_time)
+    # 设置体力推送时间
+    push_bool = await set_push_time(ev.bot_id, daily_info.roleId, refreshTimeStamp)
+    if push_bool:
+        push_icon = YES
+        push_text = "体力推送开启"
+    else:
+        push_icon = NO
+        push_text = "体力推送关闭"
 
     time_img = Image.new("RGBA", (190, 33), (255, 255, 255, 0))
     time_img_draw = ImageDraw.Draw(time_img)
@@ -327,7 +336,15 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
     status_img2_draw.rounded_rectangle([0, 0, 230, 40], fill=(0, 0, 0, int(0.3 * 255)))
     status_img2.alpha_composite(active_icon, (0, 0))
     status_img2_draw.text((50, 20), f"{active_text}", "white", waves_font_30, "lm")
-    img.alpha_composite(status_img2, (70, 140))
+    img.alpha_composite(status_img2, (70, 120))
+
+    # 体力推送状态
+    status_img3 = Image.new("RGBA", (230, 40), (255, 255, 255, 0))
+    status_img3_draw = ImageDraw.Draw(status_img3)
+    status_img3_draw.rounded_rectangle([0, 0, 230, 40], fill=(0, 0, 0, int(0.3 * 255)))
+    status_img3.alpha_composite(push_icon, (0, 0))
+    status_img3_draw.text((50, 20), f"{push_text}", "white", waves_font_30, "lm")
+    img.alpha_composite(status_img3, (70, 160))
 
     # bbs状态
     # status_img3 = Image.new("RGBA", (300, 40), (255, 255, 255, 0))

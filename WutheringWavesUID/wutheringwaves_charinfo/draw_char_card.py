@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw, ImageEnhance
 
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
+from ..utils.image import AVATAR_GETTERS
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img, get_qq_avatar
 
@@ -97,6 +98,7 @@ from ..wutheringwaves_config.wutheringwaves_config import (
     WutheringWavesConfig,
 )
 from .role_info_change import change_role_detail
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -409,7 +411,7 @@ async def get_role_need(
     is_limit_query=False,
     change_list_regex: Optional[str] = None,
 ):
-    if waves_id:
+    if waves_id and not waves_api.is_net(waves_id):
         query_list = [char_id]
         if char_id in SPECIAL_CHAR:
             query_list = SPECIAL_CHAR.copy()[char_id]
@@ -439,10 +441,10 @@ async def get_role_need(
         else:
             return (
                 None,
-                f"[鸣潮] 特征码[{waves_id}] \n无法获取【{char_name}】角色信息，请在库街区展示此角色！\n",
+                f"[鸣潮] 特征码[{waves_id}] \n无法获取【{char_name}】角色信息！\n",
             )
     else:
-        avatar = await draw_pic_with_ring(ev, is_force_avatar, force_resource_id)
+        avatar = await draw_pic_with_ring(ev, is_force_avatar, force_resource_id) if not waves_id else await draw_char_with_ring(char_id)
         all_role_detail: Optional[Dict[str, RoleDetailData]] = (
             await get_all_roleid_detail_info(uid)
         )
@@ -465,7 +467,7 @@ async def get_role_need(
             elif is_online_user and not change_list_regex:
                 return (
                     None,
-                    f"[鸣潮] 未找到【{char_name}】角色信息, 请先使用[{PREFIX}刷新面板]进行刷新!\n",
+                    f"[鸣潮] 未找到【{char_name}】角色信息\n国服用户请先使用[{PREFIX}刷新面板]进行刷新!\n国际服用户请先使用[{PREFIX}分析]上传角色信息!\n",
                 )
             else:
                 # 未上线的角色，构造一个数据
@@ -473,7 +475,7 @@ async def get_role_need(
                 if not gen_role_detail:
                     return (
                         None,
-                        f"[鸣潮] 未找到【{char_name}】角色信息, 请先使用[{PREFIX}刷新面板]进行刷新!\n",
+                        f"[鸣潮] 未找到【{char_name}】角色信息\n国服用户请使用[{PREFIX}刷新面板]进行刷新!\n国际服用户请使用[{PREFIX}分析]上传数据\n",
                     )
                 role_detail = gen_role_detail
 
@@ -645,25 +647,20 @@ async def draw_char_detail_img(
     ck = ""
     if not is_limit_query:
         _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-        if not ck:
-            return hint.error_reply(WAVES_CODE_102)
-
-        online_list = await waves_api.get_online_list_role(ck)
-        if online_list.success and online_list.data:
-            online_list_role_model = OnlineRoleList.model_validate(online_list.data)
-            online_role_map = {str(i.roleId): i for i in online_list_role_model}
-            if char_id in online_role_map:
-                is_online_user = True
+        if ck:
+            online_list = await waves_api.get_online_list_role(ck)
+            if online_list.success and online_list.data:
+                online_list_role_model = OnlineRoleList.model_validate(online_list.data)
+                online_role_map = {str(i.roleId): i for i in online_list_role_model}
+                if char_id in online_role_map:
+                    is_online_user = True
 
     # 账户数据
     if waves_id:
         uid = waves_id
 
     if not is_limit_query:
-        account_info = await waves_api.get_base_info(uid, ck)
-        if not account_info.success:
-            return account_info.throw_msg()
-        account_info = AccountBaseInfo.model_validate(account_info.data)
+        account_info = await get_user_detail_info(uid)
         force_resource_id = None
     else:
         account_info = AccountBaseInfo.model_validate(
@@ -706,8 +703,8 @@ async def draw_char_detail_img(
             logger.exception("角色数据转换错误", e)
             role_detail = temp
     else:
-        if not is_limit_query:
-            # 非极限查询时，获取评分排名
+        if not is_limit_query and not waves_api.is_net(uid):
+            # 非极限与国际服用户查询时，获取评分排名
             oneRank = await get_one_rank(
                 OneRankRequest(char_id=int(char_id), waves_id=uid)
             )
@@ -1084,17 +1081,17 @@ async def draw_char_score_img(
             f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
         )
     char_name = alias_to_char_name(char)
+    
     _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-    if not ck:
+    if not ck and not waves_api.is_net(uid):
         return hint.error_reply(WAVES_CODE_102)
 
     # 账户数据
     if waves_id:
         uid = waves_id
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
+
+    account_info =  await get_user_detail_info(uid)
+
     # 获取数据
     avatar, role_detail = await get_role_need(ev, char_id, ck, uid, char_name, waves_id)
     if isinstance(role_detail, str):
@@ -1425,7 +1422,8 @@ async def draw_pic_with_ring(ev: Event, is_force_avatar=False, force_resource_id
     elif not is_force_avatar:
         pic = await get_event_avatar(ev)
     else:
-        pic = await get_qq_avatar(ev.user_id)
+        get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id, get_qq_avatar)
+        pic = await get_bot_avatar(ev.user_id)
 
     mask_pic = Image.open(TEXT_PATH / "avatar_mask.png")
     img = Image.new("RGBA", (180, 180))

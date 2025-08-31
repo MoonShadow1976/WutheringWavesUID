@@ -5,14 +5,15 @@ from gsuid_core.models import Event
 from ..utils.at_help import ruser_id
 from ..utils.hint import error_reply
 from .draw_poker import draw_poker_img
+from ..utils.waves_api import waves_api
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103
+from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_098
 
 sv_waves_poker = SV("waves查询牌局")
 
 
 @sv_waves_poker.on_command(
-    ("poker", "牌局", "扑克", "激斗", "打牌"),
+    ("poker", "牌局", "扑克", "激斗", "打牌", "荣耀之丘"),
     block=True,
 )
 async def send_poker(bot: Bot, ev: Event):
@@ -20,6 +21,8 @@ async def send_poker(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
+    if waves_api.is_net(uid):
+        return await bot.send(error_reply(WAVES_CODE_098))
 
     im = await draw_poker_img(ev, uid, user_id)
     if isinstance(im, str):

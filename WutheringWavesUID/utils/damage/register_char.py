@@ -235,6 +235,20 @@ class Char_1207(CharAbstract):
         resonLevel: int = 1,
         isGroup: bool = True,
     ):
+        def get_molten_num(
+            attr: DamageAttribute,
+        ):
+            """
+            获取热熔人数，队伍人数
+            """
+            fix_num = 1
+            for char_id in attr.teammate_char_ids:
+                if int(char_id) // 100 == 12:
+                    fix_num += 1
+            return fix_num, len(attr.teammate_char_ids) + 1
+
+        molten_num, team_num = get_molten_num(attr)
+
         """获得buff"""
         title = "露帕-奔狼燎原之焰"
         msg = "队伍中的角色热熔伤害提升15%"
@@ -256,13 +270,31 @@ class Char_1207(CharAbstract):
             attr.add_dmg_bonus(0.4, title, msg)
         
         if chain >= 3:
-            title = "露帕-三链"
-            msg = "攻击时无视15%热熔抗性"
+            title = "露帕-荣光效果-三链"
+            msg = "角色攻击时无视15%热熔抗性"
             attr.add_enemy_resistance(-0.15, title, msg)
+        else:
+            # 共鸣解放·荣光
+            # 施放共鸣解放荣光欢酣于火时，额外获得荣光效果，35秒内：
+            # 队伍中的角色攻击时无视3%热熔抗性，并且队伍中每有一名除露帕外的热熔属性角色，无视热熔抗性效果增加3%，上限为9%，当队伍中的热熔属性角色达到3名时，无视热熔抗性的效果额外增加6%。
+            title = "露帕-荣光效果"
+            msg = f"角色攻击时无视3*{molten_num}%热熔抗性"
+            attr.add_enemy_resistance(-0.03 * molten_num, title, msg)
 
-            if attr.char_template == temp_atk:
-                msg = "攻击提升(6*3)%(变奏强化2次)"
-                attr.add_atk_percent(0.18, title, msg)
+            if molten_num >= 3:
+                msg = "角色攻击时无视6%热熔抗性"
+                attr.add_enemy_resistance(-0.06, title, msg)
+
+        title = "露帕-追猎-共鸣解放"
+        if molten_num >= 3 or chain >= 3:
+            msg = "热熔提升(10+10)%"
+            attr.add_dmg_bonus(0.2, title, msg)
+        else:
+            msg = "热熔提升10%"
+            attr.add_dmg_bonus(0.1, title, msg)
+
+        msg = f"攻击力提升(6*{team_num})%"
+        attr.add_atk_percent(0.06 * team_num, title, msg)
 
         # 焰痕
         weapon_clz = WavesWeaponRegister.find_class(21010036)
@@ -271,6 +303,7 @@ class Char_1207(CharAbstract):
             method = getattr(w, "cast_hit", None)
             if callable(method):
                 method(attr, isGroup)
+
 
 class Char_1301(CharAbstract):
     id = 1301

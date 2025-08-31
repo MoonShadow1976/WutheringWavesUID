@@ -9,7 +9,7 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.button import WavesButton
-from ..utils.database.models import WavesBind, WavesUser
+from ..utils.database.models import WavesBind, WavesUser, WavesUserAvatar
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from ..wutheringwaves_user.login_succ import login_success_msg
 from .deal import add_cookie, delete_cookie, get_cookie
@@ -143,6 +143,8 @@ async def auto_delete_all_invalid_cookie():
 async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
     uid = ev.text.strip().replace("uid", "").replace("UID", "")
     qid = ev.user_id
+    if ev.bot_id == "discord" or ev.bot_id == "qqgroup":
+        await sync_non_onebot_user_avatar(ev)
 
     at_sender = True if ev.group_id else False
 
@@ -168,7 +170,7 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
             bot,
             code,
             {
-                0: f"[鸣潮] 特征码[{uid}]绑定成功！\n\n当前仅支持查询部分信息，完整功能请使用【{PREFIX}登录】\n使用【{PREFIX}查看】查看已绑定的特征码\n使用【{PREFIX}刷新面板】更新角色面板\n更新角色面板后可以使用【{PREFIX}暗主排行】查询暗主排行\n",
+                0: f"[鸣潮] 特征码[{uid}]绑定成功！\n\n当前仅支持查询部分信息，完整功能请\n国服用户使用【{PREFIX}登录】，使用【{PREFIX}刷新面板】更新角色面板\n国际服用户请使用【{PREFIX}分析】上传角色面板\n使用【{PREFIX}查看】查看已绑定的特征码\n更新角色面板后可以使用【{PREFIX}暗主排行】查询暗主排行\n",
                 -1: f"[鸣潮] 特征码[{uid}]的位数不正确！\n",
                 -2: f"[鸣潮] 特征码[{uid}]已经绑定过了！\n",
                 -3: "[鸣潮] 你输入了错误的格式!\n",
@@ -230,6 +232,29 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
         )
 
 
+async def sync_non_onebot_user_avatar(ev: Event):
+    """从事件中提取头像 avatar_hash 并自动更新数据库中的 hash 映射"""
+    avatar_hash = "error"
+    if ev.bot_id == "discord":
+        avatar_url = ev.sender.get("avatar")
+        if not avatar_url:
+            logger.error("Discord 事件中缺少 avatar 字段")
+            return
+        parts = avatar_url.split("/")
+        index = parts.index(str(ev.user_id))
+        avatar_hash = parts[index + 1]
+    elif ev.bot_id == "qqgroup":
+        avatar_hash = ev.bot_self_id
+
+    data = await WavesUserAvatar.select_data(ev.user_id, ev.bot_id)
+    old_avatar_hash = data.avatar_hash if data else ""
+
+    if avatar_hash != old_avatar_hash:
+        await WavesUserAvatar.insert_data(
+            user_id=ev.user_id, 
+            bot_id=ev.bot_id, 
+            avatar_hash=avatar_hash
+        )
 async def send_diff_msg(bot: Bot, code: Any, data: Dict, at_sender=False):
     for retcode in data:
         if code == retcode:

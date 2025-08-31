@@ -24,7 +24,7 @@ async def send_role_info(bot: Bot, ev: Event):
         return
 
     _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-    if not ck:
+    if not ck and not waves_api.is_net(uid):
         await bot.send(error_reply(WAVES_CODE_102))
         return
 

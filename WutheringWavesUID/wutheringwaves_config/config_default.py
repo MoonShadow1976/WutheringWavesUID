@@ -26,6 +26,16 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "公告推送总开关",
         True,
     ),
+    "CrazyNotice": GsBoolConfig("催命模式", "开启后当达到推送阈值将会一直推送", False),
+    "StaminaPush": GsBoolConfig(
+        "体力推送全局开关", "开启后当体力达到推送阈值将会推送", False
+    ),
+    "StaminaPushInterval": GsIntConfig(
+        "体力推送间隔（分钟）", "体力推送间隔（分钟）", 30, 60
+    ),
+    "StaminaRemindInterval": GsIntConfig(
+        "体力提醒间隔（分钟）", "当前提醒时间将延长所填时间", 60, 600
+    ),
     "WavesRankUseTokenGroup": GsListStrConfig(
         "有token才能进排行，群管理可设置",
         "有token才能进排行，群管理可设置",
@@ -50,6 +60,7 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
             "吃我无痕",
         ],
     ),
+    "GuideSegment": GsBoolConfig("攻略切段", "避免攻略过长过大", False),
     "WavesLoginUrl": GsStrConfig(
         "鸣潮登录url",
         "用于设置WutheringWavesUID登录界面的配置",
@@ -114,6 +125,11 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "隐藏uid",
         False,
     ),
+    "botData": GsBoolConfig(
+        "bot排行查询开关",
+        "相关排行：伤害排行，评分排行，角色持有率排行，共鸣链持有率排行",
+        False,
+    ),
     "RoleListQuery": GsBoolConfig(
         "是否可以使用uid直接查询练度",
         "是否可以使用uid直接查询练度",
@@ -121,6 +137,15 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
     ),
     "MaxBindNum": GsIntConfig(
         "绑定特征码限制数量（未登录）", "绑定特征码限制数量（未登录）", 2, 100
+    ),
+    "OCRspaceApiKeyList": GsListStrConfig(
+        "OCRspace API Key List",
+        "用于ocr识别discord_bot角色卡片",
+        [],
+        options=[
+            "可输入多个key",
+            "输入后回车",
+        ],
     ),
     "WavesToken": GsStrConfig(
         "鸣潮全排行token",

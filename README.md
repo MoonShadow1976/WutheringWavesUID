@@ -5,36 +5,39 @@
 <h1 align = "center">WutheringWavesUID 2.0</h1>
 <h4 align = "center">🚧支持OneBot(QQ)、QQ频道、微信、开黑啦、Telegram的全功能鸣潮Bot插件🚧</h4>
 <div align = "center">
-        <a href="https://docs.sayu-bot.com/" target="_blank">安装文档</a> &nbsp; · &nbsp;
-        <a href="https://docs.sayu-bot.com/PluginsHelp/WutheringWavesUID.html" target="_blank">指令列表</a> &nbsp; · &nbsp;
+        <a href="https://docs.sayu-bot.com/" target="_blank">安装文档</a>   ·  
+        <a href="https://docs.sayu-bot.com/PluginsHelp/WutheringWavesUID.html" target="_blank">指令列表</a>   ·  
         <a href="https://docs.sayu-bot.com/常见问题/">常见问题</a>
 </div>
 
 ## 丨安装提醒
 
 > **注意：该插件为[早柚核心(gsuid_core)](https://github.com/Genshin-bots/gsuid_core)
-的扩展，具体安装方式可参考[GenshinUID](https://github.com/KimigaiiWuyi/GenshinUID)**
+> 的扩展，具体安装方式可参考[GenshinUID](https://github.com/KimigaiiWuyi/GenshinUID)**
 >
-> **如果已经是最新版本的`gsuid_core`, 可以直接对bot发送`core安装插件WutheringWavesUID`，然后重启core以应用安装**
+> **使用方式：如果已经是最新版本的 `gsuid_core`, 需在`plugins`文件夹`clone`本项目，后续可以直接对bot发送 `core更新插件wwuid`直接更新插件**
 >
+> 如使用命令缺失素材可尝试使用命令 `ww下载全部资源`
 >
-> 如使用命令缺失素材可尝试使用命令`ww下载全部资源`
+> bot部署[补充文档地址](https://wiki.wavesuid.top/)，国际服用户使用 `ww分析`命令前请先于控制台 `修改插件设定`处填充 `OCRspace API Key`
 >
-> [补充文档地址](https://wiki.wavesuid.top/)
-> 
 > 国际服用户可以基于 `Discord` 图片识别使用 `WutheringWavesUID` -> [传送门](https://github.com/moonshadow1976/WutheringWavesUID)
 >
 > 支持NoneBot2 & HoshinoBot & ZeroBot & YunzaiBot的鸣潮Bot插件
 >
 > 🚧插件目前还在施工中，功能快速迭代中...🚧
 >
->
 > ✨如果需要添加其他鸣潮相关功能欢迎在issues中提出✨
->
 
 ## 丨反馈渠道
 
-- QQ群号：[76436110](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hmB3ejtTx6cIDHegsLM91jd1Rn97eGAe&authKey=HqcnRdI0S98dUBcpHxwjWv72LYpUYE%2BSXVOEjiuBrAZbepCHPzP86szZFhxeiQkG&noverify=0&group_code=76436110)
+- QQ群：[76436110](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hmB3ejtTx6cIDHegsLM91jd1Rn97eGAe&authKey=HqcnRdI0S98dUBcpHxwjWv72LYpUYE%2BSXVOEjiuBrAZbepCHPzP86szZFhxeiQkG&noverify=0&group_code=76436110)
+
+#### 丨选择直接使用
+
+- QQ群：[1037977938](https://qm.qq.com/cgi-bin/qm/qr?authKey=slEX2BdUTZLlDcIxQ6X%2FfK20955frbHuysDHtZpRzaiOyKg6i4BlimWCyNFMYOpC&k=LoFWlKzrv-nrd1dfBPfjo2GZ256octsB&noverify=0&group_code=1037977938)
+- Lark Group: [wuwa](https://applink.larksuite.com/client/chat/chatter/add_by_link?link_token=00bld93f-427b-45c8-b104-c6be61ougc7m) --`对wwuid的支持并不完整，可以的话请加QQ群使用`
+- Discord Group: [共鸣基地](https://discord.gg/bp9ygDCBS7) --`解释权归`[YashajinAlice](https://github.com/YashajinAlice)`所有`
 
 ## 丨其他
 
@@ -49,6 +52,7 @@
 - [waves-plugin](https://github.com/erzaozi/waves-plugin) Yunzai 鸣潮游戏数据查询插件
 - [Yunzai-Kuro-Plugin](https://github.com/TomyJan/Yunzai-Kuro-Plugin) Yunzai 库洛插件
 - [Kuro-API-Collection](https://github.com/TomyJan/Kuro-API-Collection) 库街区 API 文档
+- [ocr.space_code_example](https://github.com/Zaargh/ocr.space_code_example) OCR.space 示例
 - 特别鸣谢以下攻略作者
   - [Moealkyne](https://www.taptap.cn/user/533395803)
   - [小沐XMu](https://www.kurobbs.com/person-center?id=10450567)

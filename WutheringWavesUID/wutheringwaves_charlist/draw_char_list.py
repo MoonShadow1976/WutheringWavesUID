@@ -10,7 +10,7 @@ from gsuid_core.utils.image.image_tools import crop_center_img
 from ..utils.api.model import AccountBaseInfo, RoleDetailData, WeaponData
 from ..utils.ascension.weapon import get_breach
 from ..utils.char_info_utils import get_all_roleid_detail_info_int
-from ..utils.error_reply import WAVES_CODE_102
+from ..utils.error_reply import WAVES_CODE_102, WAVES_CODE_099
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.fonts.waves_fonts import (
     waves_font_16,
@@ -44,6 +44,7 @@ from ..utils.refresh_char_detail import refresh_char
 from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.download_file import get_skill_img
 from ..utils.waves_api import waves_api
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -88,20 +89,8 @@ async def draw_char_list_img(
     is_peek: bool = False,
     user_waves_id: str = "",
 ) -> Union[str, bytes]:
-    is_self_ck, ck = await waves_api.get_ck_result(user_waves_id, user_id, ev.bot_id)
-    if not ck:
-        return error_reply(WAVES_CODE_102)
-
-    if uid == user_waves_id and is_self_ck:
-        is_self_ck = True
-    else:
-        is_self_ck = False
-
-    # 账户数据
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
+    _, ck = await waves_api.get_ck_result(user_waves_id, user_id, ev.bot_id)
+    account_info= await get_user_detail_info(uid)
 
     all_role_detail = await get_all_roleid_detail_info(
         ev,
@@ -112,6 +101,8 @@ async def draw_char_list_img(
         is_peek,
     )
     if not all_role_detail:
+        if waves_api.is_net(uid):
+            return error_reply(WAVES_CODE_099)
         return error_reply(code=-111, msg="练度获取失败，请先刷新角色面板")
 
     waves_char_rank = await get_waves_char_rank(uid, all_role_detail)

@@ -21,7 +21,7 @@ from ..utils.api.model import (
 )
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_102, WAVES_CODE_103
+from ..utils.error_reply import WAVES_CODE_102, WAVES_CODE_103, WAVES_CODE_098
 from ..utils.fonts.waves_fonts import (
     waves_font_20,
     waves_font_32,
@@ -129,6 +129,8 @@ async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return error_reply(WAVES_CODE_103)
+    if waves_api.is_net(uid):
+        return error_reply(WAVES_CODE_098)
 
     token_result, token = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not token_result or not token:

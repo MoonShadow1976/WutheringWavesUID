@@ -34,6 +34,7 @@ from ..utils.image import (
 from ..utils.imagetool import draw_pic_with_ring
 from ..utils.resource.constant import NORMAL_LIST, SPECIAL_CHAR_INT
 from ..utils.waves_api import waves_api
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -45,26 +46,40 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     # game_info = KuroRoleInfo(**game_info)
 
     # 共鸣者信息
-    role_info = await waves_api.get_role_info(uid, ck)
-    if not role_info.success:
-        return role_info.throw_msg()
+    if waves_api.is_net(uid):
+        from ..wutheringwaves_analyzecard.changeEcho import get_local_all_role_info
+        succ, role_info = await get_local_all_role_info(uid)
+        if not succ:
+            from ..utils.error_reply import WAVES_CODE_099
+            from ..utils.hint import error_reply
+            return error_reply(WAVES_CODE_099)
+        role_info = RoleList.model_validate(role_info)
+    else:
+        role_info = await waves_api.get_role_info(uid, ck)
+        if not role_info.success:
+            return role_info.throw_msg()
 
-    role_info = RoleList.model_validate(role_info.data)
+        role_info = RoleList.model_validate(role_info.data)
     role_info.roleList.sort(
         key=lambda i: (i.level, i.starLevel, i.roleId), reverse=True
     )
+    
+    if waves_api.is_net(uid):
+        account_info= await get_user_detail_info(uid)
+        # 拒绝掉无用数据，不走is_full
+        account_info.creatTime = None
+    else:
+        # 账户数据
+        account_info = await waves_api.get_base_info(uid, ck)
+        if not account_info.success:
+            return account_info.throw_msg()
+        account_info = AccountBaseInfo.model_validate(account_info.data)
 
-    # 账户数据
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
-
-    # 数据坞
-    calabash_data = await waves_api.get_calabash_data(uid, ck)
-    if not calabash_data.success:
-        return calabash_data.throw_msg()
-    calabash_data = CalabashData.model_validate(calabash_data.data)
+        # 数据坞
+        calabash_data = await waves_api.get_calabash_data(uid, ck)
+        if not calabash_data.success:
+            return calabash_data.throw_msg()
+        calabash_data = CalabashData.model_validate(calabash_data.data)
 
     # five_num = sum(1 for i in role_info.roleList if i.starLevel == 5)
     up_num = sum(

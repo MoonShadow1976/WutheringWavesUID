@@ -80,7 +80,7 @@ def calc_damage_2(
                 attr.add_dmg_bonus(0.1, title, msg)
 
             msg = f"攻击力提升(6*{team_num})%"
-            attr.add_atk_percent(0.06 * molten_num, title, msg)
+            attr.add_atk_percent(0.06 * team_num, title, msg)
         else:
             title = "追猎-共鸣解放"
             if chain_num >= 3:
@@ -314,6 +314,10 @@ damage_detail = [
     {
         "title": "狼舞·极尾刀",
         "func": lambda attr, role: calc_damage_3(attr, role, isSingle=True),
+    },
+    {
+        "title": "0+1守/0+1离/狼舞·极尾刀",
+        "func": lambda attr, role: calc_damage_10(attr, role),
     },
     {
         "title": "狼舞·极总伤",

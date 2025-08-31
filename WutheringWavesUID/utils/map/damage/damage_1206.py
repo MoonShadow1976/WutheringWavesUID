@@ -199,11 +199,6 @@ def calc_damage_11(
     # 露帕buff
     lupa_buff(attr, 0, 1, isGroup)
 
-    # 露帕解放火队人数buff
-    title = "露帕-追猎-共鸣解放"
-    msg = "热熔提升10%"
-    attr.add_dmg_bonus(0.1, title, msg)
-
     return calc_damage_1(attr, role, isGroup)
     
 
@@ -217,11 +212,6 @@ def calc_damage_12(
 
     # 露帕buff
     lupa_buff(attr, 6, 5, isGroup)
-
-    # 露帕解放火队人数buff
-    title = "露帕-追猎-共鸣解放"
-    msg = "热熔提升(10+10)%"
-    attr.add_dmg_bonus(0.2, title, msg)
 
     return calc_damage_1(attr, role, isGroup)
 

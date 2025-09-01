@@ -19,7 +19,7 @@ sv_get_gachalog_by_link = SV("waves导入抽卡链接", area="DIRECT")
 sv_import_gacha_log = SV("waves导入抽卡记录", area="DIRECT")
 sv_export_json_gacha_log = SV("waves导出抽卡记录")
 
-ERROR_MSG_NOTIFY = f"请给出正确的抽卡记录链接, 请重新发送【{PREFIX}导入抽卡链接 链接】"
+ERROR_MSG_NOTIFY = f"请给出正确的抽卡记录链接, 请重新发送【{PREFIX}导入抽卡链接 链接】，抽卡链接获取帮助请发送【{PREFIX}抽卡帮助】"
 
 
 @sv_get_gachalog_by_link.on_command(("导入抽卡链接", "导入抽卡记录"))

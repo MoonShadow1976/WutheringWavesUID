@@ -58,29 +58,47 @@ refresh_role_map = {
 }
 
 refresh_interval: int = WutheringWavesConfig.get_config("RefreshInterval").data
+refresh_intervalAll: int = WutheringWavesConfig.get_config("RefreshIntervalAll").data
 
 if refresh_interval > 0:
     timed_cache = TimedCache(timeout=refresh_interval, maxsize=10000)
 else:
     timed_cache = None
 
+if refresh_intervalAll > 0:
+    timed_cache_all = TimedCache(timeout=refresh_intervalAll, maxsize=10000)
+else:
+    timed_cache_all = None
 
-def can_refresh_card(user_id: str, uid: str) -> int:
+
+def can_refresh_card(user_id: str, uid: str, refresh_type: str | List[str]) -> int:
     """检查是否可以刷新角色面板"""
     key = f"{user_id}_{uid}"
-    if timed_cache:
-        now = int(time.time())
-        time_stamp = timed_cache.get(key)
-        if time_stamp and time_stamp > now:
-            return time_stamp - now
+    if refresh_type == "all":
+        if timed_cache_all:
+            now = int(time.time())
+            time_stamp = timed_cache_all.get(key)
+            if time_stamp and time_stamp > now:
+                return time_stamp - now
+    else:
+        if timed_cache:
+            now = int(time.time())
+            time_stamp = timed_cache.get(key)
+            if time_stamp and time_stamp > now:
+                return time_stamp - now
     return 0
 
 
-def set_cache_refresh_card(user_id: str, uid: str):
+def set_cache_refresh_card(user_id: str, uid: str, refresh_type: str | List[str]):
     """设置缓存"""
-    if timed_cache:
-        key = f"{user_id}_{uid}"
-        timed_cache.set(key, int(time.time()) + refresh_interval)
+    if refresh_type == "all":
+        if timed_cache_all:
+            key = f"{user_id}_{uid}"
+            timed_cache_all.set(key, int(time.time()) + refresh_intervalAll)
+    else:
+        if timed_cache:
+            key = f"{user_id}_{uid}"
+            timed_cache.set(key, int(time.time()) + refresh_interval)
 
 
 def get_refresh_interval_notify(time_stamp: int):
@@ -158,7 +176,7 @@ async def draw_refresh_char_detail_img(
     buttons: List[WavesButton],
     refresh_type: Union[str, List[str]] = "all",
 ):
-    time_stamp = can_refresh_card(user_id, uid)
+    time_stamp = can_refresh_card(user_id, uid, refresh_type)
     if time_stamp > 0:
         return get_refresh_interval_notify(time_stamp)
     self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
@@ -349,7 +367,7 @@ async def draw_refresh_char_detail_img(
     img.paste(refresh_bar, (0, 300), refresh_bar)
     img = add_footer(img, 600, 20)
     img = await convert_img(img)
-    set_cache_refresh_card(user_id, uid)
+    set_cache_refresh_card(user_id, uid, refresh_type)
     return img
 
 

@@ -222,6 +222,7 @@ async def compare_update_card_info(uid, waves_data):
     if waves_data["role"]["level"] < existing_data["role"]["level"]:
         logger.warning(f" [鸣潮][dc卡片识别] 角色等级低于本地数据，纠正：{waves_data['role']['level']}->{existing_data['role']['level']}")
         waves_data["role"]["level"] = existing_data["role"]["level"]
+        waves_data["role"]["breach"] = get_breach(existing_data["role"]["level"])
         waves_data["level"] = existing_data["level"]
     
     if waves_data["weaponData"]["weapon"]["weaponId"] == existing_data["weaponData"]["weapon"]["weaponId"]:

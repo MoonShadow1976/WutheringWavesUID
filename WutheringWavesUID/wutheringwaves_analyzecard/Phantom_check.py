@@ -206,19 +206,21 @@ class PhantomValidator:
 
         # 主词条校验
         for main_prop in phantom.get("mainProps", []):
-            is_valid, corrected = self.validate_main_prop(main_prop, cost)
-            if not is_valid:
-                return False, f"cost{cost} 主词条-{corrected}"
-            if corrected:
-                main_prop["attributeValue"] = corrected
+            if main_prop:
+                is_valid, corrected = self.validate_main_prop(main_prop, cost)
+                if not is_valid:
+                    return False, f"cost{cost} 主词条-{corrected}"
+                if corrected:
+                    main_prop["attributeValue"] = corrected
 
         # 副词条校验
         for sub_prop in phantom.get("subProps", []):
-            is_valid, corrected = self.validate_sub_prop(sub_prop)
-            if not is_valid:
-                return False, f"cost{cost} 副词条-{corrected}"
-            if corrected:
-                sub_prop["attributeValue"] = corrected
+            if sub_prop:
+                is_valid, corrected = self.validate_sub_prop(sub_prop)
+                if not is_valid:
+                    return False, f"cost{cost} 副词条-{corrected}"
+                if corrected:
+                    sub_prop["attributeValue"] = corrected
         return True, None
 
     def _preprocess_value(self, name, value):
@@ -288,6 +290,8 @@ class PhantomValidator:
         """检测10倍缩放错误（如86%→8.6%）（如.22800→2280）"""
         def scaled(num_str):
             num = float(num_str)
+            if num == 0: # 处理可能出现的0
+                return num 
             max_allowed = max(float(v.replace("%", "")) for v in allowed_values)
             if num < 1: # 处理可能出现的“.2280”
                 while num < max_allowed:  # 缩放阈值 10倍

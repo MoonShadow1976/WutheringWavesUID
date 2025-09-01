@@ -199,7 +199,7 @@ async def async_ocr(bot: Bot, ev: Event):
     if API_KEY is None:
         return await bot.send("[鸣潮] OCRspace API密钥不可用！请等待额度恢复或更换密钥\n", at_sender)
     
-    if ocr_results[0]['error'] or not ocr_results:
+    if not ocr_results or ocr_results[0]['error']:
         logger.warning("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。")
         return await bot.send("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。\n", at_sender)
 
@@ -523,7 +523,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         "skill_level": re.compile(r'(\d+)\s*[/ ]\s*\d*'),  # 兼容 L.10/10、LV.10/1、4 10、4/ 等格式
         "player_info": re.compile(r'玩家名(?:稱)?\s*[:：]?\s*(.*)$'),
         "uid_info": re.compile(r'.[馬碼]\s*[:：]?\s*(\d+)'),
-        "echo_value": re.compile(r'([\u4e00-\u9fa5]+)\s*\D*([\d.]+%?)'), # 不支持英文词条(空格不好处理), 支持处理"暴擊傷害 器44%", "攻擊 ×18%"
+        "echo_value": re.compile(r'([\u4e00-\u9fa5]+)\s*(?:\d.)?\D*([\d.]+%?)'), # 不支持英文词条(空格不好处理), 支持处理"暴擊傷害 器44%", "攻擊 ×18%", "熱熔傷害加成 0 3.75%"
         "weapon_info": re.compile(r'([\u4e00-\u9fa5]+)\s+LV\.(\d+)')
     }
 
@@ -618,7 +618,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         
         # 文本预处理：去除多余的空白符
         text_clean = re.sub(r'\s+', ' ', text).strip()  # 使用 \s+ 匹配所有空白符，并替换为单个空格
-        text_clean = re.sub(r'[·，,、,]', '.', text_clean) # 将·与逗号替换为句号(中文全角逗号（简体和繁体）、英文半角逗号、日文逗号（全角顿号）、韩文逗号)
+        text_clean = re.sub(r'[·，,、,]', '.', text_clean) # 将·与逗号替换为小数点(中文全角逗号（简体和繁体）、英文半角逗号、日文逗号（全角顿号）、韩文逗号)
         text_clean = text_clean.replace("％", "%")
 
         # 提取属性对

@@ -41,8 +41,8 @@ async def change_echo(bot: Bot, ev: Event):
     char = ev.regex_dict.get("char")
     sonata = ev.regex_dict.get("sonata")
     phantom = bool(ev.regex_dict.get("echo"))  # 改为布尔值判断
-    if not sonata and not phantom:
-        return await bot.send(f"[鸣潮] 请正确使用命令：\n {PREFIX}改{char}套装合鸣效果 (可使用 [...合鸣一3合鸣二2] 改为3+2合鸣,按顺序修改) --合鸣效果可用前两字缩写 \n {PREFIX}改{char}声骸 --修改当前套装下的首位声骸\n", at_sender)
+    if not char or (not sonata and not phantom):
+        return await bot.send(f"[鸣潮] 请正确使用命令,例如：\n  {PREFIX}改赞妮套装合鸣效果 (可使用 [...合鸣一3合鸣二2] 改为3+2合鸣,按顺序修改) \n  {PREFIX}改赞妮声骸 --修改当前套装下的首位声骸\n", at_sender)
 
     char_name = alias_to_char_name(char)
     if char == "漂泊者":
@@ -94,7 +94,7 @@ async def get_char_name_from_local(char_name: str, role_data: dict):
     # 未找到匹配角色
     return None, None
 
-async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str, phantom_a: bool, role_data: dict):
+async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | None, phantom_a: bool, role_data: dict):
     # 检查角色是否存在
     if char_id not in role_data:
         return False, "角色不存在！"
@@ -116,7 +116,7 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str, ph
                 ECHO.extend([await get_fetterDetail_from_sonata(sonata)] * num)
 
         if not ECHO:
-            return False, "请输入正确的套装名(可用前两字缩写)"
+            return False, "请输入正确的套装名(合鸣效果)"
         if len(ECHO) != len(char_data["phantomData"]["equipPhantomList"]):
             return False, f"套装数 {len(ECHO)}与角色声骸数 {len(char_data['phantomData']['equipPhantomList'])}不一致"
         logger.info(f"[鸣潮] 修改套装为:{sonata_parts}")
@@ -154,40 +154,39 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str, ph
             + "\n".join(options)
             + "\n请输入序号（1-{}）选择".format(len(options))
         )
+        try:
+            resp = await bot.receive_resp(reply=TEXT_GET_RESP, timeout=30)
+            if resp is not None and resp.content[0].data is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
+                choice = int(resp.content[0].data) - 1
+                if 0 <= choice < len(flat_choices):
+                    selected = flat_choices[choice]
+                    target_cost = selected["cost"]
+                    selected_id = selected["id"]
+                    
+                    # 获取该 cost 层级的全部可选 ID
+                    same_cost_ids = [echo_id for g in phantom_id_list_groups if g["cost"] == target_cost for echo_id in g["list"]]
+                    
+                    other_phantoms = [p for p in same_cost_ids if p != selected_id]
 
-        resp = await bot.receive_resp(TEXT_GET_RESP)
-        if resp is not None and resp.content[0].data is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
-            choice = int(resp.content[0].data) - 1
-            if 0 <= choice < len(flat_choices):
-                selected = flat_choices[choice]
-                target_cost = selected["cost"]
-                selected_id = selected["id"]
-                
-                # 获取该 cost 层级的全部可选 ID
-                same_cost_ids = [echo_id for g in phantom_id_list_groups if g["cost"] == target_cost for echo_id in g["list"]]
-                
-                other_phantoms = [p for p in same_cost_ids if p != selected_id]
-
-                first_change_bool = True # 只修改第一顺位声骸
-                for echo in char_data["phantomData"]["equipPhantomList"]:
-                    if int(echo["cost"]) == target_cost:
-                        if first_change_bool:
-                            echo["phantomProp"]["phantomId"] = selected_id
-                            echo["phantomProp"]["name"] = phantom_id_to_phantom_name(selected_id)
-                            first_change_bool = False
-                        else:
-                            if other_phantoms:
-                                echo["phantomProp"]["phantomId"] = other_phantoms[0]  # 取第一个不同的元素
-                                echo["phantomProp"]["name"] = phantom_id_to_phantom_name(other_phantoms[0])
+                    first_change_bool = True # 只修改第一顺位声骸
+                    for echo in char_data["phantomData"]["equipPhantomList"]:
+                        if int(echo["cost"]) == target_cost:
+                            if first_change_bool:
+                                echo["phantomProp"]["phantomId"] = selected_id
+                                echo["phantomProp"]["name"] = phantom_id_to_phantom_name(selected_id)
+                                first_change_bool = False
                             else:
-                                pass
+                                if other_phantoms:
+                                    echo["phantomProp"]["phantomId"] = other_phantoms[0]  # 取第一个不同的元素
+                                    echo["phantomProp"]["name"] = phantom_id_to_phantom_name(other_phantoms[0])
+                                else:
+                                    pass
 
-
-                logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
-            else:
-                return False, "请检查命令的正确性"
-        else:
-            return False, "请检查命令的正确性"
+                    logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
+            
+            return False, "修改已关闭，请检查输入的正确性"
+        except Exception:
+            return False, "等待超时，修改已关闭"
     
     # 更新数据
     role_data[char_id] = char_data

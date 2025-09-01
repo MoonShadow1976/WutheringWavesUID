@@ -708,15 +708,14 @@ async def which_char(bot: Bot, ev: Event, char: str):
     
     # 第四步：处理用户响应
     try:
-        async with timeout(30):
-            while True:
-                resp = await bot.receive_resp()
+        while True:
+            resp = await bot.receive_resp(timeout=30)
             
-                if resp is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
-                    choice_idx = int(resp.content[0].data) - 1
-                    if 0 <= choice_idx < len(flat_choices):
-                        return flat_choices[choice_idx]
-                await bot.send(f"无效序号，请输入范围[1-{len(candidates)}]的数字选择\n", at_sender=at_sender)
+            if resp is not None and resp.content[0].data and resp.content[0].type == "text" and resp.content[0].data.isdigit():
+                choice_idx = int(resp.content[0].data) - 1
+                if 0 <= choice_idx < len(flat_choices):
+                    return flat_choices[choice_idx]
+            await bot.send(f"无效序号，请输入范围[1-{len(candidates)}]的数字选择\n", at_sender=at_sender)
     except asyncio.TimeoutError:
         default_name, default_id = flat_choices[0] if flat_choices else (char, None)
         await bot.send(f"[鸣潮] 选择超时，已自动使用 {default_name}\n", at_sender=at_sender)

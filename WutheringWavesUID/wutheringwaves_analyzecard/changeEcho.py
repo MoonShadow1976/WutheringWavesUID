@@ -183,6 +183,7 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | N
                                     pass
 
                     logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
+                    pass
             
             return False, "修改已关闭，请检查输入的正确性"
         except Exception:

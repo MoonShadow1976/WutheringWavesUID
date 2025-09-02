@@ -637,7 +637,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         # 提取属性对
         valid_entries = []
         for entry in cut_entries:
-            match = patterns["echo_value"].search(text_clean)
+            match = patterns["echo_value"].search(entry)
             if match:
                 attr, value = match.groups()
 

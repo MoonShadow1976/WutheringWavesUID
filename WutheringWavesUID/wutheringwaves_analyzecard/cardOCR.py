@@ -523,7 +523,8 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         "skill_level": re.compile(r'(\d+)\s*[/ ]\s*\d*'),  # 兼容 L.10/10、LV.10/1、4 10、4/ 等格式
         "player_info": re.compile(r'玩家名(?:稱)?\s*[:：]?\s*(.*)$'),
         "uid_info": re.compile(r'.[馬碼]\s*[:：]?\s*(\d+)'),
-        "echo_value": re.compile(r'([\u4e00-\u9fa5]+)\s*(?:\d.)?\D*([\d.]+%?)'), # 不支持英文词条(空格不好处理), 支持处理"暴擊傷害 器44%", "攻擊 ×18%", "熱熔傷害加成 0 3.75%"
+        "echo_cut": re.compile(r'([\u4e00-\u9fa5]+)\s*\D*([\d.]+%?)'), # 分割各个词条与对应数值
+        "echo_value": re.compile(r'([\u4e00-\u9fa5]+)\s*(?:\d+\s+)?\D*?([\d.]+%?)'), # 不支持英文词条(空格不好处理), 支持处理"暴擊傷害 器44%", "攻擊 ×18%", "熱熔傷害加成 0 3.75%"
         "weapon_info": re.compile(r'([\u4e00-\u9fa5]+)\s+LV\.(\d+)')
     }
 
@@ -621,23 +622,38 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         text_clean = re.sub(r'[·，,、,]', '.', text_clean) # 将·与逗号替换为小数点(中文全角逗号（简体和繁体）、英文半角逗号、日文逗号（全角顿号）、韩文逗号)
         text_clean = text_clean.replace("％", "%")
 
+        # 找到所有词条的位置
+        matches = list(patterns["echo_cut"].finditer(text_clean))
+        cut_entries = []
+        # 处理每个词条段, 避免提取不全
+        for i in range(len(matches)):
+            if i < len(matches) - 1:
+                text_value = text_clean[matches[i].start():matches[i+1].start()]
+            else:
+                text_value = text_clean[matches[i].start():]
+            if text_value:
+                cut_entries.append(text_value)
+
         # 提取属性对
-        matches = patterns["echo_value"].findall(text_clean)
         valid_entries = []
-        for attr, value in matches:
-            # 属性清洗
-            attr = attr.strip()
-            # 自定义替换优先执行（在繁转简之前）
-            if re.search(r'暴.(傷害)?', attr):
-                attr = re.sub(r'暴.(傷害)?', r'暴擊\1', attr)
-            attr = attr.replace("箓擎傷害", "暴擊傷害").replace("箓擎", "暴擊")
-            attr = re.sub(r'^攻.*$', '攻擊', attr)
-            attr = re.sub(r'.*效率$', '共鳴效率', attr)
-            attr = re.sub(r'^重.傷害加成*$', '重擊傷害加成', attr)
-            clean_attr = cc.convert(attr) # 标准繁简转换
-            # 验证属性名是否符合预期（至少两个中文字符，且不含数字）
-            if len(clean_attr) >= 2 and not re.search(r'[0-9]', clean_attr):
-                valid_entries.append((clean_attr, value))
+        for entry in cut_entries:
+            match = patterns["echo_value"].search(text_clean)
+            if match:
+                attr, value = match.groups()
+
+                # 属性清洗
+                attr = attr.strip()
+                # 自定义替换优先执行（在繁转简之前）
+                if re.search(r'暴.(傷害)?', attr):
+                    attr = re.sub(r'暴.(傷害)?', r'暴擊\1', attr)
+                attr = attr.replace("箓擎傷害", "暴擊傷害").replace("箓擎", "暴擊")
+                attr = re.sub(r'^攻.*$', '攻擊', attr)
+                attr = re.sub(r'.*效率$', '共鳴效率', attr)
+                attr = re.sub(r'^重.傷害加成*$', '重擊傷害加成', attr)
+                clean_attr = cc.convert(attr) # 标准繁简转换
+                # 验证属性名是否符合预期（至少两个中文字符，且不含数字）
+                if len(clean_attr) >= 2 and not re.search(r'[0-9]', clean_attr):
+                    valid_entries.append((clean_attr, value))
         
         # 分配主副属性
         if valid_entries:

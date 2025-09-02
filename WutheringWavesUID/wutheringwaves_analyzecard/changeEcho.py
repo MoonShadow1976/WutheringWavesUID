@@ -155,10 +155,12 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | N
             + "\n请输入序号（1-{}）选择".format(len(options))
         )
         try:
+            SUCCESS = False
             resp = await bot.receive_resp(reply=TEXT_GET_RESP, timeout=30)
             if resp is not None and resp.content[0].data is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
                 choice = int(resp.content[0].data) - 1
                 if 0 <= choice < len(flat_choices):
+                    SUCCESS = True
                     selected = flat_choices[choice]
                     target_cost = selected["cost"]
                     selected_id = selected["id"]
@@ -183,8 +185,9 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | N
                                     pass
 
                     logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
-            
-            return False, "修改已关闭，请检查输入的正确性"
+
+            if not SUCCESS:
+                return False, "修改已关闭，请检查输入的正确性"
         except Exception:
             return False, "等待超时，修改已关闭"
     

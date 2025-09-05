@@ -16,6 +16,7 @@ from ...damage.utils import (
     cast_liberation,
     skill_damage_calc,
 )
+from .buff import shouanren_buff, iuno_buff, motefei_buff
 
 
 def chain_damage(
@@ -306,6 +307,80 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
+def calc_damage_10(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 莫特斐buff
+    motefei_buff(attr, 6, 1, isGroup)
+
+    return calc_damage_1(attr, role, isGroup)
+
+
+def calc_damage_11(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 尤诺buff
+    iuno_buff(attr, 0, 0, isGroup)
+
+    return calc_damage_1(attr, role, isGroup)
+    
+
+def calc_damage_12(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 莫特斐buff
+    motefei_buff(attr, 6, 1, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
+def calc_damage_13(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 尤诺buff
+    iuno_buff(attr, 0, 0, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+def calc_damage_14(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 尤诺buff
+    iuno_buff(attr, 2, 0, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
 damage_detail = [
     {
         "title": "落袭尾刀",
@@ -322,6 +397,26 @@ damage_detail = [
     {
         "title": "赫日威临·不朽者之肃总伤",
         "func": lambda attr, role: calc_damage_3(attr, role, isSingle=False),
+    },
+    {
+        "title": "0+1守/6+1莫/落袭尾刀",
+        "func": lambda attr, role: calc_damage_10(attr, role),
+    },
+    {
+        "title": "0+1守/0+0尤/落袭尾刀",
+        "func": lambda attr, role: calc_damage_11(attr, role),
+    },
+    {
+        "title": "0+1守/6+1莫/赫日威临·不朽者之肃",
+        "func": lambda attr, role: calc_damage_12(attr, role),
+    },
+    {
+        "title": "0+1守/0+0尤/赫日威临·不朽者之肃",
+        "func": lambda attr, role: calc_damage_13(attr, role),
+    },
+    {
+        "title": "0+1守/2+0尤/赫日威临·不朽者之肃",
+        "func": lambda attr, role: calc_damage_14(attr, role),
     },
 ]
 

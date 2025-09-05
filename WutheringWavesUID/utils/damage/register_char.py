@@ -439,6 +439,45 @@ class Char_1408(Char_1406):
     starLevel = 5
 
 
+class Char_1410(CharAbstract):
+    id = 1410
+    name = "尤诺"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        """获得buff"""
+        if attr.char_template == temp_atk:
+            title = "尤诺-合鸣效果-轻云出月"
+            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+            attr.add_atk_percent(0.225, title, msg)
+
+        # 10层苍白死光的祝颂
+        title = "尤诺-苍白死光的祝颂"
+        msg = "满月领域中获得十次护盾后，角色全伤害加深4%*10"
+        attr.add_dmg_deepen(0.04 * 10, title, msg)
+
+        if chain >= 2:
+            title = "尤诺-二链"
+            msg = "苍白死光的祝颂叠加至10层时额外获得40%全伤害加深"
+            attr.add_dmg_deepen(0.4, title, msg)
+
+        # 无常凶鹭
+        title = "尤诺-声骸技能-无常凶鹭"
+        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        if hit_damage == attr.char_damage:
+            title = "尤诺-延奏技能"
+            msg = "下一位登场角色重击伤害加深50%"
+            attr.add_dmg_deepen(0.5, title, msg)
+
+
 class Char_1501(CharAbstract):
     id = 1501
     name = "漂泊者·衍射"
@@ -776,6 +815,7 @@ def register_char():
     WavesCharRegister.register_class(Char_1406.id, Char_1406)
     WavesCharRegister.register_class(Char_1407.id, Char_1407)
     WavesCharRegister.register_class(Char_1408.id, Char_1408)
+    WavesCharRegister.register_class(Char_1410.id, Char_1410)
     WavesCharRegister.register_class(Char_1501.id, Char_1501)
     WavesCharRegister.register_class(Char_1502.id, Char_1502)
     WavesCharRegister.register_class(Char_1503.id, Char_1503)

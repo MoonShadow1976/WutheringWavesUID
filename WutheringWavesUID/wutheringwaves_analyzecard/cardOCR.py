@@ -184,7 +184,7 @@ async def async_ocr(bot: Bot, ev: Event):
             NEGINE_NUM = 3 # 激活PRO计划
 
         if NEGINE_NUM == 1 and API_KEY == api_key_list[0]:
-            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，请考虑稍后使用。\n", at_sender)
+            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，可能会导致识别失败，请考虑稍后使用。\n", at_sender)
         elif NEGINE_NUM == 0:
             return await bot.send("[鸣潮] OCR服务暂时不可用，请稍后再试。\n", at_sender)
         elif NEGINE_NUM == -1:

@@ -37,7 +37,7 @@ supplementary_props = {
     5015: {"name": "防御", "isPercent": True}, # x
     5016: {"name": "共鸣效率", "isPercent": True},
     5017: {"name": "攻击", "isPercent": True},
-    5018: {"name": "生命", "isPercent": False},
+    5018: {"name": "生命", "isPercent": True},
     5019: {"name": "防御", "isPercent": True},
 }
 

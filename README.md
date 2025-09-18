@@ -53,6 +53,7 @@
 - [Yunzai-Kuro-Plugin](https://github.com/TomyJan/Yunzai-Kuro-Plugin) Yunzai 库洛插件
 - [Kuro-API-Collection](https://github.com/TomyJan/Kuro-API-Collection) 库街区 API 文档
 - [ocr.space_code_example](https://github.com/Zaargh/ocr.space_code_example) OCR.space 示例
+- [Wuthery](https://wuthery.com/)与[YashajinAlice](https://github.com/YashajinAlice) 的支持
 - 特别鸣谢以下攻略作者
   - [Moealkyne](https://www.taptap.cn/user/533395803)
   - [小沐XMu](https://www.kurobbs.com/person-center?id=10450567)

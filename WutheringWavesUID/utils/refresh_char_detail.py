@@ -14,7 +14,7 @@ from ..utils.hint import error_reply
 from ..utils.queues.const import QUEUE_SCORE_RANK
 from ..utils.queues.queues import put_item
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
-from ..utils.util import get_version
+from ..utils.util import get_version, send_master_info
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import WutheringWavesConfig
 from .resource.constant import SPECIAL_CHAR_INT_ALL
@@ -298,3 +298,100 @@ async def refresh_char(
             return error_reply(code=-110, msg="库街区暂未查询到角色数据")
 
     return waves_datas
+
+
+async def refresh_char_from_pcap(
+    ev: Event,
+    uid: str,
+    user_id: str,
+    pcap_data: Dict,
+    waves_map: Optional[Dict] = None,
+    refresh_type: Union[str, List[str]] = "all",
+) -> Union[str, List]:
+    """基於 pcap 數據刷新角色面板"""
+    try:
+        from ..wutheringwaves_pcap.pcap_parser import PcapDataParser
+
+        parser = PcapDataParser()
+        role_detail_list = await parser.parse_pcap_data(pcap_data)
+
+        if not role_detail_list:
+            logger.warning(f"PCAP 數據解析結果為空: {user_id}")
+            return []
+
+        # 初始化 waves_map
+        if waves_map is None:
+            waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
+        
+        waves_data = []
+
+        # for role_detail in role_detail_list:
+        #     role_id = role_detail["role"]["roleId"]
+        #     # 標記為已更新
+        #     waves_map["refresh_update"][str(role_id)] = role_detail
+
+        async def limited_check_role_detail_info(r):
+            role_id = r["role"]["roleId"]
+
+            PhantomList = r["phantomData"]["equipPhantomList"]
+            if PhantomList:
+                for Phantom in PhantomList:
+                    prop_list = []
+                    if Phantom.get("mainProps"):
+                        prop_list.extend(Phantom.get("mainProps"))
+                    if Phantom.get("subProps"):
+                        prop_list.extend(Phantom.get("subProps"))
+                    for prop in prop_list:
+                        if (
+                            prop.get("attributeName")
+                            and "缺失" in prop["attributeName"]
+                        ):
+                            await send_master_info(
+                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_id} 的词条数据, 遇到[{prop['attributeName']}]"
+                            )
+                            logger.warning(
+                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_id} 的词条数据, 遇到[{prop['attributeName']}]"
+                            )
+                            return 
+
+            waves_data.append(r)
+
+
+        # 确定需要处理的角色
+        if refresh_type == "all":
+            roles_to_process = role_detail_list
+        elif isinstance(refresh_type, list):
+            # 将 refresh_type 转换为字符串列表以确保类型一致
+            refresh_type_str = [str(x) for x in refresh_type]
+            roles_to_process = [
+                r for r in role_detail_list 
+                if str(r["role"]["roleId"]) in refresh_type_str
+            ]
+        else:
+            logger.warning(f"无效的 refresh_type: {refresh_type}")
+            roles_to_process = []
+
+        # 并行处理所有角色
+        if roles_to_process:
+            tasks = [limited_check_role_detail_info(r) for r in roles_to_process]
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # 检查并记录任何异常
+            for i, result in enumerate(results):
+                if isinstance(result, Exception):
+                    role_id = roles_to_process[i]["role"]["roleId"]
+                    logger.error(f"处理角色 {role_id} 时发生异常: {result}")
+
+        # 儲存數據到數據庫
+        await save_card_info(
+            uid,
+            waves_data,
+            waves_map,
+            user_id,
+            is_self_ck=True,  # PCAP 模式視為自登錄
+        )
+        return waves_data
+
+    except Exception as e:
+        logger.exception(f"PCAP 數據刷新失敗: {user_id}", e)
+        return []

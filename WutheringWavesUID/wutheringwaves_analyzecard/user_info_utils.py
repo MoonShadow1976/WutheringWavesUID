@@ -46,15 +46,15 @@ def get_region_for_rank(uid: str) -> tuple[str, tuple[int, int, int]]:
     return region_map.get(first_char, ("未知", (128, 128, 128)))
 
 async def get_user_detail_info(
-    uid: str,
+    uid: str | int,
 ) -> AccountBaseInfo:
-    path = PLAYER_PATH / uid / "userData.json"
+    path = PLAYER_PATH / str(uid) / "userData.json"
     if not path.exists():
         # 用户数据不存在时返回默认信息
-        iregion = get_region_by_uid(uid)  # 获取用户地区
+        iregion = get_region_by_uid(str(uid))  # 获取用户地区
         return AccountBaseInfo(
             name=f"{iregion}服用户",
-            id=uid,
+            id=int(uid),
             creatTime=1,  # 固定为1以满足.is_full逻辑
             level=0,
             worldLevel=0,
@@ -67,17 +67,17 @@ async def get_user_detail_info(
     except Exception as e:
         logger.exception(f"get user detail info failed {path}:", e)
         path.unlink(missing_ok=True)
-        return AccountBaseInfo(name="错误", id=uid, creatTime=1, level=0, worldLevel=0)
+        return AccountBaseInfo(name="错误", id=int(uid), creatTime=1, level=0, worldLevel=0)
 
 
-async def save_user_info(uid: str, name: str, level=0, worldLevel=0):
-    _dir = PLAYER_PATH / uid
+async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
+    _dir = PLAYER_PATH / str(uid)
     _dir.mkdir(parents=True, exist_ok=True)
     path = _dir / "userData.json"
 
     # 准备保存的数据
     save_data = {
-        "id": uid,
+        "id": int(uid),
         "name": name,
         "level": level,
         "worldLevel": worldLevel,

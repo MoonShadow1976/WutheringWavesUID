@@ -305,7 +305,7 @@ class PhantomValidator:
             if "%" in value:
                 num_str = value.replace("%", "")
                 num = scaled(num_str)
-                return f"{num:.1f}%"
+                return f"{num:.2f}%"
             else:
                 num = scaled(value)
                 return f"{int(num)}"  # 非%值都是整数

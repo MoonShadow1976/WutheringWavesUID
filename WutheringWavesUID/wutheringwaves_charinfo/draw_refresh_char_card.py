@@ -37,7 +37,7 @@ from ..utils.image import (
     get_star_bg,
 )
 from ..utils.imagetool import draw_pic_with_ring
-from ..utils.refresh_char_detail import refresh_char
+from ..utils.refresh_char_detail import refresh_char, refresh_char_from_pcap
 from ..utils.resource.constant import NAME_ALIAS, SPECIAL_CHAR_NAME
 from ..utils.util import async_func_lock
 from ..utils.waves_api import waves_api
@@ -176,51 +176,77 @@ async def draw_refresh_char_detail_img(
     buttons: List[WavesButton],
     refresh_type: Union[str, List[str]] = "all",
 ):
-    time_stamp = can_refresh_card(user_id, uid, refresh_type)
-    if time_stamp > 0:
-        return get_refresh_interval_notify(time_stamp)
-    self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-    if not ck:
-        return error_reply(WAVES_CODE_102)
-    # 账户数据
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
-    # 更新group id
-    await WavesBind.insert_waves_uid(
-        user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9
-    )
-
-    waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
-    if ev.command == "面板":
-        all_waves_datas = await get_all_role_detail_info_list(uid)
-        if not all_waves_datas:
-            return "暂无面板数据"
-        waves_map = {
-            "refresh_update": {},
-            "refresh_unchanged": {
-                i.role.roleId: i.model_dump() for i in all_waves_datas
-            },
-        }
-    else:
-        waves_datas = await refresh_char(
+    # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
+    from ..wutheringwaves_pcap import load_pcap_data
+    pcap_data = await load_pcap_data(uid)
+    
+    if pcap_data:
+        # 使用 pcap 數據刷新
+        waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
+        waves_datas = await refresh_char_from_pcap(
             ev,
             uid,
             user_id,
-            ck,
+            pcap_data,
             waves_map=waves_map,
-            is_self_ck=self_ck,
             refresh_type=refresh_type,
         )
         if isinstance(waves_datas, str):
             return waves_datas
+
+        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+        account_info= await get_user_detail_info(uid)
+        
+        # pcap 模式下設置為已登錄狀態
+        self_ck = True
+    else:
+        time_stamp = can_refresh_card(user_id, uid, refresh_type)
+        if time_stamp > 0:
+            return get_refresh_interval_notify(time_stamp)
+        self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
+        if not ck:
+            return error_reply(WAVES_CODE_102)
+        # 账户数据
+        account_info = await waves_api.get_base_info(uid, ck)
+        if not account_info.success:
+            return account_info.throw_msg()
+        account_info = AccountBaseInfo.model_validate(account_info.data)
+        # 更新group id
+        await WavesBind.insert_waves_uid(
+            user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9
+        )
+
+        waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
+        if ev.command == "面板":
+            all_waves_datas = await get_all_role_detail_info_list(uid)
+            if not all_waves_datas:
+                return "暂无面板数据"
+            waves_map = {
+                "refresh_update": {},
+                "refresh_unchanged": {
+                    i.role.roleId: i.model_dump() for i in all_waves_datas
+                },
+            }
+        else:
+            waves_datas = await refresh_char(
+                ev,
+                uid,
+                user_id,
+                ck,
+                waves_map=waves_map,
+                is_self_ck=self_ck,
+                refresh_type=refresh_type,
+            )
+            if isinstance(waves_datas, str):
+                return waves_datas
 
     role_detail_list = [
         RoleDetailData(**r)
         for key in ["refresh_update", "refresh_unchanged"]
         for r in waves_map[key].values()
     ]
+    from gsuid_core.logger import logger
+    logger.info(f"role_detail_list:{role_detail_list}")
 
     # 总角色个数
     role_len = len(role_detail_list)

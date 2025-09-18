@@ -118,7 +118,7 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | N
         if not ECHO:
             return False, "请输入正确的套装名(合鸣效果)"
         if len(ECHO) != len(char_data["phantomData"]["equipPhantomList"]):
-            return False, f"套装数 {len(ECHO)}与角色声骸数 {len(char_data['phantomData']['equipPhantomList'])}不一致"
+            return False, f"套装数 {len(ECHO)}与角色声骸数 {len(char_data['phantomData']['equipPhantomList'])}不一致，请考虑在套装名后紧跟声骸数量(无数字则默认为5)"
         logger.info(f"[鸣潮] 修改套装为:{sonata_parts}")
 
 

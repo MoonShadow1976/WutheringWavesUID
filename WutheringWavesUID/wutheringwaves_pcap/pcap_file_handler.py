@@ -97,9 +97,10 @@ class PcapFileHandler:
                 f"• 声骸套数：{total_phantoms}",
                 "",
                 f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
+                "",
             ]
 
-            return msg
+            return "\n".join(msg)
 
         except Exception as e:
             logger.exception(f"pcap 解析失敗: {e}")

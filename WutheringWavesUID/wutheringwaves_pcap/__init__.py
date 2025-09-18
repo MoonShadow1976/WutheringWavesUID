@@ -21,9 +21,9 @@ from .pcap_file_handler import pcap_handler
 
 
 
-sv_pcap_parse = SV("pcap解析", priority=5)
-sv_pcap_file = SV("pcap文件处理", priority=5, area="DIRECT")
-sv_pcap_help = SV("pcap帮助", priority=5)
+sv_pcap_parse = SV("pcap解析")
+sv_pcap_file = SV("pcap文件处理")
+sv_pcap_help = SV("pcap帮助")
 
 
 # 臨時文件清理函數
@@ -147,6 +147,7 @@ async def pcap_parse(bot: Bot, ev: Event):
                 f"• 声骸套数：{total_phantoms}",
                 "",
                 f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
+                "",
             ]
     
             await bot.send("\n".join(msg), at_sender)
@@ -187,6 +188,7 @@ async def pcap_parse(bot: Bot, ev: Event):
                 f"• 角色数量：{total_roles}",
                 f"• 武器数量：{total_weapons}",
                 f"• 声骸套数：{total_phantoms}",
+                "",
             ]
 
             await bot.send("\n".join(msg), at_sender)
@@ -201,7 +203,7 @@ async def pcap_parse(bot: Bot, ev: Event):
     ),
     block=True,
 )
-async def pcap_help(bot: Bot):
+async def pcap_help(bot: Bot, ev: Event):
     """Wuthery pcap 数据导入帮助"""
     url = "https://wuthery.com/guides"
     if WutheringWavesConfig.get_config("WavesTencentWord").data:

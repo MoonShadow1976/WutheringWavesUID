@@ -1,0 +1,97 @@
+{
+    "id": 60000093,
+    "name": "嗚咔咔",
+    "monsterId": 390070069,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200007,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚嗚咔咔向敵人衝撞撕咬，衝撞時命中的敵人將受到{0}湮滅傷害，被撕咬命中的敵人將受到{1}湮滅傷害，並持續削減共振度，在{2}秒內共削減{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "召喚嗚咔咔衝撞撕咬敵人造成湮滅傷害，並可削減敵人共振度。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "37",
+            "2",
+            "4",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "42.80%",
+                    "64.20%",
+                    "5",
+                    "5.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "49.22%",
+                    "73.83%",
+                    "5",
+                    "5.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "55.64%",
+                    "83.46%",
+                    "5",
+                    "5.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "62.06%",
+                    "93.09%",
+                    "5",
+                    "5.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "68.48%",
+                    "102.72%",
+                    "5",
+                    "5.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_095_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_095_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_091_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_091_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_091_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        7,
+        6
+    ]
+}

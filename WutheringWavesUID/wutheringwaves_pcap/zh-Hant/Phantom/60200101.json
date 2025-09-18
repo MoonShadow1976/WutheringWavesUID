@@ -1,0 +1,89 @@
+{
+    "id": 60200101,
+    "name": "異相·無妄者",
+    "monsterId": 6020054,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 281011,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為無妄者，連續攻擊前方目標6次，前5次每次造成{0}的湮滅傷害，最後一段造成{1}的湮滅傷害。\n漂泊者·湮滅在施放共鳴解放·臨淵死寂後{2}秒內，施放該聲骸技能造成的傷害提升{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為無妄者，連續攻擊敵人造成湮滅傷害。 施放共鳴解放·臨淵死寂後的漂泊者·湮滅使用該聲骸技能造成的傷害提高。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "33.80%",
+                    "169.00%",
+                    "5",
+                    "50.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "38.87%",
+                    "194.35%",
+                    "5",
+                    "50.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "43.94%",
+                    "219.70%",
+                    "5",
+                    "50.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "49.01%",
+                    "245.05%",
+                    "5",
+                    "50.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "54.08%",
+                    "270.40%",
+                    "5",
+                    "50.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B8_1_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B8_1_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_998_1_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_998_1_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_998_1_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        6
+    ]
+}

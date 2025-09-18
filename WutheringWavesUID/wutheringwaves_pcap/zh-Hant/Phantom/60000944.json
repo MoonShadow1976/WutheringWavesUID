@@ -1,0 +1,75 @@
+{
+    "id": 60000944,
+    "name": "釉變幼岩",
+    "monsterId": 6000094,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200078,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚釉變幼岩。產生共鳴，為附近隊伍的角色回復{0}生命上限的生命值，最多可治療5次。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚釉變幼岩，為附近隊伍的角色回復生命值。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "1.40%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.68%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.96%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2.24%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2.52%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_31050_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_31050_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31050_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31050_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31050_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        14,
+        13
+    ]
+}

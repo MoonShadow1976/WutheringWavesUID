@@ -1,0 +1,84 @@
+{
+    "id": 60000315,
+    "name": "刺玫菇",
+    "monsterId": 390077029,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200032,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚刺玫菇，發射一道雷射光，最多造成{0}次{1}的湮滅傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚刺玫菇，發射雷射光，造成湮滅傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "75",
+            "30",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "3",
+                    "35.67%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "41.02%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "46.37%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "51.72%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "57.07%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_315_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_315_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_311_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_311_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_311_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        1,
+        6
+    ]
+}

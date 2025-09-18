@@ -1,0 +1,105 @@
+{
+    "id": 60000224,
+    "name": "雲閃之鱗",
+    "monsterId": 390080003,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280001,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為雲閃之鱗，穿梭攻擊，可連續使用最多6次，前5次每次造成{0}導電傷害，終結一擊造成{1}導電傷害，落雷造成{2}導電傷害。\n終結一擊命中後，自身導電傷害加成提升{3}，共鳴解放傷害加成提升{4}，持續{5}秒。\n技能冷卻：{6}秒",
+        "simplyDescription": "幻形為雲閃之鱗，連續攻擊敵人造成導電傷害，提高自身的導電和共鳴解放傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "46",
+            "365",
+            "91",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "82.88%",
+                    "118.40%",
+                    "19.73%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "95.31%",
+                    "136.16%",
+                    "22.69%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "107.74%",
+                    "153.92%",
+                    "25.65%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "120.18%",
+                    "171.68%",
+                    "28.61%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "132.61%",
+                    "189.44%",
+                    "31.57%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B3_1_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B3_1_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_222_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_222_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_222_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        3
+    ]
+}

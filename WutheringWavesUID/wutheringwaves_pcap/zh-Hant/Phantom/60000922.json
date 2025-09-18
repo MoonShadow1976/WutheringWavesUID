@@ -1,0 +1,84 @@
+{
+    "id": 60000922,
+    "name": "夢魘·哀聲鷙",
+    "monsterId": 6000092,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280024,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚夢魘·哀聲鷙，對周圍敵人造成{0}的衍射傷害。若敵人處於受「光噪效應」影響狀態時，哀聲鷙造成的傷害提升{1}。\n在首位裝配該聲骸技能時，自身衍射傷害加成提升{2}。\n技能冷卻：{3}秒",
+        "simplyDescription": "召喚夢魘·哀聲鷙，對周圍敵人造成衍射傷害，對受「光噪效應」影響的敵人造成更多傷害。 在首位裝配時提高自身的衍射傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "152.00%",
+                    "100.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "182.40%",
+                    "100.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "212.80%",
+                    "100.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "243.20%",
+                    "100.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "273.60%",
+                    "100.00%",
+                    "12.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_997_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_997_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_YZ_33020_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_YZ_33020_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_YZ_33020_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        11
+    ]
+}

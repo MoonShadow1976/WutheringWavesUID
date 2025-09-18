@@ -1,0 +1,75 @@
+{
+    "id": 60000644,
+    "name": "浮靈偶・海德",
+    "monsterId": 6000064,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200067,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚浮靈偶·海德攻擊，造成{0}的熱熔傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚浮靈偶·海德攻擊，對敵人造成熱熔傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "72.00%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "86.40%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "100.80%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "115.20%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "129.60%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31040_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31040_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31040_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31040_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31040_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        11,
+        14
+    ]
+}

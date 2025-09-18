@@ -1,0 +1,109 @@
+{
+    "id": 60200308,
+    "name": "布蘭特",
+    "monsterId": 6030080,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289008,
+        "skillGroupId": 200052,
+        "skillCd": 14,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Fire>熱熔傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n布蘭特團子召喚船錨進行攻擊，造成{1}的<color=Fire>熱熔傷害</color>，船錨會在砸落地面時製造若干個「橙色橘子」。拾取「橙色橘子」的角色攻擊提升{7}，並回復基於施放者最大生命{8}的生命值，持續{2}秒，可疊加{4}層。技能冷卻：{6}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{3}：「橘子」數量增加{5}",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Fire>熱熔傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n布蘭特團子召喚船錨進行攻擊，造成{1}的<color=Fire>熱熔傷害</color>，船錨會在砸落地面時製造若干個「橙色橘子」。拾取「橙色橘子」的角色攻擊提升{7}，並回復基於施放者最大生命{8}的生命值，持續{2}秒，可疊加{4}層。技能冷卻：{6}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{3}：「橘子」數量增加{5}",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2720.00%",
+                    "12",
+                    "4/8",
+                    "3",
+                    "2/4",
+                    "14",
+                    "20%",
+                    "25%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2720.00%",
+                    "12",
+                    "4/8",
+                    "3",
+                    "2/4",
+                    "14",
+                    "20%",
+                    "25%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2720.00%",
+                    "12",
+                    "4/8",
+                    "3",
+                    "2/4",
+                    "14",
+                    "20%",
+                    "25%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2720.00%",
+                    "12",
+                    "4/8",
+                    "3",
+                    "2/4",
+                    "14",
+                    "20%",
+                    "25%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2720.00%",
+                    "12",
+                    "4/8",
+                    "3",
+                    "2/4",
+                    "14",
+                    "20%",
+                    "25%"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Bulante.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Bulante.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

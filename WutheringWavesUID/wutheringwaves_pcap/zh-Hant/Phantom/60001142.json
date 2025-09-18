@@ -1,0 +1,89 @@
+{
+    "id": 60001142,
+    "name": "榮耀獅像",
+    "monsterId": 6000113,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 280028,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚【榮光之戟】，對周圍敵人造成{0}的熱熔傷害，一定時間後再造成{1}的熱熔傷害。\n在首位裝配該聲骸技能時，自身熱熔傷害加成提升{2}，共鳴解放傷害加成提升{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "使用聲骸技能，召喚【榮光之戟】，對周圍敵人造成熱熔傷害。\n在首位裝配時，提高自身熱熔和共鳴解放傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "45.60%",
+                    "106.40%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "54.72%",
+                    "127.68%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "63.84%",
+                    "148.96%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "72.96%",
+                    "170.24%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "82.08%",
+                    "191.52%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_33022_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_33022_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33022_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33022_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33022_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        18
+    ]
+}

@@ -1,0 +1,91 @@
+{
+    "id": 60000105,
+    "name": "破霜獵手",
+    "monsterId": 390070070,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200014,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚破霜獵手投擲冰矛，直接命中時造成{0}冷凝傷害，聚能過程造成10次{1}冷凝傷害，爆炸造成{2}冷凝傷害。\n技能冷卻：{3}秒",
+        "simplyDescription": "召喚破霜獵手投擲冰槍造成冷凝傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "34",
+            "3",
+            "41",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "28.80%",
+                    "2.88%",
+                    "14.40%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "33.12%",
+                    "3.31%",
+                    "16.56%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "37.44%",
+                    "3.74%",
+                    "18.72%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "41.76%",
+                    "4.18%",
+                    "20.88%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "46.08%",
+                    "4.61%",
+                    "23.04%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z9_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z9_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_101_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_101_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_101_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

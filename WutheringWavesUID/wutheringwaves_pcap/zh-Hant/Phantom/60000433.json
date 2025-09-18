@@ -1,0 +1,98 @@
+{
+    "id": 60000433,
+    "name": "飛廉之猩",
+    "monsterId": 6000043,
+    "element": [
+        4
+    ],
+    "skill": {
+        "id": 280006,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為飛廉之猩進行踢擊。 如果踢擊命中則會接續一記追擊，踢擊造成{0}氣動傷害，追擊造成{1}氣動傷害。\n追擊命中後，自身氣動傷害加成提升{2}，重擊傷害加成提升{3}，持續{4}秒。\n技能冷卻：{5}秒",
+        "simplyDescription": "幻形為飛廉之猩，連續攻擊敵人造成氣動傷害，提高自身的氣動和重擊傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "205",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "144.90%",
+                    "177.10%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "166.64%",
+                    "203.67%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "188.37%",
+                    "230.23%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "210.11%",
+                    "256.80%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "231.84%",
+                    "283.36%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_996_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_996_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_996_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        4
+    ]
+}

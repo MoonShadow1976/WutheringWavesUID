@@ -1,0 +1,584 @@
+[
+    {
+        "id": 1,
+        "name": "凝夜白霜",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 22,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "冷凝傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "冷凝傷害提升",
+        "effectDescriptionParam": "PhantomFetter_1_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 2,
+        "name": "凝夜白霜",
+        "buffIds": [
+            30000001001
+        ],
+        "addProp": [],
+        "effectDescription": "使用普攻或重擊時，冷凝傷害提升10%，該效果可疊加三層，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用普攻或重擊時，冷凝傷害提升",
+        "effectDescriptionParam": "PhantomFetter_2_SimplyEffectDesc",
+        "effectDefineDescription": "昂揚激烈，鼓舞士氣的和鳴，屬於能征服戰場的勇士。燃燒的火焰是行進的鼓點，凱旋者足踏烈焰，戰意燎原。",
+        "priority": ""
+    },
+    {
+        "id": 3,
+        "name": "熔山裂谷",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 23,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "熱熔傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "熱熔傷害提升",
+        "effectDescriptionParam": "PhantomFetter_3_SimplyEffectDesc",
+        "effectDefineDescription": "能讓精神沉穩安寧的和鳴，屬於能堅守自我的仁者。鐘磬是樂器，也是禮器，循禮守矩的人，自會遠離災禍。",
+        "priority": ""
+    },
+    {
+        "id": 5,
+        "name": "徹空冥雷",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 24,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "導電傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "導電傷害提升",
+        "effectDescriptionParam": "PhantomFetter_5_SimplyEffectDesc",
+        "effectDefineDescription": "來自某個失落年代的和鳴，屬於尚未加冕的王者。有些聲音看似被遺忘，但若要喚醒它們，往往只需一小段熟悉的旋律。",
+        "priority": ""
+    },
+    {
+        "id": 6,
+        "name": "徹空冥雷",
+        "buffIds": [
+            30000003001,
+            30000003002
+        ],
+        "addProp": [],
+        "effectDescription": "使用重擊或共鳴技能時，各獲得一層導電傷害提升15%的效果，該效果可疊加兩層，每層各持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用重擊或共鳴技能後，導電傷害提升",
+        "effectDescriptionParam": "PhantomFetter_6_SimplyEffectDesc",
+        "effectDefineDescription": "嘈雜野性，但生機勃勃的和鳴，屬於繁衍不息的生靈。自詡高雅不凡的人很難耐心傾聽來自荒野的呼喚，直到那聲音已近在耳畔。",
+        "priority": ""
+    },
+    {
+        "id": 7,
+        "name": "嘯谷長風",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 25,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "氣動傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "氣動傷害提升",
+        "effectDescriptionParam": "PhantomFetter_7_SimplyEffectDesc",
+        "effectDefineDescription": "讓人心中湧上悲痛的哀切和鳴，屬於孤獨的失偶者。當呼喚始終得不到回應，曾經高飛天空的翅膀也只能墜落地面。",
+        "priority": ""
+    },
+    {
+        "id": 8,
+        "name": "嘯谷長風",
+        "buffIds": [
+            30000004001
+        ],
+        "addProp": [],
+        "effectDescription": "使用變奏技能登場時，氣動傷害提升30%，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用變奏技能登場時，氣動傷害提升",
+        "effectDescriptionParam": "PhantomFetter_8_SimplyEffectDesc",
+        "effectDefineDescription": "難以捉摸的縹緲和鳴，屬於寒霧中的迷失者。虛無的幻境遠比現實更加冰冷。輕易觸碰，可能就意味著永陷迷夢。",
+        "priority": ""
+    },
+    {
+        "id": 9,
+        "name": "浮星祛暗",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 26,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "衍射傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "衍射傷害提升",
+        "effectDescriptionParam": "PhantomFetter_9_SimplyEffectDesc",
+        "effectDefineDescription": "旋律簡單而美妙的和鳴。對於重新踏上旅途的漂泊者而言，用來調整戰鬥節奏再合適不過了。",
+        "priority": ""
+    },
+    {
+        "id": 10,
+        "name": "浮星祛暗",
+        "buffIds": [
+            30000005001
+        ],
+        "addProp": [],
+        "effectDescription": "使用變奏技能登場時，衍射傷害提升30%，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用變奏技能登場時，衍射傷害提升",
+        "effectDescriptionParam": "PhantomFetter_10_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 11,
+        "name": "沉日劫明",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 27,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "湮滅傷害提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "湮滅傷害提升",
+        "effectDescriptionParam": "PhantomFetter_11_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 12,
+        "name": "沉日劫明",
+        "buffIds": [
+            30000006001
+        ],
+        "addProp": [],
+        "effectDescription": "使用普攻或重擊時，湮滅傷害提升7.5%，該效果可疊加四層，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用普攻或重擊時，湮滅傷害提升",
+        "effectDescriptionParam": "PhantomFetter_12_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 13,
+        "name": "隱世回光",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 35,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "治療效果提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "治療效果提升",
+        "effectDescriptionParam": "PhantomFetter_13_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 14,
+        "name": "隱世回光",
+        "buffIds": [
+            30000007001
+        ],
+        "addProp": [],
+        "effectDescription": "自身為友方提供治療時，全隊共鳴者攻擊提升15%，持續30秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "自身為友方提供治療時，全隊共鳴者攻擊提升",
+        "effectDescriptionParam": "PhantomFetter_14_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 15,
+        "name": "輕雲出月",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 11,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "共鳴效率提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "共鳴效率提升",
+        "effectDescriptionParam": "PhantomFetter_15_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 16,
+        "name": "輕雲出月",
+        "buffIds": [
+            30000008001
+        ],
+        "addProp": [],
+        "effectDescription": "使用延奏技能後，下一個登場的共鳴者攻擊提升22.5%，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用延奏技能後，下一個登場的共鳴者攻擊提升",
+        "effectDescriptionParam": "PhantomFetter_16_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 17,
+        "name": "不絕餘音",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 10007,
+                "value": 0.10000000149011612,
+                "isRatio": true
+            }
+        ],
+        "effectDescription": "攻擊提升10%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "攻擊提升",
+        "effectDescriptionParam": "PhantomFetter_17_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 18,
+        "name": "不絕餘音",
+        "buffIds": [
+            30000009001,
+            30000009003
+        ],
+        "addProp": [],
+        "effectDescription": "在場時，自身攻擊每1.5秒提升5%，該效果最多疊加四層。延奏技能傷害提升60%",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "在場時，自身攻擊提升，延奏技能傷害提升",
+        "effectDescriptionParam": "PhantomFetter_18_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 4,
+        "name": "熔山裂谷",
+        "buffIds": [
+            30000002001
+        ],
+        "addProp": [],
+        "effectDescription": "使用共鳴技能時，熱熔傷害提升30%，持續15秒",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "使用共鳴技能時，熱熔傷害提升",
+        "effectDescriptionParam": "PhantomFetter_4_SimplyEffectDesc",
+        "effectDefineDescription": "",
+        "priority": ""
+    },
+    {
+        "id": 102,
+        "name": "凌冽決斷之心",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 14,
+                "value": 1200,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "共鳴技能傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "共鳴技能傷害提升",
+        "effectDescriptionParam": "PhantomFetter_102_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 105,
+        "name": "凌冽決斷之心",
+        "buffIds": [
+            31000010001,
+            31000010003
+        ],
+        "addProp": [],
+        "effectDescription": "施放共鳴技能時，自身冷凝傷害提升{0}，持續{1}秒；施放共鳴解放時，自身共鳴技能傷害提升{2}，持續{3}秒，可疊加{4}層。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "施放共鳴技能時，自身冷凝傷害提升；施放共鳴解放時，共鳴技能傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_105_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 112,
+        "name": "此間永駐之光",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 26,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "衍射傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "衍射傷害提升",
+        "effectDescriptionParam": "PhantomFetter_112_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 115,
+        "name": "此間永駐之光",
+        "buffIds": [
+            31000011001,
+            31000011003,
+            31000011005
+        ],
+        "addProp": [],
+        "effectDescription": "角色為敵人添加【光噪效應】時，自身暴擊提升{0}，持續{1}秒；攻擊存在{2}層【光噪效應】的敵人時，自身衍射傷害加成提升{3}，持續{4}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "角色為敵人添加【光噪效應】時，自身暴擊提升；攻擊存在10層【光噪效應】的敵人時，自身衍射傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_115_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 122,
+        "name": "幽夜隱匿之帷",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 27,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "湮滅屬性傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "湮滅屬性傷害提升",
+        "effectDescriptionParam": "PhantomFetter_122_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 125,
+        "name": "幽夜隱匿之帷",
+        "buffIds": [
+            31000012001,
+            31000012002
+        ],
+        "addProp": [],
+        "effectDescription": "角色觸發延奏技能離場時，額外對周圍敵人造成{0}的湮滅傷害，該傷害為延奏技能傷害，並使下一個登場角色湮滅屬性傷害加成提升{1}，持續{2}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "角色觸發延奏技能離場時，額外對周圍敵人造成湮滅傷害，並使下一個登場角色湮滅屬性傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_125_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 132,
+        "name": "高天共奏之曲",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 11,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "共鳴效率提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "共鳴效率提升",
+        "effectDescriptionParam": "PhantomFetter_132_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 135,
+        "name": "高天共奏之曲",
+        "buffIds": [
+            31000013001,
+            31000013002
+        ],
+        "addProp": [],
+        "effectDescription": "當前角色協同攻擊造成的傷害提升{0}；協同攻擊命中敵人且暴擊時，隊伍中登場角色攻擊力提升{1}，持續{2}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "當前角色協同攻擊造成的傷害提升；協同攻擊命中敵人且暴擊時，隊伍中登場角色攻擊力提升。",
+        "effectDescriptionParam": "PhantomFetter_135_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 142,
+        "name": "無懼浪濤之勇",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 11,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "共鳴效率提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "共鳴效率提升",
+        "effectDescriptionParam": "PhantomFetter_142_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 145,
+        "name": "無懼浪濤之勇",
+        "buffIds": [
+            31000014001,
+            31000014002
+        ],
+        "addProp": [],
+        "effectDescription": "角色攻擊提升{0}，共鳴效率達到{1}後，當前角色全屬性傷害提升{2}。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "角色攻擊提升，共鳴效率達到250%後，當前角色全屬性傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_145_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 152,
+        "name": "海淵孽生之威",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 10002,
+                "value": 0.10000000149011612,
+                "isRatio": true
+            }
+        ],
+        "effectDescription": "生命值提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "生命值提升",
+        "effectDescriptionParam": "PhantomFetter_152_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 155,
+        "name": "海淵孽生之威",
+        "buffIds": [],
+        "addProp": [],
+        "effectDescription": "角色擁有護盾時，生命上限提升{0}；角色生命值減少時，當前角色暴擊率提升{1}，持續{2}秒，每秒最多觸發1次，可疊加{3}層。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "角色擁有護盾時，生命上限提升；角色生命值減少時，當前角色暴擊率提升。",
+        "effectDescriptionParam": "PhantomFetter_155_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 162,
+        "name": "流雲逝盡之空",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 25,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "氣動傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "氣動傷害提升",
+        "effectDescriptionParam": "PhantomFetter_162_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 165,
+        "name": "流雲逝盡之空",
+        "buffIds": [
+            31000016001
+        ],
+        "addProp": [],
+        "effectDescription": "角色為敵人添加【風蝕效應】時，隊伍中角色氣動傷害提升{0}，自身氣動傷害額外提升{1}，持續{2}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "角色為敵人添加【風蝕效應】時，隊伍中角色氣動傷害提升，自身氣動傷害額外提升。",
+        "effectDescriptionParam": "PhantomFetter_165_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 172,
+        "name": "願戴榮光之旅",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 25,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "氣動傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "氣動傷害提升",
+        "effectDescriptionParam": "PhantomFetter_172_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 175,
+        "name": "願戴榮光之旅",
+        "buffIds": [
+            31000017001
+        ],
+        "addProp": [],
+        "effectDescription": "攻擊命中存在【風蝕效應】的敵人時，自身暴擊提升{0}，氣動傷害提升{1}，持續{2}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "攻擊命中存在【風蝕效應】的敵人時，自身暴擊提升，氣動傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_175_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 182,
+        "name": "奔狼燎原之焰",
+        "buffIds": [],
+        "addProp": [
+            {
+                "id": 23,
+                "value": 1000,
+                "isRatio": false
+            }
+        ],
+        "effectDescription": "熱熔傷害提升{0}",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "熱熔傷害提升",
+        "effectDescriptionParam": "PhantomFetter_182_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    },
+    {
+        "id": 185,
+        "name": "奔狼燎原之焰",
+        "buffIds": [
+            31000018001
+        ],
+        "addProp": [],
+        "effectDescription": "施放共鳴解放時，隊伍中角色熱熔傷害提升{0}，自身共鳴解放傷害提升{1}，持續{2}秒。",
+        "fetterIcon": "/d/GameData/UIResources/Common/Image/IconElement/T_IconElementIce1.png",
+        "simplyEffectDesc": "施放共鳴解放時，隊伍中角色熱熔傷害提升，自身共鳴解放傷害提升。",
+        "effectDescriptionParam": "PhantomFetter_185_SimplyEffectDesc",
+        "effectDefineDescription": "看似平靜卻暗藏力量的和鳴，屬於能執掌雷電的強者。風暴不會發出警告，但沒人能忽視它的先兆。",
+        "priority": ""
+    }
+]

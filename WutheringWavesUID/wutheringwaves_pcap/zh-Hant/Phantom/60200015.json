@@ -1,0 +1,104 @@
+{
+    "id": 60200015,
+    "name": "異相·飛廉之猩",
+    "monsterId": 6020015,
+    "element": [
+        4
+    ],
+    "skill": {
+        "id": 288105,
+        "skillGroupId": 200001,
+        "skillCd": 40,
+        "descriptionEx": "使用聲骸技能，幻形為飛廉之猩，造成{0}的氣動傷害，附近隊伍中所有角色獲得{1}<color=#ffd12f>共鳴解放傷害提升</color>，並且對處於癱瘓狀態目標造成的共鳴解放傷害提高{2}，持續{3}秒。飛廉之猩會召喚柱子，柱子持續期間不斷釋放衝擊波，每個衝擊波造成{4}的氣動傷害，受到衝擊波影響的友方角色獲得{5}點共鳴能量並減少{6}的共鳴解放冷卻時間。技能冷卻：{7}秒",
+        "simplyDescription": "使用聲骸技能，幻形為飛廉之猩，造成{0}的氣動傷害，附近隊伍中所有角色獲得{1}<color=#ffd12f>共鳴解放傷害提升</color>，並且對處於癱瘓狀態目標造成的共鳴解放傷害提高{2}，持續{3}秒。飛廉之猩會召喚柱子，柱子持續期間不斷釋放衝擊波，每個衝擊波造成{4}的氣動傷害，受到衝擊波影響的友方角色獲得{5}點共鳴能量並減少{6}的共鳴解放冷卻時間。技能冷卻：{7}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "836.25%",
+                    "50.00%",
+                    "100.00%",
+                    "15",
+                    "220.80%",
+                    "50",
+                    "50.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "836.25%",
+                    "50.00%",
+                    "100.00%",
+                    "15",
+                    "220.80%",
+                    "50",
+                    "50.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "836.25%",
+                    "50.00%",
+                    "100.00%",
+                    "15",
+                    "220.80%",
+                    "50",
+                    "50.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "836.25%",
+                    "50.00%",
+                    "100.00%",
+                    "15",
+                    "220.80%",
+                    "50",
+                    "50.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "836.25%",
+                    "50.00%",
+                    "100.00%",
+                    "15",
+                    "220.80%",
+                    "50",
+                    "50.00%",
+                    "40"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1009_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_1004_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_1004_UI_png.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 2,
+    "fetter": [
+        4
+    ]
+}

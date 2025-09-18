@@ -12,9 +12,7 @@ class PcapApi:
         self.base_url = "https://pcap.wuthery.com/v1"
         self.timeout = 30
 
-    async def parse_pcap_file(
-        self, file_path: str
-    ) -> Optional[Dict[str, Any]]:
+    async def parse_pcap_file(self, file_path: Path) -> Optional[Dict[str, Any]]:
         """
         上傳並解析 pcap 文件
 
@@ -26,21 +24,22 @@ class PcapApi:
         """
         try:
             file_path = Path(file_path)
+            logger.debug(f"pcap path: {file_path}")
             if not file_path.exists():
                 logger.error(f"PCAP 文件不存在: {file_path}")
                 return None
-# 文件会冲突吗
+            #  文件会冲突吗
             # 準備文件數據
-            with open(file_path, 'rb') as f:
+            with open(file_path, "rb") as f:
                 file_data = f.read()
 
             # 準備表單數據
             data = aiohttp.FormData()
             data.add_field(
-                'file',
+                "file",
                 file_data,
                 filename=file_path.name,
-                content_type='application/vnd.tcpdump.pcap',
+                content_type="application/vnd.tcpdump.pcap",
             )
 
             # 發送請求
@@ -56,9 +55,7 @@ class PcapApi:
                         return result
                     else:
                         error_text = await response.text()
-                        logger.error(
-                            f"PCAP 解析失敗: {response.status} - {error_text}"
-                        )
+                        logger.error(f"PCAP 解析失敗: {response.status} - {error_text}")
                         return None
 
         except asyncio.TimeoutError:

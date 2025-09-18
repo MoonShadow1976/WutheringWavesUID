@@ -1,0 +1,86 @@
+{
+    "id": 60000255,
+    "name": "游弋蝶",
+    "monsterId": 390070074,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200024,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚游弋蝶，為當前隊伍角色回復{0}生命上限和額外{1}點的生命值，最多可治療4次。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚游弋蝶，為友方角色回復生命值。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "100",
+            "4",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "1%",
+                    "80",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.20%",
+                    "80",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.40%",
+                    "80",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.60%",
+                    "80",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1.80%",
+                    "80",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_255_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_255_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_251_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_251_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_251_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        7,
+        8,
+        5
+    ]
+}

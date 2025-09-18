@@ -1,0 +1,81 @@
+{
+    "id": 60000173,
+    "name": "湮滅稜鏡",
+    "monsterId": 390077017,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200011,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚湮滅稜鏡發射五枚湮滅晶片，每段造成{0}湮滅傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚持續存在的湮滅稜鏡，發射晶片攻擊敵人，造成湮滅傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "7",
+            "1.5",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "14.40%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "16.56%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "18.72%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "20.88%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "23.04%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z4_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z4_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_171_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_171_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_171_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        3,
+        5,
+        6
+    ]
+}

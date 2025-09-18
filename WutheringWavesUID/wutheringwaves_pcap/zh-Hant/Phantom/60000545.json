@@ -1,0 +1,75 @@
+{
+    "id": 60000545,
+    "name": "融火蟲",
+    "monsterId": 6000054,
+    "element": [
+        2
+    ],
+    "skill": {
+        "id": 200054,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚融火蟲持續攻擊，每次造成{0}熱熔傷害。 融火蟲會在召喚者離場或遠離融火蟲一定距離時消失。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚融火蟲持續攻擊，造成熱熔傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "24.00%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "27.60%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "31.20%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "34.80%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "38.40%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_327_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_327_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_326_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_322_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_322_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        2
+    ]
+}

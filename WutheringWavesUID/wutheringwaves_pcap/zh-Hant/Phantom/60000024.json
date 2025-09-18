@@ -1,0 +1,81 @@
+{
+    "id": 60000024,
+    "name": "裂變幼岩",
+    "monsterId": 390070052,
+    "element": [
+        0
+    ],
+    "skill": {
+        "id": 200003,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚裂變幼岩。 產生共鳴，每次回復友方角色{0}生命值。\n可以在非戰鬥情况下，拾取附近的礦物、植物。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚裂變幼岩，進行治療。\n可以在非戰鬥情况下，拾取附近的礦物、植物。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "4",
+            "100",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "2%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "2%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z3_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z3_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_021_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_021_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_021_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        3,
+        7
+    ]
+}

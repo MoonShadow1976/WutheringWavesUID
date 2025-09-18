@@ -1,0 +1,79 @@
+{
+    "id": 60000523,
+    "name": "無常凶鷺",
+    "monsterId": 6000052,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 280010,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為無常凶鷺，起飛後下砸，造成{0}的湮滅傷害；\n長按聲骸技能，持續幻形，起飛後向下傾瀉湮滅火炎，每段攻擊造成{1}的湮滅傷害。\n幻形後首次命中敵人，回復自身10點共鳴能量； 在此後15秒內，若自身施放延奏技能，則可使下一個變奏登場的角色傷害提升12%，持續15秒。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為無常凶鷺，起飛後下砸，造成湮滅傷害； 長按聲骸技能，飛起傾瀉火炎造成湮滅傷害。\n攻擊命中後回復自身共鳴能量並為下一個變奏登場的角色附加傷害提升效果。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "194.10%",
+                    "34.83%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "223.22%",
+                    "40.05%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "252.33%",
+                    "45.28%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "281.45%",
+                    "50.50%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "310.56%",
+                    "55.73%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_995_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_995_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_995_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_995_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_995_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8
+    ]
+}

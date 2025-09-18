@@ -1,0 +1,100 @@
+{
+    "id": 60000455,
+    "name": "哀聲鷙",
+    "monsterId": 6000045,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 280008,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為哀聲鷙發動二連爪擊，分別造成{0}、{1}衍射傷害。\n幻形後，自身衍射傷害加成提升{2}，共鳴解放傷害加成提升{3}，持續{4}秒。\n技能冷卻：{5}秒",
+        "simplyDescription": "幻形為哀聲鷙，連續攻擊敵人造成衍射傷害，提高自身的衍射和共鳴解放傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "1.7",
+            "8",
+            "34",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "98.40%",
+                    "147.60%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "113.16%",
+                    "169.74%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "127.92%",
+                    "191.88%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "142.68%",
+                    "214.02%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "157.44%",
+                    "236.16%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_997_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_997_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_997_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_997_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_997_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5
+    ]
+}

@@ -1,0 +1,95 @@
+{
+    "id": 60000213,
+    "name": "冥淵守衛",
+    "monsterId": 390077025,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200023,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為冥淵守衛施放躍擊。 命中時造成{0}湮滅傷害，命中敵人後扣除自身{1}的生命值，{2}秒後週期性回復自身生命值，共回復生命上限{3}的生命值。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為冥淵守衛，施放重擊造成湮滅傷害，但會扣除部分角色生命值並稍後週期性回復。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "64",
+            "128",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "171.00%",
+                    "10.00%",
+                    "5",
+                    "10.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "196.65%",
+                    "10.00%",
+                    "5",
+                    "10.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "222.30%",
+                    "10.00%",
+                    "5",
+                    "10.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "247.95%",
+                    "10.00%",
+                    "5",
+                    "10.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "273.60%",
+                    "10.00%",
+                    "5",
+                    "10.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B9_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B9_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_211_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_211_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_211_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        7
+    ]
+}

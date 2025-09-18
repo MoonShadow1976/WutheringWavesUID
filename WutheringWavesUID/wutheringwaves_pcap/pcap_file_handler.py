@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-優化的 PCAP 處理器
-整合增強版解析器，提供更好的數據整理和展示
-"""
-
 import tempfile
 import time
 from pathlib import Path
@@ -12,45 +5,40 @@ from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
+from ..wutheringwaves_config import PREFIX
+
 from .pcap_parser import PcapDataParser
-from ..utils.at_help import ruser_id
 from .pcap_api import pcap_api
 
 
-class OptimizedPcapHandler:
-    """優化的 PCAP 處理器"""
+class PcapFileHandler:
+    """PCAP 處理器"""
 
-    def __init__(self, data_dir: str = "zh-Hant"):
+    def __init__(self):
         self.parser = PcapDataParser()
 
-    async def handle_pcap_file(self, bot: Bot, ev: Event, file) -> bool:
+    async def handle_pcap_file(self, bot: Bot, ev: Event, file) -> str | list[str]:
         """處理 PCAP 文件上傳"""
-        user_id = ruser_id(ev)
-        logger.info(f"[鳴潮pcap] 用戶 {user_id} 上傳了 pcap 文件")
 
         if not file:
-            await bot.send("文件上傳失敗，請重新上傳")
-            return False
+            return "文件上传失败，请重新上传\n"
 
         file_name = ev.file_name
 
         # 檢查文件格式
         if not file_name or not file_name.lower().endswith(('.pcap')):
-            await bot.send("請上傳 .pcap 格式的文件")
-            return False
+            return "文件格式错误，请上传 .pcap 文件\n"
 
          # 檢查文件大小 (通过 Base64 字符串长度估算)
         base64_data = file
         estimated_size = (len(base64_data) * 3) / 4 - base64_data.count('=', -2)  # 估算实际文件大小
         
         if estimated_size > 50 * 1024 * 1024:  # 50MB
-            await bot.send("文件過大，請上傳小於 50MB 的文件")
-            return False
+            return "文件过大，请上传小于 50MB 的文件\n"
 
-        await bot.send("正在解析 pcap 文件，請稍候...")
 
         try:
-            # 創建臨時文件
+            # 创建临时文件
             with tempfile.NamedTemporaryFile(
                 suffix=Path(file_name).suffix, delete=False
             ) as temp_file:
@@ -67,39 +55,33 @@ class OptimizedPcapHandler:
                 temp_path.write_bytes(file_content)
             except Exception as e:
                 logger.error(f"Base64 解码失败: {e}")
-                await bot.send("文件格式错误，请上传有效的 Base64 编码文件")
-                return False
+                return "文件解析失败，请确保上传的是有效的 pcap 文件\n"
 
             # 調用 pcap API 解析
-            result = await pcap_api.parse_pcap_file(str(temp_path))
+            result = await pcap_api.parse_pcap_file(temp_path)
 
             # 清理臨時文件
             self._safe_unlink(temp_path)
 
             if not result:
-                await bot.send("解析失敗：API 返回空結果")
-                return False
+                return "解析失败：API 返回空结果\n"
 
             # 檢查結果是否包含錯誤信息
             if isinstance(result, dict) and result.get('error'):
-                await bot.send(f"解析失敗：{result.get('error', '未知錯誤')}")
-                return False
+                return f"解析失败：{result.get('error', '未知错误')}\n"
 
             # 檢查結果是否包含數據
             if not isinstance(result, dict) or 'data' not in result:
-                await bot.send("解析失敗：沒有返回數據")
-                return False
+                return "解析失败：API 没有返回数据\n"
 
             if result.get('data') is None:
-                await bot.send("解析失敗：數據為空")
-                return False
+                return "解析失败：返回数据为空\n"
 
             # 解析數據
             waves_data = await self.parser.parse_pcap_data(result["data"])
 
             if not waves_data:
-                await bot.send("數據解析失敗，請檢查 pcap 文件是否包含有效的鳴潮數據")
-                return False
+                return "数据解析失败，请确保 pcap 文件包含有效的鸣潮数据\n"
 
             # 發送成功消息
             # 從解析器中獲取統計信息
@@ -107,23 +89,21 @@ class OptimizedPcapHandler:
             total_weapons = len(self.parser.weapon_data)
             total_phantoms = len(self.parser.phantom_data)
 
-            success_msg = f"""✅ pcap 數據解析成功！
+            msg = [
+                "✅ pcap 数据解析成功！",
+                "📊 解析結果：",
+                f"• 角色数量：{total_roles}",
+                f"• 武器数量：{total_weapons}",
+                f"• 声骸套数：{total_phantoms}",
+                "",
+                f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
+            ]
 
-                📊 解析結果：
-                • 角色數量：{total_roles}
-                • 武器數量：{total_weapons}  
-                • 聲骸數量：{total_phantoms}
-
-                🎯 現在可以使用「刷新面板」查看詳細數據了！"""
-
-            await bot.send(success_msg)
-
-            return True
+            return msg
 
         except Exception as e:
             logger.exception(f"pcap 解析失敗: {e}")
-            await bot.send(f"解析過程中發生錯誤：{str(e)}")
-            return False
+            return f"解析过程中发生错误：{str(e)}\n"
 
     def _safe_unlink(self, file_path: Path, max_retries: int = 3):
         """安全地刪除文件，處理 Windows 權限問題"""
@@ -146,4 +126,4 @@ class OptimizedPcapHandler:
 
 
 # 創建全局實例
-optimized_handler = OptimizedPcapHandler()
+pcap_handler = PcapFileHandler()

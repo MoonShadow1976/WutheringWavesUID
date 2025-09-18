@@ -1,0 +1,75 @@
+{
+    "id": 60000734,
+    "name": "巡遊騎士",
+    "monsterId": 6000073,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200056,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為巡遊騎士，下砸攻擊周圍敵人，造成{0}的導電傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "幻形為巡遊騎士下砸攻擊周圍敵人，造成導電傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "174.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.80%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "243.60%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "278.40%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "313.20%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32022_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32022_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32022_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32022_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32022_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        10,
+        12
+    ]
+}

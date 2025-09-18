@@ -1,0 +1,85 @@
+{
+    "id": 60001052,
+    "name": "夢魘·輝螢軍勢",
+    "monsterId": 6000105,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 280025,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚夢魘·輝螢軍勢，對周圍敵人造成{0}的冷凝傷害。\n在首位裝配該聲骸技能時，自身冷凝傷害加成提升{1}，協同攻擊造成的傷害提升{2}。\n技能冷卻：{3}秒",
+        "simplyDescription": "召喚夢魘·輝螢軍勢，對周圍敵人造成冷凝傷害。 在首位裝配時提高自身的冷凝傷害和協同攻擊造成的傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "152.00%",
+                    "12.00%",
+                    "30.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "182.40%",
+                    "12.00%",
+                    "30.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "212.80%",
+                    "12.00%",
+                    "30.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "243.20%",
+                    "12.00%",
+                    "30.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "273.60%",
+                    "12.00%",
+                    "30.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_994_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_994_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_34013_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_34013_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_34013_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        10,
+        13
+    ]
+}

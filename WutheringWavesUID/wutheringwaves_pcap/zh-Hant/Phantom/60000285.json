@@ -1,0 +1,75 @@
+{
+    "id": 60000285,
+    "name": "綠熔蜥（稚形）",
+    "monsterId": 390070078,
+    "element": [
+        2
+    ],
+    "skill": {
+        "id": 200029,
+        "skillGroupId": 200001,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，幻形為綠熔蜥（稚形），在原地休息，能夠緩慢回復生命值。\n技能冷卻：{0}秒",
+        "simplyDescription": "幻形為綠熔蜥（稚形），在原地休息回復生命值。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "66",
+            "6",
+            "6"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_285_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_285_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_281_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_281_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_281_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        3,
+        2
+    ]
+}

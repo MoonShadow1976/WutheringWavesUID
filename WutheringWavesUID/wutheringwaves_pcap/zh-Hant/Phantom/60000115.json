@@ -1,0 +1,85 @@
+{
+    "id": 60000115,
+    "name": "咕咕河豚",
+    "monsterId": 390070076,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200026,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚咕咕河豚，向面前吹吐泡泡{0}次，每次造成{1}冷凝傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚咕咕河豚，吹吐泡泡造成冷凝傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "3",
+            "66",
+            "6",
+            "6"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "5",
+                    "14.40%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "16.56%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "18.72%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "20.88%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "23.04%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_115_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_115_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_111_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_111_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_111_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

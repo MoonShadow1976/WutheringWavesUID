@@ -1,0 +1,89 @@
+{
+    "id": 60200201,
+    "name": "異相·磐石守衛",
+    "monsterId": 6020060,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 288201,
+        "skillGroupId": 200002,
+        "skillCd": 30,
+        "descriptionEx": "使用聲骸技能，召喚異構武裝，釋放防護領域，持續{0}秒。\n期間領域內隊伍中所有角色每{4}秒獲得基於釋放者最大生命值{1}的<color=#ffd12f>護盾</color>，並提升抗打斷能力，持續{2}秒。重複觸發刷新持續時間。\n技能冷卻：{3}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "6",
+                    "100.00%",
+                    "3",
+                    "30",
+                    "0.5"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "100.00%",
+                    "3",
+                    "30",
+                    "0.5"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "100.00%",
+                    "3",
+                    "30",
+                    "0.5"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "100.00%",
+                    "3",
+                    "30",
+                    "0.5"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "100.00%",
+                    "3",
+                    "30",
+                    "0.5"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33012_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33012_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

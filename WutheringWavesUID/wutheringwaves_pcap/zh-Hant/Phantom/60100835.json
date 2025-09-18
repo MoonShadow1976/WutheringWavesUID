@@ -1,0 +1,89 @@
+{
+    "id": 60100835,
+    "name": "異相·異構武裝",
+    "monsterId": 6010083,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280014,
+        "skillGroupId": 200001,
+        "skillCd": 25,
+        "descriptionEx": "使用聲骸技能，幻形為異構武裝，攻擊前方目標，造成{0}的冷凝傷害。裝配角色施放共鳴解放時，可持續提升「強襲功率」。\n「強襲功率」升滿時，重置聲骸技能的冷卻時間，可使用聲骸技能幻形為異構武裝，起飛後向目標俯衝，造成{1}的冷凝傷害，並凍結目標。\n在首位裝配該聲骸技能時，自身獲得{2}冷凝傷害加成提升，{3}共鳴技能傷害加成提升。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為異構武裝，連續攻擊前方敵人造成冷凝傷害。裝配角色施放共鳴解放可持續提升「強襲功率」。「強襲功率」升滿時可幻形為異構武裝對敵人俯衝造成冷凝傷害。在首位裝配時提高自身的冷凝和共鳴技能傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "225.00%",
+                    "225.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "270.00%",
+                    "270.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "315.00%",
+                    "315.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "360.00%",
+                    "360.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "405.00%",
+                    "405.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33012_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33012_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_SG_33009_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_SG_33009_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_SG_33009_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        3
+    ]
+}

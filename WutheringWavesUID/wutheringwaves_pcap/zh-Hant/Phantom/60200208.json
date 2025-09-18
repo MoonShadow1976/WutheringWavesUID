@@ -1,0 +1,95 @@
+{
+    "id": 60200208,
+    "name": "角",
+    "monsterId": 6020067,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288208,
+        "skillGroupId": 200001,
+        "skillCd": 40,
+        "descriptionEx": "使用聲骸技能，幻形為浮靈偶，持續{0}秒。每次造成{1}<color=#ffd12f>熱熔傷害</color>。該技能造成傷害時，刷新幻形持續時間，最多可持續{2}秒，並為目標附加{3}層<color=#ffd12f>[恐慌]</color>，對同一目標每秒最多觸發1次。角色不在場時，不會刷新持續時間。\n<color=#ffd12f>[恐慌]</color>達到100層後，對目標造成最大共振值100.00%的共振值傷害，使目標陷入癱瘓，期間目標受到傷害必定暴擊，全屬性傷害抗性降低{4}。觸發效果後，移除<color=#ffd12f>[恐慌]</color>。\n目標癱瘓期間無法獲得<color=#ffd12f>[恐慌]</color>。\n技能冷卻：{5}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "5",
+                    "70.09%",
+                    "20",
+                    "3",
+                    "40.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "70.09%",
+                    "20",
+                    "3",
+                    "40.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "70.09%",
+                    "20",
+                    "3",
+                    "40.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "70.09%",
+                    "20",
+                    "3",
+                    "40.00%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "70.09%",
+                    "20",
+                    "3",
+                    "40.00%",
+                    "40"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32028_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32028_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32028_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32028_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32028_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        14,
+        13
+    ]
+}

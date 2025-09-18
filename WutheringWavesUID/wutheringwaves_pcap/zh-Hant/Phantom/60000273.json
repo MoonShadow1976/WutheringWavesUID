@@ -1,0 +1,73 @@
+{
+    "id": 60000273,
+    "name": "遁地鼠",
+    "monsterId": 390070077,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200028,
+        "skillGroupId": 200001,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，幻形為遁地鼠向前移動，期間可調整方向，且不會受到傷害。\n技能冷卻：{0}秒",
+        "simplyDescription": "幻形為遁地鼠快速移動，期間不會受到傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "12",
+            "6"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_275_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_275_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_271_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_271_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_271_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        1,
+        6
+    ]
+}

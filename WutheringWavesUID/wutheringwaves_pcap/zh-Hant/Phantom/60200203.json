@@ -1,0 +1,79 @@
+{
+    "id": 60200203,
+    "name": "朔雷之鱗",
+    "monsterId": 6020062,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288203,
+        "skillGroupId": 200002,
+        "skillCd": 40,
+        "descriptionEx": "使用聲骸技能，召喚赫卡忒，<color=#ffd12f>控制目標</color>，持續{0}秒。期間附近隊伍中所有角色回復{1}點協奏能量。\n技能冷卻：{2}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "6",
+                    "60",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "60",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "60",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "60",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6",
+                    "60",
+                    "40"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_34010_1_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_34010_1_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_34010_1_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        13
+    ]
+}

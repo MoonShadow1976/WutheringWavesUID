@@ -1,9 +1,8 @@
 import json
 
-import os
 from pathlib import Path
 from dataclasses import field, dataclass
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List
 
 from gsuid_core.logger import logger
 
@@ -12,7 +11,8 @@ from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 from ..utils.ascension.echo import get_echo_model
 from ..utils.ascension.model import EchoModel
 
-from .simplified_converter import convert_to_simplified
+from .detail_json import supplementary_props, m_id2monsterId_strange
+
 
 TEXT_PATH = Path(__file__).parent
 
@@ -57,47 +57,6 @@ class PhantomInfo:
     """聲骸信息"""
 
     phantom_incr_list: List[Dict[str, Any]]
-
-
-# 補充的屬性映射
-supplementary_props = {
-    1: {"name": "生命", "isPercent": False},
-    2: {"name": "攻击", "isPercent": False},
-    3: {"name": "防御", "isPercent": False},
-    4: {"name": "生命", "isPercent": False},
-    5: {"name": "攻击", "isPercent": True},
-    6: {"name": "防御", "isPercent": True},
-    7: {"name": "共鸣技能伤害加成", "isPercent": True},
-    8: {"name": "普攻伤害加成", "isPercent": True},
-    9: {"name": "重击伤害加成", "isPercent": True},
-    10: {"name": "共鸣解放伤害加成", "isPercent": True},
-    11: {"name": "暴击", "isPercent": True},
-    12: {"name": "暴击伤害", "isPercent": True},
-    13: {"name": "共鸣效率", "isPercent": True},
-    4003: {"name": "攻击", "isPercent": True},
-    40001: {"name": "攻击", "isPercent": False},
-    5001: {"name": "暴击", "isPercent": True},
-    5002: {"name": "暴击伤害", "isPercent": True},
-    5004: {"name": "生命", "isPercent": True},
-    5005: {"name": "防御", "isPercent": True},
-    50001: {"name": "攻击", "isPercent": False},
-    50002: {"name": "生命", "isPercent": False},
-    50003: {"name": "攻击", "isPercent": False},
-    5006: {"name": "治疗效果加成", "isPercent": True},
-    5007: {"name": "冷凝伤害加成", "isPercent": True},
-    5008: {"name": "热熔伤害加成", "isPercent": True},
-    5009: {"name": "导电伤害加成", "isPercent": True},
-    5010: {"name": "气动伤害加成", "isPercent": True},
-    5011: {"name": "衍射伤害加成", "isPercent": True},
-    5012: {"name": "湮灭伤害加成", "isPercent": True},
-    5013: {"name": "攻击", "isPercent": True},
-    5014: {"name": "生命", "isPercent": True},
-    5015: {"name": "防御", "isPercent": True},
-    5016: {"name": "共鸣效率", "isPercent": True},
-    5017: {"name": "攻击", "isPercent": True},
-    5018: {"name": "生命", "isPercent": False},
-    5019: {"name": "防御", "isPercent": True},
-}
 
 
 def get_breach(level: int):
@@ -259,7 +218,7 @@ class PcapDataParser:
                 return role_detail_list
 
             logger.info("🔧 初始化 PcapDataParser...")
-            self._load_phantom_index()
+            # self._load_phantom_index()
             self._load_property_index()
             logger.info(
                 f"🔧 PcapDataParser 初始化完成，載入了 {len(self.phantom_index)} 个聲骸映射，{len(self.property_index)} 個属性映射"
@@ -312,7 +271,9 @@ class PcapDataParser:
                     f"找到 PhantomItemResponse，鍵: {list(data['PhantomItemResponse'].keys())}"
                 )
                 self._extract_phantom_data_from_wuthery(data["PhantomItemResponse"])
-                logger.info(f"從 Wuthery API 提取到 {len(self.phantom_data)} 個聲骸")
+                logger.info(
+                    f"從 Wuthery API 提取到 {len(self.phantom_data)} 個角色的聲骸數據"
+                )
             else:
                 logger.warning("數據中沒有 PhantomItemResponse")
 
@@ -476,9 +437,6 @@ class PcapDataParser:
                         logger.debug(
                             f"原始数据:{role_id}-{phantom_item_incr_id}，处理完的数据有 {len(phantom_incr_list)} 个"
                         )
-            logger.info(
-                f"從 Wuthery API 提取到 {len(self.phantom_data)} 個角色的聲骸數據"
-            )
 
         except Exception as e:
             logger.exception("從 Wuthery API 提取聲骸數據失敗", e)
@@ -550,19 +508,26 @@ class PcapDataParser:
         monster_id = (
             phantom_id // 10
         )  # phantom_id = monster_id + rarity (一位数字表示声骸品质)
-        echo_detail = get_echo_model(str(monster_id))
+        echo_detail = get_echo_model(monster_id)
         if echo_detail:
             return echo_detail
+
+        m_id_strange = m_id2monsterId_strange.get(str(monster_id))
+        if m_id_strange:
+            echo_detail = get_echo_model(m_id_strange)
+            if echo_detail:
+                return echo_detail
 
         if phantom_id in self.phantom_index:
             echo_detail = get_echo_model(self.phantom_index[phantom_id])
             if echo_detail:
+                logger.warning("遍历json拿到mid")
                 return echo_detail
 
         return
 
     def _get_property_name(self, property_id: int) -> str:
-        """獲取屬性名稱（不包含%符號，用於圖標文件名）"""
+        """獲取屬性名稱"""
         # 先檢查補充的屬性映射
         if property_id in supplementary_props:
             prop_info = supplementary_props[property_id]
@@ -573,6 +538,7 @@ class PcapDataParser:
         if property_id in self.property_index:
             prop_info = self.property_index[property_id]
             name = prop_info["name"]
+            logger.warning("遍历json拿到property_name")
             return name
 
         return f"缺失名称(ID:{property_id})"
@@ -585,6 +551,7 @@ class PcapDataParser:
 
         # 再檢查標準屬性索引
         if property_id in self.property_index:
+            logger.warning("遍历json拿到property_isPercent")
             return self.property_index[property_id]["isPercent"]
 
         return False  # 默認不是百分比
@@ -721,7 +688,7 @@ class PcapDataParser:
             phantom_id = phantom_detail.get("id")  # 使用 id 而不是 phantom_id
             fetter_group_id = phantom_detail.get("fetter_group_id")
             phantom_level = phantom_detail.get("phantom_level")
-            logger.info(
+            logger.debug(
                 f"position:{position}, phantom_id:{phantom_id}, fetter_group_id:{fetter_group_id}, phantom_level:{phantom_level}"
             )
 
@@ -732,9 +699,12 @@ class PcapDataParser:
 
             echo_detail = self._get_phantom_detail(phantom_id)
             if not echo_detail:
-                return {"cost": 0, "equipPhantomList": []}
+                logger.error(
+                    f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}"
+                )
+                continue
 
-            monster_id = echo_detail.id # 重定向
+            monster_id = echo_detail.id  # 重定向
 
             cost = echo_detail.get_cost()
             total_cost += cost

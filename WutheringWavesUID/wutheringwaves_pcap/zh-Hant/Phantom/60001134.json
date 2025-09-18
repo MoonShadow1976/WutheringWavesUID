@@ -1,0 +1,90 @@
+{
+    "id": 60001134,
+    "name": "夢魘·凱爾匹",
+    "monsterId": 6000114,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 280027,
+        "skillGroupId": 200001,
+        "skillCd": 25,
+        "descriptionEx": "使用聲骸技能，幻形為夢魘·凱爾匹，對周圍敵人造成{0}的冷凝傷害。\n在首位裝配該聲骸技能時，自身冷凝傷害加成提升{2}，氣動傷害加成提升{3}；使用延奏技能離場時可召喚夢魘·凱爾匹，對敵人造成{1}的氣動傷害。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為夢魘·凱爾匹，對周圍敵人造成冷凝傷害。\n在首位裝配時，提高自身冷凝和氣動傷害；使用延奏技能離場時可召喚夢魘·凱爾匹，對敵人造成氣動傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "225.00%",
+                    "225.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "270.00%",
+                    "270.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "315.00%",
+                    "315.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "360.00%",
+                    "360.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "405.00%",
+                    "405.00%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_33021_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_33021_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33021_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33021_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33021_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        16,
+        17
+    ]
+}

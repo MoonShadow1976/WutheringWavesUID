@@ -1,0 +1,84 @@
+{
+    "id": 60000842,
+    "name": "嘆息古龍",
+    "monsterId": 6000084,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280015,
+        "skillGroupId": 200001,
+        "skillCd": 25,
+        "descriptionEx": "使用聲骸技能，幻形為嘆息古龍，召喚「悲慟領域」，持續5秒，對「悲慟領域」內的敵人週期性造成{0}的熱熔傷害。\n在首位裝配該聲骸技能時，自身獲得{1}熱熔傷害加成提升，{2}普攻傷害加成提升。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為嘆息古龍召喚「悲慟領域」，對一定範圍內的敵人持續造成熱熔傷害。在首位裝配時提高自身的熱熔和普攻傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "20.45%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "24.54%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "28.63%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "32.72%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "36.81%",
+                    "12.00%",
+                    "12.00%",
+                    "25"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33013_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33013_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33013_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33013_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33013_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        14
+    ]
+}

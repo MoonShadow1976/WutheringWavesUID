@@ -1,0 +1,106 @@
+{
+    "id": 60000442,
+    "name": "輝螢軍勢",
+    "monsterId": 6000044,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 280007,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為輝螢軍勢進行攻擊，可連續使用最多3次。\n向前方下砸並引發大範圍的冰凍衝擊，前兩段下砸分別造成{0}和{1}冷凝傷害，最後一段造成{2}冷凝傷害，被衝擊命中的敵人會被冰凍。\n每次衝擊使自身冷凝傷害加成提升{3}，共鳴技能傷害加成提升{4}，最多3層，持續{5}秒。\n技能冷卻：{6}秒",
+        "simplyDescription": "幻形為輝螢軍勢，連續攻擊敵人造成冷凝傷害，提高自身的冷凝和共鳴技能傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "19",
+            "19",
+            "103",
+            "1",
+            "30",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "125.10%",
+                    "125.10%",
+                    "166.80%",
+                    "4.00%",
+                    "4.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "143.87%",
+                    "143.87%",
+                    "191.82%",
+                    "4.00%",
+                    "4.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "162.63%",
+                    "162.63%",
+                    "216.84%",
+                    "4.00%",
+                    "4.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "181.40%",
+                    "181.40%",
+                    "241.86%",
+                    "4.00%",
+                    "4.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.16%",
+                    "200.16%",
+                    "266.88%",
+                    "4.00%",
+                    "4.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_994_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_994_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_994_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_994_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_994_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        1
+    ]
+}

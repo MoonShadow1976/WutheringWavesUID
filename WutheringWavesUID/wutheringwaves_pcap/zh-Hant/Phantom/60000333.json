@@ -1,0 +1,85 @@
+{
+    "id": 60000333,
+    "name": "箭簇熊",
+    "monsterId": 390077038,
+    "element": [
+        0
+    ],
+    "skill": {
+        "id": 200034,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚箭簇熊使用連續五段爪擊，前四段每段造成{0}的物理傷害，最後一段造成{1}的物理傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚箭簇熊，連續爪擊，造成物理傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "43",
+            "4",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "18.73%",
+                    "32.10%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "21.53%",
+                    "36.92%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "24.34%",
+                    "41.73%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "27.15%",
+                    "46.55%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "29.96%",
+                    "51.36%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_986_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_986_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_986_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_986_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_986_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        8
+    ]
+}

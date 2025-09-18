@@ -1,0 +1,80 @@
+{
+    "id": 60000745,
+    "name": "幻晝騎士",
+    "monsterId": 6000074,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200057,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為幻晝騎士，揮劍前衝攻擊敵人，造成{0}的衍射傷害。對受「光噪效應」影響的敵人造成的傷害提升{1}。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為幻晝騎士前衝攻擊敵人，造成衍射傷害，對受「光噪效應」影響的敵人造成更多傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "149.00%",
+                    "100.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "178.80%",
+                    "100.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.60%",
+                    "100.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "238.40%",
+                    "100.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "268.20%",
+                    "100.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32023_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32023_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32023_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32023_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32023_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        11,
+        14
+    ]
+}

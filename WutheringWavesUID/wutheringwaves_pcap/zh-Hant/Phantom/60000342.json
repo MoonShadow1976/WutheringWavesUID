@@ -1,0 +1,74 @@
+{
+    "id": 60000342,
+    "name": "寒霜陸龜",
+    "monsterId": 390070105,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200033,
+        "skillGroupId": 200001,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，幻形為寒霜陸龜，同時緩慢回復生命值。幻形過程中再次使用聲骸技能可退出幻形狀態。\n技能冷卻：{0}秒",
+        "simplyDescription": "幻形為寒霜陸龜，期間緩慢回復生命值。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "30",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_969_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_969_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_969_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "id": 60000293,
+    "name": "綠熔蜥",
+    "monsterId": 390077028,
+    "element": [
+        2
+    ],
+    "skill": {
+        "id": 200030,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚綠熔蜥持續噴火，造成10次{0}熱熔傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚綠熔蜥，持續噴火，造成熱熔傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "13",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "10.70%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "12.31%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "13.91%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "15.52%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "17.12%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_295_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_295_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_291_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_291_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_291_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        2
+    ]
+}

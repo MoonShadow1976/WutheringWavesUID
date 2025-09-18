@@ -1,0 +1,90 @@
+{
+    "id": 60200206,
+    "name": "異相·寒霜陸龜",
+    "monsterId": 6020065,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288206,
+        "skillGroupId": 200002,
+        "skillCd": 30,
+        "descriptionEx": "使用聲骸技能，召喚魔術先生，釋放3次強化樂章。每次使附近隊伍中所有角色獲得{0}點<color=#ffd12f>共鳴能量</color>與{1}共鳴解放傷害加成，持續{2}秒。並減少{3}的共鳴解放冷卻時間。\n技能冷卻：{4}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "40",
+                    "150.00%",
+                    "15",
+                    "30.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "40",
+                    "150.00%",
+                    "15",
+                    "30.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "40",
+                    "150.00%",
+                    "15",
+                    "30.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "40",
+                    "150.00%",
+                    "15",
+                    "30.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "40",
+                    "150.00%",
+                    "15",
+                    "30.00%",
+                    "30"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31045_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31045_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31045_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31045_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31045_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10,
+        13
+    ]
+}

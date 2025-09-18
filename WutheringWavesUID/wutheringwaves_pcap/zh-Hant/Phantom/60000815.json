@@ -1,0 +1,80 @@
+{
+    "id": 60000815,
+    "name": "巨布偶",
+    "monsterId": 6000081,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200064,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為巨布偶連續攻擊，造成4段{0}和一段{1}的物理傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為巨布偶連續攻擊，對敵人造成物理傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "26.10%",
+                    "69.60%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "31.32%",
+                    "83.52%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "36.54%",
+                    "97.44%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "41.76%",
+                    "111.36%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "46.98%",
+                    "125.28%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32030_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32030_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32030_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32030_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32030_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        12,
+        10
+    ]
+}

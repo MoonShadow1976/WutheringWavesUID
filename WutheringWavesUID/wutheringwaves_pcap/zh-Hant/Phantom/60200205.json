@@ -1,0 +1,94 @@
+{
+    "id": 60200205,
+    "name": "異相·飛廉之猩",
+    "monsterId": 6020064,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288205,
+        "skillGroupId": 200001,
+        "skillCd": 35,
+        "descriptionEx": "使用聲骸技能，幻形為無歸的謬誤，對前方連續錘擊，總計造成{0}的<color=#ffd12f>衍射傷害</color>。\n該技能造成傷害時，附近隊伍中所有角色減少{1}的共鳴技能冷卻時間，並獲得{2}共鳴技能傷害加成，上限{3}層，持續{4}秒。重複觸發刷新持續時間。\n技能冷卻：{5}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "6858.00%",
+                    "5.00%",
+                    "10.00%",
+                    "14",
+                    "15",
+                    "35"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6858.00%",
+                    "5.00%",
+                    "10.00%",
+                    "14",
+                    "15",
+                    "35"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6858.00%",
+                    "5.00%",
+                    "10.00%",
+                    "14",
+                    "15",
+                    "35"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6858.00%",
+                    "5.00%",
+                    "10.00%",
+                    "14",
+                    "15",
+                    "35"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6858.00%",
+                    "5.00%",
+                    "10.00%",
+                    "14",
+                    "15",
+                    "35"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_350_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_350_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_350_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_350_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_350_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        7
+    ]
+}

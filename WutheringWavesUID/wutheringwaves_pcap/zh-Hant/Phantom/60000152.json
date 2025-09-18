@@ -1,0 +1,81 @@
+{
+    "id": 60000152,
+    "name": "熱熔稜鏡",
+    "monsterId": 390077012,
+    "element": [
+        2
+    ],
+    "skill": {
+        "id": 200009,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚熱熔稜鏡發射一枚晶片，造成{0}熱熔傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚持續存在的熱熔稜鏡，發射晶片攻擊敵人，造成熱熔傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "7",
+            "1.5",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "20.00%+40",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "23.00%+46",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "26.00%+52",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "29.00%+58",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "32.00%+64",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z6_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z6_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_151_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_151_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_151_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        1,
+        9,
+        2
+    ]
+}

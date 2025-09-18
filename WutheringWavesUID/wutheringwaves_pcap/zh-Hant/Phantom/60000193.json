@@ -1,0 +1,85 @@
+{
+    "id": 60000193,
+    "name": "奏諭樂師",
+    "monsterId": 390077022,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200019,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "長按聲骸技能，持續幻形為奏諭樂師，持續發射導電雷射光，造成10次{0}導電傷害，每次造成傷害時可以獲得{1}點協奏能量。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為奏諭樂師，施放導電雷射，造成傷害時獲得協奏能量。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "49",
+            "33",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "33.30%",
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "38.30%",
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "43.29%",
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "48.29%",
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "53.28%",
+                    "1",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B6_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B6_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_191_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_191_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_191_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9,
+        3
+    ]
+}

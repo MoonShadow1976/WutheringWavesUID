@@ -1,0 +1,89 @@
+{
+    "id": 60000865,
+    "name": "夢魘·飛廉之猩",
+    "monsterId": 6000086,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280018,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚夢魘·飛廉之猩攻擊敵人，造成{0}的氣動傷害；留存的「風旋榕木」將持續攻擊周圍敵人，造成最多5段，每段{1}的氣動傷害。\n在首位裝配該聲骸技能時，自身氣動傷害加成提升{2}，重擊傷害加成提升{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "召喚夢魘·飛廉之猩，攻擊敵人造成氣動傷害。留存的「風旋榕木」也將對周圍敵人持續造成氣動傷害。在首位裝配時提高自身的氣動和重擊傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "91.20%",
+                    "12.16%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "109.44%",
+                    "14.59%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "127.68%",
+                    "17.02%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "145.92%",
+                    "19.46%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "164.16%",
+                    "21.89%",
+                    "12.00%",
+                    "12.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_996_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_YZ_33014_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_YZ_33014_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_YZ_33014_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        4
+    ]
+}

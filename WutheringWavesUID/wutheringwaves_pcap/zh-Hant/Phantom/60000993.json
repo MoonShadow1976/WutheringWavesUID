@@ -1,0 +1,86 @@
+{
+    "id": 60000993,
+    "name": "赦罪節使",
+    "monsterId": 6000099,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200083,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為赦罪節使，位移一段距離後進行一次遠程攻擊，造成{0}的衍射傷害。\n位移期間受到攻擊，可以規避傷害並觸發強化反擊，造成一次{1}和五次每次{2}的衍射傷害。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為赦罪節使，位移並對敵人造成衍射傷害，位移期間受到攻擊，可以規避傷害並觸發強化反擊。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "149.00%",
+                    "149.00%",
+                    "29.80%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "178.80%",
+                    "178.80%",
+                    "35.76%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.60%",
+                    "208.60%",
+                    "41.72%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "238.40%",
+                    "238.40%",
+                    "47.68%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "268.20%",
+                    "268.20%",
+                    "53.64%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_31053.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_Mstskil_31053.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31053_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31053_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31053_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        16,
+        11,
+        18
+    ]
+}

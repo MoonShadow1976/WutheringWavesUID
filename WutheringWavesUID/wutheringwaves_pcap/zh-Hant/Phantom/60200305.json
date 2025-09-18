@@ -1,0 +1,84 @@
+{
+    "id": 60200305,
+    "name": "椿",
+    "monsterId": 6030050,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289005,
+        "skillGroupId": 200051,
+        "skillCd": 16,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Dark>湮滅傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n幻形為椿團子，持續引導「蔓舞」攻擊大範圍內的目標，每秒造成{1}的<color=Dark>湮滅傷害</color>，持續{2}秒。技能冷卻：{3}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Dark>湮滅傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n幻形為椿團子，持續引導「蔓舞」攻擊大範圍內的目標，每秒造成{1}的<color=Dark>湮滅傷害</color>，持續{2}秒。技能冷卻：{3}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1194.68%",
+                    "5",
+                    "16"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1194.68%",
+                    "5",
+                    "16"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1194.68%",
+                    "5",
+                    "16"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1194.68%",
+                    "5",
+                    "16"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1194.68%",
+                    "5",
+                    "16"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Chun.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Chun.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

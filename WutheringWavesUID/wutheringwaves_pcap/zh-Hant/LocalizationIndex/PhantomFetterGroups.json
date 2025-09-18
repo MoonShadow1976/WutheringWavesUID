@@ -1,0 +1,189 @@
+[
+    {
+        "id": 1,
+        "fetterMap": {
+            "2": 1,
+            "5": 2
+        },
+        "fetterGroupName": "凝夜白霜",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriIce.png"
+    },
+    {
+        "id": 2,
+        "fetterMap": {
+            "2": 3,
+            "5": 4
+        },
+        "fetterGroupName": "熔山裂谷",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriFire.png"
+    },
+    {
+        "id": 3,
+        "fetterMap": {
+            "2": 5,
+            "5": 6
+        },
+        "fetterGroupName": "徹空冥雷",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriThunder.png"
+    },
+    {
+        "id": 4,
+        "fetterMap": {
+            "2": 7,
+            "5": 8
+        },
+        "fetterGroupName": "嘯谷長風",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriWind.png"
+    },
+    {
+        "id": 5,
+        "fetterMap": {
+            "2": 9,
+            "5": 10
+        },
+        "fetterGroupName": "浮星祛暗",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriLight.png"
+    },
+    {
+        "id": 6,
+        "fetterMap": {
+            "2": 11,
+            "5": 12
+        },
+        "fetterGroupName": "沉日劫明",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriDark.png"
+    },
+    {
+        "id": 7,
+        "fetterMap": {
+            "2": 13,
+            "5": 14
+        },
+        "fetterGroupName": "隱世回光",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriCure.png"
+    },
+    {
+        "id": 8,
+        "fetterMap": {
+            "2": 15,
+            "5": 16
+        },
+        "fetterGroupName": "輕雲出月",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriCloud.png"
+    },
+    {
+        "id": 9,
+        "fetterMap": {
+            "2": 17,
+            "5": 18
+        },
+        "fetterGroupName": "不絕餘音",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriAttack.png"
+    },
+    {
+        "id": 10,
+        "fetterMap": {
+            "2": 102,
+            "5": 105
+        },
+        "fetterGroupName": "凌冽決斷之心",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriIceUltimateSkill.png"
+    },
+    {
+        "id": 11,
+        "fetterMap": {
+            "2": 112,
+            "5": 115
+        },
+        "fetterGroupName": "此間永駐之光",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriLightError.png"
+    },
+    {
+        "id": 12,
+        "fetterMap": {
+            "2": 122,
+            "5": 125
+        },
+        "fetterGroupName": "幽夜隱匿之帷",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriDarkAssist.png"
+    },
+    {
+        "id": 13,
+        "fetterMap": {
+            "2": 132,
+            "5": 135
+        },
+        "fetterGroupName": "高天共奏之曲",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriCooperate.png"
+    },
+    {
+        "id": 14,
+        "fetterMap": {
+            "2": 142,
+            "5": 145
+        },
+        "fetterGroupName": "無懼浪濤之勇",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriEnergy.png"
+    },
+    {
+        "id": 16,
+        "fetterMap": {
+            "2": 162,
+            "5": 165
+        },
+        "fetterGroupName": "流雲逝盡之空",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriWindError.png"
+    },
+    {
+        "id": 17,
+        "fetterMap": {
+            "2": 172,
+            "5": 175
+        },
+        "fetterGroupName": "願戴榮光之旅",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriWindErrorA.png"
+    },
+    {
+        "id": 18,
+        "fetterMap": {
+            "2": 182,
+            "5": 185
+        },
+        "fetterGroupName": "奔狼燎原之焰",
+        "fetterGroupDesc": "",
+        "fetterElementColor": "FFFFFF00",
+        "icon": "/d/GameData/UIResources/Common/Image/IconElementAttri/T_IconElementAttriFireUltimateSkill.png"
+    }
+]

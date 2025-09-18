@@ -1,0 +1,92 @@
+{
+    "id": 60000082,
+    "name": "呼咻咻",
+    "monsterId": 390070068,
+    "element": [
+        4
+    ],
+    "skill": {
+        "id": 200005,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚呼咻咻引爆風壓，造成{0}氣動傷害並形成低氣壓區域。低壓區域不斷將敵人向中心聚攏，持續{1}秒，期間造成6次{2}的氣動傷害。\n技能冷卻：{3}秒",
+        "simplyDescription": "召喚呼咻咻進行引爆，造成氣動傷害，並製造低壓區域聚攏敵人。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "72",
+            "2",
+            "7",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "32.10%",
+                    "2",
+                    "12.48%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "36.92%",
+                    "2",
+                    "14.35%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "41.73%",
+                    "2",
+                    "16.22%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "46.55%",
+                    "2",
+                    "18.10%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "51.36%",
+                    "2",
+                    "19.97%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z12_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z12_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_081_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_081_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_081_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        7,
+        8,
+        4
+    ]
+}

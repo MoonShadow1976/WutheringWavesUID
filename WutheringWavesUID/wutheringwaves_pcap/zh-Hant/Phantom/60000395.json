@@ -1,0 +1,98 @@
+{
+    "id": 60000395,
+    "name": "朔雷之鱗",
+    "monsterId": 6000039,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280004,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為朔雷之鱗，進行一次甩尾攻擊接爪擊，甩尾召喚出來的雷擊每段造成{0}導電傷害，爪擊造成{1}導電傷害。\n爪擊命中後，當前角色導電傷害提升{2}，重擊傷害提升{3}，持續{4}秒。\n技能冷卻：{5}秒",
+        "simplyDescription": "幻形為朔雷之鱗，連續攻擊敵人造成導電傷害，提高當前角色的導電和重擊傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "98",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "64.05%",
+                    "109.80%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "73.66%",
+                    "126.27%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "83.27%",
+                    "142.74%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "92.87%",
+                    "159.21%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "102.48%",
+                    "175.68%",
+                    "12.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B3_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B3_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_221_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_221_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_221_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        3
+    ]
+}

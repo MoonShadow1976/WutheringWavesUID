@@ -1,0 +1,75 @@
+{
+    "id": 60000783,
+    "name": "凝水貴族",
+    "monsterId": 6000078,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200060,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為凝水貴族，召喚3個冰稜刺攻擊敵人，每個造成{0}的冷凝傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "幻形為凝水貴族，召喚3個冰稜刺攻擊敵人，造成冷凝傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "49.66%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "59.59%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "69.52%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "79.46%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "89.39%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32026_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32026_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32027_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32027_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32027_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        10,
+        11
+    ]
+}

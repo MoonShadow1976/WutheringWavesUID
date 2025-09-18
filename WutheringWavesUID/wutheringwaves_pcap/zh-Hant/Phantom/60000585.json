@@ -1,0 +1,84 @@
+{
+    "id": 60000585,
+    "name": "踏光獸",
+    "monsterId": 6000058,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200052,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為踏光獸，向前進行一段撲擊，造成{0}的衍射傷害。 命中目標時生成{1}個「遺光」，「遺光」爆炸時造成{2}的衍射傷害。\n長按聲骸技能，持續幻形，向前飛躍後空中漫步一段距離。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為踏光獸向前撲擊，造成衍射傷害。\n長按持續幻形，向前飛躍。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "84.60%",
+                    "6",
+                    "9.40%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "97.29%",
+                    "6",
+                    "10.81%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "109.98%",
+                    "6",
+                    "12.22%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "122.67%",
+                    "6",
+                    "13.63%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "135.36%",
+                    "6",
+                    "15.04%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_329_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_329_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_328_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_324_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_324_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5
+    ]
+}

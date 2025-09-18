@@ -1,0 +1,79 @@
+{
+    "id": 60000854,
+    "name": "赫卡忒",
+    "monsterId": 6000085,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 280016,
+        "skillGroupId": 230004,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，在周圍召喚3個持續旋舞的「冥月侍女」。「冥月侍女」的旋刃將對敵人造成{0}的湮滅傷害。旋刃成功觸發逆勢回擊時，重置「冥月侍女」存在的時間。\n在首位裝配該聲骸技能時，自身協同攻擊造成的傷害提升{1}。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚旋舞的「冥月侍女」，對周圍敵人造成湮滅傷害。「冥月侍女」的旋刃成功觸發逆勢回擊時重置其存在時間。在首位裝配時提高自身的協同攻擊傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "25.33%",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "30.40%",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "35.46%",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "40.53%",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "45.59%",
+                    "40.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_34010_1_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_34010_1_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_34010_1_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        13
+    ]
+}

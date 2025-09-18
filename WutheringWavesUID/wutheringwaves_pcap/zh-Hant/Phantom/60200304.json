@@ -1,0 +1,114 @@
+{
+    "id": 60200304,
+    "name": "守岸人",
+    "monsterId": 6030040,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289004,
+        "skillGroupId": 200052,
+        "skillCd": 20,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n守岸人團子持續引導「星域」，施放時清除範圍內所有角色異常狀態。處於「星域」中的所有角色每秒回復基於施放者最大生命{1}的生命值，並獲得{2}暴擊傷害，持續{3}秒。技能冷卻：{9}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{4}：「星域」持續時間增加{8}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n守岸人團子持續引導「星域」，施放時清除範圍內所有角色異常狀態。處於「星域」中的所有角色每秒回復基於施放者最大生命{1}的生命值，並獲得{2}暴擊傷害，持續{3}秒。技能冷卻：{9}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{4}：「星域」持續時間增加{8}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "5%",
+                    "50%",
+                    "8",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "5%",
+                    "50%",
+                    "8",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "5%",
+                    "50%",
+                    "8",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "5%",
+                    "50%",
+                    "8",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "5%",
+                    "50%",
+                    "8",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Shouanren.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Shouanren.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

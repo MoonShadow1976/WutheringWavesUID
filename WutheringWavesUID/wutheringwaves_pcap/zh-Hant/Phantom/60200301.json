@@ -1,0 +1,114 @@
+{
+    "id": 60200301,
+    "name": "今汐",
+    "monsterId": 6030010,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289001,
+        "skillGroupId": 200051,
+        "skillCd": 12,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n幻形為今汐團子，持續引導「光束」轟擊面前的區域，每秒造成{1}的<color=Light>衍射傷害</color>，持續{2}秒。技能冷卻：{6}秒\n·在引導期間可以操縱「光束」轟擊的方向\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{4}：「光束」數量增加{5}\n持續時間等級{3}：「光束」持續時間增加{9}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n幻形為今汐團子，持續引導「光束」轟擊面前的區域，每秒造成{1}的<color=Light>衍射傷害</color>，持續{2}秒。技能冷卻：{6}秒\n·在引導期間可以操縱「光束」轟擊的方向\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{4}：「光束」數量增加{5}\n持續時間等級{3}：「光束」持續時間增加{9}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1349.36%",
+                    "5",
+                    "2/4/6/8",
+                    "2/4",
+                    "1/2",
+                    "12",
+                    "6",
+                    "8",
+                    "2/4/6/8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1349.36%",
+                    "5",
+                    "2/4/6/8",
+                    "2/4",
+                    "1/2",
+                    "12",
+                    "6",
+                    "8",
+                    "2/4/6/8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1349.36%",
+                    "5",
+                    "2/4/6/8",
+                    "2/4",
+                    "1/2",
+                    "12",
+                    "6",
+                    "8",
+                    "2/4/6/8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1349.36%",
+                    "5",
+                    "2/4/6/8",
+                    "2/4",
+                    "1/2",
+                    "12",
+                    "6",
+                    "8",
+                    "2/4/6/8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "1349.36%",
+                    "5",
+                    "2/4/6/8",
+                    "2/4",
+                    "1/2",
+                    "12",
+                    "6",
+                    "8",
+                    "2/4/6/8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Jinxi.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Jinxi.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

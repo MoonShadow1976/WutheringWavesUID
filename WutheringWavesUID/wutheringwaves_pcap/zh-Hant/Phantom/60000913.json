@@ -1,0 +1,89 @@
+{
+    "id": 60000913,
+    "name": "夢魘·燎照之騎",
+    "monsterId": 6000091,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280023,
+        "skillGroupId": 200001,
+        "skillCd": 25,
+        "descriptionEx": "使用聲骸技能，幻形為夢魘·燎照之騎，躍起對前方敵人造成{0}的熱熔傷害。\n在首位裝配該聲骸技能時，自身熱熔傷害加成提升{1}，共鳴技能傷害加成提升{2}。\n長按聲骸技能，持續幻形為燎照之騎並進入騎行狀態，結束時對前方的目標造成一次{3}的熱熔傷害。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為夢魘·燎照之騎，對前方敵人造成熱熔傷害，在首位裝配時提高自身的熱熔和共鳴技能傷害。\n長按聲骸技能可以持續幻形為騎行狀態的夢魘·燎照之騎。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "225.00%",
+                    "12.00%",
+                    "12.00%",
+                    "157.50%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "270.00%",
+                    "12.00%",
+                    "12.00%",
+                    "189.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "315.00%",
+                    "12.00%",
+                    "12.00%",
+                    "220.50%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "360.00%",
+                    "12.00%",
+                    "12.00%",
+                    "252.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "405.00%",
+                    "12.00%",
+                    "12.00%",
+                    "283.50%",
+                    "25"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_325_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_325_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_YZ_33019_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_YZ_33019_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_YZ_33019_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        2
+    ]
+}

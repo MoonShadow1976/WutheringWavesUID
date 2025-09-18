@@ -1,0 +1,90 @@
+{
+    "id": 60001122,
+    "name": "角鱷",
+    "monsterId": 6000112,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200094,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為角鱷，躍起後下砸造成{0}的氣動傷害；此次攻擊命中敵人後一段時間內短按聲骸技能，可衝向敵人造成{1}的氣動傷害。\n在首位裝配該聲骸技能時，自身氣動傷害加成提升{2}，共鳴解放傷害加成提升{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為角鱷，躍起後下砸造成氣動傷害；此次攻擊命中敵人後一段時間內短按聲骸技能，可衝向敵人造成氣動傷害。\n在首位裝配時，提高自身氣動和共鳴解放傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "149.00%",
+                    "149.00%",
+                    "12.00%",
+                    "12.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "178.80%",
+                    "178.80%",
+                    "12.00%",
+                    "12.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.60%",
+                    "208.60%",
+                    "12.00%",
+                    "12.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "238.40%",
+                    "238.40%",
+                    "12.00%",
+                    "12.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "268.20%",
+                    "268.20%",
+                    "12.00%",
+                    "12.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_31062_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_31062_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31062_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31062_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31062_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        17,
+        18
+    ]
+}

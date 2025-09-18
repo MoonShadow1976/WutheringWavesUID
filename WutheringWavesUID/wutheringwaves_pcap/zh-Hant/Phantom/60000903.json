@@ -1,0 +1,104 @@
+{
+    "id": 60000903,
+    "name": "夢魘·無冠者",
+    "monsterId": 6000090,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280022,
+        "skillGroupId": 200001,
+        "skillCd": 12,
+        "descriptionEx": "使用聲骸技能，幻形為夢魘·無冠者，對前方敵人造成{0}的湮滅傷害。\n在首位裝配該聲骸技能時，自身湮滅傷害加成提升{1}，普攻傷害加成提升{2}。\n初始擁有{3}次可使用次數，每{4}秒可使用次數增加1次，可使用次數上限{5}次。夢魘·無冠者命中目標後，該聲骸技能造成的傷害提升{6}，持續{7}秒，不可疊加。\n技能冷卻：{4}秒",
+        "simplyDescription": "幻形為夢魘·無冠者，對前方敵人造成湮滅傷害，在首位裝配時提高自身的湮滅和普攻傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "147.00%",
+                    "12.00%",
+                    "12.00%",
+                    "3",
+                    "12",
+                    "3",
+                    "20.00%",
+                    "2"
+                ]
+            },
+            {
+                "arrayString": [
+                    "176.40%",
+                    "12.00%",
+                    "12.00%",
+                    "3",
+                    "12",
+                    "3",
+                    "20.00%",
+                    "2"
+                ]
+            },
+            {
+                "arrayString": [
+                    "205.80%",
+                    "12.00%",
+                    "12.00%",
+                    "3",
+                    "12",
+                    "3",
+                    "20.00%",
+                    "2"
+                ]
+            },
+            {
+                "arrayString": [
+                    "235.20%",
+                    "12.00%",
+                    "12.00%",
+                    "3",
+                    "12",
+                    "3",
+                    "20.00%",
+                    "2"
+                ]
+            },
+            {
+                "arrayString": [
+                    "264.60%",
+                    "12.00%",
+                    "12.00%",
+                    "3",
+                    "12",
+                    "3",
+                    "20.00%",
+                    "2"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B8_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B8_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_YZ_33018_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_YZ_33018_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_YZ_33018_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        6
+    ]
+}

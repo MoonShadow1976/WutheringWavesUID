@@ -1,0 +1,75 @@
+{
+    "id": 60000755,
+    "name": "暗夜騎士",
+    "monsterId": 6000075,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200058,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為暗夜騎士，躍起後前刺攻擊敵人，造成{0}的湮滅傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "幻形為暗夜騎士躍起後前刺攻擊敵人，造成湮滅傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "149.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "178.80%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.60%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "238.40%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "268.20%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32024_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_32024_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32024_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32024_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32024_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        12,
+        13
+    ]
+}

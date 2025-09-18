@@ -1,0 +1,109 @@
+{
+    "id": 60200306,
+    "name": "珂萊塔",
+    "monsterId": 6030060,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289006,
+        "skillGroupId": 200052,
+        "skillCd": 12,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Ice>冷凝傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n珂萊塔團子召喚「銃槍」射擊附近的目標，共計造成{3}的<color=Ice>冷凝傷害</color>。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{4}：額外召喚{7}把「銃槍」",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Ice>冷凝傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n珂萊塔團子召喚「銃槍」射擊附近的目標，共計造成{3}的<color=Ice>冷凝傷害</color>。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n子彈數量等級{4}：額外召喚{7}把「銃槍」",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "4560.00%",
+                    "5",
+                    "2508.00%",
+                    "2/4/8",
+                    "4",
+                    "8",
+                    "2/4/6",
+                    "12"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "4560.00%",
+                    "5",
+                    "2508.00%",
+                    "2/4/8",
+                    "4",
+                    "8",
+                    "2/4/6",
+                    "12"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "4560.00%",
+                    "5",
+                    "2508.00%",
+                    "2/4/8",
+                    "4",
+                    "8",
+                    "2/4/6",
+                    "12"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "4560.00%",
+                    "5",
+                    "2508.00%",
+                    "2/4/8",
+                    "4",
+                    "8",
+                    "2/4/6",
+                    "12"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "4560.00%",
+                    "5",
+                    "2508.00%",
+                    "2/4/8",
+                    "4",
+                    "8",
+                    "2/4/6",
+                    "12"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Kelaita.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Kelaita.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

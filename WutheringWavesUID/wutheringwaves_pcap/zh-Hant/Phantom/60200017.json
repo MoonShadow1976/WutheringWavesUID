@@ -1,0 +1,110 @@
+{
+    "id": 60200017,
+    "name": "奏諭樂師",
+    "monsterId": 6020017,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 288107,
+        "skillGroupId": 200002,
+        "skillCd": 30,
+        "descriptionEx": "使用聲骸技能，召喚振鐸樂師，持續{0}秒。振鐸樂師不斷釋放音符，附近隊伍中的角色拾取音符時<color=#ffd12f>提高{1}攻擊力</color>、回復自身{2}的生命值、獲得{3}的移動速度加成以及回復{4}點耐力，對處於癱瘓狀態目標的普通攻擊和重擊傷害提高{5}，持續{6}秒。本場戰鬥中，每拾取一個音符，附近隊伍中的所有角色攻擊力提高{7}。技能冷卻：{8}秒",
+        "simplyDescription": "使用聲骸技能，召喚振鐸樂師，持續{0}秒。振鐸樂師不斷釋放音符，附近隊伍中的角色拾取音符時<color=#ffd12f>提高{1}攻擊力</color>、回復自身{2}的生命值、獲得{3}的移動速度加成以及回復{4}點耐力，對處於癱瘓狀態目標的普通攻擊和重擊傷害提高{5}，持續{6}秒。本場戰鬥中，每拾取一個音符，附近隊伍中的所有角色攻擊力提高{7}。技能冷卻：{8}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "5",
+                    "15.00%",
+                    "10.00%",
+                    "20.00%",
+                    "100",
+                    "150.00%",
+                    "20",
+                    "1.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "15.00%",
+                    "10.00%",
+                    "20.00%",
+                    "100",
+                    "150.00%",
+                    "20",
+                    "1.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "15.00%",
+                    "10.00%",
+                    "20.00%",
+                    "100",
+                    "150.00%",
+                    "20",
+                    "1.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "15.00%",
+                    "10.00%",
+                    "20.00%",
+                    "100",
+                    "150.00%",
+                    "20",
+                    "1.00%",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "15.00%",
+                    "10.00%",
+                    "20.00%",
+                    "100",
+                    "150.00%",
+                    "20",
+                    "1.00%",
+                    "30"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_205_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_205_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_201_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_201_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_201_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        9,
+        3
+    ]
+}

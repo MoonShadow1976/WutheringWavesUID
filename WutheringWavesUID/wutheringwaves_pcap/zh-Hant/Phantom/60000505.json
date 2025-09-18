@@ -1,0 +1,76 @@
+{
+    "id": 60000505,
+    "name": "通行燈偶",
+    "monsterId": 6000050,
+    "element": [
+        0
+    ],
+    "skill": {
+        "id": 200049,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚通行燈偶，定身最多{0}秒，敵人受擊後會解除定身狀態。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚通行燈偶，定身敵人。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "1",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_999_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_999_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1000_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_9992_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_9992_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        3,
+        4,
+        2
+    ]
+}

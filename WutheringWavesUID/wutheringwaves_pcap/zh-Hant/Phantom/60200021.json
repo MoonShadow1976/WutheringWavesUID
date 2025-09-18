@@ -1,0 +1,85 @@
+{
+    "id": 60200021,
+    "name": "異相·寒霜陸龜",
+    "monsterId": 6020021,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 288001,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚侏侏鴕追蹤敵人進行攻擊，造成{0}次{1}物理傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "召喚侏侏鴕進行攻擊，造成物理傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "3",
+                    "24.00%",
+                    "8",
+                    "0.00%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "27.60%",
+                    "8",
+                    "0.00%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "31.20%",
+                    "8",
+                    "0.00%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "34.80%",
+                    "8",
+                    "0.00%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "3",
+                    "38.40%",
+                    "8",
+                    "0.00%"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1010_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_1005_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_1005_UI_png.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 2,
+    "fetter": [
+        5,
+        1
+    ]
+}

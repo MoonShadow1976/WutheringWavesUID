@@ -1,0 +1,94 @@
+{
+    "id": 60000485,
+    "name": "聚械機偶",
+    "monsterId": 6000048,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280009,
+        "skillGroupId": 230003,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，對周圍的敵人造成一次{0}的導電傷害，並召喚聚械廢料攻擊敵人。 廢料命中目標時會造成{1}的導電傷害，並在一段時間後爆炸，造成{2}的導電傷害。\n施放聲骸技能後，自身攻擊提升{3}，持續{4}秒。 廢料造成的傷害會被視為延奏技能傷害。\n技能冷卻：{5}秒",
+        "simplyDescription": "對周圍造成導電傷害並生成延遲爆炸的廢料，提高自身的攻擊。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "30.40%",
+                    "200.00%",
+                    "100.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "34.96%",
+                    "230.00%",
+                    "115.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "39.52%",
+                    "260.00%",
+                    "130.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "44.08%",
+                    "290.00%",
+                    "145.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "48.64%",
+                    "320.00%",
+                    "160.00%",
+                    "12.00%",
+                    "15",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_1001_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_1001_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_993_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_993_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_993_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        9
+    ]
+}

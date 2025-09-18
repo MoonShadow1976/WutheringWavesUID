@@ -1,7 +1,6 @@
 import json
 import tempfile
 import time
-import atexit
 from pathlib import Path
 from typing import Optional
 
@@ -11,20 +10,20 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
-from .pcap_api import pcap_api
-from .pcap_parser import PcapDataParser
-from .optimized_pcap_handler import optimized_handler
-from ..utils.at_help import ruser_id
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
+from ..utils.error_reply import WAVES_CODE_097, WAVES_CODE_103
 from ..utils.hint import error_reply
 
-# 使用簡單的 SV 實例，參考現有指令
+from .pcap_api import pcap_api
+from .pcap_parser import PcapDataParser
+from .pcap_file_handler import pcap_handler
+
+
+
 sv_pcap_parse = SV("pcap解析", priority=5)
-sv_pcap_status = SV("pcap状态", priority=5)
 sv_pcap_file = SV("pcap文件处理", priority=5, area="DIRECT")
-sv_pcap_data = SV("pcap数据", priority=5)
-sv_pcap_analysis = SV("pcap分析", priority=5)
+sv_pcap_help = SV("pcap帮助", priority=5)
 
 
 # 臨時文件清理函數
@@ -51,17 +50,11 @@ def safe_unlink(file_path: Path, max_retries: int = 3):
 @sv_pcap_file.on_file(("pcap"))
 async def pcap_file_handler(bot: Bot, ev: Event):
     """pcap 文件處理指令 - 使用優化處理器"""
-    user_id = ruser_id(ev)
-    logger.info(f"[鳴潮pcap] 用戶 {user_id} 上傳了 pcap 文件")
+    at_sender = True if ev.group_id else False
 
-    if not ev.file:
-        return await bot.send("文件上傳失敗，請重新上傳")
+    msg = await pcap_handler.handle_pcap_file(bot, ev, ev.file)
 
-    # 使用優化的處理器
-    success = await optimized_handler.handle_pcap_file(bot, ev, ev.file)
-
-    if not success:
-        await bot.send("文件處理失敗，請檢查文件格式或重試")
+    await bot.send(msg, at_sender)
 
 
 # 解析指令 - discord 用户使用
@@ -74,8 +67,8 @@ async def pcap_file_handler(bot: Bot, ev: Event):
 )
 async def pcap_parse(bot: Bot, ev: Event):
     """pcap 解析指令"""
-    user_id = ruser_id(ev)
-    logger.info(f"[鳴潮pcap] 用戶 {user_id} 觸發了解析指令")
+    at_sender = True if ev.group_id else False
+    uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
 
     # 檢查是否有附件文件
     attachment_file = None
@@ -92,13 +85,11 @@ async def pcap_parse(bot: Bot, ev: Event):
 
         # 檢查文件格式
         if not file_name.lower().endswith((".pcap", ".pcapng")):
-            return await bot.send("請上傳 .pcap 或 .pcapng 格式的文件")
+            return await bot.send("文件格式错误，请上传 .pcap 或 .pcapng 文件\n", at_sender)
 
         # 檢查文件大小
         if file_size > 50 * 1024 * 1024:  # 50MB
-            return await bot.send("文件過大，請上傳小於 50MB 的文件")
-
-        await bot.send("正在解析 pcap 文件，請稍候...")
+            return await bot.send("文件过大，请上传小于 50MB 的文件\n", at_sender)
 
         try:
             # 創建臨時文件
@@ -114,34 +105,33 @@ async def pcap_parse(bot: Bot, ev: Event):
                     temp_path.write_bytes(file_content)
 
             # 調用 pcap API 解析
-            result = await pcap_api.parse_pcap_file(str(temp_path))
+            result = await pcap_api.parse_pcap_file(temp_path)
 
             # 清理臨時文件
             safe_unlink(temp_path)
 
             if not result:
-                return await bot.send("解析失敗：API 返回空結果")
+                return await bot.send("解析失败：API 返回空结果\n", at_sender)
 
             # 檢查結果是否包含錯誤信息
             if isinstance(result, dict) and result.get("error"):
-                return await bot.send(f"解析失敗：{result.get('error', '未知錯誤')}")
+                return await bot.send(f"解析失败：{result.get('error', '未知错误')}\n", at_sender)
 
             # 解析數據
             # 檢查結果是否包含數據
             if not isinstance(result, dict) or "data" not in result:
-                return await bot.send("解析失敗：沒有返回數據")
+                return await bot.send("解析失败：API 没有返回数据\n", at_sender)
 
             if result.get("data") is None:
-                return await bot.send("解析失敗：數據為空")
+                return await bot.send("解析失败：返回数据为空\n", at_sender)
 
             parser = PcapDataParser()
             waves_data = await parser.parse_pcap_data(result["data"])
 
             if not waves_data:
                 return await bot.send(
-                    "數據解析失敗，請檢查 pcap 文件是否包含有效的鳴潮數據"
+                    "数据解析失败，请确保 pcap 文件包含有效的鸣潮数据\n", at_sender
                 )
-
 
             # 發送成功消息
             # 從解析器中獲取統計信息
@@ -149,23 +139,27 @@ async def pcap_parse(bot: Bot, ev: Event):
             total_weapons = len(parser.weapon_data)
             total_phantoms = len(parser.phantom_data)
 
-            success_msg = f"""✅ pcap 數據解析成功！
-
-                📊 解析結果：
-                • 角色數量：{total_roles}
-                • 武器數量：{total_weapons}  
-                • 聲骸數量：{total_phantoms}
-
-                🎯 現在可以使用「刷新面板」查看詳細數據了！"""
-
-            await bot.send(success_msg)
+            msg = [
+                "✅ pcap 数据解析成功！",
+                "📊 解析結果：",
+                f"• 角色数量：{total_roles}",
+                f"• 武器数量：{total_weapons}",
+                f"• 声骸套数：{total_phantoms}",
+                "",
+                f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
+            ]
+    
+            await bot.send("\n".join(msg), at_sender)
 
         except Exception as e:
             logger.exception(f"pcap 解析失敗: {e}")
-            await bot.send(f"解析過程中發生錯誤：{str(e)}")
+            await bot.send(f"解析过程中发生错误：{str(e)}\n", at_sender)
     else:
+        if not uid:
+            return await bot.send(error_reply(WAVES_CODE_103), at_sender)
+
         # 沒有附件，檢查是否有已解析的數據
-        pcap_data = await load_pcap_data(user_id)
+        pcap_data = await load_pcap_data(uid)
 
         if pcap_data:
             # 從角色詳細數據中獲取統計信息
@@ -185,56 +179,79 @@ async def pcap_parse(bot: Bot, ev: Event):
                 # 檢查聲骸
                 phantom_data = role_detail.get("phantomData", {})
                 if phantom_data and phantom_data.get("equipPhantomList"):
-                    total_phantoms += len(phantom_data.get("equipPhantomList", []))
+                    total_phantoms += 1
 
-            status_msg = f"""✅ 已找到 pcap 數據
+            msg = [
+                "❌ 未上传 pcap 文件！",
+                "📊 已有解析結果：",
+                f"• 角色数量：{total_roles}",
+                f"• 武器数量：{total_weapons}",
+                f"• 声骸套数：{total_phantoms}",
+            ]
 
-                📊 數據統計：
-                • 角色數量：{total_roles}
-                • 武器數量：{total_weapons}
-                • 聲骸數量：{total_phantoms}
-
-                💡 現在可以使用「刷新面板」查看詳細數據"""
-
-            await bot.send(status_msg)
+            await bot.send("\n".join(msg), at_sender)
         else:
-            await bot.send("❌ 未找到 pcap 數據，請先上傳 pcap 文件")
+            await bot.send(error_reply(WAVES_CODE_097), at_sender)
 
 
-# 狀態指令 - 使用 on_fullmatch，參考 "刷新面板" 指令
-@sv_pcap_status.on_fullmatch(
+@sv_pcap_help.on_fullmatch(
     (
-        "pcap状态",
-        "pcap检查",
+        "pcap帮助",
+        "pcap help",
     ),
     block=True,
 )
-async def pcap_status(bot: Bot, ev: Event):
-    """pcap 狀態指令"""
-    user_id = ruser_id(ev)
-    logger.info(f"[鳴潮pcap] 用戶 {user_id} 檢查 pcap 狀態")
+async def pcap_help(bot: Bot):
+    """Wuthery pcap 数据导入帮助"""
+    url = "https://wuthery.com/guides"
+    if WutheringWavesConfig.get_config("WavesTencentWord").data:
+            url = f"https://docs.qq.com/scenario/link.html?url={url}"
 
-    # 檢查是否有 pcap 數據
-    pcap_data = await load_pcap_data(user_id)
-
-    if pcap_data:
-        total_roles = pcap_data.get("total_roles", 0)
-        total_weapons = pcap_data.get("total_weapons", 0)
-        total_phantoms = pcap_data.get("total_phantoms", 0)
-
-        status_msg = f"""✅ pcap 數據已加載
-
-            📊 數據統計：
-            • 角色數量：{total_roles}
-            • 武器數量：{total_weapons}
-            • 聲骸數量：{total_phantoms}
-
-            💡 現在可以使用「刷新面板」查看詳細數據"""
-
-        await bot.send(status_msg)
-    else:
-        await bot.send("❌ 未找到 pcap 數據，請先上傳並解析 pcap 文件")
-
+    warn = "\n".join(
+        [
+            "导入前请注意：",
+            "1. 此方法通过抓取游戏网络数据包实现，完全安全，无封号风险",
+            # "3. 用户账号系统（云端保存与同步）即将上线",
+            "2. 请勿上传含有隐私信息的文件",
+            f"3. 具体教程请前往[{url}]查看, 内有视频教程",
+            "\n",
+        ]
+    )
+    method_pc = "\n".join(
+        [
+            "【PC端方法】使用 Wireshark:",
+            "1. 安装 Wireshark 并打开",
+            "2. 启动鸣潮游戏，进入登录界面（男女主角界面）",
+            "3. 在Wireshark中选择您连接互联网的网络接口",
+            "4. 切换回游戏并登录进入游戏世界",
+            "5. 返回Wireshark停止抓包，并保存为PCAP文件",
+            "6. 前往导入页面，上传刚才保存的PCAP文件",
+            "注意：也可以使用其他能导出PCAP文件的抓包工具",
+            "\n",
+        ]
+    )
+    method_android = "\n".join(
+        [
+            "【安卓端方法】使用 PCAPdroid:",
+            "1. 安装 PCAPdroid，在 Traffic dump 选 PCAP 文件",
+            "2. Target apps 中选择 Wuthering Waves",
+            "3. 点击“Ready”，然后启动并进入游戏",
+            "4. 返回 PCAPdroid 停止抓包，生成文件并上传",
+            "\n",
+        ]
+    )
+    upload_note = "\n".join(
+        [
+            "【上传方法】:",
+            "• qq用户请直接发送pcap文件到本群或私聊机器人(qq官方bot暂不支持)",
+            f"• discord用户请使用命令[{PREFIX}解析pcap]并上传pcap文件为附件",
+            "• 其他平台暂未测试",
+            "\n",
+        ]
+    )
+    msg = [warn, method_pc, method_android, upload_note]
+    
+    await bot.send(msg)
 
 
 async def load_pcap_data(uid: str) -> Optional[dict]:
@@ -251,3 +268,17 @@ async def load_pcap_data(uid: str) -> Optional[dict]:
     except Exception as e:
         logger.error(f"加載 pcap 數據失敗: {e}")
         return None
+
+
+async def exist_pcap_data(uid: str) -> bool:
+    """判断 pcap 數據是否存在"""
+    try:
+        data_file = Path("data/pcap_data") / uid / "latest_data.json"
+
+        if not data_file.exists():
+            return False
+
+        return True
+    except Exception as e:
+        logger.error(f"判断 pcap 數據是否存在失敗: {e}")
+        return False

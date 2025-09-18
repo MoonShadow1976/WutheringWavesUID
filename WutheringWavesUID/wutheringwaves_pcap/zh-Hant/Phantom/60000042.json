@@ -1,0 +1,86 @@
+{
+    "id": 60000042,
+    "name": "鳴泣戰士",
+    "monsterId": 390070064,
+    "element": [
+        2
+    ],
+    "skill": {
+        "id": 200012,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為鳴泣戰士發動格擋反擊，若格擋成功則立刻減少此技能{0}冷卻時間，並造成{1}熱熔傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為鳴泣戰士，格擋敵人攻擊，格擋反擊時造成熱熔傷害，並減少該技能的冷卻時間。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "180",
+            "70",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "70.00%",
+                    "180.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "70.00%",
+                    "207.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "70.00%",
+                    "234.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "70.00%",
+                    "261.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "70.00%",
+                    "288.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B5_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B5_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_041_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_041_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_041_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        4,
+        3,
+        2
+    ]
+}

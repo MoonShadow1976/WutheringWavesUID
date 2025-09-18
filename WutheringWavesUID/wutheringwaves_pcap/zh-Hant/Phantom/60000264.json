@@ -1,0 +1,80 @@
+{
+    "id": 60000264,
+    "name": "碎獠豬",
+    "monsterId": 390070075,
+    "element": [
+        0
+    ],
+    "skill": {
+        "id": 200025,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚碎獠豬，進行一段擊飛效果卓越的上撩攻擊，造成{0}物理傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚碎獠豬，發動衝撞，造成物理傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "108",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "20.00%+40",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "23.00%+46",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "26.00%+52",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "29.00%+58",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "32.00%+64",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_265_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_265_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_261_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_261_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_261_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        4,
+        1
+    ]
+}

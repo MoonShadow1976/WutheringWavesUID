@@ -1,0 +1,85 @@
+{
+    "id": 60000463,
+    "name": "車刃鐮",
+    "monsterId": 6000046,
+    "element": [
+        4
+    ],
+    "skill": {
+        "id": 200047,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為車刃鐮，發動旋轉衝擊造成{0}氣動傷害，旋轉衝擊結束後發動揮砍造成{1}氣動傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為車刃鐮，旋轉斬擊敵人，造成氣動傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "58",
+            "58",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "70.00%",
+                    "105.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "80.50%",
+                    "120.75%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "91.00%",
+                    "136.50%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "101.50%",
+                    "152.25%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "112.00%",
+                    "168.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_970_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_970_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_970_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_970_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_970_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        4
+    ]
+}

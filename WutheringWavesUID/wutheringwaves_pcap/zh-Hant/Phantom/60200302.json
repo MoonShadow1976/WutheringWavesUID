@@ -1,0 +1,94 @@
+{
+    "id": 60200302,
+    "name": "長離",
+    "monsterId": 6030020,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289002,
+        "skillGroupId": 200052,
+        "skillCd": 8,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Fire>熱熔傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n長離團子使用「焚身以火」進行攻擊，造成{1}的<color=Fire>熱熔傷害</color>，附近隊伍中所有角色的攻擊提升{2}，持續{3}秒，可疊加{5}層。技能冷卻：{4}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Fire>熱熔傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n長離團子使用「焚身以火」進行攻擊，造成{1}的<color=Fire>熱熔傷害</color>，附近隊伍中所有角色的攻擊提升{2}，持續{3}秒，可疊加{5}層。技能冷卻：{4}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2240.00%",
+                    "15%",
+                    "16",
+                    "8",
+                    "3"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2240.00%",
+                    "15%",
+                    "16",
+                    "8",
+                    "3"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2240.00%",
+                    "15%",
+                    "16",
+                    "8",
+                    "3"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2240.00%",
+                    "15%",
+                    "16",
+                    "8",
+                    "3"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "2240.00%",
+                    "15%",
+                    "16",
+                    "8",
+                    "3"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Changli.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Changli.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

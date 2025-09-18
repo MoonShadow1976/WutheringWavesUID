@@ -1,0 +1,105 @@
+{
+    "id": 60200016,
+    "name": "異相·寒霜陸龜",
+    "monsterId": 6020016,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 288106,
+        "skillGroupId": 200001,
+        "skillCd": 40,
+        "descriptionEx": "使用聲骸技能，幻形為寒霜陸龜，持續{0}秒。每秒對周圍造成共計{1}冷凝傷害，自身獲得5層【堅硬】和{3}的移動速度提升，每層【堅硬】使<color=#ffd12f>受到的傷害降低</color>{2}，每次受到傷害減少一層【堅硬】（每秒至多觸發一次）。幻形期間，每次擊中敵人，附近隊伍中所有角色獲得{4}的攻擊力（每秒至多觸發一次），至多疊加{5}層，持續{6}秒，當受到傷害使得【堅硬】層數歸零時，失去攻擊力加成，並提前結束幻形狀態。技能冷卻：{7}秒",
+        "simplyDescription": "使用聲骸技能，幻形為寒霜陸龜，持續{0}秒。每秒對周圍造成共計{1}冷凝傷害，自身獲得5層【堅硬】和{3}的移動速度提升，每層【堅硬】使<color=#ffd12f>受到的傷害降低</color>{2}，每次受到傷害減少一層【堅硬】（每秒至多觸發一次）。幻形期間，每次擊中敵人，附近隊伍中所有角色獲得{4}的攻擊力（每秒至多觸發一次），至多疊加{5}層，持續{6}秒，當受到傷害使得【堅硬】層數歸零時，失去攻擊力加成，並提前結束幻形狀態。技能冷卻：{7}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "20",
+                    "283.20%",
+                    "20.00%",
+                    "15.00%",
+                    "12.50%",
+                    "8",
+                    "20",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "20",
+                    "283.20%",
+                    "20.00%",
+                    "15.00%",
+                    "12.50%",
+                    "8",
+                    "20",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "20",
+                    "283.20%",
+                    "20.00%",
+                    "15.00%",
+                    "12.50%",
+                    "8",
+                    "20",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "20",
+                    "283.20%",
+                    "20.00%",
+                    "15.00%",
+                    "12.50%",
+                    "8",
+                    "20",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "20",
+                    "283.20%",
+                    "20.00%",
+                    "15.00%",
+                    "12.50%",
+                    "8",
+                    "20",
+                    "40"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1010_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_1005_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_1005_UI_png.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 2,
+    "fetter": [
+        5,
+        1
+    ]
+}

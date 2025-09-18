@@ -1,0 +1,76 @@
+{
+    "id": 60000723,
+    "name": "欺詐奇藏",
+    "monsterId": 6000072,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200076,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚欺詐奇藏連續攻擊，造成3段{0}的衍射傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚欺詐奇藏連續攻擊，對敵人造成衍射傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "35.66%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "42.79%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "49.92%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "57.06%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "64.19%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31048_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31048_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31048_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31048_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31048_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        12,
+        13,
+        10
+    ]
+}

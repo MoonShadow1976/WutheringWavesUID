@@ -1,0 +1,84 @@
+{
+    "id": 60000122,
+    "name": "紫羽鷺",
+    "monsterId": 390077004,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 200017,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為紫羽鷺，在原地格擋，持續一段時間後進行反擊，造成{0}導電傷害，在格擋過程中受到攻擊則能提前反擊，額外回復{1}點協奏能量。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為紫羽鷺，格擋敵人攻擊，反擊造成導電傷害並可回復協奏能量。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "148",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "180.00%",
+                    "5",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "207.00%",
+                    "5",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "234.00%",
+                    "5",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "261.00%",
+                    "5",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "288.00%",
+                    "5",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B2_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B2_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_121_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_121_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_121_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        2,
+        3
+    ]
+}

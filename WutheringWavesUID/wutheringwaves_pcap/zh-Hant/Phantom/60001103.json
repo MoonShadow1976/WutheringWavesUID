@@ -1,0 +1,76 @@
+{
+    "id": 60001103,
+    "name": "苦信者的作俑",
+    "monsterId": 6000110,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200092,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚苦信者的作俑，造成三次每次{0}的氣動傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚苦信者的作俑，造成氣動傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "24.00%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "28.80%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "33.60%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "38.40%",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "43.20%",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_31061_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_31061_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31061_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31061_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31061_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        16,
+        17,
+        18
+    ]
+}

@@ -1,0 +1,90 @@
+{
+    "id": 60200207,
+    "name": "奏諭樂師",
+    "monsterId": 6020066,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288207,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚幽翎火攻擊，造成{0}的<color=#ffd12f>湮滅傷害</color>，並附加{1}層<color=#ffd12f>[恐慌]</color>。若目標<color=#ffd12f>[恐慌]</color>層數不小於70層，則本次攻擊改為附加30層<color=#ffd12f>[恐慌]</color>。\n目標後續受到傷害時，獲得{2}層<color=#ffd12f>[恐慌]</color>，每1秒最多觸發1次。\n<color=#ffd12f>[恐慌]</color>達到100層後，對目標造成最大共振值100.00%的共振值傷害，使目標陷入癱瘓，期間目標受到傷害必定暴擊，全屬性傷害抗性降低{3}。觸發效果後，移除<color=#ffd12f>[恐慌]</color>。\n目標癱瘓期間無法獲得<color=#ffd12f>[恐慌]</color>。\n技能冷卻：{4}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "204.93%",
+                    "10",
+                    "1",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "204.93%",
+                    "10",
+                    "1",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "204.93%",
+                    "10",
+                    "1",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "204.93%",
+                    "10",
+                    "1",
+                    "40.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "204.93%",
+                    "10",
+                    "1",
+                    "40.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31043_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31043_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_31043_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_31043_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_31043_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        12,
+        11
+    ]
+}

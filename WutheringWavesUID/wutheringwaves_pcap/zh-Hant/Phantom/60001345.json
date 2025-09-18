@@ -1,0 +1,74 @@
+{
+    "id": 60001345,
+    "name": "異相·寒霜陸龜",
+    "monsterId": 391070105,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 201033,
+        "skillGroupId": 200001,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，幻形為寒霜陸龜，同時緩慢回復生命值。幻形過程中再次使用聲骸技能可退出幻形狀態。\n技能冷卻：{0}秒",
+        "simplyDescription": "幻形為寒霜陸龜，期間緩慢回復生命值。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "30",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B10_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1010_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_1005_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_1005_UI_png.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

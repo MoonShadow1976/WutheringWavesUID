@@ -1,0 +1,81 @@
+{
+    "id": 60000075,
+    "name": "阿嗞嗞",
+    "monsterId": 390070067,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200006,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚阿嗞嗞引爆光能，造成{0}衍射傷害並製造持續1.8秒的停滯區域。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚阿嗞嗞進行引爆，造成衍射傷害，並製造停滯區域。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "56",
+            "1.2",
+            "22",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "30.00%+60",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "34.50%+69",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "39.00%+78",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "43.50%+87",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "48.00%+96",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z10_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_Z10_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_071_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_071_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_071_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        9,
+        5
+    ]
+}

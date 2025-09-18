@@ -1,0 +1,85 @@
+{
+    "id": 60000355,
+    "name": "暗鬃狼",
+    "monsterId": 390077033,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200037,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為暗鬃狼進行尾部打擊，可連續使用最多2次。每次攻擊造成{0}湮滅傷害，命中敵人時會額外生成一次湮滅打擊，造成{1}湮滅傷害。\n技能冷卻：{2}秒",
+        "simplyDescription": "幻形為暗鬃狼，發動甩尾攻擊，造成湮滅傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "44",
+            "30",
+            "11",
+            "13"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "72.90%",
+                    "48.60%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "83.84%",
+                    "55.89%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "94.77%",
+                    "63.18%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "105.71%",
+                    "70.47%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "116.64%",
+                    "77.76%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_984_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_984_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_984_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_984_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_984_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        2,
+        6
+    ]
+}

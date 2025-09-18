@@ -1,0 +1,104 @@
+{
+    "id": 60200018,
+    "name": "角",
+    "monsterId": 6020018,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 288108,
+        "skillGroupId": 200002,
+        "skillCd": 40,
+        "descriptionEx": "使用聲骸技能，召喚角，生成<color=#ffd12f>停滯區域</color>，持續{0}秒，期間附近隊伍中所有角色破共振度能力提升{1}，受到停滯區域影響的敵人防禦力降低{2}、所有抗性降低{3}。期間角騰躍而起，對目標造成{4}的衍射傷害並降下光雷，對周圍目標造成最多五段，每段{5}的衍射傷害，隨後向下盤旋攻擊，連續造成2次{6}的衍射傷害。技能冷卻：{7}秒",
+        "simplyDescription": "使用聲骸技能，召喚角，生成<color=#ffd12f>停滯區域</color>，持續{0}秒，期間附近隊伍中所有角色破共振度能力提升{1}，受到停滯區域影響的敵人防禦力降低{2}、所有抗性降低{3}。期間角騰躍而起，對目標造成{4}的衍射傷害並降下光雷，對周圍目標造成最多五段，每段{5}的衍射傷害，隨後向下盤旋攻擊，連續造成2次{6}的衍射傷害。技能冷卻：{7}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "5",
+                    "500.00%",
+                    "30.00%",
+                    "30.00%",
+                    "246.81%",
+                    "47.85%",
+                    "119.61%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "500.00%",
+                    "30.00%",
+                    "30.00%",
+                    "246.81%",
+                    "47.85%",
+                    "119.61%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "500.00%",
+                    "30.00%",
+                    "30.00%",
+                    "246.81%",
+                    "47.85%",
+                    "119.61%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "500.00%",
+                    "30.00%",
+                    "30.00%",
+                    "246.81%",
+                    "47.85%",
+                    "119.61%",
+                    "40"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5",
+                    "500.00%",
+                    "30.00%",
+                    "30.00%",
+                    "246.81%",
+                    "47.85%",
+                    "119.61%",
+                    "40"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_328_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_328_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_327_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_323_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_323_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        5
+    ]
+}

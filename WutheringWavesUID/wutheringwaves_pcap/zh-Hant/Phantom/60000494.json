@@ -1,0 +1,75 @@
+{
+    "id": 60000494,
+    "name": "巡哨機傀",
+    "monsterId": 6000049,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200048,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為巡哨機傀，對周圍造成{0}冷凝傷害，並生成最多3塊冰牆阻攔敵人。\n技能冷卻：{1}秒",
+        "simplyDescription": "幻形為巡哨機傀，對周圍造成冷凝傷害並生成冰牆阻攔敵人。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "170.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "195.50%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "221.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "246.50%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "272.00%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_1000_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_1000_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1003_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_9995_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_9995_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

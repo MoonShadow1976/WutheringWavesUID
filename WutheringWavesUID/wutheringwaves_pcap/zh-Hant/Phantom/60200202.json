@@ -1,0 +1,89 @@
+{
+    "id": 60200202,
+    "name": "咕咕河豚",
+    "monsterId": 6020061,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 288202,
+        "skillGroupId": 200002,
+        "skillCd": 30,
+        "descriptionEx": "使用聲骸技能，召喚羅蕾萊，為附近隊伍中所有角色<color=#ffd12f>回復</color>{0}生命上限的生命值，最多可治療{1}次。受到該回復效果影響的角色獲得{2}的減傷，持續{3}秒。\n技能冷卻：{4}秒",
+        "simplyDescription": "",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "10.00%",
+                    "5",
+                    "30.00%",
+                    "30",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "10.00%",
+                    "5",
+                    "30.00%",
+                    "30",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "10.00%",
+                    "5",
+                    "30.00%",
+                    "30",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "10.00%",
+                    "5",
+                    "30.00%",
+                    "30",
+                    "30"
+                ]
+            },
+            {
+                "arrayString": [
+                    "10.00%",
+                    "5",
+                    "30.00%",
+                    "30",
+                    "30"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33011_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_33011_UI.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33011_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33011_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33011_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        12
+    ]
+}

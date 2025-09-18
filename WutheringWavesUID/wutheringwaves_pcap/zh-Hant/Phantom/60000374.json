@@ -1,0 +1,102 @@
+{
+    "id": 60000374,
+    "name": "鳴鐘之龜",
+    "monsterId": 390080005,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 280003,
+        "skillGroupId": 230001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，發動鳴鐘之龜的加護，對附近敵人造成基於自身防禦力{0}的冷凝傷害，並獲得鳴鐘之盾，持續{1}秒。\n鳴鐘之盾能為隊伍中登場角色提供{2}的减傷和{3}的傷害提升，受到{4}次攻擊後消失。\n技能冷卻：{5}秒",
+        "simplyDescription": "召喚鳴鐘之龜的護盾，對附近敵人造成基於角色防禦的冷凝傷害，使角色受到的傷害減少，造成的傷害增加。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "114",
+            "12",
+            "30",
+            "3",
+            "30",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "91.20%",
+                    "15",
+                    "50.00%",
+                    "10.00%",
+                    "3",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "104.88%",
+                    "15",
+                    "50.00%",
+                    "10.00%",
+                    "3",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "118.56%",
+                    "15",
+                    "50.00%",
+                    "10.00%",
+                    "3",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "132.24%",
+                    "15",
+                    "50.00%",
+                    "10.00%",
+                    "3",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "145.92%",
+                    "15",
+                    "50.00%",
+                    "10.00%",
+                    "3",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_992_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_992_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_992_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_992_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_992_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        7
+    ]
+}

@@ -1,0 +1,75 @@
+{
+    "id": 60001113,
+    "name": "傳道者的遺形",
+    "monsterId": 6000111,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200093,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為傳道者的遺形，對周圍敵人造成{0}的氣動傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "幻形為傳道者的遺形，對周圍敵人造成氣動傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "149.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "178.80%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "208.60%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "238.40%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "268.20%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_32034_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_32034_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_32034_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_32034_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_32034_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        17,
+        18
+    ]
+}

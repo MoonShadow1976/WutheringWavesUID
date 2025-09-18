@@ -1,0 +1,76 @@
+{
+    "id": 60100725,
+    "name": "異相·欺詐奇藏",
+    "monsterId": 6010072,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200076,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚欺詐奇藏連續攻擊，造成3段{0}的衍射傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚欺詐奇藏連續攻擊，對敵人造成衍射傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "35.66%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "42.79%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "49.92%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "57.06%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "64.19%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31048_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_31048_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_SG_31048_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_SG_31048_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_SG_31048_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 1,
+    "fetter": [
+        12,
+        13,
+        10
+    ]
+}

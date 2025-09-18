@@ -1,0 +1,75 @@
+{
+    "id": 60100515,
+    "name": "異相·叮咚咚",
+    "monsterId": 6010051,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200050,
+        "skillGroupId": 200002,
+        "skillCd": 8,
+        "descriptionEx": "使用聲骸技能，召喚叮咚咚追蹤敵人自爆，爆炸造成{0}冷凝傷害。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚叮咚咚，追蹤敵人自爆，造成冷凝傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "20.00%+40",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "23.00%+46",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "26.00%+52",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "29.00%+58",
+                    "8"
+                ]
+            },
+            {
+                "arrayString": [
+                    "32.00%+64",
+                    "8"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_998_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_998_UI.png"
+        }
+    },
+    "cost": {
+        "id": 0,
+        "cost": 1,
+        "description": "輕波級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸異相",
+    "attributes": "獲得後可以解鎖對應殘象的聲骸異相，使聲骸獲得不同的外觀。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_1015_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_327_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_327_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸異相。",
+    "phantomType": 1,
+    "fetter": [
+        5,
+        1
+    ]
+}

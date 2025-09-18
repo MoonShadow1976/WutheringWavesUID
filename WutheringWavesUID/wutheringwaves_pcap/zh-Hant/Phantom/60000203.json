@@ -1,0 +1,80 @@
+{
+    "id": 60000203,
+    "name": "振鐸樂師",
+    "monsterId": 390077023,
+    "element": [
+        6
+    ],
+    "skill": {
+        "id": 200020,
+        "skillGroupId": 200002,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，召喚振鐸樂師。振鐸樂師將週期性生發湮滅迴響，被命中的友方單位將得到強化效果：攻擊附帶{0}的湮滅傷害，最多10次。\n技能冷卻：{1}秒",
+        "simplyDescription": "召喚振鐸樂師，使友方單位攻擊附加湮滅傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "12",
+            "9",
+            "30",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "9.00%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "10.35%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "11.70%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "13.05%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "14.40%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_205_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_205_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 3,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityC.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_201_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_201_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_201_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        1,
+        6
+    ]
+}

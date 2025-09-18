@@ -1,0 +1,85 @@
+{
+    "id": 60000565,
+    "name": "雪鬃狼",
+    "monsterId": 6000056,
+    "element": [
+        1
+    ],
+    "skill": {
+        "id": 200055,
+        "skillGroupId": 200001,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，幻形為雪鬃狼，可連續使用最多2次，每次造成{0}的冷凝傷害。 在空中施放該聲骸技能時，造成的傷害提升{1}，落地時額外生成6顆「冰錐」，每顆造成{2}冷凝傷害。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為雪鬃狼進行連續攻擊，可在空中施放。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "134.00%",
+                    "20.00%",
+                    "20.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "154.10%",
+                    "20.00%",
+                    "23.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "174.20%",
+                    "20.00%",
+                    "26.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "194.30%",
+                    "20.00%",
+                    "29.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "214.40%",
+                    "20.00%",
+                    "32.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_326_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_326_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_985_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_985_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_985_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        8,
+        1
+    ]
+}

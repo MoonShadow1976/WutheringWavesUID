@@ -1,0 +1,109 @@
+{
+    "id": 60200307,
+    "name": "洛可可",
+    "monsterId": 6030070,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289007,
+        "skillGroupId": 200052,
+        "skillCd": 18,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Dark>湮滅傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n洛可可團子持續引導「思維風暴」，將附近敵人捲入其中，每秒造成{1}的<color=Dark>湮滅傷害</color>，持續{2}秒。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{3}：「思維風暴」持續時間增加{7}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Dark>湮滅傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n洛可可團子持續引導「思維風暴」，將附近敵人捲入其中，每秒造成{1}的<color=Dark>湮滅傷害</color>，持續{2}秒。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{3}：「思維風暴」持續時間增加{7}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "896.00%",
+                    "5",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "18"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "896.00%",
+                    "5",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "18"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "896.00%",
+                    "5",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "18"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "896.00%",
+                    "5",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "18"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "896.00%",
+                    "5",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "18"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Luokeke.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Luokeke.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

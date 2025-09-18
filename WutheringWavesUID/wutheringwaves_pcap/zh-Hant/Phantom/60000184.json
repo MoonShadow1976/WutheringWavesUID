@@ -1,0 +1,95 @@
+{
+    "id": 60000184,
+    "name": "堅岩鬥士",
+    "monsterId": 390077021,
+    "element": [
+        0
+    ],
+    "skill": {
+        "id": 200001,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為堅岩鬥士向前衝鋒，命中時造成{0}物理傷害並下砸造成{1}物理傷害，獲得生命值上限{2}的護盾，持續{3}秒。 幻形過程中再次使用聲骸技能可退出幻形狀態。\n技能冷卻：{4}秒",
+        "simplyDescription": "變身堅岩鬥士向前衝鋒，命中可接續追擊並獲得護盾。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [
+            "37",
+            "7.8",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "70.40%",
+                    "105.60%",
+                    "10.00%",
+                    "7",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "80.96%",
+                    "121.44%",
+                    "10.00%",
+                    "7",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "91.52%",
+                    "137.28%",
+                    "10.00%",
+                    "7",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "102.08%",
+                    "153.12%",
+                    "10.00%",
+                    "7",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "112.64%",
+                    "168.96%",
+                    "10.00%",
+                    "7",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B4_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_Z_B4_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_181_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_181_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_181_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        7,
+        8
+    ]
+}

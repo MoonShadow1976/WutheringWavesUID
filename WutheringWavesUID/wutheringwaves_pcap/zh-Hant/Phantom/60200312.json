@@ -1,0 +1,114 @@
+{
+    "id": 60200312,
+    "name": "菲比",
+    "monsterId": 6030120,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 289012,
+        "skillGroupId": 200052,
+        "skillCd": 12,
+        "descriptionEx": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n菲比團子向歲主虔誠祈禱，持續召喚「聖輝」攻擊附近的目標，每秒造成{1}的<color=Light>衍射傷害</color>，並使範圍內的所有角色持續獲得基於施放者最大生命{9}的護盾，持續{2}秒。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{3}：「聖輝」持續時間增加{7}秒",
+        "simplyDescription": "<size=40><color=Title>普攻</color></size>\n造成{0}的<color=Light>衍射傷害</color>\n<size=10> </size>\n<size=40><color=Title>核心技能</color></size>\n菲比團子向歲主虔誠祈禱，持續召喚「聖輝」攻擊附近的目標，每秒造成{1}的<color=Light>衍射傷害</color>，並使範圍內的所有角色持續獲得基於施放者最大生命{9}的護盾，持續{2}秒。技能冷卻：{8}秒\n<size=10> </size>\n<size=40><color=Title>升級效果</color></size>\n持續時間等級{3}：「聖輝」持續時間增加{7}秒",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "200.00%",
+                    "560.00%",
+                    "1",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "12",
+                    "30%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "560.00%",
+                    "1",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "12",
+                    "30%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "560.00%",
+                    "1",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "12",
+                    "30%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "560.00%",
+                    "1",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "12",
+                    "30%"
+                ]
+            },
+            {
+                "arrayString": [
+                    "200.00%",
+                    "560.00%",
+                    "1",
+                    "2/4/6/8",
+                    "4",
+                    "6",
+                    "8",
+                    "2/4/6/8",
+                    "12",
+                    "30%"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Feibi.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/ChipIcon256/T_ChipIcon256_Feibi.png"
+        }
+    },
+    "cost": {
+        "id": 2,
+        "cost": 4,
+        "description": "怒濤級"
+    },
+    "rarity": {
+        "id": 2,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityB.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_33012_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_33012_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_33012_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 2,
+    "fetter": [
+        10
+    ]
+}

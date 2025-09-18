@@ -1,0 +1,84 @@
+{
+    "id": 60001155,
+    "name": "夢魘·赫卡忒",
+    "monsterId": 6000115,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 280029,
+        "skillGroupId": 200001,
+        "skillCd": 25,
+        "descriptionEx": "使用聲骸技能，幻形為夢魘·赫卡忒，向上躍起後下砸造成三段每段{0}的湮滅傷害。\n在首位裝配該聲骸技能時，自身湮滅傷害加成提升{1}，聲骸技能傷害加成提升{2}。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為夢魘·赫卡忒，向上躍起後下砸造成三段湮滅傷害。\n在首位裝配時，提高自身湮滅和聲骸技能傷害。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "84.66%",
+                    "12.00%",
+                    "20.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "101.59%",
+                    "12.00%",
+                    "20.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "118.52%",
+                    "12.00%",
+                    "20.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "135.46%",
+                    "12.00%",
+                    "20.00%",
+                    "25"
+                ]
+            },
+            {
+                "arrayString": [
+                    "152.39%",
+                    "12.00%",
+                    "20.00%",
+                    "25"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/MstSkil_34010_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_34016_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_34016_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_34016_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        19
+    ]
+}

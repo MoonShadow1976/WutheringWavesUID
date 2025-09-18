@@ -1,0 +1,91 @@
+{
+    "id": 60000245,
+    "name": "磐石守衛",
+    "monsterId": 390077024,
+    "element": [
+        5
+    ],
+    "skill": {
+        "id": 200022,
+        "skillGroupId": 200001,
+        "skillCd": 15,
+        "descriptionEx": "使用聲骸技能，幻形為磐石守衛。可在一段時間內進行防禦，受到攻擊後會對敵人直接造成一次基於自身生命上限{0}的衍射傷害，並進行一次追擊造成生命上限{0}的衍射傷害。\n幻形期間可以再次使用聲骸技能退出幻形。\n若受到的為<color=Highlight>特殊技</color>攻擊，則會擊破敵人的<color=Highlight>特殊技</color>，獲得自身生命上限30%的護盾，並進行兩段追擊，每段造成基於自身生命上限{1}的衍射傷害，同時發射三道地裂波，每道造成生命上限{2}衍射傷害。\n技能冷卻：{3}秒",
+        "simplyDescription": "幻形為磐石守衛，進入防禦狀態，受到<color=Highlight>特殊技</color>攻擊時進行防禦反擊，擊破敵人的<color=Highlight>特殊技</color>，造成基於角色生命上限的衍射傷害。",
+        "ifCounterSkill": true,
+        "levelDescriptionEx": [
+            "55",
+            "83",
+            "9",
+            "15",
+            "20"
+        ],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "5.18%",
+                    "3.45%",
+                    "2.87%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "5.96%",
+                    "3.97%",
+                    "3.30%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "6.73%",
+                    "4.49%",
+                    "3.73%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "7.51%",
+                    "5.00%",
+                    "4.16%",
+                    "15"
+                ]
+            },
+            {
+                "arrayString": [
+                    "8.29%",
+                    "5.52%",
+                    "4.59%",
+                    "15"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_245_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_245_UI.png"
+        }
+    },
+    "cost": {
+        "id": 1,
+        "cost": 3,
+        "description": "巨浪級"
+    },
+    "rarity": {
+        "id": 5,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityE.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterGoods/T_IconMonsterGoods_241_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_241_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_241_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        7,
+        5
+    ]
+}

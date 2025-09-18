@@ -1,0 +1,90 @@
+{
+    "id": 60001064,
+    "name": "共鳴迴響·芙露德莉斯",
+    "monsterId": 6000106,
+    "element": [
+        3
+    ],
+    "skill": {
+        "id": 280026,
+        "skillGroupId": 200002,
+        "skillCd": 20,
+        "descriptionEx": "使用聲骸技能，召喚【破空幻刃】，攻擊目標，造成八段{0}和一段{1}的氣動傷害。\n在首位裝配該聲骸技能時，自身氣動傷害加成提升{2}，當裝配角色為漂泊者·氣動或卡提希婭時，自身氣動傷害加成額外提升{3}。\n技能冷卻：{4}秒",
+        "simplyDescription": "召喚【破空幻刃】，對敵人造成氣動傷害。在首位裝配時提高自身的氣動傷害，漂泊者·氣動和卡提希婭在首位裝配時氣動傷害加成額外提高。",
+        "ifCounterSkill": false,
+        "levelDescriptionEx": [],
+        "levelDescriptionStrArray": [
+            {
+                "arrayString": [
+                    "15.20%",
+                    "76.00%",
+                    "10.00%",
+                    "10.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "18.24%",
+                    "91.20%",
+                    "10.00%",
+                    "10.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "21.28%",
+                    "106.40%",
+                    "10.00%",
+                    "10.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "24.32%",
+                    "121.60%",
+                    "10.00%",
+                    "10.00%",
+                    "20"
+                ]
+            },
+            {
+                "arrayString": [
+                    "27.36%",
+                    "136.80%",
+                    "10.00%",
+                    "10.00%",
+                    "20"
+                ]
+            }
+        ],
+        "icon": {
+            "battleIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_34012_UI.png",
+            "specialIcon": "/d/GameData/UIResources/Common/Image/MstSkill/T_MstSkil_34012_UI.png"
+        }
+    },
+    "cost": {
+        "id": 3,
+        "cost": 4,
+        "description": "海嘯級"
+    },
+    "rarity": {
+        "id": 4,
+        "icon": "/d/GameData/UIResources/UiRole/Atlas/RoleVision/SP_VisionlQualityD.png"
+    },
+    "type": "聲骸",
+    "attributes": "裝備後可以獲得屬性、主動技能和特定效果加成。",
+    "icon": {
+        "icon": "/d/GameData/UIResources/Common/Image/IconMonsterHead/T_IconMonsterHead_34012_1_UI.png",
+        "iconMiddle": "/d/GameData/UIResources/Common/Image/IconMonsterGoods160/T_IconMonsterGoods160_34012_1_UI.png",
+        "iconSmall": "/d/GameData/UIResources/Common/Image/IconMonsterGoods80/T_IconMonsterGoods80_34012_1_UI.png"
+    },
+    "obtainedDescription": "解鎖聲骸。",
+    "phantomType": 1,
+    "fetter": [
+        16,
+        17
+    ]
+}

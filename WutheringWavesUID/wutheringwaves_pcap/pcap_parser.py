@@ -714,6 +714,7 @@ class PcapDataParser:
 
             # 獲取套裝名稱
             fetter_group_name = echo_detail.get_group_name_by_gid(fetter_group_id)
+            logger.debug(f"角色 {role.role.roleName} 添加声骸: {phantom_name} (套装：{fetter_group_name} ID: {phantom_id})")
 
             # 構建聲骸數據結構，符合 EquipPhantom 模型
             phantom_data = {
@@ -771,6 +772,7 @@ class PcapDataParser:
                     "attributeValue": formatted_value,
                 }
             )
+        logger.debug(f"转换属性: {converted_props}, props原始数据: {props}")
         return converted_props
 
     def _format_property_value(self, prop_id: int, value) -> str:

@@ -33,6 +33,51 @@ waves_char_card_list = SV("waves面板图列表", priority=5, pm=1)
 waves_delete_char_card = SV("waves删除面板图", priority=5, pm=1)
 waves_delete_all_card = SV("waves删除全部面板图", priority=5, pm=1)
 waves_compress_card = SV("waves面板图压缩", priority=5, pm=1)
+waves_delete_char_detail = SV("waves删除角色面板", priority=5)
+
+
+@waves_delete_char_detail.on_regex(
+    r".*删除(?P<char>[\u4e00-\u9fa5]+)?数据",
+    block=True,
+)
+async def send_delete_char_detail_msg(bot: Bot, ev: Event):
+    at_sender = True if ev.group_id else False
+    match = re.search(
+        r".*删除(?P<char>[\u4e00-\u9fa5]+)?数据",
+        ev.raw_text,
+    )
+    logger.debug(f"[鸣潮] [删除角色面板] MATCH: {match}")
+    if not match:
+        return
+    ev.regex_dict = match.groupdict()
+    char = ev.regex_dict.get("char")
+    logger.debug(f"[鸣潮] [删除角色面板] CHAR: {char}")
+    
+    uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
+    if not uid:
+        return await bot.send(error_reply(WAVES_CODE_103), at_sender)
+
+    from .delete_char_card import delete_char_detail
+
+    if not char:
+        msg = await delete_char_detail(uid)
+        return await bot.send(msg, at_sender)
+
+    char_id = char_name_to_char_id(char)
+    if not char_id:
+        return await bot.send(
+            f"角色【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n",
+            at_sender
+        )
+    delete_type = [char_id]
+    if char_id in SPECIAL_CHAR:
+        delete_type = SPECIAL_CHAR.copy()[char_id]
+
+    msg = await delete_char_detail(uid, delete_type)
+    return await bot.send(msg, at_sender)
+
+
+    
 
 
 @waves_new_get_char_info.on_fullmatch(
@@ -41,7 +86,6 @@ waves_compress_card = SV("waves面板图压缩", priority=5, pm=1)
         "刷新面包",
         "更新面板",
         "更新面包",
-        "强制刷新",
         "面板刷新",
         "面包刷新",
         "面板更新",

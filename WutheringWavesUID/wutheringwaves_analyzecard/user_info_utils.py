@@ -76,7 +76,7 @@ async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
     path = _dir / "userData.json"
 
     # 准备保存的数据
-    save_data = {
+    new_data  = {
         "id": int(uid),
         "name": name,
         "level": level,
@@ -85,7 +85,27 @@ async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
     }
 
     try:
+        existing_data = {}
+        if path.exists():
+            try:
+                async with aiofiles.open(path, "r", encoding="utf-8") as file:
+                    content = await file.read()
+                    if content.strip():
+                        existing_data = json.loads(content)
+            except json.JSONDecodeError:
+                logger.warning(f"Existing user data is corrupted for UID {uid}, creating new data")
+        
+        if existing_data:
+            # 保留原始创建时间
+            new_data["creatTime"] = existing_data.get("creatTime", new_data["creatTime"])
+            
+            # 如果新等级更高，使用新等级，否则保留原等级
+            new_data["level"] = max(level, existing_data.get("level", 0))
+            new_data["worldLevel"] = max(worldLevel, existing_data.get("worldLevel", 0))
+        
+        # 写入更新后的数据
         async with aiofiles.open(path, "w", encoding="utf-8") as file:
-            await file.write(json.dumps(save_data, ensure_ascii=False))
+            await file.write(json.dumps(new_data, ensure_ascii=False, indent=2))
+            
     except Exception as e:
-        logger.exception(f"save_user_info save failed {path}:", e)
+        logger.exception(f"save_user_info failed for UID {uid}: {e}")

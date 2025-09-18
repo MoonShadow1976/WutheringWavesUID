@@ -175,7 +175,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
         data["weaponData"]["level"] = wepon_level
         data["weaponData"]["breach"] = get_breach(wepon_level)
         data["weaponData"]["weapon"]["weaponName"] = weapon_name
-        data["weaponData"]["weapon"]["weaponId"] = weapon_id
+        data["weaponData"]["weapon"]["weaponId"] = int(weapon_id)
         weapon_detail = get_weapon_detail(weapon_id, wepon_level)
         data["weaponData"]["weapon"]["weaponStarLevel"] = weapon_detail.starLevel
 
@@ -229,8 +229,11 @@ async def compare_update_card_info(uid, waves_data):
         waves_data["role"]["breach"] = get_breach(existing_level)
         waves_data["level"] = existing_data["level"]
     
+    waves_weaponId = int(waves_data["weaponData"]["weapon"]["weaponId"])
+    existing_weaponId = int(existing_data["weaponData"]["weapon"]["weaponId"])
+
     # 确保武器ID匹配后再比较等级
-    if waves_data["weaponData"]["weapon"]["weaponId"] == existing_data["weaponData"]["weapon"]["weaponId"]:
+    if waves_weaponId == existing_weaponId:
         # 确保武器等级是整数类型
         waves_weapon_level = int(waves_data["weaponData"]["level"])
         existing_weapon_level = int(existing_data["weaponData"]["level"])

@@ -13,6 +13,8 @@ supplementary_props = {
     11: {"name": "暴击", "isPercent": True},
     12: {"name": "暴击伤害", "isPercent": True},
     13: {"name": "共鸣效率", "isPercent": True},
+    2018: {"name": "生命", "isPercent": True},
+    20002: {"name": "生命", "isPercent": False},
     4003: {"name": "攻击", "isPercent": True}, # x
     40001: {"name": "攻击", "isPercent": False}, # x
     5001: {"name": "暴击", "isPercent": True},

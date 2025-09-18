@@ -17,7 +17,7 @@ from ..utils.hint import error_reply
 
 from .pcap_api import pcap_api
 from .pcap_parser import PcapDataParser
-from .pcap_file_handler import pcap_handler
+from .pcap_file_handler import PcapFileHandler
 
 
 
@@ -51,7 +51,8 @@ def safe_unlink(file_path: Path, max_retries: int = 3):
 async def pcap_file_handler(bot: Bot, ev: Event):
     """pcap 文件處理指令 - 使用優化處理器"""
     at_sender = True if ev.group_id else False
-
+    
+    pcap_handler = PcapFileHandler()
     msg = await pcap_handler.handle_pcap_file(bot, ev, ev.file)
 
     await bot.send(msg, at_sender)
@@ -141,7 +142,7 @@ async def pcap_parse(bot: Bot, ev: Event):
 
             msg = [
                 "✅ pcap 数据解析成功！",
-                "📊 解析結果：",
+                f"📊 解析結果(uid:{parser.account_info.id})：",
                 f"• 角色数量：{total_roles}",
                 f"• 武器数量：{total_weapons}",
                 f"• 声骸套数：{total_phantoms}",

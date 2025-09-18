@@ -91,7 +91,7 @@ class PcapFileHandler:
 
             msg = [
                 "✅ pcap 数据解析成功！",
-                "📊 解析結果：",
+                f"📊 解析結果(uid:{self.parser.account_info.id})：",
                 f"• 角色数量：{total_roles}",
                 f"• 武器数量：{total_weapons}",
                 f"• 声骸套数：{total_phantoms}",
@@ -124,7 +124,3 @@ class PcapFileHandler:
                 return False
         return False
 
-
-
-# 創建全局實例
-pcap_handler = PcapFileHandler()

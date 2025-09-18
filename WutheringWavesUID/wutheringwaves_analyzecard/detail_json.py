@@ -176,7 +176,14 @@ DETAIL = {
         "name": "尤诺",
         "needId": 6000160,
         "fetterDetail": {"荣斗铸锋之冠" : 3, "啸谷长风" : 2}
-    }
+    },
+    "1411": {
+        "name": "仇远",
+        "fetterDetail": "息界同调之律"
+    },
+    "1208": {
+        "name": "嘉贝莉娜"
+    },
 }
 
 # resource/intensity_echo_detail.json

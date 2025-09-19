@@ -6,12 +6,13 @@ from typing import Any, Dict, List
 
 from gsuid_core.logger import logger
 
+from ..utils.util import send_master_info
 from ..utils.ascension.weapon import get_weapon_detail
 from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 from ..utils.ascension.echo import get_echo_model
 from ..utils.ascension.model import EchoModel
 
-from .detail_json import supplementary_props, m_id2monsterId_strange
+from .detail_json import m_id2monsterId_strange, main_first_props, main_second_props, sub_props
 
 
 TEXT_PATH = Path(__file__).parent
@@ -219,7 +220,7 @@ class PcapDataParser:
 
             logger.info("🔧 初始化 PcapDataParser...")
             # self._load_phantom_index()
-            self._load_property_index()
+            # self._load_property_index()
             logger.info(
                 f"🔧 PcapDataParser 初始化完成，載入了 {len(self.phantom_index)} 个聲骸映射，{len(self.property_index)} 個属性映射"
             )
@@ -474,7 +475,7 @@ class PcapDataParser:
                     "chainList": self._build_chain_list(role_info, role),
                     "skillList": self._build_skill_list(role_info, role),
                     "weaponData": self._build_weapon_data(role_id, role),
-                    "phantomData": self._build_phantom_data(role_id, role),
+                    "phantomData": await self._build_phantom_data(role_id, role),
                 }
 
                 role_detail_list.append(role_detail)
@@ -529,10 +530,20 @@ class PcapDataParser:
     def _get_property_name(self, property_id: int) -> str:
         """獲取屬性名稱"""
         # 先檢查補充的屬性映射
-        if property_id in supplementary_props:
-            prop_info = supplementary_props[property_id]
-            name = prop_info["name"]
-            return name
+        if 0 <= property_id < 99:
+            if property_id in sub_props:
+                prop_info = sub_props[property_id]
+                return prop_info["name"]
+        elif 1000 < property_id < 9999:
+            choice_id = property_id % 1000
+            if choice_id in main_first_props:
+                prop_info = main_first_props[choice_id]
+                return prop_info["name"]
+        elif 10000 < property_id < 99999:
+            choice_id = property_id % 10000
+            if choice_id in main_second_props:
+                prop_info = main_second_props[choice_id]
+                return prop_info["name"]
 
         # 再檢查標準屬性索引
         if property_id in self.property_index:
@@ -546,8 +557,17 @@ class PcapDataParser:
     def _is_property_percent(self, property_id: int) -> bool:
         """檢查屬性是否為百分比類型"""
         # 先檢查補充的屬性映射
-        if property_id in supplementary_props:
-            return supplementary_props[property_id]["isPercent"]
+        if 0 <= property_id < 99:
+            if property_id in sub_props:
+                return sub_props[property_id]["isPercent"]
+        elif 1000 < property_id < 9999:
+            choice_id = property_id % 1000
+            if choice_id in main_first_props:
+                return main_first_props[choice_id]["isPercent"]
+        elif 10000 < property_id < 99999:
+            choice_id = property_id % 10000
+            if choice_id in main_second_props:
+                return main_second_props[choice_id]["isPercent"]
 
         # 再檢查標準屬性索引
         if property_id in self.property_index:
@@ -673,7 +693,7 @@ class PcapDataParser:
 
         return weaponData
 
-    def _build_phantom_data(self, role_id: int, role) -> Dict[str, Any]:
+    async def _build_phantom_data(self, role_id: int, role) -> Dict[str, Any]:
         """構建聲骸數據"""
         # 查找對應的聲骸數據
         role_phantoms = self.phantom_data.get(role_id)
@@ -700,6 +720,10 @@ class PcapDataParser:
             echo_detail = self._get_phantom_detail(phantom_id)
             if not echo_detail:
                 logger.error(
+                    f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}"
+                )
+                # 在非异步函数里调用异步函数
+                await send_master_info(
                     f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}"
                 )
                 continue

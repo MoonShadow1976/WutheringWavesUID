@@ -1,4 +1,51 @@
-# 補充的屬性映射
+# 副词条属性映射 （小词条） e.g.  1, 2, 3
+sub_props = {
+    1: {"name": "生命", "isPercent": False},
+    2: {"name": "攻击", "isPercent": False},
+    3: {"name": "防御", "isPercent": False},
+    4: {"name": "生命", "isPercent": True},
+    5: {"name": "攻击", "isPercent": True},
+    6: {"name": "防御", "isPercent": True},
+    7: {"name": "共鸣技能伤害加成", "isPercent": True},
+    8: {"name": "普攻伤害加成", "isPercent": True},
+    9: {"name": "重击伤害加成", "isPercent": True},
+    10: {"name": "共鸣解放伤害加成", "isPercent": True},
+    11: {"name": "暴击", "isPercent": True},
+    12: {"name": "暴击伤害", "isPercent": True},
+    13: {"name": "共鸣效率", "isPercent": True},
+}
+
+# 主词条属性映射（大词条） e.g.  5001, 4018
+main_first_props = {
+    1: {"name": "暴击", "isPercent": True},
+    2: {"name": "暴击伤害", "isPercent": True},
+    3: {"name": "攻击", "isPercent": True}, # x
+    4: {"name": "生命", "isPercent": True},
+    5: {"name": "防御", "isPercent": True}, # x
+    6: {"name": "治疗效果加成", "isPercent": True},
+    7: {"name": "冷凝伤害加成", "isPercent": True},
+    8: {"name": "热熔伤害加成", "isPercent": True},
+    9: {"name": "导电伤害加成", "isPercent": True},
+    10: {"name": "气动伤害加成", "isPercent": True},
+    11: {"name": "衍射伤害加成", "isPercent": True},
+    12: {"name": "湮灭伤害加成", "isPercent": True},
+    13: {"name": "攻击", "isPercent": True},
+    14: {"name": "生命", "isPercent": True}, # x
+    15: {"name": "防御", "isPercent": True}, # x
+    16: {"name": "共鸣效率", "isPercent": True},
+    17: {"name": "攻击", "isPercent": True},
+    18: {"name": "生命", "isPercent": True},
+    19: {"name": "防御", "isPercent": True},
+}
+
+# 次主词条属性映射（小词条） e.g.  50001, 40001
+main_second_props = {
+    1: {"name": "攻击", "isPercent": False},
+    2: {"name": "生命", "isPercent": False},
+    3: {"name": "攻击", "isPercent": False},
+}
+
+# 用不上了
 supplementary_props = {
     1: {"name": "生命", "isPercent": False},
     2: {"name": "攻击", "isPercent": False},

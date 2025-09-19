@@ -331,7 +331,7 @@ async def refresh_char_from_pcap(
         #     waves_map["refresh_update"][str(role_id)] = role_detail
 
         async def limited_check_role_detail_info(r):
-            role_id = r["role"]["roleId"]
+            role_name = r["role"]["roleName"]
 
             PhantomList = r["phantomData"]["equipPhantomList"]
             if PhantomList:
@@ -347,10 +347,10 @@ async def refresh_char_from_pcap(
                             and "缺失" in prop["attributeName"]
                         ):
                             await send_master_info(
-                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_id} 的词条数据, 遇到[{prop['attributeName']}]"
+                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
                             )
                             logger.warning(
-                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_id} 的词条数据, 遇到[{prop['attributeName']}]"
+                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
                             )
                             return 
 

@@ -21,7 +21,7 @@
 >
 > bot部署[补充文档地址](https://wiki.wavesuid.top/)，国际服用户使用 `ww分析`命令前请先于控制台 `修改插件设定`处填充 `OCRspace API Key`
 >
-> 国际服用户可以基于 `Discord` 图片识别使用 `WutheringWavesUID` -> [传送门](https://github.com/moonshadow1976/WutheringWavesUID)
+> 国际服用户可以基于 `Discord 图片识别`或`.pcap文件抓包`使用 `WutheringWavesUID` -> [传送门](https://github.com/moonshadow1976/WutheringWavesUID)
 >
 > 支持NoneBot2 & HoshinoBot & ZeroBot & YunzaiBot的鸣潮Bot插件
 >

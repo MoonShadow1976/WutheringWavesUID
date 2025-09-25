@@ -43,11 +43,9 @@ async def analyze_card(bot: Bot, ev: Event):
         at_sender = True if ev.group_id else False
         await bot.send("[鸣潮] 请在30秒内发送一张dc官方bot生成的卡片图或图片链接\n(分辨率尽可能为1920*1080，过低可能导致识别失败)\n", at_sender)
         
-        while True:
-            resp = await bot.receive_resp(timeout=30)
-            if resp is not None:
-                ev = resp
-                break
+        resp = await bot.receive_resp(timeout=30)
+        if resp is not None:
+            ev = resp
     except asyncio.TimeoutError:
         return await bot.send("[鸣潮] 等待超时，discord卡片分析已关闭\n", at_sender)
         

@@ -70,7 +70,14 @@ async def get_user_detail_info(
         return AccountBaseInfo(name="错误", id=int(uid), creatTime=1, level=0, worldLevel=0)
 
 
-async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
+async def save_user_info(
+    uid: str | int, 
+    name: str, 
+    level=0, 
+    worldLevel=0,
+    achievementCount=0,
+    achievementStar=0,
+):
     _dir = PLAYER_PATH / str(uid)
     _dir.mkdir(parents=True, exist_ok=True)
     path = _dir / "userData.json"
@@ -82,6 +89,8 @@ async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
         "level": level,
         "worldLevel": worldLevel,
         "creatTime": int(time.time()),
+        "achievementCount": achievementCount,
+        "achievementStar": achievementStar,
     }
 
     try:
@@ -102,6 +111,8 @@ async def save_user_info(uid: str | int, name: str, level=0, worldLevel=0):
             # 如果新等级更高，使用新等级，否则保留原等级
             new_data["level"] = max(level, existing_data.get("level", 0))
             new_data["worldLevel"] = max(worldLevel, existing_data.get("worldLevel", 0))
+            new_data["achievementCount"] = max(achievementCount, existing_data.get("achievementCount", 0))
+            new_data["achievementStar"] = max(achievementStar, existing_data.get("achievementStar", 0))
         
         # 写入更新后的数据
         async with aiofiles.open(path, "w", encoding="utf-8") as file:

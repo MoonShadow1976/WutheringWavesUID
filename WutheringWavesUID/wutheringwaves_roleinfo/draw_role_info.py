@@ -34,6 +34,7 @@ from ..utils.image import (
 from ..utils.imagetool import draw_pic_with_ring
 from ..utils.resource.constant import NORMAL_LIST, SPECIAL_CHAR_INT
 from ..utils.waves_api import waves_api
+from ..utils.api.kuro_py_api import get_base_info_overseas
 from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -65,9 +66,16 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     )
     
     if waves_api.is_net(uid):
-        account_info= await get_user_detail_info(uid)
-        # 拒绝掉无用数据，不走is_full
-        account_info.creatTime = None
+        account_info, _ = await get_base_info_overseas(ck, uid)
+        base_info = await get_user_detail_info(uid)
+        if account_info:
+            account_info.creatTime = base_info.creatTime # 满足if_full
+            account_info.achievementCount = base_info.achievementCount
+            account_info.achievementStar = base_info.achievementStar
+        else:
+            account_info =base_info
+            # 拒绝掉无用数据，不走is_full
+            account_info.creatTime = None
     else:
         # 账户数据
         account_info = await waves_api.get_base_info(uid, ck)
@@ -98,12 +106,27 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
             },
             {"key": "解锁角色", "value": f"{account_info.roleNum}", "info_block": ""},
             {"key": "UP角色", "value": f"{up_num}", "info_block": "color_g.png"},
-            {
-                "key": "数据坞等级",
-                "value": f"{calabash_data.level if calabash_data.isUnlock else 0}",
-                "info_block": "",
-            },
-            {
+        ]
+        if not waves_api.is_net(uid):
+            base_info_value_list.extend([    
+                {
+                    "key": "数据坞等级",
+                    "value": f"{calabash_data.level if calabash_data.isUnlock else 0}",
+                    "info_block": "",
+                },
+                {
+                    "key": "小型信标",
+                    "value": f"{account_info.smallCount}",
+                    "info_block": "",
+                },
+                {"key": "中型信标", "value": f"{account_info.bigCount}", "info_block": ""},
+            ])
+        else:
+            for a in account_info.tidalHeritagesList:
+                base_info_value_list.append(
+                    {"key": a.name, "value": f"{a.num}", "info_block": ""}
+                )
+        base_info_value_list.extend([  {
                 "key": "已达成成就",
                 "value": f"{account_info.achievementCount}",
                 "info_block": "color_p.png",
@@ -113,13 +136,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
                 "value": f"{account_info.achievementStar}",
                 "info_block": "",
             },
-            {
-                "key": "小型信标",
-                "value": f"{account_info.smallCount}",
-                "info_block": "",
-            },
-            {"key": "中型信标", "value": f"{account_info.bigCount}", "info_block": ""},
-        ]
+        ])
 
         for b in account_info.treasureBoxList:
             base_info_value_list.append(

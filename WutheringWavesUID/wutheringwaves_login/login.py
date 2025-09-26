@@ -3,7 +3,7 @@ import hashlib
 import re
 import uuid
 from pathlib import Path
-from typing import Union
+from typing import Optional, Union
 
 import httpx
 from async_timeout import timeout
@@ -31,6 +31,19 @@ cache = TimedCache(timeout=600, maxsize=10)
 
 game_title = "[鸣潮]"
 msg_error = "[鸣潮] 登录失败\n1.是否注册过库街区\n2.库街区能否查询当前鸣潮特征码数据\n"
+
+
+class LoginModel(BaseModel):
+    auth: str
+    mobile: str
+    code: str
+
+
+class InternationalLoginModel(BaseModel):
+    auth: str
+    email: str
+    password: str
+    geetest_data: Optional[str] = None  # Geetest 驗證數據
 
 
 async def get_url() -> tuple[str, bool]:
@@ -118,8 +131,16 @@ async def page_login_local(bot: Bot, ev: Event, url):
     if isinstance(result, dict):
         return
 
-    # 手机登录
-    data = {"mobile": -1, "code": -1, "user_id": ev.user_id}
+    # 登录 - 并行国服登入缓存，增加国际服登入支持
+    data = {
+        "mobile": -1,
+        "code": -1,
+        "user_id": ev.user_id,
+        "email": -1,
+        "password": -1,
+        "geetest_data": None,
+        "login_type": None,
+    }
     cache.set(user_token, data)
     try:
         async with timeout(600):
@@ -127,17 +148,29 @@ async def page_login_local(bot: Bot, ev: Event, url):
                 result = cache.get(user_token)
                 if result is None:
                     return await bot.send("登录超时!\n", at_sender=at_sender)
-                if result.get("mobile") != -1 and result.get("code") != -1:
+
+                # 檢查是否為國際服登入
+                if result.get("login_type") == "international":
+                    if result.get("email") != -1 and result.get("password") != -1:
+                        info = InternationalLoginModel(
+                            auth=user_token,
+                            email=result.get("email"),
+                            password=result.get("password"),
+                            geetest_data=result.get("geetest_data"),
+                        )
+                        cache.delete(user_token)
+                        return await international_login(bot, ev, info)
+
+                elif result.get("mobile") != -1 and result.get("code") != -1:
                     text = f"{result['mobile']},{result['code']}"
                     cache.delete(user_token)
-                    break
+                    return await code_login(bot, ev, text, True)
+
                 await asyncio.sleep(1)
     except asyncio.TimeoutError:
         return await bot.send("登录超时!\n", at_sender=at_sender)
     except Exception as e:
         logger.error(e)
-
-    return await code_login(bot, ev, text, True)
 
 
 async def page_login_other(bot: Bot, ev: Event, url):
@@ -199,6 +232,7 @@ async def page_login_other(bot: Bot, ev: Event, url):
 
 async def page_login(bot: Bot, ev: Event):
     url, is_local = await get_url()
+    is_local = True  # 強制本地, page_login_other不好改国际服登录
 
     if is_local:
         return await page_login_local(bot, ev, url)
@@ -278,18 +312,47 @@ async def waves_login_index(auth: str):
         )
 
 
-class LoginModel(BaseModel):
-    auth: str
-    mobile: str
-    code: str
-
-
 @app.post("/waves/login")
 async def waves_login(data: LoginModel):
     temp = cache.get(data.auth)
     if temp is None:
         return {"success": False, "msg": "登录超时"}
 
-    temp.update(data.dict())
+    temp.update(data.model_dump())
     cache.set(data.auth, temp)
     return {"success": True}
+
+
+@app.post("/waves/international/login")
+async def waves_international_login(data: InternationalLoginModel):
+    temp = cache.get(data.auth)
+    if temp is None:
+        return {"success": False, "msg": "登录超时"}
+
+    info = data.model_dump()
+    temp["email"] = info.get("email", -1)
+    temp["password"] = info.get("password", -1)
+    temp["geetest_data"] = info.get("geetest_data", None)
+    temp["login_type"] = "international"
+    cache.set(data.auth, temp)
+    return {"success": True}
+
+
+async def international_login(bot: Bot, ev: Event, data: InternationalLoginModel):
+    """國際服登入 API"""
+    at_sender = True if ev.group_id else False
+    logger.debug(f"收到國際服登入請求, 完整數據: {data.model_dump()}")
+
+    try:
+        # 直接處理國際服登入邏輯，不通過模擬對象
+        email = data.email
+        password = data.password
+        geetest_data = data.geetest_data
+
+        from ..utils.api.kuro_py_api import login_overseas
+        login_msg = await login_overseas(ev, email, password, geetest_data)
+
+        return await bot.send(login_msg, at_sender=at_sender)
+    except Exception as e:
+        logger.error(f"國際服登入失敗: {e}")
+        return await bot.send(f"登入失敗: {str(e)}\n", at_sender=at_sender)

@@ -1,7 +1,7 @@
 # WutheringWavesUID
 
 <p align="center">
-  <a href="https://github.com/tyql688/WutheringWavesUID"><img src="https://s2.loli.net/2024/10/08/ku3pLJBPoGjfQWq.png" width="256" height="256" alt="WutheringWavesUID"></a>
+  <a href="https://github.com/moonshadow1976/WutheringWavesUID"><img src="https://s2.loli.net/2024/10/08/ku3pLJBPoGjfQWq.png" width="256" height="256" alt="WutheringWavesUID"></a>
 <h1 align = "center">WutheringWavesUID 2.0</h1>
 <h4 align = "center">🚧支持OneBot(QQ)、QQ频道、微信、开黑啦、Telegram的全功能鸣潮Bot插件🚧</h4>
 <div align = "center">
@@ -42,7 +42,7 @@
 ## 丨其他
 
 + 本项目仅供学习使用，请勿用于商业用途
-+ [GPL-3.0 License](https://github.com/tyql688/WutheringWavesUID/blob/master/LICENSE)
++ [GPL-3.0 License](https://github.com/moonshadow1976/WutheringWavesUID/blob/master/LICENSE)
 
 ## 致谢
 

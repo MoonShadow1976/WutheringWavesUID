@@ -61,22 +61,30 @@ async def process_uid(uid, ev):
     if not ck:
         return None
 
-    # 并行请求所有相关 API
-    results = await asyncio.gather(
-        waves_api.get_daily_info(uid, ck),
-        waves_api.get_base_info(uid, ck),
-        return_exceptions=True,
-    )
+    await asyncio.sleep(0.3)  # 避免请求过快
 
-    (daily_info_res, account_info_res) = results
-    if not isinstance(daily_info_res, KuroApiResp) or not daily_info_res.success:
-        return None
+    if not waves_api.is_net(uid):
+        # 并行请求所有相关 API
+        results = await asyncio.gather(
+            waves_api.get_daily_info(uid, ck),
+            waves_api.get_base_info(uid, ck),
+            return_exceptions=True,
+        )
 
-    if not isinstance(account_info_res, KuroApiResp) or not account_info_res.success:
-        return None
+        (daily_info_res, account_info_res) = results
+        if not isinstance(daily_info_res, KuroApiResp) or not daily_info_res.success:
+            return None
 
-    daily_info = DailyData.model_validate(daily_info_res.data)
-    account_info = AccountBaseInfo.model_validate(account_info_res.data)
+        if not isinstance(account_info_res, KuroApiResp) or not account_info_res.success:
+            return None
+
+        daily_info = DailyData.model_validate(daily_info_res.data)
+        account_info = AccountBaseInfo.model_validate(account_info_res.data)
+    else:
+        from ..utils.api.kuro_py_api import get_base_info_overseas
+        account_info, daily_info = await get_base_info_overseas(ck, uid)
+        if not daily_info or not account_info:
+            return None
 
     return {
         "daily_info": daily_info,
@@ -129,6 +137,9 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
     if daily_info.hasSignIn:
         sign_in_icon = YES
         sing_in_text = "签到已完成！"
+    elif waves_api.is_net(daily_info.roleId):
+        sign_in_icon = NO
+        sing_in_text = "不可签到！"
     else:
         sign_in_icon = NO
         sing_in_text = "今日未签到！"
@@ -221,9 +232,9 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
 
     # logo_img = get_small_logo(2)
     # title_bar.alpha_composite(logo_img, dest=(760, 60))
-
+    menFei = "千道门扉的异想" if not waves_api.is_net(daily_info.roleId) else "国际服暂无数据"
     color = RED if account_info.rougeScore != account_info.rougeScoreLimit else GREEN
-    title_bar_draw.text((810, 125), "千道门扉的异想", GREY, waves_font_26, "mm")
+    title_bar_draw.text((810, 125), menFei, GREY, waves_font_26, "mm")
     title_bar_draw.text(
         (810, 78),
         f"{account_info.rougeScore}/{account_info.rougeScoreLimit}",

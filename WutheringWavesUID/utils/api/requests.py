@@ -172,19 +172,21 @@ class WavesApi:
         if waves_user.status == "无效":
             return ""
 
-        data = await self.login_log(uid, waves_user.cookie)
-        if not data.success:
-            await data.mark_cookie_invalid(uid, waves_user.cookie)
-            return ""
-
-        data = await self.refresh_data(uid, waves_user.cookie)
-        if not data.success:
-            if data.is_bat_token_invalid:
-                if waves_user := await self.refresh_bat_token(waves_user):
-                    return waves_user.cookie
-            else:
+        from ..waves_api import waves_api
+        if not waves_api.is_net(uid):
+            data = await self.login_log(uid, waves_user.cookie)
+            if not data.success:
                 await data.mark_cookie_invalid(uid, waves_user.cookie)
-            return ""
+                return ""
+
+            data = await self.refresh_data(uid, waves_user.cookie)
+            if not data.success:
+                if data.is_bat_token_invalid:
+                    if waves_user := await self.refresh_bat_token(waves_user):
+                        return waves_user.cookie
+                else:
+                    await data.mark_cookie_invalid(uid, waves_user.cookie)
+                return ""
 
         return waves_user.cookie
 
@@ -201,20 +203,22 @@ class WavesApi:
             if not await WavesUser.cookie_validate(user.uid):
                 continue
 
-            data = await self.login_log(user.uid, user.cookie)
-            if not data.success:
-                await data.mark_cookie_invalid(user.uid, user.cookie)
-                continue
+            from ..waves_api import waves_api
+            if not waves_api.is_net(user.uid):
+                data = await self.login_log(user.uid, user.cookie)
+                if not data.success:
+                    await data.mark_cookie_invalid(user.uid, user.cookie)
+                    continue
 
-            data = await self.refresh_data(user.uid, user.cookie)
-            if not data.success:
-                await data.mark_cookie_invalid(user.uid, user.cookie)
+                data = await self.refresh_data(user.uid, user.cookie)
+                if not data.success:
+                    await data.mark_cookie_invalid(user.uid, user.cookie)
 
-                if times <= 0:
-                    break
+                    if times <= 0:
+                        break
 
-                times -= 1
-                continue
+                    times -= 1
+                    continue
 
             ck_list.append(user.cookie)
             break

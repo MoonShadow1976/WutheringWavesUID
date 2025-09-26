@@ -107,6 +107,7 @@ class AccountBaseInfo(BaseModel):
     achievementStar: Optional[int] = None  # 成就星数
     boxList: Optional[List[Optional[Box]]] = None  # 宝箱
     treasureBoxList: Optional[List[Optional[Box2]]] = None  # 宝箱
+    tidalHeritagesList: Optional[List[Optional[Box2]]] = None  # 潮汐之遗
     weeklyInstCount: Optional[int] = None  # 周本次数
     weeklyInstCountLimit: Optional[int] = None  # 周本限制次数
     storeEnergy: Optional[int] = None  # 结晶单质数量

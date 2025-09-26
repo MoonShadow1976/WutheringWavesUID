@@ -67,8 +67,8 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "",
     ),
     "WavesLoginUrlSelf": GsBoolConfig(
-        "强制【鸣潮登录url】为自己的域名",
-        "强制【鸣潮登录url】为自己的域名",
+        "强制【鸣潮登录url】为自己的域名（开关已经架空，必定为本地解析登录）",
+        "强制【鸣潮登录url】为自己的域名（开关已经架空，必定为本地解析登录）",
         False,
     ),
     "WavesTencentWord": GsBoolConfig(

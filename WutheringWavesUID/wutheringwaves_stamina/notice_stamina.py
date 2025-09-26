@@ -62,13 +62,22 @@ async def all_check(
             )
             if _check:
                 time_refresh = timestamp
-                daily_info_res = await waves_api.get_daily_info(uid, token)
-                if daily_info_res.success:
-                    daily_info = DailyData.model_validate(daily_info_res.data)
-                    refreshTimeStamp = daily_info.energyData.refreshTimeStamp
-                    time_refresh = int(
-                        refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
-                    )
+                if not waves_api.is_net(uid):
+                    daily_info_res = await waves_api.get_daily_info(uid, token)
+                    if daily_info_res.success:
+                        daily_info = DailyData.model_validate(daily_info_res.data)
+                        refreshTimeStamp = daily_info.energyData.refreshTimeStamp
+                        time_refresh = int(
+                            refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
+                        )
+                else:
+                    from ..utils.api.kuro_py_api import get_base_info_overseas
+                    _, daily_info = await get_base_info_overseas(token, uid)
+                    if daily_info:
+                        refreshTimeStamp = daily_info.energyData.refreshTimeStamp
+                        time_refresh = int(
+                            refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
+                        )
 
                 extended_time = WutheringWavesConfig.get_config("StaminaRemindInterval").data # 分钟
                 time_repush = timestamp + int(extended_time) * 60

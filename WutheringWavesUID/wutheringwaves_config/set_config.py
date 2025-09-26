@@ -41,7 +41,7 @@ async def set_push_value(ev: Event, func: str, uid: str, value: int):
         status = PUSH_MAP[func]
     else:
         return "该配置项不存在!\n"
-    logger.info("[设置推送阈值]func: {}, value: {}".format(status, value))
+    logger.info("[设置推送阈值]UID:{}\nfunc: {}, value: {}".format(uid, status, value))
     if (
         await WavesPush.update_data_by_uid(
             uid=uid, bot_id=ev.bot_id, **{f"{status}_value": value}
@@ -65,7 +65,7 @@ async def set_push_value(ev: Event, func: str, uid: str, value: int):
                 uid=uid, bot_id=ev.bot_id, **{f"{PUSH_MAP['时间']}_value": time_push}
             )
 
-        return f"设置成功!\n当前{func}推送阈值:{value}\n"
+        return f"设置成功!\nUID:{uid}\n当前{func}推送阈值:{value}\n"
     else:
         return "设置失败!\n请检查参数是否正确!\n"
 
@@ -101,7 +101,7 @@ async def set_push_time(bot_id: str, uid: str, value: int):
         await WavesPush.update_data_by_uid(
             uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"}
         )
-        logger.info(f"设置成功!\n当前{func}推送阈值:{time_push}\n")
+        logger.info(f"设置成功!\nUID:{uid}\n当前{func}推送阈值:{time_push}\n")
         return True
     except Exception as e:
         logger.info(f"[推送时间]设置失败:{e}")

@@ -95,7 +95,7 @@ async def all_check(
         if push_data[f"{mode}_push"] == "off":
             pass
         else:
-            notice = "🌜你的结晶波片达到设定阈值啦！"
+            notice = f"🌜您的结晶波片达到设定阈值啦(UID:{uid})！"
             msg_list = [
                 MessageSegment.text("✅[鸣潮] 推送提醒:\n"),
                 MessageSegment.text(notice),

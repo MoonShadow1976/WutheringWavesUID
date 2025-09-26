@@ -157,4 +157,4 @@ async def set_config_func(ev: Event, uid: str = "0"):
         else:
             succeed_msg = f"开启至群{option}"
 
-        return f"{config_name}已{succeed_msg}\n{other_msg}"
+        return f"特征码:{uid}\n{config_name}已{succeed_msg}\n{other_msg}"

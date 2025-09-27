@@ -217,7 +217,7 @@ async def login_overseas(
         # 保存用户信息到本地
         await save_user_info(uid, player_info.name, level=player_info.level)
 
-    return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n"}
+    return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n"}
 
 
 async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:

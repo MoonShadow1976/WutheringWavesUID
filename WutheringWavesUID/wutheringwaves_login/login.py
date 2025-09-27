@@ -140,7 +140,6 @@ async def page_login_local(bot: Bot, ev: Event, url):
         "group_id": ev.group_id,
         "email": -1,
         "password": -1,
-        "geetest_data": None,
         "login_type": None,
         "msg": None,
     }
@@ -323,28 +322,27 @@ async def waves_login(data: LoginModel):
 
 @app.post("/waves/international/login")
 async def waves_international_login(data: InternationalLoginModel):
-    temp = cache.get(data.auth)
-    if temp is None:
+    exist = cache.get(data.auth)
+    if exist is None:
         return {"success": False, "msg": "登录超时"}
-
-    info = data.model_dump()
-    temp["email"] = info.get("email", -1)
-    temp["password"] = info.get("password", -1)
-    temp["geetest_data"] = info.get("geetest_data", None)
-    temp["login_type"] = "international"
 
     from ..utils.api.kuro_py_api import login_overseas
     login_signal = await login_overseas(
-        temp["user_id"], 
-        temp["bot_id"], 
-        temp["group_id"], 
-        temp["email"], 
-        temp["password"],
-        temp["geetest_data"],
+        exist["user_id"], 
+        exist["bot_id"], 
+        exist["group_id"], 
+        data.email, 
+        data.password,
+        data.geetest_data,
     )
-    temp["msg"] = login_signal.get("msg", None)
 
-    if login_signal.get("success", False):
-        cache.set(data.auth, temp) # 更新缓存,准备结束
+    if login_signal.get("success", False): # 登录成功，更新缓存状态
+        exist.update({
+            "email": 1,
+            "password": 1,
+            "login_type": "international",
+            "msg": login_signal.get("msg", "登录成功\n")
+        })
+        cache.set(data.auth, exist) # 更新缓存,准备结束
 
     return login_signal

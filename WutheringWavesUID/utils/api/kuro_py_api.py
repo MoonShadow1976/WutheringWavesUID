@@ -3,7 +3,7 @@ import kuro
 from kuro.errors import GeetestTriggeredError, KuroError
 from kuro.types import Region
 
-from typing import Optional
+from typing import Any, Optional
 
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
@@ -16,8 +16,8 @@ from ...wutheringwaves_analyzecard.user_info_utils import save_user_info
 # data.mark_cookie_invalid(uid, waves_user.cookie)  # 标记为无效
 
 async def login_overseas(
-    ev: Event, email: str, password: str, geetest_data: Optional[str] = None
-) -> str:
+    user_id:str, bot_id:str, group_id:str, email: str, password: str, geetest_data: Optional[str] = None
+) -> dict[str, Any]:
     try:
         # 创建 kuro 客户端
         client = kuro.Client(region=Region.OVERSEAS)
@@ -42,7 +42,7 @@ async def login_overseas(
 
             except GeetestTriggeredError as e:
                 logger.error(f"Geetest 验证触发: {e}")
-                return "需要进行行为验证 (错误码: 41000)\n"
+                return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
             except KuroError as e:
                 logger.error(f"kuro.py Geetest 登录错误: {e}")
                 logger.error(
@@ -55,31 +55,31 @@ async def login_overseas(
 
                 if api_codes == -4 or "校验码不通过" in error_description:
                     logger.warning("Geetest 验证码不通过，需要重新验证")
-                    return "需要进行行为验证 (错误码: 41000)\n"
+                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
                 elif (
                     api_codes == 10001
                     or "account or password" in error_description.lower()
                 ):
                     logger.error("账号或密码错误")
-                    return f"账号或密码错误: {error_description}\n"
+                    return {"success": False, "msg": f"账号或密码错误: {error_description}\n"}
                 elif e.retcode == 0:
                     logger.warning(
                         "Geetest 验证数据可能已过期或服务器问题，需要重新验证"
                     )
-                    return "需要进行行为验证 (错误码: 41000)\n"
+                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
                 else:
-                    return f"Geetest 验证失败: {str(e)}\n"
+                    return {"success": False, "msg": f"Geetest 验证失败: {str(e)}\n"}
             except Exception as e:
                 logger.error(f"kuro.py 内建登录失败: {e}")
                 # 回退到原始方法
-                return f"Geetest 验证失败: {str(e)}.\n"
+                return {"success": False, "msg": f"登入失敗: {str(e)}\n"}
         else:
             # 正常登录
             try:
                 login_result = await client.game_login(email, password)
             except GeetestTriggeredError as e:
                 logger.info(f"触发 Geetest 验证: {e}")
-                return "需要进行行为验证 (错误码: 41000)\n"
+                return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
             except KuroError as e:
                 logger.info(f"kuro.py 错误: {e}")
                 logger.info(
@@ -95,11 +95,11 @@ async def login_overseas(
                     or "account or password" in error_description.lower()
                 ):
                     logger.error("账号或密码错误")
-                    return f"账号或密码错误: {error_description}\n"
+                    return {"success": False, "msg": f"账号或密码错误: {error_description}\n"}
                 elif e.retcode == 0:  # Unknown error
-                    return "需要进行行为验证 (错误码: 41000)\n"
+                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
                 else:
-                    return f"登录失败: {str(e)}\n"
+                    return {"success": False, "msg": f"登录失败: {str(e)}\n"}
             except Exception as e:
                 logger.info(f"正常登录失败，可能需要 Geetest 验证: {e}")
                 # 检查是否为需要 Geetest 验证的错误
@@ -115,9 +115,14 @@ async def login_overseas(
                         "verification",
                     ]
                 ):
-                    return "需要进行行为验证 (错误码: 41000)\n"
+                    return {
+                        "success": False,
+                        "msg": "需要进行行为验证 (错误码: 41000)\n",
+                        "need_verification": True,
+                        "error_code": 41000,
+                    }
                 else:
-                    return f"登录失败: {str(e)}\n"
+                    return {"success": False, "msg": f"登入失敗: {str(e)}\n"}
 
         # 登录成功，继续处理
         logger.debug(f"国际服登录成功: \n{login_result}")
@@ -149,9 +154,14 @@ async def login_overseas(
                 "verification",
             ]
         ):
-            return "需要进行行为验证 (错误码: 41000)\n"
+            return {
+                "success": False,
+                "msg": "需要进行行为验证 (错误码: 41000)\n",
+                "need_verification": True,
+                "error_code": 41000,
+            }
         else:
-            return f"登录失败: {str(e)}\n"
+            return {"success": False, "msg": f"登入失敗: {str(e)}\n"}
 
     for region, player_info in player_infos.items():
         logger.debug(f"角色區域: {region}, 角色信息: {player_info}")
@@ -165,15 +175,15 @@ async def login_overseas(
 
         # 檢查是否已存在用戶
         existing_user = await WavesUser.get_user_by_attr(
-            ev.user_id, ev.bot_id, "uid", uid
+            user_id, bot_id, "uid", uid
         )
 
         if existing_user:
             # 更新現有用戶
             await WavesUser.update_data_by_data(
                 select_data={
-                    "user_id": ev.user_id,
-                    "bot_id": ev.bot_id,
+                    "user_id": user_id,
+                    "bot_id": bot_id,
                     "uid": uid,
                 },
                 update_data={
@@ -186,8 +196,8 @@ async def login_overseas(
         else:
             # 創建新用戶
             await WavesUser.insert_data(
-                user_id=ev.user_id,
-                bot_id=ev.bot_id,
+                user_id=user_id,
+                bot_id=bot_id,
                 cookie=token_result.access_token,
                 uid=uid,
                 platform=region,
@@ -197,17 +207,17 @@ async def login_overseas(
 
         # 更新綁定信息
         await WavesBind.insert_waves_uid(
-            ev.user_id,
-            ev.bot_id,
+            user_id,
+            bot_id,
             uid,
-            ev.group_id,
+            group_id,
             lenth_limit=9,
         )
 
         # 保存用户信息到本地
         await save_user_info(uid, player_info.name, level=player_info.level)
 
-    return f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n"
+    return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n"}
 
 
 async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:

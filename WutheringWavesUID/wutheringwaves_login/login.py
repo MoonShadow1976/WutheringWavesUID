@@ -136,10 +136,13 @@ async def page_login_local(bot: Bot, ev: Event, url):
         "mobile": -1,
         "code": -1,
         "user_id": ev.user_id,
+        "bot_id": ev.bot_id,
+        "group_id": ev.group_id,
         "email": -1,
         "password": -1,
         "geetest_data": None,
         "login_type": None,
+        "msg": None,
     }
     cache.set(user_token, data)
     try:
@@ -152,14 +155,9 @@ async def page_login_local(bot: Bot, ev: Event, url):
                 # 檢查是否為國際服登入
                 if result.get("login_type") == "international":
                     if result.get("email") != -1 and result.get("password") != -1:
-                        info = InternationalLoginModel(
-                            auth=user_token,
-                            email=result.get("email"),
-                            password=result.get("password"),
-                            geetest_data=result.get("geetest_data"),
-                        )
+                        await bot.send(result["msg"], at_sender=at_sender)
                         cache.delete(user_token)
-                        return await international_login(bot, ev, info)
+                        return 
 
                 elif result.get("mobile") != -1 and result.get("code") != -1:
                     text = f"{result['mobile']},{result['code']}"
@@ -334,25 +332,19 @@ async def waves_international_login(data: InternationalLoginModel):
     temp["password"] = info.get("password", -1)
     temp["geetest_data"] = info.get("geetest_data", None)
     temp["login_type"] = "international"
-    cache.set(data.auth, temp)
-    return {"success": True}
 
+    from ..utils.api.kuro_py_api import login_overseas
+    login_signal = await login_overseas(
+        temp["user_id"], 
+        temp["bot_id"], 
+        temp["group_id"], 
+        temp["email"], 
+        temp["password"],
+        temp["geetest_data"],
+    )
+    temp["msg"] = login_signal.get("msg", None)
 
-async def international_login(bot: Bot, ev: Event, data: InternationalLoginModel):
-    """國際服登入 API"""
-    at_sender = True if ev.group_id else False
-    logger.debug(f"收到國際服登入請求, 完整數據: {data.model_dump()}")
+    if login_signal.get("success", False):
+        cache.set(data.auth, temp) # 更新缓存,准备结束
 
-    try:
-        # 直接處理國際服登入邏輯，不通過模擬對象
-        email = data.email
-        password = data.password
-        geetest_data = data.geetest_data
-
-        from ..utils.api.kuro_py_api import login_overseas
-        login_msg = await login_overseas(ev, email, password, geetest_data)
-
-        return await bot.send(login_msg, at_sender=at_sender)
-    except Exception as e:
-        logger.error(f"國際服登入失敗: {e}")
-        return await bot.send(f"登入失敗: {str(e)}\n", at_sender=at_sender)
+    return login_signal

@@ -94,6 +94,10 @@
       color: #fff;
       margin-bottom: 0.25rem;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .logo-text {
@@ -457,7 +461,7 @@
   <div id="successModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>登录成功</h2>
+      <h2>🎉 登录成功</h2>
       <p>欢迎回来！</p>
       <p class="countdown">5秒后自动跳转到首页</p>
       <button class="redirect-button">立即跳转</button>
@@ -491,7 +495,7 @@
 
     // 重試計數器
     let retryCount = 0;
-    const maxRetries = 2;
+    const maxRetries = 5;
 
     // 服務器切換功能
     document.querySelectorAll('.server-tab').forEach(tab => {
@@ -624,6 +628,10 @@
         geetest_data: geetestData
       };
 
+      console.log('發送登入請求:', requestData);
+      console.log('Geetest 數據:', geetestData);
+      console.log('服務器 URL:', '{{ server_url }}');
+
       fetch('{{ server_url }}/waves/international/login', {
         method: 'POST',
         headers: {
@@ -637,6 +645,9 @@
         })
         .then(data => {
           console.log('響應數據:', data);
+          // 保存響應數據供模態框使用
+          window.lastResponse = data;
+
           if (data.success) {
             retryCount = 0; // 重置重試計數器
             showSuccessModal();
@@ -675,7 +686,7 @@
         .catch(error => {
           console.error('Error:', error);
           alert('登入失敗，請重試');
-        });
+      });
     });
 
     // 顯示 Geetest 驗證
@@ -783,6 +794,9 @@
       const modal = document.getElementById('successModal');
       const countdownElement = modal.querySelector('.countdown');
       const redirectButton = modal.querySelector('.redirect-button');
+      const successCharacterInfo = document.getElementById('successCharacterInfo');
+      const successCharacterName = document.getElementById('successCharacterName');
+      const successServerName = document.getElementById('successServerName');
       let countdown = 5;
 
       modal.classList.add('show');

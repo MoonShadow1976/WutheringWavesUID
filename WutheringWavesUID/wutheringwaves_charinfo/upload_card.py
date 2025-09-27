@@ -70,6 +70,21 @@ async def get_image(ev: Event) -> Optional[List[str]]:
             and content.data.startswith("http")
         ):
             res.append(content.data)
+        elif (
+            content.type == "image"
+            and content.data
+            and isinstance(content.data, dict)
+            and content.data.get("url")
+            and content.data["url"].startswith("http")
+        ):  # discord attachment 类
+            res.append(content.data["url"])
+        elif (
+            content.type == "text"
+            and content.data
+            and isinstance(content.data, str)
+            and content.data.startswith("http")
+        ):
+            res.append(content.data)
 
     if not res and ev.image:
         res.append(ev.image)

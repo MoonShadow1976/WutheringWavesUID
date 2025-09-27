@@ -227,16 +227,40 @@ async def get_image(ev: Event):
     """
     res = []
     for content in ev.content:
-        if content.type == "img" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
+        if (
+            content.type == "img"
+            and content.data
+            and isinstance(content.data, str)
+            and content.data.startswith("http")
+        ):
             res.append(content.data)
-        elif content.type == "image" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
+        elif (
+            content.type == "image"
+            and content.data
+            and isinstance(content.data, str)
+            and content.data.startswith("http")
+        ):
             res.append(content.data)
-        elif content.type == "text" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
+        elif (
+            content.type == "image"
+            and content.data
+            and isinstance(content.data, dict)
+            and content.data.get("url")
+            and content.data["url"].startswith("http")
+        ):  # discord attachment 类
+            res.append(content.data["url"])
+        elif (
+            content.type == "text"
+            and content.data
+            and isinstance(content.data, str)
+            and content.data.startswith("http")
+        ):
             res.append(content.data)
 
     if not res and ev.image:
         res.append(ev.image)
 
+    logger.debug(f"[鸣潮]获取图片res: {res}")
     return res
 
 async def upload_discord_bot_card(ev: Event):
@@ -399,6 +423,10 @@ async def cut_card_to_ocr(image):
     for i in range(7, 12):  # 替换索引7-11，即5张声骸图
         image_echo = cropped_images[i]
         cropped_images[i] = cut_image_need_data(image_echo, echo_crop_ratios) 
+        
+        # from pathlib import Path # 保存裁切图片用于调试
+        # SRC_PATH = Path(__file__).parent / "src"
+        # cropped_images[i].save(f"{SRC_PATH}/_{i}.png")
 
     # 调用 images_ocrspace 函数并获取识别结果
     return chain_num, cropped_images

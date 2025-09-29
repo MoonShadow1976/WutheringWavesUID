@@ -331,28 +331,36 @@ async def refresh_char_from_pcap(
         #     waves_map["refresh_update"][str(role_id)] = role_detail
 
         async def limited_check_role_detail_info(r):
-            role_name = r["role"]["roleName"]
+            try:
+                role_name = r["role"]["roleName"]
+                # 验证构建RoleDetailData类
+                from ..utils.api.model import RoleDetailData
+                RoleDetailData.model_validate(r)
+            except Exception as e:
+                await send_master_info(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
+                logger.warning(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
+                return
 
-            PhantomList = r["phantomData"]["equipPhantomList"]
-            if PhantomList:
-                for Phantom in PhantomList:
-                    prop_list = []
-                    if Phantom.get("mainProps"):
-                        prop_list.extend(Phantom.get("mainProps"))
-                    if Phantom.get("subProps"):
-                        prop_list.extend(Phantom.get("subProps"))
-                    for prop in prop_list:
-                        if (
-                            prop.get("attributeName")
-                            and "缺失" in prop["attributeName"]
-                        ):
-                            await send_master_info(
-                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
-                            )
-                            logger.warning(
-                                f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
-                            )
-                            return 
+            # PhantomList = r["phantomData"]["equipPhantomList"]
+            # if PhantomList:
+            #     for Phantom in PhantomList:
+            #         prop_list = []
+            #         if Phantom.get("mainProps"):
+            #             prop_list.extend(Phantom.get("mainProps"))
+            #         if Phantom.get("subProps"):
+            #             prop_list.extend(Phantom.get("subProps"))
+            #         for prop in prop_list:
+            #             if (
+            #                 prop.get("attributeName")
+            #                 and "缺失" in prop["attributeName"]
+            #             ):
+            #                 await send_master_info(
+            #                     f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
+            #                 )
+            #                 logger.warning(
+            #                     f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
+            #                 )
+            #                 return 
 
             waves_data.append(r)
 
@@ -375,12 +383,6 @@ async def refresh_char_from_pcap(
         if roles_to_process:
             tasks = [limited_check_role_detail_info(r) for r in roles_to_process]
             results = await asyncio.gather(*tasks, return_exceptions=True)
-            
-            # 检查并记录任何异常
-            for i, result in enumerate(results):
-                if isinstance(result, Exception):
-                    role_id = roles_to_process[i]["role"]["roleId"]
-                    logger.error(f"处理角色 {role_id} 时发生异常: {result}")
 
         # 儲存數據到數據庫
         await save_card_info(

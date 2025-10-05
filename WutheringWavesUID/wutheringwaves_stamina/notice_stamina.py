@@ -5,6 +5,7 @@ from gsuid_core.segment import MessageSegment
 
 from ..utils.waves_api import waves_api
 from ..utils.api.model import DailyData
+from ..utils.api.kuro_py_api import get_base_info_overseas
 from ..utils.database.models import WavesPush, WavesUser
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 
@@ -50,39 +51,31 @@ async def all_check(
     dt = datetime.strptime(push_data[f"{status}_value"], "%Y-%m-%d %H:%M:%S")
     timestamp = int(dt.timestamp())
 
-    _check = await check(
+    _push = await check(
         time_now,
         timestamp,
     )
 
-    if push_data[f"{mode}_is_push"] == "on":
+    if push_data[f"{mode}_is_push"] == "on": # 已经推送过，启动催命模式
         if WutheringWavesConfig.get_config("CrazyNotice").data:
             await WavesPush.update_data_by_uid(
                 uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"}
             )
-            if _check:
-                time_refresh = timestamp
-                if not waves_api.is_net(uid):
-                    daily_info_res = await waves_api.get_daily_info(uid, token)
-                    if daily_info_res.success:
-                        daily_info = DailyData.model_validate(daily_info_res.data)
-                        refreshTimeStamp = daily_info.energyData.refreshTimeStamp
-                        time_refresh = int(
-                            refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
-                        )
+            if _push:
+                refreshTimeStamp = await get_next_refresh_time(uid, token)
+                if refreshTimeStamp:
+                    time_refresh = int(
+                        refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
+                    )
                 else:
-                    from ..utils.api.kuro_py_api import get_base_info_overseas
-                    _, daily_info = await get_base_info_overseas(token, uid)
-                    if daily_info:
-                        refreshTimeStamp = daily_info.energyData.refreshTimeStamp
-                        time_refresh = int(
-                            refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60
-                        )
+                    time_refresh = timestamp
 
                 extended_time = WutheringWavesConfig.get_config("StaminaRemindInterval").data # 分钟
-                time_repush = timestamp + int(extended_time) * 60
+                time_repush = timestamp + int(extended_time) * 60  # 提醒时间将延长
 
-                time_out = time_refresh if await check(time_refresh, time_repush) else time_repush
+                _push = await check(time_repush, time_refresh)  # 延长时间超过刷新时间, 需要推送
+
+                time_out = time_repush if _push else time_refresh
                 time_push = datetime.fromtimestamp(time_out)
                 await WavesPush.update_data_by_uid(
                     uid=uid, bot_id=bot_id, **{f"{status}_value": str(time_push)}
@@ -91,7 +84,7 @@ async def all_check(
             return
 
     # 准备推送
-    if _check:
+    if _push:
         if push_data[f"{mode}_push"] == "off":
             pass
         else:
@@ -114,11 +107,27 @@ async def check(
     time: int,
     limit: int,
 ) -> Union[bool, int]:
+    """超限提醒True"""
     logger.info(f"{time} >?= {limit}")
     if time >= limit:
         return True
     else:
         return False
+
+
+async def get_next_refresh_time(uid: str, token: str) -> int:
+    """获取下次体力刷新时间戳"""
+    if not waves_api.is_net(uid):
+        daily_info_res = await waves_api.get_daily_info(uid, token)
+        if daily_info_res.success:
+            daily_info = DailyData.model_validate(daily_info_res.data)
+            return daily_info.energyData.refreshTimeStamp
+    else:
+        _, daily_info = await get_base_info_overseas(token, uid)
+        if daily_info:
+            return daily_info.energyData.refreshTimeStamp
+           
+    return 0
 
 
 async def save_push_data(

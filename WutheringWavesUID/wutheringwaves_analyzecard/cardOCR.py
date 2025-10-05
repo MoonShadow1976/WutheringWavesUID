@@ -11,7 +11,6 @@ from PIL import Image
 from io import BytesIO
 from opencc import OpenCC
 from aiohttp import ClientTimeout
-from async_timeout import timeout
 
 # 项目内部模块
 from gsuid_core.bot import Bot
@@ -100,7 +99,7 @@ async def check_ocr_link_accessible(key="helloworld") -> bool:
     }
     try:
         session = await get_global_session()  # 复用全局会话
-        async with session.get(url, data=payload, timeout=10) as response:
+        async with session.get(url, data=payload, timeout=ClientTimeout(total=10)) as response:
             data = await response.json()
             logger.debug(f"[鸣潮]OCR.space示例链接访问成功，状态码为 {response.status}\n内容：{data}")
             return response.status == 200
@@ -117,7 +116,7 @@ async def check_ocr_engine_accessible() -> int:
     url = "https://status.ocr.space"
     try:
         session = await get_global_session()
-        async with session.get(url, timeout=10) as response:
+        async with session.get(url, timeout=ClientTimeout(total=10)) as response:
             html = await response.text()
             soup = BeautifulSoup(html, 'html.parser')
             
@@ -147,6 +146,8 @@ async def check_ocr_engine_accessible() -> int:
     except Exception as e:
         logger.warning(f"[鸣潮] 解析异常: {e}")
         return -1
+
+
 async def async_ocr(bot: Bot, ev: Event):
     """
     异步OCR识别函数
@@ -752,15 +753,22 @@ async def which_char(bot: Bot, ev: Event, char: str):
     
     # 第四步：处理用户响应
     try:
-        while True:
+        error_count = 0
+        while error_count < 3:
             resp = await bot.receive_resp(timeout=30)
             
             if resp is not None and resp.content[0].data and resp.content[0].type == "text" and resp.content[0].data.isdigit():
                 choice_idx = int(resp.content[0].data) - 1
                 if 0 <= choice_idx < len(flat_choices):
                     return flat_choices[choice_idx]
-            await bot.send(f"无效序号，请输入范围[1-{len(candidates)}]的数字选择\n", at_sender=at_sender)
-    except asyncio.TimeoutError:
+            error_count += 1
+            await bot.send(prompt + f"\n\n---!-第{error_count}次重试-!---\n输入无效序号，请重新输入范围[1-{len(candidates)}]的数字选择\n", at_sender=at_sender)
+        
+        # 超过3次错误
         default_name, default_id = flat_choices[0] if flat_choices else (char, None)
-        await bot.send(f"[鸣潮] 选择超时，已自动使用 {default_name}\n", at_sender=at_sender)
+        await bot.send(f"[鸣潮] 选择多次出错，已自动使用 {default_name}\n", at_sender=at_sender)
+        return default_name, default_id
+    except Exception:
+        default_name, default_id = flat_choices[0] if flat_choices else (char, None)
+        await bot.send(f"[鸣潮] 选择出错，已自动使用 {default_name}\n", at_sender=at_sender)
         return default_name, default_id

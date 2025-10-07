@@ -66,7 +66,7 @@ async def get_code_list():
         return
 
 async def get_oversea_code_list():
-    code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@latest/js/oversea_codes.js"
+    code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@main/js/oversea_codes.js"
         
     # 备选CDN镜像源
     mirrors = [

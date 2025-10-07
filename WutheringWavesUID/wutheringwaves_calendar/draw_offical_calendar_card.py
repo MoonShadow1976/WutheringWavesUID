@@ -21,7 +21,7 @@ async def fetch_image(url: str) -> Union[bytes, None]:
 
 async def draw_offical_calendar_img() -> Union[bytes, str]:
     """生成官方日历图片"""
-    calendar_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@latest/images/calendar.jpg"
+    calendar_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@main/images/calendar.jpg"
     
     # 备选CDN镜像源
     mirrors = [

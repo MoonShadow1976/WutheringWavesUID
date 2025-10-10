@@ -127,3 +127,11 @@ def iuno_buff(attr, chain, resonLevel, isGroup):
     if char_clz:
         s = char_clz()
         s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def qiuyuan_buff(attr, chain, resonLevel, isGroup):
+    # 仇远buff
+    char_clz = WavesCharRegister.find_class(1411)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)

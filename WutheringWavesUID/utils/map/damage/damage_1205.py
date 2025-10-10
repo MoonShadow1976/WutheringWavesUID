@@ -304,7 +304,7 @@ def calc_damage_15(
     shouanren_buff(attr, 0, 1, isGroup)
 
     # 露帕buff
-    lupa_buff(attr, 6, 5, isGroup)
+    lupa_buff(attr, 3, 5, isGroup)
 
     return calc_damage_0(attr, role, isGroup)
 
@@ -334,7 +334,7 @@ def calc_damage_17(
     shouanren_buff(attr, 0, 1, isGroup)
 
     # 露帕buff
-    lupa_buff(attr, 6, 5, isGroup)
+    lupa_buff(attr, 3, 5, isGroup)
 
     return calc_damage_1(attr, role, isGroup)
 
@@ -365,7 +365,7 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_14(attr, role),
     },
     {
-        "title": "0+1守/6+5露/焚身以火",
+        "title": "0+1守/3+5露/焚身以火",
         "func": lambda attr, role: calc_damage_15(attr, role),
     },
     {
@@ -381,7 +381,7 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_16(attr, role),
     },
     {
-        "title": "0+1守/6+5露/离火照丹心",
+        "title": "0+1守/3+5露/离火照丹心",
         "func": lambda attr, role: calc_damage_17(attr, role),
     },
 ]

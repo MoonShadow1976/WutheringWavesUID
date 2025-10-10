@@ -13,6 +13,7 @@ from .utils import (
     CHAR_ATTR_VOID,
     attack_damage,
     hit_damage,
+    phantom_damage,
     liberation_damage,
     skill_damage,
     temp_atk,
@@ -478,6 +479,58 @@ class Char_1410(CharAbstract):
             attr.add_dmg_deepen(0.5, title, msg)
 
 
+class Char_1411(CharAbstract):
+    id = 1411
+    name = "仇远"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        """获得buff"""
+        if attr.char_template == temp_atk:
+            title = "仇远-合鸣效果-轻云出月"
+            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+            attr.add_atk_percent(0.225, title, msg)
+
+        # 共鸣解放爆伤提升
+        title = "仇远-共鸣解放爆伤提升"
+        msg = "仇远暴击至少65%时，登场角色提升30%暴击伤害"
+        attr.add_crit_dmg(0.3)
+
+        if phantom_damage == attr.char_damage:    
+            # 竹照
+            title = "仇远-竹照"
+            msg = "附近队伍中登场角色声骸技能伤害加成提升30%"
+            attr.add_dmg_bonus(0.3, title, msg)
+
+            if chain >= 2:
+                title = "仇远-二链"
+                msg = "竹照额外效果：附近队伍中角色声骸技能伤害加深30%"
+                attr.add_dmg_deepen(0.3, title, msg)
+
+            title = "仇远-延奏技能"
+            msg = "下一位登场角色声骸技能伤害加深50%"
+            attr.add_dmg_deepen(0.5, title, msg)
+
+        # 无常凶鹭
+        title = "仇远-声骸技能-无常凶鹭"
+        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        # 裁竹
+        weapon_clz = WavesWeaponRegister.find_class(21020066)
+        if weapon_clz:
+            w = weapon_clz(21020066, 90, 6, resonLevel)
+            method = getattr(w, "cast_variation", None)
+            if callable(method):
+                method(attr, isGroup)
+
+
 class Char_1501(CharAbstract):
     id = 1501
     name = "漂泊者·衍射"
@@ -816,6 +869,7 @@ def register_char():
     WavesCharRegister.register_class(Char_1407.id, Char_1407)
     WavesCharRegister.register_class(Char_1408.id, Char_1408)
     WavesCharRegister.register_class(Char_1410.id, Char_1410)
+    WavesCharRegister.register_class(Char_1411.id, Char_1411)
     WavesCharRegister.register_class(Char_1501.id, Char_1501)
     WavesCharRegister.register_class(Char_1502.id, Char_1502)
     WavesCharRegister.register_class(Char_1503.id, Char_1503)

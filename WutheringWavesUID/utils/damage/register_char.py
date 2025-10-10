@@ -492,17 +492,16 @@ class Char_1411(CharAbstract):
         isGroup: bool = True,
     ):
         """获得buff"""
-        if attr.char_template == temp_atk:
-            title = "仇远-合鸣效果-轻云出月"
-            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
-            attr.add_atk_percent(0.225, title, msg)
-
         # 共鸣解放爆伤提升
         title = "仇远-共鸣解放爆伤提升"
         msg = "仇远暴击至少65%时，登场角色提升30%暴击伤害"
-        attr.add_crit_dmg(0.3)
+        attr.add_crit_dmg(0.3, title, msg)
 
         if phantom_damage == attr.char_damage:    
+            title = "仇远-息界同调之律"
+            msg = "队伍中角色声骸技能伤害加成提升16%"
+            attr.add_dmg_bonus(0.16, title, msg)
+
             # 竹照
             title = "仇远-竹照"
             msg = "附近队伍中登场角色声骸技能伤害加成提升30%"
@@ -517,18 +516,18 @@ class Char_1411(CharAbstract):
             msg = "下一位登场角色声骸技能伤害加深50%"
             attr.add_dmg_deepen(0.5, title, msg)
 
-        # 无常凶鹭
-        title = "仇远-声骸技能-无常凶鹭"
-        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
-        attr.add_dmg_bonus(0.12, title, msg)
-
         # 裁竹
-        weapon_clz = WavesWeaponRegister.find_class(21020066)
-        if weapon_clz:
-            w = weapon_clz(21020066, 90, 6, resonLevel)
-            method = getattr(w, "cast_variation", None)
-            if callable(method):
-                method(attr, isGroup)
+        # weapon_clz = WavesWeaponRegister.find_class(21020066)
+        # if weapon_clz:
+        #     w = weapon_clz(21020066, 90, 6, resonLevel)
+        #     method = getattr(w, "cast_variation", None)
+        #     if callable(method):
+        #         method(attr, isGroup)
+        add_list = [0.2, 0.25, 0.3, 0.35, 0.4]
+        if resonLevel in range(1, 6):
+            title = f"仇远-裁竹-谐振{resonLevel}阶"
+            msg = f"释放变奏技能时，队伍中角色声骸技能伤害提升{add_list[resonLevel-1]*100}%"
+            attr.add_dmg_bonus(add_list[resonLevel-1], title, msg)
 
 
 class Char_1501(CharAbstract):

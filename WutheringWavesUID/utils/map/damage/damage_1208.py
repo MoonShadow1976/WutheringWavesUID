@@ -16,6 +16,7 @@ from ...damage.utils import (
     phantom_damage,
     skill_damage_calc,
 )
+from .buff import shouanren_buff, qiuyuan_buff, lupa_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -288,6 +289,66 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
+def calc_damage_10(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 露帕buff
+    lupa_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
+def calc_damage_11(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 露帕buff
+    lupa_buff(attr, 3, 5, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
+def calc_damage_12(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 仇远buff
+    qiuyuan_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
+def calc_damage_13(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 仇远buff
+    qiuyuan_buff(attr, 2, 5, isGroup)
+
+    return calc_damage_3(attr, role, isGroup)
+
+
 damage_detail = [
     {
         "title": "普攻·炽天猎杀第3段",
@@ -308,6 +369,22 @@ damage_detail = [
     {
         "title": "共鸣解放·炼净",
         "func": lambda attr, role: calc_damage_3(attr, role),
+    },
+    {
+        "title": "0+1守/0+1露/共鸣解放·炼净",
+        "func": lambda attr, role: calc_damage_10(attr, role),
+    },
+    {
+        "title": "0+1守/0+1仇/共鸣解放·炼净",
+        "func": lambda attr, role: calc_damage_12(attr, role),
+    },
+    {
+        "title": "0+1守/3+5露/共鸣解放·炼净",
+        "func": lambda attr, role: calc_damage_11(attr, role),
+    },
+    {
+        "title": "0+1守/2+5仇/共鸣解放·炼净",
+        "func": lambda attr, role: calc_damage_13(attr, role),
     },
 ]
 

@@ -35,7 +35,7 @@ from ..utils.resource.constant import (
     SPECIAL_CHAR_NAME,
 )
 from ..utils.util import timed_async_cache
-from ..utils.waves_card_cache import get_card
+from ..utils.char_info_utils import get_all_role_detail_info_list
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 bar1 = Image.open(TEXT_PATH / "bar1.png")
@@ -334,7 +334,7 @@ async def get_group_or_bot_char_hold_rate_data(group_id: str) -> Dict:
         if uid in uid_fiter:
             return None
 
-        role_details = await get_card(uid)
+        role_details = await get_all_role_detail_info_list(uid)
         if role_details is None:
             return None
 

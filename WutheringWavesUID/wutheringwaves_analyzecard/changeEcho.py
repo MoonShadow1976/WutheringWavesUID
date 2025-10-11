@@ -42,7 +42,7 @@ async def change_echo(bot: Bot, ev: Event):
     sonata = ev.regex_dict.get("sonata")
     phantom = bool(ev.regex_dict.get("echo"))  # 改为布尔值判断
     if not char or (not sonata and not phantom):
-        return await bot.send(f"[鸣潮] 请正确使用命令,例如：\n  {PREFIX}改赞妮套装合鸣效果 (可使用 [...合鸣一3合鸣二2] 改为3+2合鸣,按顺序修改) \n  {PREFIX}改赞妮声骸 --修改当前套装下的首位声骸\n", at_sender)
+        return await bot.send(f"[鸣潮] 请正确使用命令,例如：\n  {PREFIX}改赞妮套装<合鸣效果> (可使用如 <合鸣一3合鸣二2> 改为3+2套装,按顺序修改) \n  {PREFIX}改赞妮声骸 --修改当前套装下的首位声骸\n", at_sender)
 
     char_name = alias_to_char_name(char)
     if char == "漂泊者":
@@ -54,7 +54,7 @@ async def change_echo(bot: Bot, ev: Event):
         return await bot.send(f"[鸣潮] 用户{uid}数据不存在，请先使用【{PREFIX}分析】上传{char_name_print}角色数据\n", at_sender)
 
     char_id, roleName = await get_char_name_from_local(char_name, old_data)
-    if not char_id:
+    if not char_id or not roleName:
         return await bot.send(f"[鸣潮] 角色{char_name_print}不存在，请先使用【{PREFIX}分析】上传角色数据\n", at_sender)
     char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', roleName) # 删除"漂泊者·衍射"的符号
 

@@ -39,12 +39,11 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
         
         char_id = result_dict["角色信息"]["角色ID"]
         char_name = char_id_to_char_name(char_id)
-        char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', char_name) # 删除"漂泊者·衍射"的符号
+        
+        char_name_print = result_dict["角色信息"]["角色名"]
+        if char_name is not None:
+            char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', char_name) # 删除"漂泊者·衍射"的符号
 
-        if char_id is None:
-            await bot.send(f"[鸣潮]识别结果为角色'{char_name_print}'不存在\n", at_sender)
-            logger.error(f" [鸣潮][dc卡片识别] 用户{uid}的{char_name_print}识别错误！")
-            return
         weapon_name = alias_to_weapon_name(result_dict["武器信息"]["武器名"])
         weapon_id = weapon_name_to_weapon_id(result_dict["武器信息"]["武器名"])
 
@@ -143,6 +142,8 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
     data["skillList"] = []
     # 使用 zip_longest 组合两个列表，较短的列表用默认值填充
     for skill_data, ocr_level in zip_longest(result.skillList, result_dict["技能等级"], fillvalue=1):
+        if isinstance(skill_data, int):
+            continue
         skill = skill_data.skill
         data["skillList"].append({
             "level": ocr_level,
@@ -190,7 +191,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
 
     waves_data.append(update_data)
     await save_card_info(uid, waves_data)
-    await bot.send(f"[鸣潮]dc卡片数据提取成功！识别套装使用默认配置(影响伤害计算不影响声骸评分)\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装合鸣效果】(可使用 [...合鸣一3合鸣二2] 改为3+2合鸣) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
+    await bot.send(f"[鸣潮]dc卡片数据提取成功！识别套装使用默认配置(影响伤害计算不影响声骸评分)\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装<合鸣效果>】 (可使用如 <合鸣一3合鸣二2> 改为3+2套装) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
     logger.info(f" [鸣潮][dc卡片识别] 数据识别完毕，用户{uid}的{char_name_print}面板数据已保存到本地！")
     return
 

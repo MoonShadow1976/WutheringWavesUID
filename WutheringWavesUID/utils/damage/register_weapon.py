@@ -622,7 +622,7 @@ class Weapon_21020066(WeaponAbstract):
     def cast_variation(self, attr: DamageAttribute, isGroup: bool = False):
         """施放变奏技能"""
         if attr.char_damage == phantom_damage:
-            dmg = f"{self.param(5)}%"
+            dmg = f"{self.param(5)}"
             title = self.get_title()
             msg = f"释放变奏技能时，队伍中角色声骸技能伤害提升{dmg}"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)

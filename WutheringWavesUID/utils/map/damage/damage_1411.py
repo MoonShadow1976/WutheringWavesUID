@@ -16,6 +16,7 @@ from ...damage.utils import (
     phantom_damage,
     skill_damage_calc,
 )
+from .buff import shouanren_buff, motefei_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -157,6 +158,11 @@ def calc_damage_2(
         attr.add_atk_percent(0.1, title, msg)
     # 设置角色技能施放是不是也有加成 eg：守岸人
 
+    # 竹照
+    title = "共鸣回路-竹照"
+    msg = "附近队伍中登场角色声骸技能伤害加成提升30%"
+    attr.add_dmg_bonus(0.3, title, msg)
+
     # 设置声骸属性
     attr.set_phantom_dmg_bonus()
 
@@ -166,6 +172,11 @@ def calc_damage_2(
         title = f"{role_name}-一链"
         msg = "暴击提升20%"
         attr.add_crit_rate(0.2, title, msg)
+
+    if chain_num >= 2:
+        title = f"{role_name}-二链"
+        msg = "竹照-队伍中角色声骸技能伤害加深30%"
+        attr.add_dmg_deepen(0.3, title, msg)
 
     if chain_num >= 3:
         title = f"{role_name}-三链"
@@ -209,6 +220,36 @@ def calc_damage_2(
     return crit_damage, expected_damage
 
 
+def calc_damage_10(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 莫特斐buff
+    motefei_buff(attr, 6, 1, isGroup)
+
+    return calc_damage_1(attr, role, isGroup)
+
+
+def calc_damage_11(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 莫特斐buff
+    motefei_buff(attr, 6, 1, isGroup)
+
+    return calc_damage_2(attr, role, isGroup)
+
+
 damage_detail = [
     {
         "title": "答剑·忠烈死节",
@@ -217,6 +258,14 @@ damage_detail = [
     {
         "title": "万钧一断",
         "func": lambda attr, role: calc_damage_2(attr, role),
+    },
+    {
+        "title": "0+1守/6+1莫/答剑·忠烈死节",
+        "func": lambda attr, role: calc_damage_10(attr, role, True),
+    },
+    {
+        "title": "0+1守/6+1莫/万钧一断",
+        "func": lambda attr, role: calc_damage_11(attr, role, True),
     },
 ]
 

@@ -517,17 +517,12 @@ class Char_1411(CharAbstract):
             attr.add_dmg_deepen(0.5, title, msg)
 
         # 裁竹
-        # weapon_clz = WavesWeaponRegister.find_class(21020066)
-        # if weapon_clz:
-        #     w = weapon_clz(21020066, 90, 6, resonLevel)
-        #     method = getattr(w, "cast_variation", None)
-        #     if callable(method):
-        #         method(attr, isGroup)
-        add_list = [0.2, 0.25, 0.3, 0.35, 0.4]
-        if resonLevel in range(1, 6):
-            title = f"仇远-裁竹-谐振{resonLevel}阶"
-            msg = f"释放变奏技能时，队伍中角色声骸技能伤害提升{add_list[resonLevel-1]*100}%"
-            attr.add_dmg_bonus(add_list[resonLevel-1], title, msg)
+        weapon_clz = WavesWeaponRegister.find_class(21020066)
+        if weapon_clz:
+            w = weapon_clz(21020066, 90, 6, resonLevel)
+            method = getattr(w, "cast_variation", None)
+            if callable(method):
+                method(attr, isGroup)
 
 
 class Char_1501(CharAbstract):

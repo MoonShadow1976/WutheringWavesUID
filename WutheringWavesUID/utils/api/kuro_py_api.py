@@ -1,19 +1,18 @@
 # 集成 kuro.py 的国际服登录功能
 import kuro
-from kuro.errors import GeetestTriggeredError, KuroError
 from kuro.types import Region
+from kuro.models.game import RoleInfo
+from kuro.errors import GeetestTriggeredError, KuroError
 
 from typing import Any, Optional
 
 from gsuid_core.logger import logger
-from gsuid_core.models import Event
 
 from .model import AccountBaseInfo, Box2, DailyData, EnergyData, LivenessData, BattlePassData
 from ..database.models import WavesBind, WavesUser
 from ...wutheringwaves_config import PREFIX
 from ...wutheringwaves_analyzecard.user_info_utils import save_user_info
 
-# data.mark_cookie_invalid(uid, waves_user.cookie)  # 标记为无效
 
 async def login_overseas(
     user_id:str, bot_id:str, group_id:str, email: str, password: str, geetest_data: Optional[str] = None
@@ -220,45 +219,56 @@ async def login_overseas(
     return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n"}
 
 
-async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
-    """获取国际服账户基础信息"""
+async def get_role_info_overseas(ck:str, uid: str) -> RoleInfo | None:
+    """获取国际服角色信息"""
     client = kuro.Client(region=Region.OVERSEAS)
 
     waves_user= await WavesUser.select_data_by_cookie_and_uid(cookie=ck, uid=uid)
     if not waves_user:
-        return None, None
+        return None
+
     try:
         oauth_code = await client.generate_oauth_code(ck)
 
         role_info = await client.get_player_role(oauth_code, int(uid), waves_user.platform)
-        basic = role_info.basic
-        battle_pass = role_info.battle_pass
-        if not basic or not battle_pass:
-            return None, None
+        if not role_info.basic or not role_info.battle_pass:
+            return None
     except Exception as e:
         logger.error(f"获取国际服用户信息失败: {e}")
+        return None
+    
+    return role_info
+
+
+async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
+    """获取国际服账户基础信息"""
+    role_info = await get_role_info_overseas(ck, uid)
+    if not role_info:
         return None, None
+
+    basic = role_info.basic
+    battle_pass = role_info.battle_pass
     
     # 保存用户信息到本地
     await save_user_info(uid, basic.name, level=basic.level, worldLevel=basic.world_level)
 
     BoxList = []
+    name_list = {
+        "1": "基准奇藏箱",
+        "2": "朴素奇藏箱",
+        "3": "精密奇藏箱",
+        "4": "辉光奇藏箱",
+    }
     for box_type, box_count in basic.chests.items():
-        name_list = {
-            "1": "基准奇藏箱",
-            "2": "朴素奇藏箱",
-            "3": "精密奇藏箱",
-            "4": "辉光奇藏箱",
-        }
         BoxList.append(Box2(name=name_list.get(box_type, "未知宝箱"), num=box_count))
     
     TidalHeritagesList = []
+    name_list = {
+        "1": "潮汐之遗绿",
+        "2": "潮汐之遗紫",
+        "3": "潮汐之遗金",
+    }
     for heritage_type, heritage_count in basic.tidal_heritages.items():
-        name_list = {
-            "1": "潮汐之遗绿",
-            "2": "潮汐之遗紫",
-            "3": "潮汐之遗金",
-        }
         TidalHeritagesList.append(Box2(name=name_list.get(heritage_type, "未知潮汐之遗"), num=heritage_count))
     
     baseInfo = AccountBaseInfo(

@@ -187,6 +187,12 @@ class WavesApi:
                 else:
                     await data.mark_cookie_invalid(uid, waves_user.cookie)
                 return ""
+        else:
+            from .kuro_py_api import get_role_info_overseas
+            role_info = await get_role_info_overseas(waves_user.cookie, uid)
+            if not role_info:
+                await WavesUser.mark_cookie_invalid(uid, waves_user.cookie, "无效")
+                return ""
 
         return waves_user.cookie
 
@@ -204,21 +210,23 @@ class WavesApi:
                 continue
 
             from ..waves_api import waves_api
-            if not waves_api.is_net(user.uid):
-                data = await self.login_log(user.uid, user.cookie)
-                if not data.success:
-                    await data.mark_cookie_invalid(user.uid, user.cookie)
-                    continue
+            if waves_api.is_net(user.uid):
+                continue
 
-                data = await self.refresh_data(user.uid, user.cookie)
-                if not data.success:
-                    await data.mark_cookie_invalid(user.uid, user.cookie)
+            data = await self.login_log(user.uid, user.cookie)
+            if not data.success:
+                await data.mark_cookie_invalid(user.uid, user.cookie)
+                continue
 
-                    if times <= 0:
-                        break
+            data = await self.refresh_data(user.uid, user.cookie)
+            if not data.success:
+                await data.mark_cookie_invalid(user.uid, user.cookie)
 
-                    times -= 1
-                    continue
+                if times <= 0:
+                    break
+
+                times -= 1
+                continue
 
             ck_list.append(user.cookie)
             break

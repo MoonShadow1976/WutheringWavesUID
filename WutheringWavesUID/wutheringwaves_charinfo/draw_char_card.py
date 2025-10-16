@@ -647,6 +647,8 @@ async def draw_char_detail_img(
     ck = ""
     if not is_limit_query:
         _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
+        if waves_api.is_net(uid):
+            ck = await waves_api.get_waves_random_cookie(uid, user_id)
         if ck:
             online_list = await waves_api.get_online_list_role(ck)
             if online_list.success and online_list.data:

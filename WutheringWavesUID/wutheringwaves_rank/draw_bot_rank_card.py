@@ -13,6 +13,7 @@ from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
 
 from ..utils.api.model import RoleDetailData, WeaponData
+from ..utils.util import send_master_info
 from ..utils.cache import TimedCache
 from ..utils.calc import WuWaCalc
 from ..utils.calculate import (
@@ -222,7 +223,6 @@ async def get_rank_info_for_user(
             rankInfo = await get_one_rank_info(user.user_id, uid, role_detail, rankDetail)
         except Exception as e:
             logger.warning(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
-            from ..utils.util import send_master_info
             await send_master_info(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
             
         if not rankInfo:

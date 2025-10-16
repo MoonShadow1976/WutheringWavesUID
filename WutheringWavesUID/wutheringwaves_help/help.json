@@ -348,6 +348,14 @@
         "need_admin": false
       },
       {
+        "name": "练度总排行",
+        "desc": "练度总排行",
+        "eg": "练度总排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
         "name": "bot伤害排行",
         "desc": "bot伤害排行",
         "eg": "长离bot排行",
@@ -364,25 +372,17 @@
         "need_admin": false
       },
       {
-        "name": "练度总排行",
-        "desc": "练度总排行",
-        "eg": "练度总排行",
+        "name": "练度群排行",
+        "desc": "练度群排行",
+        "eg": "练度排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
       },
       {
-        "name": "全服练度排行",
-        "desc": "全服练度排行",
-        "eg": "全服练度排行",
-        "need_ck": false,
-        "need_sk": false,
-        "need_admin": false
-      },
-      {
-        "name": "bot练度排行",
-        "desc": "bot练度排行",
-        "eg": "bot练度排行",
+        "name": "练度bot排行",
+        "desc": "练度bot排行",
+        "eg": "练度bot排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

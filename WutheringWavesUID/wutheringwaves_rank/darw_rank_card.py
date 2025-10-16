@@ -20,6 +20,7 @@ from ..utils.calculate import (
     get_calc_map,
     get_total_score_bg,
 )
+from ..utils.util import send_master_info
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.damage.abstract import DamageRankRegister
 from ..utils.database.models import WavesBind, WavesUser
@@ -215,7 +216,6 @@ async def get_rank_info_for_user(
             rankInfo = await get_one_rank_info(user.user_id, uid, role_detail, rankDetail)
         except Exception as e:
             logger.warning(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
-            from ..utils.util import send_master_info
             await send_master_info(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
 
         if not rankInfo:

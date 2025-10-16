@@ -158,13 +158,14 @@ def calc_damage_2(
         attr.add_atk_percent(0.1, title, msg)
     # 设置角色技能施放是不是也有加成 eg：守岸人
 
-    # 竹照
-    title = "共鸣回路-竹照"
-    msg = "附近队伍中登场角色声骸技能伤害加成提升30%"
-    attr.add_dmg_bonus(0.3, title, msg)
-
     # 设置声骸属性
     attr.set_phantom_dmg_bonus()
+
+    # 竹照
+    # 获得【竹照】效果，附近队伍中的登场角色声骸技能伤害加成提升30%，持续30秒。
+    title = "竹照"
+    msg = "声骸技能伤害加成提升30%"
+    attr.add_dmg_bonus(0.3, title, msg)
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
@@ -175,7 +176,7 @@ def calc_damage_2(
 
     if chain_num >= 2:
         title = f"{role_name}-二链"
-        msg = "竹照-队伍中角色声骸技能伤害加深30%"
+        msg = "【竹照】：附近队伍中的角色声骸技能伤害加深30%。"
         attr.add_dmg_deepen(0.3, title, msg)
 
     if chain_num >= 3:

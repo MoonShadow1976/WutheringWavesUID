@@ -120,9 +120,6 @@ async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRank
                 )
                 phantom_score += _score
 
-        if phantom_score == 0:
-            return
-
         if phantom_score >= 175:  # 只计算分数>=175的角色
             total_score += phantom_score
             char_score_details.append({

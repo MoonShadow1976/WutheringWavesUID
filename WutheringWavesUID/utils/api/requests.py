@@ -187,12 +187,12 @@ class WavesApi:
                 else:
                     await data.mark_cookie_invalid(uid, waves_user.cookie)
                 return ""
-        else:
-            from .kuro_py_api import get_role_info_overseas
-            role_info = await get_role_info_overseas(waves_user.cookie, uid)
-            if not role_info:
-                await WavesUser.mark_cookie_invalid(uid, waves_user.cookie, "无效")
-                return ""
+        # else:
+        #     from .kuro_py_api import get_role_info_overseas
+        #     role_info = await get_role_info_overseas(waves_user.cookie, uid)
+        #     if not role_info:
+        #         await WavesUser.mark_cookie_invalid(uid, waves_user.cookie, "无效")
+        #         return ""
 
         return waves_user.cookie
 

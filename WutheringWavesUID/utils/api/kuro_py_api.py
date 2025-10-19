@@ -259,7 +259,7 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
         "3": "精密奇藏箱",
         "4": "辉光奇藏箱",
     }
-    for box_type, box_count in basic.chests.items():
+    for box_type, box_count in basic.basic_chests.items(): # not chests, but basic_chests
         BoxList.append(Box2(name=name_list.get(box_type, "未知宝箱"), num=box_count))
     
     TidalHeritagesList = []

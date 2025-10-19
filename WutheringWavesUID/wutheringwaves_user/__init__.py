@@ -255,6 +255,8 @@ async def sync_non_onebot_user_avatar(ev: Event):
             bot_id=ev.bot_id, 
             avatar_hash=avatar_hash
         )
+
+
 async def send_diff_msg(bot: Bot, code: Any, data: Dict, at_sender=False):
     for retcode in data:
         if code == retcode:

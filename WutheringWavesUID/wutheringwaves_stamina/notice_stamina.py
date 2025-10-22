@@ -55,6 +55,7 @@ async def all_check(
         time_now,
         timestamp,
     )
+    logger.info(f"用户{uid} 体力提醒是否推送:{_push}")
 
     if push_data[f"{mode}_is_push"] == "on": # 已经推送过，启动催命模式
         if WutheringWavesConfig.get_config("CrazyNotice").data:
@@ -108,7 +109,6 @@ async def check(
     limit: int,
 ) -> Union[bool, int]:
     """超限提醒True"""
-    logger.info(f"{time} >?= {limit}")
     if time >= limit:
         return True
     else:

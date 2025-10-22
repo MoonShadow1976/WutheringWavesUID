@@ -245,8 +245,6 @@ async def draw_refresh_char_detail_img(
         for key in ["refresh_update", "refresh_unchanged"]
         for r in waves_map[key].values()
     ]
-    from gsuid_core.logger import logger
-    logger.info(f"role_detail_list:{role_detail_list}")
 
     # 总角色个数
     role_len = len(role_detail_list)

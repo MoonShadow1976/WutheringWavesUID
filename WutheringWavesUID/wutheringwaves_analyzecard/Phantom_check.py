@@ -305,7 +305,8 @@ class PhantomValidator:
             if "%" in value:
                 num_str = value.replace("%", "")
                 num = scaled(num_str)
-                return f"{num:.2f}%"
+                formatted = f"{num:.2f}".rstrip('0').rstrip('.')  # 使用rstrip去掉末尾的0和可能的小数点
+                return f"{formatted}%"
             else:
                 num = scaled(value)
                 return f"{int(num)}"  # 非%值都是整数

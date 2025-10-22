@@ -44,8 +44,11 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
         if char_name is not None:
             char_name_print = re.sub(r'[^\u4e00-\u9fa5A-Za-z0-9\s]', '', char_name) # 删除"漂泊者·衍射"的符号
 
-        weapon_name = alias_to_weapon_name(result_dict["武器信息"]["武器名"])
-        weapon_id = weapon_name_to_weapon_id(result_dict["武器信息"]["武器名"])
+        weapon_name = result_dict["武器信息"].get("武器名")
+        weapon_id = None
+        if weapon_name:
+            weapon_name = alias_to_weapon_name(weapon_name)
+            weapon_id = weapon_name_to_weapon_id(weapon_name)
 
         wepon_level = result_dict["武器信息"]["等级"]
 

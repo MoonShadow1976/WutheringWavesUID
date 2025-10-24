@@ -216,8 +216,9 @@ async def pcap_help(bot: Bot, ev: Event):
             "1. 此方法通过抓取游戏网络数据包实现，可直接导入所有角色面板数据",
             # "3. 用户账号系统（云端保存与同步）即将上线",
             "2. 加速器等网络工具可能导致抓包失败",
-            "3. 请勿上传含有隐私信息的 .pcap 文件",
-            f"4. 具体教程请前往[ {url} ]查看, 内有视频教程",
+            "3. 请关闭其他可能产生大量网络数据包的软件，确保pcap文件体积不超过4MB（文件过大可能导致解析失败）",
+            "4. 请勿上传含有隐私信息的 .pcap 文件",
+            f"5. 具体教程请前往[ {url} ]查看, 内有视频教程，可参考操作",
             "\n",
         ]
     )
@@ -227,17 +228,17 @@ async def pcap_help(bot: Bot, ev: Event):
             "1. 安装 Wireshark 并打开",
             "2. 启动鸣潮游戏，进入登录界面（男女主角界面）",
             "3. 在Wireshark中选择您连接互联网的网络接口",
-            "4. 切换回游戏并登录进入游戏世界",
-            "5. 返回Wireshark停止抓包，并保存为PCAP文件",
-            "6. 前往导入页面，上传刚才保存的PCAP文件",
-            "注意：也可以使用其他能导出PCAP文件的抓包工具",
+            "4. 切换回游戏并登录进入游戏世界（进度条开始加载时即可停止抓包）",
+            "5. 返回Wireshark停止抓包，并保存为 .pcap 文件",
+            "6. 前往导入页面，上传刚才保存的 .pcap 文件",
+            "注意：也可以使用其他能导出 .pcap 文件的抓包工具",
             "\n",
         ]
     )
     method_android = "\n".join(
         [
             "【安卓端方法】使用 PCAPdroid:",
-            "1. 安装 PCAPdroid，在 Traffic dump 选 PCAP 文件",
+            "1. 安装 PCAPdroid，在 Traffic dump 选 .pcap 文件",
             "2. Target apps 中选择 Wuthering Waves",
             "3. 点击“Ready”，然后启动并进入游戏",
             "4. 返回 PCAPdroid 停止抓包，生成文件并上传",
@@ -247,8 +248,8 @@ async def pcap_help(bot: Bot, ev: Event):
     upload_note = "\n".join(
         [
             "【上传方法】:",
-            "• qq用户请直接发送pcap文件到本群或私聊机器人(qq官方bot暂不支持)",
-            f"• discord用户请使用命令[{PREFIX}解析pcap]并上传pcap文件为附件",
+            "• qq用户请直接发送 .pcap 文件到本群或私聊机器人(qq官方bot暂不支持)",
+            f"• discord用户请使用命令[{PREFIX}解析pcap]并上传 .pcap 文件为附件",
             "• 其他平台暂未测试",
             "\n",
         ]

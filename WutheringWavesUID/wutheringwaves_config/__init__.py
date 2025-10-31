@@ -33,7 +33,7 @@ async def open_switch_func(bot: Bot, ev: Event):
 
         return await bot.send(f"当前特征码：{uid}\n{ERROR_CODE[WAVES_CODE_102]}")
 
-    logger.info(f"[{ev.user_id}]尝试[{ev.command[2:]}]了[{ev.text}]功能")
+    logger.info(f"[{ev.user_id}]尝试[{ev.command}]了[{ev.text}]功能")
 
     im = await set_config_func(ev, uid)
     await bot.send(im, at_sender)
@@ -60,7 +60,9 @@ async def send_config_ev(bot: Bot, ev: Event):
 
         if value is None:
             return await bot.send("请输入正确的阈值数字...\n", at_sender)
-        im = await set_push_value(ev, func, uid, int(value))
+        value = min(int(value), 240)
+        value = max(value, 0)
+        im = await set_push_value(ev, func, uid, value, ck)
     elif "体力背景" in ev.text:
         from ..utils.waves_api import waves_api
 

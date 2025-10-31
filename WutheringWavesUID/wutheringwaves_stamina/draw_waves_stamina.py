@@ -139,7 +139,7 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
         sing_in_text = "签到已完成！"
     elif waves_api.is_net(daily_info.roleId):
         sign_in_icon = NO
-        sing_in_text = "不可签到！"
+        sing_in_text = "不支持签到！"
     else:
         sign_in_icon = NO
         sing_in_text = "今日未签到！"
@@ -253,13 +253,12 @@ async def _draw_stamina_img(ev: Event, valid: Dict) -> Image.Image:
     )
     # remain_time = await seconds2hours(refreshTimeStamp - curr_time)
     # 设置体力推送时间
-    push_bool = await set_push_time(ev.bot_id, daily_info.roleId, refreshTimeStamp)
-    if push_bool:
-        push_icon = YES
-        push_text = "体力推送开启"
-    else:
-        push_icon = NO
-        push_text = "体力推送关闭"
+    push_icon = NO
+    push_text = "体力推送关闭"
+    if "!请稍后重试!" not in account_info.name and account_info.activeDays != 0:
+        if await set_push_time(ev.bot_id, daily_info.roleId, refreshTimeStamp):
+            push_icon = YES
+            push_text = "体力推送开启"
 
     time_img = Image.new("RGBA", (190, 33), (255, 255, 255, 0))
     time_img_draw = ImageDraw.Draw(time_img)

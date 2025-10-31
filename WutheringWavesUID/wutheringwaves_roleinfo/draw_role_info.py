@@ -64,7 +64,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     role_info.roleList.sort(
         key=lambda i: (i.level, i.starLevel, i.roleId), reverse=True
     )
-    
+
     if waves_api.is_net(uid):
         account_info, _ = await get_base_info_overseas(ck, uid)
         base_info = await get_user_detail_info(uid)
@@ -148,7 +148,13 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
 
     # 角色信息
     roleTotalNum = (
-        account_info.roleNum if account_info.is_full else len(role_info.roleList)
+        account_info.roleNum
+        if (
+            account_info.is_full
+            and "!请稍后重试!" not in account_info.name
+            and account_info.activeDays != 0
+        )
+        else len(role_info.roleList)
     )
     xset = 50
     yset = 470

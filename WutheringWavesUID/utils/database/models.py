@@ -29,6 +29,7 @@ exec_list.extend(
 
 T_WavesBind = TypeVar("T_WavesBind", bound="WavesBind")
 T_WavesUser = TypeVar("T_WavesUser", bound="WavesUser")
+T_WavesPush = TypeVar("T_WavesPush", bound="WavesPush")
 T_WavesUserAvatar = TypeVar("T_WavesUserAvatar", bound="WavesUserAvatar")
 
 class WavesUserAvatar(BaseModel, table=True):
@@ -294,6 +295,36 @@ class WavesPush(Push, table=True):
     resin_value: Optional[int] = Field(title="体力阈值", default=235)
     push_time_value: Optional[str] = Field(title="推送时间", default="")
     resin_is_push: Optional[str] = Field(title="体力是否已推送", default="off")
+
+    @classmethod
+    @with_session
+    async def select_push_data(
+        cls: Type[T_WavesPush],
+        session: AsyncSession,
+        user_id: str,
+        bot_id: str,
+    ) -> T_WavesPush | None:
+        sql = select(cls).where(
+            col(cls.uid) == user_id,
+            col(cls.bot_id) == bot_id
+        )
+        result = await session.execute(sql)
+        data = result.scalars().all()
+        return data[0] if data else None
+    
+    @classmethod
+    @with_session
+    async def insert_push_data(
+        cls: Type[T_WavesPush],
+        session: AsyncSession,
+        uid: str,
+        bot_id: str,
+    ):
+        data = await cls.select_push_data(uid, bot_id)
+        if data:
+            return True
+        session.add(cls(uid=uid, bot_id=bot_id))
+        return True
 
 
 @site.register_admin

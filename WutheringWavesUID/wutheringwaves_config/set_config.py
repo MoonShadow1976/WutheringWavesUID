@@ -36,11 +36,19 @@ async def set_waves_user_value(ev: Event, func: str, uid: str, value: str):
     else:
         return "设置失败!\n请检查参数是否正确!\n"
 
-async def set_push_value(ev: Event, func: str, uid: str, value: int):
+async def set_push_value(ev: Event, func: str, uid: str, value: int, ck: str):
     if func in PUSH_MAP:
         status = PUSH_MAP[func]
     else:
         return "该配置项不存在!\n"
+    
+    data = await WavesPush.select_push_data(uid, ev.bot_id)
+    if not data:
+        return "请先开启体力推送!\n"
+    push_data = data.__dict__
+    if push_data[f"{status}_push"] == "off":
+        return "体力推送未开启!\n"
+    
     logger.info("[设置推送阈值]UID:{}\nfunc: {}, value: {}".format(uid, status, value))
     if (
         await WavesPush.update_data_by_uid(
@@ -48,22 +56,10 @@ async def set_push_value(ev: Event, func: str, uid: str, value: int):
         )
         == 0
     ):
-        data = await WavesPush.select_data_by_uid(uid)
-        push_data = data.__dict__
-        if not push_data["push_time_value"]:
-            logger.info("[开启体力推送] uid:{}".format(uid))
-            option = ev.group_id if ev.group_id else "on"
-            await WavesUser.update_data_by_uid(
-                uid=uid, bot_id=ev.bot_id, **{"push_switch": option},
-            )
-            await WavesPush.update_data_by_uid(
-                uid=uid, bot_id=ev.bot_id, **{f"{PUSH_MAP['体力']}_push": option},
-            )
-            timestamp = time.time()
-            time_push = datetime.fromtimestamp(int(timestamp))
-            await WavesPush.update_data_by_uid(
-                uid=uid, bot_id=ev.bot_id, **{f"{PUSH_MAP['时间']}_value": time_push}
-            )
+        from ..wutheringwaves_stamina.notice_stamina import get_next_refresh_time
+        refreshTimeStamp = await get_next_refresh_time(uid, ck)
+        if refreshTimeStamp:
+            await set_push_time(ev.bot_id, uid, refreshTimeStamp)
 
         return f"设置成功!\nUID:{uid}\n当前{func}推送阈值:{value}\n"
     else:
@@ -81,8 +77,8 @@ async def set_push_time(bot_id: str, uid: str, value: int):
         logger.info("该配置项不存在!")
         return False
     
-    data = await WavesPush.select_data_by_uid(uid)
-    if not data: 
+    data = await WavesPush.select_push_data(uid, bot_id)
+    if not data:
         return False
     push_data = data.__dict__
     if push_data[f"{mode}_push"] == "off":
@@ -132,6 +128,7 @@ async def set_config_func(ev: Event, uid: str = "0"):
                 "push_switch": option,
             },
         )
+        await WavesPush.insert_push_data(uid=uid, bot_id=ev.bot_id)
         await WavesPush.update_data_by_uid(
             uid=uid,
             bot_id=ev.bot_id,

@@ -31,10 +31,10 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "体力推送全局开关", "开启后当体力达到推送阈值将会推送", False
     ),
     "StaminaPushInterval": GsIntConfig(
-        "体力推送间隔（分钟）", "体力推送间隔（分钟）", 30, 60
+        "体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）", 30, 60
     ),
     "StaminaRemindInterval": GsIntConfig(
-        "体力提醒间隔（分钟）", "当前提醒时间将延长所填时间", 60, 600
+        "体力提醒超时延长间隔（分钟）", "当前提醒时间之后将延长所填时间再提醒一次", 60, 1440
     ),
     "WavesRankUseTokenGroup": GsListStrConfig(
         "有token才能进排行，群管理可设置",

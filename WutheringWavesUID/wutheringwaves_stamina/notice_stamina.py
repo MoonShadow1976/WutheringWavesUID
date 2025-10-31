@@ -25,7 +25,7 @@ async def get_notice_list() -> Dict[str, Dict[str, Dict]]:
         if not user.uid or not user.cookie or user.status or not user.bot_id:
             continue
 
-        push_data = await WavesPush.select_data_by_uid(user.uid)
+        push_data = await WavesPush.select_push_data(user.uid, user.bot_id)
         if push_data is None:
             continue
 
@@ -55,7 +55,7 @@ async def all_check(
         time_now,
         timestamp,
     )
-    logger.info(f"用户{uid} 体力提醒是否推送:{_push}")
+    logger.info(f"用户{uid} 体力提醒是否应推送:{_push}，开启状态：{push_data[f'{mode}_push']}")
 
     if push_data[f"{mode}_is_push"] == "on": # 已经推送过，启动催命模式
         if WutheringWavesConfig.get_config("CrazyNotice").data:

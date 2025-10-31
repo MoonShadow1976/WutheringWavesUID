@@ -1,9 +1,10 @@
 # 集成 kuro.py 的国际服登录功能
 import kuro
 from kuro.types import Region
-from kuro.models.game import RoleInfo
+from kuro.models.game import RoleInfo, BasicRoleInfo, BattlePassRoleInfo
 from kuro.errors import GeetestTriggeredError, KuroError
 
+import datetime
 from typing import Any, Optional
 
 from gsuid_core.logger import logger
@@ -13,6 +14,57 @@ from ..database.models import WavesBind, WavesUser
 from ...wutheringwaves_config import PREFIX
 from ...wutheringwaves_analyzecard.user_info_utils import save_user_info
 
+
+# 构造retry的RoleInfo类
+fake_basic = BasicRoleInfo(
+    Name="!请稍后重试!",
+    Id=1,
+    CreatTime=datetime.datetime.now(),
+    ActiveDays=0,
+    Level=0,
+    WorldLevel=0,
+    RoleNum=1,
+    SoundBox=1,
+    Energy=1,
+    MaxEnergy=240,
+    StoreEnergy=1,
+    StoreEnergyRecoverTime=datetime.datetime.now(),
+    EnergyRecoverTime=datetime.datetime.now(),
+    Liveness=1,
+    LivenessMaxCount=100,
+    LivenessUnlock=False,
+    ChapterId=1,
+    WeeklyInstCount=0,
+    Boxes={},
+    BasicBoxes={
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+    },
+    PhantomBoxes={
+        "1": 0,
+        "2": 0,
+        "3": 0,
+    },
+    BirthMon=1,
+    BirthDay=1,
+)
+
+fake_battle_pass = BattlePassRoleInfo(
+    Level=1,
+    WeekExp=1,
+    WeekMaxExp=1,
+    IsUnlock=False,
+    IsOpen=False,
+    Exp=1,
+    ExpLimit=1,
+)
+
+fake_role_info = RoleInfo(
+    Base=fake_basic,
+    BattlePass=fake_battle_pass,
+)
 
 async def login_overseas(
     user_id:str, bot_id:str, group_id:str, email: str, password: str, geetest_data: Optional[str] = None
@@ -219,11 +271,11 @@ async def login_overseas(
     return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n"}
 
 
-async def get_role_info_overseas(ck:str, uid: str) -> RoleInfo | None:
+async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
     """获取国际服角色信息"""
     client = kuro.Client(region=Region.OVERSEAS)
 
-    waves_user= await WavesUser.select_data_by_cookie_and_uid(cookie=ck, uid=uid)
+    waves_user = await WavesUser.select_data_by_cookie_and_uid(cookie=ck, uid=uid)
     if not waves_user:
         return None
 
@@ -234,7 +286,12 @@ async def get_role_info_overseas(ck:str, uid: str) -> RoleInfo | None:
         if not role_info.basic or not role_info.battle_pass:
             return None
     except Exception as e:
-        logger.error(f"获取国际服用户信息失败: {e}")
+        logger.error(f"[鸣潮] 获取国际服用户({uid})信息失败: {e}")
+
+        if "retry" in str(e).lower():
+            logger.error("[鸣潮][retry] 返回假数据，提示用户稍后重试")
+            return fake_role_info
+
         return None
     
     return role_info

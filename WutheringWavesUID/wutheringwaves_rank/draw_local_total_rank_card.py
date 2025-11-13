@@ -130,9 +130,8 @@ async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRank
     if total_score == 0 or not char_score_details:
         return None
 
-    # 按角色分数排序，取前10个
+    # 按角色分数排序
     char_score_details.sort(key=lambda x: x['phantom_score'], reverse=True)
-    top_10_chars = char_score_details[:10]
 
     # 获取区服信息
     region_text, region_color = get_region_for_rank(uid)
@@ -145,7 +144,7 @@ async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRank
         kuro_name=account_info.name[:6],
         waves_id=uid,
         total_score=total_score,
-        char_score_details=top_10_chars,
+        char_score_details=char_score_details,
         rank=0,  # 排名后面统一计算
         server=region_text,
         server_color=region_color
@@ -345,7 +344,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
 
         # 绘制角色信息
         if detail.char_score_details:
-            sorted_chars = detail.char_score_details
+            sorted_chars = detail.char_score_details[:10]
 
             # 在条目底部绘制前10名角色的头像
             char_size = 40

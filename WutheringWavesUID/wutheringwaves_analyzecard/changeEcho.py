@@ -42,7 +42,7 @@ async def change_echo(bot: Bot, ev: Event):
     sonata = ev.regex_dict.get("sonata")
     phantom = bool(ev.regex_dict.get("echo"))  # 改为布尔值判断
     if not char or (not sonata and not phantom):
-        return await bot.send(f"[鸣潮] 请正确使用命令,例如：\n  {PREFIX}改赞妮套装<合鸣效果> (可使用如 <合鸣一3合鸣二2> 改为3+2套装,按顺序修改) \n  {PREFIX}改赞妮声骸 --修改当前套装下的首位声骸\n", at_sender)
+        return await bot.send(f"[鸣潮] 请正确使用命令,例如：\n  {PREFIX}改赞妮套装<合鸣效果> (可使用如 {PREFIX}改赞妮套装高天3不绝2 改为3+2套装,按顺序修改) \n  {PREFIX}改赞妮声骸 --修改当前套装下的首位声骸\n", at_sender)
 
     char_name = alias_to_char_name(char)
     if char == "漂泊者":

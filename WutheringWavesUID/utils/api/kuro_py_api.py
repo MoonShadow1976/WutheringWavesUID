@@ -294,6 +294,9 @@ async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
 
         return None
     
+    # 保存用户信息到本地
+    await save_user_info(uid, role_info.basic.name, level=role_info.basic.level, worldLevel=role_info.basic.world_level)
+
     return role_info
 
 
@@ -306,9 +309,6 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
     basic = role_info.basic
     battle_pass = role_info.battle_pass
     
-    # 保存用户信息到本地
-    await save_user_info(uid, basic.name, level=basic.level, worldLevel=basic.world_level)
-
     BoxList = []
     name_list = {
         "1": "基准奇藏箱",

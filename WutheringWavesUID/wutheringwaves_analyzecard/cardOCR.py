@@ -580,7 +580,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
                     name_match = patterns["name"].search(line_clean)
                     if name_match:
                         name = name_match.group()
-                        name = name.replace("吟槑", "吟霖").replace("鑒几", "鉴心")
+                        name = name.replace("吟槑", "吟霖").replace("鑒几", "鉴心").replace("千唉", "千咲")
                         if not re.match(r'^[\u4e00-\u9fa5]+$', name):
                             logger.warning(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
                             return False, final_result
@@ -610,6 +610,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
             line_clean = re.sub(r'[^0-9\u4e00-\u9fa5\s]', '', line_clean)  # 先删除非数字中英文的符号, 匹配“源能臂铠·测肆”
             line_clean = re.sub(r'\s+', ' ', line_clean).strip()  # 再合并多余空白
             if patterns["name"].search(line_clean):
+                line_clean = line_clean.replace("幽冥的忘爱章", "幽冥的忘忧章")
                 line_clean = re.sub(r'.*古洑流$', '千古洑流', line_clean)
                 final_result["武器信息"]["武器名"] = cc.convert(line_clean)
                 continue

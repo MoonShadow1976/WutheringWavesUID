@@ -97,7 +97,7 @@ def calc_damage_1(
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "拥有虚无绞痕·终焉的目标受到千咲伤害提升40%"
-        attr.add_dmg_bonus(0.4, title, msg)
+        attr.add_easy_damage(0.4, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -321,7 +321,7 @@ def calc_damage_3(
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "拥有虚无绞痕·终焉的目标受到千咲伤害提升40%"
-        attr.add_dmg_bonus(0.4, title, msg)
+        attr.add_easy_damage(0.4, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)

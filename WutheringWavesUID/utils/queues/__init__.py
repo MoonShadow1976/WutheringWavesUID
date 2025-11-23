@@ -10,9 +10,10 @@ from ..api.wwapi import (
     UPLOAD_URL,
 )
 from .const import QUEUE_ABYSS_RECORD, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD
-from .queues import register_handler, start_dispatcher
+from .queues import event_handler, start_dispatcher
 
 
+@event_handler(QUEUE_SCORE_RANK)
 async def send_score_rank(item: Any):
     if not item:
         return
@@ -42,6 +43,7 @@ async def send_score_rank(item: Any):
             logger.exception(f"上传面板失败: {res.text if res else ''} {e}")
 
 
+@event_handler(QUEUE_ABYSS_RECORD)
 async def send_abyss_record(item: Any):
     if not item:
         return
@@ -71,6 +73,7 @@ async def send_abyss_record(item: Any):
             logger.exception(f"上传深渊失败: {res.text if res else ''} {e}")
 
 
+@event_handler(QUEUE_SLASH_RECORD)
 async def send_slash_record(item: Any):
     if not item:
         return
@@ -101,9 +104,5 @@ async def send_slash_record(item: Any):
 
 
 def init_queues():
-    # 注册处理函数
-    register_handler(QUEUE_SCORE_RANK, send_score_rank)
-    register_handler(QUEUE_ABYSS_RECORD, send_abyss_record)
-    register_handler(QUEUE_SLASH_RECORD, send_slash_record)
     # 启动任务分发器
     start_dispatcher(daemon=True)

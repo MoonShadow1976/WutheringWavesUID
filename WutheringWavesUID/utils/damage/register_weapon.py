@@ -240,20 +240,20 @@ class Weapon_21010056(WeaponAbstract):
     type = 1
     name = "昙切"
 
-    # 攻击提升12%。施放变奏技能或附加【异常效应】时，自身共鸣解放伤害加成提升8%，可叠加3层，持续15秒。
-    # 该效果叠加至满层时，队伍中的角色附加【异常效应】时，该角色全属性伤害加成提升24%，持续15秒，同名效果之间不可叠加。
-
     def do_action(
         self,
         func_list: Union[List[str], str],
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
+        # 施放变奏技能或附加【异常效应】时才生效
+        if not attr.is_env_abnormal:
+            return
+
         if attr.char_damage != liberation_damage:
             return
 
         title = self.get_title()
-        # 施放变奏技能或附加异常效应时，共鸣解放伤害加成提升
         dmg = f"{self.param(1)}*{self.param(2)}"
         msg = f"施放变奏技能或附加【异常效应】时，共鸣解放伤害加成提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)

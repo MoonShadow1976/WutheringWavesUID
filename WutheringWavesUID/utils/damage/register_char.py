@@ -12,6 +12,7 @@ from .utils import (
     CHAR_ATTR_SINKING,
     CHAR_ATTR_VOID,
     attack_damage,
+    cast_variation,
     hit_damage,
     phantom_damage,
     liberation_damage,
@@ -736,6 +737,61 @@ class Char_1506(CharAbstract):
                 method(attr, isGroup)
 
 
+class Char_1507(CharAbstract):
+    id = 1507
+    name = "赞妮"
+    starLevel = 5
+
+
+class Char_1508(CharAbstract):
+    id = 1508
+    name = "千咲"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        """获得buff"""
+        attr.set_env_havoc_bane()
+
+        title = "千咲-共鸣回路-虚湮之线"
+        msg = "对拥有虚无绞痕的目标造成伤害时，可无视其18%防御"
+        attr.add_defense_reduction(0.18, title, msg)
+
+        # 异常效应层数上限增加3层
+        title = "千咲-延奏技能-解弦式第零定律"
+        msg = "使目标层数上限增加3层"
+        attr.add_effect(title, msg)
+        # 注：这个记得单独写，是几层就是几层
+
+        # 二链效果
+        if chain >= 2:
+            if attr.char_attr == CHAR_ATTR_SINKING:
+                title = "千咲-二链"
+                msg = "无视目标10%湮灭伤害抗性"
+                attr.add_enemy_resistance(-0.1, title, msg)
+
+            title = "千咲-二链"
+            msg = "队伍中的角色处于虚湮之线状态时，全属性伤害加成提升50%"
+            attr.add_dmg_bonus(0.5, title, msg)
+
+        # 六链效果：异常效应伤害加深
+        if attr.env_abnormal_deepen:
+            title = "千咲-六链"
+            msg = "拥有虚无绞痕·终焉的目标受到异常效应伤害加深30%"
+            attr.add_dmg_deepen(0.3, title, msg)
+
+        weapon_clz = WavesWeaponRegister.find_class(21010056)
+        if weapon_clz:
+            w = weapon_clz(21010056, 90, 6, resonLevel)
+            method = getattr(w, "do_action", None)
+            if callable(method):
+                method([cast_variation], attr, isGroup)
+            
 class Char_1601(CharAbstract):
     id = 1601
     name = "桃祈"

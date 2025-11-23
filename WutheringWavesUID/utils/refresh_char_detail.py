@@ -12,7 +12,7 @@ from ..utils.error_reply import WAVES_CODE_101, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.hint import error_reply
 from ..utils.queues.const import QUEUE_SCORE_RANK
-from ..utils.queues.queues import put_item
+from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
 from ..utils.util import get_version, send_master_info
 from ..utils.waves_api import waves_api
@@ -104,7 +104,7 @@ async def send_card(
             "role_num": account_info.roleNum,
             "single_refresh": 1 if len(waves_data) == 1 else 0,
         }
-        await put_item(QUEUE_SCORE_RANK, metadata)
+        push_item(QUEUE_SCORE_RANK, metadata)
 
 
 async def save_card_info(

@@ -35,7 +35,7 @@ from ..utils.image import (
 )
 from ..utils.imagetool import draw_pic, draw_pic_with_ring
 from ..utils.queues.const import QUEUE_SLASH_RECORD
-from ..utils.queues.queues import put_item
+from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import SLASH_PATH
 from ..utils.waves_api import waves_api
 
@@ -420,4 +420,4 @@ async def upload_slash_record(
         }
     )
     # logger.info(f"上传冥海记录: {slash_item.model_dump()}")
-    await put_item(QUEUE_SLASH_RECORD, slash_item.model_dump())
+    push_item(QUEUE_SLASH_RECORD, slash_item.model_dump())

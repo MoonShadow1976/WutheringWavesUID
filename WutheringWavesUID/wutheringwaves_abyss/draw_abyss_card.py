@@ -30,7 +30,7 @@ from ..utils.hint import error_reply
 from ..utils.image import GOLD, GREY, add_footer, get_waves_bg
 from ..utils.imagetool import draw_pic, draw_pic_with_ring
 from ..utils.queues.const import QUEUE_ABYSS_RECORD
-from ..utils.queues.queues import put_item
+from ..utils.queues.queues import push_item
 from ..utils.util import get_version
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import PREFIX
@@ -364,4 +364,4 @@ async def upload_abyss_record(
         }
     )
     # logger.info(f"上传深渊记录: {abyss_item.model_dump()}")
-    await put_item(QUEUE_ABYSS_RECORD, abyss_item.model_dump())
+    push_item(QUEUE_ABYSS_RECORD, abyss_item.model_dump())

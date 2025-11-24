@@ -580,7 +580,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
                     name_match = patterns["name"].search(line_clean)
                     if name_match:
                         name = name_match.group()
-                        name = name.replace("吟槑", "吟霖").replace("鑒几", "鉴心").replace("千唉", "千咲")
+                        name = name.replace("吟槑", "吟霖").replace("鑒几", "鉴心").replace("千唉", "千咲").replace("千眹", "千咲")
                         if not re.match(r'^[\u4e00-\u9fa5]+$', name):
                             logger.warning(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
                             return False, final_result

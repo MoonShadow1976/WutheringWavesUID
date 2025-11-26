@@ -15,6 +15,8 @@ from .queues import event_handler, start_dispatcher
 
 @event_handler(QUEUE_SCORE_RANK)
 async def send_score_rank(item: Any):
+    return
+    # 不上传
     if not item:
         return
     if not isinstance(item, dict):
@@ -45,6 +47,8 @@ async def send_score_rank(item: Any):
 
 @event_handler(QUEUE_ABYSS_RECORD)
 async def send_abyss_record(item: Any):
+    return
+    # 不上传
     if not item:
         return
     if not isinstance(item, dict):
@@ -75,6 +79,8 @@ async def send_abyss_record(item: Any):
 
 @event_handler(QUEUE_SLASH_RECORD)
 async def send_slash_record(item: Any):
+    return
+    # 不上传
     if not item:
         return
     if not isinstance(item, dict):

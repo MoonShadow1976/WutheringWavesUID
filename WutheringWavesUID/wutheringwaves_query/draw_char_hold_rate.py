@@ -116,6 +116,8 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
     title_mask.paste(icon, (60, 380), icon)
 
     # title
+    if group_id:
+        group_id = f" {group_id}" if "bot" in group_id else f" 群{group_id}"
     if filter_type:
         if filter_type == "UP":
             title_text = f"#UP角色持有率{group_id}"
@@ -129,7 +131,7 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
     title = (
         f"样本数量: {data.get('total_player_count', 0)} 人"
         if group_id
-        else "国服近期活跃角色持有率"
+        else "国服近期活跃角色持有率(form loping151)"
     )
     title_mask_draw.text(
         (300, 500),

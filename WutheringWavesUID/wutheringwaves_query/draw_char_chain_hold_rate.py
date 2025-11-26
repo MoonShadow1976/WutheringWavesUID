@@ -17,7 +17,7 @@ from ..utils.fonts.waves_fonts import (
     waves_font_20,
     waves_font_24,
     waves_font_36,
-    waves_font_58,
+    waves_font_42,
 )
 from ..utils.image import (
     CHAIN_COLOR_LIST,
@@ -161,14 +161,22 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
     title_mask.paste(icon, (60, 380), icon)
     
     # title
-    title_text = f"#共鸣链持有率排行{group_id}"
-    title_mask_draw.text((300, 430), title_text, "white", waves_font_58, "lm")
+    if group_id:
+        group_id = f" {group_id}" if "bot" in group_id else f" 群{group_id}"
+    if filter_type:
+        if filter_type == "UP":
+            title_text = f"#UP角色共鸣链持有率{group_id}"
+        else:
+            title_text = f"#{filter_type}星角色共鸣链持有率{group_id}"
+    else:
+        title_text = f"#共鸣链持有率{group_id}"
+    title_mask_draw.text((300, 430), title_text, "white", waves_font_42, "lm")
     
     # count
     title = (
         f"样本数量: {data.get('total_player_count', 0)} 人 | 共 {total_items} 种共鸣链"
         if group_id
-        else f"样本来源：国服近期活跃角色 | 共 {total_items} 种共鸣链"
+        else f"国服近期活跃角色(form loping151) | 共 {total_items} 种共鸣链"
     )
     title_mask_draw.text(
         (300, 500),

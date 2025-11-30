@@ -2,7 +2,8 @@ from typing import Dict, List, Literal, Optional
 
 from pydantic import BaseModel, Field
 
-MAIN_URL = "https://wh.loping151.site"
+MAIN_URL = "https://rank.kokos.icu"
+# MAIN_URL = "https://wh.loping151.site" xw
 # MAIN_URL = "https://top.camellya.xyz" die
 # MAIN_URL = "http://127.0.0.1:9001"
 

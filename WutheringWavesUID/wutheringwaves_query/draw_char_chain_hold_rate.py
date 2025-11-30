@@ -176,7 +176,7 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
     title = (
         f"样本数量: {data.get('total_player_count', 0)} 人 | 共 {total_items} 种共鸣链"
         if group_id
-        else f"国服近期活跃角色(form loping151) | 共 {total_items} 种共鸣链"
+        else f"国服近期活跃人数: {data.get('total_player_count', 0)} | 共 {total_items} 种共鸣链"
     )
     title_mask_draw.text(
         (300, 500),

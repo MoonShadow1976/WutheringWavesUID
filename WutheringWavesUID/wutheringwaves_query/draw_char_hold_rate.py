@@ -131,7 +131,7 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
     title = (
         f"样本数量: {data.get('total_player_count', 0)} 人"
         if group_id
-        else "国服近期活跃角色持有率(form loping151)"
+        else "国服近期活跃人数: {data.get('total_player_count', 0)}"
     )
     title_mask_draw.text(
         (300, 500),

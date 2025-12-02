@@ -15,6 +15,8 @@ from gsuid_core.utils.image.image_tools import crop_center_img
 from ..utils import hint
 from ..utils.api.model import AccountBaseInfo
 from ..utils.error_reply import WAVES_CODE_102
+from ..utils.queues.const import QUEUE_GACHA_RECORD
+from ..utils.queues.queues import push_item
 from ..utils.fonts.waves_fonts import (
     waves_font_18,
     waves_font_20,
@@ -427,6 +429,9 @@ async def draw_card(uid: str, ev: Event):
         )
         nindex += 1
 
+    # 上传抽卡记录到服务器
+    await upload_gacha_to_server(uid, total_data, ev)
+
     await draw_uid_avatar(uid, ev, card_img)
 
     card_img = add_footer(card_img, 600, 20)
@@ -479,3 +484,137 @@ async def draw_uid_avatar(uid, ev, card_img):
     #
     card_polygon = await get_random_card_polygon(ev)
     card_img.alpha_composite(card_polygon, (80, 0))
+
+
+async def upload_gacha_to_server(uid: str, total_data: Dict, ev: Event):
+    """上传抽卡记录统计数据到服务器"""
+    try:
+        from ..wutheringwaves_config import WutheringWavesConfig
+        
+        # 检查是否配置了Token
+        WavesToken = WutheringWavesConfig.get_config("WavesToken").data
+        if not WavesToken:
+            return
+        
+        # 提取需要的统计数据
+        gacha_stats = extract_gacha_statistics(total_data)
+        
+        # 准备上传数据
+        upload_data = {
+            "waves_id": uid,
+            "gacha_details": json.dumps(gacha_stats, ensure_ascii=False),
+            "datetime": datetime.now().isoformat(),
+        }
+        
+        # 打印上传数据
+        print(f"[抽卡记录上传] upload_data: {upload_data}")
+        
+        # 添加到上传队列
+        push_item(QUEUE_GACHA_RECORD, upload_data)
+        
+    except Exception as e:
+        # 记录错误但不影响主要功能
+        print(f"上传抽卡记录时出错: {e}")
+        pass
+
+
+def extract_gacha_statistics(total_data: Dict) -> Dict:
+    """从total_data中提取需要的统计数据"""
+    stats = {}
+    
+    # 角色精准调谐
+    if "角色精准调谐" in total_data:
+        char_data = total_data["角色精准调谐"]
+        rank_s_list = char_data.get("rank_s_list", [])
+        stats["character_event"] = {
+            "total_pulls": char_data.get("total", 0),
+            "avg_gold": char_data.get("avg") if char_data.get("avg") != "-" else None,
+            "avg_up": char_data.get("avg_up") if char_data.get("avg_up") != "-" else None,
+            "max_consecutive_up": calculate_max_consecutive_up(rank_s_list),
+            "max_consecutive_non_up": calculate_max_consecutive_non_up(rank_s_list),
+        }
+    
+    # 武器精准调谐
+    if "武器精准调谐" in total_data:
+        weapon_data = total_data["武器精准调谐"]
+        stats["weapon_event"] = {
+            "total_pulls": weapon_data.get("total", 0),
+            "avg_gold": weapon_data.get("avg") if weapon_data.get("avg") != "-" else None,
+        }
+    
+    # 角色调谐（常驻池）
+    if "角色调谐（常驻池）" in total_data:
+        char_normal_data = total_data["角色调谐（常驻池）"]
+        stats["character_standard"] = {
+            "total_pulls": char_normal_data.get("total", 0),
+            "avg_gold": char_normal_data.get("avg") if char_normal_data.get("avg") != "-" else None,
+        }
+    
+    # 武器调谐（常驻池）
+    if "武器调谐（常驻池）" in total_data:
+        weapon_normal_data = total_data["武器调谐（常驻池）"]
+        stats["weapon_standard"] = {
+            "total_pulls": weapon_normal_data.get("total", 0),
+            "avg_gold": weapon_normal_data.get("avg") if weapon_normal_data.get("avg") != "-" else None,
+        }
+    
+    return stats
+
+
+def calculate_max_consecutive_up(rank_s_list: List[Dict]) -> int:
+    """
+    计算最多连续UP数（只统计五星角色）
+    
+    例如: up,up,up,no,up,no,up,no,up,up,up
+    - 最多连续UP: 3
+    """
+    if not rank_s_list:
+        return 0
+    
+    max_consecutive = 0
+    current_consecutive = 0
+    
+    for item in rank_s_list:
+        # 只统计五星角色
+        if item.get("resourceType") == "角色" and item.get("qualityLevel") == 5:
+            if item.get("is_up", False):
+                current_consecutive += 1
+                max_consecutive = max(max_consecutive, current_consecutive)
+            else:
+                current_consecutive = 0
+    
+    return max_consecutive
+
+
+def calculate_max_consecutive_non_up(rank_s_list: List[Dict]) -> int:
+    """
+    计算最多连续非UP次数，遇到连续UP（2个或以上）才中断（只统计五星角色）
+    
+    单个UP不中断计数，只有连续UP（2个或以上）才重置。
+    """
+    if not rank_s_list:
+        return 0
+    
+    max_non_up = 0
+    current_non_up = 0
+    prev_is_up = False  # 前一个是否是UP
+    
+    for item in rank_s_list:
+        # 只统计五星角色
+        if item.get("resourceType") == "角色" and item.get("qualityLevel") == 5:
+            if item.get("is_up", False):
+                # 当前是UP
+                if prev_is_up:
+                    # 前一个也是UP，形成连续UP，中断并结算
+                    max_non_up = max(max_non_up, current_non_up)
+                    current_non_up = 0
+                prev_is_up = True
+            else:
+                # 当前是非UP
+                current_non_up += 1
+                prev_is_up = False
+    
+    # 最后如果还有未结算的，也要计入
+    max_non_up = max(max_non_up, current_non_up)
+    
+    return max_non_up

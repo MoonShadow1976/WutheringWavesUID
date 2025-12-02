@@ -86,6 +86,21 @@
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
+      },{
+        "name": "签到",
+        "desc": "签到",
+        "eg": "签到",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "开启自动签到",
+        "desc": "开启自动签到",
+        "eg": "开启自动签到",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
       },
       {
         "name": "角色养成",
@@ -340,17 +355,17 @@
         "need_admin": false
       },
       {
-        "name": "全服评分排行",
-        "desc": "全服评分排行",
-        "eg": "长离评分总排行1",
+        "name": "抽卡总排行",
+        "desc": "抽卡总排行",
+        "eg": "抽卡总排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
       },
       {
-        "name": "练度总排行",
-        "desc": "练度总排行",
-        "eg": "练度总排行",
+        "name": "武器抽卡总排行",
+        "desc": "武器抽卡总排行",
+        "eg": "武器抽卡总排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -372,6 +387,30 @@
         "need_admin": false
       },
       {
+        "name": "全服评分排行",
+        "desc": "全服评分排行",
+        "eg": "长离评分总排行1",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "连金榜",
+        "desc": "连金榜",
+        "eg": "连金榜",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "连歪榜",
+        "desc": "连歪榜",
+        "eg": "连歪榜",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
         "name": "练度群排行",
         "desc": "练度群排行",
         "eg": "练度排行",
@@ -383,6 +422,14 @@
         "name": "练度bot排行",
         "desc": "练度bot排行",
         "eg": "练度bot排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "练度总排行",
+        "desc": "练度总排行",
+        "eg": "练度总排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

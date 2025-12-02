@@ -19,6 +19,8 @@ GET_TOWER_APPEAR_RATE = f"{MAIN_URL}/api/waves/abyss/appear_rate"
 UPLOAD_SLASH_RECORD_URL = f"{MAIN_URL}/top/waves/slash/upload"
 GET_SLASH_APPEAR_RATE = f"{MAIN_URL}/api/waves/slash/appear_rate"
 GET_SLASH_RANK_URL = f"{MAIN_URL}/top/waves/slash/rank"
+UPLOAD_GACHA_RECORD_URL = f"{MAIN_URL}/top/waves/gacha/upload"
+GET_GACHA_RANK_URL = f"{MAIN_URL}/top/waves/gacha/rank"
 
 ABYSS_TYPE = Literal["l4", "m4", "r4", "a"]
 
@@ -257,3 +259,42 @@ class SlashRankRes(BaseModel):
     code: int
     message: str
     data: Optional[SlashRankData] = None
+
+
+# ------------------------------------------------------------
+# 抽卡排行
+# ------------------------------------------------------------
+
+
+class GachaRankItem(BaseModel):
+    page: int
+    page_num: int
+    waves_id: str
+    version: str
+    rank_type: str  # character_event, weapon_event, lucky_rank, unlucky_rank
+
+
+class GachaRankDetail(BaseModel):
+    rank: int
+    waves_id: str
+    user_id: str
+    kuro_name: str
+    alias_name: str
+    value: float  # avg_up or avg_gold (排序依据)
+    total_pulls: int  # 总抽数
+    avg_gold: float  # 平均出金
+    avg_up: float  # 平均UP
+    max_consecutive_up: int  # 最多连续UP次数
+    max_consecutive_non_up: int  # 最多连续非UP次数
+
+
+class GachaRankData(BaseModel):
+    rank_list: List[GachaRankDetail]
+    total_page: int
+    user_rank: Optional[GachaRankDetail] = None  # 当前用户的排名信息（如果不在前20）
+
+
+class GachaRankRes(BaseModel):
+    code: int
+    message: str
+    data: Optional[GachaRankData] = None

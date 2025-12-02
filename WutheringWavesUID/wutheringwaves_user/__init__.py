@@ -154,6 +154,10 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
             return await bot.send(
                 f"该命令需要带上正确的uid!\n{PREFIX}绑定uid\n", at_sender
             )
+        if uid == "999999999":
+            return await bot.send(
+                f"[鸣潮] 特征码[{uid}]为极限面板特征码，无法绑定！\n", at_sender
+            )
         uid_list = await WavesBind.get_uid_list_by_game(qid, ev.bot_id)
         cookie_uid_list = await WavesUser.select_user_cookie_uids(qid)
         if uid_list and cookie_uid_list:

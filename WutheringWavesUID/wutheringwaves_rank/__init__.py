@@ -10,11 +10,13 @@ from .draw_all_rank_card import draw_all_rank_card
 from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_local_total_rank_card import draw_local_total_rank
 from .draw_total_rank_card import draw_total_rank
+from .draw_gacha_server_rank import draw_gacha_server_rank_img
 
 sv_waves_rank_list = SV("ww角色排行")
 sv_waves_rank_all_list = SV("ww角色总排行", priority=1)
 sv_waves_rank_bot_list = SV("ww角色bot排行", priority=1)
 sv_waves_rank_total_list = SV("ww练度总排行", priority=0)
+sv_waves_gacha_server_rank = SV("ww抽卡全服排行", priority=0)
 
 
 @sv_waves_rank_list.on_regex("^[\u4e00-\u9fa5]+(?:排行|排名)$", block=True)
@@ -132,3 +134,22 @@ async def send_total_rank_card(bot: Bot, ev: Event):
     pages = 1
     im = await draw_total_rank(bot, ev, pages)
     await bot.send(im)
+
+
+@sv_waves_gacha_server_rank.on_fullmatch(
+    ("抽卡总排行", "武器抽卡总排行", "连金榜", "连歪榜"), block=True
+)
+async def send_gacha_server_rank_card(bot: Bot, ev: Event):
+    """抽卡全服排行榜（基于服务器API）"""
+    # 使用 raw_text 去除前缀后获取命令
+    # 例如: "ww连金榜" -> "连金榜"
+    from ..wutheringwaves_config import PREFIX
+    rank_type = ev.raw_text.replace(PREFIX, "").strip()
+    
+    im = await draw_gacha_server_rank_img(bot, ev, rank_type)
+    
+    if isinstance(im, str):
+        at_sender = True if ev.group_id else False
+        await bot.send(im, at_sender)
+    elif isinstance(im, bytes):
+        await bot.send(im)

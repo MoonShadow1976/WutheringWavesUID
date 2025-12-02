@@ -1,10 +1,8 @@
-import os
 import time
 import asyncio
 import json
 from pathlib import Path
-from typing import Dict, Optional, Tuple, List
-from urllib.parse import urljoin
+from typing import Dict, Optional, Tuple
 
 import httpx
 from gsuid_core.logger import logger
@@ -17,10 +15,14 @@ NOW_SPEED_TEST = False
 
 # GitHub Raw 镜像源列表 (可扩展)
 GITHUB_MIRRORS = [
-    ("[GitHub Raw]", "https://raw.githubusercontent.com"),
-    ("[GitHub Mirror CN]", "https://raw.gitmirror.com"),
-    ("[GitHub Mirror Fast]", "https://ghproxy.com/https://raw.githubusercontent.com"),
-    ("[GitHub Mirror]", "https://raw.fastgit.org"),
+    # ("[GitHub Raw]", "https://raw.githubusercontent.com"),
+    # ("[GitHub Mirror CN]", "https://raw.gitmirror.com"),
+    ("[GitHub Mirror CN-hub]", "https://hub.gitmirror.com/raw.githubusercontent.com"),
+    ("[GitHub Mirror j cdn]", "https://cdn.jsdelivr.net/gh"),
+    ("[GitHub Mirror j fastly]", "https://fastly.jsdelivr.net/gh"),
+    ("[GitHub Mirror j gcore]", "https://gcore.jsdelivr.net/gh"),
+    ("[GitHub Mirror fastgit]", "https://raw.fastgit.org"),
+    ("[GitHub Mirror ghproxy]", "https://ghproxy.com/https://raw.githubusercontent.com"),
 ]
 
 # 仓库信息 (可配置)
@@ -58,14 +60,31 @@ async def test_mirror_speed(tag: str, base_url: str) -> Tuple[str, str, float]:
 
 
 async def check_speed():
-    """测速选择最快的GitHub镜像源 (保持原有接口)"""
+    """测速选择最快的GitHub镜像源 (优先使用GitHub Raw，如果可用)"""
     global global_tag, global_url, NOW_SPEED_TEST
     
     if (not global_tag or not global_url) and not NOW_SPEED_TEST:
         NOW_SPEED_TEST = True
         logger.info('[WWCore资源下载]测速中...')
         
-        # 并发测试所有镜像源
+        # 第一步：优先测试GitHub Raw（原站）
+        raw_tag = "[GitHub Raw]"
+        raw_url = "https://raw.githubusercontent.com"
+        
+        logger.info(f'🔍 优先测试原站: {raw_tag}')
+        raw_tag_result, raw_url_result, raw_time = await test_mirror_speed(raw_tag, raw_url)
+        
+        # 如果GitHub Raw可以访问且速度快于5秒，直接使用
+        if raw_time < 5.0:
+            logger.info('✅ GitHub Raw可用，直接使用原站')
+            global_tag = raw_tag_result
+            global_url = f"{raw_url_result.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
+            NOW_SPEED_TEST = False
+            logger.info(f"🚀 使用资源站: {global_tag} {global_url}")
+            return global_tag, global_url
+        
+        # 第二步：如果GitHub Raw不可用，测试所有镜像源
+        logger.info('❌ GitHub Raw不可用，开始测试镜像源...')
         tasks = []
         for tag, base_url in GITHUB_MIRRORS:
             tasks.append(asyncio.create_task(test_mirror_speed(tag, base_url)))
@@ -89,12 +108,12 @@ async def check_speed():
         if fastest_url:
             global_url = f"{fastest_url.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
             global_tag = fastest_tag
-            logger.info(f"🚀 最快资源站: {global_tag} {global_url}")
+            logger.info(f"🚀 最快镜像源: {global_tag} {global_url}")
         else:
-            # 如果所有镜像都失败，使用主站作为后备
+            # 如果所有镜像都失败，仍然使用原站作为后备（即使可能不可用）
             global_url = f"https://raw.githubusercontent.com/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
             global_tag = "[GitHub Raw]"
-            logger.warning(f"⚠ 所有镜像测速失败，使用主站: {global_tag}")
+            logger.warning(f"⚠️ 所有镜像测速失败，使用原站（可能不可用）: {global_tag}")
         
         NOW_SPEED_TEST = False
         return global_tag, global_url
@@ -127,9 +146,7 @@ async def download_with_json_index(
     plugin_name: str
 ):
     """使用JSON索引下载单个目录的资源"""
-    
-    # 从endpoint提取目录名（用于查找JSON索引）
-    # endpoint格式: "resource/avatar" -> 目录名: "avatar"
+    # 从endpoint提取目录名
     dir_name = endpoint.split('/')[-1] if '/' in endpoint else endpoint
     
     # 获取目录的JSON索引
@@ -137,7 +154,7 @@ async def download_with_json_index(
     dir_json = await fetch_json_index(client, base_url, dir_json_path)
     
     if not dir_json:
-        logger.warning(f'{tag} {endpoint} 无法获取JSON索引: {dir_json_path}')
+        logger.warning(f'{plugin_name} {tag} {endpoint} 无法获取JSON索引: {dir_json_path}')
         return
     
     # 统计信息
@@ -145,31 +162,27 @@ async def download_with_json_index(
     total_files = len(files)
     exist_files = 0
     need_download_files = 0
-    logger.info(f'{tag} 目录 {endpoint} 中有 {total_files} 个文件待检查')
+    logger.debug(f'{plugin_name} {tag} 目录 {endpoint} 中有 {total_files} 个文件待检查')
     
     # 准备下载任务
     download_tasks = []
+    size_checked = 0
+    batch_size_limit = 1500000  # 1.5MB 批次限制
+    batch_num = 0  # 批次编号，用于日志
     
-    for file_info in files:
-        # file_info中的path是相对于data/resource/的完整路径
-        # 例如: "avatar/1001.png" 或 "avatar/special/1003.png"
+    for idx, file_info in enumerate(files, 1):
         file_relative_path = file_info["path"]
         remote_size = file_info.get("size", 0)
         
-        # 从完整的相对路径中移除目录名前缀
-        # 例如: "avatar/1001.png" -> 去掉 "avatar/" -> "1001.png"
-        # 例如: "avatar/special/1003.png" -> 去掉 "avatar/" -> "special/1003.png"
+        # 构建本地路径
         if file_relative_path.startswith(dir_name + "/"):
-            # 移除目录名前缀和后面的斜杠
             local_relative_path = file_relative_path[len(dir_name)+1:]
         else:
-            # 如果不以目录名开头，可能是其他情况，使用文件名
             local_relative_path = file_info["name"]
         
-        # 构建本地完整路径
         local_file_path = local_path / local_relative_path
         
-        # 检查文件是否存在且大小匹配
+        # 检查文件是否存在且大小一致
         file_exists = local_file_path.exists()
         
         if file_exists:
@@ -177,22 +190,19 @@ async def download_with_json_index(
             local_size = local_file_path.stat().st_size
             
             if local_size == remote_size:
-                # 文件存在且大小一致，跳过下载
-                continue
+                logger.debug(f'{tag}✅ 文件已存在: {file_relative_path}')
+                continue  # 文件存在且大小一致，跳过下载
             else:
-                # 文件存在但大小不一致，需要重新下载
-                logger.debug(f'{tag}🔄 文件大小不一致: {file_relative_path} (本地: {local_size}, 远程: {remote_size})')
-                need_download_files += 1
+                logger.info(f'{plugin_name} {tag}🔄 文件大小不一致: {file_relative_path} (本地: {local_size}, 远程: {remote_size})')
         else:
-            # 文件不存在，需要下载
-            need_download_files += 1
             # 确保目录存在
             local_file_path.parent.mkdir(parents=True, exist_ok=True)
         
+        need_download_files += 1
+        size_checked += remote_size
+        
         # 构建下载URL
         file_url = f"{base_url.rstrip('/')}/data/resource/{file_relative_path}"
-        
-        logger.info(f'{tag} {plugin_name} 开始下载 {file_relative_path}')
         
         # 创建下载任务
         task = asyncio.create_task(
@@ -200,21 +210,19 @@ async def download_with_json_index(
         )
         download_tasks.append(task)
         
-        # 批次控制
-        if len(download_tasks) >= 5:  # 每批5个任务
-            await asyncio.gather(*download_tasks)
+        # 批次控制：达到限制或处理完最后一个文件时
+        if size_checked >= batch_size_limit or idx == total_files:
+            batch_num += 1
+            
+            if len(download_tasks) > 0:
+                logger.debug(f'{tag} 开始第 {batch_num} 批下载，共 {len(download_tasks)} 个文件')
+                await asyncio.gather(*download_tasks)
+            
+            # 重置批次
             download_tasks.clear()
+            size_checked = 0
     
-    # 执行剩余下载任务
-    if download_tasks:
-        await asyncio.gather(*download_tasks)
-    
-    # 输出统计信息
-    logger.info(f'{tag} 目录 {endpoint} 检查完成:')
-    logger.info(f'  总数: {total_files}, 已存在: {exist_files}, 需下载: {need_download_files}')
-    
-    if need_download_files == 0:
-        logger.success(f'{tag} 目录 {endpoint} 所有文件已是最新!')
+    logger.info(f'{tag} 目录 {endpoint} 检查完成-> 总数: {total_files}, 本地已存在: {exist_files}, 需下载: {need_download_files}')
 
 
 async def download_all_file(
@@ -234,14 +242,14 @@ async def download_all_file(
             logger.error("❌ 无法获取可用的资源站")
             return
     
-    logger.info(f'🔗 使用资源站: {TAG}')
+    logger.info(f'🔗 {plugin_name} 使用资源站: {TAG}')
     
     # 2. 获取顶层资源索引，验证目录存在
     async with httpx.AsyncClient(timeout=httpx.Timeout(200.0)) as client:
         # 获取顶层索引
         resource_json = await fetch_json_index(client, BASE_URL, INDEX_PATHS['resource'])
         if not resource_json:
-            logger.error('❌ 无法获取顶层资源索引，可能索引文件未生成')
+            logger.error(f'❌ {plugin_name} 无法获取顶层资源索引，可能索引文件未生成')
             return
         
         available_dirs = resource_json.get('directories', [])
@@ -254,7 +262,7 @@ async def download_all_file(
             
             # 检查目录是否在索引中
             if dir_name not in available_dirs:
-                logger.warning(f'⚠ 目录 {dir_name} 不在资源索引中，跳过')
+                logger.warning(f'⚠ 目录 {dir_name} 不在 {plugin_name} 资源索引中，跳过')
                 continue
             
             # 确保本地目录存在
@@ -270,6 +278,6 @@ async def download_all_file(
         if processed_count == len(EPATH_MAP):
             logger.success(f'🍱 [资源检查] 插件 {plugin_name} 所有资源已是最新!')
         elif processed_count > 0:
-            logger.info(f'📦 [资源检查] 插件 {plugin_name} 已完成 {processed_count}/{len(EPATH_MAP)} 个目录')
+            logger.success(f'📦 [资源检查] 插件 {plugin_name} 已完成 {processed_count}/{len(EPATH_MAP)} 个目录')
         else:
             logger.warning(f'⚠ [资源检查] 插件 {plugin_name} 未找到任何匹配的资源目录')

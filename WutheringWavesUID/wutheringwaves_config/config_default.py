@@ -26,15 +26,17 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "公告推送总开关",
         True,
     ),
-    "CrazyNotice": GsBoolConfig("催命模式", "开启后当达到推送阈值将会一直推送", False),
     "StaminaPush": GsBoolConfig(
         "体力推送全局开关", "开启后当体力达到推送阈值将会推送", False
     ),
     "StaminaPushInterval": GsIntConfig(
-        "体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）", 30, 60
+        "体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）,不会请求更新推送时间", 30, 60
+    ),
+    "CrazyNotice": GsBoolConfig(
+        "催命模式", "开启后当达到推送阈值将会一直推送", False
     ),
     "StaminaRemindInterval": GsIntConfig(
-        "体力提醒超时延长间隔（分钟）", "当前提醒时间之后将延长所填时间再提醒一次", 60, 1440
+        "体力提醒超时延长间隔（分钟）", "当前提醒时间之后将延长所填时间再提醒一次,会请求更新推送时间", 60, 1440
     ),
     "WavesRankUseTokenGroup": GsListStrConfig(
         "有token才能进排行，群管理可设置",
@@ -109,7 +111,7 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
     "AnnMinuteCheck": GsIntConfig(
         "公告推送时间检测（单位min）", "公告推送时间检测（单位min）", 10, 60
     ),
-    "RefreshInterval": GsIntConfig(
+    "RefreshIntervalOne": GsIntConfig(
         "刷新单角色面板间隔，重启生效（单位秒）",
         "刷新单角色面板间隔，重启生效（单位秒）",
         0,
@@ -118,8 +120,8 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
     "RefreshIntervalAll": GsIntConfig(
         "刷新面板间隔，重启生效（单位秒）",
         "刷新面板间隔，重启生效（单位秒）",
-        0,
-        600,
+        300,
+        3600,
     ),
     "RefreshIntervalNotify": GsStrConfig(
         "刷新面板间隔通知文案",

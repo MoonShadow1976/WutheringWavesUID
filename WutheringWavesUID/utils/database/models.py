@@ -14,7 +14,6 @@ from gsuid_core.utils.database.base_models import (
 )
 from gsuid_core.utils.database.startup import exec_list
 from gsuid_core.webconsole.mount_app import GsAdminModel, PageSchema, site
-from gsuid_core.logger import logger
 
 exec_list.extend(
     [

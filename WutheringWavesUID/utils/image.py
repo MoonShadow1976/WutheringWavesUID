@@ -235,6 +235,31 @@ def get_crop_waves_bg(w: int, h: int, bg: str = "bg") -> Image.Image:
     return crop_center_img(cropped_image, w, h)
 
 
+async def sync_non_onebot_user_avatar(ev: Event):
+    """从事件中提取头像 avatar_hash 并自动更新数据库中的 hash 映射"""
+    avatar_hash = "error"
+    if ev.bot_id == "discord":
+        avatar_url = ev.sender.get("avatar")
+        if not avatar_url:
+            logger.error("Discord 事件中缺少 avatar 字段")
+            return
+        parts = avatar_url.split("/")
+        index = parts.index(str(ev.user_id))
+        avatar_hash = parts[index + 1]
+    elif ev.bot_id == "qqgroup":
+        avatar_hash = ev.bot_self_id
+
+    data = await WavesUserAvatar.select_data(ev.user_id, ev.bot_id)
+    old_avatar_hash = data.avatar_hash if data else ""
+
+    if avatar_hash != old_avatar_hash:
+        await WavesUserAvatar.insert_data(
+            user_id=ev.user_id, 
+            bot_id=ev.bot_id, 
+            avatar_hash=avatar_hash
+        )
+
+
 async def get_qq_avatar(
     qid: Optional[Union[int, str]] = None,
     avatar_url: Optional[str] = None,
@@ -246,6 +271,7 @@ async def get_qq_avatar(
         avatar_url = f"https://q1.qlogo.cn/g?b=qq&nk=3399214199&s={size}"
     char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
     return char_pic
+
 
 async def get_discord_avatar(
     qid: Optional[Union[int, str]] = None,
@@ -279,12 +305,14 @@ async def get_qqgroup_avatar(
     char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
     return char_pic
 
+
 # 获取对应bot_id的头像获取函数
 AVATAR_GETTERS = {
     "onebot": get_qq_avatar,
     "discord": get_discord_avatar,
     "qqgroup": get_qqgroup_avatar
 }
+
 
 async def get_event_avatar(
     ev: Event,

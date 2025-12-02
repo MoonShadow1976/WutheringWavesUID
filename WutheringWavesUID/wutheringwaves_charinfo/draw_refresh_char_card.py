@@ -35,6 +35,7 @@ from ..utils.image import (
     get_random_share_bg_path,
     get_square_avatar,
     get_star_bg,
+    sync_non_onebot_user_avatar,
 )
 from ..utils.imagetool import draw_pic_with_ring
 from ..utils.refresh_char_detail import refresh_char, refresh_char_from_pcap
@@ -57,7 +58,7 @@ refresh_role_map = {
     "share_14.webp": (1000, 180, 2560, 1320),
 }
 
-refresh_interval: int = WutheringWavesConfig.get_config("RefreshInterval").data
+refresh_interval: int = WutheringWavesConfig.get_config("RefreshIntervalOne").data
 refresh_intervalAll: int = WutheringWavesConfig.get_config("RefreshIntervalAll").data
 
 if refresh_interval > 0:
@@ -176,6 +177,9 @@ async def draw_refresh_char_detail_img(
     buttons: List[WavesButton],
     refresh_type: Union[str, List[str]] = "all",
 ):
+    if ev.bot_id == "discord" or ev.bot_id == "qqgroup":
+        await sync_non_onebot_user_avatar(ev)
+
     # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
     from ..wutheringwaves_pcap import load_pcap_data
     pcap_data = await load_pcap_data(uid)

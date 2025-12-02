@@ -9,7 +9,8 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.button import WavesButton
-from ..utils.database.models import WavesBind, WavesUser, WavesUserAvatar
+from ..utils.image import sync_non_onebot_user_avatar
+from ..utils.database.models import WavesBind, WavesUser
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from ..wutheringwaves_user.login_succ import login_success_msg
 from .deal import add_cookie, delete_cookie, get_cookie
@@ -229,31 +230,6 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
                 -1: f"[鸣潮] 该特征码[{uid}]不在已绑定列表中！\n",
             },
             at_sender=at_sender,
-        )
-
-
-async def sync_non_onebot_user_avatar(ev: Event):
-    """从事件中提取头像 avatar_hash 并自动更新数据库中的 hash 映射"""
-    avatar_hash = "error"
-    if ev.bot_id == "discord":
-        avatar_url = ev.sender.get("avatar")
-        if not avatar_url:
-            logger.error("Discord 事件中缺少 avatar 字段")
-            return
-        parts = avatar_url.split("/")
-        index = parts.index(str(ev.user_id))
-        avatar_hash = parts[index + 1]
-    elif ev.bot_id == "qqgroup":
-        avatar_hash = ev.bot_self_id
-
-    data = await WavesUserAvatar.select_data(ev.user_id, ev.bot_id)
-    old_avatar_hash = data.avatar_hash if data else ""
-
-    if avatar_hash != old_avatar_hash:
-        await WavesUserAvatar.insert_data(
-            user_id=ev.user_id, 
-            bot_id=ev.bot_id, 
-            avatar_hash=avatar_hash
         )
 
 

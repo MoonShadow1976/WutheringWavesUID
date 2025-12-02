@@ -33,7 +33,7 @@ waves_char_card_list = SV("waves面板图列表", priority=5, pm=1)
 waves_delete_char_card = SV("waves删除面板图", priority=5, pm=1)
 waves_delete_all_card = SV("waves删除全部面板图", priority=5, pm=1)
 waves_compress_card = SV("waves面板图压缩", priority=5, pm=1)
-waves_delete_char_detail = SV("waves删除角色面板", priority=5)
+waves_delete_char_detail = SV("waves删除角色数据", priority=5)
 
 
 @waves_delete_char_detail.on_regex(
@@ -59,7 +59,7 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
 
     from .delete_char_card import delete_char_detail
 
-    if not char:
+    if not char or "全部" in char or "所有" in char:
         msg = await delete_char_detail(uid)
         return await bot.send(msg, at_sender)
 
@@ -75,9 +75,6 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
 
     msg = await delete_char_detail(uid, delete_type)
     return await bot.send(msg, at_sender)
-
-
-    
 
 
 @waves_new_get_char_info.on_fullmatch(

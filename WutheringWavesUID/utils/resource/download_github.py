@@ -15,7 +15,7 @@ NOW_SPEED_TEST = False
 
 # GitHub Raw 镜像源列表 (可扩展)
 GITHUB_MIRRORS = [
-    # ("[GitHub Raw]", "https://raw.githubusercontent.com"),
+    ("[GitHub Raw]", "https://raw.githubusercontent.com"),  # 包含直连
     # ("[GitHub Mirror CN]", "https://raw.gitmirror.com"),
     ("[GitHub Mirror CN-hub]", "https://hub.gitmirror.com/raw.githubusercontent.com"),
     ("[GitHub Mirror j cdn]", "https://cdn.jsdelivr.net/gh"),
@@ -37,10 +37,17 @@ INDEX_PATHS = {
 }
 
 
-async def test_mirror_speed(tag: str, base_url: str) -> Tuple[str, str, float]:
-    """测试单个GitHub镜像源速度"""
-    test_file = f"{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}/{INDEX_PATHS['resource']}"
-    url = f"{base_url.rstrip('/')}/{test_file}"
+def mirror_head_to_access_url(url: str) -> str:
+    """将镜像源URL转换为访问资源的URL格式"""
+    if 'jsdelivr.net' in url:
+        return f"{url.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}@{GITHUB_BRANCH}"
+    else:
+        return f"{url.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
+
+
+async def test_mirror_speed(tag: str, base_url: str) -> Tuple[str, str, float, Optional[Dict]]:
+    """测试单个GitHub镜像源速度，并尝试获取resource.json"""
+    url = mirror_head_to_access_url(base_url) + f"/{INDEX_PATHS['resource']}"
     
     async with httpx.AsyncClient() as client:
         try:
@@ -50,70 +57,135 @@ async def test_mirror_speed(tag: str, base_url: str) -> Tuple[str, str, float]:
             
             if response.status_code == 200:
                 logger.debug(f'⌛ [测速] {tag} {base_url} 延时: {elapsed_time:.2f}s')
-                return tag, base_url, elapsed_time
+                # 尝试解析JSON获取last_updated
+                try:
+                    data = json.loads(response.text)
+                    if "last_updated" in data:
+                        return tag, base_url, elapsed_time, data
+                    else:
+                        logger.warning(f'⚠️ {tag} {base_url} JSON格式错误: 缺少last_updated')
+                        return tag, base_url, elapsed_time, None
+                except json.JSONDecodeError:
+                    logger.warning(f'⚠️ {tag} {base_url} JSON解析失败')
+                    return tag, base_url, elapsed_time, None
             else:
-                logger.info(f'⚠ {tag} {base_url} 测试文件状态码: {response.status_code}')
+                logger.warning(f'⚠️ {tag} {base_url} 测试文件状态码: {response.status_code}')
         except Exception as e:
-            logger.info(f'⚠ {tag} {base_url} 连接错误: {str(e)[:50]}...')
+            logger.warning(f'⚠️ {tag} {base_url} 连接错误: {str(e)[:50]}...')
     
-    return tag, base_url, float('inf')
+    return tag, base_url, float('inf'), None
 
 
 async def check_speed():
-    """测速选择最快的GitHub镜像源 (优先使用GitHub Raw，如果可用)"""
+    """测速选择最快的GitHub镜像源，比较资源新鲜度"""
     global global_tag, global_url, NOW_SPEED_TEST
     
     if (not global_tag or not global_url) and not NOW_SPEED_TEST:
         NOW_SPEED_TEST = True
-        logger.info('[WWCore资源下载]测速中...')
+        logger.info('[WW资源下载]测速中...')
         
-        # 第一步：优先测试GitHub Raw（原站）
-        raw_tag = "[GitHub Raw]"
-        raw_url = "https://raw.githubusercontent.com"
-        
-        logger.info(f'🔍 优先测试原站: {raw_tag}')
-        raw_tag_result, raw_url_result, raw_time = await test_mirror_speed(raw_tag, raw_url)
-        
-        # 如果GitHub Raw可以访问且速度快于5秒，直接使用
-        if raw_time < 5.0:
-            logger.info('✅ GitHub Raw可用，直接使用原站')
-            global_tag = raw_tag_result
-            global_url = f"{raw_url_result.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
-            NOW_SPEED_TEST = False
-            logger.info(f"🚀 使用资源站: {global_tag} {global_url}")
-            return global_tag, global_url
-        
-        # 第二步：如果GitHub Raw不可用，测试所有镜像源
-        logger.info('❌ GitHub Raw不可用，开始测试镜像源...')
+        # 第一步：测试所有源（包括直连和镜像）
         tasks = []
         for tag, base_url in GITHUB_MIRRORS:
             tasks.append(asyncio.create_task(test_mirror_speed(tag, base_url)))
         
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
-        fastest_tag = ''
-        fastest_url = ''
-        fastest_time = float('inf')
+        # 收集可用的源
+        raw_source = None  # 直连源
+        mirror_sources = []  # 镜像源
         
         for result in results:
             if isinstance(result, (Exception, BaseException)):
                 continue
-            tag, base_url, elapsed = result
-            if elapsed < fastest_time:
-                fastest_time = elapsed
-                fastest_tag = tag
-                fastest_url = base_url
+            tag, base_url, elapsed, json_data = result
+            
+            if elapsed < float('inf'):  # 可用的源
+                source_info = {
+                    'tag': tag,
+                    'url': base_url.rstrip('/'),
+                    'time': elapsed,
+                    'json': json_data
+                }
+                
+                # 分类
+                if tag == "[GitHub Raw]":
+                    raw_source = source_info
+                else:
+                    mirror_sources.append(source_info)
         
-        # 构建完整的资源站URL
-        if fastest_url:
-            global_url = f"{fastest_url.rstrip('/')}/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
-            global_tag = fastest_tag
-            logger.info(f"🚀 最快镜像源: {global_tag} {global_url}")
+        # 第二步：决策逻辑
+        selected_source = None
+        
+        if not raw_source:
+            # 情况1: 直连不可用 -> 使用最快镜像
+            logger.info('❌ GitHub Raw不可用，使用最快镜像源')
+            if mirror_sources:
+                # 按速度排序
+                mirror_sources.sort(key=lambda x: x['time'])
+                selected_source = mirror_sources[0]
         else:
-            # 如果所有镜像都失败，仍然使用原站作为后备（即使可能不可用）
-            global_url = f"https://raw.githubusercontent.com/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/{GITHUB_BRANCH}"
+            # 情况2: 直连可用
+            logger.info('✅ GitHub Raw可用，开始智能选择...')
+            
+            # 2.1 找出最快镜像源
+            fastest_mirror = None
+            if mirror_sources:
+                mirror_sources.sort(key=lambda x: x['time'])
+                fastest_mirror = mirror_sources[0]
+            
+            if not fastest_mirror:
+                # 没有可用镜像，使用直连
+                logger.info('ℹ️ 没有可用镜像源，使用直连源')
+                global_tag = raw_source['tag']
+                global_url = mirror_head_to_access_url(raw_source['url'])
+                NOW_SPEED_TEST = False
+                return global_tag, global_url
+
+            logger.info(f'🔍 最快镜像源: {fastest_mirror["tag"]} 延时: {fastest_mirror["time"]:.2f}s')
+            
+            # 2.2 根据JSON获取情况决策
+            has_raw_json = raw_source['json'] is not None
+            has_mirror_json = fastest_mirror['json'] is not None
+            
+            if not has_raw_json and not has_mirror_json:
+                # 双方都获取失败，使用直连
+                logger.warning('⚠️ 双方JSON获取失败，使用直连源')
+                selected_source = raw_source
+            elif not has_raw_json:
+                # 直连JSON获取失败，使用镜像
+                logger.info('📥 直连JSON获取失败，使用镜像源')
+                selected_source = fastest_mirror
+            elif not has_mirror_json:
+                # 镜像JSON获取失败，使用直连
+                logger.info('📥 镜像JSON获取失败，使用直连源')
+                selected_source = raw_source
+            else:
+                # 双方都有JSON，比较last_updated
+                raw_updated = raw_source['json'].get('last_updated', '')
+                mirror_updated = fastest_mirror['json'].get('last_updated', '')
+                
+                logger.debug(f'📅 直连更新日期: {raw_updated} 镜像更新日期: {mirror_updated}')
+                
+                if mirror_updated >= raw_updated:
+                    # 镜像站是最新或一样新 -> 使用镜像站
+                    logger.info('🔄 镜像站资源已同步或更新，使用镜像站')
+                    selected_source = fastest_mirror
+                else:
+                    # 镜像站落后 -> 使用直连
+                    logger.info('⚡ 镜像站资源落后，使用直连源')
+                    selected_source = raw_source
+        
+        # 第三步：设置全局变量
+        if selected_source:
+            global_url = mirror_head_to_access_url(selected_source['url'])
+            global_tag = selected_source['tag']
+            logger.info(f"🚀 最终选择: {global_tag} {global_url}")
+        else:
+            # 后备方案
+            global_url = mirror_head_to_access_url("https://raw.githubusercontent.com")
             global_tag = "[GitHub Raw]"
-            logger.warning(f"⚠️ 所有镜像测速失败，使用原站（可能不可用）: {global_tag}")
+            logger.warning(f"⚠️ 未找到合适源，使用直连（可能不可用）: {global_tag}")
         
         NOW_SPEED_TEST = False
         return global_tag, global_url

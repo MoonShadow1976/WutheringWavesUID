@@ -62,6 +62,7 @@ from ..utils.resource.constant import ATTRIBUTE_ID_MAP, SPECIAL_CHAR_NAME
 from ..utils.util import get_version
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 TITLE_I = Image.open(TEXT_PATH / "title.png")
@@ -239,6 +240,16 @@ async def draw_all_rank_card(
             (5, 10), f"{get_chain_name(rank.chain)}", "white", waves_font_18, "lm"
         )
         bar_bg.alpha_composite(info_block, (190, 30))
+
+        # 区服
+        server_text, server_color = get_region_for_rank(rank.waves_id)
+        region_block = Image.new("RGBA", (50, 20), color=(255, 255, 255, 0))
+        region_draw = ImageDraw.Draw(region_block)
+        region_draw.rounded_rectangle(
+            [0, 0, 50, 20], radius=6, fill=server_color + (int(0.9 * 255),)
+        )
+        region_draw.text((25, 10), server_text, "white", waves_font_16, "mm")
+        bar_bg.alpha_composite(region_block, (100, 80))
 
         # 等级
         info_block = Image.new("RGBA", (60, 20), color=(255, 255, 255, 0))

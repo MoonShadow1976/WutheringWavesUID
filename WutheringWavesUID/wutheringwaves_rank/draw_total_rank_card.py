@@ -48,6 +48,7 @@ from ..utils.image import (
 )
 from ..utils.util import get_version
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -200,6 +201,16 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         )
         rank_draw.text((25, 25), f"{rank_id}", "white", waves_font_34, "mm")
         bar_bg.alpha_composite(info_rank, (40, 35))
+
+        # 区服
+        server_text, server_color = get_region_for_rank(detail.waves_id)
+        region_block = Image.new("RGBA", (50, 20), color=(255, 255, 255, 0))
+        region_draw = ImageDraw.Draw(region_block)
+        region_draw.rounded_rectangle(
+            [0, 0, 50, 20], radius=6, fill=server_color + (int(0.9 * 255),)
+        )
+        region_draw.text((25, 10), server_text, "white", waves_font_16, "mm")
+        bar_bg.alpha_composite(region_block, (100, 80))
 
         # 绘制玩家名字
         bar_draw.text((210, 75), f"{detail.kuro_name}", "white", waves_font_20, "lm")

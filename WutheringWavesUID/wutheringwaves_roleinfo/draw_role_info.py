@@ -34,7 +34,6 @@ from ..utils.image import (
 from ..utils.imagetool import draw_pic_with_ring
 from ..utils.resource.constant import NORMAL_LIST, SPECIAL_CHAR_INT
 from ..utils.waves_api import waves_api
-from ..utils.api.kuro_py_api import get_base_info_overseas
 from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -66,6 +65,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     )
 
     if waves_api.is_net(uid):
+        from ..utils.api.kuro_py_api import get_base_info_overseas
         account_info, _ = await get_base_info_overseas(ck, uid)
         base_info = await get_user_detail_info(uid)
         if account_info:

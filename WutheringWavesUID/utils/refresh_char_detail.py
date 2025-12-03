@@ -8,7 +8,6 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
 from ..utils.api.model import AccountBaseInfo, RoleList
-from ..utils.api.kuro_py_api import get_base_info_overseas
 from ..utils.error_reply import WAVES_CODE_101, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.hint import error_reply
@@ -79,6 +78,7 @@ async def send_card(
         and user_id
     ):
         if waves_api.is_net(uid):
+            from ..utils.api.kuro_py_api import get_base_info_overseas
             account_info, _ = await get_base_info_overseas(token, uid)
             if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
                 logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")

@@ -314,11 +314,11 @@ async def ann_detail_card(
             index_end = index + 1
             drow_height = 0
             imgs.append(img)
-
-    if index_start == 0:
-        return await ann_batch_card(post_content[index_start:], drow_height)
     else:
-        return imgs
+        img = await ann_batch_card(post_content[index_start:index_end], drow_height)
+        imgs.append(img)
+
+    return imgs
 
 
 def split_text(content: str):

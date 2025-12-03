@@ -82,7 +82,9 @@ async def get_gacha_rank(
             - character_event: 角色精准调谐排行（按平均UP）
             - weapon_event: 武器精准调谐排行（按平均出金）
             - lucky_rank: 欧皇榜（按最多连续UP）
-            - unlucky_rank: 非酋榜（按最多连续非UP）
+            - unlucky_rank: 连歪榜（按最多连续非UP）
+            - character_event_rate: 非酋榜（角色池按平均UP对多率排行）
+            - weapon_event_rate: 武器非酋榜（武器池按平均出金率排行）
         page: 页码
         page_num: 每页数量
         waves_id: 用户特征码（可选）
@@ -142,10 +144,12 @@ async def draw_gacha_server_rank_img(
     """
     # 映射排行类型到API参数
     rank_type_map = {
-        "抽卡总排行": "character_event",
-        "武器抽卡总排行": "weapon_event",
+        "欧狗榜": "character_event",
+        "武器欧狗榜": "weapon_event",
         "连金榜": "lucky_rank",
         "连歪榜": "unlucky_rank",
+        "非酋榜": "character_event_rate",
+        "武器非酋榜": "weapon_event_rate",
     }
     
     # 清理rank_type，去除可能的空格和特殊字符
@@ -228,17 +232,21 @@ async def draw_rank_card(
     
     # 说明文字 - 根据排行类型调整
     subtitle_map = {
-        "抽卡总排行": "角色精准调谐，按平均UP抽数排序",
-        "武器抽卡总排行": "武器精准调谐，按平均出金抽数排序",
-        "连金榜": "角色精准调谐，按最多连续UP次数排序",
-        "连歪榜": "角色精准调谐，按最多连续歪次数排序",
+        "欧狗榜": "角色精准调谐，按平均UP次数排序",
+        "武器欧狗榜": "武器精准调谐，按平均出金次数排序",
+        "连金榜": "角色精准调谐，按最多连UP次数排序",
+        "连歪榜": "角色精准调谐，按最多连歪次数排序",
+        "非酋榜": "角色精准调谐，按平均UP次数排序",
+        "武器非酋榜": "武器精准调谐，按平均出金次数排序",
     }
     # 上榜条件（仅角色池和武器池显示）
     condition_map = {
-        "抽卡总排行": f"上榜条件: UP池总抽数≥300，使用过'{PREFIX}抽卡记录'",
-        "武器抽卡总排行": f"上榜条件: 武器池总抽数≥200，使用过'{PREFIX}抽卡记录'",
+        "欧狗榜": f"上榜条件: UP池总抽数≥500，使用过'{PREFIX}抽卡记录'",
+        "武器欧狗榜": f"上榜条件: 武器池总抽数≥300，使用过'{PREFIX}抽卡记录'",
         "连金榜": f"上榜条件: 使用过'{PREFIX}抽卡记录'",
         "连歪榜": f"上榜条件: 使用过'{PREFIX}抽卡记录'",
+        "非酋榜": f"上榜条件: UP池总抽数≥500，使用过'{PREFIX}抽卡记录'",
+        "武器非酋榜": f"上榜条件: 武器池总抽数≥300，使用过'{PREFIX}抽卡记录'",
     }
     desc_text = subtitle_map.get(rank_type, "Bot全服排行")
     condition_text = condition_map.get(rank_type, "")
@@ -358,7 +366,7 @@ async def draw_rank_card(
             bar_bg.alpha_composite(info_block, (350, 66))
         
         # 数据显示 - 根据排行类型
-        if rank_type == "抽卡总排行":
+        if rank_type == "欧狗榜":
             # 平均UP
             avg_up = detail.avg_up
             up_color = SPECIAL_GOLD if avg_up <= 70 else "white" if avg_up <= 85 else RED
@@ -382,7 +390,7 @@ async def draw_rank_card(
             eval_color = SPECIAL_GOLD if "欧" in evaluation else RED if "非" in evaluation else "white"
             bar_draw.text((1130, 55), evaluation, eval_color, waves_font_24, "mm")
             
-        elif rank_type == "武器抽卡总排行":
+        elif rank_type == "武器欧狗榜":
             # 平均出金
             avg_gold = detail.avg_gold
             gold_color = SPECIAL_GOLD if avg_gold <= 50 else "white" if avg_gold <= 65 else RED
@@ -400,6 +408,43 @@ async def draw_rank_card(
             eval_color = SPECIAL_GOLD if "欧" in evaluation else RED if "非" in evaluation else "white"
             bar_draw.text((1130, 55), evaluation, eval_color, waves_font_24, "mm")
             
+        elif rank_type == "非酋榜":
+            # 角色池非酋榜：显示平均UP、平均出金和总抽数，评价沿用角色池评价
+            avg_up = detail.avg_up
+            up_color = SPECIAL_GOLD if avg_up <= 70 else "white" if avg_up <= 85 else RED
+            bar_draw.text((700, 35), f"{avg_up:.1f}", up_color, waves_font_34, "mm")
+            bar_draw.text((700, 70), "平均UP", GREY, waves_font_16, "mm")
+
+            avg_gold = detail.avg_gold
+            gold_color = SPECIAL_GOLD if avg_gold <= 60 else "white"
+            bar_draw.text((840, 35), f"{avg_gold:.1f}", gold_color, waves_font_30, "mm")
+            bar_draw.text((840, 70), "平均出金", GREY, waves_font_16, "mm")
+
+            total_pulls = detail.total_pulls
+            pulls_color = SPECIAL_GOLD if total_pulls >= 1000 else "white"
+            bar_draw.text((980, 35), f"{total_pulls}", pulls_color, waves_font_30, "mm")
+            bar_draw.text((980, 70), "总抽数", GREY, waves_font_16, "mm")
+
+            evaluation = get_character_evaluation(avg_up)
+            eval_color = SPECIAL_GOLD if "欧" in evaluation else RED if "非" in evaluation else "white"
+            bar_draw.text((1130, 55), evaluation, eval_color, waves_font_24, "mm")
+
+        elif rank_type == "武器非酋榜":
+            # 武器池非酋榜：显示平均出金和总抽数，评价沿用武器池评价
+            avg_gold = detail.avg_gold
+            gold_color = SPECIAL_GOLD if avg_gold <= 50 else "white" if avg_gold <= 65 else RED
+            bar_draw.text((770, 35), f"{avg_gold:.1f}", gold_color, waves_font_34, "mm")
+            bar_draw.text((770, 70), "平均出金", GREY, waves_font_16, "mm")
+
+            total_pulls = detail.total_pulls
+            pulls_color = SPECIAL_GOLD if total_pulls >= 500 else "white"
+            bar_draw.text((980, 35), f"{total_pulls}", pulls_color, waves_font_30, "mm")
+            bar_draw.text((980, 70), "总抽数", GREY, waves_font_16, "mm")
+
+            evaluation = get_weapon_evaluation(avg_gold)
+            eval_color = SPECIAL_GOLD if "欧" in evaluation else RED if "非" in evaluation else "white"
+            bar_draw.text((1130, 55), evaluation, eval_color, waves_font_24, "mm")
+
         elif rank_type == "连金榜":
             # 连金（连续UP）
             max_up = detail.max_consecutive_up

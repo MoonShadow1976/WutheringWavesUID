@@ -355,17 +355,17 @@
         "need_admin": false
       },
       {
-        "name": "抽卡总排行",
-        "desc": "抽卡总排行",
-        "eg": "抽卡总排行",
+        "name": "欧狗榜",
+        "desc": "欧狗榜",
+        "eg": "欧狗榜",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
       },
       {
-        "name": "武器抽卡总排行",
-        "desc": "武器抽卡总排行",
-        "eg": "武器抽卡总排行",
+        "name": "武器欧狗榜",
+        "desc": "武器欧狗榜",
+        "eg": "武器欧狗榜",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -395,17 +395,17 @@
         "need_admin": false
       },
       {
-        "name": "连金榜",
-        "desc": "连金榜",
-        "eg": "连金榜",
+        "name": "非酋榜",
+        "desc": "非酋榜",
+        "eg": "非酋榜",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
       },
       {
-        "name": "连歪榜",
-        "desc": "连歪榜",
-        "eg": "连歪榜",
+        "name": "武器非酋榜",
+        "desc": "武器非酋榜",
+        "eg": "武器非酋榜",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -430,6 +430,22 @@
         "name": "练度总排行",
         "desc": "练度总排行",
         "eg": "练度总排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "连金榜",
+        "desc": "连金榜",
+        "eg": "连金榜",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "连歪榜",
+        "desc": "连歪榜",
+        "eg": "连歪榜",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

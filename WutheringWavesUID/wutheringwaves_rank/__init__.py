@@ -137,7 +137,7 @@ async def send_total_rank_card(bot: Bot, ev: Event):
 
 
 @sv_waves_gacha_server_rank.on_fullmatch(
-    ("抽卡总排行", "武器抽卡总排行", "连金榜", "连歪榜"), block=True
+    ("欧狗榜", "武器欧狗榜", "连金榜", "连歪榜", "非酋榜", "武器非酋榜"), block=True
 )
 async def send_gacha_server_rank_card(bot: Bot, ev: Event):
     """抽卡全服排行榜（基于服务器API）"""

@@ -49,7 +49,7 @@ from ..utils.image import (
     get_waves_bg,
 )
 from ..utils.util import get_version
-from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_config import WutheringWavesConfig, PREFIX
 from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -235,8 +235,10 @@ async def draw_rank_card(
     }
     # 上榜条件（仅角色池和武器池显示）
     condition_map = {
-        "抽卡总排行": "上榜条件: UP池总抽数≥300",
-        "武器抽卡总排行": "上榜条件: 武器池总抽数≥200",
+        "抽卡总排行": f"上榜条件: UP池总抽数≥300，使用过'{PREFIX}抽卡记录'",
+        "武器抽卡总排行": f"上榜条件: 武器池总抽数≥200，使用过'{PREFIX}抽卡记录'",
+        "连金榜": f"上榜条件: 使用过'{PREFIX}抽卡记录'",
+        "连歪榜": f"上榜条件: 使用过'{PREFIX}抽卡记录'",
     }
     desc_text = subtitle_map.get(rank_type, "Bot全服排行")
     condition_text = condition_map.get(rank_type, "")

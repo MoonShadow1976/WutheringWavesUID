@@ -187,7 +187,7 @@ async def draw_all_rank_card(
     text_bar_draw.text((40, 60), "上榜条件", GREY, waves_font_28, "lm")
     text_bar_draw.text((185, 50), "1. 声骸套装5件套", SPECIAL_GOLD, waves_font_20, "lm")
     text_bar_draw.text(
-        (185, 85), "2. 登录用户&刷新面板", SPECIAL_GOLD, waves_font_20, "lm"
+        (185, 85), "2. 登录用户&刷新面板(支持国际服)", SPECIAL_GOLD, waves_font_20, "lm"
     )
 
     # 备注

@@ -705,8 +705,8 @@ async def draw_char_detail_img(
             logger.exception("角色数据转换错误", e)
             role_detail = temp
     else:
-        if not is_limit_query and not waves_api.is_net(uid):
-            # 非极限与国际服用户查询时，获取评分排名
+        if not is_limit_query:
+            # 非极限面板查询时，获取评分排名
             oneRank = await get_one_rank(
                 OneRankRequest(char_id=int(char_id), waves_id=uid)
             )

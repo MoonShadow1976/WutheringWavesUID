@@ -84,7 +84,7 @@ async def send_gacha_log_card_info(bot: Bot, ev: Event):
     await bot.send(im)
 
 
-@sv_gacha_help_log.on_fullmatch("抽卡帮助")
+@sv_gacha_help_log.on_fullmatch(("抽卡帮助", "抽卡分析"))
 async def send_gacha_log_help(bot: Bot, ev: Event):
     im = await draw_card_help()
     await bot.send(im)

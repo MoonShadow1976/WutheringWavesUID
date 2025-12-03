@@ -8,6 +8,7 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
 from ..utils.api.model import AccountBaseInfo, RoleList
+from ..utils.api.kuro_py_api import get_base_info_overseas
 from ..utils.error_reply import WAVES_CODE_101, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.hint import error_reply
@@ -58,41 +59,38 @@ semaphore_manager = SemaphoreManager()
 async def send_card(
     uid: str,
     user_id: str,
-    save_data: List,
+    waves_data: List,
     is_self_ck: bool = False,
     token: Optional[str] = "",
-    role_info: Optional[RoleList] = None,
-    waves_data: Optional[List] = None,
 ):
     waves_char_rank: Optional[List[WavesCharRank]] = None
 
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if WavesToken:
-        waves_char_rank = await get_waves_char_rank(uid, save_data, True)
+        waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
     if (
         is_self_ck
         and token
         and waves_char_rank
         and WavesToken
-        and role_info
         and waves_data
         and user_id
     ):
-        # 单角色上传排行
-        if len(waves_data) != 1 and len(role_info.roleList) != len(save_data):
+        if waves_api.is_net(uid):
+            account_info, _ = await get_base_info_overseas(token, uid)
+            if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
+                logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")
+                return "[总排行上传] 国际服账号基础信息获取失败\n"
+        else:
+            account_info = await waves_api.get_base_info(uid, token=token)
+            if not account_info.success:
+                return account_info.throw_msg()
+            account_info = AccountBaseInfo.model_validate(account_info.data)
+        if len(waves_data) != 1 and account_info.roleNum != len(waves_data):
             logger.warning(
-                f"角色数量不一致，role_info.roleNum:{len(role_info.roleList)} != waves_char_rank:{len(save_data)}"
-            )
-            return
-        account_info = await waves_api.get_base_info(uid, token=token)
-        if not account_info.success:
-            return account_info.throw_msg()
-        account_info = AccountBaseInfo.model_validate(account_info.data)
-        if len(waves_data) != 1 and account_info.roleNum != len(save_data):
-            logger.warning(
-                f"角色数量不一致，role_info.roleNum:{account_info.roleNum} != waves_char_rank:{len(save_data)}"
+                f"角色数量不一致，role_info.roleNum:{account_info.roleNum} != waves_char_rank:{len(waves_data)}"
             )
             return
         metadata = {
@@ -114,7 +112,6 @@ async def save_card_info(
     user_id: str = "",
     is_self_ck: bool = False,
     token: str = "",
-    role_info: Optional[RoleList] = None,
 ):
     if len(waves_data) == 0:
         return
@@ -157,8 +154,8 @@ async def save_card_info(
 
     save_data = list(old_data.values())
 
-    if not waves_api.is_net(uid):
-        await send_card(uid, user_id, save_data, is_self_ck, token, role_info, waves_data)
+    # 上传总排行，国际服支持需pcap&登录
+    await send_card(uid, user_id, waves_data, is_self_ck, token)
 
     try:
         async with aiofiles.open(path, "w", encoding="utf-8") as file:
@@ -289,7 +286,6 @@ async def refresh_char(
         user_id,
         is_self_ck=is_self_ck,
         token=ck,
-        role_info=role_info,
     )
 
     if not waves_datas:
@@ -310,6 +306,11 @@ async def refresh_char_from_pcap(
     refresh_type: Union[str, List[str]] = "all",
 ) -> Union[str, List]:
     """基於 pcap 數據刷新角色面板"""
+    ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
+    if not ck:
+        logger.warning(f"PCAP 刷新未获取到自登录 ck，uid:{uid} user_id:{user_id}, 不会上传总排行")
+        ck = ""
+
     try:
         from ..wutheringwaves_pcap.pcap_parser import PcapDataParser
 
@@ -326,11 +327,6 @@ async def refresh_char_from_pcap(
         
         waves_data = []
 
-        # for role_detail in role_detail_list:
-        #     role_id = role_detail["role"]["roleId"]
-        #     # 標記為已更新
-        #     waves_map["refresh_update"][str(role_id)] = role_detail
-
         async def limited_check_role_detail_info(r):
             try:
                 role_name = r["role"]["roleName"]
@@ -341,27 +337,6 @@ async def refresh_char_from_pcap(
                 await send_master_info(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
                 logger.warning(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
                 return
-
-            # PhantomList = r["phantomData"]["equipPhantomList"]
-            # if PhantomList:
-            #     for Phantom in PhantomList:
-            #         prop_list = []
-            #         if Phantom.get("mainProps"):
-            #             prop_list.extend(Phantom.get("mainProps"))
-            #         if Phantom.get("subProps"):
-            #             prop_list.extend(Phantom.get("subProps"))
-            #         for prop in prop_list:
-            #             if (
-            #                 prop.get("attributeName")
-            #                 and "缺失" in prop["attributeName"]
-            #             ):
-            #                 await send_master_info(
-            #                     f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
-            #                 )
-            #                 logger.warning(
-            #                     f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的词条数据, 遇到[{prop['attributeName']}]"
-            #                 )
-            #                 return 
 
             waves_data.append(r)
 
@@ -383,7 +358,7 @@ async def refresh_char_from_pcap(
         # 并行处理所有角色
         if roles_to_process:
             tasks = [limited_check_role_detail_info(r) for r in roles_to_process]
-            results = await asyncio.gather(*tasks, return_exceptions=True)
+            await asyncio.gather(*tasks, return_exceptions=True)
 
         # 儲存數據到數據庫
         await save_card_info(
@@ -392,6 +367,7 @@ async def refresh_char_from_pcap(
             waves_map,
             user_id,
             is_self_ck=True,  # PCAP 模式視為自登錄
+            token=ck,
         )
         return waves_data
 

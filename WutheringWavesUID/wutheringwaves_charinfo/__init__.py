@@ -301,7 +301,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
             from .draw_refresh_char_card import draw_refresh_char_detail_img
             buttons = []
             msg = await draw_refresh_char_detail_img(
-                bot, ev, user_id, uid, buttons, refresh_type
+                bot, ev, user_id, uid, buttons, refresh_type, True
             )
             if isinstance(msg, bool):
                 is_refresh = msg

@@ -177,6 +177,7 @@ async def draw_refresh_char_detail_img(
     uid: str,
     buttons: List[WavesButton],
     refresh_type: Union[str, List[str]] = "all",
+    need_boolean: bool = False,
 ):
     if ev.bot_id == "discord" or ev.bot_id == "qqgroup":
         await sync_non_onebot_user_avatar(ev)
@@ -271,8 +272,8 @@ async def draw_refresh_char_detail_img(
         shadow_color = RED
 
     # 刷新直出 -> bool (只刷单角色)
-    if WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return True if role_update == 1 else False
+    if need_boolean:
+        return True if role_update > 0 else False
 
     role_high = role_len // 6 + (0 if role_len % 6 == 0 else 1)
     height = 470 + 50 + role_high * 330

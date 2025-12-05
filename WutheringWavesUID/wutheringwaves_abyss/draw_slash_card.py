@@ -14,6 +14,7 @@ from ..utils.api.model import (
 )
 from ..utils.api.wwapi import SlashDetailRequest
 from ..utils.ascension.char import get_char_model
+from ..utils.database.models import WavesBind
 from ..utils.char_info_utils import get_all_roleid_detail_info
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
@@ -38,6 +39,7 @@ from ..utils.queues.const import QUEUE_SLASH_RECORD
 from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import SLASH_PATH
 from ..utils.waves_api import waves_api
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -103,6 +105,15 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
         return error_reply(WAVES_CODE_102)
+
+    # 自动关联群组
+    if ev.group_id:
+        await WavesBind.insert_waves_uid(
+            user_id=user_id,
+            bot_id=ev.bot_id,
+            uid=uid,
+            group_id=ev.group_id
+        )
 
     command = ev.command
     text = ev.text.strip()
@@ -359,7 +370,80 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
 
     card_img = add_footer(card_img, 600, 20)
     card_img = await convert_img(card_img)
+    
+    # 保存到群排行数据库
+    await save_to_group_rank(user_id, uid, slash_detail, account_info.name)
+
     return card_img
+
+
+async def save_to_group_rank(
+    user_id: str,
+    waves_id: str,
+    slash_data: SlashDetail,
+    name: str,
+):
+    """保存无尽数据到群排行"""
+    try:
+        # 查找无尽挑战 (ID 12)
+        target_challenge = None
+        for difficulty in slash_data.difficultyList:
+            for challenge in difficulty.challengeList:
+                if challenge.challengeId == 12:
+                    target_challenge = challenge
+                    break
+            if target_challenge:
+                break
+        
+        if not target_challenge:
+            return
+
+        if target_challenge.score <= 0:
+            return
+
+        # 构建数据
+        half_list = []
+        for half in target_challenge.halfList:
+            roles = []
+            for role in half.roleList:
+                char_model = get_char_model(role.roleId)
+                roles.append({
+                    "roleId": role.roleId,
+                    "roleName": char_model.name if char_model else "",
+                    "level": role.level,
+                    "chain": role.chain,
+                    "iconUrl": role.iconUrl,
+                    "starLevel": char_model.starLevel if char_model else 0,
+                })
+            
+            half_list.append({
+                "buffName": half.buffName,
+                "buffIcon": half.buffIcon,
+                "buffDescription": half.buffDescription,
+                "buffQuality": half.buffQuality,
+                "score": half.score,
+                "roleList": roles
+            })
+
+        data = {
+            "name": name,
+            "challengeId": target_challenge.challengeId,
+            "challengeName": target_challenge.challengeName,
+            "rank": target_challenge.get_rank(),
+            "score": target_challenge.score,
+            "halfList": half_list
+        }
+
+        await GroupRankRecord.save_record(
+            user_id=user_id,
+            waves_id=waves_id,
+            rank_type="endless",
+            challenge_id=12,
+            data=data
+        )
+    except Exception as e:
+        from gsuid_core.logger import logger
+        logger.exception(f"[ww无尽] 保存用户 {waves_id} 无尽数据失败: {e}")
 
 
 async def upload_slash_record(

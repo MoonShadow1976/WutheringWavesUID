@@ -449,6 +449,22 @@
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
+      },
+      {
+        "name": "无尽群排行",
+        "desc": "无尽群排行",
+        "eg": "无尽排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "无尽总排行",
+        "desc": "无尽总排行",
+        "eg": "无尽总排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
       }
     ]
   },

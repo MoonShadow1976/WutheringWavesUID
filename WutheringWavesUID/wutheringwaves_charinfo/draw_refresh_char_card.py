@@ -180,12 +180,14 @@ async def draw_refresh_char_detail_img(
 ):
     if ev.bot_id == "discord" or ev.bot_id == "qqgroup":
         await sync_non_onebot_user_avatar(ev)
-
-    # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
-    from ..wutheringwaves_pcap import load_pcap_data
-    pcap_data = await load_pcap_data(uid)
     
-    if pcap_data:
+    if waves_api.is_net(uid):
+        # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
+        from ..wutheringwaves_pcap import load_pcap_data
+        pcap_data = await load_pcap_data(uid)
+        if not pcap_data:
+            return "国际服用户请上传 pcap 文件后再刷新面板！\n"
+
         # 使用 pcap 數據刷新
         waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
         waves_datas = await refresh_char_from_pcap(

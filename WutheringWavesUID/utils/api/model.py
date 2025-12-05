@@ -624,6 +624,8 @@ class BatchRoleCostResponse(BaseModel):
 class SlashRole(BaseModel):
     iconUrl: str  # 角色头像
     roleId: int  # 角色ID
+    level: Optional[int] = 0  # 角色等级
+    chain: Optional[int] = 0  # 角色共鸣链
 
 
 class SlashHalf(BaseModel):

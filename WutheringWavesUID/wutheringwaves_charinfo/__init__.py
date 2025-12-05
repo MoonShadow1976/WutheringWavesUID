@@ -93,8 +93,10 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
     block=True,
 )
 async def send_card_info(bot: Bot, ev: Event):
-    user_id = ruser_id(ev)
+    if WutheringWavesConfig.get_config("CharCardRefresh").data:
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n")
 
+    user_id = ruser_id(ev)
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
@@ -118,6 +120,9 @@ async def send_card_info(bot: Bot, ev: Event):
     block=True,
 )
 async def send_one_char_detail_msg(bot: Bot, ev: Event):
+    if WutheringWavesConfig.get_config("CharCardRefresh").data:
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n")
+
     logger.debug(f"[鸣潮] [角色面板] RAW_TEXT: {ev.raw_text}")
     match = re.search(
         r"(?P<is_refresh>刷新|更新)(?P<char>[\u4e00-\u9fa5]+)(?P<query_type>面板|面包)",
@@ -282,7 +287,9 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
         if not uid:
             return await bot.send(error_reply(WAVES_CODE_103))
-        if WutheringWavesConfig.get_config("CharCardRefresh").data:
+
+        is_refresh = False  # 面板直出刷新标志
+        if not change_list_regex and WutheringWavesConfig.get_config("CharCardRefresh").data:
             if not char_id or len(char_id) != 4:
                 return await bot.send(
                     f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
@@ -296,14 +303,11 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
             msg = await draw_refresh_char_detail_img(
                 bot, ev, user_id, uid, buttons, refresh_type
             )
-            if (
-                WutheringWavesConfig.get_config("CharCardRefreshNotify").data
-                and (isinstance(msg, str) or isinstance(msg, bytes))
-            ):
-                await bot.send_option(msg, buttons)
+            if isinstance(msg, bool):
+                is_refresh = msg
 
         im = await draw_char_detail_img(
-            ev, uid, char, user_id, waves_id, change_list_regex=change_list_regex
+            ev, uid, char, user_id, waves_id, change_list_regex=change_list_regex, is_refresh=is_refresh
         )
         at_sender = False
         if isinstance(im, str) or isinstance(im, bytes):

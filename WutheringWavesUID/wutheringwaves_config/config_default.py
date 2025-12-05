@@ -133,11 +133,6 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "角色面板自动刷新",
         True,
     ),
-    "CharCardRefreshNotify": GsBoolConfig(
-        "角色面板自动刷新提醒",
-        "角色面板自动刷新提醒",
-        True,
-    ),
     "HideUid": GsBoolConfig(
         "隐藏uid",
         "隐藏uid",

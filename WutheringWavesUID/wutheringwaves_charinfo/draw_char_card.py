@@ -611,6 +611,7 @@ async def draw_char_detail_img(
     is_force_avatar=False,
     change_list_regex=None,
     is_limit_query=False,
+    is_refresh=False,
 ):
     char, damageId = parse_text_and_number(char)
 
@@ -805,6 +806,23 @@ async def draw_char_detail_img(
         img.alpha_composite(
             damage_calc_img, (0, img.size[1] - 10 - damage_calc_img.size[1])
         )
+
+    if is_refresh: # 数据已更新标识
+        text_block = Image.new("RGBA", (50, 800), color=(255, 255, 255, 0))
+        text_draw = ImageDraw.Draw(text_block)
+        vertical_text = "|| 数 据 已 自 动 更 新 ||"
+        # 竖排绘制每个字符
+        line_height = 40  # 行高
+        for i, char in enumerate(vertical_text):
+            char_y = 30 + i * line_height
+            text_draw.text(
+                (25, char_y),  # x位置居中
+                char, 
+                fill=(0, 255, 0),  # 绿色
+                font=waves_font_50, 
+                anchor="mm"  # 中间锚点
+            )
+        img.alpha_composite(text_block, (550, 290))
 
     # 右侧属性
     right_image_temp = Image.new("RGBA", (600, 1100))

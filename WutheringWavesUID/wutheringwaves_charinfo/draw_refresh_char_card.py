@@ -245,6 +245,13 @@ async def draw_refresh_char_detail_img(
             if isinstance(waves_datas, str):
                 return waves_datas
 
+    # 保存用户信息
+    from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
+    if account_info.is_full:
+        await save_user_info(str(account_info.id), account_info.name[:7], account_info.level, account_info.worldLevel)
+    else:
+        await save_user_info(str(account_info.id), account_info.name[:7])
+
     role_detail_list = [
         RoleDetailData(**r)
         for key in ["refresh_update", "refresh_unchanged"]
@@ -260,6 +267,10 @@ async def draw_refresh_char_detail_img(
     if role_update == 0:
         shadow_title = "数据未更新"
         shadow_color = RED
+
+    # 刷新直出 -> bool (只刷单角色)
+    if WutheringWavesConfig.get_config("CharCardRefresh").data:
+        return True if role_update == 1 else False
 
     role_high = role_len // 6 + (0 if role_len % 6 == 0 else 1)
     height = 470 + 50 + role_high * 330
@@ -345,11 +356,7 @@ async def draw_refresh_char_detail_img(
     img.paste(avatar_ring, (35, 80), avatar_ring)
 
     # 账号基本信息，由于可能会没有，放在一起
-    from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
     if account_info.is_full:
-        await save_user_info(
-            str(account_info.id), account_info.name[:7], account_info.level, account_info.worldLevel
-        )
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
@@ -362,8 +369,6 @@ async def draw_refresh_char_detail_img(
             (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
         )
         img.paste(title_bar, (-20, 70), title_bar)
-    else:
-        await save_user_info(str(account_info.id), account_info.name[:7])
 
     # bar
     refresh_bar = Image.open(TEXT_PATH / "refresh_bar.png")

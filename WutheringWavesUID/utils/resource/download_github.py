@@ -21,7 +21,7 @@ GITHUB_MIRRORS = [
     ("[GitHub Mirror j cdn]", "https://cdn.jsdelivr.net/gh"),
     ("[GitHub Mirror j fastly]", "https://fastly.jsdelivr.net/gh"),
     ("[GitHub Mirror j gcore]", "https://gcore.jsdelivr.net/gh"),
-    ("[GitHub Mirror ghproxy]", "https://gh-proxy.com/https://raw.githubusercontent.com"),
+    ("[GitHub Mirror ghproxy]", "https://gh-proxy.org/https://raw.githubusercontent.com"),
 ]
 
 # 仓库信息 (可配置)
@@ -55,22 +55,22 @@ async def test_mirror_speed(tag: str, base_url: str) -> Tuple[str, str, float, O
             elapsed_time = time.time() - start_time
             
             if response.status_code == 200:
-                logger.debug(f'⌛ [测速] {tag} {base_url} 延时: {elapsed_time:.2f}s')
+                logger.debug(f'⌛ [测速] {tag} {url} 延时: {elapsed_time:.2f}s')
                 # 尝试解析JSON获取last_updated
                 try:
                     data = json.loads(response.text)
                     if "last_updated" in data:
                         return tag, base_url, elapsed_time, data
                     else:
-                        logger.warning(f'⚠️ {tag} {base_url} JSON格式错误: 缺少last_updated')
+                        logger.warning(f'⚠️ {tag} {url} JSON格式错误: 缺少last_updated')
                         return tag, base_url, elapsed_time, None
                 except json.JSONDecodeError:
-                    logger.warning(f'⚠️ {tag} {base_url} JSON解析失败')
+                    logger.warning(f'⚠️ {tag} {url} JSON解析失败')
                     return tag, base_url, elapsed_time, None
             else:
-                logger.warning(f'⚠️ {tag} {base_url} 测试文件状态码: {response.status_code}')
+                logger.warning(f'⚠️ {tag} {url} 测试文件状态码: {response.status_code}')
         except Exception as e:
-            logger.warning(f'⚠️ {tag} {base_url} 连接错误: {str(e)[:50]}...')
+            logger.warning(f'⚠️ {tag} {url} 连接错误: {str(e)[:50]}...')
     
     return tag, base_url, float('inf'), None
 
@@ -333,7 +333,7 @@ async def download_all_file(
             
             # 检查目录是否在索引中
             if dir_name not in available_dirs:
-                logger.warning(f'⚠ 目录 {dir_name} 不在 {plugin_name} 资源索引中，跳过')
+                logger.warning(f'⚠️ 目录 {dir_name} 不在 {plugin_name} 资源索引中，跳过')
                 continue
             
             # 确保本地目录存在
@@ -351,4 +351,4 @@ async def download_all_file(
         elif processed_count > 0:
             logger.success(f'📦 [资源检查] 插件 {plugin_name} 已完成 {processed_count}/{len(EPATH_MAP)} 个目录')
         else:
-            logger.warning(f'⚠ [资源检查] 插件 {plugin_name} 未找到任何匹配的资源目录')
+            logger.warning(f'⚠️ [资源检查] 插件 {plugin_name} 未找到任何匹配的资源目录')

@@ -21,8 +21,7 @@ GITHUB_MIRRORS = [
     ("[GitHub Mirror j cdn]", "https://cdn.jsdelivr.net/gh"),
     ("[GitHub Mirror j fastly]", "https://fastly.jsdelivr.net/gh"),
     ("[GitHub Mirror j gcore]", "https://gcore.jsdelivr.net/gh"),
-    ("[GitHub Mirror fastgit]", "https://raw.fastgit.org"),
-    ("[GitHub Mirror ghproxy]", "https://ghproxy.com/https://raw.githubusercontent.com"),
+    ("[GitHub Mirror ghproxy]", "https://gh-proxy.com/https://raw.githubusercontent.com"),
 ]
 
 # 仓库信息 (可配置)

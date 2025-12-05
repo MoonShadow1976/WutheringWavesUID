@@ -128,6 +128,16 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "刷新面板间隔通知文案",
         "请等待{}s后尝试刷新面板！",
     ),
+    "CharCardRefresh": GsBoolConfig(
+        "角色面板自动刷新",
+        "角色面板自动刷新",
+        True,
+    ),
+    "CharCardRefreshNotify": GsBoolConfig(
+        "角色面板自动刷新提醒",
+        "角色面板自动刷新提醒",
+        True,
+    ),
     "HideUid": GsBoolConfig(
         "隐藏uid",
         "隐藏uid",

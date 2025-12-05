@@ -15,6 +15,7 @@ from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_097
 from ..utils.hint import error_reply
 from ..utils.name_convert import char_name_to_char_id
 from ..utils.resource.constant import SPECIAL_CHAR
+from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_char_card import draw_char_detail_img, draw_char_score_img
 from .upload_card import (
     compress_all_custom_card,
@@ -206,6 +207,10 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
     if isinstance(char, str) and "极限" in char:
         is_limit_query = True
         char = char.replace("极限", "")
+    if char:
+        if "刷新" in char or "更新" in char:
+            return
+        char_id = char_name_to_char_id(char)
 
     if damage:
         char = f"{char}{damage}"
@@ -277,6 +282,26 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
         if not uid:
             return await bot.send(error_reply(WAVES_CODE_103))
+        if WutheringWavesConfig.get_config("CharCardRefresh").data:
+            if not char_id or len(char_id) != 4:
+                return await bot.send(
+                    f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
+                )
+            refresh_type = [char_id]
+            if char_id in SPECIAL_CHAR:
+                refresh_type = SPECIAL_CHAR.copy()[char_id]
+
+            from .draw_refresh_char_card import draw_refresh_char_detail_img
+            buttons = []
+            msg = await draw_refresh_char_detail_img(
+                bot, ev, user_id, uid, buttons, refresh_type
+            )
+            if (
+                WutheringWavesConfig.get_config("CharCardRefreshNotify").data
+                and (isinstance(msg, str) or isinstance(msg, bytes))
+            ):
+                await bot.send_option(msg, buttons)
+
         im = await draw_char_detail_img(
             ev, uid, char, user_id, waves_id, change_list_regex=change_list_regex
         )

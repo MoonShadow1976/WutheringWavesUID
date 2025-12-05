@@ -82,6 +82,7 @@ def can_refresh_card(user_id: str, uid: str, refresh_type: str | List[str]) -> i
             if time_stamp and time_stamp > now:
                 return time_stamp - now
     else:
+        key = key if not refresh_type else f"{user_id}_{uid}_{refresh_type[0]}"
         if timed_cache:
             now = int(time.time())
             time_stamp = timed_cache.get(key)
@@ -92,13 +93,13 @@ def can_refresh_card(user_id: str, uid: str, refresh_type: str | List[str]) -> i
 
 def set_cache_refresh_card(user_id: str, uid: str, refresh_type: str | List[str]):
     """设置缓存"""
+    key = f"{user_id}_{uid}"
     if refresh_type == "all":
         if timed_cache_all:
-            key = f"{user_id}_{uid}"
             timed_cache_all.set(key, int(time.time()) + refresh_intervalAll)
     else:
         if timed_cache:
-            key = f"{user_id}_{uid}"
+            key = key if not refresh_type else f"{user_id}_{uid}_{refresh_type[0]}"
             timed_cache.set(key, int(time.time()) + refresh_interval)
 
 

@@ -94,7 +94,7 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
 )
 async def send_card_info(bot: Bot, ev: Event):
     if WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n")
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
 
     user_id = ruser_id(ev)
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
@@ -121,7 +121,7 @@ async def send_card_info(bot: Bot, ev: Event):
 )
 async def send_one_char_detail_msg(bot: Bot, ev: Event):
     if WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n")
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
 
     logger.debug(f"[鸣潮] [角色面板] RAW_TEXT: {ev.raw_text}")
     match = re.search(
@@ -288,7 +288,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         if not uid:
             return await bot.send(error_reply(WAVES_CODE_103))
 
-        is_refresh = False  # 面板直出刷新标志
+        is_refresh = 0  # 面板直出刷新标志
         if not change_list_regex and WutheringWavesConfig.get_config("CharCardRefresh").data:
             if not char_id or len(char_id) != 4:
                 return await bot.send(
@@ -304,14 +304,17 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
                 bot, ev, user_id, uid, buttons, refresh_type, True
             )
             if isinstance(msg, bool):
-                is_refresh = msg
+                is_refresh = 1 if msg else 0
+            if isinstance(msg, str):
+                is_refresh = -1
 
         im = await draw_char_detail_img(
             ev, uid, char, user_id, waves_id, change_list_regex=change_list_regex, is_refresh=is_refresh
         )
-        at_sender = False
-        if isinstance(im, str) or isinstance(im, bytes):
-            return await bot.send(im, at_sender)
+        if isinstance(im, bytes):
+            return await bot.send(im)
+        if isinstance(im, str) and isinstance(msg, str):
+            return await bot.send(msg + im, at_sender)
 
 
 @waves_new_char_detail.on_regex(r"^(\d+)?[\u4e00-\u9fa5]+(?:权重)$", block=True)

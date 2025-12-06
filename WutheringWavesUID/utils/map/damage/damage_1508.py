@@ -84,10 +84,10 @@ def calc_damage_1(
         title = f"{role_name}-二链"
         msg = "造成伤害无视目标10%湮灭伤害抗性"
         attr.add_enemy_resistance(-0.1, title, msg)
-        if isGroup:
-            title = f"{role_name}-二链"
-            msg = "队伍中的角色处于虚湮之线状态时，全属性伤害加成提升50%"
-            attr.add_dmg_bonus(0.5, title, msg)
+
+        title = f"{role_name}-二链"
+        msg = "队伍中的角色处于虚湮之线状态时，全属性伤害加成提升50%"
+        attr.add_dmg_bonus(0.5, title, msg)
 
     if chain_num >= 5:
         title = f"{role_name}-五链"
@@ -313,10 +313,10 @@ def calc_damage_3(
         title = f"{role_name}-二链"
         msg = "造成伤害无视目标10%湮灭伤害抗性"
         attr.add_enemy_resistance(-0.1, title, msg)
-        if isGroup:
-            title = f"{role_name}-二链"
-            msg = "队伍中的角色处于虚湮之线状态时，全属性伤害加成提升50%"
-            attr.add_dmg_bonus(0.5, title, msg)
+
+        title = f"{role_name}-二链"
+        msg = "队伍中的角色处于虚湮之线状态时，全属性伤害加成提升50%"
+        attr.add_dmg_bonus(0.5, title, msg)
 
     if chain_num >= 6:
         title = f"{role_name}-六链"

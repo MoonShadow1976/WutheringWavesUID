@@ -205,6 +205,12 @@ class Weapon_21010044(WeaponAbstract):
             attr.add_def_percent(calc_percent_expression(dmg), title, msg)
 
 
+class Weapon_21010045(WeaponAbstract):
+    id = 21010045
+    type = 1
+    name = "源能机锋"
+
+
 class Weapon_21010046(WeaponAbstract):
     id = 21010046
     type = 1
@@ -284,6 +290,12 @@ class Weapon_21010064(WeaponAbstract):
             title = self.get_title()
             msg = f"施放共鸣技能后，每2秒攻击提升{dmg}"
             attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21010066(WeaponAbstract):
+    id = 21010066
+    type = 1
+    name = "宙算仪轨"
 
 
 class Weapon_21010074(WeaponAbstract):
@@ -563,6 +575,12 @@ class Weapon_21020044(WeaponAbstract):
             attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 
+class Weapon_21020045(WeaponAbstract):
+    id = 21020045
+    type = 2
+    name = "镭射切变"
+
+
 class Weapon_21020046(WeaponAbstract):
     id = 21020046
     type = 2
@@ -840,12 +858,6 @@ class Weapon_21030034(WeaponAbstract):
     name = "穿击枪-26型"
 
 
-class Weapon_21030043(WeaponAbstract):
-    id = 21030043
-    type = 3
-    name = "远行者佩枪·洞察"
-
-
 class Weapon_21030036(WeaponAbstract):
     id = 21030036
     type = 3
@@ -889,10 +901,28 @@ class Weapon_21030036(WeaponAbstract):
         return True
 
 
+class Weapon_21030043(WeaponAbstract):
+    id = 21030043
+    type = 3
+    name = "远行者佩枪·洞察"
+
+
 class Weapon_21030044(WeaponAbstract):
     id = 21030044
     type = 3
     name = "无眠烈火"
+
+
+class Weapon_21030045(WeaponAbstract):
+    id = 21030045
+    type = 3
+    name = "相位涟漪"
+
+
+class Weapon_21030046(WeaponAbstract):
+    id = 21030046
+    type = 3
+    name = "溢彩荧辉" 
 
 
 class Weapon_21030053(WeaponAbstract):
@@ -1189,6 +1219,12 @@ class Weapon_21040044(WeaponAbstract):
         title = self.get_title()
         msg = f"施放变奏技能时，自身共鸣解放伤害加成提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21040045(WeaponAbstract):
+    id = 21040045
+    type = 4
+    name = "脉冲协臂"
 
 
 class Weapon_21040046(WeaponAbstract):
@@ -1531,6 +1567,12 @@ class Weapon_21050044(WeaponAbstract):
             title = self.get_title()
             msg = f"施放变奏技能时，自身生命提升{dmg}"
             attr.add_life_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21050045(WeaponAbstract):
+    id = 21050045
+    type = 5
+    name = "玻色星仪"
 
 
 class Weapon_21050046(WeaponAbstract):

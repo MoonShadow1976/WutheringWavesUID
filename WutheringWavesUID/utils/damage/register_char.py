@@ -307,6 +307,12 @@ class Char_1207(CharAbstract):
                 method(attr, isGroup)
 
 
+class Char_1209(CharAbstract):
+    id = 1209
+    name = "莫宁"
+    starLevel = 5
+
+
 class Char_1301(CharAbstract):
     id = 1301
     name = "卡卡罗"
@@ -780,7 +786,7 @@ class Char_1508(CharAbstract):
             attr.add_dmg_bonus(0.5, title, msg)
 
         # 六链效果：异常效应伤害加深
-        if attr.env_abnormal_deepen:
+        if attr.env_abnormal_deepen: # ？
             title = "千咲-六链"
             msg = "拥有虚无绞痕·终焉的目标受到异常效应伤害加深30%"
             attr.add_dmg_deepen(0.3, title, msg)
@@ -791,7 +797,14 @@ class Char_1508(CharAbstract):
             method = getattr(w, "do_action", None)
             if callable(method):
                 method([cast_variation], attr, isGroup)
-            
+
+
+class Char_1509(CharAbstract):
+    id = 1509
+    name = "琳奈"
+    starLevel = 5
+
+
 class Char_1601(CharAbstract):
     id = 1601
     name = "桃祈"

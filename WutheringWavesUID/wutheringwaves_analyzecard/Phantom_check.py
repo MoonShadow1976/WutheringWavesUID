@@ -1,6 +1,6 @@
 from gsuid_core.logger import logger
+from functools import lru_cache
 from pathlib import Path
-import asyncio
 
 
 # change from utils.map.calc_score_script.py
@@ -153,15 +153,15 @@ phantom_main_value = [
 ]
 phantom_main_value_map = {i["name"]: i["values"] for i in phantom_main_value}
 
+TEXT_PATH = Path(__file__).parent.parent / "utils" / "texture2d" / "attribute_prop"
 
-async def exist_attribute_prop(name: str = "") -> bool:
-    TEXT_PATH = Path(__file__).parent.parent / "utils" / "texture2d" / "attribute_prop" 
+@lru_cache(maxsize=50)
+def exist_attribute_prop(name: str = "") -> bool:
+    """检查属性图片文件是否存在（带缓存）"""
     file_path = Path(TEXT_PATH) / f"attr_prop_{name}.png"
-    try:
-        return await asyncio.to_thread(file_path.exists)
-    except Exception as e:
-        logger.error(f"[鸣潮][dc卡片识别]文件检查异常: {name}: {e}")
-        return False
+    
+    exists = file_path.exists()
+    return exists
 
 def get_props(phantom):
         props = []
@@ -185,7 +185,7 @@ class PhantomValidator:
             if phantom and phantom.get("phantomProp"):
                     props = get_props(phantom)
                     for _prop in props:
-                        name_b = await exist_attribute_prop(_prop.get("attributeName"))
+                        name_b = exist_attribute_prop(_prop.get("attributeName"))
                         if not name_b:
                             logger.warning(f"[鸣潮][声骸检验]词条文本检查异常: {_prop.get('attributeName')}")
                             return False, None

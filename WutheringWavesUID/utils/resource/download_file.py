@@ -26,8 +26,8 @@ async def get_skill_img(
         if pic_url:
             await download(pic_url, _dir, name, tag="[鸣潮]")
         else:
-            # logger.warning(f"[鸣潮] 角色 {char_id} 的技能图片不存在，使用默认图片")
-            _path = ROLE_DETAIL_SKILL_PATH / "1102/skill_1102.png"
+            # logger.warning(f"[鸣潮] 角色 {char_id} 的 {skill_name} 技能图片不存在，使用默认图片")
+            _path = ROLE_DETAIL_SKILL_PATH / "1102/skill_攻击提升.png"
 
     return Image.open(_path).convert("RGBA")
 
@@ -74,4 +74,7 @@ async def get_fetter_img(name: str, pic_url: str) -> Image.Image:
 async def get_material_img(material_id: Union[str, int]) -> Image.Image:
     name = f"material_{material_id}.png"
     _path = MATERIAL_PATH / name
+    if not _path.exists():
+        _path = MATERIAL_PATH / "material_2.png"
+
     return Image.open(_path).convert("RGBA")

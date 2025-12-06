@@ -32,6 +32,9 @@ from ...damage.utils import (
     SONATA_TIDEBREAKING,
     SONATA_VOID,
     SONATA_WELKIN,
+    SONATA_PRISMATIC,
+    SONATA_SPAGYRIC,
+    SONATA_SIDEREAL,
     Havoc_Bane_Role_Ids,
     Spectro_Frazzle_Role_Ids,
     cast_attack,
@@ -167,9 +170,11 @@ def phase_damage(
         # 轻云出月
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_MOONLIT):
             pass
+
         # 不绝余音 查无此人
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_LINGERING):
             pass
+
         # 凌冽决断之心 -新冷凝
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_FROSTY):
             if cast_skill in damage_func and attr.char_attr == CHAR_ATTR_FREEZING:
@@ -271,6 +276,7 @@ def phase_damage(
                 title = f"{phase_name}-{ph_detail.ph_name}"
                 msg = "自身共鸣解放伤害提升20%"
                 attr.add_dmg_bonus(0.2, title, msg)
+
         # 失序彼岸之梦
         elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_ANCIENT):
             # 角色共鸣能量为0时，自身暴击率提升20%，声骸技能伤害加成提升35%
@@ -339,3 +345,15 @@ def phase_damage(
             attr.add_atk_percent(0.2, title, msg)
             msg = "角色为敌人添加【虚湮效应】时，共鸣解放伤害加成提升30%"
             attr.add_dmg_bonus(0.3, title, msg)
+
+        # 逆光跃彩之约
+        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_PRISMATIC):
+            pass
+
+        # 流金溯真之式
+        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_SPAGYRIC):
+            pass
+
+        # 星构寻辉之环
+        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_SIDEREAL):
+            pass

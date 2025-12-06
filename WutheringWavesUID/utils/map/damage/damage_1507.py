@@ -212,7 +212,7 @@ def calc_damage_3(
         char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel
     )
     sm = skill_multi.split("+")
-    skill_multi = calc_percent_expression(sm[1]) * 0.5303128453301832
+    skill_multi = calc_percent_expression(sm[1]) * 0.5303128453301832 # 来源小羊 技能树里没有
     title = "终夜尾刀伤害"
     msg = f"技能倍率{skill_multi*100:.2f}%"
     attr.add_skill_multi(skill_multi, title, msg)

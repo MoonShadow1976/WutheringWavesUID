@@ -1,5 +1,6 @@
 # from .download_core import download_all_file
 from .download_github import download_all_file
+from gsuid_core.logger import logger
 
 from .RESOURCE_PATH import (
     AVATAR_PATH,
@@ -14,7 +15,11 @@ from .RESOURCE_PATH import (
 
 
 async def download_all_resource():
-    await download_all_file(
+    """
+    下载所有资源
+    返回: 简化的下载结果字符串
+    """
+    result = await download_all_file(
         "WutheringWavesUID",
         {
             "resource/waves_avatar": AVATAR_PATH,
@@ -27,3 +32,8 @@ async def download_all_resource():
             "resource/guide": GUIDE_PATH,
         },
     )
+    
+    # 记录完整日志
+    logger.info(f"📦 [资源下载完成] {result}")
+    
+    return result

@@ -326,7 +326,7 @@ def calc_damage_10(
 
     # 守岸人提供的额外虚湮效应（3层，共6层）
     title = "拖曳终焉之弦"
-    msg = "变奏后队友攻击命中时，目标【虚湮效应】层数上限增加3层，每层降低2%防御"
+    msg = "变奏后攻击命中时，目标虚湮效应层数上限增加3层，每层降低2%防御"
     attr.add_defense_reduction(0.06, title, msg)
 
     return calc_damage_3(attr, role, isGroup, isSingle=False)

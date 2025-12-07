@@ -94,7 +94,7 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
 )
 async def send_card_info(bot: Bot, ev: Event):
     if WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
 
     user_id = ruser_id(ev)
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
@@ -121,7 +121,7 @@ async def send_card_info(bot: Bot, ev: Event):
 )
 async def send_one_char_detail_msg(bot: Bot, ev: Event):
     if WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
+        return await bot.send("[鸣潮] 已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效或无pcap导入\n")
 
     logger.debug(f"[鸣潮] [角色面板] RAW_TEXT: {ev.raw_text}")
     match = re.search(

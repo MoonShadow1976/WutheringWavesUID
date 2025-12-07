@@ -67,7 +67,7 @@ fake_role_info = RoleInfo(
 )
 
 async def login_overseas(
-    user_id:str, bot_id:str, group_id:str, email: str, password: str, geetest_data: Optional[str] = None
+    email: str, password: str, geetest_data: Optional[str] = None
 ) -> dict[str, Any]:
     try:
         # 创建 kuro 客户端
@@ -214,61 +214,11 @@ async def login_overseas(
         else:
             return {"success": False, "msg": f"登入失敗: {str(e)}\n"}
 
-    for region, player_info in player_infos.items():
-        logger.debug(f"角色區域: {region}, 角色信息: {player_info}")
-        if not player_info:
-            continue
-
-        uid = str(player_info.uid)  # 使用 uid 字段
-
-        # 國際服登入成功，存儲用戶數據
-        # 為國際服創建/更新 WavesUser 記錄
-
-        # 檢查是否已存在用戶
-        existing_user = await WavesUser.get_user_by_attr(
-            user_id, bot_id, "uid", uid
-        )
-
-        if existing_user:
-            # 更新現有用戶
-            await WavesUser.update_data_by_data(
-                select_data={
-                    "user_id": user_id,
-                    "bot_id": bot_id,
-                    "uid": uid,
-                },
-                update_data={
-                    "cookie": token_result.access_token,
-                    "platform": region,
-                    "status": "",
-                },
-            )
-            logger.info(f"WavesUser 更新成功: UID {uid}")
-        else:
-            # 創建新用戶
-            await WavesUser.insert_data(
-                user_id=user_id,
-                bot_id=bot_id,
-                cookie=token_result.access_token,
-                uid=uid,
-                platform=region,
-                status="",
-            )
-            logger.info(f"WavesUser 創建成功: UID {uid}")
-
-        # 更新綁定信息
-        await WavesBind.insert_waves_uid(
-            user_id,
-            bot_id,
-            uid,
-            group_id,
-            lenth_limit=9,
-        )
-
-        # 保存用户信息到本地
-        await save_user_info(uid, player_info.name, level=player_info.level)
-
-    return {"success": True, "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n"}
+    return {
+        "success": True, 
+        "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n",
+        "data": {"player_infos": player_infos, "token": token_result.access_token}
+    }
 
 
 async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:

@@ -12,16 +12,16 @@
 
 ## 丨安装提醒
 
-> **注意：该插件为[早柚核心(gsuid_core)](https://github.com/Genshin-bots/gsuid_core)的扩展 
+> **注意：该插件为[早柚核心(gsuid_core)](https://github.com/Genshin-bots/gsuid_core)的扩展
 > 具体安装方式可参考[[快速开始](https://docs.sayu-bot.com/Started/InstallCore.html)]**
 >
 > **使用方式：**
-> 如果已经是最新版本的 `gsuid_core`, 需在 `plugins`文件夹 `clone`本项目 
-> 后续可以直接对bot发送 `core全部更新`直接更新插件 
+> 如果已经是最新版本的 `gsuid_core`, 需在 `plugins`文件夹 `clone`本项目
+> 后续可以直接对bot发送 `core全部更新`直接更新插件
 > 如使用命令缺失素材可尝试使用命令 `ww下载全部资源`
 >
 > 由于国际服缺少库街区
-> 国际服用户可以基于 `Discord 图片识别`或 `PCAP文件抓包`使用 `WutheringWavesUID` 
+> 国际服用户可以基于 `Discord 图片识别`或 `PCAP文件抓包`使用 `WutheringWavesUID`
 > 国际服用户使用 `ww分析`命令进行 `Discord 图片识别`前请先于控制台 `修改插件设定`处填充 [OCRspace API Key](https://ocr.space/OCRAPI)
 >
 > 支持NoneBot2 & HoshinoBot & ZeroBot & YunzaiBot的鸣潮Bot插件
@@ -29,7 +29,7 @@
 > 🚧插件目前还在施工中，功能快速迭代中...🚧
 >
 > ✨如果需要添加其他鸣潮相关功能欢迎在issues中提出✨
-> 
+>
 > 🔥如有侵权请联系删除🔥
 
 #### 丨反馈渠道
@@ -56,6 +56,7 @@
 - [Kuro-API-Collection](https://github.com/TomyJan/Kuro-API-Collection) 库街区 API 文档
 - [ocr.space_code_example](https://github.com/Zaargh/ocr.space_code_example) OCR.space 示例
 - [Wuthery](https://wuthery.com/)与[YashajinAlice](https://github.com/YashajinAlice) 的支持
+- [wuwabot_reader](https://github.com/TedIwaArdN/wuwabot_reader) 图像匹配逻辑
 - 特别鸣谢以下攻略作者 (排名无先后顺序)
   - [Moealkyne](https://www.taptap.cn/user/533395803)
   - [小沐XMu](https://www.kurobbs.com/person-center?id=10450567)

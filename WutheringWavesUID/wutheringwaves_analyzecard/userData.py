@@ -9,6 +9,7 @@ from gsuid_core.logger import logger
 
 from ..utils.ascension.weapon import get_weapon_detail
 from ..utils.refresh_char_detail import save_card_info
+from ..utils.ascension.echo import get_echo_model
 from ..utils.name_convert import (
     char_id_to_char_name,
     alias_to_weapon_name,
@@ -19,7 +20,11 @@ from ..utils.name_convert import (
 from ..wutheringwaves_config import PREFIX
 from .Phantom_check import PhantomValidator
 from .changeEcho import get_local_all_role_detail
-from .char_fetterDetail import get_fetterDetail_from_char, echo_data_to_cost
+from .char_fetterDetail import (
+    get_fetterDetail_from_char,
+    get_fetterDetail_from_sonata,
+    echo_data_to_cost
+)
 from .user_info_utils import save_user_info, get_region_by_uid
 
 
@@ -87,39 +92,62 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
     # 处理 `phantomData` 的数据
     data["phantomData"] = {
         "cost": 12,
-        "equipPhantomList": []
+        "equipPhantomList": [None] * 5
     }
 
     cost_sum = 0 # 默认cost总数
     cost4_counter = 0 # 4cost 的计数器
-    echo_num = len(result_dict["装备数据"])
     ECHO = await get_fetterDetail_from_char(char_id)
 
-    for i, echo_value in enumerate(result_dict["装备数据"]):
-        # 创建 ECHO 的独立副本
-        echo = copy.deepcopy(ECHO[i])
+    # 遍历所有装备数据 下标：1-5
+    for slot in range(1, 6):
+        i = str(slot)
+        echo_value = result_dict["装备数据"].get(i)
+        match_icon = result_dict["匹配图标"].get(i)
+        if match_icon:
+            check_sonata_name = match_icon.get('sonata_name')
+            check_echo_id = match_icon.get('echo_id')
+        else:
+            check_sonata_name = None
+            check_echo_id = None
 
-        echo["fetterDetail"]["num"] = echo_num
+        if echo_value is None:
+            logger.info(f"[鸣潮][OCR]第 {i} 个声骸无数据")
+            continue
+        
+        # 创建 ECHO 的独立副本
+        if check_sonata_name:
+            echo = copy.deepcopy(await get_fetterDetail_from_sonata(check_sonata_name))
+        else:
+            echo = copy.deepcopy(ECHO[slot - 1])
+
         # 更新 echo 的 mainProps 和 subProps, 防止空表
         echo["mainProps"] = echo_value.get("mainProps", [])
         echo["subProps"] = echo_value.get("subProps", [])
 
         # 根据主词条判断声骸cost并适配id
-        echo_id, cost = await echo_data_to_cost(char_id, echo["mainProps"], i, cost4_counter)
-        cost_sum += cost
+        if check_echo_id and (check_echo := get_echo_model(check_echo_id)):
+            # 有check_echo的情况
+            echo_id, cost, name = check_echo.id, check_echo.get_cost(), check_echo.name
+        else:
+            echo_id, cost = await echo_data_to_cost(char_id, echo["mainProps"], slot - 1, cost4_counter)
+            name = f"识别默认{cost}c"
+            if cost == 4:
+                name = phantom_id_to_phantom_name(str(echo_id))
 
-        echo["phantomProp"]["name"] = f"识别默认{cost}c"
-        if cost == 4:
-            cost4_counter += 1  # 只有实际生成cost4时递增
-            echo["phantomProp"]["name"] = phantom_id_to_phantom_name(str(echo_id))
-
+        # 设置echo属性
+        echo["phantomProp"]["name"] = name
         echo["phantomProp"]["phantomId"] = echo_id
         echo["phantomProp"]["cost"] = cost
         echo["cost"] = cost
 
         # 将更新后的 echo 添加到 equipPhantomList
-        data["phantomData"]["equipPhantomList"].append(echo)
-        
+        data["phantomData"]["equipPhantomList"][slot - 1] = echo
+
+        if cost == 4:
+            cost4_counter += 1
+        cost_sum += cost
+
     data["phantomData"]["cost"] = cost_sum # 更新总cost
     
     # 处理 `role` 的数据

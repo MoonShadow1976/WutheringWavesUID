@@ -37,11 +37,11 @@ crop_ratios = [
     (694/REF_WIDTH, 115/REF_HEIGHT, 764/REF_WIDTH, 215/REF_HEIGHT), # 共鸣解放
     (501/REF_WIDTH, 250/REF_HEIGHT, 571/REF_WIDTH, 350/REF_HEIGHT), # 变奏技能
     (650/REF_WIDTH, 250/REF_HEIGHT, 720/REF_WIDTH, 350/REF_HEIGHT), # 共鸣回路
-    ( 10/REF_WIDTH, 360/REF_HEIGHT, 214/REF_WIDTH, 590/REF_HEIGHT), # 声骸1
+    (12/REF_WIDTH, 360/REF_HEIGHT, 216/REF_WIDTH, 590/REF_HEIGHT), # 声骸1
     (221/REF_WIDTH, 360/REF_HEIGHT, 425/REF_WIDTH, 590/REF_HEIGHT), # 声骸2
     (430/REF_WIDTH, 360/REF_HEIGHT, 634/REF_WIDTH, 590/REF_HEIGHT), # 声骸3
     (639/REF_WIDTH, 360/REF_HEIGHT, 843/REF_WIDTH, 590/REF_HEIGHT), # 声骸4
-    (848/REF_WIDTH, 360/REF_HEIGHT, 1052/REF_WIDTH,590/REF_HEIGHT), # 声骸5
+    (848/REF_WIDTH, 360/REF_HEIGHT, 1052/REF_WIDTH,590/REF_HEIGHT), # 声骸5 之间左右差209
 ]
 # 共鸣链识别顺序（从右往左，从6到1）
 chain_crop_ratios = [
@@ -66,7 +66,14 @@ ECHO_WIDTH = 204
 ECHO_HEIGHT = 230
 echo_crop_ratios = [
     (110/ECHO_WIDTH,  40/ECHO_HEIGHT, 204/ECHO_WIDTH,  85/ECHO_HEIGHT), # 右上角主词条(忽略声骸cost，暂不处理)
-    ( 26/ECHO_WIDTH, 105/ECHO_HEIGHT, 204/ECHO_WIDTH, 230/ECHO_HEIGHT), # 下部6条副词条
+    ( 24/ECHO_WIDTH, 105/ECHO_HEIGHT, 204/ECHO_WIDTH, 230/ECHO_HEIGHT), # 下部6条副词条  zuo 左2
+]
+
+# 声骸图标和套装识别区域比例（左、上、右、下），数字来自src/example_card_2.png
+echo_icon_crop_ratios = [
+    (  0/ECHO_WIDTH,  2/ECHO_HEIGHT, 107/ECHO_WIDTH, 104/ECHO_HEIGHT), # 声骸
+    #(139 136/ECHO_WIDTH, 10/ECHO_HEIGHT, 167 164/ECHO_WIDTH,  37/ECHO_HEIGHT), # 套装
+    (137/ECHO_WIDTH, 9/ECHO_HEIGHT, 164/ECHO_WIDTH,  37/ECHO_HEIGHT), # 套装
 ]
 
 # 全局配置
@@ -171,8 +178,8 @@ async def async_ocr(bot: Bot, ev: Event):
     if not bool_i:
         return await bot.send("[鸣潮]获取dc卡片图失败！卡片分析已停止。\n", at_sender)
     # 获取dc卡片与共鸣链
-    chain_num, cropped_images = await cut_card_to_ocr(image)
-
+    chain_num, chek_imgs, cropped_images = await cut_card_to_ocr(image)
+ 
     # 遍历密钥
     ocr_results =  None
     for key in api_key_list:
@@ -204,7 +211,7 @@ async def async_ocr(bot: Bot, ev: Event):
         logger.warning("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。")
         return await bot.send("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。\n", at_sender)
 
-    bool_d, final_result = await ocr_results_to_dict(chain_num, ocr_results)
+    bool_d, final_result = await ocr_results_to_dict(chain_num, chek_imgs, ocr_results)
     if not bool_d:
         return await bot.send("[鸣潮]Please use chinese card！\n", at_sender)
 
@@ -420,17 +427,27 @@ async def cut_card_to_ocr(image):
     image_char = cropped_images[0]
     cropped_images[0] = cut_image_need_data(image_char, char_crop_ratios)
 
-    # 进一步裁剪拼接声骸图
-    for i in range(7, 12):  # 替换索引7-11，即5张声骸图
+    # 进一步处理声骸图：裁切数值、图像匹配
+    analyze_echoes_results = []
+    for i in range(7, 12):
         image_echo = cropped_images[i]
-        cropped_images[i] = cut_image_need_data(image_echo, echo_crop_ratios) 
+
+        # 图像匹配部分
+        if WutheringWavesConfig.get_config("CardImgCheck").data:
+            cropped_icons = cut_image(image_echo, echo_icon_crop_ratios)
+            from .img_check import batch_analyze_card_img
+            results = await batch_analyze_card_img(cropped_icons, str(i - 6))
+            analyze_echoes_results.append(results)
+
+        # 裁切数值部分
+        cropped_images[i] = cut_image_need_data(image_echo, echo_crop_ratios)
         
         # from pathlib import Path # 保存裁切图片用于调试
         # SRC_PATH = Path(__file__).parent / "src"
         # cropped_images[i].save(f"{SRC_PATH}/_{i}.png")
 
     # 调用 images_ocrspace 函数并获取识别结果
-    return chain_num, cropped_images
+    return chain_num, analyze_echoes_results, cropped_images
 
 async def images_ocrspace(api_key, engine_num, cropped_images):
     """
@@ -527,7 +544,7 @@ async def fetch_ocr_result(session, url, payload):
     except Exception as e:
         return [{'error': f'Processing Error:{e}', 'text': None}]
 
-async def ocr_results_to_dict(chain_num, ocr_results):
+async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
     """
     适配OCR.space输出结构的增强版结果解析
     输入结构: [{'text': '...', 'error': ...}, ...]
@@ -537,13 +554,20 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         "用户信息": {},
         "角色信息": {},
         "技能等级": [],
-        "装备数据": [],
+        "装备数据": {},
+        "匹配图标": {},
         "武器信息": {}
     }
     
     # 保存角色共鸣链
-    if not final_result["角色信息"].get("共鸣链"):
-        final_result["角色信息"]["共鸣链"] = chain_num
+    final_result["角色信息"]["共鸣链"] = chain_num
+
+    # 保存声骸图标与套装匹配结果
+    for result in chek_imgs:
+        final_result["匹配图标"][f"{result['slot']}"] = {
+            "echo_id": result['echo'],
+            "sonata_name": result['echo_set'],
+        }
 
     # 增强正则模式（适配多行文本处理）
     patterns = {
@@ -687,7 +711,7 @@ async def ocr_results_to_dict(chain_num, ocr_results):
         
         # 分配主副属性
         if valid_entries:
-             # 主词条逻辑（取前两个有效词条）
+            # 主词条逻辑（取前两个有效词条）
             for entry in valid_entries[:2]:
                 equipment["mainProps"].append({
                     "attributeName": entry[0],
@@ -702,7 +726,9 @@ async def ocr_results_to_dict(chain_num, ocr_results):
                     "attributeValue": entry[1]
                 })
             
-            final_result["装备数据"].append(equipment)
+            final_result["装备数据"][f"{idx - 6}"] = equipment
+        else:
+            final_result["装备数据"][f"{idx - 6}"] = None
 
     logger.info(f" [鸣潮][dc卡片识别] 最终提取内容:\n{final_result}")
     return True, final_result

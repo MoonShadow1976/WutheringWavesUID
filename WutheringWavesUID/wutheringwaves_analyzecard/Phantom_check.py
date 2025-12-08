@@ -182,19 +182,22 @@ class PhantomValidator:
     async def validate_phatom_list(self):
         """验证整个声骸列表"""
         for phantom in self.equipPhantomList:
-            if phantom and phantom.get("phantomProp"):
-                    props = get_props(phantom)
-                    for _prop in props:
-                        name_b = exist_attribute_prop(_prop.get("attributeName"))
-                        if not name_b:
-                            logger.warning(f"[鸣潮][声骸检验]词条文本检查异常: {_prop.get('attributeName')}")
-                            return False, None
+            if not phantom:
+                continue
+
+            if phantom.get("phantomProp"):
+                props = get_props(phantom)
+                for _prop in props:
+                    name_b = exist_attribute_prop(_prop.get("attributeName"))
+                    if not name_b:
+                        logger.warning(f"[鸣潮][声骸检验]词条文本检查异常: {_prop.get('attributeName')}")
+                        return False, None
 
             value_b, text = self._validate_phantom(phantom)
             if not value_b:
                 logger.warning(f"[鸣潮][声骸检验]词条数值检查异常：{text}")
                 return False, None
-                
+
         return True, self.equipPhantomList
 
     def _validate_phantom(self, phantom):

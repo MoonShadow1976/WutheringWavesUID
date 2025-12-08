@@ -160,6 +160,11 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
             "输入后回车",
         ],
     ),
+    "CardImgCheck": GsBoolConfig(
+        "国际服dc卡片声骸图标识别",
+        "国际服dc卡片声骸图标识别",
+        False,
+    ),
     "WavesToken": GsStrConfig(
         "鸣潮全排行token",
         "鸣潮全排行token",

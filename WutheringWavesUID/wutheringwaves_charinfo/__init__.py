@@ -288,6 +288,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         if not uid:
             return await bot.send(error_reply(WAVES_CODE_103))
 
+        msg = ""
         is_refresh = 0  # 面板直出刷新标志
         if not waves_api.is_net(uid) and not change_list_regex and not re.search(r'\d', char) and WutheringWavesConfig.get_config("CharCardRefresh").data:
             if not char_id or len(char_id) != 4:

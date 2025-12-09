@@ -17,7 +17,7 @@ from ..utils.name_convert import (
     phantom_id_to_phantom_name
 )
 
-from ..wutheringwaves_config import PREFIX
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .Phantom_check import PhantomValidator
 from .changeEcho import get_local_all_role_detail
 from .char_fetterDetail import (
@@ -222,7 +222,13 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: Dict):
 
     waves_data.append(update_data)
     await save_card_info(uid, waves_data)
-    await bot.send(f"[鸣潮]dc卡片数据提取成功！识别套装使用默认配置(影响伤害计算不影响声骸评分)\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装<合鸣效果>】 (可使用如 {PREFIX}改{char_name_print}套装高天3不绝2 改为3+2套装) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
+
+    if not WutheringWavesConfig.get_config("CardImgCheck").data:
+        prefix_msg = "识别套装使用默认配置(影响伤害计算不影响声骸评分)"
+    else:
+        prefix_msg = "识别套装使用图像匹配，可能存在误差(影响伤害计算不影响声骸评分)"
+
+    await bot.send(f"[鸣潮]dc卡片数据提取成功！{prefix_msg}\n可使用：\n【{PREFIX}{char_name_print}面板】查看您的角色面板\n【{PREFIX}改{char_name_print}套装<合鸣效果>】 (可使用如 {PREFIX}改{char_name_print}套装高天3不绝2 改为3+2套装) 修改声骸套装\n【{PREFIX}改{char_name_print}声骸】修改当前套装的首位声骸\n", at_sender)
     logger.info(f" [鸣潮][dc卡片识别] 数据识别完毕，用户{uid}的{char_name_print}面板数据已保存到本地！")
     return
 

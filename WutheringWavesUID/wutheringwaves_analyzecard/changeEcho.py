@@ -165,83 +165,94 @@ async def change_sonata_and_first_echo(bot: Bot, char_id: int, sonata_a: str | N
             + "\n".join(options)
             + "\n请输入序号（1-{}）选择".format(len(options))
         )
-        try:
-            SUCCESS = False
-            resp = await bot.receive_resp(reply=TEXT_GET_RESP, timeout=30)
-            if resp is not None and resp.content[0].data is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
-                choice = int(resp.content[0].data) - 1
-                if 0 <= choice < len(flat_choices):
-                    SUCCESS = True
-                    selected = flat_choices[choice]
-                    target_cost = selected["cost"]
-                    selected_id = selected["id"]
-                    target_sonata = selected["sonata"]
+        # try:
+        SUCCESS = False
+        resp = await bot.receive_resp(reply=TEXT_GET_RESP, timeout=30)
+        if resp is not None and resp.content[0].data is not None and resp.content[0].type == "text" and resp.content[0].data.isdigit():
+            choice = int(resp.content[0].data) - 1
+            if 0 <= choice < len(flat_choices):
+                SUCCESS = True
+                selected = flat_choices[choice]
+                target_cost = selected["cost"]
+                selected_id = selected["id"]
+                target_sonata = selected["sonata"]
 
-                    # 获取该套装和cost层级的全部可选ID
-                    same_cost_ids = []
-                    if target_sonata in phantom_id_list_groups:
-                        for group in phantom_id_list_groups[target_sonata]:
-                            if group["cost"] == target_cost:
-                                same_cost_ids = group["list"]
-                                break
-                    
-                    if not same_cost_ids:
-                        return False, f"未找到套装{target_sonata}的{target_cost}cost声骸列表"
+                # 获取该套装和cost层级的全部可选ID
+                same_cost_ids = []
+                if target_sonata in phantom_id_list_groups:
+                    for group in phantom_id_list_groups[target_sonata]:
+                        if group["cost"] == target_cost:
+                            same_cost_ids = group["list"]
+                            break
+                
+                if not same_cost_ids:
+                    return False, f"未找到套装{target_sonata}的{target_cost}cost声骸列表"
 
-                    # 排除已选择的声骸ID，获取其他可选声骸
-                    other_phantoms = [p for p in same_cost_ids if p != selected_id]
-                    
-                    # 收集所有有效声骸，并按套装分类
-                    sonata_to_phantoms = {}
-                    for echo in valid_phantoms:
-                        sonata = echo["fetterDetail"]["name"]
-                        if sonata not in sonata_to_phantoms:
-                            sonata_to_phantoms[sonata] = []
-                        sonata_to_phantoms[sonata].append(echo)
-                    
-                    # 构建新的声骸顺序：将目标套装的声骸放在最前面
-                    new_valid_phantoms = []
-                    
-                    # 首先添加目标套装的声骸（但要保持原来的内部顺序）
-                    if target_sonata in sonata_to_phantoms:
-                        target_phantoms = sonata_to_phantoms[target_sonata]
-                        # 替换目标套装的声骸ID
-                        for i, echo in enumerate(target_phantoms):
-                            # 如果是该套装中第一个满足cost条件的声骸，使用selected_id
-                            if i == 0 and int(echo["cost"]) == target_cost:
-                                echo["phantomProp"]["phantomId"] = selected_id
-                                echo["phantomProp"]["name"] = phantom_id_to_phantom_name(selected_id)
-                            # 其他同套装同cost的声骸使用other_phantoms
-                            elif int(echo["cost"]) == target_cost and other_phantoms:
-                                echo["phantomProp"]["phantomId"] = other_phantoms[(i - 1) % len(other_phantoms)]
-                                echo["phantomProp"]["name"] = phantom_id_to_phantom_name(other_phantoms[i - 1])
-                        new_valid_phantoms.extend(target_phantoms)
-                    
-                    # 按照存在的套装添加其他套装的声骸(联动sonata_to_phantoms)
-                    for sonata in sonata_exists:
-                        if sonata != target_sonata and sonata in sonata_to_phantoms:
-                            logger.debug(f"[鸣潮] 套装 {sonata} 添加声骸，添加数量: {len(sonata_to_phantoms[sonata])}")
-                            new_valid_phantoms.extend(sonata_to_phantoms[sonata])
-                    
-                    # 确保长度正确
-                    if len(new_valid_phantoms) != len(valid_phantoms):
-                        logger.error(f"[鸣潮] 新声骸列表长度错误，预期{len(valid_phantoms)}，实际{len(new_valid_phantoms)}，构建结果：{new_valid_phantoms}")
-                        return False, "声骸数量不匹配，重建列表失败"
-                    
-                    # 将新列表填回原位置（保持null值位置不变）
-                    new_index = 0
-                    for i in range(len(equip_phantom_list)):
-                        if equip_phantom_list[i] is not None:
-                            if new_index < len(new_valid_phantoms):
-                                equip_phantom_list[i] = new_valid_phantoms[new_index]
-                                new_index += 1
-                    
-                    logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
+                # 排除已选择的声骸ID，获取其他可选声骸
+                other_phantoms = [p for p in same_cost_ids if p != selected_id]
+                
+                # 收集所有有效声骸，并按套装分类
+                sonata_to_phantoms = {}
+                for echo in valid_phantoms:
+                    sonata = echo["fetterDetail"]["name"]
+                    if sonata not in sonata_to_phantoms:
+                        sonata_to_phantoms[sonata] = []
+                    sonata_to_phantoms[sonata].append(echo)
+                
+                # 构建新的声骸顺序：将目标套装的声骸放在最前面
+                new_valid_phantoms = []
+                
+                # 首先添加目标套装的声骸（但要保持原来的内部顺序）
+                if target_sonata in sonata_to_phantoms:
+                    target_phantoms = sonata_to_phantoms[target_sonata]
 
-            if not SUCCESS:
-                return False, "修改已关闭，请检查输入的正确性"
-        except Exception:
-            return False, "等待超时，修改已关闭"
+                    # 将第一个满足cost条件的元素移到列表最前面
+                    for i, echo in enumerate(target_phantoms):
+                        if int(echo["cost"]) == target_cost:
+                            # 找到第一个满足条件的元素，将其移到列表开头
+                            target_phantoms.insert(0, target_phantoms.pop(i))
+                            break
+
+                    # 替换目标套装的声骸ID
+                    is_first = True
+                    for i, echo in enumerate(target_phantoms):
+                        # 如果是该套装中第一个满足cost条件的声骸，使用selected_id
+                        if is_first and int(echo["cost"]) == target_cost:
+                            echo["phantomProp"]["phantomId"] = selected_id
+                            echo["phantomProp"]["name"] = phantom_id_to_phantom_name(selected_id)
+                            is_first = False
+                        # 其他同套装同cost的声骸使用other_phantoms
+                        elif int(echo["cost"]) == target_cost and other_phantoms:
+                            echo["phantomProp"]["phantomId"] = other_phantoms[(i - 1) % len(other_phantoms)]
+                            echo["phantomProp"]["name"] = phantom_id_to_phantom_name(echo["phantomProp"]["phantomId"])
+
+                    new_valid_phantoms.extend(target_phantoms)
+                
+                # 按照存在的套装添加其他套装的声骸(联动sonata_to_phantoms)
+                for sonata in sonata_exists:
+                    if sonata != target_sonata and sonata in sonata_to_phantoms:
+                        logger.debug(f"[鸣潮] 套装 {sonata} 添加声骸，添加数量: {len(sonata_to_phantoms[sonata])}")
+                        new_valid_phantoms.extend(sonata_to_phantoms[sonata])
+                
+                # 确保长度正确
+                if len(new_valid_phantoms) != len(valid_phantoms):
+                    logger.error(f"[鸣潮] 新声骸列表长度错误，预期{len(valid_phantoms)}，实际{len(new_valid_phantoms)}，构建结果：{new_valid_phantoms}")
+                    return False, "声骸数量不匹配，重建列表失败"
+                
+                # 将新列表填回原位置（保持null值位置不变）
+                new_index = 0
+                for i in range(len(equip_phantom_list)):
+                    if equip_phantom_list[i] is not None:
+                        if new_index < len(new_valid_phantoms):
+                            equip_phantom_list[i] = new_valid_phantoms[new_index]
+                            new_index += 1
+                
+                logger.info(f"[鸣潮] 修改cost声骸id为:{selected_id}")
+
+        if not SUCCESS:
+            return False, "修改已关闭，请检查输入的正确性"
+        # except Exception:
+        #     return False, "程序错误，修改已关闭"
 
     # 更新数据
     role_data[char_id] = char_data

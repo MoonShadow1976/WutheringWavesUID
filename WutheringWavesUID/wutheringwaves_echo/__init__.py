@@ -13,7 +13,6 @@ sv_waves_echo_list = SV(f"声骸展示")
 
 @sv_waves_echo_list.on_fullmatch(
     (
-        f"声骸列表",
         f"我的声骸",
         f"声骸仓库",
         f"声骸",

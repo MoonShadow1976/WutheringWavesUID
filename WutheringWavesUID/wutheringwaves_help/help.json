@@ -588,7 +588,7 @@
       {
         "name": "武器列表",
         "desc": "武器列表",
-        "eg": "(武器类型)武器(列表)",
+        "eg": "(武器类型)武器列表",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -597,6 +597,14 @@
         "name": "合鸣/套装效果",
         "desc": "合鸣/套装效果",
         "eg": "套装列表",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "声骸列表",
+        "desc": "声骸列表",
+        "eg": "(套装名)声骸列表",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

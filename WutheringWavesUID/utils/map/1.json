@@ -6027,7 +6027,7 @@
           "quality": 5
         },
         {
-          "cost": 3,
+          "cost": 1,
           "fetterDetail": {
             "firstDescription": "",
             "groupId": 0,
@@ -6039,13 +6039,13 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "湮灭伤害加成",
-              "attributeValue": "30%",
+              "attributeName": "攻击",
+              "attributeValue": "18%",
               "iconUrl": ""
             },
             {
-              "attributeName": "攻击",
-              "attributeValue": "100",
+              "attributeName": "生命",
+              "attributeValue": "2280",
               "iconUrl": ""
             }
           ],
@@ -6072,10 +6072,10 @@
             }
           ],
           "phantomProp": {
-            "cost": 3,
+            "cost": 1,
             "iconUrl": "",
-            "name": "持刃贵族",
-            "phantomId": 6000077,
+            "name": "梦魇·侏侏鸵",
+            "phantomId": 6000172,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -6083,7 +6083,7 @@
           "quality": 5
         },
         {
-          "cost": 3,
+          "cost": 1,
           "fetterDetail": {
             "firstDescription": "",
             "groupId": 0,
@@ -6095,13 +6095,13 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "湮灭伤害加成",
-              "attributeValue": "30%",
+              "attributeName": "攻击",
+              "attributeValue": "18%",
               "iconUrl": ""
             },
             {
-              "attributeName": "攻击",
-              "attributeValue": "100",
+              "attributeName": "生命",
+              "attributeValue": "2280",
               "iconUrl": ""
             }
           ],
@@ -6128,10 +6128,10 @@
             }
           ],
           "phantomProp": {
-            "cost": 3,
+            "cost": 1,
             "iconUrl": "",
-            "name": "梦魇·刺玫菇",
-            "phantomId": 6000173,
+            "name": "梦魇·呜咔咔",
+            "phantomId": 6000171,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -6195,7 +6195,7 @@
           "quality": 5
         },
         {
-          "cost": 1,
+          "cost": 4,
           "fetterDetail": {
             "firstDescription": "",
             "groupId": 0,
@@ -6207,13 +6207,13 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "攻击",
-              "attributeValue": "18%",
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
               "iconUrl": ""
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "2280",
+              "attributeName": "攻击",
+              "attributeValue": "150",
               "iconUrl": ""
             }
           ],
@@ -6240,10 +6240,10 @@
             }
           ],
           "phantomProp": {
-            "cost": 1,
+            "cost": 4,
             "iconUrl": "",
-            "name": "遁地鼠",
-            "phantomId": 390070077,
+            "name": "梦魇·无冠者",
+            "phantomId": 6000090,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""

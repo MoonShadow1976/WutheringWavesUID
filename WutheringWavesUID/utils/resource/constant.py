@@ -122,7 +122,7 @@ SONATA_FIRST_ID = {
 }
 
 
-SHORT_NAME = {6000106: "芙露德莉斯", 6000167: "利维亚坦"}
+SHORT_NAME = {6000106: "芙露德莉斯", 6000167: "利维亚坦", 6000116: "芬莱克"}
 
 
 def get_short_name(sonata_id: int, sonata_name: str) -> str:

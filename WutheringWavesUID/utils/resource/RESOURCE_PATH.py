@@ -108,3 +108,6 @@ waves_templates = Environment(
 
 # 设置captcha目录
 CAPTCHA_PATH = Path(__file__).parents[1].parent / "utils/api/captcha"
+
+# 缺失图
+MISSING_IMG = Path(__file__).parent.parent / "texture2d/缺失.png"

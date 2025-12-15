@@ -376,6 +376,51 @@ class Char_1305(CharAbstract):
     starLevel = 5
 
 
+class Char_1306(CharAbstract):
+    id = 1306
+    name = "卜灵"
+    starLevel = 4
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 附近队伍中所有角色全伤害加深15%
+        title = "卜灵-延奏技能"
+        msg = "附近队伍中所有角色全伤害加深15%"
+        attr.add_dmg_deepen(0.15, title, msg)
+    
+        if skill_damage == attr.char_damage:
+            if len(attr.teammate_char_ids) == 1:
+                #【雷法·两仪交泰】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升10%
+                title = "卜灵-雷法·两仪交泰"
+                msg = "队伍中登场的角色共鸣技能伤害加成提升10%"
+                attr.add_dmg_bonus(0.1, title, msg)
+            elif len(attr.teammate_char_ids) >= 2 and chain < 6:
+                #【雷法·三才合一】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升25%
+                title = "卜灵-雷法·三才合一"
+                msg = "队伍中登场的角色共鸣技能伤害加成提升25%"
+                attr.add_dmg_bonus(0.25, title, msg)
+            elif len(attr.teammate_char_ids) >= 2 and chain >= 6:
+                #【雷法·三才合一】状态持续期间，队伍中登场的角色获得的共鸣技能伤害加成效果提升至50%
+                title = "卜灵-六链-雷法·三才合一"
+                msg = "队伍中登场的角色共鸣技能伤害加成提升50%"
+                attr.add_dmg_bonus(0.5, title, msg)
+        
+        if attr.char_template == temp_atk:
+            title = "卜灵-合鸣效果-隐世回光"
+            msg = "全队共鸣者攻击提升15%"
+            attr.add_atk_percent(0.15, title, msg)
+
+            title = "卜灵-声骸技能-无归的谬误"
+            msg = "全队角色攻击提升10%"
+            attr.add_atk_percent(0.1, title, msg)
+
+
+
 class Char_1402(CharAbstract):
     id = 1402
     name = "秧秧"

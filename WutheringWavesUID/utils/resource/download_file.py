@@ -10,6 +10,7 @@ from .RESOURCE_PATH import (
     PHANTOM_PATH,
     ROLE_DETAIL_CHAINS_PATH,
     ROLE_DETAIL_SKILL_PATH,
+    MISSING_IMG,
 )
 
 
@@ -27,7 +28,7 @@ async def get_skill_img(
             await download(pic_url, _dir, name, tag="[鸣潮]")
         else:
             # logger.warning(f"[鸣潮] 角色 {char_id} 的 {skill_name} 技能图片不存在，使用默认图片")
-            _path = ROLE_DETAIL_SKILL_PATH / "1102/skill_攻击提升.png"
+            _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")
 
@@ -45,7 +46,7 @@ async def get_chain_img(
             await download(pic_url, _dir, name, tag="[鸣潮]")
         else:
             # logger.warning(f"[鸣潮] 角色 {char_id} 的共鸣链图片不存在，使用默认图片")
-            _path = ROLE_DETAIL_CHAINS_PATH / f"1102/chain_{order_id}.png"
+            _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")
 
@@ -57,7 +58,7 @@ async def get_phantom_img(phantom_id: int, pic_url: str) -> Image.Image:
         if pic_url:
             await download(pic_url, PHANTOM_PATH, name, tag="[鸣潮]")
         else:
-            _path = PHANTOM_PATH / "phantom_390070051.png"
+            _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")
 
@@ -75,6 +76,6 @@ async def get_material_img(material_id: Union[str, int]) -> Image.Image:
     name = f"material_{material_id}.png"
     _path = MATERIAL_PATH / name
     if not _path.exists():
-        _path = MATERIAL_PATH / "material_2.png"
+        _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")

@@ -138,7 +138,10 @@ async def get_role_pile(
 
     name = f"role_pile_{resource_id}.png"
     path = ROLE_PILE_PATH / name
-    return False, Image.open(path).convert("RGBA")
+    if path.exists():
+        return False, Image.open(path).convert("RGBA")
+    else:
+        return False, Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
 async def get_role_pile_old(
@@ -154,13 +157,19 @@ async def get_role_pile_old(
 
     name = f"role_pile_{resource_id}.png"
     path = ROLE_PILE_PATH / name
-    return Image.open(path).convert("RGBA")
+    if path.exists():
+        return Image.open(path).convert("RGBA")
+    else:
+        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
 async def get_square_avatar(resource_id: Union[int, str]) -> Image.Image:
     name = f"role_head_{resource_id}.png"
     path = AVATAR_PATH / name
-    return Image.open(path).convert("RGBA")
+    if path.exists():
+        return Image.open(path).convert("RGBA")
+    else:
+        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
 async def cropped_square_avatar(item_icon: Image.Image, size: int) -> Image.Image:
@@ -190,10 +199,10 @@ async def cropped_square_avatar(item_icon: Image.Image, size: int) -> Image.Imag
 async def get_square_weapon(resource_id: Union[int, str]) -> Image.Image:
     name = f"weapon_{resource_id}.png"
     path = WEAPON_PATH / name
-    if os.path.exists(path):
+    if path.exists():
         return Image.open(path).convert("RGBA")
     else:
-        return Image.open(WEAPON_PATH / "weapon_21010063.png").convert("RGBA")
+        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
 async def get_attribute(name: str = "", is_simple: bool = False) -> Image.Image:
@@ -211,7 +220,10 @@ async def get_attribute_prop(name: str = "") -> Image.Image:
 
 
 async def get_attribute_effect(name: str = "") -> Image.Image:
-    return Image.open(TEXT_PATH / f"attribute_effect/attr_{name}.png").convert("RGBA")
+    path = TEXT_PATH / f"attribute_effect/attr_{name}.png"
+    if path.exists():
+        return Image.open(path).convert("RGBA")
+    return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
 async def get_weapon_type(name: str = "") -> Image.Image:

@@ -448,18 +448,20 @@ class OnlineWeaponList(RootModel[List[OnlineWeapon]]):
 class OnlineRole(BaseModel):
     """
     {
-        "roleId": 1102,
-        "roleName": "散华",
-        "roleIconUrl": "https://web-static.kurobbs.com/adminConfig/98/role_icon/1738924370710.png",
-        "starLevel": 4,
-        "attributeId": 1,
-        "attributeName": null,
-        "weaponTypeId": 2,
-        "weaponTypeName": "迅刀",
-        "acronym": "sh",
-        "isPreview": false,
-        "isNew": false,
-        "priority": 4
+        'roleId': 1608, 
+        'roleName': '弗洛洛', 
+        'roleIconUrl': 'https://web-static.kurobbs.com/adminConfig/98/role_icon/1753068445260.png', 
+        'starLevel': 5, 
+        'attributeId': 6, 
+        'weaponTypeId': 5, 
+        'weaponTypeName': '音感仪', 
+        'acronym': 'fll', 
+        'isPreview': False, 
+        'isNew': False, 
+        'priority': 285, 
+        'rolePicture': 'https://web-static.kurobbs.com/adminConfig/98/rolePicture/', 
+        'rolePictureSmall': 'https://web-static.kurobbs.com/adminConfig/98/rolePictureSmall/', 
+        'commonSkillList': [{'type': '常态攻击', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085716584.png', 'recommend': False}, {'type': '共鸣技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085063395.png', 'recommend': False}, {'type': '共鸣解放', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085554763.png', 'recommend': False}, {'type': '变奏技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085560200.png', 'recommend': False}, {'type': '共鸣回路', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085704555.png', 'recommend': False}, {'type': '延奏技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085353417.png', 'recommend': False}], 'advanceSkillList': [{'location': '2-1', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068073796.png'}, {'location': '2-2', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068161957.png'}, {'location': '2-3', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068592556.png'}, {'location': '2-4', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753067972012.png'}, {'location': '2-5', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068637999.png'}, {'location': '3-1', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068562194.png'}, {'location': '3-2', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753067862690.png'}, {'location': '3-3', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068670842.png'}, {'location': '3-4', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068186045.png'}, {'location': '3-5', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068673636.png'}]
     }
     """
 
@@ -468,7 +470,7 @@ class OnlineRole(BaseModel):
     roleIconUrl: str
     starLevel: int
     attributeId: int
-    attributeName: Optional[str]
+    attributeName: Optional[str] = None
     weaponTypeId: int
     weaponTypeName: str
     acronym: str

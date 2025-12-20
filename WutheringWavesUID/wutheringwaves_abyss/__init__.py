@@ -4,12 +4,12 @@ from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
-from ..utils.waves_api import waves_api
 from ..utils.at_help import ruser_id
 from ..utils.button import WavesButton
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_098
+from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_103
 from ..utils.hint import error_reply
+from ..utils.waves_api import waves_api
 from ..wutheringwaves_abyss.draw_abyss_card import draw_abyss_img
 from .draw_challenge_card import draw_challenge_img
 from .draw_slash_card import draw_slash_img
@@ -53,7 +53,7 @@ async def send_waves_abyss_info(bot: Bot, ev: Event):
         at_sender = True if ev.group_id else False
         await bot.send(im, at_sender)
     else:
-        buttons: List[Any] = [
+        buttons: list[Any] = [
             WavesButton("深塔", "深塔"),
             WavesButton("超载", "超载"),
             WavesButton("稳定", "稳定"),
@@ -117,7 +117,7 @@ async def send_waves_slash_info(bot: Bot, ev: Event):
         at_sender = True if ev.group_id else False
         return await bot.send(im, at_sender)
     else:
-        buttons: List[Any] = [
+        buttons: list[Any] = [
             WavesButton("冥歌海墟", "冥海"),
             WavesButton("冥海前6层", "禁忌"),
             WavesButton("冥海11层", "冥海11"),

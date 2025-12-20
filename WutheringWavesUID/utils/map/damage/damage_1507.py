@@ -19,9 +19,7 @@ from .buff import feibi_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
@@ -36,9 +34,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel)
     title = "集中压制伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -99,9 +95,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     # 设置角色伤害类型
     attr.set_char_damage(hit_damage)
@@ -116,17 +110,13 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel)
     title = "终夜伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
     # 每点【焰光】增加倍率
-    yanguang_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "4", skillLevel
-    )
+    yanguang_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "4", skillLevel)
     title = "【焰光】增加倍率*40层"
     msg = f"{yanguang_multi}*40"
     attr.add_skill_multi(f"{yanguang_multi}*40", title, msg)
@@ -191,9 +181,7 @@ def calc_damage_2(
     return crit_damage, expected_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     # 设置角色伤害类型
     attr.set_char_damage(hit_damage)
@@ -208,19 +196,15 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel)
     sm = skill_multi.split("+")
-    skill_multi = calc_percent_expression(sm[1]) * 0.5303128453301832 # 来源小羊 技能树里没有
+    skill_multi = calc_percent_expression(sm[1]) * 0.5303128453301832  # 来源小羊 技能树里没有
     title = "终夜尾刀伤害"
-    msg = f"技能倍率{skill_multi*100:.2f}%"
+    msg = f"技能倍率{skill_multi * 100:.2f}%"
     attr.add_skill_multi(skill_multi, title, msg)
 
     # 每点【焰光】增加倍率
-    yanguang_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "4", skillLevel
-    )
+    yanguang_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "4", skillLevel)
     title = "【焰光】增加倍率*20层"
     msg = f"{yanguang_multi}*20"
     attr.add_skill_multi(f"{yanguang_multi}*20")
@@ -284,9 +268,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_4(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -300,9 +282,7 @@ def calc_damage_4(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
     title = "重燃伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -362,9 +342,7 @@ def calc_damage_4(
     return crit_damage, expected_damage
 
 
-def calc_damage_5(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -378,13 +356,11 @@ def calc_damage_5(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
     sm = skill_multi.split("+")
     skill_multi = calc_percent_expression(sm[1])
     title = "终绝将至之刻2段伤害"
-    msg = f"技能倍率{skill_multi*100:.2f}%"
+    msg = f"技能倍率{skill_multi * 100:.2f}%"
     attr.add_skill_multi(skill_multi, title, msg)
 
     # 设置角色施放技能
@@ -442,9 +418,7 @@ def calc_damage_5(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
@@ -455,9 +429,7 @@ def calc_damage_10(
     return calc_damage_3(attr, role, isGroup)
 
 
-def calc_damage_11(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
@@ -470,9 +442,7 @@ def calc_damage_11(
     return calc_damage_3(attr, role, isGroup)
 
 
-def calc_damage_12(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
@@ -485,9 +455,7 @@ def calc_damage_12(
     return calc_damage_3(attr, role, isGroup)
 
 
-def calc_damage_13(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_13(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
@@ -500,9 +468,7 @@ def calc_damage_13(
     return calc_damage_2(attr, role, isGroup)
 
 
-def calc_damage_14(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_14(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
@@ -515,9 +481,7 @@ def calc_damage_14(
     return calc_damage_2(attr, role, isGroup)
 
 
-def calc_damage_15(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_15(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_env_spectro_deepen()
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")

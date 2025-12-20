@@ -66,9 +66,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "5", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "5", skillLevel)
 
     aftersound_percent = 1
     if isSingle:
@@ -77,7 +75,7 @@ def calc_damage_1(
 
         aftersound_percent = round(s2 / calc_percent_expression(skill_multi), 5)
 
-        skill_multi = f"{s2*100:.2f}%"
+        skill_multi = f"{s2 * 100:.2f}%"
 
     title = "谱曲终末"
     msg = f"技能倍率{skill_multi}"
@@ -87,14 +85,10 @@ def calc_damage_1(
     aftersound_num = calc_aftersound_num(role, isGroup)
 
     # 技能技能倍率
-    aftersound_skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel
-    )
+    aftersound_skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel)
     aftersound_num_multi = min(aftersound_num, 24)
 
-    aftersound_skill_multi = (
-        f"{aftersound_skill_multi}*{aftersound_num_multi}*{aftersound_percent}"
-    )
+    aftersound_skill_multi = f"{aftersound_skill_multi}*{aftersound_num_multi}*{aftersound_percent}"
     title = f"{role_name}-余响"
     msg = f"{aftersound_num_multi}层余响-余响倍率{aftersound_skill_multi}"
     attr.add_skill_multi(aftersound_skill_multi, title, msg)
@@ -110,7 +104,7 @@ def calc_damage_1(
     role_breach = role.role.breach
     if role_breach and role_breach >= 3:
         crit_dmg = calc_aftersound_crit_dmg(aftersound_num)
-        crit_dmg_str = f"{crit_dmg*100:.2f}%"
+        crit_dmg_str = f"{crit_dmg * 100:.2f}%"
         title = f"{role_name}-固有技能-八重奏"
         msg = f"{aftersound_num}层余响-暴击伤害提升{crit_dmg_str}"
         attr.add_crit_dmg(crit_dmg, title, msg)

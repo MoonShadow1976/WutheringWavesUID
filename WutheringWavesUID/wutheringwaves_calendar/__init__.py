@@ -11,7 +11,7 @@ from .draw_offical_calendar_card import draw_offical_calendar_img
 sv_waves_calendar = SV("waves日历")
 
 
-@sv_waves_calendar.on_fullmatch((f"个人日历", f"日历"), block=True)
+@sv_waves_calendar.on_fullmatch(("个人日历", "日历"), block=True)
 async def send_waves_calendar_pic(bot: Bot, ev: Event):
     uid = ""
     of_img = await draw_offical_calendar_img()
@@ -20,7 +20,7 @@ async def send_waves_calendar_pic(bot: Bot, ev: Event):
     if isinstance(im, str):
         return await bot.send(im)
     else:
-        buttons: List[Any] = [
+        buttons: list[Any] = [
             WavesButton("深塔", "深塔"),
             WavesButton("冥海", "冥海"),
         ]

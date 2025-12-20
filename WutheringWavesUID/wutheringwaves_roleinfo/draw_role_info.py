@@ -1,10 +1,8 @@
 from pathlib import Path
-from typing import Optional
-
-from PIL import Image, ImageDraw
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.api.model import (
     AccountBaseInfo,
@@ -48,10 +46,12 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     # 共鸣者信息
     if waves_api.is_net(uid):
         from ..wutheringwaves_analyzecard.changeEcho import get_local_all_role_info
+
         succ, role_info = await get_local_all_role_info(uid)
         if not succ:
             from ..utils.error_reply import WAVES_CODE_099
             from ..utils.hint import error_reply
+
             return error_reply(WAVES_CODE_099)
         role_info = RoleList.model_validate(role_info)
     else:
@@ -60,20 +60,19 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
             return role_info.throw_msg()
 
         role_info = RoleList.model_validate(role_info.data)
-    role_info.roleList.sort(
-        key=lambda i: (i.level, i.starLevel, i.roleId), reverse=True
-    )
+    role_info.roleList.sort(key=lambda i: (i.level, i.starLevel, i.roleId), reverse=True)
 
     if waves_api.is_net(uid):
         from ..utils.api.kuro_py_api import get_base_info_overseas
+
         account_info, _ = await get_base_info_overseas(ck, uid)
         base_info = await get_user_detail_info(uid)
         if account_info:
-            account_info.creatTime = base_info.creatTime # 满足if_full
+            account_info.creatTime = base_info.creatTime  # 满足if_full
             account_info.achievementCount = base_info.achievementCount
             account_info.achievementStar = base_info.achievementStar
         else:
-            account_info =base_info
+            account_info = base_info
             # 拒绝掉无用数据，不走is_full
             account_info.creatTime = None
     else:
@@ -90,11 +89,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
         calabash_data = CalabashData.model_validate(calabash_data.data)
 
     # five_num = sum(1 for i in role_info.roleList if i.starLevel == 5)
-    up_num = sum(
-        1
-        for i in role_info.roleList
-        if i.starLevel == 5 and i.roleName not in NORMAL_LIST
-    )
+    up_num = sum(1 for i in role_info.roleList if i.starLevel == 5 and i.roleName not in NORMAL_LIST)
 
     base_info_value_list = []
     if account_info.is_full:
@@ -108,40 +103,41 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
             {"key": "UP角色", "value": f"{up_num}", "info_block": "color_g.png"},
         ]
         if not waves_api.is_net(uid):
-            base_info_value_list.extend([    
-                {
-                    "key": "数据坞等级",
-                    "value": f"{calabash_data.level if calabash_data.isUnlock else 0}",
-                    "info_block": "",
-                },
-                {
-                    "key": "小型信标",
-                    "value": f"{account_info.smallCount}",
-                    "info_block": "",
-                },
-                {"key": "中型信标", "value": f"{account_info.bigCount}", "info_block": ""},
-            ])
+            base_info_value_list.extend(
+                [
+                    {
+                        "key": "数据坞等级",
+                        "value": f"{calabash_data.level if calabash_data.isUnlock else 0}",
+                        "info_block": "",
+                    },
+                    {
+                        "key": "小型信标",
+                        "value": f"{account_info.smallCount}",
+                        "info_block": "",
+                    },
+                    {"key": "中型信标", "value": f"{account_info.bigCount}", "info_block": ""},
+                ]
+            )
         else:
             for a in account_info.tidalHeritagesList:
-                base_info_value_list.append(
-                    {"key": a.name, "value": f"{a.num}", "info_block": ""}
-                )
-        base_info_value_list.extend([  {
-                "key": "已达成成就",
-                "value": f"{account_info.achievementCount}",
-                "info_block": "color_p.png",
-            },
-            {
-                "key": "成就星数",
-                "value": f"{account_info.achievementStar}",
-                "info_block": "",
-            },
-        ])
+                base_info_value_list.append({"key": a.name, "value": f"{a.num}", "info_block": ""})
+        base_info_value_list.extend(
+            [
+                {
+                    "key": "已达成成就",
+                    "value": f"{account_info.achievementCount}",
+                    "info_block": "color_p.png",
+                },
+                {
+                    "key": "成就星数",
+                    "value": f"{account_info.achievementStar}",
+                    "info_block": "",
+                },
+            ]
+        )
 
         for b in account_info.treasureBoxList:
-            base_info_value_list.append(
-                {"key": b.name, "value": f"{b.num}", "info_block": ""}
-            )
+            base_info_value_list.append({"key": b.name, "value": f"{b.num}", "info_block": ""})
 
     # 初始化基础信息栏位
     bs = Image.open(TEXT_PATH / "bs.png")
@@ -149,11 +145,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     # 角色信息
     roleTotalNum = (
         account_info.roleNum
-        if (
-            account_info.is_full
-            and "!请稍后重试!" not in account_info.name
-            and account_info.activeDays != 0
-        )
+        if (account_info.is_full and "!请稍后重试!" not in account_info.name and account_info.activeDays != 0)
         else len(role_info.roleList)
     )
     xset = 50
@@ -207,16 +199,14 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
         char_bg.paste(char_attribute, (155, 13), char_attribute)
 
         char_bg_draw = ImageDraw.Draw(char_bg)
-        char_bg_draw.text(
-            (90, 173), f"LV.{roleInfo.level}", "white", waves_font_26, "lm"
-        )
+        char_bg_draw.text((90, 173), f"LV.{roleInfo.level}", "white", waves_font_26, "lm")
 
         if roleInfo.roleId in SPECIAL_CHAR_INT:
             query_list = SPECIAL_CHAR_INT.copy()
         else:
             query_list = [roleInfo.roleId]
 
-        temp: Optional[RoleDetailData] = None  # type: ignore
+        temp: RoleDetailData | None = None  # type: ignore
         for char_id in query_list:
             if char_id in role_detail_info_map:
                 temp: RoleDetailData = role_detail_info_map[char_id]
@@ -232,12 +222,8 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
 
             info_block = Image.new("RGBA", (60, 30), color=(255, 255, 255, 0))
             info_block_draw = ImageDraw.Draw(info_block)
-            info_block_draw.rounded_rectangle(
-                [0, 0, 60, 30], radius=7, fill=(96, 12, 120, int(0.8 * 255))
-            )
-            info_block_draw.text(
-                (5, 15), f"{temp.get_chain_name()}", "white", waves_font_26, "lm"
-            )
+            info_block_draw.rounded_rectangle([0, 0, 60, 30], radius=7, fill=(96, 12, 120, int(0.8 * 255)))
+            info_block_draw.text((5, 15), f"{temp.get_chain_name()}", "white", waves_font_26, "lm")
             char_bg.paste(info_block, (18, 158), info_block)
 
         card_img.paste(char_bg, (_x, _y), char_bg)
@@ -251,12 +237,8 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     # 基础信息 名字 特征码
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     card_img.paste(base_info_bg, (35, 170), base_info_bg)
 
     # 头像 头像环
@@ -277,14 +259,10 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(line, (0, yset - bs.size[1] - 70), line)
         card_img.paste(bs, (-10, yset - bs.size[1] - 70), bs)
         card_img.paste(title_bar, (0, 220), title_bar)

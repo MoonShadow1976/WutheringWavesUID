@@ -1,24 +1,19 @@
+from dataclasses import dataclass, field
 import json
-
 from pathlib import Path
-from dataclasses import field, dataclass
-from typing import Any, Dict, List
+from typing import Any
 
 from gsuid_core.logger import logger
 
-from ..utils.util import send_master_info
-from ..utils.ascension.weapon import get_weapon_detail
-from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
+from ..utils.api.model import AccountBaseInfo as BaseInfo
 from ..utils.ascension.echo import get_echo_model
 from ..utils.ascension.model import EchoModel
-from ..utils.api.model import AccountBaseInfo as BaseInfo
-
+from ..utils.ascension.weapon import get_weapon_detail
+from ..utils.util import send_master_info
+from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 from .detail_json import m_id2monsterId_strange, main_first_props, main_second_props, sub_props
 
-
 TEXT_PATH = Path(__file__).parent
-
-
 
 
 @dataclass
@@ -30,8 +25,8 @@ class RoleInfo:
     breach: int
     resonant_chain_group_index: int  # 角色共鸣链
     exp: int
-    skills: List[Dict[str, Any]] = field(default_factory=list)  # 技能數據
-    skill_node_state: List[Dict[str, Any]] = field(default_factory=list)  # 技能節點狀態
+    skills: list[dict[str, Any]] = field(default_factory=list)  # 技能數據
+    skill_node_state: list[dict[str, Any]] = field(default_factory=list)  # 技能節點狀態
 
 
 @dataclass
@@ -50,7 +45,7 @@ class WeaponInfo:
 class PhantomInfo:
     """聲骸信息"""
 
-    phantom_incr_list: List[Dict[str, Any]]
+    phantom_incr_list: list[dict[str, Any]]
 
 
 def get_breach(level: int):
@@ -104,7 +99,6 @@ class PcapDataParser:
     def _load_phantom_index(self):
         """載入聲骸索引"""
         try:
-
             # 嘗試多個可能的路徑
             possible_paths = [
                 "zh-Hant/Phantom",
@@ -127,7 +121,7 @@ class PcapDataParser:
 
                 for phantom_file in phantom_dir.glob("*.json"):
                     try:
-                        with open(phantom_file, "r", encoding="utf-8") as f:
+                        with open(phantom_file, encoding="utf-8") as f:
                             phantom_data = json.load(f)
                             phantom_id = phantom_data.get("id")
                             monsterId = phantom_data.get("monsterId")
@@ -148,7 +142,6 @@ class PcapDataParser:
     def _load_property_index(self):
         """載入屬性索引"""
         try:
-
             # 嘗試多個可能的路徑
             possible_paths = [
                 "zh-Hant/LocalizationIndex/PropertyIndexs.json",
@@ -167,7 +160,7 @@ class PcapDataParser:
 
             if property_file:
                 logger.info(f"✅ 找到屬性索引文件: {property_file}")
-                with open(property_file, "r", encoding="utf-8") as f:
+                with open(property_file, encoding="utf-8") as f:
                     properties = json.load(f)
                     for prop in properties:
                         self.property_index[prop["id"]] = {
@@ -181,7 +174,7 @@ class PcapDataParser:
         except Exception as e:
             logger.error(f"載入屬性索引失敗: {e}")
 
-    async def parse_pcap_data(self, pcap_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    async def parse_pcap_data(self, pcap_data: dict[str, Any]) -> list[dict[str, Any]]:
         """
         解析 PCAP 數據
 
@@ -206,9 +199,7 @@ class PcapDataParser:
             # 檢查是否有已處理的角色詳細數據 -- 刷新面板用
             if "role_detail_list" in pcap_data:
                 role_detail_list = pcap_data["role_detail_list"]
-                logger.info(
-                    f"直接使用已處理的角色詳細數據，共 {len(role_detail_list)} 個角色"
-                )
+                logger.info(f"直接使用已處理的角色詳細數據，共 {len(role_detail_list)} 個角色")
                 return role_detail_list
 
             logger.info("🔧 初始化 PcapDataParser...")
@@ -223,9 +214,7 @@ class PcapDataParser:
                 data = pcap_data["data"]
                 logger.debug(f"找到 data 字段，鍵: {list(data.keys())}")
             else:
-                logger.debug(
-                    f"沒有找到 data 字段或 data 不是字典，pcap_data 鍵: {list(pcap_data.keys())}"
-                )
+                logger.debug(f"沒有找到 data 字段或 data 不是字典，pcap_data 鍵: {list(pcap_data.keys())}")
                 # 直接使用 pcap_data 作為數據源
                 data = pcap_data
 
@@ -245,22 +234,15 @@ class PcapDataParser:
             logger.info(f"從 Wuthery API 提取到用户信息：{self.account_info}")
 
             # 提取角色數據
-            if (
-                "PbGetRoleListNotify" in data
-                and "role_list" in data["PbGetRoleListNotify"]
-            ):
-                self._extract_role_data_from_wuthery(
-                    data["PbGetRoleListNotify"]["role_list"]
-                )
+            if "PbGetRoleListNotify" in data and "role_list" in data["PbGetRoleListNotify"]:
+                self._extract_role_data_from_wuthery(data["PbGetRoleListNotify"]["role_list"])
                 logger.info(f"從 Wuthery API 提取到 {len(self.role_data)} 個角色")
             else:
                 logger.error("數據中沒有 PbGetRoleListNotify 或 role_list")
 
             # 提取武器數據
             if "WeaponItemResponse" in data:
-                logger.debug(
-                    f"找到 WeaponItemResponse，鍵: {list(data['WeaponItemResponse'].keys())}"
-                )
+                logger.debug(f"找到 WeaponItemResponse，鍵: {list(data['WeaponItemResponse'].keys())}")
                 if "weapon_item_list" in data["WeaponItemResponse"]:
                     weapon_list = data["WeaponItemResponse"]["weapon_item_list"]
                     logger.debug(f"武器列表長度: {len(weapon_list)}")
@@ -273,13 +255,9 @@ class PcapDataParser:
 
             # 提取聲骸數據
             if "PhantomItemResponse" in data:
-                logger.debug(
-                    f"找到 PhantomItemResponse，鍵: {list(data['PhantomItemResponse'].keys())}"
-                )
+                logger.debug(f"找到 PhantomItemResponse，鍵: {list(data['PhantomItemResponse'].keys())}")
                 self._extract_phantom_data_from_wuthery(data["PhantomItemResponse"])
-                logger.info(
-                    f"從 Wuthery API 提取到 {len(self.phantom_data)} 個角色的聲骸數據"
-                )
+                logger.info(f"從 Wuthery API 提取到 {len(self.phantom_data)} 個角色的聲骸數據")
             else:
                 logger.warning("數據中沒有 PhantomItemResponse")
 
@@ -307,7 +285,7 @@ class PcapDataParser:
             logger.exception("PCAP 數據解析失敗", e)
             return []
 
-    def _extract_base_info_data_from_wuthery(self, base_info: Dict[str, Any]):
+    def _extract_base_info_data_from_wuthery(self, base_info: dict[str, Any]):
         """從 Wuthery API 格式提取用户基本數據"""
         try:
             uid = base_info.get("id")
@@ -331,14 +309,12 @@ class PcapDataParser:
                 elif key == 11:  # worldLevel
                     world_level = attribute.get("int32_value", 0)
 
-            self.account_info = BaseInfo(
-                id=uid, name=name, level=level, worldLevel=world_level
-            )
+            self.account_info = BaseInfo(id=uid, name=name, level=level, worldLevel=world_level)
 
         except Exception as e:
             logger.exception("從 Wuthery API 提取角色數據失敗", e)
 
-    def _extract_achievement_info_data_from_wuthery(self, achievement_info: Dict[str, Any]):
+    def _extract_achievement_info_data_from_wuthery(self, achievement_info: dict[str, Any]):
         """從 Wuthery API 格式提取用户成就數據"""
         try:
             achievement_count = achievement_info.get("finished_achievement_num", 0)
@@ -348,14 +324,12 @@ class PcapDataParser:
             self.account_info.achievementCount = achievement_count
             self.account_info.achievementStar = achievement_star
 
-            logger.debug(
-                f"提取用户成就數據: 已达成成就 {achievement_count} 个, 成就星数 {achievement_star}"
-            )
+            logger.debug(f"提取用户成就數據: 已达成成就 {achievement_count} 个, 成就星数 {achievement_star}")
 
         except Exception as e:
             logger.exception("從 Wuthery API 提取用户成就數據失敗", e)
 
-    def _extract_role_data_from_wuthery(self, role_list: List[Dict[str, Any]]):
+    def _extract_role_data_from_wuthery(self, role_list: list[dict[str, Any]]):
         """從 Wuthery API 格式提取角色數據"""
         try:
             for role in role_list:
@@ -390,7 +364,7 @@ class PcapDataParser:
         except Exception as e:
             logger.exception("從 Wuthery API 提取角色數據失敗", e)
 
-    def _extract_weapon_data_from_wuthery(self, weapon_list: List[Dict[str, Any]]):
+    def _extract_weapon_data_from_wuthery(self, weapon_list: list[dict[str, Any]]):
         """從 Wuthery API 格式提取武器數據"""
         try:
             logger.debug(f"開始提取武器數據，武器列表長度: {len(weapon_list)}")
@@ -430,7 +404,7 @@ class PcapDataParser:
         except Exception as e:
             logger.exception("從 Wuthery API 提取武器數據失敗", e)
 
-    def _extract_phantom_data_from_wuthery(self, phantom_data: Dict[str, Any]):
+    def _extract_phantom_data_from_wuthery(self, phantom_data: dict[str, Any]):
         """從 Wuthery API 格式提取聲骸數據"""
         try:
             # 提取裝備信息
@@ -445,9 +419,7 @@ class PcapDataParser:
                 if role_id and phantom_item_incr_id:
                     # 查找對應的聲骸數據
                     phantom_incr_list = []
-                    for incr_id in (
-                        phantom_item_incr_id if len(phantom_item_incr_id) <= 5 else []
-                    ):  # 不处理0, 超限不处理
+                    for incr_id in phantom_item_incr_id if len(phantom_item_incr_id) <= 5 else []:  # 不处理0, 超限不处理
                         if incr_id > 0:  # 只處理有效的聲骸ID
                             for phantom_item in phantom_item_list:
                                 if phantom_item.get("incr_id") == incr_id:
@@ -458,14 +430,12 @@ class PcapDataParser:
                         self.phantom_data[role_id] = PhantomInfo(
                             phantom_incr_list=phantom_incr_list,
                         )
-                        logger.debug(
-                            f"原始数据:{role_id}-{phantom_item_incr_id}，处理完的数据有 {len(phantom_incr_list)} 个"
-                        )
+                        logger.debug(f"原始数据:{role_id}-{phantom_item_incr_id}，处理完的数据有 {len(phantom_incr_list)} 个")
 
         except Exception as e:
             logger.exception("從 Wuthery API 提取聲骸數據失敗", e)
 
-    async def _build_role_detail_list(self) -> List[Dict[str, Any]]:
+    async def _build_role_detail_list(self) -> list[dict[str, Any]]:
         """構建角色詳細數據列表"""
         role_detail_list = []
 
@@ -529,9 +499,7 @@ class PcapDataParser:
 
     def _get_phantom_detail(self, phantom_id: int) -> EchoModel | None:
         """獲取聲骸信息"""
-        monster_id = (
-            phantom_id // 10
-        )  # phantom_id = monster_id + rarity (一位数字表示声骸品质)
+        monster_id = phantom_id // 10  # phantom_id = monster_id + rarity (一位数字表示声骸品质)
         echo_detail = get_echo_model(monster_id)
         if echo_detail:
             return echo_detail
@@ -599,7 +567,7 @@ class PcapDataParser:
 
         return False  # 默認不是百分比
 
-    def _build_chain_list(self, role_info: RoleInfo, role) -> List[Dict[str, Any]]:
+    def _build_chain_list(self, role_info: RoleInfo, role) -> list[dict[str, Any]]:
         """构建共鸣链列表"""
         if not role_info.resonant_chain_group_index:
             role_info.resonant_chain_group_index = 0
@@ -620,7 +588,7 @@ class PcapDataParser:
             )
         return chainList
 
-    def _build_skill_list(self, role_info: RoleInfo, role) -> List[Dict[str, Any]]:
+    def _build_skill_list(self, role_info: RoleInfo, role) -> list[dict[str, Any]]:
         """构建技能列表"""
         # 如果沒有技能数据，返回空列表
         if not role_info.skills:
@@ -680,7 +648,7 @@ class PcapDataParser:
 
         return skillList
 
-    def _build_weapon_data(self, role_id: int, role) -> Dict[str, Any]:
+    def _build_weapon_data(self, role_id: int, role) -> dict[str, Any]:
         """構建武器數據"""
         # 查找對應的武器數據
         weapon_info = None
@@ -716,7 +684,7 @@ class PcapDataParser:
 
         return weaponData
 
-    async def _build_phantom_data(self, role_id: int, role) -> Dict[str, Any]:
+    async def _build_phantom_data(self, role_id: int, role) -> dict[str, Any]:
         """構建聲骸數據"""
         # 查找對應的聲骸數據
         role_phantoms = self.phantom_data.get(role_id)
@@ -742,13 +710,9 @@ class PcapDataParser:
 
             echo_detail = self._get_phantom_detail(phantom_id)
             if not echo_detail:
-                logger.error(
-                    f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}"
-                )
+                logger.error(f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}")
                 # 在非异步函数里调用异步函数
-                await send_master_info(
-                    f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}"
-                )
+                await send_master_info(f"[鸣潮] 角色 {role.role.roleName} 无法匹配到的声骸id: {phantom_id}")
                 continue
 
             monster_id = echo_detail.id  # 重定向
@@ -777,9 +741,7 @@ class PcapDataParser:
                     "secondDescription": "",
                     "tripleDescription": "",
                 },
-                "mainProps": self._convert_phantom_props(
-                    phantom_detail.get("phantom_main_prop", [])
-                ),
+                "mainProps": self._convert_phantom_props(phantom_detail.get("phantom_main_prop", [])),
                 "phantomProp": {
                     "cost": cost,
                     "iconUrl": "",
@@ -789,9 +751,7 @@ class PcapDataParser:
                     "quality": rarity,  # 默認品質
                     "skillDescription": "",
                 },
-                "subProps": self._convert_phantom_props(
-                    phantom_detail.get("phantom_sub_prop", [])
-                ),
+                "subProps": self._convert_phantom_props(phantom_detail.get("phantom_sub_prop", [])),
             }
             equip_phantom_list.append(phantom_data)
 
@@ -800,7 +760,7 @@ class PcapDataParser:
             "equipPhantomList": (equip_phantom_list if equip_phantom_list else []),
         }
 
-    def _convert_phantom_props(self, props: List[Dict]) -> List[Dict]:
+    def _convert_phantom_props(self, props: list[dict]) -> list[dict]:
         """轉換聲骸屬性格式"""
         converted_props = []
         for prop in props:

@@ -1,14 +1,13 @@
+from datetime import datetime
 import json
 import re
 import time
-from datetime import datetime
-
-import httpx
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
+import httpx
 
 sv_waves_code = SV("鸣潮兑换码")
 
@@ -17,7 +16,7 @@ invalid_code_list = ("MINGCHAO",)
 url = "https://newsimg.5054399.com/comm/mlcxqcommon/static/wap/js/data_102.js?{}&callback=?&_={}"
 
 
-@sv_waves_code.on_fullmatch((f"code", f"兑换码"))
+@sv_waves_code.on_fullmatch(("code", "兑换码"))
 async def get_sign_func(bot: Bot, ev: Event):
     # 分别获取结果
     list1 = await get_code_list()  # 可能返回列表或None
@@ -65,15 +64,16 @@ async def get_code_list():
         logger.exception("[获取兑换码失败] ", e)
         return
 
+
 async def get_oversea_code_list():
     code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@main/js/oversea_codes.js"
-        
+
     # 备选CDN镜像源
     mirrors = [
         code_url,
         code_url.replace("cdn.jsdelivr.net", "fastly.jsdelivr.net"),
         code_url.replace("cdn.jsdelivr.net", "gcore.jsdelivr.net"),
-        "https://raw.githubusercontent.com/MoonShadow1976/WutheringWaves_OverSea_StaticAssets/main/js/oversea_codes.js"
+        "https://raw.githubusercontent.com/MoonShadow1976/WutheringWaves_OverSea_StaticAssets/main/js/oversea_codes.js",
     ]
 
     for url in mirrors:
@@ -135,9 +135,7 @@ def is_code_expired(label: str) -> bool:
         expire_sec = 0
 
     # 构建截止时间
-    expire_date = datetime(
-        expire_year, expire_month, expire_day, expire_hour, expire_min, expire_sec
-    )
+    expire_date = datetime(expire_year, expire_month, expire_day, expire_hour, expire_min, expire_sec)
 
     # 比较时间
     return now > expire_date

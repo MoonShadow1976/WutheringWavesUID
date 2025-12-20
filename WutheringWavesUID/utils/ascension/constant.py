@@ -1,5 +1,3 @@
-from typing import Union
-
 fixed_name = [
     "暴击提升",
     "暴击伤害提升",
@@ -45,7 +43,7 @@ def sum_numbers(*args):
     return f"{total}"
 
 
-def percent_to_float(value: Union[str, float]) -> float:
+def percent_to_float(value: str | float) -> float:
     if isinstance(value, str):
         return float(value.rstrip("%")) * 0.01
     return value

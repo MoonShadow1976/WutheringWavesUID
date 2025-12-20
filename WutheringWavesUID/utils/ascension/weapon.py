@@ -1,10 +1,8 @@
 import copy
 from pathlib import Path
-from typing import Optional, Union
-
-from msgspec import json as msgjson
 
 from gsuid_core.logger import logger
+from msgspec import json as msgjson
 
 from ..ascension.constant import fixed_name
 from .model import WeaponModel
@@ -18,7 +16,7 @@ def read_weapon_json_files(directory):
 
     for file in files:
         try:
-            with open(file, "r", encoding="utf-8") as f:
+            with open(file, encoding="utf-8") as f:
                 data = msgjson.decode(f.read())
                 file_name = file.name.split(".")[0]
                 weapon_id_data[file_name] = data
@@ -45,7 +43,7 @@ class WavesWeaponResult:
         return f"谐振{['一', '二', '三', '四', '五'][self.resonLevel - 1]}阶"
 
 
-def get_breach(breach: Union[int, None], level: int):
+def get_breach(breach: int | None, level: int):
     if breach is None:
         if level <= 20:
             breach = 0
@@ -65,10 +63,10 @@ def get_breach(breach: Union[int, None], level: int):
 
 
 def get_weapon_detail(
-    weapon_id: Union[str, int],
+    weapon_id: str | int,
     level: int,
-    breach: Union[int, None] = None,
-    resonLevel: Union[int, None] = 1,
+    breach: int | None = None,
+    resonLevel: int | None = 1,
 ) -> WavesWeaponResult:
     """
     breach 突破
@@ -132,7 +130,7 @@ def get_weapon_star(weapon_name) -> int:
     return result.starLevel
 
 
-def get_weapon_model(weapon_id: Union[int, str]) -> Optional[WeaponModel]:
+def get_weapon_model(weapon_id: int | str) -> WeaponModel | None:
     if str(weapon_id) not in weapon_id_data:
         return None
     return WeaponModel(**weapon_id_data[str(weapon_id)])

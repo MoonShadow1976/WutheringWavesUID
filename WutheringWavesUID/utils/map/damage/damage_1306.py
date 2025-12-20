@@ -1,22 +1,21 @@
 # 奥古斯塔
 
-from typing import Tuple
 
 from ...api.model import RoleDetailData
-from .damage import echo_damage, phase_damage, weapon_damage
 from ...ascension.char import WavesCharResult, get_char_detail2
 from ...damage.damage import DamageAttribute, calc_percent_expression
 from ...damage.utils import (
-    SkillType,
     SkillTreeMap,
+    SkillType,
+    cast_attack,
     cast_hit,
+    cast_liberation,
     cast_skill,
     hit_damage,
-    cast_attack,
-    cast_liberation,
     skill_damage_calc,
 )
-from .buff import shouanren_buff, iuno_buff, motefei_buff
+from .buff import iuno_buff, motefei_buff, shouanren_buff
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
 def chain_damage(
@@ -43,7 +42,7 @@ def chain_damage(
             crit_rate_bonus = min(max(crit_rate / 0.01, 0), 50)
             add_crit_dmg = crit_rate_bonus * 2 * 0.01
             title = f"{role_name}-二链"
-            msg = f"爆伤提升{add_crit_dmg*100:.2f}%"
+            msg = f"爆伤提升{add_crit_dmg * 100:.2f}%"
             attr.add_crit_dmg(add_crit_dmg, title, msg)
 
         # 暴击高于150%时，每多出1%暴击，奥古斯塔暴击伤害提升2%，最高可提升50%暴击伤害
@@ -53,7 +52,7 @@ def chain_damage(
             crit_rate_bonus = min(max(crit_rate / 0.01, 0), 25)
             add_crit_dmg = crit_rate_bonus * 2 * 0.01
             title = f"{role_name}-六链"
-            msg = f"爆伤提升{add_crit_dmg*100:.2f}%"
+            msg = f"爆伤提升{add_crit_dmg * 100:.2f}%"
             attr.add_crit_dmg(add_crit_dmg, title, msg)
 
     elif chain_num >= 2:
@@ -72,7 +71,7 @@ def chain_damage(
             crit_rate_bonus = min(max(crit_rate / 0.01, 0), 50)
             add_crit_dmg = crit_rate_bonus * 2 * 0.01
             title = f"{role_name}-二链"
-            msg = f"爆伤提升{add_crit_dmg*100:.2f}%"
+            msg = f"爆伤提升{add_crit_dmg * 100:.2f}%"
             attr.add_crit_dmg(add_crit_dmg, title, msg)
 
     elif chain_num >= 1:
@@ -104,7 +103,7 @@ def calc_damage_1(
     role: RoleDetailData,
     isGroup: bool = False,
     isSingle: bool = True,
-) -> Tuple[str, str]:
+) -> tuple[str, str]:
     # 设置角色固有技能
     role_breach = role.role.breach
     if role_breach and role_breach >= 3:
@@ -124,13 +123,11 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel)
     if isSingle:
         sm = skill_multi.split("+")
         s2 = calc_percent_expression(sm[-1])
-        skill_multi = f"{s2*100:.2f}%"
+        skill_multi = f"{s2 * 100:.2f}%"
 
     title = "共鸣技能·不败恒阳·落袭伤害"
     msg = f"技能倍率{skill_multi}"
@@ -173,7 +170,7 @@ def calc_damage_2(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-) -> Tuple[str, str]:
+) -> tuple[str, str]:
     # 设置角色固有技能
     role_breach = role.role.breach
     if role_breach and role_breach >= 3:
@@ -193,9 +190,7 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel)
 
     title = "赫日威临·烈阳伤害"
     msg = f"技能倍率{skill_multi}"
@@ -239,7 +234,7 @@ def calc_damage_3(
     role: RoleDetailData,
     isGroup: bool = False,
     isSingle: bool = True,
-) -> Tuple[str, str]:
+) -> tuple[str, str]:
     # 设置角色固有技能
     role_breach = role.role.breach
     if role_breach and role_breach >= 3:
@@ -259,15 +254,13 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "32", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "32", skillLevel)
 
     if isSingle:
         title = "赫日威临·不朽者之肃"
         sm = skill_multi.split("+")
         s2 = calc_percent_expression(sm[1])
-        skill_multi = f"{s2*100:.2f}%"
+        skill_multi = f"{s2 * 100:.2f}%"
     else:
         title = "赫日威临·不朽者之肃总伤"
 
@@ -307,9 +300,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
 
@@ -322,9 +313,7 @@ def calc_damage_10(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_11(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
 
@@ -335,11 +324,9 @@ def calc_damage_11(
     iuno_buff(attr, 0, 0, isGroup)
 
     return calc_damage_1(attr, role, isGroup)
-    
 
-def calc_damage_12(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
 
@@ -352,9 +339,7 @@ def calc_damage_12(
     return calc_damage_3(attr, role, isGroup)
 
 
-def calc_damage_13(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_13(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
 
@@ -366,9 +351,8 @@ def calc_damage_13(
 
     return calc_damage_3(attr, role, isGroup)
 
-def calc_damage_14(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+
+def calc_damage_14(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(hit_damage)
     attr.set_char_template("temp_atk")
 

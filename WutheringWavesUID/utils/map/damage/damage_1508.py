@@ -14,13 +14,11 @@ from ...damage.utils import (
     liberation_damage,
     skill_damage_calc,
 )
-from .buff import shouanren_buff, luokeke_buff
+from .buff import luokeke_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     即刻·归无伤害
     """
@@ -40,9 +38,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能倍率 即刻·归无 1741.49%
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel)
     title = "即刻·归无伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -112,9 +108,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     即刻·归无治疗量
     """
@@ -132,9 +126,7 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 治疗倍率 即刻·归无 214.61% + 4854
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "21", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "21", skillLevel)
     title = "即刻·归无治疗量"
     msg = f"技能倍率{skill_multi}"
     attr.add_healing_skill_multi(skill_multi, title, msg)
@@ -174,7 +166,10 @@ def calc_damage_2(
 
 
 def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, isSingle: bool = True,
+    attr: DamageAttribute,
+    role: RoleDetailData,
+    isGroup: bool = False,
+    isSingle: bool = True,
 ) -> tuple[str, str]:
     """
     电锯模式长按总伤（锯环·疾攻第2段长按+第3段长按+锯环·终结）
@@ -194,16 +189,12 @@ def calc_damage_3(
     skill_type: SkillType = "共鸣回路"
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
-    
-    if isSingle: # 总伤
+
+    if isSingle:  # 总伤
         # 锯环·疾攻第2段长按
-        skill_multi_2_2 = skill_damage_calc(
-            char_result.skillTrees, SkillTreeMap[skill_type], "28-2", skillLevel
-        )
+        skill_multi_2_2 = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "28-2", skillLevel)
         # 锯环·疾攻第3段长按
-        skill_multi_3_2 = skill_damage_calc(
-            char_result.skillTrees, SkillTreeMap[skill_type], "29-2", skillLevel
-        )
+        skill_multi_3_2 = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "29-2", skillLevel)
 
         title = "锯环·疾攻第2段长按"
         msg = f"技能倍率{skill_multi_2_2}"
@@ -214,13 +205,9 @@ def calc_damage_3(
         attr.add_skill_multi(skill_multi_3_2, title, msg)
 
     # 锯环·终结基础倍率 94.05%+376.17%
-    skill_multi_final = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "30", skillLevel
-    )
+    skill_multi_final = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "30", skillLevel)
     # 每点【锯环残响】增加倍率 4.72%
-    skill_multi_per_echo = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel
-    )
+    skill_multi_per_echo = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel)
 
     title = "锯环·终结基础伤害"
     msg = f"技能倍率{skill_multi_final}"
@@ -259,7 +246,7 @@ def calc_damage_3(
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
-    
+
     # 统一计算倍率提升（Skill Ratio）
     ratio_increase = 0
     ratio_msgs = []
@@ -310,9 +297,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
     # 设置虚湮效应

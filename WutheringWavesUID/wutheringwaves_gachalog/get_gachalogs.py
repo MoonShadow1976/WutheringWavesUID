@@ -1,16 +1,14 @@
 import asyncio
 import base64
 import copy
-import json
 from datetime import datetime
+import json
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
 
 import aiofiles
-import msgspec
-
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
+import msgspec
 
 from ..utils.api.model import GachaLog
 from ..utils.database.models import WavesUser
@@ -63,9 +61,7 @@ def find_length(A, B) -> int:
 
 
 # 找到两个数组中最长公共子串的下标
-def find_longest_common_subarray_indices(
-    a: List[GachaLog], b: List[GachaLog]
-) -> Optional[Tuple[Tuple[int, int], Tuple[int, int]]]:
+def find_longest_common_subarray_indices(a: list[GachaLog], b: list[GachaLog]) -> tuple[tuple[int, int], tuple[int, int]] | None:
     n, m = len(a), len(b)
     dp = [[0] * (m + 1) for _ in range(n + 1)]
     length = 0
@@ -89,9 +85,7 @@ def find_longest_common_subarray_indices(
 
 
 # 根据最长公共子串递归合并两个GachaLog列表，不去重，按time排序
-def merge_gacha_logs_by_common_subarray(
-    a: List[GachaLog], b: List[GachaLog]
-) -> List[GachaLog]:
+def merge_gacha_logs_by_common_subarray(a: list[GachaLog], b: list[GachaLog]) -> list[GachaLog]:
     common_indices = find_longest_common_subarray_indices(a, b)
     if not common_indices:
         return sorted(
@@ -110,8 +104,8 @@ def merge_gacha_logs_by_common_subarray(
 
 
 async def get_new_gachalog(
-    uid: str, record_id: str, full_data: Dict[str, List[GachaLog]], is_force: bool
-) -> tuple[Union[str, None], Dict[str, List[GachaLog]], Dict[str, int]]:
+    uid: str, record_id: str, full_data: dict[str, list[GachaLog]], is_force: bool
+) -> tuple[str | None, dict[str, list[GachaLog]], dict[str, int]]:
     new = {}
     new_count = {}
     for gacha_name, card_pool_type in gacha_type_meta_data.items():
@@ -140,34 +134,30 @@ async def get_new_gachalog(
 
 
 async def get_new_gachalog_for_file(
-    full_data: Dict[str, List[GachaLog]],
-    import_data: Dict[str, List[GachaLog]],
-) -> tuple[Union[str, None], Dict[str, List[GachaLog]], Dict[str, int]]:
+    full_data: dict[str, list[GachaLog]],
+    import_data: dict[str, list[GachaLog]],
+) -> tuple[str | None, dict[str, list[GachaLog]], dict[str, int]]:
     new = {}
     new_count = {}
 
     for cardPoolType, item in import_data.items():
-        item: List[GachaLog]
+        item: list[GachaLog]
         if cardPoolType not in gacha_type_meta_data:
             continue
         gacha_name = cardPoolType
         gacha_log = [GachaLog(**log.dict()) for log in item]
-        new_gacha_log = merge_gacha_logs_by_common_subarray(
-            full_data[gacha_name], gacha_log
-        )
+        new_gacha_log = merge_gacha_logs_by_common_subarray(full_data[gacha_name], gacha_log)
         new[gacha_name] = new_gacha_log
         new_count[gacha_name] = len(new_gacha_log)
     return None, new, new_count
 
 
-async def backup_gachalogs(uid: str, gachalogs_history: Dict, type: str):
+async def backup_gachalogs(uid: str, gachalogs_history: dict, type: str):
     path = PLAYER_PATH / str(uid)
     if not path.exists():
         path.mkdir(parents=True, exist_ok=True)
     # 备份
-    backup_path = (
-        path / f"{type}_gacha_logs_{datetime.now().strftime('%Y-%m-%d.%H%M%S')}.json"
-    )
+    backup_path = path / f"{type}_gacha_logs_{datetime.now().strftime('%Y-%m-%d.%H%M%S')}.json"
     async with aiofiles.open(backup_path, "w", encoding="UTF-8") as file:
         await file.write(json.dumps(gachalogs_history, ensure_ascii=False))
 
@@ -177,7 +167,7 @@ async def save_gachalogs(
     uid: str,
     record_id: str,
     is_force: bool = False,
-    import_data: Optional[Dict[str, List[GachaLog]]] = None,
+    import_data: dict[str, list[GachaLog]] | None = None,
 ) -> str:
     path = PLAYER_PATH / str(uid)
     if not path.exists():
@@ -189,7 +179,7 @@ async def save_gachalogs(
     temp_gachalogs_history = {}
     if gachalogs_path.exists():
         with Path.open(gachalogs_path, encoding="UTF-8") as f:
-            gachalogs_history: Dict = json.load(f)
+            gachalogs_history: dict = json.load(f)
 
         # import 时备份
         if not record_id:
@@ -227,17 +217,14 @@ async def save_gachalogs(
         await backup_gachalogs(uid, temp_gachalogs_history, type="update")
 
     for gacha_name in gacha_type_meta_data.keys():
-        gachalogs_history[gacha_name] = [
-            GachaLog(**log) for log in gachalogs_history[gacha_name]
-        ]
+        gachalogs_history[gacha_name] = [GachaLog(**log) for log in gachalogs_history[gacha_name]]
 
     if record_id:
-        code, gachalogs_new, gachalogs_count_add = await get_new_gachalog(
-            uid, record_id, gachalogs_history, is_force
-        )
+        code, gachalogs_new, gachalogs_count_add = await get_new_gachalog(uid, record_id, gachalogs_history, is_force)
     else:
         code, gachalogs_new, gachalogs_count_add = await get_new_gachalog_for_file(
-            gachalogs_history, import_data  # type: ignore
+            gachalogs_history,
+            import_data,  # type: ignore
         )
 
     if isinstance(code, str) or not gachalogs_new:
@@ -257,8 +244,7 @@ async def save_gachalogs(
         result[gacha_name] = len(gachalogs_new.get(gacha_name, []))  # type: ignore
 
     result["data"] = {  # type: ignore
-        gacha_name: [log.dict() for log in gachalogs_new.get(gacha_name, [])]
-        for gacha_name in gacha_type_meta_data.keys()
+        gacha_name: [log.dict() for log in gachalogs_new.get(gacha_name, [])] for gacha_name in gacha_type_meta_data.keys()
     }
 
     vo = msgspec.to_builtins(result)
@@ -295,7 +281,7 @@ async def save_record_id(user_id, bot_id, uid, record_id):
 
 
 async def import_gachalogs(ev: Event, history_url: str, type: str, uid: str) -> str:
-    history_data: Dict = {}
+    history_data: dict = {}
     if type == "json":
         history_data = json.loads(history_url)
     else:
@@ -307,7 +293,7 @@ async def import_gachalogs(ev: Event, history_url: str, type: str, uid: str) -> 
         except json.decoder.JSONDecodeError:
             return "请传入正确的JSON格式文件!"
 
-    def turn_wwuid_gacha(data: Dict) -> Optional[WWUIDGacha]:
+    def turn_wwuid_gacha(data: dict) -> WWUIDGacha | None:
         if "info" in data and "export_app" in data["info"]:
             if "Waves-Plugin" == data["info"]["export_app"]:
                 return WavesPluginGacha.model_validate(data).turn_wwuid_gacha()
@@ -356,7 +342,7 @@ async def export_gachalogs(uid: str) -> dict:
     # 抽卡记录json路径
     gachalogs_path = path / "gacha_logs.json"
     if gachalogs_path.exists():
-        async with aiofiles.open(gachalogs_path, "r", encoding="UTF-8") as f:
+        async with aiofiles.open(gachalogs_path, encoding="UTF-8") as f:
             raw_data = json.loads(await f.read())
 
         result = {
@@ -374,9 +360,7 @@ async def export_gachalogs(uid: str) -> dict:
         for name, gachalogs in gachalogs_history.items():
             result["list"].extend(gachalogs)
 
-        async with aiofiles.open(
-            path / f"export_{uid}.json", "w", encoding="UTF-8"
-        ) as file:
+        async with aiofiles.open(path / f"export_{uid}.json", "w", encoding="UTF-8") as file:
             await file.write(json.dumps(result, ensure_ascii=False, indent=4))
 
         logger.success("[导出抽卡记录] 导出成功!")

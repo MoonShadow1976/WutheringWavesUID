@@ -1,10 +1,8 @@
 from pathlib import Path
-from typing import Union
-
-from PIL import Image, ImageDraw
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.api.model import (
     AccountBaseInfo,
@@ -14,8 +12,8 @@ from ..utils.api.model import (
 )
 from ..utils.api.wwapi import SlashDetailRequest
 from ..utils.ascension.char import get_char_model
-from ..utils.database.models import WavesBind
 from ..utils.char_info_utils import get_all_roleid_detail_info
+from ..utils.database.models import WavesBind
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
     waves_font_18,
@@ -79,9 +77,7 @@ COLOR_QUALITY = {
 }
 
 
-async def get_slash_data(
-    uid: str, ck: str, is_self_ck: bool
-) -> Union[SlashDetail, str]:
+async def get_slash_data(uid: str, ck: str, is_self_ck: bool) -> SlashDetail | str:
     if is_self_ck:
         slash_data = await waves_api.get_slash_detail(uid, ck)
     else:
@@ -91,9 +87,7 @@ async def get_slash_data(
         return slash_data.throw_msg()
 
     slash_data = slash_data.data
-    if not slash_data or (
-        isinstance(slash_data, dict) and not slash_data.get("isUnlock", False)
-    ):
+    if not slash_data or (isinstance(slash_data, dict) and not slash_data.get("isUnlock", False)):
         if not is_self_ck:
             return SLASH_ERROR_MESSAGE_NO_UNLOCK
         return SLASH_ERROR_MESSAGE_NO_DATA
@@ -101,19 +95,14 @@ async def get_slash_data(
         return SlashDetail.model_validate(slash_data)
 
 
-async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]:
+async def draw_slash_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
         return error_reply(WAVES_CODE_102)
 
     # 自动关联群组
     if ev.group_id:
-        await WavesBind.insert_waves_uid(
-            user_id=user_id,
-            bot_id=ev.bot_id,
-            uid=uid,
-            group_id=ev.group_id
-        )
+        await WavesBind.insert_waves_uid(user_id=user_id, bot_id=ev.bot_id, uid=uid, group_id=ev.group_id)
 
     command = ev.command
     text = ev.text.strip()
@@ -133,7 +122,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
         challengeIds = [12]
 
     # 冥海数据
-    slash_detail: Union[SlashDetail, str] = await get_slash_data(uid, ck, is_self_ck)
+    slash_detail: SlashDetail | str = await get_slash_data(uid, ck, is_self_ck)
     if isinstance(slash_detail, str):
         return slash_detail
 
@@ -179,23 +168,14 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
     info_h = 300
     CHALLENGE_SPACING = 30
 
-    h = (
-        footer_h
-        + card_h
-        + (info_h + title_h + CHALLENGE_SPACING) * len(query_challenge_ids)
-        - CHALLENGE_SPACING
-    )
+    h = footer_h + card_h + (info_h + title_h + CHALLENGE_SPACING) * len(query_challenge_ids) - CHALLENGE_SPACING
     card_img = get_waves_bg(1100, h, "bg9")
 
     # 绘制个人信息
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     card_img.paste(base_info_bg, (15, 20), base_info_bg)
 
     # 头像 头像环
@@ -208,14 +188,10 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(title_bar, (-20, 70), title_bar)
 
     # 根据面板数据获取详细信息
@@ -235,9 +211,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                 continue
 
             # 获取title
-            title_bar = Image.open(
-                TEXT_PATH / f"difficulty_{difficulty.difficulty}.png"
-            )
+            title_bar = Image.open(TEXT_PATH / f"difficulty_{difficulty.difficulty}.png")
 
             temp_bar_draw = ImageDraw.Draw(title_bar)
             # 层数
@@ -271,9 +245,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
             role_bg = Image.open(TEXT_PATH / "role_hang_bg.png")
             # 获取角色信息
             for half_index, slash_half in enumerate(challenge.halfList):
-                role_hang_bg = Image.new(
-                    "RGBA", (1100, info_h // 2), (255, 255, 255, 0)
-                )
+                role_hang_bg = Image.new("RGBA", (1100, info_h // 2), (255, 255, 255, 0))
                 role_hang_bg_draw = ImageDraw.Draw(role_hang_bg)
                 text_dui = "队伍一" if half_index == 0 else "队伍二"
                 role_hang_bg_draw.text(
@@ -315,9 +287,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                     if char_model is None:
                         continue
                     avatar = await draw_pic(slash_role.roleId)
-                    char_bg = Image.open(
-                        TEXT_PATH / f"char_bg{char_model.starLevel}.png"
-                    )
+                    char_bg = Image.open(TEXT_PATH / f"char_bg{char_model.starLevel}.png")
                     char_bg_draw = ImageDraw.Draw(char_bg)
                     char_bg_draw.text(
                         (90, 150),
@@ -327,20 +297,11 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                         "mm",
                     )
                     char_bg.paste(avatar, (0, 0), avatar)
-                    if (
-                        role_detail_info_map
-                        and str(slash_role.roleId) in role_detail_info_map
-                    ):
-                        temp: RoleDetailData = role_detail_info_map[
-                            str(slash_role.roleId)
-                        ]
-                        info_block = Image.new(
-                            "RGBA", (40, 20), color=(255, 255, 255, 0)
-                        )
+                    if role_detail_info_map and str(slash_role.roleId) in role_detail_info_map:
+                        temp: RoleDetailData = role_detail_info_map[str(slash_role.roleId)]
+                        info_block = Image.new("RGBA", (40, 20), color=(255, 255, 255, 0))
                         info_block_draw = ImageDraw.Draw(info_block)
-                        info_block_draw.rectangle(
-                            [0, 0, 40, 20], fill=(96, 12, 120, int(0.9 * 255))
-                        )
+                        info_block_draw.rectangle([0, 0, 40, 20], fill=(96, 12, 120, int(0.9 * 255)))
                         info_block_draw.text(
                             (2, 10),
                             f"{temp.get_chain_name()}",
@@ -350,9 +311,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                         )
                         char_bg.paste(info_block, (110, 35), info_block)
 
-                    role_hang_bg.alpha_composite(
-                        char_bg, (350 + role_index * info_h // 2, -20)
-                    )
+                    role_hang_bg.alpha_composite(char_bg, (350 + role_index * info_h // 2, -20))
 
                 role_bg.paste(role_hang_bg, (0, info_h // 2 * half_index), role_hang_bg)
 
@@ -370,7 +329,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
 
     card_img = add_footer(card_img, 600, 20)
     card_img = await convert_img(card_img)
-    
+
     # 保存到群排行数据库
     await save_to_group_rank(user_id, uid, slash_detail, account_info.name)
 
@@ -394,7 +353,7 @@ async def save_to_group_rank(
                     break
             if target_challenge:
                 break
-        
+
         if not target_challenge:
             return
 
@@ -407,23 +366,27 @@ async def save_to_group_rank(
             roles = []
             for role in half.roleList:
                 char_model = get_char_model(role.roleId)
-                roles.append({
-                    "roleId": role.roleId,
-                    "roleName": char_model.name if char_model else "",
-                    "level": role.level,
-                    "chain": role.chain,
-                    "iconUrl": role.iconUrl,
-                    "starLevel": char_model.starLevel if char_model else 0,
-                })
-            
-            half_list.append({
-                "buffName": half.buffName,
-                "buffIcon": half.buffIcon,
-                "buffDescription": half.buffDescription,
-                "buffQuality": half.buffQuality,
-                "score": half.score,
-                "roleList": roles
-            })
+                roles.append(
+                    {
+                        "roleId": role.roleId,
+                        "roleName": char_model.name if char_model else "",
+                        "level": role.level,
+                        "chain": role.chain,
+                        "iconUrl": role.iconUrl,
+                        "starLevel": char_model.starLevel if char_model else 0,
+                    }
+                )
+
+            half_list.append(
+                {
+                    "buffName": half.buffName,
+                    "buffIcon": half.buffIcon,
+                    "buffDescription": half.buffDescription,
+                    "buffQuality": half.buffQuality,
+                    "score": half.score,
+                    "roleList": roles,
+                }
+            )
 
         data = {
             "name": name,
@@ -431,18 +394,13 @@ async def save_to_group_rank(
             "challengeName": target_challenge.challengeName,
             "rank": target_challenge.get_rank(),
             "score": target_challenge.score,
-            "halfList": half_list
+            "halfList": half_list,
         }
 
-        await GroupRankRecord.save_record(
-            user_id=user_id,
-            waves_id=waves_id,
-            rank_type="endless",
-            challenge_id=12,
-            data=data
-        )
+        await GroupRankRecord.save_record(user_id=user_id, waves_id=waves_id, rank_type="endless", challenge_id=12, data=data)
     except Exception as e:
         from gsuid_core.logger import logger
+
         logger.exception(f"[ww无尽] 保存用户 {waves_id} 无尽数据失败: {e}")
 
 

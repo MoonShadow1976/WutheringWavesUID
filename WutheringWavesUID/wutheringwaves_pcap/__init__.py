@@ -1,7 +1,7 @@
 import json
+from pathlib import Path
 import tempfile
 import time
-from pathlib import Path
 from typing import Optional
 
 import aiohttp
@@ -11,15 +11,12 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.database.models import WavesBind
-from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from ..utils.error_reply import WAVES_CODE_097, WAVES_CODE_103
 from ..utils.hint import error_reply
-
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .pcap_api import pcap_api
-from .pcap_parser import PcapDataParser
 from .pcap_file_handler import PcapFileHandler
-
-
+from .pcap_parser import PcapDataParser
 
 sv_pcap_parse = SV("pcap解析")
 sv_pcap_file = SV("pcap文件处理")
@@ -47,11 +44,11 @@ def safe_unlink(file_path: Path, max_retries: int = 3):
 
 
 # 文件處理指令 - qq 用户使用（官方bot暂不支持）
-@sv_pcap_file.on_file(("pcap"))
+@sv_pcap_file.on_file("pcap")
 async def pcap_file_handler(bot: Bot, ev: Event):
     """pcap 文件處理指令 - 使用優化處理器"""
     at_sender = True if ev.group_id else False
-    
+
     pcap_handler = PcapFileHandler()
     msg = await pcap_handler.handle_pcap_file(bot, ev, ev.file)
 
@@ -94,9 +91,7 @@ async def pcap_parse(bot: Bot, ev: Event):
 
         try:
             # 創建臨時文件
-            with tempfile.NamedTemporaryFile(
-                suffix=Path(file_name).suffix, delete=False
-            ) as temp_file:
+            with tempfile.NamedTemporaryFile(suffix=Path(file_name).suffix, delete=False) as temp_file:
                 temp_path = Path(temp_file.name)
 
             # 下載文件
@@ -130,9 +125,7 @@ async def pcap_parse(bot: Bot, ev: Event):
             waves_data = await parser.parse_pcap_data(result["data"])
 
             if not waves_data:
-                return await bot.send(
-                    "数据解析失败，请确保 pcap 文件包含有效的鸣潮数据\n", at_sender
-                )
+                return await bot.send("数据解析失败，请确保 pcap 文件包含有效的鸣潮数据\n", at_sender)
 
             # 發送成功消息
             # 從解析器中獲取統計信息
@@ -150,7 +143,7 @@ async def pcap_parse(bot: Bot, ev: Event):
                 f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
                 "",
             ]
-    
+
             await bot.send("\n".join(msg), at_sender)
 
         except Exception as e:
@@ -208,7 +201,7 @@ async def pcap_help(bot: Bot, ev: Event):
     """Wuthery pcap 数据导入帮助"""
     url = "https://wuthery.com/guides"
     if WutheringWavesConfig.get_config("WavesTencentWord").data:
-            url = f"https://docs.qq.com/scenario/link.html?url={url}"
+        url = f"https://docs.qq.com/scenario/link.html?url={url}"
 
     warn = "\n".join(
         [
@@ -255,11 +248,11 @@ async def pcap_help(bot: Bot, ev: Event):
         ]
     )
     msg = [warn, method_pc, method_android, upload_note]
-    
+
     await bot.send(msg)
 
 
-async def load_pcap_data(uid: str) -> Optional[dict]:
+async def load_pcap_data(uid: str) -> dict | None:
     """加載 pcap 數據"""
     try:
         data_file = Path("data/pcap_data") / uid / "latest_data.json"
@@ -267,7 +260,7 @@ async def load_pcap_data(uid: str) -> Optional[dict]:
         if not data_file.exists():
             return None
 
-        with open(data_file, "r", encoding="utf-8") as f:
+        with open(data_file, encoding="utf-8") as f:
             return json.load(f)
 
     except Exception as e:

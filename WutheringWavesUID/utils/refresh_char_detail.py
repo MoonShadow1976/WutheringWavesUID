@@ -1,9 +1,7 @@
 import asyncio
 import json
-from typing import Dict, List, Optional, Union
 
 import aiofiles
-
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
@@ -58,27 +56,21 @@ semaphore_manager = SemaphoreManager()
 async def send_card(
     uid: str,
     user_id: str,
-    waves_data: List,
+    waves_data: list,
     is_self_ck: bool = False,
-    token: Optional[str] = "",
+    token: str | None = "",
 ):
-    waves_char_rank: Optional[List[WavesCharRank]] = None
+    waves_char_rank: list[WavesCharRank] | None = None
 
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if WavesToken:
         waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
-    if (
-        is_self_ck
-        and token
-        and waves_char_rank
-        and WavesToken
-        and waves_data
-        and user_id
-    ):
+    if is_self_ck and token and waves_char_rank and WavesToken and waves_data and user_id:
         if waves_api.is_net(uid):
             from ..utils.api.kuro_py_api import get_base_info_overseas
+
             account_info, _ = await get_base_info_overseas(token, uid)
             if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
                 logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")
@@ -89,9 +81,7 @@ async def send_card(
                 return account_info.throw_msg()
             account_info = AccountBaseInfo.model_validate(account_info.data)
         if len(waves_data) != 1 and account_info.roleNum != len(waves_data):
-            logger.warning(
-                f"角色数量不一致，role_info.roleNum:{account_info.roleNum} != waves_char_rank:{len(waves_data)}"
-            )
+            logger.warning(f"角色数量不一致，role_info.roleNum:{account_info.roleNum} != waves_char_rank:{len(waves_data)}")
             return
         metadata = {
             "user_id": user_id,
@@ -107,8 +97,8 @@ async def send_card(
 
 async def save_card_info(
     uid: str,
-    waves_data: List,
-    waves_map: Optional[Dict] = None,
+    waves_data: list,
+    waves_map: dict | None = None,
     user_id: str = "",
     is_self_ck: bool = False,
     token: str = "",
@@ -122,7 +112,7 @@ async def save_card_info(
     old_data = {}
     if path.exists():
         try:
-            async with aiofiles.open(path, mode="r", encoding="utf-8") as f:
+            async with aiofiles.open(path, encoding="utf-8") as f:
                 old = json.loads(await f.read())
                 old_data = {d["role"]["roleId"]: d for d in old}
         except Exception as e:
@@ -172,11 +162,11 @@ async def refresh_char(
     ev: Event,
     uid: str,
     user_id: str,
-    ck: Optional[str] = None,  # type: ignore
-    waves_map: Optional[Dict] = None,
+    ck: str | None = None,  # type: ignore
+    waves_map: dict | None = None,
     is_self_ck: bool = False,
-    refresh_type: Union[str, List[str]] = "all",
-) -> Union[str, List]:
+    refresh_type: str | list[str] = "all",
+) -> str | list:
     waves_datas = []
     if not ck:
         is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
@@ -204,30 +194,25 @@ async def refresh_char(
         tasks = [
             limited_get_role_detail_info(f"{r.roleId}", uid, ck)
             for r in role_info.roleList
-            if refresh_type == "all"
-            or (isinstance(refresh_type, list) and f"{r.roleId}" in refresh_type)
+            if refresh_type == "all" or (isinstance(refresh_type, list) and f"{r.roleId}" in refresh_type)
         ]
     else:
         if role_info.showRoleIdList:
             tasks = [
                 limited_get_role_detail_info(f"{r}", uid, ck)
                 for r in role_info.showRoleIdList
-                if refresh_type == "all"
-                or (isinstance(refresh_type, list) and f"{r}" in refresh_type)
+                if refresh_type == "all" or (isinstance(refresh_type, list) and f"{r}" in refresh_type)
             ]
         else:
             tasks = [
                 limited_get_role_detail_info(f"{r.roleId}", uid, ck)
                 for r in role_info.roleList
-                if refresh_type == "all"
-                or (isinstance(refresh_type, list) and f"{r.roleId}" in refresh_type)
+                if refresh_type == "all" or (isinstance(refresh_type, list) and f"{r.roleId}" in refresh_type)
             ]
     results = await asyncio.gather(*tasks)
 
-    charId2chainNum: Dict[int, int] = {
-        r.roleId: r.chainUnlockNum
-        for r in role_info.roleList
-        if isinstance(r.chainUnlockNum, int)
+    charId2chainNum: dict[int, int] = {
+        r.roleId: r.chainUnlockNum for r in role_info.roleList if isinstance(r.chainUnlockNum, int)
     }
     # 处理返回的数据
     for role_detail_info in results:
@@ -264,10 +249,7 @@ async def refresh_char(
 
         # 修正合鸣效果
         try:
-            if (
-                role_detail_info["phantomData"]
-                and role_detail_info["phantomData"]["equipPhantomList"]
-            ):
+            if role_detail_info["phantomData"] and role_detail_info["phantomData"]["equipPhantomList"]:
                 for i in role_detail_info["phantomData"]["equipPhantomList"]:
                     if not isinstance(i, dict):
                         continue
@@ -301,10 +283,10 @@ async def refresh_char_from_pcap(
     ev: Event,
     uid: str,
     user_id: str,
-    pcap_data: Dict,
-    waves_map: Optional[Dict] = None,
-    refresh_type: Union[str, List[str]] = "all",
-) -> Union[str, List]:
+    pcap_data: dict,
+    waves_map: dict | None = None,
+    refresh_type: str | list[str] = "all",
+) -> str | list:
     """基於 pcap 數據刷新角色面板"""
     ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
     if not ck:
@@ -324,7 +306,7 @@ async def refresh_char_from_pcap(
         # 初始化 waves_map
         if waves_map is None:
             waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
-        
+
         waves_data = []
 
         async def limited_check_role_detail_info(r):
@@ -332,6 +314,7 @@ async def refresh_char_from_pcap(
                 role_name = r["role"]["roleName"]
                 # 验证构建RoleDetailData类
                 from ..utils.api.model import RoleDetailData
+
                 RoleDetailData.model_validate(r)
             except Exception as e:
                 await send_master_info(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
@@ -340,17 +323,13 @@ async def refresh_char_from_pcap(
 
             waves_data.append(r)
 
-
         # 确定需要处理的角色
         if refresh_type == "all":
             roles_to_process = role_detail_list
         elif isinstance(refresh_type, list):
             # 将 refresh_type 转换为字符串列表以确保类型一致
             refresh_type_str = [str(x) for x in refresh_type]
-            roles_to_process = [
-                r for r in role_detail_list 
-                if str(r["role"]["roleId"]) in refresh_type_str
-            ]
+            roles_to_process = [r for r in role_detail_list if str(r["role"]["roleId"]) in refresh_type_str]
         else:
             logger.warning(f"无效的 refresh_type: {refresh_type}")
             roles_to_process = []

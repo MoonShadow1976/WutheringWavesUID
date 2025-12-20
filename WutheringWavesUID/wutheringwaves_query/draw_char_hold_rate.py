@@ -1,14 +1,12 @@
 import asyncio
 import copy
 from pathlib import Path
-from typing import Dict, Union
-
-import httpx
-from PIL import Image, ImageDraw
 
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+import httpx
+from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import GET_HOLD_RATE_URL
 from ..utils.ascension.char import get_char_model
@@ -98,9 +96,7 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
     footer_height = 50
 
     # 计算所需的总高度
-    total_height = (
-        header_height + item_spacing * len(char_list) + margin * 2 + footer_height
-    )
+    total_height = header_height + item_spacing * len(char_list) + margin * 2 + footer_height
 
     # 创建带背景的画布 - 使用bg9
     img = get_waves_bg(width, total_height, "bg9")
@@ -129,9 +125,7 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
 
     # count
     title = (
-        f"样本数量: {data.get('total_player_count', 0)} 人"
-        if group_id
-        else f"近期活跃人数: {data.get('total_player_count', 0)}"
+        f"样本数量: {data.get('total_player_count', 0)} 人" if group_id else f"近期活跃人数: {data.get('total_player_count', 0)}"
     )
     title_mask_draw.text(
         (300, 500),
@@ -180,13 +174,9 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
             temp_bg_draw = ImageDraw.Draw(temp_bg)
 
             c_color_hex = CHAIN_COLOR_LIST[i]
-            temp_bg_draw.rounded_rectangle(
-                (35, 0, 125, 30), 8, fill=c_color_hex + (100,)
-            )
+            temp_bg_draw.rounded_rectangle((35, 0, 125, 30), 8, fill=c_color_hex + (100,))
             temp_bg_draw.text((0, 15), chain_text, "white", waves_font_20, "lm")
-            temp_bg_draw.text(
-                (80, 15), f"{c_percent:.2f}%", "white", waves_font_20, "mm"
-            )
+            temp_bg_draw.text((80, 15), f"{c_percent:.2f}%", "white", waves_font_20, "mm")
 
             bar_bg.alpha_composite(temp_bg, (310 + i * 135, 26))
 
@@ -204,9 +194,7 @@ async def new_draw_char_hold_rate(ev: Event, data, group_id: str = "") -> bytes:
         elif char_model.starLevel == 4:
             color = STAR_FOUR
 
-        hole_progress_bg_draw.rounded_rectangle(
-            (0, 0, real_length, 24), 15, fill=color + (170,)
-        )
+        hole_progress_bg_draw.rounded_rectangle((0, 0, real_length, 24), 15, fill=color + (170,))
         if hold_rate < 10:
             xy = (real_length + 50, 12)
         else:
@@ -254,7 +242,7 @@ async def draw_pic(roleId):
     expiration=3600,
     condition=lambda x: x,
 )
-async def get_char_hold_rate_data() -> Dict:
+async def get_char_hold_rate_data() -> dict:
     """获取角色持有率数据"""
     try:
         async with httpx.AsyncClient() as client:
@@ -268,7 +256,7 @@ async def get_char_hold_rate_data() -> Dict:
     return {}
 
 
-async def get_group_or_bot_char_hold_rate_data(group_id: str) -> Dict:
+async def get_group_or_bot_char_hold_rate_data(group_id: str) -> dict:
     """获取群组或者bot所有的角色持有率数据"""
     res = {}
 
@@ -376,7 +364,7 @@ async def get_group_or_bot_char_hold_rate_data(group_id: str) -> Dict:
 
 
 # 主入口函数
-async def get_char_hold_rate_img(ev: Event, group_id: str = "") -> Union[bytes, str]:
+async def get_char_hold_rate_img(ev: Event, group_id: str = "") -> bytes | str:
     """获取角色持有率图像"""
     if group_id:
         data = await get_group_or_bot_char_hold_rate_data(group_id)

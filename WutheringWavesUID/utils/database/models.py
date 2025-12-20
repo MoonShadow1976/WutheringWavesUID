@@ -1,19 +1,18 @@
-from typing import Any, Dict, List, Optional, Type, TypeVar
-
-from sqlalchemy import delete, null, update
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.sql import and_, or_
-from sqlmodel import Field, col, select
+from typing import Any, TypeVar
 
 from gsuid_core.utils.database.base_models import (
+    BaseModel,
     Bind,
     Push,
     User,
-    BaseModel,
     with_session,
 )
 from gsuid_core.utils.database.startup import exec_list
 from gsuid_core.webconsole.mount_app import GsAdminModel, PageSchema, site
+from sqlalchemy import delete, null, update
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.sql import and_, or_
+from sqlmodel import Field, col, select
 
 exec_list.extend(
     [
@@ -22,7 +21,7 @@ exec_list.extend(
         'ALTER TABLE WavesUser ADD COLUMN bbs_sign_switch TEXT DEFAULT "off"',
         'ALTER TABLE WavesUser ADD COLUMN bat TEXT DEFAULT ""',
         'ALTER TABLE WavesUser ADD COLUMN did TEXT DEFAULT ""',
-        'ALTER TABLE WavesPush ADD COLUMN push_time_value TEXT DEFAULT ""'
+        'ALTER TABLE WavesPush ADD COLUMN push_time_value TEXT DEFAULT ""',
     ]
 )
 
@@ -31,35 +30,33 @@ T_WavesUser = TypeVar("T_WavesUser", bound="WavesUser")
 T_WavesPush = TypeVar("T_WavesPush", bound="WavesPush")
 T_WavesUserAvatar = TypeVar("T_WavesUserAvatar", bound="WavesUserAvatar")
 
+
 class WavesUserAvatar(BaseModel, table=True):
-    __table_args__: Dict[str, Any] = {"extend_existing": True}
+    __table_args__: dict[str, Any] = {"extend_existing": True}
     avatar_hash: str = Field(default="", title="头像哈希")
 
+
 class WavesBind(Bind, table=True):
-    __table_args__: Dict[str, Any] = {"extend_existing": True}
-    uid: Optional[str] = Field(default=None, title="鸣潮UID")
+    __table_args__: dict[str, Any] = {"extend_existing": True}
+    uid: str | None = Field(default=None, title="鸣潮UID")
 
     @classmethod
     @with_session
-    async def get_group_all_uid(
-        cls: Type[T_WavesBind], session: AsyncSession, group_id: Optional[str] = None
-    ):
+    async def get_group_all_uid(cls: type[T_WavesBind], session: AsyncSession, group_id: str | None = None):
         """根据传入`group_id`获取该群号下所有绑定`uid`列表"""
-        result = await session.scalars(
-            select(cls).where(col(cls.group_id).contains(group_id))
-        )
+        result = await session.scalars(select(cls).where(col(cls.group_id).contains(group_id)))
         return result.all()
 
     @classmethod
     async def insert_waves_uid(
-        cls: Type[T_WavesBind],
+        cls: type[T_WavesBind],
         user_id: str,
         bot_id: str,
         uid: str,
-        group_id: Optional[str] = None,
-        lenth_limit: Optional[int] = None,
-        is_digit: Optional[bool] = True,
-        game_name: Optional[str] = None,
+        group_id: str | None = None,
+        lenth_limit: int | None = None,
+        is_digit: bool | None = True,
+        game_name: str | None = None,
     ) -> int:
         if lenth_limit:
             if len(uid) != lenth_limit:
@@ -114,10 +111,10 @@ class WavesBind(Bind, table=True):
 
 
 class WavesUser(User, table=True):
-    __table_args__: Dict[str, Any] = {"extend_existing": True}
+    __table_args__: dict[str, Any] = {"extend_existing": True}
     cookie: str = Field(default="", title="Cookie")
     uid: str = Field(default=None, title="鸣潮UID")
-    record_id: Optional[str] = Field(default=None, title="鸣潮记录ID")
+    record_id: str | None = Field(default=None, title="鸣潮记录ID")
     platform: str = Field(default="", title="ck平台")
     stamina_bg_value: str = Field(default="", title="体力背景")
     bbs_sign_switch: str = Field(default="off", title="自动社区签到")
@@ -126,27 +123,20 @@ class WavesUser(User, table=True):
 
     @classmethod
     @with_session
-    async def mark_cookie_invalid(
-        cls: Type[T_WavesUser], session: AsyncSession, uid: str, cookie: str, mark: str
-    ):
-        sql = (
-            update(cls)
-            .where(col(cls.uid) == uid)
-            .where(col(cls.cookie) == cookie)
-            .values(status=mark)
-        )
+    async def mark_cookie_invalid(cls: type[T_WavesUser], session: AsyncSession, uid: str, cookie: str, mark: str):
+        sql = update(cls).where(col(cls.uid) == uid).where(col(cls.cookie) == cookie).values(status=mark)
         await session.execute(sql)
         return True
 
     @classmethod
     @with_session
     async def select_cookie(
-        cls: Type[T_WavesUser],
+        cls: type[T_WavesUser],
         session: AsyncSession,
         uid: str,
         user_id: str,
         bot_id: str,
-    ) -> Optional[str]:
+    ) -> str | None:
         sql = select(cls).where(
             cls.user_id == user_id,
             cls.uid == uid,
@@ -159,12 +149,12 @@ class WavesUser(User, table=True):
     @classmethod
     @with_session
     async def select_waves_user(
-        cls: Type[T_WavesUser],
+        cls: type[T_WavesUser],
         session: AsyncSession,
         uid: str,
         user_id: str,
         bot_id: str,
-    ) -> Optional[T_WavesUser]:
+    ) -> T_WavesUser | None:
         sql = select(cls).where(
             cls.user_id == user_id,
             cls.uid == uid,
@@ -177,10 +167,10 @@ class WavesUser(User, table=True):
     @classmethod
     @with_session
     async def select_user_cookie_uids(
-        cls: Type[T_WavesUser],
+        cls: type[T_WavesUser],
         session: AsyncSession,
         user_id: str,
-    ) -> List[str]:
+    ) -> list[str]:
         sql = select(cls).where(
             and_(
                 col(cls.user_id) == user_id,
@@ -195,9 +185,7 @@ class WavesUser(User, table=True):
 
     @classmethod
     @with_session
-    async def select_data_by_cookie(
-        cls: Type[T_WavesUser], session: AsyncSession, cookie: str
-    ) -> Optional[T_WavesUser]:
+    async def select_data_by_cookie(cls: type[T_WavesUser], session: AsyncSession, cookie: str) -> T_WavesUser | None:
         sql = select(cls).where(cls.cookie == cookie)
         result = await session.execute(sql)
         data = result.scalars().all()
@@ -206,8 +194,8 @@ class WavesUser(User, table=True):
     @classmethod
     @with_session
     async def select_data_by_cookie_and_uid(
-        cls: Type[T_WavesUser], session: AsyncSession, cookie: str, uid: str
-    ) -> Optional[T_WavesUser]:
+        cls: type[T_WavesUser], session: AsyncSession, cookie: str, uid: str
+    ) -> T_WavesUser | None:
         sql = select(cls).where(cls.cookie == cookie, cls.uid == uid)
         result = await session.execute(sql)
         data = result.scalars().all()
@@ -215,12 +203,12 @@ class WavesUser(User, table=True):
 
     @classmethod
     async def get_user_by_attr(
-        cls: Type[T_WavesUser],
+        cls: type[T_WavesUser],
         user_id: str,
         bot_id: str,
         attr_key: str,
         attr_value: str,
-    ) -> Optional[Any]:
+    ) -> Any | None:
         user_list = await cls.select_data_list(user_id=user_id, bot_id=bot_id)
         if not user_list:
             return None
@@ -231,9 +219,7 @@ class WavesUser(User, table=True):
 
     @classmethod
     @with_session
-    async def get_waves_all_user(
-        cls: Type[T_WavesUser], session: AsyncSession
-    ) -> List[T_WavesUser]:
+    async def get_waves_all_user(cls: type[T_WavesUser], session: AsyncSession) -> list[T_WavesUser]:
         """获取所有有效用户"""
         sql = select(cls).where(
             and_(
@@ -248,7 +234,7 @@ class WavesUser(User, table=True):
         return list(data)
 
     @classmethod
-    async def get_all_push_user_list(cls: Type[T_WavesUser]) -> List[T_WavesUser]:
+    async def get_all_push_user_list(cls: type[T_WavesUser]) -> list[T_WavesUser]:
         data = await cls.get_waves_all_user()
         return [user for user in data if user.push_switch != "off"]
 
@@ -283,38 +269,35 @@ class WavesUser(User, table=True):
 
 
 class WavesPush(Push, table=True):
-    __table_args__: Dict[str, Any] = {"extend_existing": True}
+    __table_args__: dict[str, Any] = {"extend_existing": True}
     bot_id: str = Field(title="平台")
     uid: str = Field(default=None, title="鸣潮UID")
-    resin_push: Optional[str] = Field(
+    resin_push: str | None = Field(
         title="体力推送",
         default="off",
         schema_extra={"json_schema_extra": {"hint": "ww开启体力推送"}},
     )
-    resin_value: Optional[int] = Field(title="体力阈值", default=235)
-    push_time_value: Optional[str] = Field(title="推送时间", default="")
-    resin_is_push: Optional[str] = Field(title="体力是否已推送", default="off")
+    resin_value: int | None = Field(title="体力阈值", default=235)
+    push_time_value: str | None = Field(title="推送时间", default="")
+    resin_is_push: str | None = Field(title="体力是否已推送", default="off")
 
     @classmethod
     @with_session
     async def select_push_data(
-        cls: Type[T_WavesPush],
+        cls: type[T_WavesPush],
         session: AsyncSession,
         user_id: str,
         bot_id: str,
     ) -> T_WavesPush | None:
-        sql = select(cls).where(
-            col(cls.uid) == user_id,
-            col(cls.bot_id) == bot_id
-        )
+        sql = select(cls).where(col(cls.uid) == user_id, col(cls.bot_id) == bot_id)
         result = await session.execute(sql)
         data = result.scalars().all()
         return data[0] if data else None
-    
+
     @classmethod
     @with_session
     async def insert_push_data(
-        cls: Type[T_WavesPush],
+        cls: type[T_WavesPush],
         session: AsyncSession,
         uid: str,
         bot_id: str,

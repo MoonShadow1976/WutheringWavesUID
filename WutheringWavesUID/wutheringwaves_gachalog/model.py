@@ -1,5 +1,3 @@
-from typing import List
-
 from pydantic import BaseModel
 
 """
@@ -46,4 +44,4 @@ class WWUIDGachaItem(BaseModel):
 
 class WWUIDGacha(BaseModel):
     info: WWUIDGachaInfo
-    list: List[WWUIDGachaItem]
+    list: list[WWUIDGachaItem]

@@ -1,5 +1,4 @@
 # 莫宁
-from typing import Literal
 
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail2
@@ -10,17 +9,11 @@ from ...damage.utils import (
     cast_attack,
     cast_hit,
     cast_liberation,
-    cast_phantom,
     cast_skill,
-    hit_damage,
-    phantom_damage,
-    skill_damage_calc,
     liberation_damage,
-    skill_damage,
+    skill_damage_calc,
 )
-from .buff import shouanren_buff, qiuyuan_buff, lupa_buff
 from .damage import echo_damage, phase_damage, weapon_damage
-
 
 # def calc_damage_1(
 #     attr: DamageAttribute,
@@ -229,9 +222,7 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel)
     title = "共鸣解放·临界协议"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)

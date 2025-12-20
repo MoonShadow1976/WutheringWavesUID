@@ -1,11 +1,9 @@
 import copy
 from pathlib import Path
-from typing import Dict, List
-
-from PIL import Image, ImageDraw
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.api.model import (
     BatchRoleCostResponse,
@@ -21,7 +19,7 @@ from ..utils.api.model import (
 )
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_102, WAVES_CODE_103, WAVES_CODE_098
+from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_102, WAVES_CODE_103
 from ..utils.fonts.waves_fonts import (
     waves_font_20,
     waves_font_32,
@@ -124,7 +122,7 @@ skill_index_kuro = {
 }
 
 
-async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
+async def calc_develop_cost(ev: Event, develop_list: list[str], is_flush=False):
     user_id = ev.user_id
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
@@ -190,9 +188,7 @@ async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
 
     develop_data_map = {}
     if owneds:
-        develop_data = await waves_api.get_develop_role_cultivate_status(
-            uid, token, owneds
-        )
+        develop_data = await waves_api.get_develop_role_cultivate_status(uid, token, owneds)
         if not develop_data.success:
             return develop_data.throw_msg()
         develop_data = RoleCultivateStatusList.model_validate(develop_data.data)
@@ -242,9 +238,7 @@ async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
 
         template_role["weaponId"] = role_detail.weaponData.weapon.weaponId
         template_role["weaponStartLevel"] = role_detail.weaponData.level
-        template_role["advanceSkillList"] = list(
-            set(skillBreakList).difference(set(develop_data.skillBreakList))
-        )
+        template_role["advanceSkillList"] = list(set(skillBreakList).difference(set(develop_data.skillBreakList)))
         content_list.append(template_role)
 
     if not content_list:
@@ -260,9 +254,7 @@ async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
     all_card = []
     # batch_preview: RoleCostDetail = batch_role_cost_res.preview
     for cost in batch_role_cost_res.costList:
-        role_detail_card = await calc_role_need_card(
-            cost, online_role_map, online_weapon_map, content_map
-        )
+        role_detail_card = await calc_role_need_card(cost, online_role_map, online_weapon_map, content_map)
         all_card.extend(role_detail_card)
 
     height_block = 40
@@ -282,7 +274,7 @@ async def calc_develop_cost(ev: Event, develop_list: List[str], is_flush=False):
     return card_img
 
 
-async def draw_material_card(cultivate_cost_list: List[CultivateCost], title: str):
+async def draw_material_card(cultivate_cost_list: list[CultivateCost], title: str):
     line_item_num = 6
     material_header_height = 120
     material_header_block_height = 20
@@ -322,15 +314,11 @@ async def draw_material_card(cultivate_cost_list: List[CultivateCost], title: st
     temp_high += material_header_block_height + material_header_height
     index = 0
     for cultivate_cost in cultivate_cost_list:
-        temp_img = Image.new(
-            "RGBA", (material_item_width, material_item_height), (0, 0, 0, 255)
-        )
+        temp_img = Image.new("RGBA", (material_item_width, material_item_height), (0, 0, 0, 255))
 
         material_star_img = copy.deepcopy(material_star_img_map[cultivate_cost.quality])
         material_item_img = await get_material_img(cultivate_cost.id)
-        material_item_img = material_item_img.resize(
-            (material_item_width, material_item_width)
-        )
+        material_item_img = material_item_img.resize((material_item_width, material_item_width))
 
         temp_img_draw = ImageDraw.Draw(temp_img)
         temp_img_draw.text(
@@ -348,8 +336,7 @@ async def draw_material_card(cultivate_cost_list: List[CultivateCost], title: st
             temp_img,
             (
                 40 + index % 6 * (material_item_width + 18),
-                index // 6 * (material_item_height + material_item_block_height)
-                + temp_high,
+                index // 6 * (material_item_height + material_item_block_height) + temp_high,
             ),
         )
         index += 1
@@ -359,18 +346,15 @@ async def draw_material_card(cultivate_cost_list: List[CultivateCost], title: st
 
 async def calc_role_need_card(
     role_cost_detail: RoleCostDetail,
-    online_role_map: Dict[str, OnlineRole],
-    online_weapon_map: Dict[str, OnlineWeapon],
-    content_map: Dict[str, Dict],
+    online_role_map: dict[str, OnlineRole],
+    online_weapon_map: dict[str, OnlineWeapon],
+    content_map: dict[str, dict],
 ):
     img_cards = []
     if not role_cost_detail.roleId:
         return img_cards
 
-    if (
-        f"{role_cost_detail.roleId}" not in online_role_map
-        or f"{role_cost_detail.roleId}" not in content_map
-    ):
+    if f"{role_cost_detail.roleId}" not in online_role_map or f"{role_cost_detail.roleId}" not in content_map:
         return img_cards
 
     online_role = online_role_map[f"{role_cost_detail.roleId}"]
@@ -469,33 +453,23 @@ async def calc_role_need_card(
     img_cards.append(temp_img)
 
     if role_cost_detail.allCost:
-        all_cost_img = await draw_material_card(
-            role_cost_detail.allCost, "所需材料总览"
-        )
+        all_cost_img = await draw_material_card(role_cost_detail.allCost, "所需材料总览")
         img_cards.append(all_cost_img)
 
     if role_cost_detail.missingCost:
-        missing_cost_img = await draw_material_card(
-            role_cost_detail.missingCost, "仍需材料总览"
-        )
+        missing_cost_img = await draw_material_card(role_cost_detail.missingCost, "仍需材料总览")
         img_cards.append(missing_cost_img)
 
     if role_cost_detail.missingRoleCost:
-        missing_role_cost_img = await draw_material_card(
-            role_cost_detail.missingRoleCost, "角色升级"
-        )
+        missing_role_cost_img = await draw_material_card(role_cost_detail.missingRoleCost, "角色升级")
         img_cards.append(missing_role_cost_img)
 
     if role_cost_detail.missingSkillCost:
-        missing_skill_cost_img = await draw_material_card(
-            role_cost_detail.missingSkillCost, "技能升级"
-        )
+        missing_skill_cost_img = await draw_material_card(role_cost_detail.missingSkillCost, "技能升级")
         img_cards.append(missing_skill_cost_img)
 
     if role_cost_detail.missingWeaponCost:
-        missing_weapon_cost_img = await draw_material_card(
-            role_cost_detail.missingWeaponCost, "武器升级"
-        )
+        missing_weapon_cost_img = await draw_material_card(role_cost_detail.missingWeaponCost, "武器升级")
         img_cards.append(missing_weapon_cost_img)
 
     return img_cards

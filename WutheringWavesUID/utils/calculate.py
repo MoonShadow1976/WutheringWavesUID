@@ -1,10 +1,8 @@
 import math
 from pathlib import Path
-from typing import Dict, List, Union
-
-from msgspec import json as msgjson
 
 from gsuid_core.logger import logger
+from msgspec import json as msgjson
 
 from ..utils.api.model import Props
 from ..utils.ascension.char import get_char_model
@@ -19,7 +17,7 @@ score_interval = ["c", "b", "a", "s", "ss", "sss"]
 fix_max_score = 50
 
 
-def get_calc_map(ctx: Dict, char_name: str, char_id: Union[int, str]):
+def get_calc_map(ctx: dict, char_name: str, char_id: int | str):
     if str(char_id) in ID_FULL_CHAR_NAME:
         char_name = ID_FULL_CHAR_NAME[str(char_id)]
     char_path = MAP_PATH / char_name
@@ -29,19 +27,15 @@ def get_calc_map(ctx: Dict, char_name: str, char_id: Union[int, str]):
     def check_conditions(file_name):
         condition_path = char_path / file_name
         if condition_path.exists():
-            with open(condition_path, "r", encoding="utf-8") as f:
+            with open(condition_path, encoding="utf-8") as f:
                 expressions = msgjson.decode(f.read())
             return find_first_matching_expression(ctx, expressions)
         return None
 
     # 先检查用户条件，然后是默认条件
-    calc_json_path = (
-        check_conditions("condition-user.json")
-        or check_conditions("condition.json")
-        or "calc.json"
-    )
+    calc_json_path = check_conditions("condition-user.json") or check_conditions("condition.json") or "calc.json"
     logger.debug(f"{char_name} [匹配文件]: {char_path.name}/{calc_json_path}")
-    with open(char_path / calc_json_path, "r", encoding="utf-8") as f:
+    with open(char_path / calc_json_path, encoding="utf-8") as f:
         return msgjson.decode(f.read())
 
 
@@ -86,9 +80,7 @@ def calc_phantom_entry(index, prop, cost: int, calc_map, char_attr: str):
         score += pros_temp.get("技能伤害加成", 0) * skill_weight[2] * value
     elif prop.attributeName == "共鸣解放伤害加成":
         score += pros_temp.get("技能伤害加成", 0) * skill_weight[3] * value
-    elif prop.attributeName[0:2] in ATTRIBUTE_NAME_SET and (
-        char_attr == prop.attributeName[0:2] or char_attr == ""
-    ):
+    elif prop.attributeName[0:2] in ATTRIBUTE_NAME_SET and (char_attr == prop.attributeName[0:2] or char_attr == ""):
         score += pros_temp.get("属性伤害加成", 0) * value
     else:
         score += pros_temp.get(prop.attributeName, 0) * value
@@ -114,10 +106,10 @@ def get_max_score(cost, calc_map):
 
 
 def calc_phantom_score(
-    char_id: Union[str, int],
-    prop_list: List[Props],
+    char_id: str | int,
+    prop_list: list[Props],
     cost: int,
-    calc_map: Union[Dict, None],
+    calc_map: dict | None,
 ) -> tuple[float, str]:
     if not calc_map:
         return 0, "c"
@@ -146,7 +138,7 @@ def calc_phantom_score(
     return final_score, score_level
 
 
-def get_total_score_bg(char_name: str, score: float, calc_map: Union[Dict, None]):
+def get_total_score_bg(char_name: str, score: float, calc_map: dict | None):
     if not calc_map:
         return "c"
 
@@ -156,13 +148,11 @@ def get_total_score_bg(char_name: str, score: float, calc_map: Union[Dict, None]
         if ratio >= _score:
             _temp = index
     score_level = score_interval[_temp]
-    logger.debug(
-        f"{char_name} [声骸评分]: {score} [总声骸评分等级]: {score_level} [总声骸评分系数]: {ratio:.2f}"
-    )
+    logger.debug(f"{char_name} [声骸评分]: {score} [总声骸评分等级]: {score_level} [总声骸评分系数]: {ratio:.2f}")
     return score_level
 
 
-def get_valid_color(name, value, calc_map: Union[Dict, None]):
+def get_valid_color(name, value, calc_map: dict | None):
     name_color = (255, 255, 255)
     num_color = (255, 255, 255)
     name = name.replace("百分比", "")

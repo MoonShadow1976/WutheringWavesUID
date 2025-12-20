@@ -4,13 +4,13 @@ from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
-from .darw_rank_card import draw_rank_img
-from .draw_bot_rank_card import draw_bot_rank_img
-from .draw_all_rank_card import draw_all_rank_card
 from ..wutheringwaves_config import WutheringWavesConfig
+from .darw_rank_card import draw_rank_img
+from .draw_all_rank_card import draw_all_rank_card
+from .draw_bot_rank_card import draw_bot_rank_img
+from .draw_gacha_server_rank import draw_gacha_server_rank_img
 from .draw_local_total_rank_card import draw_local_total_rank
 from .draw_total_rank_card import draw_total_rank
-from .draw_gacha_server_rank import draw_gacha_server_rank_img
 
 sv_waves_rank_list = SV("ww角色排行")
 sv_waves_rank_all_list = SV("ww角色总排行", priority=1)
@@ -86,9 +86,7 @@ async def send_bot_rank_card(bot: Bot, ev: Event):
         await bot.send(im)
 
 
-@sv_waves_rank_all_list.on_regex(
-    "^[\u4e00-\u9fa5]+(?:总排行|总排名)(\d+)?$", block=True
-)
+@sv_waves_rank_all_list.on_regex("^[\u4e00-\u9fa5]+(?:总排行|总排名)(\\d+)?$", block=True)
 async def send_all_rank_card(bot: Bot, ev: Event):
     # 正则表达式
     match = re.search(
@@ -130,24 +128,22 @@ async def send_all_rank_card(bot: Bot, ev: Event):
 
 @sv_waves_rank_total_list.on_command(("练度总排行", "练度总排名"), block=True)
 async def send_total_rank_card(bot: Bot, ev: Event):
-
     pages = 1
     im = await draw_total_rank(bot, ev, pages)
     await bot.send(im)
 
 
-@sv_waves_gacha_server_rank.on_fullmatch(
-    ("欧狗榜", "武器欧狗榜", "连金榜", "连歪榜", "非酋榜", "武器非酋榜"), block=True
-)
+@sv_waves_gacha_server_rank.on_fullmatch(("欧狗榜", "武器欧狗榜", "连金榜", "连歪榜", "非酋榜", "武器非酋榜"), block=True)
 async def send_gacha_server_rank_card(bot: Bot, ev: Event):
     """抽卡全服排行榜（基于服务器API）"""
     # 使用 raw_text 去除前缀后获取命令
     # 例如: "ww连金榜" -> "连金榜"
     from ..wutheringwaves_config import PREFIX
+
     rank_type = ev.raw_text.replace(PREFIX, "").strip()
-    
+
     im = await draw_gacha_server_rank_img(bot, ev, rank_type)
-    
+
     if isinstance(im, str):
         at_sender = True if ev.group_id else False
         await bot.send(im, at_sender)

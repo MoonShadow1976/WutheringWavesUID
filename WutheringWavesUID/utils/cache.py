@@ -1,5 +1,5 @@
-import time
 from collections import OrderedDict
+import time
 
 
 class TimedCache:

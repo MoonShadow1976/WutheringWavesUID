@@ -1,19 +1,17 @@
 # 集成 kuro.py 的国际服登录功能
-import kuro
-from kuro.types import Region
-from kuro.models.game import RoleInfo, BasicRoleInfo, BattlePassRoleInfo
-from kuro.errors import GeetestTriggeredError, KuroError
-
 import datetime
-from typing import Any, Optional
+from typing import Any
 
 from gsuid_core.logger import logger
+import kuro
+from kuro.errors import GeetestTriggeredError, KuroError
+from kuro.models.game import BasicRoleInfo, BattlePassRoleInfo, RoleInfo
+from kuro.types import Region
 
-from .model import AccountBaseInfo, Box2, DailyData, EnergyData, LivenessData, BattlePassData
-from ..database.models import WavesBind, WavesUser
-from ...wutheringwaves_config import PREFIX
 from ...wutheringwaves_analyzecard.user_info_utils import save_user_info
-
+from ...wutheringwaves_config import PREFIX
+from ..database.models import WavesUser
+from .model import AccountBaseInfo, BattlePassData, Box2, DailyData, EnergyData, LivenessData
 
 # 构造retry的RoleInfo类
 fake_basic = BasicRoleInfo(
@@ -66,9 +64,8 @@ fake_role_info = RoleInfo(
     BattlePass=fake_battle_pass,
 )
 
-async def login_overseas(
-    email: str, password: str, geetest_data: Optional[str] = None
-) -> dict[str, Any]:
+
+async def login_overseas(email: str, password: str, geetest_data: str | None = None) -> dict[str, Any]:
     try:
         # 创建 kuro 客户端
         client = kuro.Client(region=Region.OVERSEAS)
@@ -82,23 +79,22 @@ async def login_overseas(
                 geetest_json = json.loads(geetest_data)  # 解析 Geetest 数据
                 logger.debug(f"解析 Geetest 数据: {geetest_json}")
 
-                mmt_result = kuro.models.MMTResult(
-                    **geetest_json
-                )  # 创建 MMTResult 对象
+                mmt_result = kuro.models.MMTResult(**geetest_json)  # 创建 MMTResult 对象
                 logger.debug(f"创建 MMTResult 成功: {mmt_result}")
 
-                login_result = await client.game_login(
-                    email, password, mmt_result=mmt_result
-                )
+                login_result = await client.game_login(email, password, mmt_result=mmt_result)
 
             except GeetestTriggeredError as e:
                 logger.error(f"Geetest 验证触发: {e}")
-                return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
+                return {
+                    "success": False,
+                    "msg": "需要进行行为验证 (错误码: 41000)\n",
+                    "need_verification": True,
+                    "error_code": 41000,
+                }
             except KuroError as e:
                 logger.error(f"kuro.py Geetest 登录错误: {e}")
-                logger.error(
-                    f"KuroError 详细信息: retcode={e.retcode}, msg={e.msg}, api_msg={e.api_msg}"
-                )
+                logger.error(f"KuroError 详细信息: retcode={e.retcode}, msg={e.msg}, api_msg={e.api_msg}")
                 logger.error(f"API 响应: {e.response}")
                 # 检查 API 响应中的具体错误码
                 api_codes = e.response.get("codes", 0)
@@ -106,18 +102,23 @@ async def login_overseas(
 
                 if api_codes == -4 or "校验码不通过" in error_description:
                     logger.warning("Geetest 验证码不通过，需要重新验证")
-                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
-                elif (
-                    api_codes == 10001
-                    or "account or password" in error_description.lower()
-                ):
+                    return {
+                        "success": False,
+                        "msg": "需要进行行为验证 (错误码: 41000)\n",
+                        "need_verification": True,
+                        "error_code": 41000,
+                    }
+                elif api_codes == 10001 or "account or password" in error_description.lower():
                     logger.error("账号或密码错误")
                     return {"success": False, "msg": f"账号或密码错误: {error_description}\n"}
                 elif e.retcode == 0:
-                    logger.warning(
-                        "Geetest 验证数据可能已过期或服务器问题，需要重新验证"
-                    )
-                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
+                    logger.warning("Geetest 验证数据可能已过期或服务器问题，需要重新验证")
+                    return {
+                        "success": False,
+                        "msg": "需要进行行为验证 (错误码: 41000)\n",
+                        "need_verification": True,
+                        "error_code": 41000,
+                    }
                 else:
                     return {"success": False, "msg": f"Geetest 验证失败: {str(e)}\n"}
             except Exception as e:
@@ -130,25 +131,30 @@ async def login_overseas(
                 login_result = await client.game_login(email, password)
             except GeetestTriggeredError as e:
                 logger.info(f"触发 Geetest 验证: {e}")
-                return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
+                return {
+                    "success": False,
+                    "msg": "需要进行行为验证 (错误码: 41000)\n",
+                    "need_verification": True,
+                    "error_code": 41000,
+                }
             except KuroError as e:
                 logger.info(f"kuro.py 错误: {e}")
-                logger.info(
-                    f"KuroError 详细信息: retcode={e.retcode}, msg={e.msg}, api_msg={e.api_msg}"
-                )
+                logger.info(f"KuroError 详细信息: retcode={e.retcode}, msg={e.msg}, api_msg={e.api_msg}")
                 logger.info(f"API 响应: {e.response}")
                 # 检查 API 响应中的具体错误码
                 api_codes = e.response.get("codes", 0)
                 error_description = e.response.get("error_description", "")
 
-                if (
-                    api_codes == 10001
-                    or "account or password" in error_description.lower()
-                ):
+                if api_codes == 10001 or "account or password" in error_description.lower():
                     logger.error("账号或密码错误")
                     return {"success": False, "msg": f"账号或密码错误: {error_description}\n"}
                 elif e.retcode == 0:  # Unknown error
-                    return {"success": False, "msg": "需要进行行为验证 (错误码: 41000)\n", "need_verification": True, "error_code": 41000}
+                    return {
+                        "success": False,
+                        "msg": "需要进行行为验证 (错误码: 41000)\n",
+                        "need_verification": True,
+                        "error_code": 41000,
+                    }
                 else:
                     return {"success": False, "msg": f"登录失败: {str(e)}\n"}
             except Exception as e:
@@ -215,9 +221,9 @@ async def login_overseas(
             return {"success": False, "msg": f"登入失敗: {str(e)}\n"}
 
     return {
-        "success": True, 
+        "success": True,
         "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n",
-        "data": {"player_infos": player_infos, "token": token_result.access_token}
+        "data": {"player_infos": player_infos, "token": token_result.access_token},
     }
 
 
@@ -243,14 +249,14 @@ async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
             return fake_role_info
 
         return None
-    
+
     # 保存用户信息到本地
     await save_user_info(uid, role_info.basic.name, level=role_info.basic.level, worldLevel=role_info.basic.world_level)
 
     return role_info
 
 
-async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
+async def get_base_info_overseas(ck: str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
     """获取国际服账户基础信息"""
     role_info = await get_role_info_overseas(ck, uid)
     if not role_info:
@@ -258,7 +264,7 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
 
     basic = role_info.basic
     battle_pass = role_info.battle_pass
-    
+
     BoxList = []
     name_list = {
         "1": "基准奇藏箱",
@@ -266,9 +272,9 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
         "3": "精密奇藏箱",
         "4": "辉光奇藏箱",
     }
-    for box_type, box_count in basic.basic_chests.items(): # not chests, but basic_chests
+    for box_type, box_count in basic.basic_chests.items():  # not chests, but basic_chests
         BoxList.append(Box2(name=name_list.get(box_type, "未知宝箱"), num=box_count))
-    
+
     TidalHeritagesList = []
     name_list = {
         "1": "潮汐之遗绿",
@@ -277,7 +283,7 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
     }
     for heritage_type, heritage_count in basic.tidal_heritages.items():
         TidalHeritagesList.append(Box2(name=name_list.get(heritage_type, "未知潮汐之遗"), num=heritage_count))
-    
+
     baseInfo = AccountBaseInfo(
         name=basic.name,
         id=int(uid),
@@ -296,29 +302,33 @@ async def get_base_info_overseas(ck:str, uid: str) -> tuple[None, None] | tuple[
     )
 
     dailyData = DailyData(
-        gameId=0, # [每日]默认不使用
-        userId=0, # 同
-        serverId="0", # 同
+        gameId=0,  # [每日]默认不使用
+        userId=0,  # 同
+        serverId="0",  # 同
         roleName=basic.name,
         roleId=uid,
-        signInTxt="国际服用户", # 同
+        signInTxt="国际服用户",  # 同
         hasSignIn=False,
         energyData=EnergyData(
-            name="结晶波片",img="",
+            name="结晶波片",
+            img="",
             refreshTimeStamp=int(basic.waveplates_replenish_time.timestamp()),
             cur=basic.waveplates,
             total=basic.max_waveplates,
         ),
         livenessData=LivenessData(
-            name="活跃度",img="",
+            name="活跃度",
+            img="",
             cur=basic.activity_points,
             total=basic.max_activity_points,
         ),
-        battlePassData=[BattlePassData(
-            name="电台",
-            cur=battle_pass.level,
-            total=70,
-        )]
+        battlePassData=[
+            BattlePassData(
+                name="电台",
+                cur=battle_pass.level,
+                total=70,
+            )
+        ],
     )
 
     return baseInfo, dailyData

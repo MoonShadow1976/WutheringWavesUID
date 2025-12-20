@@ -1,17 +1,15 @@
 import asyncio
 import copy
-import re
 from pathlib import Path
-from typing import Optional
-
-import httpx
-from PIL import Image, ImageDraw
+import re
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+import httpx
+from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import (
     GET_SLASH_RANK_URL,
@@ -82,7 +80,7 @@ def get_score_color(score: int):
         return (255, 255, 255)
 
 
-async def get_rank(item: SlashRankItem) -> Optional[SlashRankRes]:
+async def get_rank(item: SlashRankItem) -> SlashRankRes | None:
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if not WavesToken:
@@ -202,9 +200,7 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
         def draw_rank_id(rank_id, size=(50, 50), draw=(24, 24), dest=(40, 30)):
             info_rank = Image.new("RGBA", size, color=(255, 255, 255, 0))
             rank_draw = ImageDraw.Draw(info_rank)
-            rank_draw.rounded_rectangle(
-                [0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),)
-            )
+            rank_draw.rounded_rectangle([0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),))
             rank_draw.text(draw, f"{rank_id}", "white", waves_font_34, "mm")
             role_bg.alpha_composite(info_rank, dest)
 
@@ -217,17 +213,13 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
             draw_rank_id(rank_id, size=(50, 50), draw=(24, 24), dest=(40, 30))
 
         # 名字
-        role_bg_draw.text(
-            (210, 75), f"{rank_temp.kuro_name}", "white", waves_font_20, "lm"
-        )
+        role_bg_draw.text((210, 75), f"{rank_temp.kuro_name}", "white", waves_font_20, "lm")
 
         # uid
         uid_color = "white"
         if rank_temp.waves_id == item.waves_id:
             uid_color = RED
-        role_bg_draw.text(
-            (350, 40), f"特征码: {rank_temp.waves_id}", uid_color, waves_font_20, "lm"
-        )
+        role_bg_draw.text((350, 40), f"特征码: {rank_temp.waves_id}", uid_color, waves_font_20, "lm")
 
         # bot主人名字
         botName = rank_temp.alias_name if rank_temp.alias_name else ""
@@ -241,12 +233,8 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
 
             info_block = Image.new("RGBA", (200, 30), color=(255, 255, 255, 0))
             info_block_draw = ImageDraw.Draw(info_block)
-            info_block_draw.rounded_rectangle(
-                [0, 0, 200, 30], radius=6, fill=color + (int(0.6 * 255),)
-            )
-            info_block_draw.text(
-                (100, 15), f"bot: {botName}", "white", waves_font_18, "mm"
-            )
+            info_block_draw.rounded_rectangle([0, 0, 200, 30], radius=6, fill=color + (int(0.6 * 255),))
+            info_block_draw.text((100, 15), f"bot: {botName}", "white", waves_font_18, "mm")
             role_bg.alpha_composite(info_block, (350, 66))
 
         # 总分数
@@ -259,7 +247,6 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
         )
 
         for half_index, slash_half in enumerate(rank_temp.half_list):
-
             for role_index, char_detail in enumerate(slash_half.char_detail):
                 char_id = char_detail.char_id
                 char_level = char_detail.level
@@ -274,9 +261,7 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
                 if char_chain != -1:
                     info_block = Image.new("RGBA", (20, 20), color=(255, 255, 255, 0))
                     info_block_draw = ImageDraw.Draw(info_block)
-                    info_block_draw.rectangle(
-                        [0, 0, 20, 20], fill=(96, 12, 120, int(0.9 * 255))
-                    )
+                    info_block_draw.rectangle([0, 0, 20, 20], fill=(96, 12, 120, int(0.9 * 255)))
                     info_block_draw.text(
                         (8, 8),
                         f"{char_chain}",
@@ -286,9 +271,7 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
                     )
                     char_avatar.paste(info_block, (30, 30), info_block)
 
-                role_bg.alpha_composite(
-                    char_avatar, (570 + half_index * 250 + role_index * 50, 20)
-                )
+                role_bg.alpha_composite(char_avatar, (570 + half_index * 250 + role_index * 50, 20))
 
             # buff
             buff_bg = Image.new("RGBA", (50, 50), (255, 255, 255, 0))
@@ -326,7 +309,7 @@ async def draw_all_slash_rank_card(bot: Bot, ev: Event):
 
 
 async def get_avatar(
-    qid: Optional[str],
+    qid: str | None,
 ) -> Image.Image:
     # 检查qid 为纯数字
     if qid and qid.isdigit():

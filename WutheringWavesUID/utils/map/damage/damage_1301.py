@@ -20,9 +20,7 @@ from .buff import shouanren_buff, yinlin_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -36,9 +34,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
     title = "死告"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -92,9 +88,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -108,9 +102,7 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
     title = "幻影蚀刻伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -158,9 +150,7 @@ def calc_damage_3(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-    skill_type_name: Literal[
-        "猎犬剑技第一段", "猎犬剑技第二段", "猎犬剑技第三段"
-    ] = "猎犬剑技第一段",
+    skill_type_name: Literal["猎犬剑技第一段", "猎犬剑技第二段", "猎犬剑技第三段"] = "猎犬剑技第一段",
 ) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
@@ -186,15 +176,13 @@ def calc_damage_3(
         param = "4"
     elif skill_type_name == "猎犬剑技第三段":
         param = "5"
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], param, skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], param, skillLevel)
 
     title = f"{skill_type_name}伤害"
     if skill_type_name == "猎犬剑技第二段":
         sm = skill_multi.split("+")
         skill_multi = calc_percent_expression(sm[1])
-        msg = f"技能倍率{skill_multi*100:.2f}%"
+        msg = f"技能倍率{skill_multi * 100:.2f}%"
     else:
         msg = f"技能倍率{skill_multi}"
 
@@ -244,9 +232,7 @@ def calc_damage_4(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-    skill_type_name: Literal[
-        "灭杀指令第一段", "灭杀指令第二段", "灭杀指令第三段"
-    ] = "灭杀指令第一段",
+    skill_type_name: Literal["灭杀指令第一段", "灭杀指令第二段", "灭杀指令第三段"] = "灭杀指令第一段",
 ) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
@@ -271,9 +257,7 @@ def calc_damage_4(
         param = "2"
     elif skill_type_name == "灭杀指令第三段":
         param = "3"
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], param, skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], param, skillLevel)
     title = f"{skill_type_name}伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -323,9 +307,7 @@ def calc_damage_4(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
     # 守岸人buff
@@ -348,33 +330,23 @@ damage_detail = [
     },
     {
         "title": "猎犬剑技第一段",
-        "func": lambda attr, role: calc_damage_3(
-            attr, role, skill_type_name="猎犬剑技第一段"
-        ),
+        "func": lambda attr, role: calc_damage_3(attr, role, skill_type_name="猎犬剑技第一段"),
     },
     {
         "title": "猎犬剑技第二段",
-        "func": lambda attr, role: calc_damage_3(
-            attr, role, skill_type_name="猎犬剑技第二段"
-        ),
+        "func": lambda attr, role: calc_damage_3(attr, role, skill_type_name="猎犬剑技第二段"),
     },
     {
         "title": "灭杀指令第一段",
-        "func": lambda attr, role: calc_damage_4(
-            attr, role, skill_type_name="灭杀指令第一段"
-        ),
+        "func": lambda attr, role: calc_damage_4(attr, role, skill_type_name="灭杀指令第一段"),
     },
     {
         "title": "灭杀指令第二段",
-        "func": lambda attr, role: calc_damage_4(
-            attr, role, skill_type_name="灭杀指令第二段"
-        ),
+        "func": lambda attr, role: calc_damage_4(attr, role, skill_type_name="灭杀指令第二段"),
     },
     {
         "title": "灭杀指令第三段",
-        "func": lambda attr, role: calc_damage_4(
-            attr, role, skill_type_name="灭杀指令第三段"
-        ),
+        "func": lambda attr, role: calc_damage_4(attr, role, skill_type_name="灭杀指令第三段"),
     },
     {
         "title": "0+1守/0+1吟霖/死告伤害",

@@ -7,11 +7,11 @@ from gsuid_core.logger import logger
 from ...resource.RESOURCE_PATH import CAPTCHA_PATH
 from .base import CaptchaSolver
 
-SOLVER_REGISTRY: Dict[str, Type[CaptchaSolver]] = {}
+SOLVER_REGISTRY: dict[str, type[CaptchaSolver]] = {}
 
 
 def register_solver(name: str):
-    def decorator(cls: Type[CaptchaSolver]):
+    def decorator(cls: type[CaptchaSolver]):
         SOLVER_REGISTRY[name] = cls
         return cls
 
@@ -39,7 +39,7 @@ def _auto_discover_solvers():
 _auto_discover_solvers()
 
 
-def get_solver() -> Optional[CaptchaSolver]:
+def get_solver() -> CaptchaSolver | None:
     from ....wutheringwaves_config import WutheringWavesConfig
 
     captcha_provider = WutheringWavesConfig.get_config("CaptchaProvider").data

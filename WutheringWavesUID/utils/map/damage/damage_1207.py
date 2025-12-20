@@ -56,9 +56,7 @@ def calc_damage_2(
         param_id = "2"
         title = "破敌"
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], param_id, skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], param_id, skillLevel)
 
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -178,14 +176,12 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
 
     if isSingle:
         sm = skill_multi.split("+")
         s2 = calc_percent_expression(sm[-1])
-        skill_multi = f"{s2*100:.2f}%"
+        skill_multi = f"{s2 * 100:.2f}%"
 
     title = "狼舞的决意·极"
     msg = f"技能倍率{skill_multi}"
@@ -292,9 +288,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
     # 守岸人buff

@@ -1,5 +1,5 @@
 import re
-from typing import Dict, Literal, Optional
+from typing import Literal
 
 SONATA_FREEZING = "凝夜白霜"
 SONATA_MOLTEN = "熔山裂谷"
@@ -109,9 +109,7 @@ AbnormalType = Literal[
 ]
 
 
-def skill_damage_calc(
-    skillTree: Optional[Dict], skillTreeId: str, skillParamId: str, skillLevel: int
-) -> str:
+def skill_damage_calc(skillTree: dict | None, skillTreeId: str, skillParamId: str, skillLevel: int) -> str:
     """
     获取技能伤害
     :param skillTree: 技能树
@@ -122,9 +120,7 @@ def skill_damage_calc(
     """
     if skillTree is None:
         return "0"
-    return skillTree[skillTreeId]["skill"]["level"][skillParamId]["param"][0][
-        skillLevel
-    ]
+    return skillTree[skillTreeId]["skill"]["level"][skillParamId]["param"][0][skillLevel]
 
 
 def parse_skill_multi(temp):

@@ -1,12 +1,10 @@
 from pathlib import Path
-from typing import Dict, List, Union
-
-import httpx
-from PIL import Image, ImageDraw
 
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+import httpx
+from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import ABYSS_TYPE_MAP_REVERSE, GET_TOWER_APPEAR_RATE
 from ..utils.ascension.char import get_char_model
@@ -25,7 +23,7 @@ TEXT_PATH = Path(__file__).parent / "texture2d"
 
 
 @timed_async_cache(expiration=3600, condition=lambda x: isinstance(x, dict))
-async def get_tower_appear_rate_data() -> Union[Dict, None]:
+async def get_tower_appear_rate_data() -> dict | None:
     async with httpx.AsyncClient() as client:
         try:
             res = await client.get(
@@ -98,7 +96,7 @@ async def draw_tower_use_rate(ev: Event):
         area_type: str = i["area_type"]
         if filter_type is not None and area_type != filter_type:
             continue
-        rates: List[Dict] = i["rates"]
+        rates: list[dict] = i["rates"]
 
         tower_name_bg = Image.open(TEXT_PATH / f"tower_name_bg_{area_type}.png")
         tower_name_bg_draw = ImageDraw.Draw(tower_name_bg)

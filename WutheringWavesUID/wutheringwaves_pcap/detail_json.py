@@ -19,9 +19,9 @@ sub_props = {
 main_first_props = {
     1: {"name": "暴击", "isPercent": True},
     2: {"name": "暴击伤害", "isPercent": True},
-    3: {"name": "攻击", "isPercent": True}, # x
+    3: {"name": "攻击", "isPercent": True},  # x
     4: {"name": "生命", "isPercent": True},
-    5: {"name": "防御", "isPercent": True}, # x
+    5: {"name": "防御", "isPercent": True},  # x
     6: {"name": "治疗效果加成", "isPercent": True},
     7: {"name": "冷凝伤害加成", "isPercent": True},
     8: {"name": "热熔伤害加成", "isPercent": True},
@@ -30,8 +30,8 @@ main_first_props = {
     11: {"name": "衍射伤害加成", "isPercent": True},
     12: {"name": "湮灭伤害加成", "isPercent": True},
     13: {"name": "攻击", "isPercent": True},
-    14: {"name": "生命", "isPercent": True}, # x
-    15: {"name": "防御", "isPercent": True}, # x
+    14: {"name": "生命", "isPercent": True},  # x
+    15: {"name": "防御", "isPercent": True},  # x
     16: {"name": "共鸣效率", "isPercent": True},
     17: {"name": "攻击", "isPercent": True},
     18: {"name": "生命", "isPercent": True},
@@ -62,13 +62,13 @@ supplementary_props = {
     13: {"name": "共鸣效率", "isPercent": True},
     2018: {"name": "生命", "isPercent": True},
     20002: {"name": "生命", "isPercent": False},
-    4003: {"name": "攻击", "isPercent": True}, # x
-    40001: {"name": "攻击", "isPercent": False}, # x
+    4003: {"name": "攻击", "isPercent": True},  # x
+    40001: {"name": "攻击", "isPercent": False},  # x
     5001: {"name": "暴击", "isPercent": True},
     5002: {"name": "暴击伤害", "isPercent": True},
-    5003: {"name": "攻击", "isPercent": True}, # x
+    5003: {"name": "攻击", "isPercent": True},  # x
     5004: {"name": "生命", "isPercent": True},
-    5005: {"name": "防御", "isPercent": True}, # x
+    5005: {"name": "防御", "isPercent": True},  # x
     50001: {"name": "攻击", "isPercent": False},
     50002: {"name": "生命", "isPercent": False},
     50003: {"name": "攻击", "isPercent": False},
@@ -80,8 +80,8 @@ supplementary_props = {
     5011: {"name": "衍射伤害加成", "isPercent": True},
     5012: {"name": "湮灭伤害加成", "isPercent": True},
     5013: {"name": "攻击", "isPercent": True},
-    5014: {"name": "生命", "isPercent": True}, # x
-    5015: {"name": "防御", "isPercent": True}, # x
+    5014: {"name": "生命", "isPercent": True},  # x
+    5015: {"name": "防御", "isPercent": True},  # x
     5016: {"name": "共鸣效率", "isPercent": True},
     5017: {"name": "攻击", "isPercent": True},
     5018: {"name": "生命", "isPercent": True},

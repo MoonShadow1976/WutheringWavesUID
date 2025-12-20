@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Union
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -26,7 +26,7 @@ class CaptchaSolver(ABC):
         return cls.__name__
 
     @abstractmethod
-    async def solve(self) -> Union[CaptchaResult, Dict[str, Any]]:
+    async def solve(self) -> CaptchaResult | dict[str, Any]:
         raise NotImplementedError
 
     async def close(self) -> None:

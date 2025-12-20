@@ -1,10 +1,8 @@
 import copy
 from pathlib import Path
-from typing import Optional, Union
-
-from msgspec import json as msgjson
 
 from gsuid_core.logger import logger
+from msgspec import json as msgjson
 
 from ..ascension.constant import fixed_name, sum_percentages
 from .model import CharacterModel
@@ -18,7 +16,7 @@ def read_char_json_files(directory):
 
     for file in files:
         try:
-            with open(file, "r", encoding="utf-8") as f:
+            with open(file, encoding="utf-8") as f:
                 data = msgjson.decode(f.read())
                 file_name = file.name.split(".")[0]
                 char_id_data[file_name] = data
@@ -38,7 +36,7 @@ class WavesCharResult:
         self.fixed_skill = {}
 
 
-def get_breach(breach: Union[int, None], level: int):
+def get_breach(breach: int | None, level: int):
     if breach is None:
         if level <= 20:
             breach = 0
@@ -60,9 +58,7 @@ def get_breach(breach: Union[int, None], level: int):
     return breach
 
 
-def get_char_detail(
-    char_id: Union[str, int], level: int, breach: Union[int, None] = None
-) -> WavesCharResult:
+def get_char_detail(char_id: str | int, level: int, breach: int | None = None) -> WavesCharResult:
     """
     breach 突破
     resonLevel 精炼
@@ -89,21 +85,15 @@ def get_char_detail(
             if name not in result.fixed_skill:
                 result.fixed_skill[name] = "0%"
 
-            result.fixed_skill[name] = sum_percentages(
-                skill_info["param"][0], result.fixed_skill[name]
-            )
+            result.fixed_skill[name] = sum_percentages(skill_info["param"][0], result.fixed_skill[name])
 
         if skill_info.get("type") == "固有技能":
             for i, name in enumerate(fixed_name):
-                if skill_info["desc"].startswith(name) or skill_info["desc"].startswith(
-                    f"{char_data['name']}的{name}"
-                ):
+                if skill_info["desc"].startswith(name) or skill_info["desc"].startswith(f"{char_data['name']}的{name}"):
                     name = name.replace("提升", "").replace("全", "")
                     if name not in result.fixed_skill:
                         result.fixed_skill[name] = "0%"
-                    result.fixed_skill[name] = sum_percentages(
-                        skill_info["param"][0], result.fixed_skill[name]
-                    )
+                    result.fixed_skill[name] = sum_percentages(skill_info["param"][0], result.fixed_skill[name])
 
     return result
 
@@ -116,12 +106,10 @@ def get_char_detail2(role) -> WavesCharResult:
 
 
 def get_char_id(char_name):
-    return next(
-        (_id for _id, value in char_id_data.items() if value["name"] == char_name), None
-    )
+    return next((_id for _id, value in char_id_data.items() if value["name"] == char_name), None)
 
 
-def get_char_model(char_id: Union[str, int]) -> Optional[CharacterModel]:
+def get_char_model(char_id: str | int) -> CharacterModel | None:
     if str(char_id) not in char_id_data:
         return None
     return CharacterModel(**char_id_data[str(char_id)])

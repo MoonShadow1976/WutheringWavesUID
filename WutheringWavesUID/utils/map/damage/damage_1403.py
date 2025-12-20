@@ -1,23 +1,21 @@
 # 秋水
-from .buff import shouanren_buff, sanhua_buff
-from .damage import echo_damage, weapon_damage, phase_damage
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail2
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
-    SkillType,
     SkillTreeMap,
-    cast_skill,
+    SkillType,
+    attack_damage,
     cast_attack,
     cast_liberation,
-    attack_damage,
+    cast_skill,
+    skill_damage_calc,
 )
+from .buff import sanhua_buff, shouanren_buff
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -35,10 +33,8 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel
-    )
-    title = f"空中攻击"
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel)
+    title = "空中攻击"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
@@ -64,7 +60,7 @@ def calc_damage_1(
     chain_num = role.get_chain_num()
     if chain_num >= 2:
         title = f"{role_name}-二链"
-        msg = f"秋水攻击被分身嘲讽的目标时，攻击提升15%。"
+        msg = "秋水攻击被分身嘲讽的目标时，攻击提升15%。"
         attr.add_atk_percent(0.15, title, msg)
 
     # if chain_num >= 3:
@@ -74,12 +70,12 @@ def calc_damage_1(
 
     if chain_num >= 5:
         title = f"{role_name}-五链"
-        msg = f"处于迷雾潜行时，秋水的气动伤害加成提升25%"
+        msg = "处于迷雾潜行时，秋水的气动伤害加成提升25%"
         attr.add_dmg_bonus(0.25, title, msg)
 
     if chain_num >= 6:
         title = f"{role_name}-六链"
-        msg = f"共鸣解放持续时，额外增加暴击8%"
+        msg = "共鸣解放持续时，额外增加暴击8%"
         attr.add_crit_rate(0.08, title, msg)
 
     # 声骸
@@ -95,9 +91,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
     # 守岸人buff

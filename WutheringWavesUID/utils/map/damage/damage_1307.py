@@ -16,9 +16,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     召劾鬼神治疗量
     """
@@ -36,9 +34,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 治疗倍率 召劾鬼神 145.13% + 1270
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "32", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "32", skillLevel)
     title = "召劾鬼神治疗量"
     msg = f"技能倍率{skill_multi}"
     attr.add_healing_skill_multi(skill_multi, title, msg)
@@ -79,9 +75,7 @@ def calc_damage_1(
     return None, crit_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     三链-五雷荡煞阵触发治疗
     """
@@ -136,9 +130,7 @@ def calc_damage_2(
     return None, crit_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     飞雷诀·归一伤害
     """
@@ -156,9 +148,7 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能倍率 飞雷诀·归一 979.59%
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel)
     title = "飞雷诀·归一伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)

@@ -1022,7 +1022,6 @@ class Echo_6000190(EchoAbstract):
     name = "炉芯机骸"
 
 
-
 def register_echo():
     # 自动注册所有以 Echo_ 开头的类
     for name, obj in globals().items():

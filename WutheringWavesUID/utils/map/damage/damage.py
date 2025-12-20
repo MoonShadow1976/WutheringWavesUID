@@ -1,5 +1,3 @@
-from typing import List, Union
-
 from ...api.model import RoleDetailData, WeaponData
 from ...damage.abstract import WavesEchoRegister, WavesWeaponRegister
 from ...damage.damage import DamageAttribute, check_char_id
@@ -25,16 +23,16 @@ from ...damage.utils import (
     SONATA_MOLTEN,
     SONATA_MOONLIT,
     SONATA_PILGRIMAGE,
+    SONATA_PRISMATIC,
     SONATA_REJUVENATING,
     SONATA_SCISSOR,
+    SONATA_SIDEREAL,
     SONATA_SIERRA,
     SONATA_SINKING,
+    SONATA_SPAGYRIC,
     SONATA_TIDEBREAKING,
     SONATA_VOID,
     SONATA_WELKIN,
-    SONATA_PRISMATIC,
-    SONATA_SPAGYRIC,
-    SONATA_SIDEREAL,
     Havoc_Bane_Role_Ids,
     Spectro_Frazzle_Role_Ids,
     cast_attack,
@@ -51,7 +49,7 @@ from ...damage.utils import (
 def weapon_damage(
     attr: DamageAttribute,
     weapon_data: WeaponData,
-    damage_func: Union[List[str], str],
+    damage_func: list[str] | str,
     isGroup: bool,
 ):
     # 武器谐振
@@ -85,7 +83,7 @@ def check_if_ph_3(ph_name: str, ph_num: int, check_name: str):
 def phase_damage(
     attr: DamageAttribute,
     role: RoleDetailData,
-    damage_func: Union[List[str], str],
+    damage_func: list[str] | str,
     isGroup: bool = False,
     isHealing: bool = False,
 ):
@@ -158,9 +156,7 @@ def phase_damage(
                 attr.add_dmg_bonus(0.3, title, msg)
 
         # 隐世回光
-        elif isHealing and check_if_ph_5(
-            ph_detail.ph_name, ph_detail.ph_num, SONATA_REJUVENATING
-        ):
+        elif isHealing and check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_REJUVENATING):
             if attr.char_template != "temp_atk":
                 return
             title = f"{phase_name}-{ph_detail.ph_name}"

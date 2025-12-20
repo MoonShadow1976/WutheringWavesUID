@@ -1,20 +1,19 @@
 import re
 
-from PIL import Image
-
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image
 
-from ..utils.waves_api import waves_api
 from ..utils.at_help import is_valid_at, ruser_id
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_097
+from ..utils.error_reply import WAVES_CODE_097, WAVES_CODE_103
 from ..utils.hint import error_reply
 from ..utils.name_convert import char_name_to_char_id
 from ..utils.resource.constant import SPECIAL_CHAR
+from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_char_card import draw_char_detail_img, draw_char_score_img
 from .upload_card import (
@@ -53,7 +52,7 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
     ev.regex_dict = match.groupdict()
     char = ev.regex_dict.get("char")
     logger.debug(f"[鸣潮] [删除角色面板] CHAR: {char}")
-    
+
     uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103), at_sender)
@@ -66,10 +65,7 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
 
     char_id = char_name_to_char_id(char)
     if not char_id:
-        return await bot.send(
-            f"角色【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n",
-            at_sender
-        )
+        return await bot.send(f"角色【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n", at_sender)
     delete_type = [char_id]
     if char_id in SPECIAL_CHAR:
         delete_type = SPECIAL_CHAR.copy()[char_id]
@@ -99,10 +95,13 @@ async def send_card_info(bot: Bot, ev: Event):
         return await bot.send(error_reply(WAVES_CODE_103))
 
     if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n")
+        return await bot.send(
+            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n"
+        )
 
     # 檢查是否有 pcap 數據
     from ..wutheringwaves_pcap import exist_pcap_data
+
     pcap_bool = await exist_pcap_data(uid)
     if not pcap_bool and waves_api.is_net(uid):
         return await bot.send(error_reply(WAVES_CODE_097))
@@ -134,9 +133,7 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
         return
     char_id = char_name_to_char_id(char)
     if not char_id or len(char_id) != 4:
-        return await bot.send(
-            f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
-        )
+        return await bot.send(f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n")
     refresh_type = [char_id]
     if char_id in SPECIAL_CHAR:
         refresh_type = SPECIAL_CHAR.copy()[char_id]
@@ -148,10 +145,13 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
         return await bot.send(error_reply(WAVES_CODE_103))
 
     if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send("[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n")
+        return await bot.send(
+            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n"
+        )
 
     # 檢查是否有 pcap 數據
     from ..wutheringwaves_pcap import exist_pcap_data
+
     pcap_bool = await exist_pcap_data(uid)
     if not pcap_bool and waves_api.is_net(uid):
         return await bot.send(error_reply(WAVES_CODE_097))
@@ -159,9 +159,7 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 
     buttons = []
-    msg = await draw_refresh_char_detail_img(
-        bot, ev, user_id, uid, buttons, refresh_type
-    )
+    msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons, refresh_type)
     if isinstance(msg, str) or isinstance(msg, bytes):
         return await bot.send_option(msg, buttons)
 
@@ -224,9 +222,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
     logger.debug(f"[鸣潮] [角色面板] CHAR: {char} {ev.regex_dict}")
 
     if is_limit_query:
-        im = await draw_char_detail_img(
-            ev, "1", char, ev.user_id, is_limit_query=is_limit_query
-        )
+        im = await draw_char_detail_img(ev, "1", char, ev.user_id, is_limit_query=is_limit_query)
         if isinstance(im, str) or isinstance(im, bytes):
             return await bot.send(im)
         else:
@@ -235,9 +231,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
     at_sender = True if ev.group_id else False
     if is_pk:
         if not waves_id and not is_valid_at(ev):
-            return await bot.send(
-                f"[鸣潮] [角色面板] 角色【{char}】PK需要指定目标玩家!\n", at_sender
-            )
+            return await bot.send(f"[鸣潮] [角色面板] 角色【{char}】PK需要指定目标玩家!\n", at_sender)
 
         uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
         if not uid:
@@ -263,9 +257,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
         if not uid:
             return await bot.send(error_reply(WAVES_CODE_103))
-        im2 = await draw_char_detail_img(
-            ev, uid, char, user_id, waves_id, need_convert_img=False
-        )
+        im2 = await draw_char_detail_img(ev, uid, char, user_id, waves_id, need_convert_img=False)
         if isinstance(im2, str):
             return await bot.send(im2, at_sender)
 
@@ -273,9 +265,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
             return
 
         # 创建一个新的图片对象
-        new_im = Image.new(
-            "RGBA", (im1.size[0] + im2.size[0], max(im1.size[1], im2.size[1]))
-        )
+        new_im = Image.new("RGBA", (im1.size[0] + im2.size[0], max(im1.size[1], im2.size[1])))
 
         # 将两张图片粘贴到新图片对象上
         new_im.paste(im1, (0, 0))
@@ -290,20 +280,22 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
 
         msg = ""
         is_refresh = 0  # 面板直出刷新标志
-        if not waves_api.is_net(uid) and not change_list_regex and not re.search(r'\d', char) and WutheringWavesConfig.get_config("CharCardRefresh").data:
+        if (
+            not waves_api.is_net(uid)
+            and not change_list_regex
+            and not re.search(r"\d", char)
+            and WutheringWavesConfig.get_config("CharCardRefresh").data
+        ):
             if not char_id or len(char_id) != 4:
-                return await bot.send(
-                    f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
-                )
+                return await bot.send(f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n")
             refresh_type = [char_id]
             if char_id in SPECIAL_CHAR:
                 refresh_type = SPECIAL_CHAR.copy()[char_id]
 
             from .draw_refresh_char_card import draw_refresh_char_detail_img
+
             buttons = []
-            msg = await draw_refresh_char_detail_img(
-                bot, ev, user_id, uid, buttons, refresh_type, True
-            )
+            msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons, refresh_type, True)
             if isinstance(msg, bool):
                 is_refresh = 1 if msg else 0
             if isinstance(msg, str):
@@ -320,9 +312,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
 
 @waves_new_char_detail.on_regex(r"^(\d+)?[\u4e00-\u9fa5]+(?:权重)$", block=True)
 async def send_char_detail_msg2_weight(bot: Bot, ev: Event):
-    match = re.search(
-        r"(?P<waves_id>\d+)?(?P<char>[\u4e00-\u9fa5]+)(?:权重)", ev.raw_text
-    )
+    match = re.search(r"(?P<waves_id>\d+)?(?P<char>[\u4e00-\u9fa5]+)(?:权重)", ev.raw_text)
     if not match:
         return
     ev.regex_dict = match.groupdict()
@@ -371,9 +361,7 @@ async def get_char_card_list(bot: Bot, ev: Event):
     await get_custom_card_list(bot, ev, char)
 
 
-@waves_delete_char_card.on_regex(
-    r"^删除[\u4e00-\u9fa5]+面板图[a-zA-Z0-9]+$", block=True
-)
+@waves_delete_char_card.on_regex(r"^删除[\u4e00-\u9fa5]+面板图[a-zA-Z0-9]+$", block=True)
 async def delete_char_card(bot: Bot, ev: Event):
     match = re.search(
         r"删除(?P<char>[\u4e00-\u9fa5]+)面板图(?P<hash_id>[a-zA-Z0-9]+)",

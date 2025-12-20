@@ -18,9 +18,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -36,9 +34,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "11", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "11", skillLevel)
     title = "翩跹-e1伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -87,9 +83,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -105,9 +99,7 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "12", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "12", skillLevel)
     title = "斑驳幻梦-e2伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -156,9 +148,7 @@ def calc_damage_2(
     return crit_damage, expected_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -174,9 +164,7 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "22", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "22", skillLevel)
     title = "感知汲取-e3伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -225,9 +213,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_4(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -243,9 +229,7 @@ def calc_damage_4(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel)
     title = "蛰幻-强化a3伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -292,9 +276,7 @@ def calc_damage_4(
     return crit_damage, expected_damage
 
 
-def calc_damage_5(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -310,9 +292,7 @@ def calc_damage_5(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "13", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "13", skillLevel)
     title = "惊醒伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -361,9 +341,7 @@ def calc_damage_5(
     return crit_damage, expected_damage
 
 
-def calc_damage_6(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_6(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -379,9 +357,7 @@ def calc_damage_6(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel)
     title = "陷溺-r伤害"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -430,9 +406,7 @@ def calc_damage_6(
     return crit_damage, expected_damage
 
 
-def calc_damage_7(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_7(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(heal_bonus)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -446,9 +420,7 @@ def calc_damage_7(
     # 技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "25", skillLevel)
     title = "感知汲取治疗量"
     msg = f"技能倍率{skill_multi}"
     attr.add_healing_skill_multi(skill_multi, title, msg)

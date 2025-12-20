@@ -1,5 +1,5 @@
-import re
 from pathlib import Path
+import re
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -88,8 +88,10 @@ async def process_images_new(_dir: Path):
     imgs = []
     try:
         from ..wutheringwaves_config import WutheringWavesConfig
+
         segment_bool = WutheringWavesConfig.get_config("GuideSegment").data
         from PIL import Image
+
         with Image.open(_dir) as img:
             width, height = img.size
 
@@ -98,8 +100,8 @@ async def process_images_new(_dir: Path):
             aspect_ratio = height / width
 
             # 定义裁切阈值
-            CROP_ASPECT_RATIO = 5    # 长宽比超过 5 时裁切
-            MAX_SINGLE_SIDE = 4000   # 单边最大允许像素（防止过大）
+            CROP_ASPECT_RATIO = 5  # 长宽比超过 5 时裁切
+            MAX_SINGLE_SIDE = 4000  # 单边最大允许像素（防止过大）
 
             # 判断是否需要裁切
             need_crop = False
@@ -109,7 +111,7 @@ async def process_images_new(_dir: Path):
             elif max_side > MAX_SINGLE_SIDE:
                 need_crop = True
                 logger.info(f"单边尺寸 {max_side} 超过阈值 {MAX_SINGLE_SIDE}，需要裁切")
-            
+
             if not segment_bool:
                 # 无需裁切，直接发送原图
                 logger.info("控制台未开启‘攻略切段’功能，发送原图")
@@ -122,7 +124,7 @@ async def process_images_new(_dir: Path):
             else:
                 # 裁切方向（纵向）
                 segment_length = min(width * CROP_ASPECT_RATIO, MAX_SINGLE_SIDE)
-                # 计算裁切的段数 
+                # 计算裁切的段数
                 # segments = math.ceil(height / segment_length)
                 segments = (height + segment_length - 1) // segment_length
                 # 计算基准高度和余数

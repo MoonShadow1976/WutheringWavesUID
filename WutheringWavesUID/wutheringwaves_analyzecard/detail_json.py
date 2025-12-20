@@ -1,207 +1,53 @@
 # id2name
 DETAIL = {
-    "1304": {
-        "name": "今汐",
-        "fetterDetail": "浮星祛暗"
-    },
-    "1604": {
-        "sex": "女",
-        "name": "漂泊者·湮灭",
-        "fetterDetail": "沉日劫明"
-    },
-    "1303": {
-        "name": "渊武",
-        "fetterDetail": "高天共奏之曲"
-    },
-    "1105": {
-        "name": "折枝",
-        "fetterDetail": "高天共奏之曲"
-    },
-    "1505": {
-        "name": "守岸人",
-        "fetterDetail": "隐世回光"
-    },
-    "1605": {
-        "sex": "男",
-        "name": "漂泊者·湮灭",
-        "fetterDetail": "沉日劫明"
-    },
-    "1205": {
-        "name": "长离",
-        "fetterDetail": "熔山裂谷"
-    },
-    "1506": {
-        "name": "菲比",
-        "needId": 6000104,
-        "fetterDetail": "此间永驻之光"
-    },
-    "1104": {
-        "name": "凌阳",
-        "fetterDetail": "凝夜白霜"
-    },
-    "1203": {
-        "name": "安可",
-        "fetterDetail": "熔山裂谷"
-    },
-    "1302": {
-        "name": "吟霖",
-        "fetterDetail": "高天共奏之曲"
-    },
-    "1502": {
-        "sex": "女",
-        "name": "漂泊者·衍射",
-        "fetterDetail": "此间永驻之光"
-    },
-    "1405": {
-        "name": "鉴心",
-        "fetterDetail": "啸谷长风"
-    },
-    "1103": {
-        "name": "白芷",
-        "fetterDetail": "隐世回光"
-    },
-    "1106": {
-        "name": "釉瑚",
-        "fetterDetail": "隐世回光"
-    },
-    "1202": {
-        "name": "炽霞",
-        "fetterDetail": "熔山裂谷"
-    },
-    "1503": {
-        "name": "维里奈",
-        "fetterDetail": "隐世回光"
-    },
-    "1606": {
-        "name": "洛可可",
-        "fetterDetail": "幽夜隐匿之帷"
-    },
-    "1102": {
-        "name": "散华",
-        "fetterDetail": "轻云出月"
-    },
-    "1301": {
-        "name": "卡卡罗",
-        "fetterDetail": "彻空冥雷"
-    },
-    "1403": {
-        "name": "秋水",
-        "fetterDetail": "啸谷长风"
-    },
-    "1601": {
-        "name": "桃祈",
-        "fetterDetail": "轻云出月"
-    },
-    "1602": {
-        "name": "丹瑾",
-        "fetterDetail": "沉日劫明"
-    },
-    "1305": {
-        "name": "相里要",
-        "fetterDetail": "彻空冥雷"
-    },
-    "1204": {
-        "name": "莫特斐",
-        "fetterDetail": "高天共奏之曲"
-    },
-    "1107": {
-        "name": "珂莱塔",
-        "fetterDetail": "凌冽决断之心"
-    },
-    "1504": {
-        "name": "灯灯",
-        "fetterDetail": "轻云出月"
-    },
-    "1603": {
-        "name": "椿",
-        "fetterDetail": "沉日劫明"
-    },
-    "1501": {
-        "sex": "男",
-        "name": "漂泊者·衍射",
-        "fetterDetail": "此间永驻之光"
-    },
-    "1404": {
-        "name": "忌炎",
-        "fetterDetail": "啸谷长风"
-    },
-    "1402": {
-        "name": "秧秧",
-        "fetterDetail": "轻云出月"
-    },
-    "1206": {
-        "name": "布兰特",
-        "fetterDetail": "无惧浪涛之勇"
-    },
-    "1408": {
-        "sex": "女",
-        "name": "漂泊者·气动",
-        "fetterDetail": "流云逝尽之空"
-    },
-    "1406": {
-        "sex": "男",
-        "name": "漂泊者·气动",
-        "fetterDetail": "流云逝尽之空"
-    },
-    "1607": {
-        "name": "坎特蕾拉",
-        "fetterDetail": "幽夜隐匿之帷"
-    },
-    "1507": {
-        "name": "赞妮",
-        "needId": 6000104,
-        "fetterDetail": "此间永驻之光"
-    },
-    "1407": {
-        "name": "夏空",
-        "fetterDetail": "流云逝尽之空"
-    },
-     "1409": {
-        "name": "卡提希娅",
-        "fetterDetail": "愿戴荣光之旅"
-    },
-    "1207": {
-        "name": "露帕",
-        "fetterDetail": "奔狼燎原之焰"
-    },
-    "1608": {
-        "name": "弗洛洛",
-        "fetterDetail": {"失序彼岸之梦" : 3, "幽夜隐匿之帷" : 2}
-    },
-    "1306": {
-        "name": "奥古斯塔",
-        "fetterDetail": {"荣斗铸锋之冠" : 3, "彻空冥雷" : 2}
-    },
-    "1410": {
-        "name": "尤诺",
-        "needId": 6000160,
-        "fetterDetail": {"荣斗铸锋之冠" : 3, "啸谷长风" : 2}
-    },
-    "1411": {
-        "name": "仇远",
-        "fetterDetail": {"息界同调之律" : 3, "啸谷长风" : 2}
-    },
-    "1208": {
-        "name": "嘉贝莉娜",
-        "needId": 6000120,
-        "fetterDetail": {"焚羽猎魔之影" : 3, "奔狼燎原之焰" : 2}
-    },
-    "1307": {
-        "name": "卜灵",
-        "fetterDetail": "隐世回光"
-    },
-    "1508": {
-        "name": "千咲",
-        "fetterDetail": {"命理崩毁之弦" : 3, "沉日劫明" : 2}
-    },
-    "1509": {
-        "name": "琳奈",
-        "fetterDetail": "逆光跃彩之约"
-    },
-    "1209": {
-        "name": "莫宁",
-        "fetterDetail": "星构寻辉之环"
-    },
+    "1304": {"name": "今汐", "fetterDetail": "浮星祛暗"},
+    "1604": {"sex": "女", "name": "漂泊者·湮灭", "fetterDetail": "沉日劫明"},
+    "1303": {"name": "渊武", "fetterDetail": "高天共奏之曲"},
+    "1105": {"name": "折枝", "fetterDetail": "高天共奏之曲"},
+    "1505": {"name": "守岸人", "fetterDetail": "隐世回光"},
+    "1605": {"sex": "男", "name": "漂泊者·湮灭", "fetterDetail": "沉日劫明"},
+    "1205": {"name": "长离", "fetterDetail": "熔山裂谷"},
+    "1506": {"name": "菲比", "needId": 6000104, "fetterDetail": "此间永驻之光"},
+    "1104": {"name": "凌阳", "fetterDetail": "凝夜白霜"},
+    "1203": {"name": "安可", "fetterDetail": "熔山裂谷"},
+    "1302": {"name": "吟霖", "fetterDetail": "高天共奏之曲"},
+    "1502": {"sex": "女", "name": "漂泊者·衍射", "fetterDetail": "此间永驻之光"},
+    "1405": {"name": "鉴心", "fetterDetail": "啸谷长风"},
+    "1103": {"name": "白芷", "fetterDetail": "隐世回光"},
+    "1106": {"name": "釉瑚", "fetterDetail": "隐世回光"},
+    "1202": {"name": "炽霞", "fetterDetail": "熔山裂谷"},
+    "1503": {"name": "维里奈", "fetterDetail": "隐世回光"},
+    "1606": {"name": "洛可可", "fetterDetail": "幽夜隐匿之帷"},
+    "1102": {"name": "散华", "fetterDetail": "轻云出月"},
+    "1301": {"name": "卡卡罗", "fetterDetail": "彻空冥雷"},
+    "1403": {"name": "秋水", "fetterDetail": "啸谷长风"},
+    "1601": {"name": "桃祈", "fetterDetail": "轻云出月"},
+    "1602": {"name": "丹瑾", "fetterDetail": "沉日劫明"},
+    "1305": {"name": "相里要", "fetterDetail": "彻空冥雷"},
+    "1204": {"name": "莫特斐", "fetterDetail": "高天共奏之曲"},
+    "1107": {"name": "珂莱塔", "fetterDetail": "凌冽决断之心"},
+    "1504": {"name": "灯灯", "fetterDetail": "轻云出月"},
+    "1603": {"name": "椿", "fetterDetail": "沉日劫明"},
+    "1501": {"sex": "男", "name": "漂泊者·衍射", "fetterDetail": "此间永驻之光"},
+    "1404": {"name": "忌炎", "fetterDetail": "啸谷长风"},
+    "1402": {"name": "秧秧", "fetterDetail": "轻云出月"},
+    "1206": {"name": "布兰特", "fetterDetail": "无惧浪涛之勇"},
+    "1408": {"sex": "女", "name": "漂泊者·气动", "fetterDetail": "流云逝尽之空"},
+    "1406": {"sex": "男", "name": "漂泊者·气动", "fetterDetail": "流云逝尽之空"},
+    "1607": {"name": "坎特蕾拉", "fetterDetail": "幽夜隐匿之帷"},
+    "1507": {"name": "赞妮", "needId": 6000104, "fetterDetail": "此间永驻之光"},
+    "1407": {"name": "夏空", "fetterDetail": "流云逝尽之空"},
+    "1409": {"name": "卡提希娅", "fetterDetail": "愿戴荣光之旅"},
+    "1207": {"name": "露帕", "fetterDetail": "奔狼燎原之焰"},
+    "1608": {"name": "弗洛洛", "fetterDetail": {"失序彼岸之梦": 3, "幽夜隐匿之帷": 2}},
+    "1306": {"name": "奥古斯塔", "fetterDetail": {"荣斗铸锋之冠": 3, "彻空冥雷": 2}},
+    "1410": {"name": "尤诺", "needId": 6000160, "fetterDetail": {"荣斗铸锋之冠": 3, "啸谷长风": 2}},
+    "1411": {"name": "仇远", "fetterDetail": {"息界同调之律": 3, "啸谷长风": 2}},
+    "1208": {"name": "嘉贝莉娜", "needId": 6000120, "fetterDetail": {"焚羽猎魔之影": 3, "奔狼燎原之焰": 2}},
+    "1307": {"name": "卜灵", "fetterDetail": "隐世回光"},
+    "1508": {"name": "千咲", "fetterDetail": {"命理崩毁之弦": 3, "沉日劫明": 2}},
+    "1509": {"name": "琳奈", "fetterDetail": "逆光跃彩之约"},
+    "1209": {"name": "莫宁", "fetterDetail": "星构寻辉之环"},
 }
 
 # resource/intensity_echo_detail.json

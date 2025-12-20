@@ -1,5 +1,3 @@
-from typing import Dict
-
 from gsuid_core.data_store import get_res_path
 from gsuid_core.utils.plugins_config.models import (
     GSC,
@@ -11,7 +9,7 @@ from gsuid_core.utils.plugins_config.models import (
 
 bg_path = get_res_path(["WutheringWavesUID", "bg"])
 
-SHOW_CONIFG: Dict[str, GSC] = {
+SHOW_CONIFG: dict[str, GSC] = {
     "BlurRadius": GsIntConfig(
         "毛玻璃半径越大，毛玻璃效果越明显，0为不开启",
         "毛玻璃半径越大，毛玻璃效果越明显",

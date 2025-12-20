@@ -1,17 +1,15 @@
-from typing import List, Optional
-
 from pydantic import BaseModel
 
 
 class LinkConfig(BaseModel):
-    linkUrl: Optional[str] = None
+    linkUrl: str | None = None
     linkType: int
     entryId: str
 
 
 class ProgressData(BaseModel):
     progressType: int
-    dataRange: List[str]
+    dataRange: list[str]
     title: str
 
 
@@ -19,21 +17,21 @@ class RepeatConfig(BaseModel):
     endDate: str
     isNeverEnd: bool
     repeatInterval: int
-    dataRanges: List[ProgressData]
+    dataRanges: list[ProgressData]
 
 
 class CountDown(BaseModel):
-    dateRange: Optional[List[str]] = None
+    dateRange: list[str] | None = None
 
 
 class ContentData(BaseModel):
     contentUrl: str
-    countDown: Optional[CountDown] = None
+    countDown: CountDown | None = None
     title: str
 
 
 class VersionActivity(BaseModel):
-    content: List[ContentData]
+    content: list[ContentData]
 
 
 class ImageItem(BaseModel):
@@ -44,4 +42,4 @@ class ImageItem(BaseModel):
 
 class SpecialImages(BaseModel):
     name: str
-    imgs: List[ImageItem]
+    imgs: list[ImageItem]

@@ -1,23 +1,21 @@
 # 椿
-from .buff import sanhua_buff, shouanren_buff, luokeke_buff
-from .damage import echo_damage, weapon_damage, phase_damage
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
+    SkillTreeMap,
+    SkillType,
     attack_damage,
     cast_attack,
-    liberation_damage,
     cast_liberation,
-    SkillType,
-    SkillTreeMap,
+    liberation_damage,
+    skill_damage_calc,
 )
+from .buff import luokeke_buff, sanhua_buff, shouanren_buff
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_0(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_0(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     一日花
     """
@@ -35,11 +33,9 @@ def calc_damage_0(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
 
-    title = f"一日花"
+    title = "一日花"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
@@ -56,25 +52,25 @@ def calc_damage_0(
         # 1命
         # 变奏入场
         title = f"{role_name}-一链"
-        msg = f"施放变奏技能八千春秋时，暴击伤害提升28%"
+        msg = "施放变奏技能八千春秋时，暴击伤害提升28%"
         attr.add_crit_dmg(0.28, title, msg)
 
     if chain_num >= 2:
         # 2命
         title = f"{role_name}-二链"
-        msg = f"共鸣回路一日花伤害倍率提升120%"
+        msg = "共鸣回路一日花伤害倍率提升120%"
         attr.add_skill_ratio(1.2, title, msg)
 
     if chain_num >= 3:
         # 3命
         title = f"{role_name}-三链"
-        msg = f"含苞状态期间，椿的攻击提升58%。"
+        msg = "含苞状态期间，椿的攻击提升58%。"
         attr.add_atk_percent(0.58, title, msg)
 
     if chain_num >= 4 and isGroup:
         # 4命
         title = f"{role_name}-四链"
-        msg = f"变奏技能八千春秋后，队伍中的角色普攻伤害加成提升25%"
+        msg = "变奏技能八千春秋后，队伍中的角色普攻伤害加成提升25%"
         attr.add_dmg_bonus(0.25, title, msg)
 
     # 声骸技能
@@ -90,9 +86,7 @@ def calc_damage_0(
     return crit_damage, expected_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     芳华绽烬
     """
@@ -110,11 +104,9 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
 
-    title = f"芳华绽烬"
+    title = "芳华绽烬"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
@@ -131,13 +123,13 @@ def calc_damage_1(
         # 1命
         # 变奏入场
         title = f"{role_name}-一链"
-        msg = f"施放变奏技能八千春秋时，暴击伤害提升28%"
+        msg = "施放变奏技能八千春秋时，暴击伤害提升28%"
         attr.add_crit_dmg(0.28, title, msg)
 
     if chain_num >= 3:
         # 3命
         title = f"{role_name}-三链"
-        msg = f"共鸣解放芳华绽烬伤害倍率提升50%；含苞状态期间，椿的攻击提升58%。"
+        msg = "共鸣解放芳华绽烬伤害倍率提升50%；含苞状态期间，椿的攻击提升58%。"
         attr.add_atk_percent(0.58)
         attr.add_skill_ratio(0.5)
         attr.add_effect(title, msg)
@@ -146,7 +138,7 @@ def calc_damage_1(
         # 4命
         # 变奏入场
         title = f"{role_name}-四链"
-        msg = f"变奏技能八千春秋后，队伍中的角色普攻伤害加成提升25%"
+        msg = "变奏技能八千春秋后，队伍中的角色普攻伤害加成提升25%"
         attr.add_dmg_bonus(0.25, title, msg)
 
     # 声骸技能
@@ -162,9 +154,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
@@ -177,9 +167,7 @@ def calc_damage_2(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
@@ -192,9 +180,7 @@ def calc_damage_10(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_12(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 

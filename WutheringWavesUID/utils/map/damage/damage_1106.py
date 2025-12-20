@@ -1,5 +1,4 @@
 # 釉瑚
-from typing import List, Optional, Union
 
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail2
@@ -39,7 +38,7 @@ def calc_damage_1(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-    skill_name: Union[str, List[str]] = "",
+    skill_name: str | list[str] = "",
 ) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
@@ -54,9 +53,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
     title = "诗中物"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -121,8 +118,8 @@ def calc_damage_2(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-    skill_name: Union[str, List[str]] = "",
-) -> tuple[Optional[str], str]:
+    skill_name: str | list[str] = "",
+) -> tuple[str | None, str]:
     damage_func = [cast_attack, cast_skill, cast_hit, cast_liberation]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_atk")
@@ -137,16 +134,12 @@ def calc_damage_2(
 
     if "双关" in skill_name:
         # 技能技能倍率
-        skill_multi = skill_damage_calc(
-            char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel
-        )
+        skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "3", skillLevel)
         title = "双关额外治疗量"
         msg = f"技能倍率{skill_multi}"
     else:
         # 技能技能倍率
-        skill_multi = skill_damage_calc(
-            char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-        )
+        skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
         title = "诗中物治疗量"
         msg = f"技能倍率{skill_multi}"
     attr.add_healing_skill_multi(skill_multi, title, msg)
@@ -168,9 +161,7 @@ def calc_damage_2(
     return None, crit_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[Optional[str], str]:
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str | None, str]:
     damage_func = [cast_attack, cast_skill, cast_hit, cast_liberation]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_atk")
@@ -183,9 +174,7 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
     title = "匣中问祯治疗量"
     msg = f"技能倍率{skill_multi}"
     attr.add_healing_skill_multi(skill_multi, title, msg)

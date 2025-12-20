@@ -16,7 +16,7 @@ from ...damage.utils import (
     skill_damage,
     skill_damage_calc,
 )
-from .buff import bulante_buff, shouanren_buff, lupa_buff
+from .buff import bulante_buff, lupa_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -82,9 +82,7 @@ def calc_damage_0(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
 
     title = "焚身以火"
     msg = f"技能倍率{skill_multi}"
@@ -130,9 +128,7 @@ def calc_damage_0(
     return crit_damage, expected_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     离火照丹心
     """
@@ -148,9 +144,7 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
 
     title = "离火照丹心"
     msg = f"技能倍率{skill_multi}"
@@ -187,9 +181,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr1 = copy.deepcopy(attr)
     crit_damage1, expected_damage1 = calc_damage_0(attr1, role, isGroup)
     attr1.add_effect("焚身以火暴击伤害", f"{crit_damage1}")
@@ -206,9 +198,7 @@ def calc_damage_2(
     attr3.add_effect("焚身以火期望伤害", f"{expected_damage3}")
 
     crit_damage = add_comma_separated_numbers(crit_damage1, crit_damage2, crit_damage3)
-    expected_damage = add_comma_separated_numbers(
-        expected_damage1, expected_damage2, expected_damage3
-    )
+    expected_damage = add_comma_separated_numbers(expected_damage1, expected_damage2, expected_damage3)
 
     attr.add_effect(" ", " ")
     attr.effect.extend(attr1.effect[2:])
@@ -219,9 +209,7 @@ def calc_damage_2(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
@@ -234,9 +222,7 @@ def calc_damage_10(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_11(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
@@ -249,9 +235,7 @@ def calc_damage_11(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_12(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(skill_damage)
     attr.set_char_template("temp_atk")
 
@@ -264,9 +248,7 @@ def calc_damage_12(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_13(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_13(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(skill_damage)
     attr.set_char_template("temp_atk")
 
@@ -279,9 +261,7 @@ def calc_damage_13(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_14(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_14(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(skill_damage)
     attr.set_char_template("temp_atk")
 
@@ -294,9 +274,7 @@ def calc_damage_14(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_15(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_15(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
@@ -309,9 +287,7 @@ def calc_damage_15(
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_16(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_16(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
@@ -324,9 +300,7 @@ def calc_damage_16(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_17(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_17(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 

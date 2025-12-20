@@ -1,10 +1,8 @@
 from pathlib import Path
-from typing import Union
-
-from PIL import Image, ImageDraw
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.api.model import (
     AbyssChallenge,
@@ -59,9 +57,7 @@ async def get_abyss_data(uid: str, ck: str, is_self_ck: bool):
         return abyss_data.throw_msg()
 
     abyss_data = abyss_data.data
-    if not abyss_data or (
-        isinstance(abyss_data, dict) and not abyss_data.get("isUnlock", False)
-    ):
+    if not abyss_data or (isinstance(abyss_data, dict) and not abyss_data.get("isUnlock", False)):
         if not is_self_ck:
             return ABYSS_ERROR_MESSAGE_LOGIN
         return ABYSS_ERROR_MESSAGE_NO_DATA
@@ -69,7 +65,7 @@ async def get_abyss_data(uid: str, ck: str, is_self_ck: bool):
         return AbyssChallenge.model_validate(abyss_data)
 
 
-async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]:
+async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
         return error_reply(WAVES_CODE_102)
@@ -113,11 +109,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
         return ABYSS_ERROR_MESSAGE_NO_DEEP
 
     abyss_check = next(
-        (
-            abyss
-            for abyss in abyss_data.difficultyList
-            if abyss.difficultyName == "深境区"
-        ),
+        (abyss for abyss in abyss_data.difficultyList if abyss.difficultyName == "深境区"),
         None,
     )
     if not abyss_check:
@@ -132,17 +124,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
     if not needAbyss:
         return ABYSS_ERROR_MESSAGE_NO_DEEP
 
-    frameHigh = (
-        sum(
-            [
-                len(i.floorList) * 141 + 90 + 50
-                for i in needAbyss.towerAreaList
-                if i.floorList
-            ]
-        )
-        + 100
-        + 50
-    )
+    frameHigh = sum([len(i.floorList) * 141 + 90 + 50 for i in needAbyss.towerAreaList if i.floorList]) + 100 + 50
 
     h = frameHigh + 220
     card_img = get_waves_bg(950, h, "bg4")
@@ -150,12 +132,8 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
     # 基础信息 名字 特征码
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     card_img.paste(base_info_bg, (15, 20), base_info_bg)
 
     # 头像 头像环
@@ -168,14 +146,10 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(title_bar, (-20, 70), title_bar)
 
     # 根据面板数据获取详细信息
@@ -211,15 +185,9 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
 
             yset += 90  # tower_name_bg high
             if not tower.floorList:
-                tower.floorList = [
-                    AbyssFloor(
-                        **{"floor": 1, "picUrl": "", "star": 0, "roleList": None}
-                    )
-                ]
+                tower.floorList = [AbyssFloor(**{"floor": 1, "picUrl": "", "star": 0, "roleList": None})]
             for floor_index, floor in enumerate(tower.floorList):
-                abyss_bg = Image.open(
-                    TEXT_PATH / f"abyss_bg_{floor.floor}.jpg"
-                ).convert("RGBA")
+                abyss_bg = Image.open(TEXT_PATH / f"abyss_bg_{floor.floor}.jpg").convert("RGBA")
                 abyss_bg = abyss_bg.resize((abyss_bg.size[0] + 100, abyss_bg.size[1]))
                 abyss_bg_temp = Image.new("RGBA", abyss_bg.size)
                 name_bg = Image.open(TEXT_PATH / "name_bg.png")
@@ -232,9 +200,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                     _floor = "三"
                 elif floor.floor == 4:
                     _floor = "四"
-                name_bg_draw.text(
-                    (70, 50), f"第{_floor}层", "white", waves_font_40, "lm"
-                )
+                name_bg_draw.text((70, 50), f"第{_floor}层", "white", waves_font_40, "lm")
                 abyss_bg_temp.paste(name_bg, (0, 0), name_bg)
 
                 # 星数
@@ -248,11 +214,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                 if floor.roleList:
                     for role_index, _role in enumerate(floor.roleList):
                         role = next(
-                            (
-                                role
-                                for role in role_info.roleList
-                                if role.roleId == _role.roleId
-                            ),
+                            (role for role in role_info.roleList if role.roleId == _role.roleId),
                             None,
                         )
                         if not role:
@@ -261,24 +223,13 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                         avatar = await draw_pic(role.roleId)
                         char_bg = Image.open(TEXT_PATH / f"char_bg{role.starLevel}.png")
                         char_bg_draw = ImageDraw.Draw(char_bg)
-                        char_bg_draw.text(
-                            (90, 150), f"{role.roleName}", "white", waves_font_18, "mm"
-                        )
+                        char_bg_draw.text((90, 150), f"{role.roleName}", "white", waves_font_18, "mm")
                         char_bg.paste(avatar, (0, 0), avatar)
-                        if (
-                            role_detail_info_map
-                            and str(role.roleId) in role_detail_info_map
-                        ):
-                            temp: RoleDetailData = role_detail_info_map[
-                                str(role.roleId)
-                            ]
-                            info_block = Image.new(
-                                "RGBA", (40, 20), color=(255, 255, 255, 0)
-                            )
+                        if role_detail_info_map and str(role.roleId) in role_detail_info_map:
+                            temp: RoleDetailData = role_detail_info_map[str(role.roleId)]
+                            info_block = Image.new("RGBA", (40, 20), color=(255, 255, 255, 0))
                             info_block_draw = ImageDraw.Draw(info_block)
-                            info_block_draw.rectangle(
-                                [0, 0, 40, 20], fill=(96, 12, 120, int(0.9 * 255))
-                            )
+                            info_block_draw.rectangle([0, 0, 40, 20], fill=(96, 12, 120, int(0.9 * 255)))
                             info_block_draw.text(
                                 (2, 10),
                                 f"{temp.get_chain_name()}",
@@ -288,9 +239,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str) -> Union[bytes, str]
                             )
                             char_bg.paste(info_block, (110, 35), info_block)
 
-                        abyss_bg_temp.alpha_composite(
-                            char_bg, (300 + role_index * 150, -20)
-                        )
+                        abyss_bg_temp.alpha_composite(char_bg, (300 + role_index * 150, -20))
 
                 abyss_bg.paste(abyss_bg_temp, (0, 0), abyss_bg_temp)
                 frame.paste(abyss_bg, (80, yset), abyss_bg)

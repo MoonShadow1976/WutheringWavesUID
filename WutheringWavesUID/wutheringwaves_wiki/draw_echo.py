@@ -1,11 +1,9 @@
-import textwrap
 from pathlib import Path
-from typing import Optional
-
-from PIL import Image, ImageDraw
+import textwrap
 
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image, ImageDraw
 
 from ..utils.ascension.echo import get_echo_model
 from ..utils.ascension.model import EchoModel
@@ -72,9 +70,7 @@ async def parse_echo_detail_content(echo_model: EchoModel, card_img):
 
     image = Image.new("RGBA", (650, 320), (255, 255, 255, 0))
     image_draw = ImageDraw.Draw(image)
-    image_draw.rounded_rectangle(
-        [20, 20, 630, 300], radius=20, fill=(0, 0, 0, int(0.3 * 255))
-    )
+    image_draw.rounded_rectangle([20, 20, 630, 300], radius=20, fill=(0, 0, 0, int(0.3 * 255)))
     title = "技能描述"
     desc = echo_model.get_skill_detail()
 
@@ -89,12 +85,8 @@ async def parse_echo_detail_content(echo_model: EchoModel, card_img):
 
     # 计算总的绘制高度
     total_text_height = y_padding + block_line_spacing + shadow_radius * 2
-    total_text_height += len(lines_title) * (
-        title_font_size + line_spacing
-    )  # 标题部分的总高度
-    total_text_height += len(lines_desc) * (
-        detail_font_size + line_spacing
-    )  # 描述部分的总高度
+    total_text_height += len(lines_title) * (title_font_size + line_spacing)  # 标题部分的总高度
+    total_text_height += len(lines_desc) * (detail_font_size + line_spacing)  # 描述部分的总高度
 
     # 绘制标题文本
     y_offset = y_padding + shadow_radius
@@ -130,12 +122,8 @@ async def parse_echo_statistic_content(echo_model: EchoModel, echo_image):
     echo_bg_temp.alpha_composite(echo_bg, dest=(0, 0))
     echo_bg_temp_draw = ImageDraw.Draw(echo_bg_temp)
     for index, row in enumerate(rows):
-        echo_bg_temp_draw.text(
-            (100, 207 + index * 50), f"{row[0]}", "white", waves_font_30, "lm"
-        )
-        echo_bg_temp_draw.text(
-            (480, 207 + index * 50), f"{row[1]}", "white", waves_font_30, "rm"
-        )
+        echo_bg_temp_draw.text((100, 207 + index * 50), f"{row[0]}", "white", waves_font_30, "lm")
+        echo_bg_temp_draw.text((480, 207 + index * 50), f"{row[1]}", "white", waves_font_30, "rm")
 
     echo_bg_temp = echo_bg_temp.resize((350, 175))
     echo_image.alpha_composite(echo_bg_temp, (10, 200))
@@ -177,7 +165,7 @@ async def draw_wiki_echo(echo_name: str):
     if echo_id is None:
         return None
 
-    echo_model: Optional[EchoModel] = get_echo_model(echo_id)
+    echo_model: EchoModel | None = get_echo_model(echo_id)
     if not echo_model:
         return f"[鸣潮] 暂无【{echo_name}】对应wiki"
 

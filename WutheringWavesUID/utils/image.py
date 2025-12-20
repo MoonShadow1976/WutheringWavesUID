@@ -1,9 +1,13 @@
-import os
-import random
 from io import BytesIO
+import os
 from pathlib import Path
-from typing import Literal, Optional, Tuple, Union
+import random
+from typing import Literal
 
+from gsuid_core.logger import logger
+from gsuid_core.models import Event
+from gsuid_core.utils.image.image_tools import crop_center_img
+from gsuid_core.utils.image.utils import sget
 from PIL import (
     Image,
     ImageDraw,
@@ -14,11 +18,6 @@ from PIL import (
 )
 
 from ..utils.database.models import WavesUserAvatar
-from gsuid_core.logger import logger
-from gsuid_core.models import Event
-from gsuid_core.utils.image.image_tools import crop_center_img
-from gsuid_core.utils.image.utils import sget
-
 from ..utils.resource.RESOURCE_PATH import (
     AVATAR_PATH,
     CUSTOM_CARD_PATH,
@@ -117,7 +116,7 @@ async def get_random_share_bg_path():
     return SHARE_BG_PATH / path
 
 
-async def get_random_waves_role_pile(char_id: Optional[str] = None):
+async def get_random_waves_role_pile(char_id: str | None = None):
     if char_id:
         return await get_role_pile_old(char_id, custom=True)
 
@@ -125,9 +124,7 @@ async def get_random_waves_role_pile(char_id: Optional[str] = None):
     return Image.open(f"{ROLE_PILE_PATH}/{path}").convert("RGBA")
 
 
-async def get_role_pile(
-    resource_id: Union[int, str], custom: bool = False
-) -> tuple[bool, Image.Image]:
+async def get_role_pile(resource_id: int | str, custom: bool = False) -> tuple[bool, Image.Image]:
     if custom:
         custom_dir = f"{CUSTOM_CARD_PATH}/{resource_id}"
         if os.path.isdir(custom_dir) and len(os.listdir(custom_dir)) > 0:
@@ -144,9 +141,7 @@ async def get_role_pile(
         return False, Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
-async def get_role_pile_old(
-    resource_id: Union[int, str], custom: bool = False
-) -> Image.Image:
+async def get_role_pile_old(resource_id: int | str, custom: bool = False) -> Image.Image:
     if custom:
         custom_dir = f"{CUSTOM_MR_CARD_PATH}/{resource_id}"
         if os.path.isdir(custom_dir) and len(os.listdir(custom_dir)) > 0:
@@ -163,7 +158,7 @@ async def get_role_pile_old(
         return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
 
-async def get_square_avatar(resource_id: Union[int, str]) -> Image.Image:
+async def get_square_avatar(resource_id: int | str) -> Image.Image:
     name = f"role_head_{resource_id}.png"
     path = AVATAR_PATH / name
     if path.exists():
@@ -196,7 +191,7 @@ async def cropped_square_avatar(item_icon: Image.Image, size: int) -> Image.Imag
     return resized_image
 
 
-async def get_square_weapon(resource_id: Union[int, str]) -> Image.Image:
+async def get_square_weapon(resource_id: int | str) -> Image.Image:
     name = f"weapon_{resource_id}.png"
     path = WEAPON_PATH / name
     if path.exists():
@@ -214,9 +209,7 @@ async def get_attribute(name: str = "", is_simple: bool = False) -> Image.Image:
 
 
 async def get_attribute_prop(name: str = "") -> Image.Image:
-    return Image.open(TEXT_PATH / f"attribute_prop/attr_prop_{name}.png").convert(
-        "RGBA"
-    )
+    return Image.open(TEXT_PATH / f"attribute_prop/attr_prop_{name}.png").convert("RGBA")
 
 
 async def get_attribute_effect(name: str = "") -> Image.Image:
@@ -265,16 +258,12 @@ async def sync_non_onebot_user_avatar(ev: Event):
     old_avatar_hash = data.avatar_hash if data else ""
 
     if avatar_hash != old_avatar_hash:
-        await WavesUserAvatar.insert_data(
-            user_id=ev.user_id, 
-            bot_id=ev.bot_id, 
-            avatar_hash=avatar_hash
-        )
+        await WavesUserAvatar.insert_data(user_id=ev.user_id, bot_id=ev.bot_id, avatar_hash=avatar_hash)
 
 
 async def get_qq_avatar(
-    qid: Optional[Union[int, str]] = None,
-    avatar_url: Optional[str] = None,
+    qid: int | str | None = None,
+    avatar_url: str | None = None,
     size: int = 640,
 ) -> Image.Image:
     if qid:
@@ -286,8 +275,8 @@ async def get_qq_avatar(
 
 
 async def get_discord_avatar(
-    qid: Optional[Union[int, str]] = None,
-    avatar_url: Optional[str] = None,
+    qid: int | str | None = None,
+    avatar_url: str | None = None,
     size: int = 640,
 ) -> Image.Image:
     if qid:
@@ -303,8 +292,8 @@ async def get_discord_avatar(
 
 
 async def get_qqgroup_avatar(
-    qid: Optional[Union[int, str]] = None,
-    avatar_url: Optional[str] = None,
+    qid: int | str | None = None,
+    avatar_url: str | None = None,
     size: int = 640,
 ) -> Image.Image:
     if qid:
@@ -319,16 +308,12 @@ async def get_qqgroup_avatar(
 
 
 # 获取对应bot_id的头像获取函数
-AVATAR_GETTERS = {
-    "onebot": get_qq_avatar,
-    "discord": get_discord_avatar,
-    "qqgroup": get_qqgroup_avatar
-}
+AVATAR_GETTERS = {"onebot": get_qq_avatar, "discord": get_discord_avatar, "qqgroup": get_qqgroup_avatar}
 
 
 async def get_event_avatar(
     ev: Event,
-    avatar_path: Optional[Path] = None,
+    avatar_path: Path | None = None,
     size: int = 640,
     is_valid_at_param: bool = True,
 ) -> Image.Image:
@@ -338,7 +323,7 @@ async def get_event_avatar(
         from ..utils.at_help import is_valid_at
 
         is_valid_at_param = is_valid_at(ev)
-    
+
     get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
 
     # 尝试获取@用户的头像
@@ -348,7 +333,7 @@ async def get_event_avatar(
         except Exception:
             img = None
 
-    if img is None and "avatar" in ev.sender and ev.sender["avatar"]: # qqgroup不返回avatar...
+    if img is None and "avatar" in ev.sender and ev.sender["avatar"]:  # qqgroup不返回avatar...
         avatar_url: str = ev.sender["avatar"]
         if avatar_url.startswith(("http", "https")):
             try:
@@ -416,8 +401,8 @@ def add_footer(
 async def change_color(
     chain,
     color: tuple = (255, 255, 255),
-    w: Optional[int] = None,
-    h: Optional[int] = None,
+    w: int | None = None,
+    h: int | None = None,
 ):
     # 获取图像数据
     pixels = chain.load()  # 加载像素数据
@@ -445,24 +430,20 @@ def draw_text_with_shadow(
     _y: int,
     font: ImageFont.FreeTypeFont,
     fill_color: str = "white",
-    shadow_color: Union[float, tuple[int, ...], str] = "black",
-    offset: Tuple[int, int] = (2, 2),
+    shadow_color: float | tuple[int, ...] | str = "black",
+    offset: tuple[int, int] = (2, 2),
     anchor="rm",
 ):
     """描边"""
     for i in range(-offset[0], offset[0] + 1):
         for j in range(-offset[1], offset[1] + 1):
-            image.text(
-                (_x + i, _y + j), text, font=font, fill=shadow_color, anchor=anchor
-            )
+            image.text((_x + i, _y + j), text, font=font, fill=shadow_color, anchor=anchor)
 
     image.text((_x, _y), text, font=font, fill=fill_color, anchor=anchor)
     image.text((_x, _y), text, font=font, fill=fill_color, anchor=anchor)
 
 
-def compress_to_webp(
-    image_path: Path, quality: int = 80, delete_original: bool = False
-) -> tuple[bool, Path]:
+def compress_to_webp(image_path: Path, quality: int = 80, delete_original: bool = False) -> tuple[bool, Path]:
     try:
         from PIL import Image
 
@@ -491,9 +472,7 @@ def compress_to_webp(
         # 计算压缩率
         webp_size = webp_path.stat().st_size
         compression_ratio = (1 - webp_size / orig_size) * 100 if orig_size > 0 else 0
-        logger.info(
-            f"图片 {image_path.name} 压缩为webp格式, 压缩率: {compression_ratio:.2f}%"
-        )
+        logger.info(f"图片 {image_path.name} 压缩为webp格式, 压缩率: {compression_ratio:.2f}%")
 
         # 删除原图片（如果需要）
         if delete_original:

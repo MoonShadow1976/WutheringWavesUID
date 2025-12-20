@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 from gsuid_core.bot import Bot
 from gsuid_core.models import Event
@@ -11,7 +11,7 @@ login_fail = "[鸣潮] 特征码[{}]已登录，但刷新面板失败，请使�
 
 
 async def login_success_msg(bot: Bot, ev: Event, waves_user: WavesUser):
-    buttons: List[Any] = [
+    buttons: list[Any] = [
         WavesButton("体力", "mr"),
         WavesButton("刷新面板", "刷新面板"),
         WavesButton("深塔", "深塔"),
@@ -22,9 +22,7 @@ async def login_success_msg(bot: Bot, ev: Event, waves_user: WavesUser):
         draw_refresh_char_detail_img,
     )
 
-    msg = await draw_refresh_char_detail_img(
-        bot, ev, waves_user.user_id, waves_user.uid, buttons
-    )
+    msg = await draw_refresh_char_detail_img(bot, ev, waves_user.user_id, waves_user.uid, buttons)
     if isinstance(msg, bytes):
         return await bot.send_option(msg, buttons)
     else:

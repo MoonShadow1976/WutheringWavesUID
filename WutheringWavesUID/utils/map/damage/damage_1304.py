@@ -1,21 +1,19 @@
 # 今汐
-from .buff import weilinai_buff, zhezhi_buff, shouanren_buff, dengdeng_buff
-from .damage import echo_damage, weapon_damage, phase_damage
 from ...api.model import RoleDetailData
-from ...ascension.char import get_char_detail, WavesCharResult
+from ...ascension.char import WavesCharResult, get_char_detail
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
-    skill_damage,
+    cast_liberation,
     cast_skill,
     liberation_damage,
-    cast_liberation,
+    skill_damage,
+    skill_damage_calc,
 )
+from .buff import dengdeng_buff, shouanren_buff, weilinai_buff, zhezhi_buff
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     惊龙破空·炳星
     """
@@ -57,19 +55,19 @@ def calc_damage_1(
     if chain_num >= 1:
         # 1命
         title = f"{role_name}-一链"
-        msg = f"施放共鸣技能时，共鸣技能造成的伤害提升20%*4"
+        msg = "施放共鸣技能时，共鸣技能造成的伤害提升20%*4"
         attr.add_dmg_bonus(0.2 * 4, title, msg)
 
     if chain_num >= 3 and isGroup:
         # 3命
         title = f"{role_name}-三链"
-        msg = f"施放变奏技能后，获得一层谪仙效果，攻击提升25%*2"
+        msg = "施放变奏技能后，获得一层谪仙效果，攻击提升25%*2"
         attr.add_atk_percent(0.25 * 2, title, msg)
 
     if chain_num >= 4:
         # 4命
         title = f"{role_name}-四链"
-        msg = f"施放共鸣技能时，角色全属性伤害加成提升20%"
+        msg = "施放共鸣技能时，角色全属性伤害加成提升20%"
         attr.add_dmg_bonus(0.2, title, msg)
 
     if chain_num >= 6:
@@ -92,9 +90,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     移岁诛邪
     """
@@ -128,19 +124,19 @@ def calc_damage_2(
     if chain_num >= 3 and isGroup:
         # 3命
         title = f"{role_name}-三链"
-        msg = f"施放变奏技能后，获得一层谪仙效果，攻击提升25%*2"
+        msg = "施放变奏技能后，获得一层谪仙效果，攻击提升25%*2"
         attr.add_atk_percent(0.25 * 2, title, msg)
 
     if chain_num >= 4:
         # 4命
         title = f"{role_name}-四链"
-        msg = f"施放共鸣解放时，角色全属性伤害加成提升20%"
+        msg = "施放共鸣解放时，角色全属性伤害加成提升20%"
         attr.add_dmg_bonus(0.2, title, msg)
 
     if chain_num >= 5:
         # 4命
         title = f"{role_name}-五链"
-        msg = f"共鸣解放移岁诛邪伤害倍率提升120%。"
+        msg = "共鸣解放移岁诛邪伤害倍率提升120%。"
         attr.add_skill_ratio(1.2, title, msg)
 
     # 声骸技能
@@ -156,9 +152,7 @@ def calc_damage_2(
     return crit_damage, expected_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     """
     0维/0折枝/惊龙破空·炳星
     """
@@ -174,9 +168,7 @@ def calc_damage_3(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_4(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     """
     0+1守/0折枝/惊龙破空·炳星
     """
@@ -192,9 +184,7 @@ def calc_damage_4(
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_5(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     """
     6+5守/6灯灯/惊龙破空·炳星
     """

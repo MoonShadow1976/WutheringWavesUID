@@ -1,30 +1,23 @@
 import json
 import time
-import aiofiles
 
+import aiofiles
 from gsuid_core.logger import logger
 
 from ..utils.api.model import AccountBaseInfo
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
 
-
 # creatTime 是为了满足.is_full的逻辑
 # 1 5 6 7 8 9
 # 国美欧亚港澳台SEA东南亚
 
+
 def get_region_by_uid(uid: str) -> str:
     if not uid:
         return "未知"
-    
+
     first_char = uid[0]
-    region_map = {
-        '1': '国',
-        '5': '美',
-        '6': '欧',
-        '7': '亚',
-        '8': '港澳台',
-        '9': '东南亚'
-    }
+    region_map = {"1": "国", "5": "美", "6": "欧", "7": "亚", "8": "港澳台", "9": "东南亚"}
     return region_map.get(first_char, "未知")
 
 
@@ -34,15 +27,15 @@ def get_region_for_rank(uid: str) -> tuple[str, tuple[int, int, int]]:
     """
     if not uid:
         return ("未知", (128, 128, 128))  # 灰色
-    
+
     first_char = uid[0]
     region_map = {
-        '1': ("国服", (203, 95, 95)),    # 红色系
-        '5': ("美服", (95, 120, 203)),   # 蓝色系
-        '6': ("欧服", (114, 180, 114)),  # 绿色系
-        '7': ("亚服", (203, 157, 114)),  # 橙色系
-        '8': ("港澳台", (167, 95, 203)), # 紫色系
-        '9': ("SEA", (114, 180, 203)),   # 青色系
+        "1": ("国服", (203, 95, 95)),  # 红色系
+        "5": ("美服", (95, 120, 203)),  # 蓝色系
+        "6": ("欧服", (114, 180, 114)),  # 绿色系
+        "7": ("亚服", (203, 157, 114)),  # 橙色系
+        "8": ("港澳台", (167, 95, 203)),  # 紫色系
+        "9": ("SEA", (114, 180, 203)),  # 青色系
     }
     return region_map.get(first_char, ("未知", (128, 128, 128)))
 
@@ -63,7 +56,7 @@ async def get_user_detail_info(
         )
 
     try:
-        async with aiofiles.open(path, mode="r", encoding="utf-8") as f:
+        async with aiofiles.open(path, encoding="utf-8") as f:
             player_data = json.loads(await f.read())
             return AccountBaseInfo(**player_data)
     except Exception as e:
@@ -73,9 +66,9 @@ async def get_user_detail_info(
 
 
 async def save_user_info(
-    uid: str | int, 
-    name: str, 
-    level=0, 
+    uid: str | int,
+    name: str,
+    level=0,
     worldLevel=0,
     achievementCount=0,
     achievementStar=0,
@@ -85,7 +78,7 @@ async def save_user_info(
     path = _dir / "userData.json"
 
     # 准备保存的数据
-    new_data  = {
+    new_data = {
         "id": int(uid),
         "name": name,
         "level": level,
@@ -99,26 +92,26 @@ async def save_user_info(
         existing_data = {}
         if path.exists():
             try:
-                async with aiofiles.open(path, "r", encoding="utf-8") as file:
+                async with aiofiles.open(path, encoding="utf-8") as file:
                     content = await file.read()
                     if content.strip():
                         existing_data = json.loads(content)
             except json.JSONDecodeError:
                 logger.warning(f"Existing user data is corrupted for UID {uid}, creating new data")
-        
+
         if existing_data:
             # 保留原始创建时间
             new_data["creatTime"] = existing_data.get("creatTime", new_data["creatTime"])
-            
+
             # 如果新等级更高，使用新等级，否则保留原等级
             new_data["level"] = max(level, existing_data.get("level", 0))
             new_data["worldLevel"] = max(worldLevel, existing_data.get("worldLevel", 0))
             new_data["achievementCount"] = max(achievementCount, existing_data.get("achievementCount", 0))
             new_data["achievementStar"] = max(achievementStar, existing_data.get("achievementStar", 0))
-        
+
         # 写入更新后的数据
         async with aiofiles.open(path, "w", encoding="utf-8") as file:
             await file.write(json.dumps(new_data, ensure_ascii=False, indent=2))
-            
+
     except Exception as e:
         logger.exception(f"save_user_info failed for UID {uid}: {e}")

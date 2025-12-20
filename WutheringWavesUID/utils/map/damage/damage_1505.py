@@ -1,20 +1,18 @@
 # 守岸人
-from .damage import echo_damage, weapon_damage, phase_damage
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
     cast_skill,
-    skill_damage_calc,
-    heal_bonus,
     cast_variation,
+    heal_bonus,
     liberation_damage,
+    skill_damage_calc,
 )
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     damage_func = [cast_skill]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_life")
@@ -41,7 +39,7 @@ def calc_damage_1(
     chain_num = role.get_chain_num()
     if chain_num >= 4:
         title = f"{role_name}-四链"
-        msg = f"施放共鸣技能混沌理论时，治疗效果加成提升70%。"
+        msg = "施放共鸣技能混沌理论时，治疗效果加成提升70%。"
         attr.add_dmg_bonus(0.7, title, msg)
 
     echo_damage(attr, isGroup)
@@ -54,9 +52,7 @@ def calc_damage_1(
     return None, crit_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     damage_func = [cast_skill]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_life")
@@ -83,7 +79,7 @@ def calc_damage_2(
     chain_num = role.get_chain_num()
     if chain_num >= 4:
         title = f"{role_name}-四链"
-        msg = f"施放共鸣技能混沌理论时，治疗效果加成提升70%。"
+        msg = "施放共鸣技能混沌理论时，治疗效果加成提升70%。"
         attr.add_dmg_bonus(0.7, title, msg)
 
     echo_damage(attr, isGroup)
@@ -96,9 +92,7 @@ def calc_damage_2(
     return None, crit_damage
 
 
-def calc_damage_3(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> (str, str):
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_life")
 
@@ -137,7 +131,7 @@ def calc_damage_3(
     chain_num = role.get_chain_num()
     if chain_num >= 6:
         title = f"{role_name}-六链"
-        msg = f"洞悉伤害倍率提升42%。守岸人的暴击伤害提升500%。"
+        msg = "洞悉伤害倍率提升42%。守岸人的暴击伤害提升500%。"
         attr.add_skill_ratio(0.42, title, msg)
         attr.add_crit_dmg(5)
 

@@ -11,9 +11,7 @@ sv_add_char_alias = SV("ww角色名别名", pm=0)
 sv_list_char_alias = SV("ww角色名别名列表")
 
 
-@sv_add_char_alias.on_regex(
-    r"^(添加|删除)([\u4e00-\u9fa5]+)别名([\u4e00-\u9fa5]+)$", block=True
-)
+@sv_add_char_alias.on_regex(r"^(添加|删除)([\u4e00-\u9fa5]+)别名([\u4e00-\u9fa5]+)$", block=True)
 async def handle_add_char_alias(bot: Bot, ev: Event):
     match = re.search(
         r"(?P<action>添加|删除)(?P<char_name>[\u4e00-\u9fa5]+)别名(?P<new_alias>[\u4e00-\u9fa5]+)$",

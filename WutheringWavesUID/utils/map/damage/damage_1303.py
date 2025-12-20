@@ -1,23 +1,21 @@
 # 渊武
 
-from .damage import echo_damage, weapon_damage, phase_damage
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail2
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
-    SkillType,
     SkillTreeMap,
-    skill_damage,
-    cast_skill,
+    SkillType,
     cast_attack,
+    cast_skill,
     liberation_damage,
+    skill_damage,
+    skill_damage_calc,
 )
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -31,10 +29,8 @@ def calc_damage_1(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel
-    )
-    title = f"雷之楔协同攻击"
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "2", skillLevel)
+    title = "雷之楔协同攻击"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
@@ -57,12 +53,12 @@ def calc_damage_1(
     chain_num = role.get_chain_num()
     if chain_num >= 3:
         title = f"{role_name}-三链"
-        msg = f"雷之楔的协同攻击命中目标时，基于渊武20%防御额外提升伤害"
+        msg = "雷之楔的协同攻击命中目标时，基于渊武20%防御额外提升伤害"
         attr.add_skill_multi(0.2, title, msg)
 
     if chain_num >= 6:
         title = f"{role_name}-六链"
-        msg = f"处在雷之楔范围内的所有角色将持续获得效果：防御提升32%"
+        msg = "处在雷之楔范围内的所有角色将持续获得效果：防御提升32%"
         attr.add_def_percent(0.32, title, msg)
 
     # 声骸
@@ -80,9 +76,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -96,10 +90,8 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel
-    )
-    title = f"寂土重明"
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "1", skillLevel)
+    title = "寂土重明"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
@@ -123,7 +115,7 @@ def calc_damage_2(
 
     if chain_num >= 6:
         title = f"{role_name}-六链"
-        msg = f"共鸣技能雷之楔在场时，渊武的共鸣解放伤害加成提升50%"
+        msg = "共鸣技能雷之楔在场时，渊武的共鸣解放伤害加成提升50%"
         attr.add_dmg_bonus(0.5, title, msg)
 
     # 声骸

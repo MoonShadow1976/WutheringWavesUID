@@ -1,30 +1,16 @@
 import asyncio
 from pathlib import Path
-from typing import Dict, List, Union, Optional
 
 from gsuid_core.bot import Bot
-from gsuid_core.models import Event
 from gsuid_core.logger import logger
+from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
 from PIL import Image, ImageDraw
 
-from ..utils.util import hide_uid
-from ..utils.cache import TimedCache
-from ..wutheringwaves_config import PREFIX
-from ..utils.database.models import WavesBind
 from ..utils.ascension.char import get_char_model
-from ..wutheringwaves_config import WutheringWavesConfig
-from ..utils.image import (
-    add_footer,
-    get_waves_bg,
-    AVATAR_GETTERS,
-    get_square_avatar,
-    get_ICON,
-    pic_download_from_url,
-    RED,
-    SPECIAL_GOLD,
-)
+from ..utils.cache import TimedCache
+from ..utils.database.models import WavesBind
 from ..utils.fonts.waves_fonts import (
     waves_font_12,
     waves_font_20,
@@ -34,8 +20,19 @@ from ..utils.fonts.waves_fonts import (
     waves_font_44,
     waves_font_58,
 )
+from ..utils.image import (
+    AVATAR_GETTERS,
+    RED,
+    SPECIAL_GOLD,
+    add_footer,
+    get_ICON,
+    get_square_avatar,
+    get_waves_bg,
+    pic_download_from_url,
+)
 from ..utils.resource.RESOURCE_PATH import SLASH_PATH
-
+from ..utils.util import hide_uid
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .models import GroupRankRecord
 
 # --- 常量与资源加载 ---
@@ -50,10 +47,10 @@ pic_cache = TimedCache(86400, 200)
 
 COLOR_QUALITY = {
     1: (188, 188, 188),  # 白色
-    2: (76, 175, 80),    # 绿色
-    3: (33, 150, 243),   # 蓝色
-    4: (171, 71, 188),   # 紫色
-    5: (255, 193, 7),    # 金色
+    2: (76, 175, 80),  # 绿色
+    3: (33, 150, 243),  # 蓝色
+    4: (171, 71, 188),  # 紫色
+    5: (255, 193, 7),  # 金色
 }
 
 
@@ -71,13 +68,8 @@ def get_score_color(score: int):
     else:
         return (255, 255, 255)
 
-async def draw_group_rank_card(
-    bot: Bot, 
-    ev: Event, 
-    records: List[GroupRankRecord],
-    title: str = "海蚀无尽群排行"
-) -> Union[str, bytes]:
-    
+
+async def draw_group_rank_card(bot: Bot, ev: Event, records: list[GroupRankRecord], title: str = "海蚀无尽群排行") -> str | bytes:
     if not records:
         msg = [f"[鸣潮] 群【{ev.group_id}】暂无有效的{title}数据。"]
         msg.append(f"请使用【{PREFIX}无尽】上传更新数据后再试。")
@@ -89,7 +81,7 @@ async def draw_group_rank_card(
     self_uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     self_record = None
     self_rank_index = -1
-    
+
     for i, record in enumerate(records):
         if record.waves_id == self_uid:
             self_record = record
@@ -158,19 +150,15 @@ async def draw_group_rank_card(
         1200: "评级",
     }
     for x, text in headers.items():
-        header_draw.text(
-            (x, 480), text, (255, 255, 255, 180), waves_font_34, "mm"
-        )
+        header_draw.text((x, 480), text, (255, 255, 255, 180), waves_font_34, "mm")
 
     # 绘制列表
     y_pos_start = 510
-    
+
     for i, record in enumerate(display_list):
         user_avatar = user_avatars_map.get(record.user_id)
         if user_avatar:
-            bar_image = await _create_rank_bar(
-                record, i + 1, user_avatar, is_self_row=(record.waves_id == self_uid)
-            )
+            bar_image = await _create_rank_bar(record, i + 1, user_avatar, is_self_row=(record.waves_id == self_uid))
             # 使用 alpha_composite 确保透明度正确处理
             card_img.alpha_composite(bar_image, (0, y_pos_start + i * item_spacing))
 
@@ -191,14 +179,15 @@ async def draw_group_rank_card(
     card_img = add_footer(card_img)
     return await convert_img(card_img)
 
+
 async def get_avatar(
     ev: Event,
-    qid: Optional[Union[int, str]],
-    char_id: Union[int, str],
+    qid: int | str | None,
+    char_id: int | str,
 ) -> Image.Image:
     try:
         get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
-        
+
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(qid)
             if not pic:
@@ -214,7 +203,7 @@ async def get_avatar(
         avatar_mask_temp = avatar_mask.copy()
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
-    
+
     except Exception:
         # 打印异常，进行降级处理
         logger.warning("头像获取失败，使用默认头像")
@@ -233,6 +222,7 @@ async def get_avatar(
         img.paste(pic_temp, (0, 0), mask_pic_temp)
 
     return img
+
 
 async def _create_rank_bar(
     record: GroupRankRecord,
@@ -257,9 +247,7 @@ async def _create_rank_bar(
     def draw_rank_id(rank_id, size=(50, 50), draw=(24, 24), dest=(40, 30)):
         info_rank = Image.new("RGBA", size, color=(255, 255, 255, 0))
         rank_draw = ImageDraw.Draw(info_rank)
-        rank_draw.rounded_rectangle(
-            [0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),)
-        )
+        rank_draw.rounded_rectangle([0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),))
         rank_draw.text(draw, f"{rank_id}", "white", waves_font_34, "mm")
         role_bg.alpha_composite(info_rank, dest)
 
@@ -271,17 +259,13 @@ async def _create_rank_bar(
         draw_rank_id(rank_num, size=(50, 50), draw=(24, 24), dest=(40, 30))
 
     # 名字
-    role_bg_draw.text(
-        (215, 45), f"{record.name or hide_uid(record.waves_id)}", "white", waves_font_20, "lm"
-    )
+    role_bg_draw.text((215, 45), f"{record.name or hide_uid(record.waves_id)}", "white", waves_font_20, "lm")
 
     # uid
     uid_color = "white"
     if is_self_row:
         uid_color = RED
-    role_bg_draw.text(
-        (215, 75), f"{hide_uid(record.waves_id)}", uid_color, waves_font_20, "lm"
-    )
+    role_bg_draw.text((215, 75), f"{hide_uid(record.waves_id)}", uid_color, waves_font_20, "lm")
 
     # 总分数
     role_bg_draw.text(
@@ -295,15 +279,14 @@ async def _create_rank_bar(
     if record.teams:
         # 按 team_index 排序
         sorted_teams = sorted(record.teams, key=lambda t: t.team_index)
-        
+
         for half_index, team in enumerate(sorted_teams[:2]):
-            
             # 角色
             # 限制只显示前3个角色，防止溢出
             for role_index, role in enumerate(team.roles[:3]):
                 char_id = role.role_id
                 char_chain = role.chain
-                
+
                 char_model = get_char_model(char_id)
                 if char_model is None:
                     continue
@@ -313,9 +296,7 @@ async def _create_rank_bar(
                 if char_chain != -1:
                     info_block = Image.new("RGBA", (25, 25), color=(255, 255, 255, 0))
                     info_block_draw = ImageDraw.Draw(info_block)
-                    info_block_draw.rectangle(
-                        [0, 0, 15, 15], fill=(96, 12, 120, int(0.9 * 255))
-                    )
+                    info_block_draw.rectangle([0, 0, 15, 15], fill=(96, 12, 120, int(0.9 * 255)))
                     info_block_draw.text(
                         (8, 8),
                         f"{char_chain}",
@@ -325,9 +306,7 @@ async def _create_rank_bar(
                     )
                     char_avatar.paste(info_block, (52, 52), info_block)
 
-                role_bg.alpha_composite(
-                    char_avatar, (350 + half_index * 320 + role_index * 70, 20)
-                )
+                role_bg.alpha_composite(char_avatar, (350 + half_index * 320 + role_index * 70, 20))
 
             # buff
             buff_bg = Image.new("RGBA", (60, 60), (255, 255, 255, 0))
@@ -360,9 +339,7 @@ async def _create_rank_bar(
     # 评级
     if record.rank_level:
         try:
-            score_img = Image.open(
-                TEXT_PATH / f"score_{record.rank_level.lower()}.png"
-            ).resize((60, 60))
+            score_img = Image.open(TEXT_PATH / f"score_{record.rank_level.lower()}.png").resize((60, 60))
             role_bg.alpha_composite(score_img, (1170, 25))
         except FileNotFoundError:
             role_bg_draw.text(

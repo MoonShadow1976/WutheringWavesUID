@@ -1,24 +1,22 @@
 import asyncio
-import time
 from pathlib import Path
-from typing import List, Optional, Union
-
-from PIL import Image, ImageDraw
-from pydantic import BaseModel
+import time
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image, ImageDraw
+from pydantic import BaseModel
 
-from ..utils.util import send_master_info
 from ..utils.cache import TimedCache
 from ..utils.calc import WuWaCalc
 from ..utils.calculate import (
     calc_phantom_score,
     get_calc_map,
 )
+from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind, WavesUser
 from ..utils.fonts.waves_fonts import (
     waves_font_12,
@@ -31,19 +29,18 @@ from ..utils.fonts.waves_fonts import (
     waves_font_58,
 )
 from ..utils.image import (
+    AVATAR_GETTERS,
     GREY,
     RED,
     SPECIAL_GOLD,
-    AVATAR_GETTERS,
     add_footer,
     get_ICON,
     get_square_avatar,
     get_waves_bg,
 )
-from ..utils.util import hide_uid
-from ..wutheringwaves_config import WutheringWavesConfig
-from ..utils.char_info_utils import get_all_role_detail_info_list
+from ..utils.util import hide_uid, send_master_info
 from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank, get_user_detail_info
+from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -58,7 +55,7 @@ class BotTotalRankDetail(BaseModel):
     kuro_name: str
     waves_id: str
     total_score: float
-    char_score_details: List
+    char_score_details: list
     rank: int
     server: str = ""
     server_color: tuple = (54, 54, 54)
@@ -69,14 +66,10 @@ async def get_waves_token_condition(ev):
     flag = False
 
     # 群组 自定义的
-    WavesRankUseTokenGroup = WutheringWavesConfig.get_config(
-        "WavesRankUseTokenGroup"
-    ).data
+    WavesRankUseTokenGroup = WutheringWavesConfig.get_config("WavesRankUseTokenGroup").data
     # 全局 主人定义的
     RankUseToken = WutheringWavesConfig.get_config("RankUseToken").data
-    if (
-        WavesRankUseTokenGroup and ev.group_id in WavesRankUseTokenGroup
-    ) or RankUseToken:
+    if (WavesRankUseTokenGroup and ev.group_id in WavesRankUseTokenGroup) or RankUseToken:
         wavesTokenUsers = await WavesUser.get_waves_all_user()
         wavesTokenUsersMap = {(w.user_id, w.uid): w.cookie for w in wavesTokenUsers}
         flag = True
@@ -84,7 +77,7 @@ async def get_waves_token_condition(ev):
     return flag, wavesTokenUsersMap
 
 
-async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRankDetail]:
+async def calculate_user_total_score(user_id, uid: str) -> BotTotalRankDetail | None:
     """计算用户的练度总分"""
     role_details = await get_all_role_detail_info_list(uid)
     if not role_details:
@@ -115,27 +108,22 @@ async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRank
         for i, _phantom in enumerate(equipPhantomList):
             if _phantom and _phantom.phantomProp:
                 props = _phantom.get_props()
-                _score, _bg = calc_phantom_score(
-                    role_detail.role.roleId, props, _phantom.cost, calc.calc_temp
-                )
+                _score, _bg = calc_phantom_score(role_detail.role.roleId, props, _phantom.cost, calc.calc_temp)
                 phantom_score += _score
 
         if phantom_score >= 175:  # 只计算分数>=175的角色
             total_score += phantom_score
-            char_score_details.append({
-                'char_id': role_detail.role.roleId,
-                'phantom_score': phantom_score
-            })
+            char_score_details.append({"char_id": role_detail.role.roleId, "phantom_score": phantom_score})
 
     if total_score == 0 or not char_score_details:
         return None
 
     # 按角色分数排序
-    char_score_details.sort(key=lambda x: x['phantom_score'], reverse=True)
+    char_score_details.sort(key=lambda x: x["phantom_score"], reverse=True)
 
     # 获取区服信息
     region_text, region_color = get_region_for_rank(uid)
-    
+
     # 获取用户信息
     account_info = await get_user_detail_info(uid)
 
@@ -147,11 +135,11 @@ async def calculate_user_total_score(user_id, uid: str) -> Optional[BotTotalRank
         char_score_details=char_score_details,
         rank=0,  # 排名后面统一计算
         server=region_text,
-        server_color=region_color
+        server_color=region_color,
     )
 
 
-async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> List[BotTotalRankDetail]:
+async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> list[BotTotalRankDetail]:
     """获取本地用户的练度排行数据"""
     if bot_bool:
         users = await WavesBind.get_all_data()
@@ -172,8 +160,7 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> List[BotTotalRan
 
             rank_data_list = []
             for uid in user.uid.split("_"):
-                if (tokenLimitFlag and 
-                    (user.user_id, uid) not in wavesTokenUsersMap):
+                if tokenLimitFlag and (user.user_id, uid) not in wavesTokenUsersMap:
                     continue
                 try:
                     rank_data = await calculate_user_total_score(user.user_id, uid)
@@ -195,7 +182,7 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> List[BotTotalRan
 
     # 按总分排序
     all_rank_data.sort(key=lambda x: x.total_score, reverse=True)
-    
+
     # 设置排名
     for rank, data in enumerate(all_rank_data, 1):
         data.rank = rank
@@ -203,7 +190,7 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> List[BotTotalRan
     return all_rank_data
 
 
-async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> Union[str, bytes]:
+async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> str | bytes:
     """绘制练度Bot排行"""
     self_uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
 
@@ -215,7 +202,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
     rank_data_list = rank_all_list[:rank_length]
     if not self_uid:
         self_uid = ""
-    else: # 如果用户不在前20名，添加用户数据
+    else:  # 如果用户不在前20名，添加用户数据
         for r in rank_all_list:
             if r.waves_id == self_uid and r.rank > 20:
                 rank_data_list.append(r)
@@ -230,9 +217,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
     char_list_len = len(rank_data_list)
 
     # 计算所需的总高度
-    total_height = (
-        header_height + text_bar_height + item_spacing * char_list_len + footer_height
-    )
+    total_height = header_height + text_bar_height + item_spacing * char_list_len + footer_height
 
     # 创建带背景的画布 - 使用bg9
     card_img = get_waves_bg(width, total_height, "bg9")
@@ -241,9 +226,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
     text_bar_draw = ImageDraw.Draw(text_bar_img)
     # 绘制深灰色背景
     bar_bg_color = (36, 36, 41, 230)
-    text_bar_draw.rounded_rectangle(
-        [20, 20, width - 40, 110], radius=8, fill=bar_bg_color
-    )
+    text_bar_draw.rounded_rectangle([20, 20, width - 40, 110], radius=8, fill=bar_bg_color)
 
     # 绘制顶部的金色高亮线
     accent_color = (203, 161, 95)
@@ -258,9 +241,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
         waves_font_20,
         "lm",
     )
-    text_bar_draw.text(
-        (185, 85), "2. 显示前10个最强角色", SPECIAL_GOLD, waves_font_20, "lm"
-    )
+    text_bar_draw.text((185, 85), "2. 显示前10个最强角色", SPECIAL_GOLD, waves_font_20, "lm")
 
     # 备注
     temp_notes = "排行标准：以所有角色声骸分数总和（角色分数>=175）为排序的综合排名"
@@ -272,9 +253,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
     bar = Image.open(TEXT_PATH / "bar1.png")
 
     # 获取头像
-    tasks = [
-        get_avatar(ev, rank.user_id, rank.char_score_details[0]["char_id"]) for rank in rank_data_list
-    ]
+    tasks = [get_avatar(ev, rank.user_id, rank.char_score_details[0]["char_id"]) for rank in rank_data_list]
     results = await asyncio.gather(*tasks)
 
     # 绘制排行条目
@@ -300,9 +279,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
         # 排名背景
         info_rank = Image.new("RGBA", (50, 50), color=(255, 255, 255, 0))
         rank_draw = ImageDraw.Draw(info_rank)
-        rank_draw.rounded_rectangle(
-            [0, 0, 50, 50], radius=8, fill=rank_color + (int(0.9 * 255),)
-        )
+        rank_draw.rounded_rectangle([0, 0, 50, 50], radius=8, fill=rank_color + (int(0.9 * 255),))
         rank_draw.text((25, 25), f"{rank_id}", "white", waves_font_34, "mm")
         bar_bg.alpha_composite(info_rank, (40, 35))
 
@@ -318,17 +295,13 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
         uid_color = "white"
         if detail.waves_id == self_uid:
             uid_color = RED
-        bar_draw.text(
-            (350, 40), f"特征码: {hide_uid(detail.waves_id)}", uid_color, waves_font_20, "lm"
-        )
+        bar_draw.text((350, 40), f"特征码: {hide_uid(detail.waves_id)}", uid_color, waves_font_20, "lm")
 
         # 区服信息
         if detail.server:
             region_block = Image.new("RGBA", (200, 30), color=(255, 255, 255, 0))
             region_draw = ImageDraw.Draw(region_block)
-            region_draw.rounded_rectangle(
-                [0, 0, 200, 30], radius=6, fill=detail.server_color + (int(0.9 * 255),)
-            )
+            region_draw.rounded_rectangle([0, 0, 200, 30], radius=6, fill=detail.server_color + (int(0.9 * 255),))
             region_draw.text((100, 15), f"Server: {detail.server}", "white", waves_font_18, "mm")
             bar_bg.alpha_composite(region_block, (350, 65))
 
@@ -356,7 +329,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
                 char_x = char_start_x + i * char_spacing
 
                 # 获取角色头像
-                char_avatar = await get_square_avatar(char['char_id'])
+                char_avatar = await get_square_avatar(char["char_id"])
                 char_avatar = char_avatar.resize((char_size, char_size))
 
                 # 应用圆形遮罩
@@ -366,9 +339,7 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
                 char_avatar_masked.paste(char_avatar, (0, 0), char_mask_resized)
 
                 # 粘贴头像
-                bar_bg.paste(
-                    char_avatar_masked, (char_x, char_start_y), char_avatar_masked
-                )
+                bar_bg.paste(char_avatar_masked, (char_x, char_start_y), char_avatar_masked)
 
                 # 绘制分数
                 score_text = f"{int(char['phantom_score'])}"
@@ -423,8 +394,8 @@ async def draw_local_total_rank(bot: Bot, ev: Event, bot_bool: bool = False) -> 
 
 async def get_avatar(
     ev: Event,
-    qid: Optional[Union[int, str]],
-    char_id: Union[int, str],
+    qid: int | str | None,
+    char_id: int | str,
 ) -> Image.Image:
     try:
         get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
@@ -444,7 +415,7 @@ async def get_avatar(
         avatar_mask_temp = avatar_mask.copy()
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
-    
+
     except Exception:
         # 打印异常，进行降级处理
         logger.warning("头像获取失败，使用默认头像")

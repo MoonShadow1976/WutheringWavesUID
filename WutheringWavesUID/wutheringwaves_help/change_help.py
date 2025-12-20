@@ -1,11 +1,10 @@
 import json
 from pathlib import Path
-from typing import Dict
-
-from PIL import Image
 
 from gsuid_core.help.draw_new_plugin_help import get_new_help
 from gsuid_core.help.model import PluginHelp
+from PIL import Image
+
 from ..utils.image import get_footer
 from ..version import WutheringWavesUID_version
 from ..wutheringwaves_config import PREFIX
@@ -16,9 +15,9 @@ ICON_PATH = Path(__file__).parent / "change_icon_path"
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
 
-def get_help_data() -> Dict[str, PluginHelp]:
+def get_help_data() -> dict[str, PluginHelp]:
     # 读取文件内容
-    with open(HELP_DATA, "r", encoding="utf-8") as file:
+    with open(HELP_DATA, encoding="utf-8") as file:
         return json.load(file)
 
 

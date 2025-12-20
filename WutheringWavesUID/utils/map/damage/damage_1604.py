@@ -18,9 +18,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     临渊死寂
     """
@@ -80,9 +78,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     灭音伤害
     """
@@ -163,9 +159,7 @@ def calc_damage_3(
     # 临渊死寂 技能倍率
     skillLevel = role.get_skill_level("共鸣回路")
     # 技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, "7", f"{attack_type+1}", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, "7", f"{attack_type + 1}", skillLevel)
     title = f"暗流·普攻第{attack_type}段"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -209,9 +203,7 @@ def calc_damage_3(
     return crit_damage, expected_damage
 
 
-def calc_damage_4(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     破命伤害
     """
@@ -277,9 +269,7 @@ def calc_damage_4(
     return crit_damage, expected_damage
 
 
-def calc_damage_10(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
     # 守岸人buff

@@ -1,20 +1,18 @@
 # 相里要
-from .damage import weapon_damage, echo_damage, phase_damage
 from ...api.model import RoleDetailData
-from ...ascension.char import get_char_detail, WavesCharResult
+from ...ascension.char import WavesCharResult, get_char_detail
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
-    cast_skill,
-    cast_liberation,
-    liberation_damage,
     cast_hit,
+    cast_liberation,
+    cast_skill,
+    liberation_damage,
+    skill_damage_calc,
 )
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     万方法则
     """
@@ -43,7 +41,7 @@ def calc_damage_1(
 
     if role_breach and role_breach >= 3:
         title = f"{role_name}-固有技能-睿知"
-        msg = f"施放共鸣技能时，导电伤害加成提升5%*4"
+        msg = "施放共鸣技能时，导电伤害加成提升5%*4"
         attr.add_dmg_bonus(0.20, title, msg)
 
     attr.set_phantom_dmg_bonus()
@@ -82,9 +80,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     思维矩阵
     """
@@ -113,7 +109,7 @@ def calc_damage_2(
 
     if role_breach and role_breach >= 3:
         title = f"{role_name}-固有技能-睿知"
-        msg = f"施放共鸣技能时，导电伤害加成提升5%*4"
+        msg = "施放共鸣技能时，导电伤害加成提升5%*4"
         attr.add_dmg_bonus(0.20, title, msg)
 
     attr.set_phantom_dmg_bonus()

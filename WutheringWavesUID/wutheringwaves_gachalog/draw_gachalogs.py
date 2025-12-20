@@ -1,22 +1,15 @@
+from datetime import datetime
 import json
 import os
-import random
-from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+import random
 
 import aiofiles
-from PIL import Image, ImageDraw
-
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image, ImageDraw
 
-from ..utils import hint
-from ..utils.api.model import AccountBaseInfo
-from ..utils.error_reply import WAVES_CODE_102
-from ..utils.queues.const import QUEUE_GACHA_RECORD
-from ..utils.queues.queues import push_item
 from ..utils.fonts.waves_fonts import (
     waves_font_18,
     waves_font_20,
@@ -36,9 +29,10 @@ from ..utils.image import (
     get_square_weapon,
     get_waves_bg,
 )
+from ..utils.queues.const import QUEUE_GACHA_RECORD
+from ..utils.queues.queues import push_item
 from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
-from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import PREFIX
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -64,7 +58,7 @@ def get_num_h(num: int, column: int):
     return row
 
 
-def get_level_from_list(ast: int, lst: List) -> int:
+def get_level_from_list(ast: int, lst: list) -> int:
     if ast == 0:
         return 2
 
@@ -78,7 +72,7 @@ def get_level_from_list(ast: int, lst: List) -> int:
 
 
 async def draw_card_help():
-    warn =  "\n".join(
+    warn = "\n".join(
         [
             "导入前请检查：",
             "1.确保您的抽卡记录是【简体中文】，暂不支持其他语言",
@@ -149,8 +143,8 @@ async def draw_card(uid: str, ev: Event):
     gacha_log_path = PLAYER_PATH / str(uid) / "gacha_logs.json"
     if not gacha_log_path.exists():
         return f"[鸣潮] 你还没有抽卡记录噢!\n 请发送 {PREFIX}导入抽卡链接 后重试!"
-    async with aiofiles.open(gacha_log_path, "r", encoding="UTF-8") as f:
-        raw_data: Dict = json.loads(await f.read())
+    async with aiofiles.open(gacha_log_path, encoding="UTF-8") as f:
+        raw_data: dict = json.loads(await f.read())
 
     gachalogs = raw_data["data"]
     title_num = len([1 for i in gachalogs.keys() if "新手" not in i])
@@ -181,9 +175,7 @@ async def draw_card(uid: str, ev: Event):
                 current_data["time_range"] = data["time"]
             if index == len(gacha_data) - 1:
                 time_1 = datetime.strptime(data["time"], "%Y-%m-%d %H:%M:%S")
-                time_2 = datetime.strptime(
-                    current_data["time_range"], "%Y-%m-%d %H:%M:%S"
-                )
+                time_2 = datetime.strptime(current_data["time_range"], "%Y-%m-%d %H:%M:%S")
                 current_data["all_time"] = (time_1 - time_2).total_seconds()
 
                 current_data["time_range"] += "~" + data["time"]
@@ -212,13 +204,13 @@ async def draw_card(uid: str, ev: Event):
             current_data["avg"] = "-"
         else:
             _d = sum(current_data["r_num"]) / len(current_data["r_num"])
-            current_data["avg"] = float("{:.2f}".format(_d))
+            current_data["avg"] = float(f"{_d:.2f}")
         # 计算平均up数量
         if len(current_data["up_list"]) == 0:
             current_data["avg_up"] = "-"
         else:
             _u = sum(current_data["r_num"]) / len(current_data["up_list"])
-            current_data["avg_up"] = float("{:.2f}".format(_u))
+            current_data["avg_up"] = float(f"{_u:.2f}")
 
         current_data["level"] = 2
         if current_data["avg_up"] == "-" and current_data["avg"] == "-":
@@ -226,13 +218,9 @@ async def draw_card(uid: str, ev: Event):
         else:
             if gacha_name == "角色精准调谐":
                 if current_data["avg_up"] != "-":
-                    current_data["level"] = get_level_from_list(
-                        current_data["avg_up"], [74, 87, 99, 105, 120]
-                    )
+                    current_data["level"] = get_level_from_list(current_data["avg_up"], [74, 87, 99, 105, 120])
                 elif current_data["avg"] != "-":
-                    current_data["level"] = get_level_from_list(
-                        current_data["avg"], [53, 60, 68, 73, 75]
-                    )
+                    current_data["level"] = get_level_from_list(current_data["avg"], [53, 60, 68, 73, 75])
             elif gacha_name in [
                 "武器精准调谐",
                 "角色调谐（常驻池）",
@@ -240,14 +228,10 @@ async def draw_card(uid: str, ev: Event):
                 "新手自选唤取",
             ]:
                 if current_data["avg"] != "-":
-                    current_data["level"] = get_level_from_list(
-                        current_data["avg"], [45, 52, 59, 65, 70]
-                    )
+                    current_data["level"] = get_level_from_list(current_data["avg"], [45, 52, 59, 65, 70])
             elif gacha_name == "新手调谐":
                 if current_data["avg"] != "-":
-                    current_data["level"] = get_level_from_list(
-                        current_data["avg"], [10, 20, 30, 40, 45]
-                    )
+                    current_data["level"] = get_level_from_list(current_data["avg"], [10, 20, 30, 40, 45])
 
     oset = 280
     bset = 170
@@ -305,9 +289,7 @@ async def draw_card(uid: str, ev: Event):
         info_block = Image.new("RGBA", (137, 28), color=(255, 255, 255, 0))
         info_block_draw = ImageDraw.Draw(info_block)
         info_block_draw.rectangle([0, 0, 137, 28], fill=(0, 0, 0, int(0.6 * 255)))
-        info_block_draw.text(
-            (65, 12), f"{item['gacha_num']}抽", gcolor, waves_font_20, "mm"
-        )
+        info_block_draw.text((65, 12), f"{item['gacha_num']}抽", gcolor, waves_font_20, "mm")
 
         item_bg.paste(info_block, (15, 130), info_block)
 
@@ -351,9 +333,7 @@ async def draw_card(uid: str, ev: Event):
         title_draw.text((160, 178), avg_s, "white", waves_font_32, "mm")
         title_draw.text((300, 178), avg_up_s, "white", waves_font_32, "mm")
         title_draw.text((457, 178), total, "white", waves_font_32, "mm")
-        title_draw.text(
-            (110, 80), gacha_type_meta_rename[gacha_name], "white", waves_font_40, "lm"
-        )
+        title_draw.text((110, 80), gacha_type_meta_rename[gacha_name], "white", waves_font_40, "lm")
         title_draw.text((380, 87), "已", "white", waves_font_23, "rm")
         title_draw.text((410, 84), remain_s, "red", waves_font_40, "mm")
         title_draw.text((530, 87), "抽未出金", "white", waves_font_23, "rm")
@@ -403,15 +383,9 @@ async def draw_card(uid: str, ev: Event):
         newbie_bg_cp = newbie_bg.copy()
         newbie_bg_cp_draw = ImageDraw.Draw(newbie_bg_cp)
         newbie_bg_cp.paste(item_bg, (115, 220), item_bg)
-        newbie_bg_cp_draw.text(
-            (200, 160), gacha_type_meta_rename[gacha_name], "white", waves_font_40, "mm"
-        )
+        newbie_bg_cp_draw.text((200, 160), gacha_type_meta_rename[gacha_name], "white", waves_font_40, "mm")
         if gacha_data["time_range"]:
-            time_range = (
-                gacha_data["time_range"].split("~")[1]
-                if "~" in gacha_data["time_range"]
-                else gacha_data["time_range"]
-            )
+            time_range = gacha_data["time_range"].split("~")[1] if "~" in gacha_data["time_range"] else gacha_data["time_range"]
         else:
             time_range = "暂未抽过卡!"
         newbie_bg_cp_draw.text(
@@ -469,16 +443,13 @@ async def get_random_card_polygon(ev: Event):
 async def draw_uid_avatar(uid, ev, card_img):
     # 统一国服与国际服头图
     from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
-    account_info= await get_user_detail_info(uid)
+
+    account_info = await get_user_detail_info(uid)
 
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     base_info_bg = base_info_bg.resize((900, 450))
     card_img.alpha_composite(base_info_bg, (110, 30))
     #
@@ -486,42 +457,42 @@ async def draw_uid_avatar(uid, ev, card_img):
     card_img.alpha_composite(card_polygon, (80, 0))
 
 
-async def upload_gacha_to_server(uid: str, total_data: Dict, ev: Event):
+async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
     """上传抽卡记录统计数据到服务器"""
     try:
         from ..wutheringwaves_config import WutheringWavesConfig
-        
+
         # 检查是否配置了Token
         WavesToken = WutheringWavesConfig.get_config("WavesToken").data
         if not WavesToken:
             return
-        
+
         # 提取需要的统计数据
         gacha_stats = extract_gacha_statistics(total_data)
-        
+
         # 准备上传数据
         upload_data = {
             "waves_id": uid,
             "gacha_details": json.dumps(gacha_stats, ensure_ascii=False),
             "datetime": datetime.now().isoformat(),
         }
-        
+
         # 打印上传数据
         print(f"[抽卡记录上传] upload_data: {upload_data}")
-        
+
         # 添加到上传队列
         push_item(QUEUE_GACHA_RECORD, upload_data)
-        
+
     except Exception as e:
         # 记录错误但不影响主要功能
         print(f"上传抽卡记录时出错: {e}")
         pass
 
 
-def extract_gacha_statistics(total_data: Dict) -> Dict:
+def extract_gacha_statistics(total_data: dict) -> dict:
     """从total_data中提取需要的统计数据"""
     stats = {}
-    
+
     # 角色精准调谐
     if "角色精准调谐" in total_data:
         char_data = total_data["角色精准调谐"]
@@ -533,7 +504,7 @@ def extract_gacha_statistics(total_data: Dict) -> Dict:
             "max_consecutive_up": calculate_max_consecutive_up(rank_s_list),
             "max_consecutive_non_up": calculate_max_consecutive_non_up(rank_s_list),
         }
-    
+
     # 武器精准调谐
     if "武器精准调谐" in total_data:
         weapon_data = total_data["武器精准调谐"]
@@ -541,7 +512,7 @@ def extract_gacha_statistics(total_data: Dict) -> Dict:
             "total_pulls": weapon_data.get("total", 0),
             "avg_gold": weapon_data.get("avg") if weapon_data.get("avg") != "-" else None,
         }
-    
+
     # 角色调谐（常驻池）
     if "角色调谐（常驻池）" in total_data:
         char_normal_data = total_data["角色调谐（常驻池）"]
@@ -549,7 +520,7 @@ def extract_gacha_statistics(total_data: Dict) -> Dict:
             "total_pulls": char_normal_data.get("total", 0),
             "avg_gold": char_normal_data.get("avg") if char_normal_data.get("avg") != "-" else None,
         }
-    
+
     # 武器调谐（常驻池）
     if "武器调谐（常驻池）" in total_data:
         weapon_normal_data = total_data["武器调谐（常驻池）"]
@@ -557,23 +528,23 @@ def extract_gacha_statistics(total_data: Dict) -> Dict:
             "total_pulls": weapon_normal_data.get("total", 0),
             "avg_gold": weapon_normal_data.get("avg") if weapon_normal_data.get("avg") != "-" else None,
         }
-    
+
     return stats
 
 
-def calculate_max_consecutive_up(rank_s_list: List[Dict]) -> int:
+def calculate_max_consecutive_up(rank_s_list: list[dict]) -> int:
     """
     计算最多连续UP数（只统计五星角色）
-    
+
     例如: up,up,up,no,up,no,up,no,up,up,up
     - 最多连续UP: 3
     """
     if not rank_s_list:
         return 0
-    
+
     max_consecutive = 0
     current_consecutive = 0
-    
+
     for item in rank_s_list:
         # 只统计五星角色
         if item.get("resourceType") == "角色" and item.get("qualityLevel") == 5:
@@ -582,23 +553,23 @@ def calculate_max_consecutive_up(rank_s_list: List[Dict]) -> int:
                 max_consecutive = max(max_consecutive, current_consecutive)
             else:
                 current_consecutive = 0
-    
+
     return max_consecutive
 
 
-def calculate_max_consecutive_non_up(rank_s_list: List[Dict]) -> int:
+def calculate_max_consecutive_non_up(rank_s_list: list[dict]) -> int:
     """
     计算最多连续非UP次数，遇到连续UP（2个或以上）才中断（只统计五星角色）
-    
+
     单个UP不中断计数，只有连续UP（2个或以上）才重置。
     """
     if not rank_s_list:
         return 0
-    
+
     max_non_up = 0
     current_non_up = 0
     prev_is_up = False  # 前一个是否是UP
-    
+
     for item in rank_s_list:
         # 只统计五星角色
         if item.get("resourceType") == "角色" and item.get("qualityLevel") == 5:
@@ -613,8 +584,8 @@ def calculate_max_consecutive_non_up(rank_s_list: List[Dict]) -> int:
                 # 当前是非UP
                 current_non_up += 1
                 prev_is_up = False
-    
+
     # 最后如果还有未结算的，也要计入
     max_non_up = max(max_non_up, current_non_up)
-    
+
     return max_non_up

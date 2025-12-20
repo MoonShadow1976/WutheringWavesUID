@@ -8,15 +8,15 @@ from ..utils.error_reply import WAVES_CODE_103
 from ..utils.hint import error_reply
 from .draw_echo_list import get_draw_list
 
-sv_waves_echo_list = SV(f"声骸展示")
+sv_waves_echo_list = SV("声骸展示")
 
 
 @sv_waves_echo_list.on_fullmatch(
     (
-        f"我的声骸",
-        f"声骸仓库",
-        f"声骸",
-        f"声骇",
+        "我的声骸",
+        "声骸仓库",
+        "声骸",
+        "声骇",
     )
 )
 async def send_echo_list_msg(bot: Bot, ev: Event):
@@ -26,9 +26,7 @@ async def send_echo_list_msg(bot: Bot, ev: Event):
         return await bot.send(error_reply(WAVES_CODE_103))
 
     # 更新groupid
-    await WavesBind.insert_waves_uid(
-        user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9
-    )
+    await WavesBind.insert_waves_uid(user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9)
 
     #
     im = await get_draw_list(ev, uid, user_id)

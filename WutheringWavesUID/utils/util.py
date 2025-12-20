@@ -1,14 +1,14 @@
 import asyncio
+from collections.abc import Callable, Coroutine
+from functools import wraps
 import inspect
 import random
 import string
 import time
-from functools import wraps
-from typing import Any, Callable, Coroutine, Dict, List, TypeVar, overload
-
-import httpx
+from typing import Any, TypeVar, overload
 
 from gsuid_core.subscribe import gs_subscribe
+import httpx
 
 
 def timed_async_cache(expiration, condition=lambda x: True):
@@ -61,18 +61,18 @@ F = TypeVar("F", bound=Callable[..., Coroutine[Any, Any, Any]])
 
 
 @overload
-def async_func_lock(*, keys: List[str] | None = None) -> Callable[[F], F]: ...
+def async_func_lock(*, keys: list[str] | None = None) -> Callable[[F], F]: ...
 
 
 @overload
-def async_func_lock(_func: F, *, keys: List[str] | None = None) -> F: ...
+def async_func_lock(_func: F, *, keys: list[str] | None = None) -> F: ...
 
 
 # 异步函数参数锁
 def async_func_lock(
     _func: F | None = None,
     *,
-    keys: List[str] | None = None,
+    keys: list[str] | None = None,
 ) -> Callable[[F], F] | F:
     """
     异步函数参数锁
@@ -83,7 +83,7 @@ def async_func_lock(
     """
 
     def decorator(func: F) -> F:
-        locks: Dict[tuple, asyncio.Lock] = {}
+        locks: dict[tuple, asyncio.Lock] = {}
         sig = inspect.signature(func)
         params = list(sig.parameters.keys())
         is_cls_method = params and params[0] in ["self", "cls"]
@@ -178,7 +178,7 @@ def hide_uid(uid: str) -> str:
     return uid[:2] + "*" * 4 + uid[-2:]
 
 
-def format_with_defaults(desc: str, params: List[Any], default_value: str = "N/A"):
+def format_with_defaults(desc: str, params: list[Any], default_value: str = "N/A"):
     num_placeholders = desc.count("{")  # 简单估计位置参数数量
     params_list = list(params)
     while len(params_list) < num_placeholders:

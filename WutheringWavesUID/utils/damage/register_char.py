@@ -14,8 +14,8 @@ from .utils import (
     attack_damage,
     cast_variation,
     hit_damage,
-    phantom_damage,
     liberation_damage,
+    phantom_damage,
     skill_damage,
     temp_atk,
 )
@@ -265,12 +265,12 @@ class Char_1207(CharAbstract):
             title = "露帕-延奏技能"
             msg = "下一位登场角色普攻伤害加深25%"
             attr.add_dmg_deepen(0.25, title, msg)
-        
+
         if chain >= 2:
             title = "露帕-二链"
             msg = "施放共鸣解放时，队伍中的角色热熔伤害提升(20+20)%"
             attr.add_dmg_bonus(0.4, title, msg)
-        
+
         if chain >= 3:
             title = "露帕-荣光效果-三链"
             msg = "角色攻击时无视15%热熔抗性"
@@ -392,24 +392,24 @@ class Char_1306(CharAbstract):
         title = "卜灵-延奏技能"
         msg = "附近队伍中所有角色全伤害加深15%"
         attr.add_dmg_deepen(0.15, title, msg)
-    
+
         if skill_damage == attr.char_damage:
             if len(attr.teammate_char_ids) == 1:
-                #【雷法·两仪交泰】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升10%
+                # 【雷法·两仪交泰】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升10%
                 title = "卜灵-雷法·两仪交泰"
                 msg = "队伍中登场的角色共鸣技能伤害加成提升10%"
                 attr.add_dmg_bonus(0.1, title, msg)
             elif len(attr.teammate_char_ids) >= 2 and chain < 6:
-                #【雷法·三才合一】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升25%
+                # 【雷法·三才合一】状态持续期间，使队伍中登场的角色共鸣技能伤害加成提升25%
                 title = "卜灵-雷法·三才合一"
                 msg = "队伍中登场的角色共鸣技能伤害加成提升25%"
                 attr.add_dmg_bonus(0.25, title, msg)
             elif len(attr.teammate_char_ids) >= 2 and chain >= 6:
-                #【雷法·三才合一】状态持续期间，队伍中登场的角色获得的共鸣技能伤害加成效果提升至50%
+                # 【雷法·三才合一】状态持续期间，队伍中登场的角色获得的共鸣技能伤害加成效果提升至50%
                 title = "卜灵-六链-雷法·三才合一"
                 msg = "队伍中登场的角色共鸣技能伤害加成提升50%"
                 attr.add_dmg_bonus(0.5, title, msg)
-        
+
         if attr.char_template == temp_atk:
             title = "卜灵-合鸣效果-隐世回光"
             msg = "全队共鸣者攻击提升15%"
@@ -418,7 +418,6 @@ class Char_1306(CharAbstract):
             title = "卜灵-声骸技能-无归的谬误"
             msg = "全队角色攻击提升10%"
             attr.add_atk_percent(0.1, title, msg)
-
 
 
 class Char_1402(CharAbstract):
@@ -457,7 +456,6 @@ class Char_1406(CharAbstract):
         resonLevel: int = 1,
         isGroup: bool = True,
     ):
-
         if attr.char_attr == CHAR_ATTR_SIERRA:
             #  血誓盟约
             title = "风主-血誓盟约"
@@ -549,7 +547,7 @@ class Char_1411(CharAbstract):
         msg = "仇远暴击至少65%时，登场角色提升30%暴击伤害"
         attr.add_crit_dmg(0.3, title, msg)
 
-        if phantom_damage == attr.char_damage:    
+        if phantom_damage == attr.char_damage:
             title = "仇远-息界同调之律"
             msg = "队伍中角色声骸技能伤害加成提升16%"
             attr.add_dmg_bonus(0.16, title, msg)
@@ -831,7 +829,7 @@ class Char_1508(CharAbstract):
             attr.add_dmg_bonus(0.5, title, msg)
 
         # 六链效果：异常效应伤害加深
-        if attr.env_abnormal_deepen: # ？
+        if attr.env_abnormal_deepen:  # ？
             title = "千咲-六链"
             msg = "拥有虚无绞痕·终焉的目标受到异常效应伤害加深30%"
             attr.add_dmg_deepen(0.3, title, msg)

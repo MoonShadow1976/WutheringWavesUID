@@ -1,5 +1,3 @@
-from typing import List, Union
-
 from ..damage.abstract import WavesWeaponRegister, WeaponAbstract
 from .damage import DamageAttribute, calc_percent_expression
 from .utils import (
@@ -125,7 +123,7 @@ class Weapon_21010034(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -248,7 +246,7 @@ class Weapon_21010056(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -347,7 +345,7 @@ class Weapon_21010094(WeaponAbstract):
     # 对带有【异常效应】的怪物造成伤害时，自身攻击提升4%，持续10秒，每秒可触发1次，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -512,7 +510,7 @@ class Weapon_21020034(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -641,7 +639,7 @@ class Weapon_21020064(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -722,7 +720,7 @@ class Weapon_21020094(WeaponAbstract):
     # 对带有【异常效应】的怪物造成伤害时，自身攻击提升4%，持续10秒，每秒可触发1次，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -922,7 +920,7 @@ class Weapon_21030045(WeaponAbstract):
 class Weapon_21030046(WeaponAbstract):
     id = 21030046
     type = 3
-    name = "溢彩荧辉" 
+    name = "溢彩荧辉"
 
 
 class Weapon_21030053(WeaponAbstract):
@@ -938,7 +936,7 @@ class Weapon_21030064(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -1004,7 +1002,7 @@ class Weapon_21030094(WeaponAbstract):
     # 对带有【异常效应】的怪物造成伤害时，自身攻击提升4%，持续10秒，每秒可触发1次，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -1165,7 +1163,7 @@ class Weapon_21040034(WeaponAbstract):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -1337,7 +1335,7 @@ class Weapon_21040094(WeaponAbstract):
     # 对带有【异常效应】的怪物造成伤害时，自身攻击提升4%，持续10秒，每秒可触发1次，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -1497,7 +1495,7 @@ class Weapon_21050027(WeaponAbstract):
     # 对带有【光噪效应】的敌人造成伤害时获得效果：自身衍射伤害提升6%，每1秒可获得1层，持续6秒，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -1505,7 +1503,7 @@ class Weapon_21050027(WeaponAbstract):
             return
         if attr.char_attr != CHAR_ATTR_CELESTIAL:
             return
-        dmg = f"{self.param(0)*4}"
+        dmg = f"{self.param(0) * 4}"
         title = self.get_title()
         msg = f"对带有【光噪效应】的敌人造成伤害时获得效果：自身衍射伤害提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
@@ -1747,7 +1745,7 @@ class Weapon_21050094(WeaponAbstract):
     # 对带有【异常效应】的怪物造成伤害时，自身攻击提升4%，持续10秒，每秒可触发1次，可叠加4层。
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):

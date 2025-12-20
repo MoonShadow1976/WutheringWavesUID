@@ -1,5 +1,3 @@
-from typing import List, Optional, Union
-
 from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 
@@ -14,11 +12,7 @@ from ..utils.waves_api import waves_api
 async def add_cookie(ev: Event, ck: str, did: str) -> str:
     platform = PLATFORM_SOURCE
     kuroWavesUserInfos = await waves_api.get_kuro_role_list(ck, did)
-    if (
-        not kuroWavesUserInfos.success
-        or not kuroWavesUserInfos.data
-        or not isinstance(kuroWavesUserInfos.data, list)
-    ):
+    if not kuroWavesUserInfos.success or not kuroWavesUserInfos.data or not isinstance(kuroWavesUserInfos.data, list):
         return kuroWavesUserInfos.throw_msg()
 
     kuroWavesUserInfos = kuroWavesUserInfos.data
@@ -29,9 +23,7 @@ async def add_cookie(ev: Event, ck: str, did: str) -> str:
         if data.gameId != GAME_ID:
             continue
 
-        user = await WavesUser.get_user_by_attr(
-            ev.user_id, ev.bot_id, "uid", data.roleId
-        )
+        user = await WavesUser.get_user_by_attr(ev.user_id, ev.bot_id, "uid", data.roleId)
 
         succ, bat = await waves_api.get_request_token(
             data.roleId,
@@ -74,9 +66,7 @@ async def add_cookie(ev: Event, ck: str, did: str) -> str:
             update_data={"bat": bat, "did": did},
         )
 
-        res = await WavesBind.insert_waves_uid(
-            ev.user_id, ev.bot_id, data.roleId, ev.group_id, lenth_limit=9
-        )
+        res = await WavesBind.insert_waves_uid(ev.user_id, ev.bot_id, data.roleId, ev.group_id, lenth_limit=9)
         if res == 0 or res == -2:
             await WavesBind.switch_uid_by_game(ev.user_id, ev.bot_id, data.roleId)
 
@@ -103,16 +93,14 @@ async def delete_cookie(ev: Event, uid: str) -> str:
     return f"[鸣潮] 特征码[{uid}]的token删除成功!\n"
 
 
-async def get_cookie(bot: Bot, ev: Event) -> Union[List[str], str]:
+async def get_cookie(bot: Bot, ev: Event) -> list[str] | str:
     uid_list = await WavesBind.get_uid_list_by_game(ev.user_id, ev.bot_id)
     if uid_list is None:
         return ERROR_CODE[WAVES_CODE_103]
 
     msg = []
     for uid in uid_list:
-        waves_user: Optional[WavesUser] = await WavesUser.select_waves_user(
-            uid, ev.user_id, ev.bot_id
-        )
+        waves_user: WavesUser | None = await WavesUser.select_waves_user(uid, ev.user_id, ev.bot_id)
         if not waves_user:
             continue
 

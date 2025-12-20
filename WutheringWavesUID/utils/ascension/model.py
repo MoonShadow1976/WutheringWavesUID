@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +14,7 @@ class Stats(BaseModel):
 
 class WeaponStats(BaseModel):
     name: str
-    value: Union[str, float]
+    value: str | float
     isRatio: bool
     isPercent: bool
 
@@ -26,15 +26,15 @@ class LevelExp(BaseModel):
 
 class SkillLevel(BaseModel):
     name: str
-    param: List[List[str]]
+    param: list[list[str]]
 
 
 class Skill(BaseModel):
     name: str
     desc: str
-    param: List[str]
-    type: Optional[str] = None
-    level: Optional[Dict[str, SkillLevel]] = None
+    param: list[str]
+    type: str | None = None
+    level: dict[str, SkillLevel] | None = None
 
     def get_desc_detail(self):
         return format_with_defaults(self.desc, self.param)
@@ -43,7 +43,7 @@ class Skill(BaseModel):
 class Chain(BaseModel):
     name: str
     desc: str
-    param: List[Union[str, float]]
+    param: list[str | float]
 
     def get_desc_detail(self):
         return format_with_defaults(self.desc, self.param)
@@ -59,10 +59,10 @@ class CharacterModel(BaseModel):
     starLevel: int
     attributeId: int
     weaponTypeId: int
-    stats: Dict[str, Dict[str, Stats]]
-    skillTree: Dict[str, Dict[str, Skill]]
-    chains: Dict[int, Chain]
-    ascensions: Dict[str, List[AscensionMaterial]]
+    stats: dict[str, dict[str, Stats]]
+    skillTree: dict[str, dict[str, Skill]]
+    chains: dict[int, Chain]
+    ascensions: dict[str, list[AscensionMaterial]]
 
     class Config:
         # Updated configuration keys for Pydantic v2
@@ -81,12 +81,12 @@ class WeaponModel(BaseModel):
     name: str
     type: int
     starLevel: int
-    stats: Dict[str, Dict[str, List[WeaponStats]]]
+    stats: dict[str, dict[str, list[WeaponStats]]]
     effect: str
     effectName: str
-    param: List[List[str]]
+    param: list[list[str]]
     desc: str
-    ascensions: Dict[str, List[AscensionMaterial]]
+    ascensions: dict[str, list[AscensionMaterial]]
 
     class Config:
         # Updated configuration keys for Pydantic v2
@@ -94,7 +94,7 @@ class WeaponModel(BaseModel):
         str_strip_whitespace = True  # Replaces `anystr_strip_whitespace`
         str_min_length = 1  # Replaces `min_anystr_length`
 
-    def get_max_level_stat_tuple(self) -> List[Tuple[str, str]]:
+    def get_max_level_stat_tuple(self) -> list[tuple[str, str]]:
         stats = self.stats["6"]["90"]
         rets = []
         for stat in stats:
@@ -109,9 +109,7 @@ class WeaponModel(BaseModel):
         return rets
 
     def get_effect_detail(self):
-        return self.effect.format(
-            *["(" + "/".join(i) + ")" if len(set(i)) > 1 else i[0] for i in self.param]
-        )
+        return self.effect.format(*["(" + "/".join(i) + ")" if len(set(i)) > 1 else i[0] for i in self.param])
 
     def get_ascensions_max_list(self):
         for i in ["5", "4", "3", "2"]:
@@ -197,8 +195,8 @@ class EchoModel(BaseModel):
     id: int
     name: str
     intensityCode: int
-    group: Dict[str, Dict[str, str]]
-    skill: Dict[str, Any]
+    group: dict[str, dict[str, str]]
+    skill: dict[str, Any]
 
     class Config:
         populate_by_name = True
@@ -208,7 +206,7 @@ class EchoModel(BaseModel):
     def get_skill_detail(self):
         return format_with_defaults(self.skill["desc"], self.skill["params"][-1])
 
-    def get_intensity(self) -> List[Tuple[str, str]]:
+    def get_intensity(self) -> list[tuple[str, str]]:
         temp_cost = {0: "c1", 1: "c3", 2: "c4", 3: "c4"}
         temp_level = {0: "轻波级", 1: "巨浪级", 2: "怒涛级", 3: "海啸级"}
         result = []
@@ -222,9 +220,9 @@ class EchoModel(BaseModel):
 
     def get_group_name_by_gid(self, gid: str | int) -> str | None:
         gid = str(gid)
-        if gid not in self.group: 
+        if gid not in self.group:
             return None
         return self.group[gid].get("name")
 
-    def get_group_name(self) -> List[str]:
+    def get_group_name(self) -> list[str]:
         return [i["name"] for i in self.group.values()]

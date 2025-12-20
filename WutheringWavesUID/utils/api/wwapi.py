@@ -1,4 +1,4 @@
-from typing import Dict, List, Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -58,7 +58,7 @@ class RankDetail(BaseModel):
 
 
 class RankInfoData(BaseModel):
-    details: List[RankDetail]
+    details: list[RankDetail]
     page: int
     page_num: int
 
@@ -66,7 +66,7 @@ class RankInfoData(BaseModel):
 class RankInfoResponse(BaseModel):
     code: int
     message: str
-    data: Optional[RankInfoData] = None
+    data: RankInfoData | None = None
 
 
 class RankItem(BaseModel):
@@ -74,7 +74,7 @@ class RankItem(BaseModel):
     page: int
     page_num: int
     rank_type: int
-    waves_id: Optional[str] = ""
+    waves_id: str | None = ""
     version: str
 
 
@@ -102,11 +102,11 @@ class TotalRankDetail(BaseModel):
     kuro_name: str
     waves_id: str
     total_score: float
-    char_score_details: List[CharScoreDetail]
+    char_score_details: list[CharScoreDetail]
 
 
 class TotalRankInfoData(BaseModel):
-    score_details: List[TotalRankDetail]
+    score_details: list[TotalRankDetail]
     page: int
     page_num: int
 
@@ -114,7 +114,7 @@ class TotalRankInfoData(BaseModel):
 class TotalRankResponse(BaseModel):
     code: int
     message: str
-    data: Optional[TotalRankInfoData] = None
+    data: TotalRankInfoData | None = None
 
 
 # ------------------------------------------------------------
@@ -122,13 +122,13 @@ class TotalRankResponse(BaseModel):
 
 class OneRankRequest(BaseModel):
     char_id: int = Field(..., description="角色ID")
-    waves_id: Optional[str] = Field(default="", description="鸣潮ID")
+    waves_id: str | None = Field(default="", description="鸣潮ID")
 
 
 class OneRankResponse(BaseModel):
     code: int
     message: str
-    data: List[RankDetail]
+    data: list[RankDetail]
 
 
 # ------------------------------------------------------------
@@ -140,12 +140,12 @@ class AbyssDetail(BaseModel):
     area_type: ABYSS_TYPE
     area_name: str
     floor: int
-    char_ids: List[int]
+    char_ids: list[int]
 
 
 class AbyssItem(BaseModel):
     waves_id: str
-    abyss_record: List[AbyssDetail]
+    abyss_record: list[AbyssDetail]
     version: str
 
 
@@ -160,13 +160,13 @@ class AbyssUseRate(BaseModel):
 
 class AbyssRecord(BaseModel):
     abyss_type: ABYSS_TYPE
-    use_rate: List[AbyssUseRate]
+    use_rate: list[AbyssUseRate]
 
 
 class AbyssRecordResponse(BaseModel):
     code: int
     message: str
-    data: List[AbyssRecord]
+    data: list[AbyssRecord]
 
 
 # ------------------------------------------------------------
@@ -176,17 +176,17 @@ class AbyssRecordResponse(BaseModel):
 class RoleHoldRate(BaseModel):
     char_id: int
     rate: float
-    chain_rate: Dict[int, float]
+    chain_rate: dict[int, float]
 
 
 class RoleHoldRateRequest(BaseModel):
-    char_id: Optional[int] = None
+    char_id: int | None = None
 
 
 class RoleHoldRateResponse(BaseModel):
     code: int
     message: str
-    data: List[RoleHoldRate]
+    data: list[RoleHoldRate]
 
 
 # ------------------------------------------------------------
@@ -198,7 +198,7 @@ class SlashDetail(BaseModel):
     buffIcon: str
     buffName: str
     buffQuality: int
-    charIds: List[int]
+    charIds: list[int]
     score: int
 
 
@@ -206,7 +206,7 @@ class SlashDetailRequest(BaseModel):
     wavesId: str
     challengeId: int
     challengeName: str
-    halfList: List[SlashDetail]
+    halfList: list[SlashDetail]
     rank: str
     score: int
 
@@ -234,12 +234,12 @@ class SlashHalfList(BaseModel):
     buff_icon: str  # buff图标
     buff_name: str  # buff名称
     buff_quality: int  # buff品质
-    char_detail: List[SlashCharDetail]  # 角色详细数据
+    char_detail: list[SlashCharDetail]  # 角色详细数据
     score: int  # 每层分数
 
 
 class SlashRank(BaseModel):
-    half_list: List[SlashHalfList]
+    half_list: list[SlashHalfList]
     score: int  # 冥海总分数
     rank: int  # 总排名
     user_id: str  # 用户id
@@ -252,13 +252,13 @@ class SlashRankData(BaseModel):
     page: int  # 页码
     page_num: int  # 每页数量
     start_date: str  # 开始日期
-    rank_list: List[SlashRank]  # 排行数据
+    rank_list: list[SlashRank]  # 排行数据
 
 
 class SlashRankRes(BaseModel):
     code: int
     message: str
-    data: Optional[SlashRankData] = None
+    data: SlashRankData | None = None
 
 
 # ------------------------------------------------------------
@@ -289,12 +289,12 @@ class GachaRankDetail(BaseModel):
 
 
 class GachaRankData(BaseModel):
-    rank_list: List[GachaRankDetail]
+    rank_list: list[GachaRankDetail]
     total_page: int
-    user_rank: Optional[GachaRankDetail] = None  # 当前用户的排名信息（如果不在前20）
+    user_rank: GachaRankDetail | None = None  # 当前用户的排名信息（如果不在前20）
 
 
 class GachaRankRes(BaseModel):
     code: int
     message: str
-    data: Optional[GachaRankData] = None
+    data: GachaRankData | None = None

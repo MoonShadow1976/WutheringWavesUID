@@ -1,8 +1,7 @@
 from typing import Any
 
-import httpx
-
 from gsuid_core.logger import logger
+import httpx
 
 from ..api.wwapi import (
     UPLOAD_ABYSS_RECORD_URL,
@@ -10,7 +9,7 @@ from ..api.wwapi import (
     UPLOAD_SLASH_RECORD_URL,
     UPLOAD_URL,
 )
-from .const import QUEUE_ABYSS_RECORD, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD, QUEUE_GACHA_RECORD
+from .const import QUEUE_ABYSS_RECORD, QUEUE_GACHA_RECORD, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD
 from .queues import event_handler, start_dispatcher
 
 
@@ -102,7 +101,6 @@ async def send_slash_record(item: Any):
             logger.info(f"上传冥海结果: {res.status_code} - {res.text}")
         except Exception as e:
             logger.exception(f"上传冥海失败: {res.text if res else ''} {e}")
-
 
 
 @event_handler(QUEUE_GACHA_RECORD)

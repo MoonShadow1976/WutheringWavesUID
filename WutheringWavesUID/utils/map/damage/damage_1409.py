@@ -71,9 +71,7 @@ def calc_damage_1(
         skillParamId = "11"
     elif skill_name == "小卡空中回收3剑":
         skillParamId = "12"
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel)
 
     title = skill_name
     msg = f"技能倍率{skill_multi}"
@@ -156,9 +154,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr.set_env_aero_erosion()
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
@@ -173,9 +169,7 @@ def calc_damage_2(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "6", skillLevel)
 
     title = "小卡共鸣技能"
     msg = f"技能倍率{skill_multi}"
@@ -299,9 +293,7 @@ def calc_damage_11(
         skillParamId = "26"
     elif skill_name == "大卡空中3段":
         skillParamId = "27"
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel)
 
     title = skill_name
     msg = f"技能倍率{skill_multi}"
@@ -379,9 +371,7 @@ def calc_damage_11(
     return crit_damage, expected_damage
 
 
-def calc_damage_12(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr.set_env_aero_erosion()
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
@@ -396,9 +386,7 @@ def calc_damage_12(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(
-        char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel
-    )
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "31", skillLevel)
 
     title = "大卡共鸣解放"
     msg = f"技能倍率{skill_multi}"
@@ -483,9 +471,7 @@ def calc_damage_12(
     return crit_damage, expected_damage
 
 
-def calc_damage_20(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-) -> tuple[str, str]:
+def calc_damage_20(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_life")
 
@@ -514,9 +500,7 @@ damage_detail = [
     },
     {
         "title": "3剑下落",
-        "func": lambda attr, role: calc_damage_1(
-            attr, role, skill_name="小卡空中回收3剑"
-        ),
+        "func": lambda attr, role: calc_damage_1(attr, role, skill_name="小卡空中回收3剑"),
     },
     {
         "title": "小卡共鸣技能",

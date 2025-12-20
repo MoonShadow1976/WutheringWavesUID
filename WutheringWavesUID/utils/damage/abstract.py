@@ -1,9 +1,7 @@
-from typing import List, Optional, Union
-
 from ...utils.damage.damage import DamageAttribute
 
 
-class WavesRegister(object):
+class WavesRegister:
     _id_cls_map = {}
 
     @classmethod
@@ -38,16 +36,16 @@ class DamageRankRegister(WavesRegister):
     _id_cls_map = {}
 
 
-class WeaponAbstract(object):
+class WeaponAbstract:
     id = None
     type = None
     name = None
 
     def __init__(
         self,
-        weapon_id: Union[str, int],
+        weapon_id: str | int,
         weapon_level: int,
-        weapon_breach: Union[int, None] = None,
+        weapon_breach: int | None = None,
         weapon_reson_level: int = 1,
     ):
         from ...utils.ascension.weapon import (
@@ -55,9 +53,7 @@ class WeaponAbstract(object):
             get_weapon_detail,
         )
 
-        weapon_detail: WavesWeaponResult = get_weapon_detail(
-            weapon_id, weapon_level, weapon_breach, weapon_reson_level
-        )
+        weapon_detail: WavesWeaponResult = get_weapon_detail(weapon_id, weapon_level, weapon_breach, weapon_reson_level)
         self.weapon_id = weapon_id
         self.weapon_level = weapon_level
         self.weapon_breach = weapon_breach
@@ -66,7 +62,7 @@ class WeaponAbstract(object):
 
     def do_action(
         self,
-        func_list: Union[List[str], str],
+        func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
     ):
@@ -162,7 +158,7 @@ class WeaponAbstract(object):
         pass
 
 
-class EchoAbstract(object):
+class EchoAbstract:
     name = None
     id = None
 
@@ -178,9 +174,9 @@ class EchoAbstract(object):
         return {}
 
 
-class CharAbstract(object):
+class CharAbstract:
     name = None
-    id: Optional[int] = None
+    id: int | None = None
     starLevel = None
 
     def do_buff(

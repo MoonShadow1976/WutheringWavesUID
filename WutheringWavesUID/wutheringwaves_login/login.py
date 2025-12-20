@@ -1,15 +1,10 @@
 import asyncio
 import hashlib
+from pathlib import Path
 import re
 import uuid
-from pathlib import Path
-from typing import Optional, Union
 
-import httpx
 from async_timeout import timeout
-from pydantic import BaseModel
-from starlette.responses import HTMLResponse
-
 from gsuid_core.bot import Bot
 from gsuid_core.config import core_config
 from gsuid_core.logger import logger
@@ -17,16 +12,19 @@ from gsuid_core.models import Event
 from gsuid_core.segment import MessageSegment
 from gsuid_core.utils.cookie_manager.qrlogin import get_qrcode_base64
 from gsuid_core.web_app import app
+import httpx
+from pydantic import BaseModel
+from starlette.responses import HTMLResponse
 
 from ..utils.cache import TimedCache
 from ..utils.database.models import WavesBind, WavesUser
 from ..utils.resource.RESOURCE_PATH import waves_templates
 from ..utils.util import get_public_ip
 from ..utils.waves_api import waves_api
+from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from ..wutheringwaves_user import deal
 from ..wutheringwaves_user.login_succ import login_success_msg
-from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 
 cache = TimedCache(timeout=600, maxsize=10)
 
@@ -44,7 +42,7 @@ class InternationalLoginModel(BaseModel):
     auth: str
     email: str
     password: str
-    geetest_data: Optional[str] = None  # Geetest 驗證數據
+    geetest_data: str | None = None  # Geetest 驗證數據
 
 
 async def get_url() -> tuple[str, bool]:
@@ -171,6 +169,7 @@ async def page_login_local(bot: Bot, ev: Event, url):
     except Exception as e:
         logger.error(e)
 
+
 # 暂时不兼容国际服登录
 async def page_login_other(bot: Bot, ev: Event, url):
     at_sender = True if ev.group_id else False
@@ -204,9 +203,7 @@ async def page_login_other(bot: Bot, ev: Event, url):
         async with timeout(600):
             while True:
                 if times <= 0:
-                    return await bot.send(
-                        "登录服务请求失败! 请稍后再试\n", at_sender=at_sender
-                    )
+                    return await bot.send("登录服务请求失败! 请稍后再试\n", at_sender=at_sender)
 
                 result = await client.post(url + "/waves/get", json={"token": token})
                 if result.status_code != 200:
@@ -276,14 +273,12 @@ async def code_login(bot: Bot, ev: Event, text: str, isPage=False):
             return await bot.send(msg_error, at_sender=at_sender)
 
 
-async def add_cookie(ev, token, did) -> Union[WavesUser, str, None]:
+async def add_cookie(ev, token, did) -> WavesUser | str | None:
     ck_res = await deal.add_cookie(ev, token, did)
     if "成功" in ck_res:
         user = await WavesUser.get_user_by_attr(ev.user_id, ev.bot_id, "cookie", token)
         if user:
-            data = await WavesBind.insert_waves_uid(
-                ev.user_id, ev.bot_id, user.uid, ev.group_id, lenth_limit=9
-            )
+            data = await WavesBind.insert_waves_uid(ev.user_id, ev.bot_id, user.uid, ev.group_id, lenth_limit=9)
             if data == 0 or data == -2:
                 await WavesBind.switch_uid_by_game(ev.user_id, ev.bot_id, user.uid)
         return user
@@ -305,30 +300,39 @@ async def add_oversea_user(bot: Bot, ev: Event, data: dict):
         # 為國際服創建/更新 WavesUser 記錄
 
         # 檢查是否已存在用戶
-        existing_user = await WavesUser.get_user_by_attr(
-            ev.user_id, ev.bot_id, "uid", uid
-        )
+        existing_user = await WavesUser.get_user_by_attr(ev.user_id, ev.bot_id, "uid", uid)
 
         if existing_user:
             await WavesUser.update_data_by_data(
                 select_data={
-                    "user_id": ev.user_id, "bot_id": ev.bot_id, "uid": uid,
+                    "user_id": ev.user_id,
+                    "bot_id": ev.bot_id,
+                    "uid": uid,
                 },
                 update_data={
-                    "cookie": token, "platform": region, "status": "",
+                    "cookie": token,
+                    "platform": region,
+                    "status": "",
                 },
             )  # 更新現有用戶
             logger.info(f"WavesUser 更新成功: UID {uid}")
         else:
             await WavesUser.insert_data(
-                user_id=ev.user_id, bot_id=ev.bot_id,
+                user_id=ev.user_id,
+                bot_id=ev.bot_id,
                 cookie=token,
-                uid=uid, platform=region, status="",
+                uid=uid,
+                platform=region,
+                status="",
             )  # 創建新用戶
             logger.info(f"WavesUser 創建成功: UID {uid}")
 
         await WavesBind.insert_waves_uid(
-            ev.user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9,
+            ev.user_id,
+            ev.bot_id,
+            uid,
+            ev.group_id,
+            lenth_limit=9,
         )  # 更新綁定信息
 
         # 保存用户信息到本地
@@ -379,20 +383,23 @@ async def waves_international_login(data: InternationalLoginModel):
         return {"success": False, "msg": "登录超时"}
 
     from ..utils.api.kuro_py_api import login_overseas
+
     login_signal = await login_overseas(
-        data.email, 
+        data.email,
         data.password,
         data.geetest_data,
     )
 
-    if login_signal.get("success", False): # 登录成功，更新缓存状态
-        exist.update({
-            "email": 1,
-            "password": 1,
-            "login_type": "international",
-            "msg": login_signal.get("msg", "登录成功\n"),
-            "data": login_signal.get("data", {}),
-        })
-        cache.set(data.auth, exist) # 更新缓存,准备结束
+    if login_signal.get("success", False):  # 登录成功，更新缓存状态
+        exist.update(
+            {
+                "email": 1,
+                "password": 1,
+                "login_type": "international",
+                "msg": login_signal.get("msg", "登录成功\n"),
+                "data": login_signal.get("data", {}),
+            }
+        )
+        cache.set(data.auth, exist)  # 更新缓存,准备结束
 
     return login_signal

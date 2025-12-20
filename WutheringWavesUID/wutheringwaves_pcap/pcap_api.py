@@ -1,7 +1,8 @@
-import aiohttp
 import asyncio
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
+
+import aiohttp
 from gsuid_core.logger import logger
 
 
@@ -12,7 +13,7 @@ class PcapApi:
         self.base_url = "https://pcap.wuthery.com/v1"
         self.timeout = 30
 
-    async def parse_pcap_file(self, file_path: Path) -> Optional[Dict[str, Any]]:
+    async def parse_pcap_file(self, file_path: Path) -> dict[str, Any] | None:
         """
         上傳並解析 pcap 文件
 
@@ -43,12 +44,8 @@ class PcapApi:
             )
 
             # 發送請求
-            async with aiohttp.ClientSession(
-                timeout=aiohttp.ClientTimeout(total=self.timeout)
-            ) as session:
-                async with session.post(
-                    f"{self.base_url}/parse", data=data
-                ) as response:
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=self.timeout)) as session:
+                async with session.post(f"{self.base_url}/parse", data=data) as response:
                     if response.status == 200:
                         result = await response.json()
                         logger.info(f"PCAP 解析成功: {file_path.name}")

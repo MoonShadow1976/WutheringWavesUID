@@ -48,9 +48,7 @@ async def send_char_list_msg_new(bot: Bot, ev: Event):
 
     if not is_peek:
         # 更新groupid
-        await WavesBind.insert_waves_uid(
-            user_id, ev.bot_id, query_waves_id, ev.group_id, lenth_limit=9
-        )
+        await WavesBind.insert_waves_uid(user_id, ev.bot_id, query_waves_id, ev.group_id, lenth_limit=9)
 
     im = await draw_char_list_img(
         query_waves_id,

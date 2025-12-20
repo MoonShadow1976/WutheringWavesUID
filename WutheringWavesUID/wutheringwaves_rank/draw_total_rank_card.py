@@ -1,16 +1,14 @@
 import asyncio
 import copy
 from pathlib import Path
-from typing import Optional, Union
-
-import httpx
-from PIL import Image, ImageDraw
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+import httpx
+from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import (
     GET_TOTAL_RANK_URL,
@@ -47,8 +45,8 @@ from ..utils.image import (
     get_waves_bg,
 )
 from ..utils.util import get_version
-from ..wutheringwaves_config import WutheringWavesConfig
 from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
+from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -67,7 +65,7 @@ BOT_COLOR = [
 ]
 
 
-async def get_rank(item: TotalRankRequest) -> Optional[TotalRankResponse]:
+async def get_rank(item: TotalRankRequest) -> TotalRankResponse | None:
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if not WavesToken:
@@ -92,7 +90,7 @@ async def get_rank(item: TotalRankRequest) -> Optional[TotalRankResponse]:
             logger.exception(f"获取练度排行失败: {e}")
 
 
-async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
+async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> str | bytes:
     page_num = 20
     self_uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     if not self_uid:
@@ -123,9 +121,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
     char_list_len = len(rankInfoList.data.score_details)
 
     # 计算所需的总高度
-    total_height = (
-        header_height + text_bar_height + item_spacing * char_list_len + footer_height
-    )
+    total_height = header_height + text_bar_height + item_spacing * char_list_len + footer_height
 
     # 创建带背景的画布 - 使用bg9
     card_img = get_waves_bg(width, total_height, "bg9")
@@ -134,9 +130,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
     text_bar_draw = ImageDraw.Draw(text_bar_img)
     # 绘制深灰色背景
     bar_bg_color = (36, 36, 41, 230)
-    text_bar_draw.rounded_rectangle(
-        [20, 20, width - 40, 110], radius=8, fill=bar_bg_color
-    )
+    text_bar_draw.rounded_rectangle([20, 20, width - 40, 110], radius=8, fill=bar_bg_color)
 
     # 绘制顶部的金色高亮线
     accent_color = (203, 161, 95)
@@ -151,9 +145,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         waves_font_20,
         "lm",
     )
-    text_bar_draw.text(
-        (185, 85), "2. 显示前10个最强角色", SPECIAL_GOLD, waves_font_20, "lm"
-    )
+    text_bar_draw.text((185, 85), "2. 显示前10个最强角色", SPECIAL_GOLD, waves_font_20, "lm")
 
     # 备注
     temp_notes = "排行标准：以所有角色声骸分数总和（角色分数>=175）为排序的综合排名"
@@ -197,9 +189,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         def draw_rank_id(rank_id, size=(50, 50), draw=(24, 24), dest=(40, 30)):
             info_rank = Image.new("RGBA", size, color=(255, 255, 255, 0))
             rank_draw = ImageDraw.Draw(info_rank)
-            rank_draw.rounded_rectangle(
-                [0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),)
-            )
+            rank_draw.rounded_rectangle([0, 0, size[0], size[1]], radius=8, fill=rank_color + (int(0.9 * 255),))
             rank_draw.text(draw, f"{rank_id}", "white", waves_font_34, "mm")
             bar_bg.alpha_composite(info_rank, dest)
 
@@ -214,9 +204,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         server_text, server_color = get_region_for_rank(detail.waves_id)
         region_block = Image.new("RGBA", (50, 20), color=(255, 255, 255, 0))
         region_draw = ImageDraw.Draw(region_block)
-        region_draw.rounded_rectangle(
-            [0, 0, 50, 20], radius=6, fill=server_color + (int(0.9 * 255),)
-        )
+        region_draw.rounded_rectangle([0, 0, 50, 20], radius=6, fill=server_color + (int(0.9 * 255),))
         region_draw.text((25, 10), server_text, "white", waves_font_16, "mm")
         bar_bg.alpha_composite(region_block, (100, 80))
 
@@ -232,9 +220,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         uid_color = "white"
         if detail.waves_id == self_uid:
             uid_color = RED
-        bar_draw.text(
-            (350, 40), f"特征码: {detail.waves_id}", uid_color, waves_font_20, "lm"
-        )
+        bar_draw.text((350, 40), f"特征码: {detail.waves_id}", uid_color, waves_font_20, "lm")
 
         # bot主人名字
         botName = getattr(detail, "alias_name", None)
@@ -248,12 +234,8 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
 
             info_block = Image.new("RGBA", (200, 30), color=(255, 255, 255, 0))
             info_block_draw = ImageDraw.Draw(info_block)
-            info_block_draw.rounded_rectangle(
-                [0, 0, 200, 30], radius=6, fill=color + (int(0.6 * 255),)
-            )
-            info_block_draw.text(
-                (100, 15), f"bot: {botName}", "white", waves_font_18, "mm"
-            )
+            info_block_draw.rounded_rectangle([0, 0, 200, 30], radius=6, fill=color + (int(0.6 * 255),))
+            info_block_draw.text((100, 15), f"bot: {botName}", "white", waves_font_18, "mm")
             bar_bg.alpha_composite(info_block, (350, 66))
 
         # 总分数
@@ -269,9 +251,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
         # 绘制角色信息
         if detail.char_score_details:
             # 按分数排序，取前6名
-            sorted_chars = sorted(
-                detail.char_score_details, key=lambda x: x.phantom_score, reverse=True
-            )[:10]
+            sorted_chars = sorted(detail.char_score_details, key=lambda x: x.phantom_score, reverse=True)[:10]
 
             # 在条目底部绘制前10名角色的头像
             char_size = 40
@@ -293,9 +273,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
                 char_avatar_masked.paste(char_avatar, (0, 0), char_mask_resized)
 
                 # 粘贴头像
-                bar_bg.paste(
-                    char_avatar_masked, (char_x, char_start_y), char_avatar_masked
-                )
+                bar_bg.paste(char_avatar_masked, (char_x, char_start_y), char_avatar_masked)
 
                 # 绘制分数
                 score_text = f"{int(char.phantom_score)}"
@@ -345,7 +323,7 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> Union[str, bytes]:
 
 
 async def get_avatar(
-    qid: Optional[str],
+    qid: str | None,
 ) -> Image.Image:
     # 检查qid 为纯数字
     if qid and qid.isdigit():

@@ -1,10 +1,8 @@
-import textwrap
 from pathlib import Path
-from typing import Dict, Optional
-
-from PIL import Image, ImageDraw
+import textwrap
 
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.ascension.char import get_char_model
 from ..utils.ascension.model import (
@@ -41,7 +39,7 @@ async def draw_char_wiki(char_id: str, query_role_type: str):
 
 
 async def draw_char_skill(char_id: str):
-    char_model: Optional[CharacterModel] = get_char_model(char_id)
+    char_model: CharacterModel | None = get_char_model(char_id)
     if char_model is None:
         return ""
 
@@ -56,9 +54,7 @@ async def draw_char_skill(char_id: str):
     char_bg_draw.text((580, 120), f"{char_model.name}", "black", waves_font_70, "lm")
     # 稀有度
     rarity_pic = Image.open(TEXT_PATH / f"rarity_{char_model.starLevel}.png")
-    rarity_pic = rarity_pic.resize(
-        (180, int(180 / rarity_pic.size[0] * rarity_pic.size[1]))
-    )
+    rarity_pic = rarity_pic.resize((180, int(180 / rarity_pic.size[0] * rarity_pic.size[1])))
 
     # 90级别数据
     max_stats: Stats = char_model.get_max_level_stat()
@@ -81,7 +77,7 @@ async def draw_char_skill(char_id: str):
 
 
 async def draw_char_chain(char_id: str):
-    char_model: Optional[CharacterModel] = get_char_model(char_id)
+    char_model: CharacterModel | None = get_char_model(char_id)
     if char_model is None:
         return ""
 
@@ -96,9 +92,7 @@ async def draw_char_chain(char_id: str):
     char_bg_draw.text((580, 120), f"{char_model.name}", "black", waves_font_70, "lm")
     # 稀有度
     rarity_pic = Image.open(TEXT_PATH / f"rarity_{char_model.starLevel}.png")
-    rarity_pic = rarity_pic.resize(
-        (180, int(180 / rarity_pic.size[0] * rarity_pic.size[1]))
-    )
+    rarity_pic = rarity_pic.resize((180, int(180 / rarity_pic.size[0] * rarity_pic.size[1])))
 
     # 90级别数据
     max_stats: Stats = char_model.get_max_level_stat()
@@ -144,9 +138,7 @@ async def parse_char_stats(max_stats: Stats):
 
             # 绘制矩形边框
             _i = 0.8 if row_index % 2 == 0 else 1
-            draw.rectangle(
-                [x0, y0, x1, y1], fill=(40, 40, 40, int(_i * 255)), outline=GREY
-            )
+            draw.rectangle([x0, y0, x1, y1], fill=(40, 40, 40, int(_i * 255)), outline=GREY)
 
             # 计算文本位置以居中
             bbox = draw.textbbox((0, 0), cell, font=waves_font_24)
@@ -161,7 +153,7 @@ async def parse_char_stats(max_stats: Stats):
     return image
 
 
-async def parse_char_chain(data: Dict[int, Chain]):
+async def parse_char_chain(data: dict[int, Chain]):
     y_padding = 20  # 初始位移
     x_padding = 20  # 初始位移
     line_spacing = 10  # 行间距
@@ -194,12 +186,8 @@ async def parse_char_chain(data: Dict[int, Chain]):
 
         # 计算总的绘制高度
         total_text_height = y_padding + block_line_spacing + shadow_radius * 2
-        total_text_height += len(lines_title) * (
-            title_font_size + line_spacing
-        )  # 标题部分的总高度
-        total_text_height += len(lines_desc) * (
-            detail_color_size + line_spacing
-        )  # 描述部分的总高度
+        total_text_height += len(lines_title) * (title_font_size + line_spacing)  # 标题部分的总高度
+        total_text_height += len(lines_desc) * (detail_color_size + line_spacing)  # 描述部分的总高度
 
         img = Image.new(
             "RGBA",
@@ -255,7 +243,7 @@ async def parse_char_chain(data: Dict[int, Chain]):
     return final_img
 
 
-async def parse_char_skill(data: Dict[str, Dict[str, Skill]]):
+async def parse_char_skill(data: dict[str, dict[str, Skill]]):
     y_padding = 20  # 初始位移
     x_padding = 20  # 初始位移
     line_spacing = 10  # 行间距
@@ -308,12 +296,8 @@ async def parse_char_skill(data: Dict[str, Dict[str, Skill]]):
 
         # 计算总的绘制高度
         total_text_height = y_padding + block_line_spacing + shadow_radius * 2
-        total_text_height += len(lines_title) * (
-            title_font_size + line_spacing
-        )  # 标题部分的总高度
-        total_text_height += len(lines_desc) * (
-            detail_color_size + line_spacing
-        )  # 描述部分的总高度
+        total_text_height += len(lines_title) * (title_font_size + line_spacing)  # 标题部分的总高度
+        total_text_height += len(lines_desc) * (detail_color_size + line_spacing)  # 描述部分的总高度
 
         img = Image.new(
             "RGBA",
@@ -347,11 +331,7 @@ async def parse_char_skill(data: Dict[str, Dict[str, Skill]]):
 
         # 绘制描述文本
         for line in lines_desc:
-            color = (
-                title_color
-                if line.startswith("属性加成") or line.startswith("固有技能")
-                else detail_color
-            )
+            color = title_color if line.startswith("属性加成") or line.startswith("固有技能") else detail_color
             draw.text(
                 (x_offset, y_offset),
                 line,
@@ -378,7 +358,7 @@ async def parse_char_skill(data: Dict[str, Dict[str, Skill]]):
     return final_img
 
 
-async def parse_char_skill_rate(skillLevels: Optional[Dict[str, SkillLevel]]):
+async def parse_char_skill_rate(skillLevels: dict[str, SkillLevel] | None):
     if not skillLevels:
         return
     rows = []
@@ -424,9 +404,7 @@ async def parse_char_skill_rate(skillLevels: Optional[Dict[str, SkillLevel]]):
 
             # 绘制矩形边框
             _i = 0.3 if row_index % 2 == 0 else 0.7
-            draw.rectangle(
-                [x0, y0, x1, y1], fill=(40, 40, 40, int(_i * 255)), outline=GREY
-            )
+            draw.rectangle([x0, y0, x1, y1], fill=(40, 40, 40, int(_i * 255)), outline=GREY)
 
             # 计算文本位置以居中
             bbox = draw.textbbox((0, 0), cell, font=font)

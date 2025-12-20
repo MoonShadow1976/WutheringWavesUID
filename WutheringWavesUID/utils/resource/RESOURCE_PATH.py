@@ -1,9 +1,8 @@
-import sys
 from pathlib import Path
-
-from jinja2 import Environment, FileSystemLoader
+import sys
 
 from gsuid_core.data_store import get_res_path
+from jinja2 import Environment, FileSystemLoader
 
 MAIN_PATH = get_res_path() / "WutheringWavesUID"
 sys.path.append(str(MAIN_PATH))

@@ -19,12 +19,13 @@ sv_get_gachalog_by_link = SV("waves导入抽卡链接", area="DIRECT")
 sv_import_gacha_log = SV("waves导入抽卡记录", area="DIRECT")
 sv_export_json_gacha_log = SV("waves导出抽卡记录")
 
-ERROR_MSG_NOTIFY = f"请给出正确的抽卡记录链接, 请重新发送【{PREFIX}导入抽卡链接 链接】，抽卡链接获取帮助请发送【{PREFIX}抽卡帮助】"
+ERROR_MSG_NOTIFY = (
+    f"请给出正确的抽卡记录链接, 请重新发送【{PREFIX}导入抽卡链接 链接】，抽卡链接获取帮助请发送【{PREFIX}抽卡帮助】"
+)
 
 
 @sv_get_gachalog_by_link.on_command(("导入抽卡链接", "导入抽卡记录"))
 async def get_gacha_log_by_link(bot: Bot, ev: Event):
-
     # 没有uid 就别导了吧
     uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     if not uid:
@@ -57,7 +58,9 @@ async def get_gacha_log_by_link(bot: Bot, ev: Event):
         return await bot.send(ERROR_MSG_NOTIFY)
 
     if player_id and player_id != uid:
-        ERROR_MSG = f"请保证抽卡链接的特征码与当前正在使用的特征码一致\n\n请使用以下命令核查:\n{PREFIX}查看\n{PREFIX}切换{player_id}"
+        ERROR_MSG = (
+            f"请保证抽卡链接的特征码与当前正在使用的特征码一致\n\n请使用以下命令核查:\n{PREFIX}查看\n{PREFIX}切换{player_id}"
+        )
         return await bot.send(ERROR_MSG)
 
     is_force = False
@@ -67,7 +70,7 @@ async def get_gacha_log_by_link(bot: Bot, ev: Event):
     await bot.send(f"UID{uid}开始执行[刷新抽卡记录],需要一定时间...请勿重复触发!")
     im = await save_gachalogs(ev, uid, record_id, is_force)
     if "抽卡记录" in im:
-        buttons: List[Any] = [WavesButton("查看抽卡记录", "抽卡记录")]
+        buttons: list[Any] = [WavesButton("查看抽卡记录", "抽卡记录")]
         await bot.send_option(im, buttons)
     else:
         await bot.send(im)
@@ -104,7 +107,7 @@ async def get_gacha_log_by_file(bot: Bot, ev: Event):
         return await bot.send("导入抽卡记录异常...")
 
 
-@sv_export_json_gacha_log.on_fullmatch(("导出抽卡记录"))
+@sv_export_json_gacha_log.on_fullmatch("导出抽卡记录")
 async def send_export_gacha_info(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     if not uid:

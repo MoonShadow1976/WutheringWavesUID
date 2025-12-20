@@ -1,17 +1,16 @@
 import asyncio
 import copy
 from pathlib import Path
-from typing import Dict, Union
-
-import httpx
-from PIL import Image, ImageDraw
 
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+import httpx
+from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import GET_HOLD_RATE_URL
 from ..utils.ascension.char import get_char_model
+from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind
 from ..utils.fonts.waves_fonts import (
     waves_font_20,
@@ -35,7 +34,6 @@ from ..utils.resource.constant import (
     SPECIAL_CHAR_NAME,
 )
 from ..utils.util import timed_async_cache
-from ..utils.char_info_utils import get_all_role_detail_info_list
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 bar1 = Image.open(TEXT_PATH / "bar1.png")
@@ -64,21 +62,19 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
     # 收集所有共鸣链数据
     chain_data_list = []
     total_items = 0
-    
+
     # 整合到一个循环中处理数据
     for char in data["char_hold_rate"]:
         char_id = char["char_id"]
         char_model = get_char_model(char_id)
         if not char_model:
             continue
-            
+
         # 应用过滤器
         if filter_type:
             if filter_type == "UP":
                 if not (
-                    char_model.starLevel == 5
-                    and int(char_id) not in NORMAL_LIST_IDS
-                    and str(char_id) not in SPECIAL_CHAR_NAME
+                    char_model.starLevel == 5 and int(char_id) not in NORMAL_LIST_IDS and str(char_id) not in SPECIAL_CHAR_NAME
                 ):
                     continue
             elif filter_type == "五":
@@ -94,22 +90,24 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         if player_count == -1:
             use_rate = True
         chain_rates = char["chain_hold_rate"]
-        
+
         # 计算每个共鸣链的持有数量或所占比例
         for chain_level, rate in chain_rates.items():
-            all_rate = (hold_rate * rate / 100)
+            all_rate = hold_rate * rate / 100
             num = 0 if use_rate else round(player_count * rate / 100)
             if all_rate > 0:  # 只添加有持有者的链
-                chain_data_list.append({
-                    "char_id": char_id,
-                    "char_model": char_model,
-                    "chain_level": chain_level,
-                    "num": num,
-                    "all_rate": all_rate,
-                    "rate": rate
-                })
+                chain_data_list.append(
+                    {
+                        "char_id": char_id,
+                        "char_model": char_model,
+                        "chain_level": chain_level,
+                        "num": num,
+                        "all_rate": all_rate,
+                        "rate": rate,
+                    }
+                )
                 total_items += 1
-    
+
     # 按持有数量降序排序
     chain_data_list.sort(key=lambda x: x["all_rate"], reverse=True)
 
@@ -119,47 +117,42 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
     item_height = 130  # 每个条目的高度
     header_height = 700
     footer_height = 50
-    
+
     # 计算最佳列数 - 基于黄金分割比 (0.618)
     # 目标宽高比 = 宽度 / 高度 ≈ 0.618
     # 因此目标高度 = 宽度 / 0.618 ≈ 2100
     target_height = width / 0.618
-    
+
     # 计算可用高度 (减去页眉页脚和边距)
     available_height = target_height - header_height - footer_height - 2 * margin
     if available_height < 0:
         available_height = target_height  # 防止负数
-    
+
     # 计算每列最大行数
     max_rows_per_col = max(1, int(available_height / item_height))
-    
+
     # 计算最佳列数
     columns = max(1, min(5, (total_items + max_rows_per_col - 1) // max_rows_per_col))
-    
+
     # 计算每列实际行数
     rows_per_column = (total_items + columns - 1) // columns
-    
+
     # 计算总高度
-    total_height = int(
-        header_height 
-        + rows_per_column * item_height 
-        + margin * 2 
-        + footer_height
-    )
-    
+    total_height = int(header_height + rows_per_column * item_height + margin * 2 + footer_height)
+
     # 创建带背景的画布 - 使用bg9
     img = get_waves_bg(width, total_height, "bg9")
-    
+
     # title_bg
     title_bg = Image.open(TEXT_PATH / "title2.png")
     title_mask = Image.open(TEXT_PATH / "title1.png")
     title_mask_draw = ImageDraw.Draw(title_mask)
-    
+
     # icon
     icon = get_ICON()
     icon = icon.resize((180, 180))
     title_mask.paste(icon, (60, 380), icon)
-    
+
     # title
     if group_id:
         group_id = f" {group_id}" if "bot" in group_id else f" 群{group_id}"
@@ -171,7 +164,7 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
     else:
         title_text = f"#共鸣链持有率{group_id}"
     title_mask_draw.text((300, 430), title_text, "white", waves_font_42, "lm")
-    
+
     # count
     title = (
         f"样本数量: {data.get('total_player_count', 0)} 人 | 共 {total_items} 种共鸣链"
@@ -185,16 +178,16 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         waves_font_36,
         "lm",
     )
-    
+
     img.paste(title_bg, (0, 0), title_bg)
     img.paste(title_mask, (0, 0), title_mask)
-    
+
     # 绘制排行榜
     draw = ImageDraw.Draw(img)
-    
+
     # 计算列宽 (考虑边距)
     column_width = (width - margin * (columns + 1)) // columns
-    
+
     rank = 1
     for idx, chain_data in enumerate(chain_data_list):
         char_id = chain_data["char_id"]
@@ -203,29 +196,23 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         num = chain_data["num"]
         all_rate = chain_data["all_rate"]
         rate = chain_data["rate"]
-        
+
         # 计算位置 (行和列)
         col = idx % columns
         row = idx // columns
-        
+
         # 计算坐标
         x = margin + col * (column_width + margin)
         y = header_height + row * item_height
-        
+
         # 绘制背景框
         bg_box = Image.new("RGBA", (column_width, item_height - 20), (0, 0, 0, 150))
         img.paste(bg_box, (x, y), bg_box)
-        
+
         # 排名序号
         rank_text = f"{rank}."
-        draw.text(
-            (x + 1, y + 2),
-            rank_text,
-            "white",
-            waves_font_20,
-            "lm"
-        )
-        
+        draw.text((x + 1, y + 2), rank_text, "white", waves_font_20, "lm")
+
         # 属性图标
         attribute_text = char_model.attributeId
         attribute_name = ATTRIBUTE_ID_MAP[attribute_text]
@@ -237,50 +224,25 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         avatar = await draw_pic(char_id)
         avatar = avatar.resize((110, 110))
         img.paste(avatar, (x + 10, y + 10), avatar)
-        
+
         # 链级
-        draw.text(
-            (x + 42, y + 90),
-            f"{chain_level}链",
-            CHAIN_COLOR_LIST[int(chain_level)],
-            waves_font_24,
-            "lm"
-        )
-        
+        draw.text((x + 42, y + 90), f"{chain_level}链", CHAIN_COLOR_LIST[int(chain_level)], waves_font_24, "lm")
+
         # 持有数量
         if not use_rate:
-            draw.text(
-                (x + 110, y + 30),
-                f"{num}人",
-                "white",
-                waves_font_20,
-                "lm"
-            )
+            draw.text((x + 110, y + 30), f"{num}人", "white", waves_font_20, "lm")
 
         # 持有占比
-        draw.text(
-            (x + 90, y + 60),
-            f"总榜{all_rate:.2f}%",
-            "white",
-            waves_font_20,
-            "lm"
-        )
+        draw.text((x + 90, y + 60), f"总榜{all_rate:.2f}%", "white", waves_font_20, "lm")
 
         # 同角色该链持有数量占比
-        draw.text(
-            (x + 90, y + 90),
-            f"同角{rate:.2f}%",
-            "white",
-            waves_font_20,
-            "lm"
-        )
-        
-        
+        draw.text((x + 90, y + 90), f"同角{rate:.2f}%", "white", waves_font_20, "lm")
+
         rank += 1
-    
+
     # 添加页脚
     img = add_footer(img)
-    
+
     # 转换为字节
     return await convert_img(img)
 
@@ -302,12 +264,11 @@ async def draw_pic(roleId):
     return img
 
 
-
 @timed_async_cache(
     expiration=3600,
     condition=lambda x: x,
 )
-async def get_char_hold_rate_data() -> Dict:
+async def get_char_hold_rate_data() -> dict:
     """获取角色持有率数据"""
     try:
         async with httpx.AsyncClient() as client:
@@ -321,7 +282,7 @@ async def get_char_hold_rate_data() -> Dict:
     return {}
 
 
-async def get_group_or_bot_char_hold_rate_data(group_id: str) -> Dict:
+async def get_group_or_bot_char_hold_rate_data(group_id: str) -> dict:
     """获取群组或者bot所有的角色持有率数据"""
     res = {}
 
@@ -429,7 +390,7 @@ async def get_group_or_bot_char_hold_rate_data(group_id: str) -> Dict:
 
 
 # 主入口函数
-async def get_char_chain_hold_rate_img(ev: Event, group_id: str = "") -> Union[bytes, str]:
+async def get_char_chain_hold_rate_img(ev: Event, group_id: str = "") -> bytes | str:
     """获取角色共鸣链持有率图像"""
     if group_id:
         data = await get_group_or_bot_char_hold_rate_data(group_id)

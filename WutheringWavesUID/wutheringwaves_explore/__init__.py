@@ -3,10 +3,10 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.at_help import ruser_id
-from ..utils.waves_api import waves_api
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_103, WAVES_CODE_098
+from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_103
 from ..utils.hint import error_reply
+from ..utils.waves_api import waves_api
 from .draw_explore_card import draw_explore_img
 
 waves_get_explore = SV("waves获取探索度")
@@ -14,9 +14,9 @@ waves_get_explore = SV("waves获取探索度")
 
 @waves_get_explore.on_fullmatch(
     (
-        f"ts",
-        f"探索",
-        f"探索度",
+        "ts",
+        "探索",
+        "探索度",
     )
 )
 async def send_card_info(bot: Bot, ev: Event):

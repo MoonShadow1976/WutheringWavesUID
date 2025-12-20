@@ -1,5 +1,4 @@
 # 丹瑾
-from typing import List, Union
 
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail
@@ -15,9 +14,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage(
-    attr: DamageAttribute, role: RoleDetailData, damage_func, isGroup: bool = False
-):
+def calc_damage(attr: DamageAttribute, role: RoleDetailData, damage_func, isGroup: bool = False):
     role_name = role.role.roleName
     role_id = role.role.roleId
     role_level = role.role.level
@@ -84,7 +81,7 @@ def calc_damage_1(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
-    skill_type: Union[str, List[str]] = "满能缭乱",
+    skill_type: str | list[str] = "满能缭乱",
 ) -> tuple[str, str]:
     """
     满能缭乱伤害
@@ -131,9 +128,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_4(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> tuple[str, str]:
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     绯红绽放
     """
@@ -185,9 +180,7 @@ damage_detail = [
     },
     {
         "title": "满能z尾刀",
-        "func": lambda attr, role: calc_damage_1(
-            attr, role, skill_type=["满能缭乱", "满能纷落"]
-        ),
+        "func": lambda attr, role: calc_damage_1(attr, role, skill_type=["满能缭乱", "满能纷落"]),
     },
     {
         "title": "绯红绽放",

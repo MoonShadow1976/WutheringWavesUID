@@ -1,14 +1,13 @@
 import asyncio
-import random
 from datetime import datetime, timedelta
 from pathlib import Path
-
-from PIL import Image, ImageDraw
-from PIL.ImageFile import ImageFile
+import random
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image, ImageDraw
+from PIL.ImageFile import ImageFile
 
 from ..utils.ascension.char import get_char_id
 from ..utils.ascension.weapon import get_weapon_id
@@ -87,9 +86,7 @@ async def draw_calendar_img(ev: Event, uid: str):
     gacha_char_list = []
     gacha_weapon_list = []
     content = None
-    side_modules = (
-        wiki_home.get("data", {}).get("contentJson", {}).get("sideModules", [])
-    )
+    side_modules = wiki_home.get("data", {}).get("contentJson", {}).get("sideModules", [])
     for side_module in side_modules:
         if side_module["title"] == "角色活动唤取":
             gacha_char_list = await draw_calendar_gacha(side_module, "角色")
@@ -114,14 +111,7 @@ async def draw_calendar_img(ev: Event, uid: str):
     footer_high = 70
 
     content_total_row = 1 + (len(content.content) - 1) // 2 if content else 0
-    total_high = (
-        title_high
-        + banner_high
-        + temp_high
-        + content_total_row * event_high
-        + bar2_high
-        + footer_high
-    )
+    total_high = title_high + banner_high + temp_high + content_total_row * event_high + bar2_high + footer_high
     if gacha_char_list:
         total_high += (char_bar_high + star_fg_high * len(gacha_char_list)) * 2
         total_high += temp_high
@@ -202,9 +192,7 @@ async def draw_calendar_img(ev: Event, uid: str):
 
             # 起止时间
             formatted_date_range = f"{formatted_start} ~ {formatted_end}"
-            event_bg_draw.text(
-                (160, 95), f"{formatted_date_range}", "white", ww_font_20, "lm"
-            )
+            event_bg_draw.text((160, 95), f"{formatted_date_range}", "white", ww_font_20, "lm")
             # 时间小图标
             event_bg.alpha_composite(time_icon, (155, 115))
             # 状态
@@ -225,9 +213,7 @@ async def draw_calendar_img(ev: Event, uid: str):
                 # 进行中
                 total_duration = (end_time - start_time).total_seconds()
                 elapsed_duration = (now - start_time).total_seconds()
-                progress = (
-                    elapsed_duration / total_duration if total_duration > 0 else 0
-                )
+                progress = elapsed_duration / total_duration if total_duration > 0 else 0
                 fill_color = "gold" if color == "white" else color
 
             # 绘制进度条背景
@@ -323,9 +309,7 @@ async def draw_calendar_gacha(side_module, gacha_type):
             pic = pic.resize((180, 180))
             return {"name": name, "id": id, "pic": pic}
 
-        tasks = [
-            process_item(img_item, special_images) for img_item in special_images.imgs
-        ]
+        tasks = [process_item(img_item, special_images) for img_item in special_images.imgs]
         nodes = await asyncio.gather(*tasks, return_exceptions=True)
 
         res["nodes"].extend(filter(None, nodes))
@@ -385,16 +369,12 @@ def draw_gacha(gacha_list, img, _high):
             if len(gacha_name) <= 2:
                 name_bg = Image.new("RGBA", (60, 25), color=(255, 255, 255, 0))
                 rank_draw = ImageDraw.Draw(name_bg)
-                rank_draw.rectangle(
-                    [0, 0, 60, 25], fill=(255, 255, 255) + (int(0.9 * 255),)
-                )
+                rank_draw.rectangle([0, 0, 60, 25], fill=(255, 255, 255) + (int(0.9 * 255),))
                 rank_draw.text((30, 12), f"{gacha_name}", "black", ww_font_20, "mm")
             else:
                 name_bg = Image.new("RGBA", (80, 25), color=(255, 255, 255, 0))
                 rank_draw = ImageDraw.Draw(name_bg)
-                rank_draw.rectangle(
-                    [0, 0, 80, 25], fill=(255, 255, 255) + (int(0.9 * 255),)
-                )
+                rank_draw.rectangle([0, 0, 80, 25], fill=(255, 255, 255) + (int(0.9 * 255),))
                 rank_draw.text((40, 12), f"{gacha_name}", "black", ww_font_20, "mm")
 
             gacha_bg.paste(star_bg_temp, (80 + j * 260, 0))

@@ -1,28 +1,27 @@
-import copy
-import textwrap
-from pathlib import Path
 from collections import defaultdict
+import copy
+from pathlib import Path
+import textwrap
+
+from gsuid_core.logger import logger
+from gsuid_core.utils.image.convert import convert_img
 from PIL import Image, ImageDraw
 
-from gsuid_core.utils.image.convert import convert_img
-from gsuid_core.logger import logger
-
-from ..wutheringwaves_config import PREFIX
+from ..utils.ascension.echo import echo_id_data, set_name_to_echo_ids
 from ..utils.ascension.sonata import sonata_id_data
 from ..utils.ascension.weapon import weapon_id_data
-from ..utils.ascension.echo import echo_id_data, set_name_to_echo_ids
+from ..utils.fonts.waves_fonts import waves_font_16, waves_font_18, waves_font_24
+from ..utils.image import (
+    SPECIAL_GOLD,
+    add_footer,
+    get_attribute_effect,
+    get_square_weapon,
+    get_waves_bg,
+)
 from ..utils.name_convert import alias_to_sonata_name
 from ..utils.resource.constant import get_short_name
 from ..utils.resource.download_file import get_phantom_img
-from ..utils.fonts.waves_fonts import waves_font_24, waves_font_18, waves_font_16
-from ..utils.image import (
-    SPECIAL_GOLD, 
-    get_waves_bg, 
-    add_footer, 
-    get_attribute_effect, 
-    get_square_weapon,
-)
-
+from ..wutheringwaves_config import PREFIX
 
 TEXT_PATH = Path(__file__).parent.parent / "wutheringwaves_develop" / "texture2d"
 star_1 = Image.open(TEXT_PATH / "star-1.png")
@@ -72,21 +71,13 @@ async def draw_weapon_list(weapon_type: str):
         # 如果找到目标类型，只收集该类型武器
         if target_type is not None:
             if w_type == target_type:
-                weapon_groups[w_type].append({
-                    "id": weapon_id,
-                    "name": name,
-                    "star_level": star_level,
-                    "effect_name": effect_name
-                })
+                weapon_groups[w_type].append(
+                    {"id": weapon_id, "name": name, "star_level": star_level, "effect_name": effect_name}
+                )
         # 否则收集所有武器
         else:
-            weapon_groups[w_type].append({
-                "id": weapon_id,
-                "name": name,
-                "star_level": star_level,
-                "effect_name": effect_name
-            })
-    
+            weapon_groups[w_type].append({"id": weapon_id, "name": name, "star_level": star_level, "effect_name": effect_name})
+
     # 按类型从小到大排序
     sorted_groups = sorted(weapon_groups.items(), key=lambda x: x[0])
 
@@ -105,8 +96,8 @@ async def draw_weapon_list(weapon_type: str):
     # 绘制标题
     title = "武器一览"
     draw.text((int(width / 2), 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt")
-    draw.text((int(width / 2), 63),f"使用【{PREFIX}'武器名'图鉴】查询具体介绍",font=waves_font_16, fill="#AAAAAA", anchor="mt")
-    
+    draw.text((int(width / 2), 63), f"使用【{PREFIX}'武器名'图鉴】查询具体介绍", font=waves_font_16, fill="#AAAAAA", anchor="mt")
+
     # 当前绘制位置
     y_offset = 80
 
@@ -268,9 +259,7 @@ async def draw_sonata_list():
 
                 # 绘制所有套装效果
                 current_height = current_y + name_height
-                for set_num, effect in sorted(
-                    sonata["set"].items(), key=lambda x: int(x[0])
-                ):
+                for set_num, effect in sorted(sonata["set"].items(), key=lambda x: int(x[0])):
                     # 绘制件数标签
                     draw.text(
                         (col_info["text_x"], current_height),
@@ -340,11 +329,13 @@ async def draw_echo_list(sonata_type: str):
                 if "异相" in name:
                     continue  # 排除异相声骸
 
-                echoes.append({
-                    "id": echo_id,
-                    "name": name,
-                    "intensity_code": intensity_code,
-                })
+                echoes.append(
+                    {
+                        "id": echo_id,
+                        "name": name,
+                        "intensity_code": intensity_code,
+                    }
+                )
     else:
         # 如果没有指定套装，显示所有声骸
         for echo_str_id, data in echo_id_data.items():
@@ -356,20 +347,22 @@ async def draw_echo_list(sonata_type: str):
             if "异相" in name:
                 continue  # 排除异相声骸
 
-            echoes.append({
-                "id": echo_id,
-                "name": name,
-                "intensity_code": intensity_code,
-            })
+            echoes.append(
+                {
+                    "id": echo_id,
+                    "name": name,
+                    "intensity_code": intensity_code,
+                }
+            )
 
     # 按intensity_code降序排序（值越大越稀有），相同intensity_code时按名称升序
     echoes.sort(key=lambda x: (-x["intensity_code"], x["id"]))
-    
+
     # 按intensity_code分组
     grouped_echoes = defaultdict(list)
     for echo in echoes:
         grouped_echoes[echo["intensity_code"]].append(echo)
-    
+
     # 按intensity_code降序排序分组
     sorted_groups = sorted(grouped_echoes.items(), key=lambda x: -x[0])
 
@@ -388,7 +381,7 @@ async def draw_echo_list(sonata_type: str):
         horizontal_spacing = 115
         # 计算图片宽度（10列布局）
         width = horizontal_spacing * (echoes_per_row - 1) + icon_size + 80
-    
+
     # 创建一个足够高的临时图片，最后再裁剪
     img = get_waves_bg(width, 4000, "bg5")
     draw = ImageDraw.Draw(img)
@@ -401,9 +394,7 @@ async def draw_echo_list(sonata_type: str):
         title = "声骸列表一览"
         subtitle = f"使用【{PREFIX}'套装名'声骸列表】查询指定套装声骸"
 
-    draw.text(
-        (int(width / 2), 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt"
-    )
+    draw.text((int(width / 2), 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt")
     draw.text(
         (int(width / 2), 63),
         subtitle,
@@ -421,12 +412,15 @@ async def draw_echo_list(sonata_type: str):
 
     # 按稀有度分组绘制
     for intensity_code, echoes_in_group in sorted_groups:
-        
         # 绘制稀有度标题
         intensity_color = (
             "#FFD700"
             if intensity_code >= 3
-            else "#4169E1" if intensity_code == 2 else "#32CD32" if intensity_code == 1 else "#C0C0C0"
+            else "#4169E1"
+            if intensity_code == 2
+            else "#32CD32"
+            if intensity_code == 1
+            else "#C0C0C0"
         )
         draw.text(
             (50, y_offset),
@@ -459,7 +453,7 @@ async def draw_echo_list(sonata_type: str):
                 # 获取声骸图标
                 echo_icon = await get_phantom_img(echo["id"], "")
                 echo_icon = echo_icon.resize((icon_size, icon_size))
-                
+
                 # 合并图标
                 img.alpha_composite(echo_icon, (x_pos, row_y))
 
@@ -480,7 +474,7 @@ async def draw_echo_list(sonata_type: str):
 
             # 移动到下一行
             y_offset += row_height
-        
+
         # 组间增加间距
         y_offset += 10
 

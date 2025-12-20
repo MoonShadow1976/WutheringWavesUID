@@ -1,5 +1,3 @@
-from typing import Dict
-
 from gsuid_core.utils.plugins_config.models import (
     GSC,
     GsBoolConfig,
@@ -10,7 +8,7 @@ from gsuid_core.utils.plugins_config.models import (
     GsStrConfig,
 )
 
-CONFIG_DEFAULT: Dict[str, GSC] = {
+CONFIG_DEFAULT: dict[str, GSC] = {
     "WavesAnnGroups": GsDictConfig(
         "推送公告群组",
         "鸣潮公告推送群组",
@@ -26,15 +24,9 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "公告推送总开关",
         True,
     ),
-    "StaminaPush": GsBoolConfig(
-        "体力推送全局开关", "开启后当体力达到推送阈值将会推送", False
-    ),
-    "StaminaPushInterval": GsIntConfig(
-        "体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）,不会请求更新推送时间", 30, 60
-    ),
-    "CrazyNotice": GsBoolConfig(
-        "催命模式", "开启后当达到推送阈值将会一直推送", False
-    ),
+    "StaminaPush": GsBoolConfig("体力推送全局开关", "开启后当体力达到推送阈值将会推送", False),
+    "StaminaPushInterval": GsIntConfig("体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）,不会请求更新推送时间", 30, 60),
+    "CrazyNotice": GsBoolConfig("催命模式", "开启后当达到推送阈值将会一直推送", False),
     "StaminaRemindInterval": GsIntConfig(
         "体力提醒超时延长间隔（分钟）", "当前提醒时间之后将延长所填时间再提醒一次,会请求更新推送时间", 60, 1440
     ),
@@ -108,9 +100,7 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "每天定时删除无效token",
         False,
     ),
-    "AnnMinuteCheck": GsIntConfig(
-        "公告推送时间检测（单位min）", "公告推送时间检测（单位min）", 10, 60
-    ),
+    "AnnMinuteCheck": GsIntConfig("公告推送时间检测（单位min）", "公告推送时间检测（单位min）", 10, 60),
     "RefreshIntervalOne": GsIntConfig(
         "刷新单角色面板间隔，重启生效（单位秒）",
         "刷新单角色面板间隔，重启生效（单位秒）",
@@ -148,9 +138,7 @@ CONFIG_DEFAULT: Dict[str, GSC] = {
         "是否可以使用uid直接查询练度",
         True,
     ),
-    "MaxBindNum": GsIntConfig(
-        "绑定特征码限制数量（未登录）", "绑定特征码限制数量（未登录）", 2, 100
-    ),
+    "MaxBindNum": GsIntConfig("绑定特征码限制数量（未登录）", "绑定特征码限制数量（未登录）", 2, 100),
     "OCRspaceApiKeyList": GsListStrConfig(
         "OCRspace API Key List",
         "用于ocr识别discord_bot角色卡片",

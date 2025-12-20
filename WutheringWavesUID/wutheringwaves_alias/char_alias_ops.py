@@ -1,5 +1,4 @@
 import json
-from typing import Dict, List
 
 from gsuid_core.bot import msgjson
 
@@ -16,8 +15,8 @@ class CharAliasOps:
         self.load_custom_data()
 
     def load_custom_data(self):
-        with open(CUSTOM_CHAR_ALIAS_PATH, "r", encoding="UTF-8") as f:
-            self.custom_data = msgjson.decode(f.read(), type=Dict[str, List[str]])
+        with open(CUSTOM_CHAR_ALIAS_PATH, encoding="UTF-8") as f:
+            self.custom_data = msgjson.decode(f.read(), type=dict[str, list[str]])
 
     def save_custom_data(self):
         with open(CUSTOM_CHAR_ALIAS_PATH, "w", encoding="UTF-8") as f:

@@ -5,11 +5,11 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.button import WavesButton
+from ..wutheringwaves_config import WutheringWavesConfig
+from .draw_char_chain_hold_rate import get_char_chain_hold_rate_img
 from .draw_char_hold_rate import get_char_hold_rate_img
 from .draw_slash_appear_rate import draw_slash_use_rate
 from .draw_tower_appear_rate import draw_tower_use_rate
-from ..wutheringwaves_config import WutheringWavesConfig
-from .draw_char_chain_hold_rate import get_char_chain_hold_rate_img
 
 sv_char_hold_rate = SV("waves角色持有率")
 sv_char_chain_hold_rate = SV("waves角色共鸣链持有率")
@@ -43,7 +43,7 @@ async def handle_char_hold_rate(bot: Bot, ev: Event):
         img = await get_char_hold_rate_img(ev, "bot")
     else:
         img = await get_char_hold_rate_img(ev)
-    buttons: List[Any] = [
+    buttons: list[Any] = [
         WavesButton("UP持有率", "角色持有率UP"),
         WavesButton("持有率", "角色持有率"),
         WavesButton("持有率4星", "角色持有率4"),
@@ -56,9 +56,18 @@ async def handle_char_hold_rate(bot: Bot, ev: Event):
 # 角色持有率指令
 @sv_char_chain_hold_rate.on_command(
     (
-        "角色共鸣链持有率", "共鸣链持有率", "链持有率", "链率",
-        "群角色共鸣链持有率", "群共鸣链持有率", "群链持有率", "群链率",
-        "bot角色共鸣链持有率", "bot共鸣链持有率", "bot链持有率", "bot链率",
+        "角色共鸣链持有率",
+        "共鸣链持有率",
+        "链持有率",
+        "链率",
+        "群角色共鸣链持有率",
+        "群共鸣链持有率",
+        "群链持有率",
+        "群链率",
+        "bot角色共鸣链持有率",
+        "bot共鸣链持有率",
+        "bot链持有率",
+        "bot链率",
     )
 )
 async def handle_char_chain_hold_rate(bot: Bot, ev: Event):
@@ -88,7 +97,7 @@ async def handle_char_chain_hold_rate(bot: Bot, ev: Event):
 )
 async def handle_tower_appear_rate(bot: Bot, ev: Event):
     img = await draw_tower_use_rate(ev)
-    buttons: List[Any] = [
+    buttons: list[Any] = [
         WavesButton("深塔出场率", "深塔使用率"),
         WavesButton("左4出场率", "深塔出场率左"),
         WavesButton("右4出场率", "深塔出场率右"),
@@ -123,7 +132,7 @@ async def handle_tower_appear_rate(bot: Bot, ev: Event):
 )
 async def handle_slash_appear_rate(bot: Bot, ev: Event):
     img = await draw_slash_use_rate(ev)
-    buttons: List[Any] = [
+    buttons: list[Any] = [
         WavesButton("总出场率", "冥海出场率"),
         WavesButton("总使用率", "冥海总使用率"),
         WavesButton("上半出场率", "冥海出场率上半"),

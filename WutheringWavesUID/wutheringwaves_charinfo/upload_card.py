@@ -1,19 +1,17 @@
 import asyncio
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
+import os
 import shutil
 import ssl
 import time
-import os
-from typing import List, Optional
-from concurrent.futures import ThreadPoolExecutor, as_completed
-
-import httpx
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.download_resource.download_file import download
 from gsuid_core.utils.image.convert import convert_img
+import httpx
 
 from ..utils.image import compress_to_webp
 from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
@@ -25,7 +23,7 @@ def get_hash_id(name):
     return hashlib.sha256(name.encode()).hexdigest()[:8]
 
 
-def get_char_id_and_name(char: str) -> tuple[Optional[str], str, str]:
+def get_char_id_and_name(char: str) -> tuple[str | None, str, str]:
     char_id = None
     msg = f"[鸣潮] 角色名【{char}】无法找到, 可能暂未适配, 请先检查输入是否正确！\n"
     sex = ""
@@ -53,22 +51,12 @@ def get_char_id_and_name(char: str) -> tuple[Optional[str], str, str]:
     return char_id, char, ""
 
 
-async def get_image(ev: Event) -> Optional[List[str]]:
+async def get_image(ev: Event) -> list[str] | None:
     res = []
     for content in ev.content:
-        if (
-            content.type == "img"
-            and content.data
-            and isinstance(content.data, str)
-            and content.data.startswith("http")
-        ):
+        if content.type == "img" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
             res.append(content.data)
-        elif (
-            content.type == "image"
-            and content.data
-            and isinstance(content.data, str)
-            and content.data.startswith("http")
-        ):
+        elif content.type == "image" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
             res.append(content.data)
         elif (
             content.type == "image"
@@ -78,12 +66,7 @@ async def get_image(ev: Event) -> Optional[List[str]]:
             and content.data["url"].startswith("http")
         ):  # discord attachment 类
             res.append(content.data["url"])
-        elif (
-            content.type == "text"
-            and content.data
-            and isinstance(content.data, str)
-            and content.data.startswith("http")
-        ):
+        elif content.type == "text" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
             res.append(content.data)
 
     if not res and ev.image:
@@ -97,9 +80,7 @@ async def upload_custom_card(bot: Bot, ev: Event, char: str):
 
     upload_images = await get_image(ev)
     if not upload_images:
-        return await bot.send(
-            "[鸣潮] 上传角色面板图失败\n请同时发送图片及其命令\n", at_sender
-        )
+        return await bot.send("[鸣潮] 上传角色面板图失败\n请同时发送图片及其命令\n", at_sender)
 
     char_id, char, msg = get_char_id_and_name(char)
     if msg:
@@ -148,11 +129,7 @@ async def get_custom_card_list(bot: Bot, ev: Event, char: str):
         return await bot.send(f"[鸣潮] 角色【{char}】暂未上传过面板图！\n", at_sender)
 
     # 获取角色文件夹图片数量, 只要图片
-    files = [
-        f
-        for f in temp_dir.iterdir()
-        if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]
-    ]
+    files = [f for f in temp_dir.iterdir() if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]]
 
     imgs = []
     for index, f in enumerate(files, start=1):
@@ -179,22 +156,16 @@ async def delete_custom_card(bot: Bot, ev: Event, char: str, hash_id: str):
         return await bot.send(f"[鸣潮] 角色【{char}】暂未上传过面板图！\n", at_sender)
 
     files_map = {
-        get_hash_id(f.name): f
-        for f in temp_dir.iterdir()
-        if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]
+        get_hash_id(f.name): f for f in temp_dir.iterdir() if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]
     }
 
     if hash_id not in files_map:
-        return await bot.send(
-            f"[鸣潮] 角色【{char}】未找到id为【{hash_id}】的面板图！\n", at_sender
-        )
+        return await bot.send(f"[鸣潮] 角色【{char}】未找到id为【{hash_id}】的面板图！\n", at_sender)
 
     # 删除文件
     try:
         files_map[hash_id].unlink()
-        return await bot.send(
-            f"[鸣潮] 删除角色【{char}】的id为【{hash_id}】的面板图成功！\n", at_sender
-        )
+        return await bot.send(f"[鸣潮] 删除角色【{char}】的id为【{hash_id}】的面板图成功！\n", at_sender)
     except Exception:
         return
 
@@ -210,9 +181,7 @@ async def delete_all_custom_card(bot: Bot, ev: Event, char: str):
         return await bot.send(f"[鸣潮] 角色【{char}】暂未上传过面板图！\n", at_sender)
 
     files_map = {
-        get_hash_id(f.name): f
-        for f in temp_dir.iterdir()
-        if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]
+        get_hash_id(f.name): f for f in temp_dir.iterdir() if f.is_file() and f.suffix in [".jpg", ".png", ".jpeg", ".webp"]
     }
 
     if len(files_map) == 0:
@@ -230,9 +199,9 @@ async def delete_all_custom_card(bot: Bot, ev: Event, char: str):
 
 async def compress_all_custom_card(bot: Bot, ev: Event):
     count = 0
-    use_cores = max(os.cpu_count() - 2, 1) # 避免2c服务器卡死
+    use_cores = max(os.cpu_count() - 2, 1)  # 避免2c服务器卡死
     await bot.send(f"[鸣潮] 开始压缩面板图, 使用 {use_cores} 核心")
-    
+
     task_list = []
     for char_id_path in CUSTOM_CARD_PATH.iterdir():
         if not char_id_path.is_dir():
@@ -242,7 +211,7 @@ async def compress_all_custom_card(bot: Bot, ev: Event):
                 continue
             if img_path.suffix.lower() in [".jpg", ".png", ".jpeg"]:
                 task_list.append((img_path, 80, True))
-                
+
     with ThreadPoolExecutor(max_workers=use_cores) as executor:
         future_to_file = {executor.submit(compress_to_webp, *task): task for task in task_list}
 
@@ -252,7 +221,7 @@ async def compress_all_custom_card(bot: Bot, ev: Event):
                 success, _ = future.result()
                 if success:
                     count += 1
-                
+
             except Exception as exc:
                 print(f"Error processing {file_info[0]}: {exc}")
 

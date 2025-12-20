@@ -1,14 +1,14 @@
+from pathlib import Path
 import tempfile
 import time
-from pathlib import Path
+
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
 from ..wutheringwaves_config import PREFIX
-
-from .pcap_parser import PcapDataParser
 from .pcap_api import pcap_api
+from .pcap_parser import PcapDataParser
 
 
 class PcapFileHandler:
@@ -26,31 +26,29 @@ class PcapFileHandler:
         file_name = ev.file_name
 
         # 檢查文件格式
-        if not file_name or not file_name.lower().endswith(('.pcap')):
+        if not file_name or not file_name.lower().endswith(".pcap"):
             return "文件格式错误，请上传 .pcap 文件\n"
 
-         # 檢查文件大小 (通过 Base64 字符串长度估算)
+        # 檢查文件大小 (通过 Base64 字符串长度估算)
         base64_data = file
-        estimated_size = (len(base64_data) * 3) / 4 - base64_data.count('=', -2)  # 估算实际文件大小
-        
+        estimated_size = (len(base64_data) * 3) / 4 - base64_data.count("=", -2)  # 估算实际文件大小
+
         if estimated_size > 50 * 1024 * 1024:  # 50MB
             return "文件过大，请上传小于 50MB 的文件\n"
 
-
         try:
             # 创建临时文件
-            with tempfile.NamedTemporaryFile(
-                suffix=Path(file_name).suffix, delete=False
-            ) as temp_file:
+            with tempfile.NamedTemporaryFile(suffix=Path(file_name).suffix, delete=False) as temp_file:
                 temp_path = Path(temp_file.name)
 
             # 下載文件
             try:
                 import base64
+
                 # 移除可能的数据URI前缀（如果有的话）
-                if ',' in base64_data:
-                    base64_data = base64_data.split(',', 1)[1]
-                    
+                if "," in base64_data:
+                    base64_data = base64_data.split(",", 1)[1]
+
                 file_content = base64.b64decode(base64_data)
                 temp_path.write_bytes(file_content)
             except Exception as e:
@@ -67,14 +65,14 @@ class PcapFileHandler:
                 return "解析失败：API 返回空结果\n"
 
             # 檢查結果是否包含錯誤信息
-            if isinstance(result, dict) and result.get('error'):
+            if isinstance(result, dict) and result.get("error"):
                 return f"解析失败：{result.get('error', '未知错误')}\n"
 
             # 檢查結果是否包含數據
-            if not isinstance(result, dict) or 'data' not in result:
+            if not isinstance(result, dict) or "data" not in result:
                 return "解析失败：API 没有返回数据\n"
 
-            if result.get('data') is None:
+            if result.get("data") is None:
                 return "解析失败：返回数据为空\n"
 
             # 解析數據
@@ -123,4 +121,3 @@ class PcapFileHandler:
                 logger.warning(f"刪除臨時文件時發生錯誤: {e}")
                 return False
         return False
-

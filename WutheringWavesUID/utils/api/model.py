@@ -1,7 +1,7 @@
-from typing import Dict, List, Union, Literal, Optional
+from typing import Literal
 
 from msgspec import UNSET, Struct, UnsetType, field
-from pydantic import Field, BaseModel, RootModel, model_validator
+from pydantic import BaseModel, Field, RootModel, model_validator
 
 
 class GeneralGeetestData(Struct):
@@ -13,7 +13,7 @@ class GeneralGeetestData(Struct):
 class GeneralV1SendPhoneCodeRequest(Struct):
     phone: str
     type: int
-    captcha: Union[GeneralGeetestData, UnsetType] = field(default=UNSET)
+    captcha: GeneralGeetestData | UnsetType = field(default=UNSET)
 
 
 class EnergyData(BaseModel):
@@ -55,29 +55,29 @@ class DailyData(BaseModel):
     hasSignIn: bool
     energyData: EnergyData
     livenessData: LivenessData
-    battlePassData: List[BattlePassData]
+    battlePassData: list[BattlePassData]
 
 
 class Role(BaseModel):
     roleId: int
     level: int
-    breach: Optional[int] = None
+    breach: int | None = None
     roleName: str
-    roleIconUrl: Optional[str]
-    rolePicUrl: Optional[str]
+    roleIconUrl: str | None
+    rolePicUrl: str | None
     starLevel: int
     attributeId: int
-    attributeName: Optional[str]
+    attributeName: str | None
     weaponTypeId: int
-    weaponTypeName: Optional[str]
+    weaponTypeName: str | None
     acronym: str
-    chainUnlockNum: Optional[int] = None
+    chainUnlockNum: int | None = None
     # mapRoleId: int | None
 
 
 class RoleList(BaseModel):
-    roleList: List[Role]
-    showRoleIdList: Optional[List[int]] = None
+    roleList: list[Role]
+    showRoleIdList: list[int] | None = None
     showToGuest: bool
 
 
@@ -96,24 +96,24 @@ class AccountBaseInfo(BaseModel):
 
     name: str  # 名字
     id: int  # 特征码
-    creatTime: Optional[int] = None  # 创建时间 ms
-    activeDays: Optional[int] = None  # 活跃天数
-    level: Optional[int] = None  # 等级
-    worldLevel: Optional[int] = None  # 世界等级
-    roleNum: Optional[int] = None  # 角色数量
-    bigCount: Optional[int] = None  # 大型信标解锁数
-    smallCount: Optional[int] = None  # 小型信标解锁数
-    achievementCount: Optional[int] = None  # 成就数量
-    achievementStar: Optional[int] = None  # 成就星数
-    boxList: Optional[List[Optional[Box]]] = None  # 宝箱
-    treasureBoxList: Optional[List[Optional[Box2]]] = None  # 宝箱
-    tidalHeritagesList: Optional[List[Optional[Box2]]] = None  # 潮汐之遗
-    weeklyInstCount: Optional[int] = None  # 周本次数
-    weeklyInstCountLimit: Optional[int] = None  # 周本限制次数
-    storeEnergy: Optional[int] = None  # 结晶单质数量
-    storeEnergyLimit: Optional[int] = None  # 结晶单质限制
-    rougeScore: Optional[int] = None  # 千道门扉的异想
-    rougeScoreLimit: Optional[int] = None  # 千道门扉的异想限制
+    creatTime: int | None = None  # 创建时间 ms
+    activeDays: int | None = None  # 活跃天数
+    level: int | None = None  # 等级
+    worldLevel: int | None = None  # 世界等级
+    roleNum: int | None = None  # 角色数量
+    bigCount: int | None = None  # 大型信标解锁数
+    smallCount: int | None = None  # 小型信标解锁数
+    achievementCount: int | None = None  # 成就数量
+    achievementStar: int | None = None  # 成就星数
+    boxList: list[Box | None] | None = None  # 宝箱
+    treasureBoxList: list[Box2 | None] | None = None  # 宝箱
+    tidalHeritagesList: list[Box2 | None] | None = None  # 潮汐之遗
+    weeklyInstCount: int | None = None  # 周本次数
+    weeklyInstCountLimit: int | None = None  # 周本限制次数
+    storeEnergy: int | None = None  # 结晶单质数量
+    storeEnergyLimit: int | None = None  # 结晶单质限制
+    rougeScore: int | None = None  # 千道门扉的异想
+    rougeScoreLimit: int | None = None  # 千道门扉的异想限制
 
     @property
     def is_full(self):
@@ -122,10 +122,10 @@ class AccountBaseInfo(BaseModel):
 
 
 class Chain(BaseModel):
-    name: Optional[str]
+    name: str | None
     order: int
-    description: Optional[str]
-    iconUrl: Optional[str]
+    description: str | None
+    iconUrl: str | None
     unlocked: bool
 
 
@@ -134,16 +134,16 @@ class Weapon(BaseModel):
     weaponName: str
     weaponType: int
     weaponStarLevel: int
-    weaponIcon: Optional[str]
-    weaponEffectName: Optional[str]
+    weaponIcon: str | None
+    weaponEffectName: str | None
     # effectDescription: Optional[str]
 
 
 class WeaponData(BaseModel):
     weapon: Weapon
     level: int
-    breach: Optional[int] = None
-    resonLevel: Optional[int]
+    breach: int | None = None
+    resonLevel: int | None
 
 
 class PhantomProp(BaseModel):
@@ -153,21 +153,21 @@ class PhantomProp(BaseModel):
     quality: int
     cost: int
     iconUrl: str
-    skillDescription: Optional[str]
+    skillDescription: str | None
 
 
 class FetterDetail(BaseModel):
     groupId: int
     name: str
-    iconUrl: Optional[str]
+    iconUrl: str | None
     num: int
-    firstDescription: Optional[str]
-    secondDescription: Optional[str]
+    firstDescription: str | None
+    secondDescription: str | None
 
 
 class Props(BaseModel):
     attributeName: str
-    iconUrl: Optional[str] = None
+    iconUrl: str | None = None
     attributeValue: str
 
 
@@ -177,8 +177,8 @@ class EquipPhantom(BaseModel):
     quality: int
     level: int
     fetterDetail: FetterDetail
-    mainProps: Optional[List[Props]] = None
-    subProps: Optional[List[Props]] = None
+    mainProps: list[Props] | None = None
+    subProps: list[Props] | None = None
 
     def get_props(self):
         props = []
@@ -192,7 +192,7 @@ class EquipPhantom(BaseModel):
 
 class EquipPhantomData(BaseModel):
     cost: int
-    equipPhantomList: Union[List[Optional[EquipPhantom]], None, List[None]] = None
+    equipPhantomList: list[EquipPhantom | None] | None | list[None] = None
 
 
 class Skill(BaseModel):
@@ -211,10 +211,10 @@ class SkillData(BaseModel):
 class RoleDetailData(BaseModel):
     role: Role
     level: int
-    chainList: List[Chain]
+    chainList: list[Chain]
     weaponData: WeaponData
-    phantomData: Optional[EquipPhantomData] = None
-    skillList: List[SkillData]
+    phantomData: EquipPhantomData | None = None
+    skillList: list[SkillData]
 
     def get_chain_num(self):
         """获取命座数量"""
@@ -233,9 +233,7 @@ class RoleDetailData(BaseModel):
         skill_type: Literal["常态攻击", "共鸣技能", "共鸣解放", "变奏技能", "共鸣回路"],
     ):
         skill_level = 1
-        _skill = next(
-            (skill for skill in self.skillList if skill.skill.type == skill_type), None
-        )
+        _skill = next((skill for skill in self.skillList if skill.skill.type == skill_type), None)
         if _skill:
             skill_level = _skill.level - 1
         return skill_level
@@ -248,13 +246,13 @@ class RoleDetailData(BaseModel):
 class CalabashData(BaseModel):
     """数据坞"""
 
-    level: Optional[int]  # 数据坞等级
-    baseCatch: Optional[str]  # 基础吸收概率
-    strengthenCatch: Optional[str]  # 强化吸收概率
-    catchQuality: Optional[int]  # 最高可吸收品质
-    cost: Optional[int]  # cost上限
-    maxCount: Optional[int]  # 声骸收集进度-max
-    unlockCount: Optional[int]  # 声骸收集进度-curr
+    level: int | None  # 数据坞等级
+    baseCatch: str | None  # 基础吸收概率
+    strengthenCatch: str | None  # 强化吸收概率
+    catchQuality: int | None  # 最高可吸收品质
+    cost: int | None  # cost上限
+    maxCount: int | None  # 声骸收集进度-max
+    unlockCount: int | None  # 声骸收集进度-curr
     isUnlock: bool  # 解锁
 
 
@@ -302,7 +300,7 @@ class GachaLog(BaseModel):
 # 定义角色模型
 class AbyssRole(BaseModel):
     roleId: int
-    iconUrl: Optional[str] = None
+    iconUrl: str | None = None
 
 
 # 定义楼层模型
@@ -310,7 +308,7 @@ class AbyssFloor(BaseModel):
     floor: int
     picUrl: str
     star: int
-    roleList: Optional[List[AbyssRole]] = None
+    roleList: list[AbyssRole] | None = None
 
 
 # 定义区域模型
@@ -319,21 +317,21 @@ class AbyssArea(BaseModel):
     areaName: str
     star: int
     maxStar: int
-    floorList: Optional[List[AbyssFloor]] = None
+    floorList: list[AbyssFloor] | None = None
 
 
 # 定义难度模型
 class AbyssDifficulty(BaseModel):
     difficulty: int
     difficultyName: str
-    towerAreaList: List[AbyssArea]
+    towerAreaList: list[AbyssArea]
 
 
 # 定义顶层模型
 class AbyssChallenge(BaseModel):
     isUnlock: bool
-    seasonEndTime: Optional[int]
-    difficultyList: Optional[List[AbyssDifficulty]]
+    seasonEndTime: int | None
+    difficultyList: list[AbyssDifficulty] | None
 
 
 class ChallengeRole(BaseModel):
@@ -350,11 +348,11 @@ class Challenge(BaseModel):
     bossName: str
     passTime: int
     difficulty: int
-    roles: Optional[List[ChallengeRole]] = None
+    roles: list[ChallengeRole] | None = None
 
 
 class ChallengeArea(BaseModel):
-    challengeInfo: Dict[str, List[Challenge]]
+    challengeInfo: dict[str, list[Challenge]]
     open: bool = False
     isUnlock: bool = False
 
@@ -389,7 +387,7 @@ class AreaInfo(BaseModel):
     areaId: int
     areaName: str
     areaProgress: int
-    itemList: List[ExploreItem]
+    itemList: list[ExploreItem]
 
 
 class ExploreCountry(BaseModel):
@@ -402,7 +400,7 @@ class ExploreCountry(BaseModel):
 
 
 class ExploreArea(BaseModel):
-    areaInfoList: Union[List[AreaInfo], None] = None
+    areaInfoList: list[AreaInfo] | None = None
     country: ExploreCountry
     countryProgress: str
 
@@ -410,7 +408,7 @@ class ExploreArea(BaseModel):
 class ExploreList(BaseModel):
     """探索度"""
 
-    exploreList: Union[List[ExploreArea], None] = None
+    exploreList: list[ExploreArea] | None = None
     open: bool
 
 
@@ -440,7 +438,7 @@ class OnlineWeapon(BaseModel):
     acronym: str
 
 
-class OnlineWeaponList(RootModel[List[OnlineWeapon]]):
+class OnlineWeaponList(RootModel[list[OnlineWeapon]]):
     def __iter__(self):
         return iter(self.root)
 
@@ -448,19 +446,19 @@ class OnlineWeaponList(RootModel[List[OnlineWeapon]]):
 class OnlineRole(BaseModel):
     """
     {
-        'roleId': 1608, 
-        'roleName': '弗洛洛', 
-        'roleIconUrl': 'https://web-static.kurobbs.com/adminConfig/98/role_icon/1753068445260.png', 
-        'starLevel': 5, 
-        'attributeId': 6, 
-        'weaponTypeId': 5, 
-        'weaponTypeName': '音感仪', 
-        'acronym': 'fll', 
-        'isPreview': False, 
-        'isNew': False, 
-        'priority': 285, 
-        'rolePicture': 'https://web-static.kurobbs.com/adminConfig/98/rolePicture/', 
-        'rolePictureSmall': 'https://web-static.kurobbs.com/adminConfig/98/rolePictureSmall/', 
+        'roleId': 1608,
+        'roleName': '弗洛洛',
+        'roleIconUrl': 'https://web-static.kurobbs.com/adminConfig/98/role_icon/1753068445260.png',
+        'starLevel': 5,
+        'attributeId': 6,
+        'weaponTypeId': 5,
+        'weaponTypeName': '音感仪',
+        'acronym': 'fll',
+        'isPreview': False,
+        'isNew': False,
+        'priority': 285,
+        'rolePicture': 'https://web-static.kurobbs.com/adminConfig/98/rolePicture/',
+        'rolePictureSmall': 'https://web-static.kurobbs.com/adminConfig/98/rolePictureSmall/',
         'commonSkillList': [{'type': '常态攻击', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085716584.png', 'recommend': False}, {'type': '共鸣技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085063395.png', 'recommend': False}, {'type': '共鸣解放', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085554763.png', 'recommend': False}, {'type': '变奏技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085560200.png', 'recommend': False}, {'type': '共鸣回路', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085704555.png', 'recommend': False}, {'type': '延奏技能', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/36/role_skill_icon/1753085353417.png', 'recommend': False}], 'advanceSkillList': [{'location': '2-1', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068073796.png'}, {'location': '2-2', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068161957.png'}, {'location': '2-3', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068592556.png'}, {'location': '2-4', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753067972012.png'}, {'location': '2-5', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068637999.png'}, {'location': '3-1', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068562194.png'}, {'location': '3-2', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753067862690.png'}, {'location': '3-3', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068670842.png'}, {'location': '3-4', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068186045.png'}, {'location': '3-5', 'iconUrl': 'https://web-static.kurobbs.com/adminConfig/99/advance_skill_icon/1753068673636.png'}]
     }
     """
@@ -470,7 +468,7 @@ class OnlineRole(BaseModel):
     roleIconUrl: str
     starLevel: int
     attributeId: int
-    attributeName: Optional[str] = None
+    attributeName: str | None = None
     weaponTypeId: int
     weaponTypeName: str
     acronym: str
@@ -479,7 +477,7 @@ class OnlineRole(BaseModel):
     priority: int
 
 
-class OnlineRoleList(RootModel[List[OnlineRole]]):
+class OnlineRoleList(RootModel[list[OnlineRole]]):
     def __iter__(self):
         return iter(self.root)
 
@@ -512,12 +510,12 @@ class OnlinePhantom(BaseModel):
     acronym: str
 
 
-class OnlinePhantomList(RootModel[List[OnlinePhantom]]):
+class OnlinePhantomList(RootModel[list[OnlinePhantom]]):
     def __iter__(self):
         return iter(self.root)
 
 
-class OwnedRoleList(RootModel[List[int]]):
+class OwnedRoleList(RootModel[list[int]]):
     def __iter__(self):
         return iter(self.root)
 
@@ -561,11 +559,11 @@ class RoleCultivateStatus(BaseModel):
     roleName: str
     roleLevel: int
     roleBreakLevel: int  # 突破等级
-    skillLevelList: List[RoleCultivateSkillLevel]
-    skillBreakList: List[str]  # 突破技能
+    skillLevelList: list[RoleCultivateSkillLevel]
+    skillBreakList: list[str]  # 突破技能
 
 
-class RoleCultivateStatusList(RootModel[List[RoleCultivateStatus]]):
+class RoleCultivateStatusList(RootModel[list[RoleCultivateStatus]]):
     def __iter__(self):
         return iter(self.root)
 
@@ -602,16 +600,16 @@ class Strategy(BaseModel):
 class RoleCostDetail(BaseModel):
     """角色培养详情"""
 
-    allCost: Optional[List[CultivateCost]] = None
-    missingCost: Optional[List[CultivateCost]] = None
-    synthetic: Optional[List[CultivateCost]] = None
-    missingRoleCost: Optional[List[CultivateCost]] = None
-    missingSkillCost: Optional[List[CultivateCost]] = None
-    missingWeaponCost: Optional[List[CultivateCost]] = None
+    allCost: list[CultivateCost] | None = None
+    missingCost: list[CultivateCost] | None = None
+    synthetic: list[CultivateCost] | None = None
+    missingRoleCost: list[CultivateCost] | None = None
+    missingSkillCost: list[CultivateCost] | None = None
+    missingWeaponCost: list[CultivateCost] | None = None
     roleId: int
-    weaponId: Optional[int] = None
-    strategyList: Optional[List[Strategy]] = None
-    showStrategy: Optional[bool] = None
+    weaponId: int | None = None
+    strategyList: list[Strategy] | None = None
+    showStrategy: bool | None = None
 
 
 class BatchRoleCostResponse(BaseModel):
@@ -620,14 +618,14 @@ class BatchRoleCostResponse(BaseModel):
     roleNum: int  # 角色数量
     weaponNum: int  # 武器数量
     # preview: Dict[str, Optional[List[CultivateCost]]]
-    costList: List[RoleCostDetail]  # 每个角色的详细花费
+    costList: list[RoleCostDetail]  # 每个角色的详细花费
 
 
 class SlashRole(BaseModel):
     iconUrl: str  # 角色头像
     roleId: int  # 角色ID
-    level: Optional[int] = 0  # 角色等级
-    chain: Optional[int] = 0  # 角色共鸣链
+    level: int | None = 0  # 角色等级
+    chain: int | None = 0  # 角色共鸣链
 
 
 class SlashHalf(BaseModel):
@@ -635,15 +633,15 @@ class SlashHalf(BaseModel):
     buffIcon: str  # 图标
     buffName: str  # 名称
     buffQuality: int  # 品质
-    roleList: List[SlashRole]  # 角色列表
+    roleList: list[SlashRole]  # 角色列表
     score: int  # 分数
 
 
 class SlashChallenge(BaseModel):
     challengeId: int  # 挑战ID
     challengeName: str  # 挑战名称
-    halfList: List[SlashHalf] = Field(default_factory=list)  # 半场列表
-    rank: Optional[str] = Field(default="")  # 等级
+    halfList: list[SlashHalf] = Field(default_factory=list)  # 半场列表
+    rank: str | None = Field(default="")  # 等级
     score: int  # 分数
 
     def get_rank(self):
@@ -654,7 +652,7 @@ class SlashChallenge(BaseModel):
 
 class SlashDifficulty(BaseModel):
     allScore: int  # 总分数
-    challengeList: List[SlashChallenge] = Field(default_factory=list)  # 挑战列表
+    challengeList: list[SlashChallenge] = Field(default_factory=list)  # 挑战列表
     difficulty: int  # 难度
     difficultyName: str  # 难度名称
     homePageBG: str  # 首页背景
@@ -667,7 +665,7 @@ class SlashDetail(BaseModel):
 
     isUnlock: bool  # 是否解锁
     seasonEndTime: int  # 赛季结束时间
-    difficultyList: List[SlashDifficulty] = Field(default_factory=list)  # 难度列表
+    difficultyList: list[SlashDifficulty] = Field(default_factory=list)  # 难度列表
 
 
 class Period(BaseModel):
@@ -680,9 +678,9 @@ class Period(BaseModel):
 class PeriodList(BaseModel):
     """资源简报"""
 
-    weeks: List[Period] = Field(default_factory=list)  # 周报列表
-    months: List[Period] = Field(default_factory=list)  # 月报列表
-    versions: List[Period] = Field(default_factory=list)  # 版本列表
+    weeks: list[Period] = Field(default_factory=list)  # 周报列表
+    months: list[Period] = Field(default_factory=list)  # 月报列表
+    versions: list[Period] = Field(default_factory=list)  # 版本列表
 
 
 class PeriodNode(BaseModel):
@@ -695,8 +693,8 @@ class PeriodDetail(BaseModel):
 
     totalCoin: int
     totalStar: int
-    coinList: List[PeriodNode] = Field(default_factory=list)
-    starList: List[PeriodNode] = Field(default_factory=list)
+    coinList: list[PeriodNode] = Field(default_factory=list)
+    starList: list[PeriodNode] = Field(default_factory=list)
 
 
 class PermanentRouge(BaseModel):
@@ -720,7 +718,7 @@ class PhantomBattleBadgeItem(BaseModel):
 class PhantomBattle(BaseModel):
     """激斗！向着荣耀之丘"""
 
-    badgeList: List[PhantomBattleBadgeItem] = Field(default_factory=list)  # 勋章列表
+    badgeList: list[PhantomBattleBadgeItem] = Field(default_factory=list)  # 勋章列表
     badgeNum: int  # 勋章数量
     cardNum: int  # 卡片数量
     exp: int  # 经验

@@ -1,10 +1,11 @@
+from datetime import datetime
+import time
+
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.subscribe import gs_subscribe
 
 from ..utils.database.models import WavesPush, WavesUser
-from datetime import datetime
-import time
 
 PUSH_MAP = {
     "体力": "resin",
@@ -14,17 +15,19 @@ WAVES_USER_MAP = {"体力背景": "stamina_bg"}
 
 task_name_resin = "订阅体力推送"
 
+
 async def get_push_config():
     from ..wutheringwaves_config import WutheringWavesConfig
 
     return WutheringWavesConfig.get_config("StaminaPush").data
+
 
 async def set_waves_user_value(ev: Event, func: str, uid: str, value: str):
     if func in WAVES_USER_MAP:
         status = WAVES_USER_MAP[func]
     else:
         return "该配置项不存在!\n"
-    logger.info("[设置{}] uid:{} value: {}".format(func, uid, value))
+    logger.info(f"[设置{func}] uid:{uid} value: {value}")
     if (
         await WavesUser.update_data_by_data(
             select_data={"user_id": ev.user_id, "bot_id": ev.bot_id, "uid": uid},
@@ -36,27 +39,24 @@ async def set_waves_user_value(ev: Event, func: str, uid: str, value: str):
     else:
         return "设置失败!\n请检查参数是否正确!\n"
 
+
 async def set_push_value(ev: Event, func: str, uid: str, value: int, ck: str):
     if func in PUSH_MAP:
         status = PUSH_MAP[func]
     else:
         return "该配置项不存在!\n"
-    
+
     data = await WavesPush.select_push_data(uid, ev.bot_id)
     if not data:
         return "请先开启体力推送!\n"
     push_data = data.__dict__
     if push_data[f"{status}_push"] == "off":
         return "体力推送未开启!\n"
-    
-    logger.info("[设置推送阈值]UID:{}\nfunc: {}, value: {}".format(uid, status, value))
-    if (
-        await WavesPush.update_data_by_uid(
-            uid=uid, bot_id=ev.bot_id, **{f"{status}_value": value}
-        )
-        == 0
-    ):
+
+    logger.info(f"[设置推送阈值]UID:{uid}\nfunc: {status}, value: {value}")
+    if await WavesPush.update_data_by_uid(uid=uid, bot_id=ev.bot_id, **{f"{status}_value": value}) == 0:
         from ..wutheringwaves_stamina.notice_stamina import get_next_refresh_time
+
         refreshTimeStamp = await get_next_refresh_time(uid, ck)
         if refreshTimeStamp:
             await set_push_time(ev.bot_id, uid, refreshTimeStamp)
@@ -76,7 +76,7 @@ async def set_push_time(bot_id: str, uid: str, value: int):
     else:
         logger.info("该配置项不存在!")
         return False
-    
+
     data = await WavesPush.select_push_data(uid, bot_id)
     if not data:
         return False
@@ -86,23 +86,18 @@ async def set_push_time(bot_id: str, uid: str, value: int):
     resin_push = push_data[f"{mode}_value"]
 
     # 根据体力阈值计算推送时间
-    value = value - (240 -resin_push) * 6 * 60
+    value = value - (240 - resin_push) * 6 * 60
     time_push = datetime.fromtimestamp(int(value))
 
-    logger.info("[设置推送时间]func: {}, value: {}".format(status, time_push))
+    logger.info(f"[设置推送时间]func: {status}, value: {time_push}")
     try:
-        await WavesPush.update_data_by_uid(
-            uid=uid, bot_id=bot_id, **{f"{status}_value": str(time_push)}
-        )
-        await WavesPush.update_data_by_uid(
-            uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"}
-        )
+        await WavesPush.update_data_by_uid(uid=uid, bot_id=bot_id, **{f"{status}_value": str(time_push)})
+        await WavesPush.update_data_by_uid(uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"})
         logger.info(f"设置成功!\nUID:{uid}\n当前{func}推送阈值:{time_push}\n")
         return True
     except Exception as e:
         logger.info(f"[推送时间]设置失败:{e}")
         return False
-
 
 
 async def set_config_func(ev: Event, uid: str = "0"):
@@ -120,7 +115,7 @@ async def set_config_func(ev: Event, uid: str = "0"):
         if not await get_push_config():
             return "体力推送功能已禁用!\n"
 
-         # 执行设置
+        # 执行设置
         await WavesUser.update_data_by_uid(
             uid=uid,
             bot_id=ev.bot_id,
@@ -138,9 +133,7 @@ async def set_config_func(ev: Event, uid: str = "0"):
         )
         timestamp = time.time()
         time_push = datetime.fromtimestamp(int(timestamp))
-        await WavesPush.update_data_by_uid(
-            uid=uid, bot_id=ev.bot_id, **{f"{PUSH_MAP['时间']}_value": time_push}
-        )
+        await WavesPush.update_data_by_uid(uid=uid, bot_id=ev.bot_id, **{f"{PUSH_MAP['时间']}_value": time_push})
         if option == "off":
             await gs_subscribe.delete_subscribe("single", task_name_resin, ev)
         else:

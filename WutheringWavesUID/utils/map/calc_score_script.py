@@ -2,7 +2,6 @@ import copy
 import json
 import math
 from pathlib import Path
-from typing import List, Optional
 
 from msgspec import json as msgjson
 
@@ -174,9 +173,7 @@ phantom_main_value = [
 phantom_main_value_map = {i["name"]: i["values"] for i in phantom_main_value}
 
 
-def calc_sub_max_score(
-    _temp, sub_props, jineng: Optional[List] = None, skill_weight: Optional[List] = None
-):
+def calc_sub_max_score(_temp, sub_props, jineng: list | None = None, skill_weight: list | None = None):
     score = 0
     jineng_list = [
         "普攻伤害加成",
@@ -231,17 +228,13 @@ def read_calc_json_files(directory):
     char_limit_cards = []
     for file in files:
         try:
-            with open(file, "r", encoding="utf-8") as f:
+            with open(file, encoding="utf-8") as f:
                 data = msgjson.decode(f.read())
 
                 skill_weight = data["skill_weight"]
                 jineng = max(skill_weight)
-                sub_max = calc_sub_max_score(
-                    data["max_sub_props"], data["sub_props"], jineng, skill_weight
-                )
-                main_max = calc_main_max_score(
-                    data["max_main_props"], data["main_props"]
-                )
+                sub_max = calc_sub_max_score(data["max_sub_props"], data["sub_props"], jineng, skill_weight)
+                main_max = calc_main_max_score(data["max_main_props"], data["main_props"])
                 # score_max = [round(sub_max + i, @) for i in main_max]
                 score_max = [math.floor((sub_max + i) * 1000) / 1000 for i in main_max]
 
@@ -263,11 +256,7 @@ def read_calc_json_files(directory):
 
             char_name = f"{file.parents[0].name}"
             char_limit = next(
-                (
-                    i
-                    for i in limit_data["charList"]
-                    if i["name"] == char_name and i["calcFile"] == file.name
-                ),
+                (i for i in limit_data["charList"] if i["name"] == char_name and i["calcFile"] == file.name),
                 None,
             )
             if char_limit is None:
@@ -340,9 +329,7 @@ def calc_char_limit(char_limit, calc_file_dict):
 
     # 武器
     temp_weapon = char_template_data["weaponData"]["weapon"]
-    temp_weapon["weaponEffectName"] = weapon_detail["effect"].format(
-        *[i[-1] for i in weapon_detail["param"]]
-    )
+    temp_weapon["weaponEffectName"] = weapon_detail["effect"].format(*[i[-1] for i in weapon_detail["param"]])
     temp_weapon["weaponIcon"] = ""
     temp_weapon["weaponId"] = char_limit["weaponId"]
     temp_weapon["weaponName"] = weapon_detail["name"]
@@ -384,9 +371,7 @@ def calc_char_limit(char_limit, calc_file_dict):
             custom_main_shuxing = j.get("mainPropName")
 
             mainProps = i["mainProps"]
-            for flag, main_props_name in enumerate(
-                calc_file_dict["max_main_props"][f"{cost}.1"]
-            ):
+            for flag, main_props_name in enumerate(calc_file_dict["max_main_props"][f"{cost}.1"]):
                 if cost == 4:
                     index = 2
                 elif cost == 3:

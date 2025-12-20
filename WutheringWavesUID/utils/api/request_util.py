@@ -1,7 +1,8 @@
 import asyncio
 from enum import IntEnum
-from typing import Any, Dict, Generic, Optional, TypeVar, Union
+from typing import Any, Generic, TypeVar, Union
 
+from gsuid_core.logger import logger
 from pydantic import (
     BaseModel,
     ConfigDict,
@@ -9,8 +10,6 @@ from pydantic import (
     computed_field,
     model_validator,
 )
-
-from gsuid_core.logger import logger
 
 from ...utils.util import (
     generate_random_string,
@@ -23,7 +22,7 @@ PLATFORM_SOURCE = "ios"
 CONTENT_TYPE = "application/x-www-form-urlencoded; charset=utf-8"
 
 
-async def get_base_header(devCode: Optional[str] = None):
+async def get_base_header(devCode: str | None = None):
     header = {
         "source": PLATFORM_SOURCE,
         "Content-Type": CONTENT_TYPE,
@@ -91,7 +90,7 @@ NOT_SEND_MASTER_INFO_CODES = (
 )
 
 
-def check_send_master_info(code: int, msg: str, data: Optional[T] = None) -> bool:
+def check_send_master_info(code: int, msg: str, data: T | None = None) -> bool:
     if code in SEND_MASTER_INFO_CODES:
         return True
 
@@ -110,7 +109,7 @@ class KuroApiResp(BaseModel, Generic[T]):
 
     code: int = Field(0, description="状态码")
     msg: str = Field("", description="消息")
-    data: Optional[T] = Field(None, description="数据")
+    data: T | None = Field(None, description="数据")
 
     @computed_field
     @property
@@ -120,7 +119,7 @@ class KuroApiResp(BaseModel, Generic[T]):
     @classmethod
     def ok(
         cls,
-        data: Optional[T] = None,
+        data: T | None = None,
         msg: str = "请求成功",
         code: int = RespCode.OK_ZERO,
     ) -> "KuroApiResp[T]":
@@ -177,5 +176,5 @@ if __name__ == "__main__":
     print(v)
 
     p = {"code": -1, "data": "登录已过期", "msg": "登录已过期，请重新登录"}
-    v = KuroApiResp[Union[str, Dict[str, Any]]].model_validate(p)
+    v = KuroApiResp[Union[str, dict[str, Any]]].model_validate(p)
     print(v)

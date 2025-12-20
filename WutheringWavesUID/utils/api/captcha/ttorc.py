@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict
+from typing import Any
 
 import aiohttp
 
@@ -39,8 +39,7 @@ class TtorcCaptchaSolver(RemoteCaptchaSolver):
     async def get_balance(self) -> str:
         return "N/A"
 
-    async def solve(self) -> Dict[str, Any]:
-
+    async def solve(self) -> dict[str, Any]:
         # https://www.kancloud.cn/ttorc/ttorc/3119239
         params = {
             "appkey": self._appkey,

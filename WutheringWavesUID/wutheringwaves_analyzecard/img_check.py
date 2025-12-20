@@ -1,12 +1,13 @@
 # change from https://github.com/TedIwaArdN/wuwabot_reader
 
 from venv import logger
+
 import numpy as np
 from PIL import Image
 
+from ..utils.ascension.echo import get_echo_ids_by_set_name
 from ..utils.image import TEXT_PATH
 from ..utils.resource.RESOURCE_PATH import PHANTOM_PATH
-from ..utils.ascension.echo import get_echo_ids_by_set_name
 
 ECHO_SIZE = (8, 8)
 SET_SIZE = (8, 8)
@@ -119,9 +120,7 @@ class ImageComparer:
 
         # 打印调试信息
         non_empty_count = total_pixels - empty_pixel_count
-        logger.debug(
-            f"空槽位检测: 非空像素={non_empty_count}/{total_pixels}, 空占比={empty_percentage:.1f}%"
-        )
+        logger.debug(f"空槽位检测: 非空像素={non_empty_count}/{total_pixels}, 空占比={empty_percentage:.1f}%")
 
         # 如果空像素超过阈值，则视为空图标
         return empty_percentage > empty_percentage_threshold
@@ -219,11 +218,7 @@ class ImageComparer:
             diff_b = diff_val(rgb1[:, :, 2], rgb2[:, :, 2])
 
             # 判断每个像素是否相似（所有通道差值都小于阈值）
-            pixel_matches = (
-                (diff_r < pixel_threshold)
-                & (diff_g < pixel_threshold)
-                & (diff_b < pixel_threshold)
-            )
+            pixel_matches = (diff_r < pixel_threshold) & (diff_g < pixel_threshold) & (diff_b < pixel_threshold)
         else:
             # 灰度图像
             diff = diff_val(img1_array, img2_array)
@@ -269,7 +264,7 @@ class ImageComparer:
         )
 
 
-async def batch_analyze_card_img(cropped_icons:list[Image.Image], i:str) -> dict[str, str | float]:
+async def batch_analyze_card_img(cropped_icons: list[Image.Image], i: str) -> dict[str, str | float]:
     """
     cropped_icons: 裁切出的声骸图像和套装图像
     """
@@ -298,7 +293,7 @@ async def batch_analyze_card_img(cropped_icons:list[Image.Image], i:str) -> dict
             set_confidence = similarity
             if similarity > 0.95:  # 高相似度直接确认
                 break
-    
+
     # 根据套装名获取对应的声骸ID列表，避免无效比较
     echo_ids_for_set = get_echo_ids_by_set_name(set_match)
     if not echo_ids_for_set:

@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from PIL import Image, ImageDraw
-
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
+from PIL import Image, ImageDraw
 
 from ..utils.api.model import AccountBaseInfo, MoreActivity
 from ..utils.error_reply import WAVES_CODE_102
@@ -45,9 +44,7 @@ for x in range(lock_resized.width):
 def draw_rounded_rectangle(draw, coords, radius, fill=None, outline=None, width=1):
     """绘制圆角矩形"""
     x1, y1, x2, y2 = coords
-    draw.rounded_rectangle(
-        coords, radius=radius, fill=fill, outline=outline, width=width
-    )
+    draw.rounded_rectangle(coords, radius=radius, fill=fill, outline=outline, width=width)
 
 
 def draw_progress_bar(
@@ -63,9 +60,7 @@ def draw_progress_bar(
 ):
     """绘制进度条"""
     # 背景
-    draw_rounded_rectangle(
-        draw, (x, y, x + width, y + height), radius=height // 2, fill=bg_color
-    )
+    draw_rounded_rectangle(draw, (x, y, x + width, y + height), radius=height // 2, fill=bg_color)
 
     # 进度
     if max_progress > 0:
@@ -109,12 +104,8 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
     # 绘制个人信息
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     card_img.paste(base_info_bg, (15, 20), base_info_bg)
 
     # 头像 头像环
@@ -127,14 +118,10 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(title_bar, (-20, 70), title_bar)
 
     y_offset = 270
@@ -173,9 +160,7 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
 
     # 右侧等级信息
     level_text_x = 210
-    level_card_draw.text(
-        (level_text_x, 75), phantomBattle.levelName, "white", waves_font_26, "lm"
-    )
+    level_card_draw.text((level_text_x, 75), phantomBattle.levelName, "white", waves_font_26, "lm")
 
     # 经验进度条
     draw_progress_bar(
@@ -216,9 +201,7 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
 
     # 右侧卡片信息
     card_text_x = 210
-    card_card_draw.text(
-        (card_text_x, 75), "已收集卡片数量", "white", waves_font_26, "lm"
-    )
+    card_card_draw.text((card_text_x, 75), "已收集卡片数量", "white", waves_font_26, "lm")
 
     # 卡片进度条
     draw_progress_bar(
@@ -333,9 +316,7 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
 
             # 调整图标尺寸
             if icon_img.size != (icon_area_size, icon_area_size):
-                icon_img = icon_img.resize(
-                    (icon_area_size, icon_area_size), Image.Resampling.LANCZOS
-                )
+                icon_img = icon_img.resize((icon_area_size, icon_area_size), Image.Resampling.LANCZOS)
 
             # 创建圆形遮罩
             mask = Image.new("L", (icon_area_size, icon_area_size), 0)
@@ -349,9 +330,7 @@ async def draw_poker_img(ev: Event, uid: str, user_id: str):
                 icon_img.putalpha(120)
 
             # 应用圆形遮罩
-            icon_bg = Image.new(
-                "RGBA", (icon_area_size, icon_area_size), (255, 255, 255, 0)
-            )
+            icon_bg = Image.new("RGBA", (icon_area_size, icon_area_size), (255, 255, 255, 0))
             icon_bg.paste(icon_img, (0, 0))
 
             badge_item_bg.paste(icon_bg, (icon_area_x, icon_area_y), mask)

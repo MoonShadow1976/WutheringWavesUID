@@ -1,6 +1,7 @@
 import asyncio
+from collections.abc import Callable, Coroutine
 import threading
-from typing import Any, Callable, Coroutine, Dict, List, Union
+from typing import Any
 
 from gsuid_core.logger import logger
 
@@ -9,12 +10,12 @@ class TaskDispatcher:
     def __init__(self):
         self.queue = asyncio.Queue()
         self.running = False
-        self.handlers: Dict[str, List[Callable]] = {}
+        self.handlers: dict[str, list[Callable]] = {}
 
     def register_handler(
         self,
         task_type: str,
-        handler: Callable[[Any], Union[Any, Coroutine[Any, Any, Any]]],
+        handler: Callable[[Any], Any | Coroutine[Any, Any, Any]],
     ) -> None:
         # 初始化处理器列表
         if task_type not in self.handlers:
@@ -73,9 +74,7 @@ class TaskDispatcher:
             return
 
         self.running = True
-        threading.Thread(
-            target=lambda: asyncio.run(self._process()), daemon=daemon
-        ).start()
+        threading.Thread(target=lambda: asyncio.run(self._process()), daemon=daemon).start()
 
 
 # 创建全局任务分发器实例
@@ -84,7 +83,7 @@ dispatcher = TaskDispatcher()
 
 def register_handler(
     task_type: str,
-    handler: Callable[[Any], Union[Any, Coroutine[Any, Any, Any]]],
+    handler: Callable[[Any], Any | Coroutine[Any, Any, Any]],
 ) -> None:
     dispatcher.register_handler(task_type, handler)
 

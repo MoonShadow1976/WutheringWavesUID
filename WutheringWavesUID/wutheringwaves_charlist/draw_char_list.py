@@ -1,16 +1,14 @@
 from pathlib import Path
-from typing import Union
-
-from PIL import Image, ImageDraw
 
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image, ImageDraw
 
-from ..utils.api.model import AccountBaseInfo, RoleDetailData, WeaponData
+from ..utils.api.model import RoleDetailData, WeaponData
 from ..utils.ascension.weapon import get_breach
 from ..utils.char_info_utils import get_all_roleid_detail_info_int
-from ..utils.error_reply import WAVES_CODE_102, WAVES_CODE_099
+from ..utils.error_reply import WAVES_CODE_099
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.fonts.waves_fonts import (
     waves_font_16,
@@ -88,9 +86,9 @@ async def draw_char_list_img(
     is_refresh: bool = False,
     is_peek: bool = False,
     user_waves_id: str = "",
-) -> Union[str, bytes]:
+) -> str | bytes:
     _, ck = await waves_api.get_ck_result(user_waves_id, user_id, ev.bot_id)
-    account_info= await get_user_detail_info(uid)
+    account_info = await get_user_detail_info(uid)
 
     all_role_detail = await get_all_roleid_detail_info(
         ev,
@@ -106,9 +104,7 @@ async def draw_char_list_img(
         return error_reply(code=-111, msg="练度获取失败，请先刷新角色面板")
 
     waves_char_rank = await get_waves_char_rank(uid, all_role_detail)
-    waves_char_rank.sort(
-        key=lambda i: (i.score, i.starLevel, i.level, i.chain, i.roleId), reverse=True
-    )
+    waves_char_rank.sort(key=lambda i: (i.score, i.starLevel, i.level, i.chain, i.roleId), reverse=True)
 
     avatar_h = 230
     info_bg_h = 260
@@ -119,12 +115,8 @@ async def draw_char_list_img(
     # 基础信息 名字 特征码
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
-    base_info_draw.text(
-        (275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm"
-    )
-    base_info_draw.text(
-        (226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm"
-    )
+    base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
+    base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     card_img.paste(base_info_bg, (15, 20), base_info_bg)
 
     # 头像 头像环
@@ -139,14 +131,10 @@ async def draw_char_list_img(
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
-        title_bar_draw.text(
-            (810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm"
-        )
+        title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(title_bar, (-20, 70), title_bar)
 
     # up角色
@@ -174,7 +162,8 @@ async def draw_char_list_img(
         bar_star.paste(role_avatar, (60, 0), role_avatar)
 
         role_attribute = await get_attribute(
-            role_detail.role.attributeName, is_simple=True  # type: ignore
+            role_detail.role.attributeName,
+            is_simple=True,  # type: ignore
         )
         role_attribute = role_attribute.resize((40, 40)).convert("RGBA")
         bar_star.alpha_composite(role_attribute, (170, 20))
@@ -185,9 +174,7 @@ async def draw_char_list_img(
         info_block_draw = ImageDraw.Draw(info_block)
         fill = CHAIN_COLOR[role_detail.get_chain_num()] + (int(0.9 * 255),)
         info_block_draw.rectangle([0, 0, 40, 20], fill=fill)
-        info_block_draw.text(
-            (2, 10), f"{role_detail.get_chain_name()}", "white", waves_font_18, "lm"
-        )
+        info_block_draw.text((2, 10), f"{role_detail.get_chain_name()}", "white", waves_font_18, "lm")
         bar_star.alpha_composite(info_block, (120, 15))
 
         # 评分
@@ -212,9 +199,7 @@ async def draw_char_list_img(
             skill_bg = Image.open(TEXT_PATH / "skill_bg.png")
             temp.alpha_composite(skill_bg)
 
-            skill_img = await get_skill_img(
-                role_detail.role.roleId, _skill.skill.name, _skill.skill.iconUrl
-            )
+            skill_img = await get_skill_img(role_detail.role.roleId, _skill.skill.name, _skill.skill.iconUrl)
             skill_img = skill_img.resize((70, 70))
             # skill_img = ImageEnhance.Brightness(skill_img).enhance(0.3)
             temp.alpha_composite(skill_img, (25, 25))
@@ -257,20 +242,14 @@ async def draw_char_list_img(
             waves_font_40,
             "lm",
         )
-        weapon_bg_temp_draw.text(
-            (203, 75), f"Lv.{weaponData.level}/90", "white", waves_font_30, "lm"
-        )
+        weapon_bg_temp_draw.text((203, 75), f"Lv.{weaponData.level}/90", "white", waves_font_30, "lm")
 
         _x = 220 + 43 * len(weaponData.weapon.weaponName)
         _y = 37
 
         wrc_fill = WEAPON_RESONLEVEL_COLOR[weaponData.resonLevel] + (int(0.8 * 255),)  # type: ignore
-        weapon_bg_temp_draw.rounded_rectangle(
-            [_x - 15, _y - 15, _x + 50, _y + 15], radius=7, fill=wrc_fill
-        )
-        weapon_bg_temp_draw.text(
-            (_x, _y), f"精{weaponData.resonLevel}", "white", waves_font_24, "lm"
-        )
+        weapon_bg_temp_draw.rounded_rectangle([_x - 15, _y - 15, _x + 50, _y + 15], radius=7, fill=wrc_fill)
+        weapon_bg_temp_draw.text((_x, _y), f"精{weaponData.resonLevel}", "white", waves_font_24, "lm")
 
         weapon_breach = get_breach(weaponData.breach, weaponData.level)
         for i in range(0, weapon_breach):  # type: ignore
@@ -281,9 +260,7 @@ async def draw_char_list_img(
 
         bar_star.alpha_composite(weapon_bg_temp.resize((260, 130)), dest=(710, 25))
 
-        card_img.paste(
-            bar_star, (0, avatar_h + info_bg_h + index * bar_star_h), bar_star
-        )
+        card_img.paste(bar_star, (0, avatar_h + info_bg_h + index * bar_star_h), bar_star)
 
         if _rank.starLevel == 5 and _rank.roleName not in NORMAL_LIST:
             up_num += 1
@@ -310,19 +287,13 @@ async def draw_char_list_img(
     info_bg_draw.text((240, 120), f"{up_num}/{all_num}", "white", waves_font_40, "mm")
     info_bg_draw.text((240, 160), "up角色", "white", waves_font_20, "mm")
 
-    info_bg_draw.text(
-        (410, 120), f"{level_num}/{all_num}", "white", waves_font_40, "mm"
-    )
+    info_bg_draw.text((410, 120), f"{level_num}/{all_num}", "white", waves_font_40, "mm")
     info_bg_draw.text((410, 160), "高练角色", "white", waves_font_20, "mm")
 
-    info_bg_draw.text(
-        (580, 120), f"{chain_num}/{all_num - all_num_5}", "white", waves_font_40, "mm"
-    )
+    info_bg_draw.text((580, 120), f"{chain_num}/{all_num - all_num_5}", "white", waves_font_40, "mm")
     info_bg_draw.text((580, 160), "高链4星", "white", waves_font_20, "mm")
 
-    info_bg_draw.text(
-        (750, 120), f"{chain_num_5}/{all_num_5}", "white", waves_font_40, "mm"
-    )
+    info_bg_draw.text((750, 120), f"{chain_num_5}/{all_num_5}", "white", waves_font_40, "mm")
     info_bg_draw.text((750, 160), "高链5星", "white", waves_font_20, "mm")
 
     card_img.paste(info_bg, (0, avatar_h), info_bg)

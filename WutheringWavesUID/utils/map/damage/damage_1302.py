@@ -1,21 +1,19 @@
 # 吟霖
-from .damage import weapon_damage, echo_damage, phase_damage
 from ...api.model import RoleDetailData
-from ...ascension.char import get_char_detail, WavesCharResult
+from ...ascension.char import WavesCharResult, get_char_detail
 from ...damage.damage import DamageAttribute
 from ...damage.utils import (
-    skill_damage_calc,
-    skill_damage,
-    cast_skill,
-    liberation_damage,
     cast_hit,
     cast_liberation,
+    cast_skill,
+    liberation_damage,
+    skill_damage,
+    skill_damage_calc,
 )
+from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     审判之雷
     """
@@ -47,7 +45,7 @@ def calc_damage_1(
 
     if role_breach and role_breach >= 3:
         title = f"{role_name}-固有技能-浸渍痛楚"
-        msg = f"使用共鸣技能磁殛咆哮后，暴击提升15%"
+        msg = "使用共鸣技能磁殛咆哮后，暴击提升15%"
         attr.add_crit_rate(0.15, title, msg)
 
     attr.set_phantom_dmg_bonus()
@@ -57,13 +55,13 @@ def calc_damage_1(
     if chain_num >= 3:
         # 3命
         title = f"{role_name}-三链"
-        msg = f"共鸣回路审判之雷伤害倍率提升55%。"
+        msg = "共鸣回路审判之雷伤害倍率提升55%。"
         attr.add_skill_ratio(0.55, title, msg)
 
     if chain_num >= 4:
         # 4命
         title = f"{role_name}-四链"
-        msg = f"共鸣回路审判之雷命中时，队伍中的角色攻击提升20%."
+        msg = "共鸣回路审判之雷命中时，队伍中的角色攻击提升20%."
         attr.add_atk_percent(0.2, title, msg)
 
     # 声骸技能
@@ -79,9 +77,7 @@ def calc_damage_1(
     return crit_damage, expected_damage
 
 
-def calc_damage_2(
-    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False
-) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
     """
     破天雷灭击
     """
@@ -110,11 +106,11 @@ def calc_damage_2(
 
     if role_breach and role_breach >= 3:
         title = f"{role_name}-固有技能-浸渍痛楚"
-        msg = f"使用共鸣技能磁殛咆哮后，暴击提升15%"
+        msg = "使用共鸣技能磁殛咆哮后，暴击提升15%"
         attr.add_crit_rate(0.15, title, msg)
 
         title = f"{role_name}-固有技能-目标专注"
-        msg = f"共鸣技能召雷磁爆命中带有缚罪标记的目标，触发该效果时攻击提升10%"
+        msg = "共鸣技能召雷磁爆命中带有缚罪标记的目标，触发该效果时攻击提升10%"
         attr.add_atk_percent(0.1, title, msg)
 
     attr.set_phantom_dmg_bonus()
@@ -124,13 +120,13 @@ def calc_damage_2(
     if chain_num >= 4:
         # 4命
         title = f"{role_name}-四链"
-        msg = f"共鸣回路审判之雷命中时，队伍中的角色攻击提升20%."
+        msg = "共鸣回路审判之雷命中时，队伍中的角色攻击提升20%."
         attr.add_atk_percent(0.2, title, msg)
 
     if chain_num >= 5:
         # 5命
         title = f"{role_name}-五链"
-        msg = f"共鸣解放命中带有共鸣回路缚罪标记、惩罚印记的目标时，伤害提升100%。"
+        msg = "共鸣解放命中带有共鸣回路缚罪标记、惩罚印记的目标时，伤害提升100%。"
         attr.add_dmg_bonus(1, title, msg)
 
     # 声骸技能

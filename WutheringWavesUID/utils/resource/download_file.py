@@ -1,22 +1,17 @@
-from typing import Union
-
-from PIL import Image
-
 from gsuid_core.utils.download_resource.download_file import download
+from PIL import Image
 
 from .RESOURCE_PATH import (
     FETTER_PATH,
     MATERIAL_PATH,
+    MISSING_IMG,
     PHANTOM_PATH,
     ROLE_DETAIL_CHAINS_PATH,
     ROLE_DETAIL_SKILL_PATH,
-    MISSING_IMG,
 )
 
 
-async def get_skill_img(
-    char_id: Union[str, int], skill_name: str, pic_url: str
-) -> Image.Image:
+async def get_skill_img(char_id: str | int, skill_name: str, pic_url: str) -> Image.Image:
     _dir = ROLE_DETAIL_SKILL_PATH / str(char_id)
     _dir.mkdir(parents=True, exist_ok=True)
 
@@ -33,9 +28,7 @@ async def get_skill_img(
     return Image.open(_path).convert("RGBA")
 
 
-async def get_chain_img(
-    char_id: Union[str, int], order_id: int, pic_url: str
-) -> Image.Image:
+async def get_chain_img(char_id: str | int, order_id: int, pic_url: str) -> Image.Image:
     _dir = ROLE_DETAIL_CHAINS_PATH / str(char_id)
     _dir.mkdir(parents=True, exist_ok=True)
 
@@ -72,7 +65,7 @@ async def get_fetter_img(name: str, pic_url: str) -> Image.Image:
     return Image.open(_path).convert("RGBA")
 
 
-async def get_material_img(material_id: Union[str, int]) -> Image.Image:
+async def get_material_img(material_id: str | int) -> Image.Image:
     name = f"material_{material_id}.png"
     _path = MATERIAL_PATH / name
     if not _path.exists():

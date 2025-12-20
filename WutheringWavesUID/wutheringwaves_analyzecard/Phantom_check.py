@@ -1,7 +1,7 @@
-from gsuid_core.logger import logger
 from functools import lru_cache
 from pathlib import Path
 
+from gsuid_core.logger import logger
 
 # change from utils.map.calc_score_script.py
 # 声骸副词条
@@ -155,22 +155,25 @@ phantom_main_value_map = {i["name"]: i["values"] for i in phantom_main_value}
 
 TEXT_PATH = Path(__file__).parent.parent / "utils" / "texture2d" / "attribute_prop"
 
+
 @lru_cache(maxsize=50)
 def exist_attribute_prop(name: str = "") -> bool:
     """检查属性图片文件是否存在（带缓存）"""
     file_path = Path(TEXT_PATH) / f"attr_prop_{name}.png"
-    
+
     exists = file_path.exists()
     return exists
 
-def get_props(phantom):
-        props = []
-        if phantom.get("mainProps"):
-            props.extend(phantom.get("mainProps"))
-        if phantom.get("subProps"):
-            props.extend(phantom.get("subProps"))
 
-        return props
+def get_props(phantom):
+    props = []
+    if phantom.get("mainProps"):
+        props.extend(phantom.get("mainProps"))
+    if phantom.get("subProps"):
+        props.extend(phantom.get("subProps"))
+
+    return props
+
 
 class PhantomValidator:
     def __init__(self, equipPhantomList):
@@ -291,24 +294,25 @@ class PhantomValidator:
 
     def _detect_scale_error(self, value, allowed_values):
         """检测10倍缩放错误（如86%→8.6%）（如.22800→2280）"""
+
         def scaled(num_str):
             num = float(num_str)
-            if num == 0: # 处理可能出现的0
-                return num 
+            if num == 0:  # 处理可能出现的0
+                return num
             max_allowed = max(float(v.replace("%", "")) for v in allowed_values)
-            if num < 1: # 处理可能出现的“.2280”
+            if num < 1:  # 处理可能出现的“.2280”
                 while num < max_allowed:  # 缩放阈值 10倍
                     num = float(f"{num * 10:.8f}")  # 避免扩大出现的浮点误差
                 logger.warning(f"[鸣潮][声骸检查] {num_str} 扩大为 {num}")
             while num > max_allowed:  # 缩放阈值 10倍
                 num = float(f"{num / 10:.8f}")
             return num
-        
+
         try:
             if "%" in value:
                 num_str = value.replace("%", "")
                 num = scaled(num_str)
-                formatted = f"{num:.2f}".rstrip('0').rstrip('.')  # 使用rstrip去掉末尾的0和可能的小数点
+                formatted = f"{num:.2f}".rstrip("0").rstrip(".")  # 使用rstrip去掉末尾的0和可能的小数点
                 return f"{formatted}%"
             else:
                 num = scaled(value)

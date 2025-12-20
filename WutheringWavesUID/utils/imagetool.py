@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from PIL import Image
 from gsuid_core.models import Event
 from gsuid_core.utils.image.image_tools import crop_center_img
+from PIL import Image
 
 from ..utils.image import get_event_avatar, get_square_avatar
 

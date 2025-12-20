@@ -12,10 +12,19 @@ skip-magic-trailing-comma = false
 
 [tool.ruff.lint]
 select = [
-    "E", "W", "F", "I", "B", "C4", "UP",
+    "E",  # pycodestyle错误
+    "W",  # pycodestyle警告
+    "F",  # pyflakes
+    "I",  # isort
+    # "B",  # 常见bug检测
+    "C4", # 理解力检查
+    "UP", # pyupgrade规则
 ]
 ignore = [
-    "E501", "B905",
+    "E501",  # 行太长 - 由格式化器处理
+    "E402",  # 模块级导入不在文件顶部
+    "F403",  # 使用了 from ... import * 通配符导入
+    "F841",  # 未被使用的变量赋值
 ]
 
 [tool.ruff.lint.isort]
@@ -35,7 +44,7 @@ max-complexity = 15
 name = "WutheringWavesUID"
 version = "3.0.0"
 description = "支持OneBot(QQ)、OneBotV12、QQ频道、微信、KOOK（开黑啦）、Telegram（电报）、FeiShu（飞书）、DoDo、Villa（米游社大别野）、Discord的全功能HoshinoBot/NoneBot2/Koishi/yunzai/ZeroBot鸣潮机器人插件"
-authors = ["tyql688 <632558678@qq.com>", "MoonShadow1976 <3483948113@qq.com>"]
+authors = ["tyql688 <632558678@qq.com>", "xinxiuzhu <2609145334@qq.com>", "lniuua <1733486239@qq.com>", "MoonShadow1976 <3483948113@qq.com>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
 homepage = "https://github.com/MoonShadow1976/WutheringWavesUID"
@@ -51,6 +60,8 @@ build-backend = "pdm.backend"
 [project]
 authors = [
   { name = "tyql688", email = "632558678@qq.com" },
+  { name = "xinxiuzhu", email = "2609145334@qq.com" },
+  { name = "lniuua", email = "1733486239@qq.com" },
   { name = "MoonShadow1976", email = "3483948113@qq.com" },
 ]
 license = { text = "GPL-3.0-or-later" }

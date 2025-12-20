@@ -1,0 +1,100 @@
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  pre-commit-checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run pre-commit hooks
+        id: precommit
+        continue-on-error: true
+        uses: pre-commit/action@v3.0.0
+
+      - name: Check for changes
+        id: check-changes
+        if: always() && github.event_name == 'push'  # 只在 push 时检查
+        run: |
+          # 检查是否有文件被修改
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "没有文件需要格式化"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "检测到格式化修改，准备提交..."
+            git status --short
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          # 检查上次提交是否也是自动格式化
+          LAST_COMMIT_MSG=$(git log -1 --pretty=%B)
+          if [[ "$LAST_COMMIT_MSG" == *"自动格式化"* ]] || [[ "$LAST_COMMIT_MSG" == *"[skip ci]"* ]]; then
+            echo "跳过提交：上次提交已经是格式化操作"
+            exit 0
+          fi
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "style: 自动格式化代码 [skip ci]"
+          git push
+          echo "✅ 已自动提交格式化修改"
+
+      - name: Status Report
+        run: |
+          if [ "${{ steps.precommit.outcome }}" = "failure" ]; then
+            echo "## 🚨 Pre-commit Status" >> $GITHUB_STEP_SUMMARY
+            echo "**检测到格式化问题**" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "${{ github.event_name }}" = "push" ]; then
+              if [ "${{ steps.check-changes.outputs.changes }}" = "true" ]; then
+                echo "" >> $GITHUB_STEP_SUMMARY
+                echo "✅ 已自动修复并提交代码格式" >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "**Failed for Python ${{ matrix.python-version }}**" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| 项目 | 状态 |" >> $GITHUB_STEP_SUMMARY
+              echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+              echo "| Python ${{ matrix.python-version }} | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "**如何修复:**" >> $GITHUB_STEP_SUMMARY
+              echo "- 本地运行: \`pre-commit run --all-files\`" >> $GITHUB_STEP_SUMMARY
+              echo "- 或者: \`pre-commit run ruff --all-files && pre-commit run ruff-format --all-files\`" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "## ✅ Pre-commit Status" >> $GITHUB_STEP_SUMMARY
+            echo "**所有检查通过**" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "${{ github.event_name }}" = "push" ] && [ "${{ steps.check-changes.outputs.changes }}" = "true" ]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "✅ 已自动提交格式化修改" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+      - name: Fail for PR only
+        if: github.event_name == 'pull_request' && steps.precommit.outcome == 'failure'
+        run: |
+          echo "❌ PR 需要先修复代码格式问题"
+          exit 1

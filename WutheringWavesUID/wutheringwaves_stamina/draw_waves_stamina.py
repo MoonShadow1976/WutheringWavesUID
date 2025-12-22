@@ -51,7 +51,7 @@ based_h = 850
 async def seconds2hours(seconds: int) -> str:
     m, s = divmod(int(seconds), 60)
     h, m = divmod(m, 60)
-    return "%02d小时%02d分" % (h, m)
+    return f"{h:02d}小时{m:02d}分"
 
 
 async def process_uid(uid, ev):

@@ -194,6 +194,14 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> bytes | str:
         title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         card_img.paste(title_bar, (-20, 70), title_bar)
 
+    # 赛季结束时间
+    from datetime import datetime, timedelta
+
+    end_time = datetime.now() + timedelta(milliseconds=slash_detail.seasonEndTime)
+    end_time_str = f"本期截止时间: {end_time.strftime('%Y-%m-%d %H:%M')}"
+    card_draw = ImageDraw.Draw(card_img)
+    card_draw.text((620, 280), end_time_str, "white", waves_font_25, "lm")
+
     # 根据面板数据获取详细信息
     role_detail_info_map = await get_all_roleid_detail_info(uid)
     role_detail_info_map = role_detail_info_map if role_detail_info_map else {}
@@ -331,7 +339,7 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     card_img = await convert_img(card_img)
 
     # 保存到群排行数据库
-    await save_to_group_rank(user_id, uid, slash_detail, account_info.name)
+    await save_to_group_rank(user_id, uid, slash_detail, account_info.name, role_info)
 
     return card_img
 
@@ -341,6 +349,7 @@ async def save_to_group_rank(
     waves_id: str,
     slash_data: SlashDetail,
     name: str,
+    role_info: RoleList,
 ):
     """保存无尽数据到群排行"""
     try:
@@ -360,18 +369,22 @@ async def save_to_group_rank(
         if target_challenge.score <= 0:
             return
 
+        # 构建角色信息字典
+        role_details_map = {str(r.roleId): r for r in role_info.roleList}
+
         # 构建数据
         half_list = []
         for half in target_challenge.halfList:
             roles = []
             for role in half.roleList:
                 char_model = get_char_model(role.roleId)
+                role_detail = role_details_map.get(str(role.roleId))
                 roles.append(
                     {
                         "roleId": role.roleId,
                         "roleName": char_model.name if char_model else "",
-                        "level": role.level,
-                        "chain": role.chain,
+                        "level": role_detail.level if role_detail else 0,
+                        "chain": role_detail.chainUnlockNum if role_detail else 0,
                         "iconUrl": role.iconUrl,
                         "starLevel": char_model.starLevel if char_model else 0,
                     }
@@ -379,10 +392,7 @@ async def save_to_group_rank(
 
             half_list.append(
                 {
-                    "buffName": half.buffName,
-                    "buffIcon": half.buffIcon,
-                    "buffDescription": half.buffDescription,
-                    "buffQuality": half.buffQuality,
+                    "buff_id": int(half.buffIcon.split("/")[-1].split(".")[0]),
                     "score": half.score,
                     "roleList": roles,
                 }
@@ -397,7 +407,20 @@ async def save_to_group_rank(
             "halfList": half_list,
         }
 
-        await GroupRankRecord.save_record(user_id=user_id, waves_id=waves_id, rank_type="endless", challenge_id=12, data=data)
+        import time
+
+        # seasonEndTime is in milliseconds
+        season_id = int(time.time() + slash_data.seasonEndTime / 1000) // 3600
+
+        await GroupRankRecord.save_record(
+            user_id=user_id,
+            waves_id=waves_id,
+            rank_type="endless",
+            season_id=season_id,
+            challenge_id=12,
+            data=data,
+        )
+        await GroupRankRecord.clean_old_seasons(rank_type="endless")
     except Exception as e:
         from gsuid_core.logger import logger
 

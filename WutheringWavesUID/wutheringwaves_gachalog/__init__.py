@@ -1,5 +1,5 @@
 import re
-from typing import Any, List
+from typing import Any
 
 from gsuid_core.bot import Bot
 from gsuid_core.models import Event

@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 import tempfile
 import time
-from typing import Optional
 
 import aiohttp
 from gsuid_core.bot import Bot

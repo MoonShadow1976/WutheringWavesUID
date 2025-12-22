@@ -1,6 +1,6 @@
 import asyncio
 from enum import IntEnum
-from typing import Any, Generic, TypeVar, Union
+from typing import Any, Generic, TypeVar
 
 from gsuid_core.logger import logger
 from pydantic import (
@@ -176,5 +176,5 @@ if __name__ == "__main__":
     print(v)
 
     p = {"code": -1, "data": "登录已过期", "msg": "登录已过期，请重新登录"}
-    v = KuroApiResp[Union[str, dict[str, Any]]].model_validate(p)
+    v = KuroApiResp[str | dict[str, Any]].model_validate(p)
     print(v)

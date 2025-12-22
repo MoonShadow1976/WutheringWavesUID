@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 from gsuid_core.bot import Bot
 from gsuid_core.models import Event
@@ -10,7 +10,7 @@ from ..utils.database.models import WavesBind
 from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_103
 from ..utils.hint import error_reply
 from ..utils.waves_api import waves_api
-from ..wutheringwaves_abyss.draw_abyss_card import draw_abyss_img
+from .draw_abyss_card import draw_abyss_img
 from .draw_challenge_card import draw_challenge_img
 from .draw_slash_card import draw_slash_img
 

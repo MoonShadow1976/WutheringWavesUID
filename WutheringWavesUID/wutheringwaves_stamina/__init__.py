@@ -5,8 +5,7 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import ERROR_CODE, WAVES_CODE_098, WAVES_CODE_103
-from ..utils.waves_api import waves_api
+from ..utils.error_reply import ERROR_CODE, WAVES_CODE_103
 from ..utils.waves_send_msg import send_board_cast_msg
 from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_waves_stamina import draw_stamina_img

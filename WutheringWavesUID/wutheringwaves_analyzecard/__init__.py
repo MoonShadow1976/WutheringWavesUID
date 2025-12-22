@@ -1,7 +1,6 @@
 import asyncio
 import re
 
-from async_timeout import timeout
 from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV

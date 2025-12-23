@@ -109,7 +109,7 @@ AbnormalType = Literal[
 ]
 
 # 偏移效果
-ShiftingType =[
+ShiftingType = [
     "TuneRupture",  # 震谐·偏移
     "TuneStrain",  # 集谐·偏移
 ]

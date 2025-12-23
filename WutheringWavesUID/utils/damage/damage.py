@@ -115,6 +115,7 @@ class DamageAttribute:
         dmg_bonus=0,
         dmg_deepen=0,
         easy_damage=0,
+        final_damage=0,
         crit_rate=0,
         crit_dmg=0,
         character_level=0,
@@ -129,7 +130,6 @@ class DamageAttribute:
         char_damage=None,
         enemy_level=90,
         teammate_char_ids: list[int] | None = None,
-        env_spectro=False,
         online_level=1,
     ):
         """
@@ -202,6 +202,8 @@ class DamageAttribute:
         self.dmg_deepen = dmg_deepen
         # 易伤百分比
         self.easy_damage = easy_damage
+        # 最终伤害提升百分比
+        self.final_damage = final_damage
         # 暴击率
         self.crit_rate = crit_rate
         # 暴击伤害
@@ -233,7 +235,7 @@ class DamageAttribute:
         # 队友id
         self.teammate_char_ids = teammate_char_ids if teammate_char_ids else []
         # 光噪效应
-        self.env_spectro = env_spectro
+        self.env_spectro = False
         # 光噪效应伤害加深
         self.env_spectro_deepen = False
         # 风蚀效应
@@ -242,14 +244,34 @@ class DamageAttribute:
         self.env_aero_erosion_deepen = False
         # 虚湮效应
         self.env_havoc_bane = False
+        # 虚湮效应伤害加深
+        self.env_havoc_bane_deepen = False
+        # 聚爆效应
+        self.env_fusion_burst = False
+        # 聚爆效应伤害加深
+        self.env_fusion_burst_deepen = False
+        # 霜渐效应
+        self.env_glacio_chafe = False
+        # 霜渐效应伤害加深
+        self.env_glacio_chafe_deepen = False
+        # 电磁效应
+        self.env_electro_flare = False
+        # 电磁效应伤害加深
+        self.env_electro_flare_deepen = False
+        # 异常类型
+        self.abnormalType = None
+        # 偏移效果
+        self.env_shifting = None
+        # 谐度破坏增幅 (初始10点)
+        self.tune_break_boost = 10
+        # 集谐干涉层数 (初始0层)
+        self.tune_strain_stack = 0
         # 触发护盾
         self.trigger_shield = False
         # 声骸结果
         self.ph_result = False
         # 联觉等级
         self.online_level = online_level
-        # 异常类型
-        self.abnormalType = None
 
         if enemy_resistance:
             self.add_enemy_resistance(enemy_resistance, "敌人抗性", f"{enemy_resistance:.0%}")
@@ -479,6 +501,12 @@ class DamageAttribute:
         self.add_effect(title, msg)
         return self
 
+    def add_final_damage(self, final_damage: float, title="", msg=""):
+        """增加最终伤害百分比"""
+        self.final_damage += final_damage
+        self.add_effect(title, msg)
+        return self
+
     def add_crit_rate(self, crit_rate: float, title="", msg=""):
         """设置暴击率"""
         self.crit_rate += crit_rate
@@ -544,12 +572,28 @@ class DamageAttribute:
         return self
 
     def is_env_abnormal(self):
-        """是否有异常效果"""
+        """是否有异常效应"""
         return any(
             [
                 self.env_spectro,
                 self.env_aero_erosion,
                 self.env_havoc_bane,
+                self.env_fusion_burst,
+                self.env_glacio_chafe,
+                self.env_electro_flare,
+            ]
+        )
+
+    def is_env_abnormal_deepen(self):
+        """是否有异常效应伤害加深"""
+        return any(
+            [
+                self.env_spectro_deepen,
+                self.env_aero_erosion_deepen,
+                self.env_havoc_bane_deepen,
+                self.env_fusion_burst_deepen,
+                self.env_glacio_chafe_deepen,
+                self.env_electro_flare_deepen,
             ]
         )
 
@@ -576,6 +620,53 @@ class DamageAttribute:
     def set_env_havoc_bane(self):
         """虚湮效应"""
         self.env_havoc_bane = True
+        return self
+
+    def set_env_havoc_bane_deepen(self):
+        """虚湮效应伤害加深"""
+        self.env_havoc_bane_deepen = True
+        return self
+
+    def set_env_fusion_burst(self):
+        """聚爆效应"""
+        self.env_fusion_burst = True
+        return self
+
+    def set_env_fusion_burst_deepen(self):
+        """聚爆效应伤害加深"""
+        self.env_fusion_burst_deepen = True
+        return self
+
+    def set_env_glacio_chafe(self):
+        """霜渐效应"""
+        self.env_glacio_chafe = True
+        return self
+
+    def set_env_glacio_chafe_deepen(self):
+        """霜渐效应伤害加深"""
+        self.env_glacio_chafe_deepen = True
+        return self
+
+    def set_env_electro_flare(self):
+        """电磁效应"""
+        self.env_electro_flare = True
+        return self
+
+    def set_env_electro_flare_deepen(self):
+        """电磁效应伤害加深"""
+        self.env_electro_flare_deepen = True
+        return self
+
+    def add_tune_break_boost(self, tune_break_boost: float, title="", msg=""):
+        """增加谐度破坏增幅"""
+        self.tune_break_boost += tune_break_boost
+        self.add_effect(title, msg)
+        return self
+
+    def add_tune_strain_stack(self, tune_strain_stack: float, title="", msg=""):
+        """增加集谐干涉层数"""
+        self.tune_strain_stack += tune_strain_stack
+        self.add_effect(title, msg)
         return self
 
     def set_trigger_shield(self):
@@ -684,6 +775,7 @@ class DamageAttribute:
             * (1 + self.dmg_bonus)
             * (1 + self.dmg_deepen)
             * (1 + self.easy_damage)
+            * (1 + self.final_damage)
             * self.valid_enemy_resistance
             * self.defense_ratio
             * self.crit_dmg
@@ -709,6 +801,7 @@ class DamageAttribute:
             * (1 + self.dmg_bonus)
             * (1 + self.dmg_deepen)
             * (1 + self.easy_damage)
+            * (1 + self.final_damage)
             * self.valid_enemy_resistance
             * self.defense_ratio
             * (self.crit_rate * (self.crit_dmg - 1) + 1)
@@ -719,14 +812,14 @@ class DamageAttribute:
         计算治疗量。
         """
         flat, percent = parse_skill_multi(self.healing_skill_multi)
-        return effect_value * (percent * 0.01) * (1 + self.dmg_bonus) + flat * (1 + self.dmg_bonus)
+        return (effect_value * (percent * 0.01) * (1 + self.skill_ratio_in_skill_description) + flat) * (1 + self.dmg_bonus)
 
     def calculate_shield(self, effect_value):
         """
         计算盾量。
         """
         flat, percent = parse_skill_multi(self.shield_skill_multi)
-        return effect_value * (percent * 0.01) * (1 + self.dmg_bonus) + flat * (1 + self.dmg_bonus)
+        return (effect_value * (percent * 0.01) * (1 + self.skill_ratio_in_skill_description) + flat) * (1 + self.dmg_bonus)
 
 
 class AbnormalSpectroFrazzle:

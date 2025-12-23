@@ -78,6 +78,18 @@ class WeaponAbstract:
         if attr.env_aero_erosion:
             func_list.append("env_aero_erosion")
 
+        if attr.env_havoc_bane:
+            func_list.append("env_havoc_bane")
+
+        if attr.env_fusion_burst:
+            func_list.append("env_fusion_burst")
+
+        if attr.env_glacio_chafe:
+            func_list.append("env_glacio_chafe")
+
+        if attr.env_electro_flare:
+            func_list.append("env_electro_flare")
+
         if attr.trigger_shield:
             func_list.append("trigger_shield")
 
@@ -143,6 +155,22 @@ class WeaponAbstract:
 
     def env_aero_erosion(self, attr: DamageAttribute, isGroup: bool = False):
         """风蚀效应"""
+        pass
+
+    def env_havoc_bane(self, attr: DamageAttribute, isGroup: bool = False):
+        """虚湮效应"""
+        pass
+
+    def env_fusion_burst(self, attr: DamageAttribute, isGroup: bool = False):
+        """聚爆效应"""
+        pass
+
+    def env_glacio_chafe(self, attr: DamageAttribute, isGroup: bool = False):
+        """霜渐效应"""
+        pass
+
+    def env_electro_flare(self, attr: DamageAttribute, isGroup: bool = False):
+        """电磁效应"""
         pass
 
     def trigger_shield(self, attr: DamageAttribute, isGroup: bool = False):

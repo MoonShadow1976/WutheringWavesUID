@@ -157,6 +157,21 @@ phantom_sub_value = [
 ]
 phantom_sub_value_map = {i["name"]: i["values"] for i in phantom_sub_value}
 
+"""
+    声骸副词条 - 配平权重 - 小词条1 属伤1.5 大词条2 双爆3 重要3
+    词条       最大值    权重(=1)
+    攻击       60       0.0167
+    防御       70       0.01429
+    生命       580      0.00173
+    伤加成     11.6%    0.08621
+    攻击%      11.6%
+    生命%      11.6%
+    共鸣效     12.4%    0.08065
+    防御%      14.7%    0.06803
+    暴击       10.5%    0.09524
+    暴伤       21.0%    0.0477
+"""
+
 # 1, 3, 4
 phantom_main_value = [
     {"name": "攻击", "values": ["0", "100", "150"]},
@@ -171,6 +186,28 @@ phantom_main_value = [
     {"name": "治疗效果加成", "values": ["0%", "0%", "26.4%"]},
 ]
 phantom_main_value_map = {i["name"]: i["values"] for i in phantom_main_value}
+
+"""
+    声骸主词条 - 配平权重 - c4_0.7 c3_1 c1_1.4
+    词条       最大值    权重(=1)
+            1 cost
+    攻击%      18%      0.05556
+    防御%      18%
+    生命%      22.8%    0.04386
+            3 cost
+    伤加成     30%      0.03334
+    攻击%      30%
+    生命%      30%
+    共鸣效     32%      0.03125
+    防御%      38%      0.02632
+            4 cost
+    暴击       22%      0.04546
+    治疗效     26.4%    0.03789
+    攻击%      33%      0.03031
+    生命%      33%
+    防御%      41.8%    0.02393
+    暴伤       44%      0.02273
+"""
 
 
 def calc_sub_max_score(_temp, sub_props, jineng: list | None = None, skill_weight: list | None = None):
@@ -267,6 +304,7 @@ def read_calc_json_files(directory):
         except Exception as e:
             print(f"Error decoding {file}", e)
 
+    char_limit_cards.sort(key=lambda x: x["role"]["roleId"])
     with open(ROLE_LIMIT_PATH, "w", encoding="utf-8") as f:
         json.dump(char_limit_cards, f, ensure_ascii=False, indent=2)
 
@@ -399,8 +437,14 @@ def calc_char_limit(char_limit, calc_file_dict):
                 "共鸣解放伤害加成",
             ][jineng_index]
 
+            custom_sub_shuxing = j.get("subPropName", [])
+            max_sub_props = calc_file_dict["max_sub_props"]
+
             subProps = i["subProps"]
-            for sub_props_name in calc_file_dict["max_sub_props"]:
+            max_len = max(len(custom_sub_shuxing), len(max_sub_props))
+            for idx in range(max_len):
+                sub_props_name = custom_sub_shuxing[idx] if idx < len(custom_sub_shuxing) else max_sub_props[idx]
+
                 _phantom_value = phantom_sub_value_map[sub_props_name][-1]
                 if sub_props_name.startswith("技能"):
                     sub_props_name = jineng_name

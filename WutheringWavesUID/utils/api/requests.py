@@ -166,9 +166,7 @@ class WavesApi:
         if waves_user.status == "无效":
             return ""
 
-        from ..waves_api import waves_api
-
-        if not waves_api.is_net(uid):
+        if not self.is_net(uid):
             data = await self.login_log(uid, waves_user.cookie)
             if not data.success:
                 await data.mark_cookie_invalid(uid, waves_user.cookie)

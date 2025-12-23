@@ -185,9 +185,9 @@
         "need_admin": false
       },
       {
-        "name": "查询声骸列表",
-        "desc": "查询声骸列表",
-        "eg": "声骸列表",
+        "name": "查询声骸",
+        "desc": "查询声骸",
+        "eg": "声骸",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
@@ -453,7 +453,7 @@
       {
         "name": "无尽群排行",
         "desc": "无尽群排行",
-        "eg": "无尽排行",
+        "eg": "无尽排行(上期)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

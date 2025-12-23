@@ -98,7 +98,7 @@ Havoc_Bane_Role_Ids = [1508]
 # 失序彼岸之梦 套装
 Ancient_Role_Ids = [1608]
 
-# 异常
+# 异常效应
 AbnormalType = Literal[
     "SpectroFrazzle",  # 光噪效应
     "AeroErosion",  # 风蚀效应
@@ -106,6 +106,12 @@ AbnormalType = Literal[
     "FusionBurst",  # 聚爆效应
     "GlacioChafe",  # 霜渐效应
     "ElectroFlare",  # 电磁效应
+]
+
+# 偏移效果
+ShiftingType =[
+    "TuneRupture",  # 震谐·偏移
+    "TuneStrain",  # 集谐·偏移
 ]
 
 

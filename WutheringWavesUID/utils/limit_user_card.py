@@ -20,4 +20,11 @@ async def load_limit_user_card():
     async with aiofiles.open(LIMIT_USER_PATH / "rawData.json", "w", encoding="UTF-8") as f:
         await f.write(json.dumps(data, ensure_ascii=False))
 
+    LIMIT_USER_PATH = PLAYER_PATH / "999999999"
+    if not LIMIT_USER_PATH.exists():
+        LIMIT_USER_PATH.mkdir(parents=True, exist_ok=True)
+
+    async with aiofiles.open(LIMIT_USER_PATH / "rawData.json", "w", encoding="UTF-8") as f:
+        await f.write(json.dumps(data, ensure_ascii=False))
+
     return data

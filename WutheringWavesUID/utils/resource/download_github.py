@@ -7,10 +7,6 @@ import aiofiles
 from gsuid_core.logger import logger
 import httpx
 
-# 全局缓存
-global_tag, global_url = "", ""
-NOW_SPEED_TEST = False
-
 # GitHub Raw 镜像源列表 (可扩展)
 GITHUB_MIRRORS = [
     ("[GitHub Raw]", "https://raw.githubusercontent.com"),  # 包含直连
@@ -86,95 +82,77 @@ async def test_mirror_speed(tag: str, base_url: str) -> tuple[str, str, float, d
 
 async def check_speed():
     """测速选择最快的GitHub镜像源，比较资源新鲜度"""
-    global global_tag, global_url, NOW_SPEED_TEST
+    logger.info("[WW资源下载]测速中...")
 
-    if (not global_tag or not global_url) and not NOW_SPEED_TEST:
-        NOW_SPEED_TEST = True
-        logger.info("[WW资源下载]测速中...")
+    tasks = []
+    for tag, base_url in GITHUB_MIRRORS:
+        tasks.append(asyncio.create_task(test_mirror_speed(tag, base_url)))
 
-        tasks = []
-        for tag, base_url in GITHUB_MIRRORS:
-            tasks.append(asyncio.create_task(test_mirror_speed(tag, base_url)))
+    results = await asyncio.gather(*tasks, return_exceptions=True)
 
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+    available_sources = []
 
-        available_sources = []
+    for result in results:
+        if isinstance(result, (Exception, BaseException)):
+            continue
+        tag, base_url, elapsed, json_data = result
 
-        for result in results:
-            if isinstance(result, (Exception, BaseException)):
-                continue
-            tag, base_url, elapsed, json_data = result
+        if elapsed < float("inf"):
+            # 解析更新时间字符串为时间戳 (UTC)
+            last_updated_str = json_data.get("last_updated", "1970-01-01T00:00:00Z") if json_data else "1970-01-01T00:00:00Z"
+            try:
+                last_updated_timestamp = time.mktime(time.strptime(last_updated_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except Exception:
+                last_updated_timestamp = 0
 
-            if elapsed < float("inf"):
-                # 解析更新时间字符串为时间戳 (UTC)
-                last_updated_str = json_data.get("last_updated", "1970-01-01T00:00:00Z") if json_data else "1970-01-01T00:00:00Z"
-                try:
-                    last_updated_timestamp = time.mktime(time.strptime(last_updated_str, "%Y-%m-%dT%H:%M:%SZ"))
-                except Exception:
-                    last_updated_timestamp = 0
+            source_info = {
+                "tag": tag,
+                "url": base_url.rstrip("/"),
+                "time": elapsed,
+                "json": json_data,
+                "last_updated_timestamp": last_updated_timestamp,  # 时间戳用于排序
+            }
+            available_sources.append(source_info)
 
-                source_info = {
-                    "tag": tag,
-                    "url": base_url.rstrip("/"),
-                    "time": elapsed,
-                    "json": json_data,
-                    "last_updated_timestamp": last_updated_timestamp,  # 时间戳用于排序
-                }
-                available_sources.append(source_info)
-
-        if not available_sources:
-            logger.error("❌ 没有可用的镜像源，直接使用GitHub Raw")
-            global_url = mirror_head_to_access_url("https://raw.githubusercontent.com")
-            global_tag = "[GitHub Raw]"
-            NOW_SPEED_TEST = False
-            return global_tag, global_url
-
-        # 按更新时间戳降序（越新越好），然后按延时升序（越小越好）
-        def sort_key(source):
-            return (
-                -source["last_updated_timestamp"],  # 降序，时间戳越大越新
-                source["time"],
-            )
-
-        available_sources.sort(key=sort_key)
-
-        # 获取最佳的更新时间和对应的源
-        best_update_timestamp = available_sources[0]["last_updated_timestamp"]
-        best_sources = [s for s in available_sources if s["last_updated_timestamp"] == best_update_timestamp]
-
-        if len(best_sources) > 1:
-            logger.info(f"🔍 有{len(best_sources)}个源具有相同的最新更新时间")
-            # 在这些具有相同更新时间的源中选择最快的
-            best_sources.sort(key=lambda x: x["time"])
-            selected_source = best_sources[0]
-            logger.info(f"⚡ 在这些源中选择最快的: {selected_source['tag']} ({selected_source['time']:.2f}s)")
-        else:
-            selected_source = available_sources[0]
-            logger.info(f"📅 选择唯一一个资源最新的源: {selected_source['tag']}")
-
-        # 特殊处理：如果最佳源不是GitHub Raw但更新时间落后于GitHub Raw，显示警告
-        raw_source = next((s for s in available_sources if s["tag"] == "[GitHub Raw]"), None)
-        if raw_source:
-            if (
-                selected_source["tag"] != "[GitHub Raw]"
-                and selected_source["last_updated_timestamp"] < raw_source["last_updated_timestamp"]
-            ):
-                logger.warning(f"⚠️ 选择的镜像站({selected_source['tag']})资源比GitHub Raw旧，改为使用GitHub Raw")
-
-                selected_source = raw_source
-        else:
-            logger.info(f"GitHub Raw不可用，直接使用镜像站{selected_source['tag']}")
-
-        global_url = mirror_head_to_access_url(selected_source["url"])
-        global_tag = selected_source["tag"]
-        logger.info(f"🚀 最终选择: {global_tag} {global_url}")
-
-        NOW_SPEED_TEST = False
+    if not available_sources:
+        logger.error("❌ 没有可用的镜像源，直接使用GitHub Raw")
+        global_url = mirror_head_to_access_url("https://raw.githubusercontent.com")
+        global_tag = "[GitHub Raw]"
         return global_tag, global_url
 
-    if NOW_SPEED_TEST:
-        while NOW_SPEED_TEST:
-            await asyncio.sleep(0.5)
+    # 按更新时间戳降序（越新越好），然后按延时升序（越小越好）
+    available_sources.sort(key=lambda s: (-s["last_updated_timestamp"], s["time"]))
+
+    # 获取最佳的更新时间和对应的源
+    best_update_timestamp = available_sources[0]["last_updated_timestamp"]
+    best_sources = [s for s in available_sources if s["last_updated_timestamp"] == best_update_timestamp]
+
+    if len(best_sources) > 1:
+        logger.info(f"🔍 有{len(best_sources)}个源具有相同的最新更新时间")
+        # 在这些具有相同更新时间的源中选择最快的
+        best_sources.sort(key=lambda x: x["time"])
+        selected_source = best_sources[0]
+        logger.info(f"⚡ 在这些源中选择最快的: {selected_source['tag']} ({selected_source['time']:.2f}s)")
+    else:
+        selected_source = available_sources[0]
+        logger.info(f"📅 选择唯一一个资源最新的源: {selected_source['tag']}")
+
+    # 特殊处理：如果最佳源不是GitHub Raw但更新时间落后于GitHub Raw，显示警告
+    raw_source = next((s for s in available_sources if s["tag"] == "[GitHub Raw]"), None)
+    if raw_source:
+        if (
+            selected_source["tag"] != "[GitHub Raw]"
+            and selected_source["last_updated_timestamp"] < raw_source["last_updated_timestamp"]
+        ):
+            logger.warning(f"⚠️ 选择的镜像站({selected_source['tag']})资源比GitHub Raw旧，改为使用GitHub Raw")
+
+            selected_source = raw_source
+    else:
+        logger.info(f"GitHub Raw不可用，直接使用镜像站{selected_source['tag']}")
+
+    global_url = mirror_head_to_access_url(selected_source["url"])
+    global_tag = selected_source["tag"]
+    logger.info(f"🚀 最终选择: {global_tag} {global_url}")
 
     return global_tag, global_url
 

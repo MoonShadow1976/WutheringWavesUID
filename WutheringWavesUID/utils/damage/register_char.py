@@ -829,7 +829,7 @@ class Char_1508(CharAbstract):
             attr.add_dmg_bonus(0.5, title, msg)
 
         # 六链效果：异常效应伤害加深
-        if attr.env_abnormal_deepen:  # ？
+        if attr.is_env_abnormal_deepen:
             title = "千咲-六链"
             msg = "拥有虚无绞痕·终焉的目标受到异常效应伤害加深30%"
             attr.add_dmg_deepen(0.3, title, msg)

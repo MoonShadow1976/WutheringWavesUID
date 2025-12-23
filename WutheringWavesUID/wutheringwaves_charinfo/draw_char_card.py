@@ -981,6 +981,8 @@ async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, wave
     # 获取数据
     avatar, role_detail = await get_role_need(ev, char_id, ck, uid, char_name, waves_id)
     if isinstance(role_detail, str):
+        avatar, role_detail = await get_role_need(ev, char_id, ck, "1", char_name)
+    if isinstance(role_detail, str):
         return role_detail
 
     # 创建背景

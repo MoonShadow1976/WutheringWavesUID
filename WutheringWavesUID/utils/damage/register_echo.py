@@ -966,10 +966,20 @@ class Echo_6000179(EchoAbstract):
     id = 6000179
     name = "双极·星升辉铳"
 
+    # 在首位装配该声骸技能时，自身衍射伤害加成提升12.00%，普攻伤害加成提升12.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"普攻伤害加成": "12%", "衍射伤害加成": "12%"}
+
 
 class Echo_6000180(EchoAbstract):
     id = 6000180
     name = "双极·渊陨重锋"
+
+    # 在首位装配该声骸技能时，自身导电伤害加成提升12.00%，普攻伤害加成提升12.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"普攻伤害加成": "12%", "导电伤害加成": "12%"}
 
 
 class Echo_6000181(EchoAbstract):
@@ -1020,6 +1030,11 @@ class Echo_6000189(EchoAbstract):
 class Echo_6000190(EchoAbstract):
     id = 6000190
     name = "炉芯机骸"
+
+    # 在首位装配该声骸技能时，自身共鸣效率提升10.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"共鸣效率": "10%"}
 
 
 def register_echo():

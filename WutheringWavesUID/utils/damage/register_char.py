@@ -1,8 +1,4 @@
-from ...utils.damage.abstract import (
-    CharAbstract,
-    WavesCharRegister,
-    WavesWeaponRegister,
-)
+from ...utils.damage.abstract import CharAbstract, WavesCharRegister, WavesWeaponRegister
 from .damage import DamageAttribute
 from .utils import (
     CHAR_ATTR_CELESTIAL,
@@ -18,6 +14,7 @@ from .utils import (
     phantom_damage,
     skill_damage,
     temp_atk,
+    temp_def,
 )
 
 
@@ -311,6 +308,61 @@ class Char_1209(CharAbstract):
     id = 1209
     name = "莫宁"
     starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        if attr.char_template == temp_atk:
+            title = "莫宁-合鸣效果-星构寻辉之环"
+            msg = "为队中角色治疗时，使队伍中角色攻击提升25%"
+            attr.add_atk_percent(0.25, title, msg)
+
+        # 谐振场
+        title = "莫宁-谐振场"
+        msg = "谐振场生效范围内偏谐值累积效率提升50%"
+        attr.add_off_tune_buildup_rate(0.5, title, msg)
+
+        if attr.char_template == temp_def:
+            # 强谐振场
+            title = "莫宁-强谐振场"
+            msg = "强谐振场生效范围内附近队伍中所有角色防御提升20%"
+            attr.add_def_percent(0.2, title, msg)
+
+        # 干涉标记
+        if attr.is_env_shifting() or chain >= 1:
+            title = "莫宁-干涉标记"
+            tip = "若目标处于【干涉】状态，对其" if chain < 1 else "队伍中角色"
+            msg = f"{tip}造成的伤害提升40%"
+            attr.add_easy_damage(0.4, title, msg)
+
+        if chain >= 2:
+            title = "莫宁-二链"
+            msg = "角色对拥有干涉标记的目标造成的暴击伤害提升32%"
+            attr.add_crit_dmg(0.32, title, msg)
+
+            title = "莫宁-二链"
+            msg = "谐振场还会使偏谐值累积效率额外提升20%"
+            attr.add_off_tune_buildup_rate(0.2, title, msg)
+
+        title = "莫宁-解耦"
+        msg = "莫宁于编队中时，目标集谐·干涉层数上限增加1层"
+        attr.add_tune_strain_stack(1, title, msg)
+
+        title = "莫宁-延奏技能"
+        msg = "队伍中的角色全伤害加深25%"
+        attr.add_dmg_deepen(0.25, title, msg)
+
+        # 宙算仪轨
+        weapon_clz = WavesWeaponRegister.find_class(21010066)
+        if weapon_clz:
+            w = weapon_clz(21010066, 90, 6, resonLevel)
+            method = getattr(w, "cast_healing", None)
+            if callable(method):
+                method(attr, isGroup)
 
 
 class Char_1301(CharAbstract):
@@ -846,6 +898,69 @@ class Char_1509(CharAbstract):
     id = 1509
     name = "琳奈"
     starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 附加集谐·偏移 - 光致变染
+        title = "琳奈-共鸣模态"
+        msg = "光致变染为目标附加【集谐·偏移】"
+        attr.set_env_tune_strain()
+        attr.add_effect(title, msg)
+
+        title = "琳奈-共鸣回路-视觉冲击"
+        msg = "消耗3点【本色】，使附近队伍中所有角色的谐度破坏增幅提升40点"
+        attr.add_tune_break_boost(40, title, msg)
+
+        title = "琳奈-共鸣解放"
+        msg = "施放时使附近队伍中所有角色的伤害加成提升24%，持续30秒"
+        attr.add_dmg_bonus(0.24, title, msg)
+
+        title = "琳奈-光谱解析"
+        msg = "琳奈于编队中时，目标集谐·干涉层数上限增加1层"
+        attr.add_tune_strain_stack(1, title, msg)
+
+        title = "琳奈-延奏技能"
+        msg = "下一个登场的角色全伤害加深15%，持续14秒"
+        attr.add_dmg_deepen(0.15, title, msg)
+
+        if chain >= 2:
+            title = "琳奈-二链"
+            msg = "延奏技能额外使下一个登场的角色全伤害加深25%"
+            attr.add_dmg_deepen(0.25, title, msg)
+
+        if attr.char_damage == liberation_damage:
+            title = "琳奈-延奏技能"
+            msg = "下一个登场的角色共鸣解放伤害加深25%，持续14秒"
+            attr.add_dmg_deepen(0.25, title, msg)
+
+        title = "琳奈-声骸技能-海维夏"
+        msg = "使用后15秒内，使下一个变奏技能登场的角色全属性伤害加成提升10%"
+        attr.add_dmg_bonus(0.1, title, msg)
+
+        # 角色施放延奏技能后，下一个变奏技能登场的角色攻击提升15%，其每点谐度破坏增幅还会使攻击额外提升0.3%，上限15%，持续15秒，若切换至其他角色则该效果提前结束。
+        if attr.char_template == "temp_atk":
+            title = "琳奈-合鸣效果-逆光跃彩之约"
+            msg = "角色施放延奏技能后，下一个变奏技能登场的角色攻击提升15%"
+            attr.add_atk_percent(0.15, title, msg)
+
+            # dmg = min(0.15, attr.tune_break_boost * 0.003) # 其 是指变奏的角色
+            # msg = f"其每点谐度破坏增幅使攻击额外提升0.3%,上限15%(当前提升{dmg * 100:.2f}%)"
+            # attr.add_atk_percent(dmg, title, msg)
+            msg = "其谐度破坏增幅使攻击额外提升15%"  # 其 是指戴套的角色
+            attr.add_atk_percent(0.15, title, msg)
+
+        # 溢彩荧辉
+        weapon_clz = WavesWeaponRegister.find_class(21030046)
+        if weapon_clz:
+            w = weapon_clz(21030046, 90, 6, resonLevel)
+            method = getattr(w, "cast_attack", None)
+            if callable(method):
+                method(attr, isGroup)
 
 
 class Char_1601(CharAbstract):

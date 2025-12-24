@@ -781,14 +781,12 @@
                             "cost": 4
                         },
                         {
-                            "phantomId": 6000077,
-                            "mainPropName": "属性伤害加成",
-                            "cost": 3
+                            "phantomId": 6000172,
+                            "cost": 1
                         },
                         {
-                            "phantomId": 6000173,
-                            "mainPropName": "属性伤害加成",
-                            "cost": 3
+                            "phantomId": 6000171,
+                            "cost": 1
                         }
                     ]
                 },
@@ -800,7 +798,78 @@
                             "cost": 1
                         },
                         {
-                            "phantomId": 390070077,
+                            "phantomId": 6000090,
+                            "cost": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "libId": 26,
+            "fetterList": [
+                {
+                    "fetterDetailName": "熔山裂谷",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000091,
+                            "mainPropName": "暴击伤害",
+                            "subPropName":[
+                                "防御%",
+                                "暴击"
+                            ],
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 390077033,
+                            "mainPropName": "防御%",
+                            "subPropName":[
+                                "防御%",
+                                "暴击"
+                            ],
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 390077028,
+                            "mainPropName": "防御%",
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 390077012,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 390077016,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "libId": 27,
+            "fetterList": [
+                {
+                    "fetterDetailName": "流金溯真之式",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000179,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000180,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000189,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000175,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000176,
                             "cost": 1
                         }
                     ]
@@ -972,6 +1041,13 @@
         },
         {
             "calcFile": "calc.json",
+            "charId": 1307,
+            "name": "卜灵",
+            "weaponId": 21050024,
+            "sonataLibId": 17
+        },
+        {
+            "calcFile": "calc.json",
             "charId": 1409,
             "name": "卡提希娅",
             "weaponId": 21020056,
@@ -1025,6 +1101,20 @@
             "name": "千咲",
             "weaponId": 21010056,
             "sonataLibId": 25
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1209,
+            "name": "莫宁",
+            "weaponId": 21010066,
+            "sonataLibId": 26
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1509,
+            "name": "琳奈",
+            "weaponId": 21030046,
+            "sonataLibId": 27
         }
     ]
 }

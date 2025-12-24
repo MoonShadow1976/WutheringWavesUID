@@ -262,6 +262,12 @@ class DamageAttribute:
         self.abnormalType = None
         # 偏移效果
         self.env_shifting = None
+        # 震谐·干涉
+        self.env_tune_rupture = False
+        # 集谐·干涉
+        self.env_tune_strain = False
+        # 偏谐值累积效率 (初始100%)
+        self.off_tune_buildup_rate = 1
         # 谐度破坏增幅 (初始10点)
         self.tune_break_boost = 10
         # 集谐干涉层数 (初始0层)
@@ -655,6 +661,28 @@ class DamageAttribute:
     def set_env_electro_flare_deepen(self):
         """电磁效应伤害加深"""
         self.env_electro_flare_deepen = True
+        return self
+
+    def is_env_shifting(self):
+        """是否处于干涉状态"""
+        return any([self.env_tune_rupture, self.env_tune_strain])
+
+    def set_env_tune_rupture(self):
+        """震谐·干涉"""
+        self.env_tune_rupture = True
+        self.env_tune_strain = False
+        return self
+
+    def set_env_tune_strain(self):
+        """集谐·干涉"""
+        self.env_tune_strain = True
+        self.env_tune_rupture = False
+        return self
+
+    def add_off_tune_buildup_rate(self, off_tune_buildup_rate: float, title="", msg=""):
+        """增加偏谐值累积效率"""
+        self.off_tune_buildup_rate += off_tune_buildup_rate
+        self.add_effect(title, msg)
         return self
 
     def add_tune_break_boost(self, tune_break_boost: float, title="", msg=""):

@@ -6,6 +6,7 @@ from .utils import (
     CHAR_ATTR_SIERRA,
     Spectro_Frazzle_Role_Ids,
     attack_damage,
+    cast_variation,
     heal_bonus,
     hit_damage,
     liberation_damage,
@@ -208,6 +209,19 @@ class Weapon_21010045(WeaponAbstract):
     type = 1
     name = "源能机锋"
 
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if not attr.env_tune_strain and attr.char_damage != liberation_damage:
+            return
+        title = self.get_title()
+        dmg = f"{self.param(1)}"
+        msg = f"对处于集谐·干涉状态的敌人造成伤害后，共鸣解放伤害加成提升{dmg}"
+        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
 
 class Weapon_21010046(WeaponAbstract):
     id = 21010046
@@ -251,16 +265,14 @@ class Weapon_21010056(WeaponAbstract):
         isGroup: bool = False,
     ):
         # 施放变奏技能或附加【异常效应】时才生效
-        if not attr.is_env_abnormal:
+        if not attr.is_env_abnormal and attr.char_damage != cast_variation:
             return
 
-        if attr.char_damage != liberation_damage:
-            return
-
-        title = self.get_title()
-        dmg = f"{self.param(1)}*{self.param(2)}"
-        msg = f"施放变奏技能或附加【异常效应】时，共鸣解放伤害加成提升{dmg}"
-        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+        if attr.char_damage == liberation_damage:
+            title = self.get_title()
+            dmg = f"{self.param(1)}*{self.param(2)}"
+            msg = f"施放变奏技能或附加【异常效应】时，共鸣解放伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
         # 千咲：满层时，附加异常效应时全属性伤害加成
         if attr.role and attr.role.role.roleId == 1508:
@@ -294,6 +306,14 @@ class Weapon_21010066(WeaponAbstract):
     id = 21010066
     type = 1
     name = "宙算仪轨"
+
+    # # 造成治疗时，使附近队伍中所有角色的暴击伤害提升{4}
+    def cast_healing(self, attr: DamageAttribute, isGroup: bool = False):
+        """施放治疗"""
+        dmg = f"{self.param(4)}"
+        title = self.get_title()
+        msg = f"造成治疗时，使附近队伍中所有角色的暴击伤害提升{dmg}"
+        attr.add_crit_dmg(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21010074(WeaponAbstract):
@@ -577,6 +597,19 @@ class Weapon_21020045(WeaponAbstract):
     id = 21020045
     type = 2
     name = "镭射切变"
+
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if not attr.env_tune_strain and attr.char_damage != skill_damage:
+            return
+        title = self.get_title()
+        dmg = f"{self.param(1)}"
+        msg = f"对处于集谐·干涉状态的敌人造成伤害后，共鸣技能伤害加成提升{dmg}"
+        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21020046(WeaponAbstract):
@@ -916,11 +949,46 @@ class Weapon_21030045(WeaponAbstract):
     type = 3
     name = "相位涟漪"
 
+    def cast_tune_break(self, attr: DamageAttribute, isGroup: bool = False):
+        # 队伍中的角色施放【谐度破坏技】后，自身全属性伤害加成提升{1}
+        dmg = f"{self.param(1)}"
+        title = self.get_title()
+        msg = f"施放【谐度破坏技】后，自身全属性伤害加成提升{dmg}"
+        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
 
 class Weapon_21030046(WeaponAbstract):
     id = 21030046
     type = 3
     name = "溢彩荧辉"
+
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        # 施放变奏技能或普攻伤害命中时，使自身普攻伤害提高{1}，持续{2}秒
+        if attr.char_damage == attack_damage:
+            dmg = f"{self.param(1)}"
+            title = self.get_title()
+            msg = f"施放变奏技能或普攻伤害命中时，使自身普攻伤害提高{dmg}"
+            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
+
+        # 每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使全队角色造成的全伤害提高{3}，最多叠加{4}层
+        if attr.is_env_shifting:
+            dmg = f"{self.param(3)} * {self.param(4)}"
+            title = self.get_title()
+            msg = f"普攻为目标附加【偏移】时，使全队角色造成的全伤害提高{dmg}"
+            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
+
+    def cast_attack(self, attr: DamageAttribute, isGroup: bool = False):
+        # 每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使全队角色造成的全伤害提高{3}，最多叠加{4}层
+        if attr.is_env_shifting:
+            dmg = f"{self.param(3)} * {self.param(4)}"
+            title = self.get_title()
+            msg = f"普攻为目标附加【偏移】时，使全队角色造成的全伤害提高{dmg}"
+            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21030053(WeaponAbstract):
@@ -1223,6 +1291,20 @@ class Weapon_21040045(WeaponAbstract):
     id = 21040045
     type = 4
     name = "脉冲协臂"
+
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        # 对处于【集谐·干涉】状态的敌人造成伤害后，普攻伤害加成提升{1}，持续{2}秒，可叠加{3}层
+        if not attr.env_tune_strain and attr.char_damage != attack_damage:
+            return
+        title = self.get_title()
+        dmg = f"{self.param(1) * self.param(3)}"
+        msg = f"对处于集谐·干涉状态的敌人造成伤害后，普攻伤害加成提升{dmg}"
+        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21040046(WeaponAbstract):
@@ -1571,6 +1653,18 @@ class Weapon_21050045(WeaponAbstract):
     id = 21050045
     type = 5
     name = "玻色星仪"
+
+    def cast_tune_break(self, attr: DamageAttribute, isGroup: bool = False):
+        # 队伍中的角色施放【谐度破坏技】后，自身攻击提升{1}，普攻伤害加成提升{2}
+        dmg = f"{self.param(1)}"
+        title = self.get_title()
+        msg = f"施放【谐度破坏技】后，自身攻击提升{dmg}"
+        attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+        if attr.char_damage == attack_damage:
+            dmg = f"{self.param(2)}"
+            title = self.get_title()
+            msg = f"施放【谐度破坏技】后，自身普攻伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21050046(WeaponAbstract):

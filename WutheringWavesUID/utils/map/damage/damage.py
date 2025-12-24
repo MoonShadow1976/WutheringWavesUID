@@ -35,6 +35,7 @@ from ...damage.utils import (
     SONATA_WELKIN,
     Havoc_Bane_Role_Ids,
     Spectro_Frazzle_Role_Ids,
+    attack_damage,
     cast_attack,
     cast_hit,
     cast_liberation,
@@ -167,9 +168,13 @@ def phase_damage(
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_MOONLIT):
             pass
 
-        # 不绝余音 查无此人
+        # 不绝余音
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_LINGERING):
-            pass
+            if attr.char_template != "temp_atk":
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "在场时，自身攻击每1.5秒提升5%，该效果最多叠加四层"
+            attr.add_atk_percent(0.2, title, msg)
 
         # 凌冽决断之心 -新冷凝
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_FROSTY):
@@ -343,13 +348,30 @@ def phase_damage(
             attr.add_dmg_bonus(0.3, title, msg)
 
         # 逆光跃彩之约
-        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_PRISMATIC):
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_PRISMATIC):
+            # 角色施放延奏技能后，下一个变奏技能登场的角色攻击提升15%，其每点谐度破坏增幅还会使攻击额外提升0.3%，上限15%，持续15秒，若切换至其他角色则该效果提前结束。
             pass
 
         # 流金溯真之式
-        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_SPAGYRIC):
-            pass
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_SPAGYRIC):
+            # 角色造成普攻伤害时，自身衍射伤害提升10%，该效果可叠加3层，持续5秒。
+            # 叠至3层时，施放共鸣解放时，普攻伤害加成提升40%。
+            if attr.char_damage != attack_damage:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            if attr.char_attr == CHAR_ATTR_CELESTIAL:
+                msg = "角色造成普攻伤害时，自身衍射伤害提升10%，可叠加3层"
+                attr.add_easy_damage(0.3, title, msg)
+            if cast_liberation in damage_func:
+                msg = "叠至3层时，施放共鸣解放时，普攻伤害加成提升40%"
+                attr.add_dmg_bonus(0.4, title, msg)
 
         # 星构寻辉之环
-        elif check_if_ph_3(ph_detail.ph_name, ph_detail.ph_num, SONATA_SIDEREAL):
-            pass
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_SIDEREAL):
+            # 为队伍中角色提供治疗时，自身每1%的偏谐值累积效率使队伍中角色攻击提升0.2%，上限25%
+            if attr.char_template != "temp_atk":
+                return
+            dmg = min(0.25, attr.off_tune_buildup_rate * 0.2)
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = f"治疗时，自身每1%偏谐累积效率提升攻击0.2%,上限25%(当前提升{dmg * 100:.2f}%)"
+            attr.add_atk_percent(dmg, title, msg)

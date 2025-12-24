@@ -2,212 +2,152 @@
 
 from ...api.model import RoleDetailData
 from ...ascension.char import WavesCharResult, get_char_detail2
-from ...damage.damage import DamageAttribute
+from ...damage.damage import DamageAttribute, calc_percent_expression
 from ...damage.utils import (
     SkillTreeMap,
     SkillType,
-    cast_attack,
-    cast_hit,
+    cast_damage,
+    cast_healing,
     cast_liberation,
     cast_skill,
+    heal_bonus,
     liberation_damage,
+    skill_create_healing,
     skill_damage_calc,
 )
+from .buff import lynae_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
-# def calc_damage_1(
-#     attr: DamageAttribute,
-#     role: RoleDetailData,
-#     isGroup: bool = False,
-#     size: Literal[1, 2, 3, 4, 5] = 1,
-# ) -> tuple[str, str]:
-#     # 设置角色伤害类型  #分布式阵列治疗量   最优求解伤害
-#     attr.set_char_damage(skill_damage)
-#     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-#     attr.set_char_template("temp_atk")
 
-#     role_name = role.role.roleName
-#     # 获取角色详情
-#     char_result: WavesCharResult = get_char_detail2(role)
-
-#     skill_type: SkillType = "共鸣回路"
-#     # 获取角色技能等级
-#     skillLevel = role.get_skill_level(skill_type)
-#     # 技能技能倍率
-#     skillParamId = f"{size+16}"
-#     skill_multi = skill_damage_calc(
-#         char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel
-#     )
-#     title = f"普攻·炽天猎杀第{size}段"
-#     msg = f"技能倍率{skill_multi}"
-#     attr.add_skill_multi(skill_multi, title, msg)
-
-#     # 设置角色施放技能
-#     damage_func = [cast_attack, cast_skill, cast_hit, cast_liberation, cast_phantom]
-#     phase_damage(attr, role, damage_func, isGroup)
-
-#     # 设置角色等级
-#     attr.set_character_level(role.role.level)
-
-#     # 设置角色固有技能
-#     role_breach = role.role.breach
-#     if role_breach and role_breach >= 3:
-#         title = "固有技能-誓猎"
-#         msg = "死运既定，伤害加深5*4%"
-#         attr.add_dmg_deepen(0.05 * 4, title, msg)
-
-#     # 设置角色技能施放是不是也有加成 eg：守岸人
-
-#     # 共鸣解放 伤害倍率
-#     title = "共鸣解放-炼净"
-#     msg = "伤害倍率提升85%"
-#     attr.add_skill_ratio_in_skill_description(0.85, title, msg)
-
-#     # 设置声骸属性
-#     attr.set_phantom_dmg_bonus()
-
-#     # 设置共鸣链
-#     chain_num = role.get_chain_num()
-#     if chain_num >= 1:
-#         title = f"{role_name}-一链"
-#         msg = "40点余火，提升80%暴击伤害"
-#         attr.add_crit_dmg(0.8, title, msg)
-
-#     if chain_num >= 2:
-#         title = f"{role_name}-二链"
-#         msg = "内燃烧提供的攻击加成提升350%。"
-#         attr.add_atk_percent(0.2 * (1 + 3.5), title, msg)
-#     else:
-#         # 内燃烧 buff
-#         title = "内燃烧"
-#         msg = "嘉贝莉娜的攻击提升20%"
-#         attr.add_atk_percent(0.2, title, msg)
-
-#     if chain_num >= 4:
-#         title = f"{role_name}-四链"
-#         msg = "施放声骸技能时，全属性伤害加成提升20%"
-#         attr.add_dmg_bonus(0.2, title, msg)
-
-#     if chain_num >= 6:
-#         title = f"{role_name}-六链"
-#         msg = "伤害倍率提升60%"
-#         attr.add_skill_ratio(0.6, title, msg)
-
-#         msg = "永恒位格余火提供35%热熔伤害加深"
-#         attr.add_dmg_deepen(0.35, title, msg)
-
-#     # 声骸
-#     echo_damage(attr, isGroup)
-
-#     # 武器
-#     weapon_damage(attr, role.weaponData, damage_func, isGroup)
-
-#     # 暴击伤害
-#     crit_damage = f"{attr.calculate_crit_damage():,.0f}"
-#     # 期望伤害
-#     expected_damage = f"{attr.calculate_expected_damage():,.0f}"
-#     return crit_damage, expected_damage
-
-
-# def calc_damage_2(
-#     attr: DamageAttribute,
-#     role: RoleDetailData,
-#     isGroup: bool = False,
-#     size: Literal[1, 2, 3] = 1,
-#     char_damage: Literal["hit_damage", "phantom_damage"] = hit_damage,
-# ) -> tuple[str, str]:
-#     # 设置角色伤害类型
-#     attr.set_char_damage(char_damage)
-#     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-#     attr.set_char_template("temp_atk")
-
-#     role_name = role.role.roleName
-#     # 获取角色详情
-#     char_result: WavesCharResult = get_char_detail2(role)
-
-#     skill_type: SkillType = "共鸣回路"
-#     # 获取角色技能等级
-#     skillLevel = role.get_skill_level(skill_type)
-#     # 技能技能倍率
-#     skillParamId = f"{size+21}"
-#     skill_multi = skill_damage_calc(
-#         char_result.skillTrees, SkillTreeMap[skill_type], skillParamId, skillLevel
-#     )
-#     title = f"重击·炼羽裁决第{size}段"
-#     msg = f"技能倍率{skill_multi}"
-#     attr.add_skill_multi(skill_multi, title, msg)
-
-#     # 设置角色施放技能
-#     damage_func = [cast_attack, cast_skill, cast_hit, cast_liberation, cast_phantom]
-#     phase_damage(attr, role, damage_func, isGroup)
-
-#     # 设置角色等级
-#     attr.set_character_level(role.role.level)
-
-#     # 设置角色固有技能
-#     role_breach = role.role.breach
-#     if role_breach and role_breach >= 3:
-#         title = "固有技能-誓猎"
-#         msg = "死运既定，伤害加深5*4%"
-#         attr.add_dmg_deepen(0.05 * 4, title, msg)
-
-#     # 设置角色技能施放是不是也有加成 eg：守岸人
-
-#     # 共鸣解放 伤害倍率
-#     title = "共鸣解放-炼净"
-#     msg = "伤害倍率提升85%"
-#     attr.add_skill_ratio_in_skill_description(0.85, title, msg)
-
-#     # 设置声骸属性
-#     attr.set_phantom_dmg_bonus()
-
-#     # 设置共鸣链
-#     chain_num = role.get_chain_num()
-#     if chain_num >= 1:
-#         title = f"{role_name}-一链"
-#         msg = "40点余火，提升80%暴击伤害"
-#         attr.add_crit_dmg(0.8, title, msg)
-
-#     if chain_num >= 2:
-#         title = f"{role_name}-二链"
-#         msg = "内燃烧提供的攻击加成提升350%。"
-#         attr.add_atk_percent(0.2 * (1 + 3.5), title, msg)
-#     else:
-#         # 内燃烧 buff
-#         title = "内燃烧"
-#         msg = "嘉贝莉娜的攻击提升20%"
-#         attr.add_atk_percent(0.2, title, msg)
-
-#     if chain_num >= 4:
-#         title = f"{role_name}-四链"
-#         msg = "施放声骸技能时，全属性伤害加成提升20%"
-#         attr.add_dmg_bonus(0.2, title, msg)
-
-#     if chain_num >= 6:
-#         title = f"{role_name}-六链"
-#         msg = "伤害倍率提升60%"
-#         attr.add_skill_ratio(0.6, title, msg)
-
-#         msg = "永恒位格余火提供35%热熔伤害加深"
-#         attr.add_dmg_deepen(0.35, title, msg)
-
-#     # 声骸
-#     echo_damage(attr, isGroup)
-
-#     # 武器
-#     weapon_damage(attr, role.weaponData, damage_func, isGroup)
-
-#     # 暴击伤害
-#     crit_damage = f"{attr.calculate_crit_damage():,.0f}"
-#     # 期望伤害
-#     expected_damage = f"{attr.calculate_expected_damage():,.0f}"
-#     return crit_damage, expected_damage
-
-
-def calc_damage_3(
+def calc_damage_1(
     attr: DamageAttribute,
     role: RoleDetailData,
     isGroup: bool = False,
+) -> tuple[str, str]:
+    # 设置角色伤害类型
+    attr.set_char_damage(heal_bonus)
+    # 设置角色模板  "temp_atk", "temp_life", "temp_def"
+    attr.set_char_template("temp_def")
+
+    role_name = role.role.roleName
+    # 获取角色详情
+    char_result: WavesCharResult = get_char_detail2(role)
+
+    skill_type: SkillType = "共鸣技能"
+    # 获取角色技能等级
+    skillLevel = role.get_skill_level(skill_type)
+    # 技能技能倍率
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "14", skillLevel)
+    title = "分布式阵列治疗量"
+    msg = f"技能倍率{skill_multi}"
+    attr.add_healing_skill_multi(skill_multi, title, msg)
+
+    # 设置角色等级
+    attr.set_character_level(role.role.level)
+
+    # 谐振场
+    title = "共鸣回路-谐振场"
+    msg = "谐振场生效范围内偏谐值累积效率提升50%"
+    attr.add_off_tune_buildup_rate(0.5, title, msg)
+
+    # 强谐振场
+    title = "共鸣解放-强谐振场"
+    msg = "强谐振场生效范围内附近队伍中所有角色防御提升20%"
+    attr.add_def_percent(0.2, title, msg)
+
+    # 设置共鸣链
+    chain_num = role.get_chain_num()
+    if chain_num >= 2:
+        title = f"{role_name}-二链"
+        msg = "谐振场还会使偏谐值累积效率额外提升20%"
+        attr.add_off_tune_buildup_rate(0.2, title, msg)
+
+    # 设置角色技能施放是不是也有加成 eg：守岸人
+
+    # 设置角色施放技能 - 增加偏谐值累积效率在前
+    damage_func = [cast_healing, skill_create_healing]
+    phase_damage(attr, role, damage_func, isGroup)
+
+    echo_damage(attr, isGroup)
+
+    weapon_damage(attr, role.weaponData, damage_func, isGroup)
+
+    healing_bonus = attr.calculate_healing(attr.effect_def)
+
+    crit_damage = f"{healing_bonus:,.0f}"
+    return None, crit_damage
+
+
+def calc_damage_2(
+    attr: DamageAttribute,
+    role: RoleDetailData,
+    isGroup: bool = False,
+) -> tuple[str, str]:
+    # 设置角色伤害类型
+    attr.set_char_damage(heal_bonus)
+    # 设置角色模板  "temp_atk", "temp_life", "temp_def"
+    attr.set_char_template("temp_def")
+
+    role_name = role.role.roleName
+    # 获取角色详情
+    char_result: WavesCharResult = get_char_detail2(role)
+
+    skill_type: SkillType = "共鸣回路"
+    # 获取角色技能等级
+    skillLevel = role.get_skill_level(skill_type)
+    # 技能技能倍率
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "27", skillLevel)
+    title = "谐振场治疗量"
+    msg = f"技能倍率{skill_multi}"
+    attr.add_healing_skill_multi(skill_multi, title, msg)
+
+    # 设置角色等级
+    attr.set_character_level(role.role.level)
+
+    # 设置角色技能施放是不是也有加成 eg：守岸人
+
+    # 谐振场
+    title = "共鸣回路-谐振场"
+    msg = "谐振场生效范围内偏谐值累积效率提升50%"
+    attr.add_off_tune_buildup_rate(0.5, title, msg)
+
+    # 强谐振场
+    title = "共鸣解放-强谐振场"
+    msg = "强谐振场生效范围内附近队伍中所有角色防御提升20%"
+    attr.add_def_percent(0.2, title, msg)
+
+    title = "共鸣解放-强谐振场"
+    msg = "继承谐振场的治疗效果，且治疗倍率提升40%"
+    attr.add_skill_ratio_in_skill_description(0.4, title, msg)
+
+    # 设置共鸣链
+    chain_num = role.get_chain_num()
+    if chain_num >= 2:
+        title = f"{role_name}-二链"
+        msg = "谐振场还会使偏谐值累积效率额外提升20%"
+        attr.add_off_tune_buildup_rate(0.2, title, msg)
+
+    if chain_num >= 4:
+        title = f"{role_name}-四链"
+        msg = "强谐振场的治疗量提升30%"
+        attr.add_dmg_bonus(0.32, title, msg)
+
+    # 设置角色施放技能 - 增加偏谐值累积效率在前
+    damage_func = [cast_healing]
+    phase_damage(attr, role, damage_func, isGroup)
+
+    echo_damage(attr, isGroup)
+
+    weapon_damage(attr, role.weaponData, damage_func, isGroup)
+
+    healing_bonus = attr.calculate_healing(attr.effect_def)
+
+    crit_damage = f"{healing_bonus:,.0f}"
+    return None, crit_damage
+
+
+def calc_damage_3(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, Interfered: bool = False
 ) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
@@ -222,14 +162,10 @@ def calc_damage_3(
     # 获取角色技能等级
     skillLevel = role.get_skill_level(skill_type)
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "20", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "21", skillLevel)
     title = "共鸣解放·临界协议"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
-
-    # 设置角色施放技能
-    damage_func = [cast_attack, cast_skill, cast_hit, cast_liberation]
-    phase_damage(attr, role, damage_func, isGroup)
 
     # 设置角色等级
     attr.set_character_level(role.role.level)
@@ -237,42 +173,64 @@ def calc_damage_3(
     # 设置角色固有技能
     # role_breach = role.role.breach
     # if role_breach and role_breach >= 3:
-    #     title = "固有技能-誓猎"
-    #     msg = "死运既定，伤害加深5*4%"
-    #     attr.add_dmg_deepen(0.05 * 4, title, msg)
+
+    # 设置角色谐度破坏
+    if Interfered:
+        title = "解耦"
+        msg = "莫宁于编队中时，目标集谐·干涉层数上限增加1层"
+        attr.add_tune_strain_stack(1, title, msg)
+
+        title = "解耦-响应集谐干涉"
+        dmg = f"0.12% * {attr.tune_strain_stack} * {attr.tune_break_boost}"
+        msg = f"每层集谐·干涉,每点谐度破坏增幅最终伤害提升{dmg}"
+        attr.add_final_damage(calc_percent_expression(dmg), title, msg)
 
     # 设置角色技能施放是不是也有加成 eg：守岸人
 
-    # # 设置声骸属性
-    # attr.set_phantom_dmg_bonus()
-
     # 临界协议
-    title = "共鸣解放-临界协议"
-    msg = "莫宁自身共鸣效率大于260%时，解放伤害暴击提升80%"
-    attr.add_crit_rate(0.6, title, msg)
-    msg = "莫宁自身共鸣效率大于260%时，解放伤害暴击伤害提升160%"
-    attr.add_crit_dmg(1.6, title, msg)
+    if attr.energy_regen > 1:
+        title = "共鸣解放-临界协议"
+        dmg = min(0.8, (attr.energy_regen - 1) * 0.5)
+        msg = f"共效超100%每1%为该伤害提升0.5%暴击,上限80%,当前提升{dmg * 100:.2f}%"
+        attr.add_crit_rate(dmg, title, msg)
+        dmg = min(1.6, attr.energy_regen - 1)
+        msg = f"共效超100%每1%为该伤害提升1%爆伤,上限160%,当前提升{dmg * 100:.2f}%"
+        attr.add_crit_dmg(dmg, title, msg)
+
+    # 谐振场
+    title = "共鸣回路-谐振场"
+    msg = "谐振场生效范围内偏谐值累积效率提升50%"
+    attr.add_off_tune_buildup_rate(0.5, title, msg)
 
     # 强谐振场
     title = "共鸣解放-强谐振场"
     msg = "强谐振场生效范围内附近队伍中所有角色防御提升20%"
     attr.add_def_percent(0.2, title, msg)
 
-    # 干涉标记
-    title = "共鸣回路-干涉标记"
-    msg = "附近队伍中所有角色对拥有干涉标记的目标造成的伤害提升40%"
-    attr.add_easy_damage(0.4, title, msg)
+    # 设置共鸣链
+    chain_num = role.get_chain_num()
 
-    title = "延奏技能"
+    # 干涉标记
+    if attr.energy_regen > 1 and (attr.is_env_shifting() or chain_num >= 1):
+        title = "共鸣回路-干涉标记"
+        dmg = min(0.4, (attr.energy_regen - 1) * 0.25)
+        msg = f"共效超100%每1%计为0.25%伤害提升,上限40%,当前提升{dmg * 100:.2f}%"
+        attr.add_easy_damage(dmg, title, msg)
+
+    title = f"{role_name}-延奏技能"
     msg = "队伍中的角色全伤害加深25%"
     attr.add_dmg_deepen(0.25, title, msg)
 
-    # 设置共鸣链
-    chain_num = role.get_chain_num()
     if chain_num >= 2:
-        title = f"{role_name}-二链"
-        msg = "附近队伍中所有角色对拥有干涉标记的目标造成的暴击伤害提升32%"
-        attr.add_crit_dmg(0.32, title, msg)
+        if attr.energy_regen > 1:
+            title = f"{role_name}-二链-干涉标记"
+            dmg = min(0.32, (attr.energy_regen - 1) * 0.2)
+            msg = f"共效超100%每1%提升0.2%爆伤,上限32%,当前提升{dmg * 100:.2f}%"
+            attr.add_crit_dmg(dmg, title, msg)
+
+        title = f"{role_name}-二链-谐振场"
+        msg = "谐振场使偏谐值累积效率额外提升20%"
+        attr.add_off_tune_buildup_rate(0.2, title, msg)
 
     if chain_num >= 5:
         title = f"{role_name}-五链"
@@ -284,6 +242,10 @@ def calc_damage_3(
         msg = "共鸣解放·临界协议造成的伤害提升400%"
         attr.add_easy_damage(4, title, msg)
 
+    # 设置角色施放技能 - 增加偏谐值累积效率在前 - 造成共鸣技能伤害吃火套
+    damage_func = [cast_skill, cast_damage, cast_healing, cast_liberation]
+    phase_damage(attr, role, damage_func, isGroup)
+
     # 声骸
     echo_damage(attr, isGroup)
 
@@ -291,32 +253,71 @@ def calc_damage_3(
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage(attr.effect_def):,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage(attr.effect_def):,.0f}"
     return crit_damage, expected_damage
 
 
-# def calc_damage_10(
-#     attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True
-# ) -> tuple[str, str]:
-#     attr.set_char_damage(phantom_damage)
-#     attr.set_char_template("temp_atk")
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+    attr.set_char_damage(liberation_damage)
+    attr.set_char_template("temp_def")
 
-#     # 守岸人buff
-#     shouanren_buff(attr, 0, 1, isGroup)
+    # 琳奈buff
+    lynae_buff(attr, 0, 1, isGroup)
 
-#     # 露帕buff
-#     lupa_buff(attr, 0, 1, isGroup)
+    return calc_damage_3(attr, role, isGroup)
 
-#     return calc_damage_3(attr, role, isGroup)
+
+def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+    attr.set_char_damage(liberation_damage)
+    attr.set_char_template("temp_def")
+
+    # 琳奈buff
+    lynae_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_3(attr, role, isGroup, Interfered=True)
+
+
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+    attr.set_char_damage(liberation_damage)
+    attr.set_char_template("temp_def")
+
+    # 琳奈buff
+    lynae_buff(attr, 2, 5, isGroup)
+
+    return calc_damage_3(attr, role, isGroup, Interfered=True)
 
 
 damage_detail = [
     {
-        "title": "莫宁-共鸣解放·临界协议",
+        "title": "分布式阵列治疗量",
+        "func": lambda attr, role: calc_damage_1(attr, role),
+    },
+    {
+        "title": "强谐振场治疗量",
+        "func": lambda attr, role: calc_damage_2(attr, role),
+    },
+    {
+        "title": "临界协议",
         "func": lambda attr, role: calc_damage_3(attr, role),
+    },
+    {
+        "title": "响应集谐·临界协议",
+        "func": lambda attr, role: calc_damage_3(attr, role, Interfered=True),
+    },
+    {
+        "title": "0+1琳奈/临界协议",
+        "func": lambda attr, role: calc_damage_10(attr, role),
+    },
+    {
+        "title": "0+1琳奈/响应集谐·临界协议",
+        "func": lambda attr, role: calc_damage_11(attr, role),
+    },
+    {
+        "title": "2+5琳奈/响应集谐·临界协议",
+        "func": lambda attr, role: calc_damage_12(attr, role),
     },
 ]
 
-rank = damage_detail[0]
+rank = damage_detail[2]

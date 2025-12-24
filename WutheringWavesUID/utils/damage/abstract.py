@@ -95,6 +95,8 @@ class WeaponAbstract:
 
         func_list.append("cast_phantom")
 
+        func_list.append("cast_tune_break")
+
         func_list = [x for i, x in enumerate(func_list) if func_list.index(x) == i]
 
         for func_name in func_list:
@@ -175,6 +177,10 @@ class WeaponAbstract:
 
     def trigger_shield(self, attr: DamageAttribute, isGroup: bool = False):
         """触发护盾"""
+        pass
+
+    def cast_tune_break(self, attr: DamageAttribute, isGroup: bool = False):
+        """施放谐度破坏技"""
         pass
 
     def cast_healing(self, attr: DamageAttribute, isGroup: bool = False):

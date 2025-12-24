@@ -143,3 +143,19 @@ def boling_buff(attr, chain, resonLevel, isGroup):
     if char_clz:
         s = char_clz()
         s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def mornye_buff(attr, chain, resonLevel, isGroup):
+    # 莫宁buff
+    char_clz = WavesCharRegister.find_class(1209)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def lynae_buff(attr, chain, resonLevel, isGroup):
+    # 琳奈buff
+    char_clz = WavesCharRegister.find_class(1509)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)

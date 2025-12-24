@@ -30,7 +30,9 @@ async def ann_list_card() -> bytes:
     # 分组并排序
     grouped = {}
     for item in ann_list:
-        t = item["eventType"]
+        t = item.get("eventType")
+        if not t:
+            continue
         grouped.setdefault(t, []).append(item)
 
     for data in grouped.values():
@@ -289,8 +291,9 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
             drow_height = 0
             imgs.append(img)
     else:
-        img = await ann_batch_card(post_content[index_start:index_end], drow_height)
-        imgs.append(img)
+        if drow_height and index_end > index_start:
+            img = await ann_batch_card(post_content[index_start:index_end], drow_height)
+            imgs.append(img)
 
     return imgs
 

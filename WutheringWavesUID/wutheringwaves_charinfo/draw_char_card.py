@@ -136,6 +136,7 @@ card_sort_name = [
     ("攻击", "0"),
     ("防御", "0"),
     ("共鸣效率", "0%"),
+    ("偏谐值累积效率", "0%"),
     ("暴击", "0.0%"),
     ("暴击伤害", "0.0%"),
     ("属性伤害加成", "0.0%"),
@@ -746,7 +747,7 @@ async def draw_char_detail_img(
 
     # 武器banner
     banner2 = Image.open(TEXT_PATH / "banner2.png")
-    right_image_temp.alpha_composite(banner2, dest=(0, 550))
+    right_image_temp.alpha_composite(banner2, dest=(0, 600))
 
     # 右侧属性-武器
     weapon_bg = Image.open(TEXT_PATH / "weapon_bg.png")
@@ -761,11 +762,11 @@ async def draw_char_detail_img(
     weapon_icon_bg.paste(weapon_icon, (10, 20), weapon_icon)
 
     weapon_bg_temp_draw = ImageDraw.Draw(weapon_bg_temp)
-    weapon_bg_temp_draw.text((200, 30), f"{weaponData.weapon.weaponName}", SPECIAL_GOLD, waves_font_40, "lm")
-    weapon_bg_temp_draw.text((203, 75), f"Lv.{weaponData.level}/90", "white", waves_font_30, "lm")
+    weapon_bg_temp_draw.text((200, 70), f"{weaponData.weapon.weaponName}", SPECIAL_GOLD, waves_font_40, "lm")
+    weapon_bg_temp_draw.text((203, 115), f"Lv.{weaponData.level}/90", "white", waves_font_30, "lm")
 
     _x = 220 + 43 * len(weaponData.weapon.weaponName)
-    _y = 37
+    _y = 77
     wrc_fill = WEAPON_RESONLEVEL_COLOR[weaponData.resonLevel] + (int(0.8 * 255),)  # type: ignore
     weapon_bg_temp_draw.rounded_rectangle([_x - 15, _y - 15, _x + 50, _y + 15], radius=7, fill=wrc_fill)
 
@@ -774,9 +775,9 @@ async def draw_char_detail_img(
     weapon_breach = get_breach(weaponData.breach, weaponData.level)
     for i in range(0, weapon_breach):  # type: ignore
         promote_icon = Image.open(TEXT_PATH / "promote_icon.png")
-        weapon_bg_temp.alpha_composite(promote_icon, dest=(200 + 40 * i, 100))
+        weapon_bg_temp.alpha_composite(promote_icon, dest=(200 + 40 * i, 140))
 
-    weapon_bg_temp.alpha_composite(weapon_icon_bg, dest=(45, 0))
+    weapon_bg_temp.alpha_composite(weapon_icon_bg, dest=(45, 40))
 
     weapon_detail: WavesWeaponResult = get_weapon_detail(
         weaponData.weapon.weaponId,
@@ -920,11 +921,11 @@ async def draw_char_detail_img(
             name_color, _ = get_valid_color(name, value, calc.calc_temp)
 
         prop_img = prop_img.resize((40, 40))
-        sh_bg.alpha_composite(prop_img, (60, 40 + index * 55))
-        sh_bg_draw.text((120, 58 + index * 55), f"{name[:6]}", name_color, waves_font_24, "lm")
-        sh_bg_draw.text((530, 58 + index * 55), f"{value}", name_color, waves_font_24, "rm")
+        sh_bg.alpha_composite(prop_img, (60, 50 + index * 55))
+        sh_bg_draw.text((120, 68 + index * 55), f"{name[:8]}", name_color, waves_font_24, "lm")
+        sh_bg_draw.text((530, 68 + index * 55), f"{value}", name_color, waves_font_24, "rm")
 
-    right_image_temp.alpha_composite(sh_bg, dest=(0, 80))
+    right_image_temp.alpha_composite(sh_bg, dest=(0, 70))
     img.paste(right_image_temp, (570, 200), right_image_temp)
 
     # 技能
@@ -933,7 +934,7 @@ async def draw_char_detail_img(
 
     temp_i = 0
     for _, _skill in enumerate(role_detail.get_skill_list()):
-        if _skill.skill.type == "延奏技能":
+        if _skill.skill.type == "延奏技能" or _skill.skill.type == "谐度破坏":
             continue
         skill_bg = skill_bg_1.copy()
         # logger.debug(f"{char_name}-{_skill.skill.name}")

@@ -127,6 +127,7 @@ class DamageAttribute:
         char_attr=None,
         sync_strike=False,
         energy_regen=0,
+        off_tune_buildup_rate=0,
         char_damage=None,
         enemy_level=90,
         teammate_char_ids: list[int] | None = None,
@@ -267,7 +268,7 @@ class DamageAttribute:
         # 集谐·干涉
         self.env_tune_strain = False
         # 偏谐值累积效率 (初始100%)
-        self.off_tune_buildup_rate = 1
+        self.off_tune_buildup_rate = off_tune_buildup_rate
         # 谐度破坏增幅 (初始10点)
         self.tune_break_boost = 10
         # 集谐干涉层数 (初始0层)

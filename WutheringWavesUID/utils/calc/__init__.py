@@ -272,6 +272,10 @@ class WuWaCalc:
         card_sort_map["共鸣效率"] = sum_percentages(char_regen, result.get("共鸣效率", "0%"), card_sort_map["共鸣效率"])
         card_sort_map["energy_regen"] = percent_to_float(card_sort_map["共鸣效率"])
 
+        off_tune_buildup_rate = "100%"
+        card_sort_map["偏谐值累积效率"] = sum_percentages(off_tune_buildup_rate, result.get("偏谐值累积效率", "0%"), card_sort_map["偏谐值累积效率"])
+        card_sort_map["off_tune_buildup_rate"] = percent_to_float(card_sort_map["偏谐值累积效率"])
+
         card_sort_map["ph_detail"] = result.get("ph_detail", [])
 
         card_sort_map["ph_result"] = False
@@ -390,6 +394,7 @@ class WuWaCalc:
         attr.add_crit_rate(card_sort_map["crit_rate"])
         attr.add_crit_dmg(card_sort_map["crit_dmg"])
         attr.add_energy_regen(card_sort_map["energy_regen"])
+        attr.add_off_tune_buildup_rate(card_sort_map["off_tune_buildup_rate"])
         # attr.add_dmg_bonus(card_sort_map['dmg_bonus'])
         attr.set_dmg_bonus_phantom(card_sort_map)
         attr.set_echo_id(card_sort_map["echo_id"])

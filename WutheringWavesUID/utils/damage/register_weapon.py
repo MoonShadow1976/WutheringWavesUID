@@ -276,6 +276,7 @@ class Weapon_21010056(WeaponAbstract):
 
         # 千咲：满层时，附加异常效应时全属性伤害加成
         if attr.role and attr.role.role.roleId == 1508:
+            title = self.get_title()
             dmg2 = f"{self.param(4)}"
             msg = f"满层时附加【异常效应】，全属性伤害加成提升{dmg2}"
             attr.add_dmg_bonus(calc_percent_expression(dmg2), title, msg)

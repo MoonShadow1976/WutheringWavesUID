@@ -273,7 +273,9 @@ class WuWaCalc:
         card_sort_map["energy_regen"] = percent_to_float(card_sort_map["共鸣效率"])
 
         off_tune_buildup_rate = "100%"
-        card_sort_map["偏谐值累积效率"] = sum_percentages(off_tune_buildup_rate, result.get("偏谐值累积效率", "0%"), card_sort_map["偏谐值累积效率"])
+        card_sort_map["偏谐值累积效率"] = sum_percentages(
+            off_tune_buildup_rate, result.get("偏谐值累积效率", "0%"), card_sort_map["偏谐值累积效率"]
+        )
         card_sort_map["off_tune_buildup_rate"] = percent_to_float(card_sort_map["偏谐值累积效率"])
 
         card_sort_map["ph_detail"] = result.get("ph_detail", [])

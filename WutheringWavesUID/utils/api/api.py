@@ -9,7 +9,7 @@ NET_SERVER_ID_MAP = {
     6: "6eb2a235b30d05efd77bedb5cf60999e",
     7: "86d52186155b148b5c138ceb41be9650",
     8: "919752ae5ea09c1ced910dd668a63ffb",
-    9: "10cd7254d57e58ae560b15d51e34b4c",
+    9: "10cd7254d57e58ae560b15d51e34b4c8",
 }
 
 

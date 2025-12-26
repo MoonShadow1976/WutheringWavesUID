@@ -394,6 +394,7 @@ def clean_and_convert_gachalogs(logs: list[GachaLog] | None) -> list:
     if len(logs) <= 1:
         return [logs[0].dict()] if logs else []
 
+    exist_error: None | GachaLog = None
     exist_error_acount = 0
     records_with_dt = []
     records_with_dt.append(logs[-1].dict())
@@ -402,8 +403,17 @@ def clean_and_convert_gachalogs(logs: list[GachaLog] | None) -> list:
     for i in range(len(logs) - 2, -1, -1):
         next_time = datetime.strptime(logs[i].time, "%Y-%m-%d %H:%M:%S")
         if current_time > next_time:
+            exist_error = logs[i + 1] if not exist_error else exist_error
             exist_error_acount += 1
             continue
+        if exist_error:
+            if current_time < next_time:
+                exist_error = None
+            elif current_time == next_time:
+                exist_error_acount += 1
+                if exist_error == logs[i] and i-1 >= 0 and exist_error != logs[i - 1]:
+                    exist_error = None
+                continue
         records_with_dt.append(logs[i].dict())
         current_time = next_time
 

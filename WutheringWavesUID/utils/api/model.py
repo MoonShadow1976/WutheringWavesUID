@@ -107,7 +107,6 @@ class AccountBaseInfo(BaseModel):
     achievementStar: int | None = None  # 成就星数
     boxList: list[Box | None] | None = None  # 宝箱
     treasureBoxList: list[Box2 | None] | None = None  # 宝箱
-    tidalHeritagesList: list[Box2 | None] | None = None  # 潮汐之遗
     weeklyInstCount: int | None = None  # 周本次数
     weeklyInstCountLimit: int | None = None  # 周本限制次数
     storeEnergy: int | None = None  # 结晶单质数量
@@ -686,15 +685,24 @@ class PeriodList(BaseModel):
 class PeriodNode(BaseModel):
     type: str
     num: int
+    sort: int | None = None
+
+
+class PeriodResourceItem(BaseModel):
+    type: int
+    total: int | str
+    detail: list[PeriodNode] = Field(default_factory=list)
 
 
 class PeriodDetail(BaseModel):
     """资源简报详情"""
 
-    totalCoin: int
-    totalStar: int
+    totalCoin: int | None = None
+    totalStar: int | None = None
     coinList: list[PeriodNode] = Field(default_factory=list)
     starList: list[PeriodNode] = Field(default_factory=list)
+    itemList: list[PeriodResourceItem] | None = None
+    copyWriting: str | None = None
 
 
 class PermanentRouge(BaseModel):

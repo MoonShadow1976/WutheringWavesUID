@@ -231,7 +231,7 @@ async def calc_develop_cost(ev: Event, develop_list: list[str], is_flush=False):
 
         for skill in develop_data.skillLevelList:
             skill_index = skill_index_kuro[skill.type]
-            if skill.type == "其他技能" or skill.type == "延奏技能":
+            if skill.type == "其他技能" or skill.type == "延奏技能" or skill.type == "谐度破坏":
                 continue
 
             template_role["skillLevelUpList"][skill_index]["startLevel"] = skill.level

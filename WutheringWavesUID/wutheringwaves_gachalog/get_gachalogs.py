@@ -239,13 +239,15 @@ async def save_gachalogs(
     # 初始化最后保存的数据
     result = {"uid": uid, "data_time": current_time}
 
-    # 保存数量
-    for gacha_name in gacha_type_meta_data.keys():
-        result[gacha_name] = len(gachalogs_new.get(gacha_name, []))  # type: ignore
-
+    # ========== 新增：时间顺序异常的检查与清理 ==========
     result["data"] = {  # type: ignore
-        gacha_name: [log.dict() for log in gachalogs_new.get(gacha_name, [])] for gacha_name in gacha_type_meta_data.keys()
+        gacha_name: clean_and_convert_gachalogs(gachalogs_new.get(gacha_name, [])) for gacha_name in gacha_type_meta_data.keys()
     }
+
+    # 保存清理后的数量
+    for gacha_name in gacha_type_meta_data.keys():
+        result[gacha_name] = len(result["data"][gacha_name])  # type: ignore
+    # ==============================================
 
     vo = msgspec.to_builtins(result)
     async with aiofiles.open(gachalogs_path, "w", encoding="UTF-8") as file:
@@ -380,3 +382,31 @@ async def export_gachalogs(uid: str) -> dict:
         }
 
     return im
+
+
+def clean_and_convert_gachalogs(logs: list[GachaLog] | None) -> list:
+    """
+    清理时间异常并将GachaLog对象转换为字典
+    从后往前(旧到新)检查时间顺序，删除时间倒流的记录
+    """
+    if not logs:
+        return []
+    if len(logs) <= 1:
+        return [logs[0].dict()] if logs else []
+
+    exist_error_acount = 0
+    records_with_dt = []
+    records_with_dt.append(logs[-1].dict())
+    current_time = datetime.strptime(logs[-1].time, "%Y-%m-%d %H:%M:%S")
+
+    for i in range(len(logs) - 2, -1, -1):
+        next_time = datetime.strptime(logs[i].time, "%Y-%m-%d %H:%M:%S")
+        if current_time > next_time:
+            exist_error_acount += 1
+            continue
+        records_with_dt.append(logs[i].dict())
+        current_time = next_time
+
+    if exist_error_acount:
+        logger.warning(f"[鸣潮][抽卡记录] 检测到卡池类型 {logs[-1].cardPoolType} 有 {exist_error_acount} 条时间倒流异常记录")
+    return records_with_dt[::-1]

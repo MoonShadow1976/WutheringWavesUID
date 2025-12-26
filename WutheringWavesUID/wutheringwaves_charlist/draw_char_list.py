@@ -193,7 +193,7 @@ async def draw_char_list_img(
         # 技能
         skill_img_temp = Image.new("RGBA", (1500, 300))
         for i, _skill in enumerate(role_detail.get_skill_list()):
-            if _skill.skill.type == "延奏技能":
+            if _skill.skill.type == "延奏技能" or _skill.skill.type == "谐度破坏":
                 continue
             temp = Image.new("RGBA", (120, 140))
             skill_bg = Image.open(TEXT_PATH / "skill_bg.png")

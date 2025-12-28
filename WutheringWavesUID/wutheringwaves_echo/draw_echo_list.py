@@ -116,8 +116,9 @@ async def get_draw_list(ev: Event, uid: str, user_id: str) -> str | bytes:
 
     waves_echo_rank.sort(key=lambda i: (i.score, i.roleId), reverse=True)
 
-    # img = get_waves_bg(1200, 2650, 'bg3')
-    img = get_waves_bg(1600, 3230, "bg3")
+    render_list = waves_echo_rank[:28]
+    target_height = 220 + ((len(render_list) + 3) // 4) * 570 + 200
+    img = get_waves_bg(1600, int(target_height), "bg3")
 
     # 头像部分
     avatar, avatar_ring = await draw_pic_with_ring(ev)
@@ -147,7 +148,7 @@ async def get_draw_list(ev: Event, uid: str, user_id: str) -> str | bytes:
 
     promote_icon = Image.open(TEXT_PATH / "promote_icon.png")
     promote_icon = promote_icon.resize((30, 30))
-    for index, _echo in enumerate(waves_echo_rank[:20]):
+    for index, _echo in enumerate(render_list):
         sh_bg = _sh_bg.copy()
         head_high = 50
         sh_temp = Image.new("RGBA", (350, 550 + head_high))

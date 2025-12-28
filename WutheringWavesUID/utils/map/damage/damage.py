@@ -356,13 +356,13 @@ def phase_damage(
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_SPAGYRIC):
             # 角色造成普攻伤害时，自身衍射伤害提升10%，该效果可叠加3层，持续5秒。
             # 叠至3层时，施放共鸣解放时，普攻伤害加成提升40%。
-            if attr.char_damage != attack_damage:
+            if cast_attack not in damage_func:
                 return
             title = f"{phase_name}-{ph_detail.ph_name}"
             if attr.char_attr == CHAR_ATTR_CELESTIAL:
                 msg = "角色造成普攻伤害时，自身衍射伤害提升10%，可叠加3层"
-                attr.add_easy_damage(0.3, title, msg)
-            if cast_liberation in damage_func:
+                attr.add_dmg_bonus(0.3, title, msg)
+            if cast_liberation in damage_func and attr.char_damage == attack_damage:
                 msg = "叠至3层时，施放共鸣解放时，普攻伤害加成提升40%"
                 attr.add_dmg_bonus(0.4, title, msg)
 

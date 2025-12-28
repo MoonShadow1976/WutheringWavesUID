@@ -27,6 +27,10 @@ def calc_damage_1(
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
     attr.set_char_template("temp_atk")
 
+    title = "默认手法"
+    msg = "变奏入场 ez r" if isGroup else "ez r"
+    attr.add_effect(title, msg)
+
     role_name = role.role.roleName
     # 获取角色详情
     char_result: WavesCharResult = get_char_detail2(role)
@@ -49,23 +53,23 @@ def calc_damage_1(
     attr.set_env_tune_strain()
     attr.add_effect(title, msg)
 
-    title = "共鸣回路-视觉冲击"
-    msg = "消耗3点【本色】，使附近队伍中所有角色的谐度破坏增幅提升40点"
-    attr.add_tune_break_boost(40, title, msg)
-
     # 设置角色固有技能
     role_breach = role.role.breach
-    if role_breach and role_breach >= 3:
+    if role_breach and role_breach >= 3 and isGroup:
         title = "固有技能-《...》"
         msg = "施放变奏时，9秒内自身的衍射伤害加成提升25%"
         attr.add_dmg_bonus(0.25, title, msg)
 
     title = "共鸣解放"
-    msg = "施放时使附近队伍中所有角色的伤害加成提升24%，持续30秒"
+    msg = "施放时使附近队伍中所有角色造成的伤害提升24%，持续30秒"
     attr.add_dmg_bonus(0.24, title, msg)
 
     # 设置角色谐度破坏
     if Interfered:
+        title = "共鸣回路-视觉冲击"
+        msg = "使附近队伍中所有角色的谐度破坏增幅提升40点，持续30秒"
+        attr.add_tune_break_boost(40, title, msg)
+
         title = "光谱解析"
         msg = "林奈于编队中时，目标集谐·干涉层数上限增加1层"
         attr.add_tune_strain_stack(1, title, msg)
@@ -76,6 +80,9 @@ def calc_damage_1(
         attr.add_final_damage(calc_percent_expression(dmg), title, msg)
 
     # 设置角色技能施放是不是也有加成 eg：守岸人
+
+    # 设置声骸属性
+    attr.set_phantom_dmg_bonus()
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
@@ -123,6 +130,17 @@ def calc_damage_2(
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
     attr.set_char_template("temp_atk")
 
+    # 设置共鸣链
+    chain_num = role.get_chain_num()
+
+    title = "默认手法"
+    tip = "跳z跳z跳z" if chain_num >= 6 else "跳跳跳"
+    if isGroup:
+        msg = f"变奏入场 ez r {tip} 下落攻击"
+    else:
+        msg = f"ez r {tip} 下落攻击"
+    attr.add_effect(title, msg)
+
     role_name = role.role.roleName
     # 获取角色详情
     char_result: WavesCharResult = get_char_detail2(role)
@@ -155,26 +173,26 @@ def calc_damage_2(
     attr.add_effect(title, msg)
 
     # 设置角色施放技能
-    damage_func = [cast_attack, cast_damage, cast_liberation]
+    damage_func = [cast_attack, cast_damage]
     phase_damage(attr, role, damage_func, isGroup)
-
-    title = "共鸣回路-视觉冲击"
-    msg = "消耗3点【本色】，使附近队伍中所有角色的谐度破坏增幅提升40点"
-    attr.add_tune_break_boost(40, title, msg)
 
     # 设置角色固有技能
     role_breach = role.role.breach
-    if role_breach and role_breach >= 3:
+    if role_breach and role_breach >= 3 and isGroup:
         title = "固有技能-《...》"
         msg = "施放变奏时，9秒内自身的衍射伤害加成提升25%"
         attr.add_dmg_bonus(0.25, title, msg)
 
     title = "共鸣解放"
-    msg = "施放时使附近队伍中所有角色的伤害加成提升24%，持续30秒"
+    msg = "施放时使附近队伍中所有角色造成的伤害提升24%，持续30秒"
     attr.add_dmg_bonus(0.24, title, msg)
 
     # 设置角色谐度破坏
     if Interfered:
+        title = "共鸣回路-视觉冲击"
+        msg = "使附近队伍中所有角色的谐度破坏增幅提升40点，持续30秒"
+        attr.add_tune_break_boost(40, title, msg)
+
         title = "光谱解析"
         msg = "林奈于编队中时，目标集谐·干涉层数上限增加1层"
         attr.add_tune_strain_stack(1, title, msg)
@@ -186,8 +204,9 @@ def calc_damage_2(
 
     # 设置角色技能施放是不是也有加成 eg：守岸人
 
-    # 设置共鸣链
-    chain_num = role.get_chain_num()
+    # 设置声骸属性
+    attr.set_phantom_dmg_bonus()
+
     if chain_num >= 1:
         if skill_name == "c2":
             title = f"{role_name}-一链"
@@ -213,7 +232,7 @@ def calc_damage_2(
     if chain_num >= 6:
         if skill_name == "c1":
             title = f"{role_name}-六链"
-            msg = "3层心之彩使目标受到普攻·视觉冲击的伤害提高30%*3"
+            msg = "3层心之彩使目标受到普攻·视觉冲击的伤害提升30%*3"
             attr.add_easy_damage(0.9, title, msg)
 
     # 声骸

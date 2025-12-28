@@ -337,7 +337,7 @@ class Char_1209(CharAbstract):
             title = "莫宁-干涉标记"
             tip = "若目标处于【干涉】状态，对其" if chain < 1 else "队伍中角色"
             msg = f"{tip}造成的伤害提升40%"
-            attr.add_easy_damage(0.4, title, msg)
+            attr.add_dmg_bonus(0.4, title, msg)
 
         if chain >= 2:
             title = "莫宁-二链"

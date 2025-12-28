@@ -64,6 +64,9 @@ def calc_damage_1(
 
     # 设置角色技能施放是不是也有加成 eg：守岸人
 
+    # 设置声骸属性
+    attr.set_phantom_dmg_bonus(needShuxing=False)
+
     # 设置角色施放技能 - 增加偏谐值累积效率在前
     damage_func = [cast_healing, skill_create_healing]
     phase_damage(attr, role, damage_func, isGroup)
@@ -105,6 +108,9 @@ def calc_damage_2(
     attr.set_character_level(role.role.level)
 
     # 设置角色技能施放是不是也有加成 eg：守岸人
+
+    # 设置声骸属性
+    attr.set_phantom_dmg_bonus(needShuxing=False)
 
     # 谐振场
     title = "共鸣回路-谐振场"
@@ -207,6 +213,9 @@ def calc_damage_3(
     msg = "强谐振场生效范围内附近队伍中所有角色防御提升20%"
     attr.add_def_percent(0.2, title, msg)
 
+    # 设置声骸属性
+    attr.set_phantom_dmg_bonus()
+
     # 设置共鸣链
     chain_num = role.get_chain_num()
 
@@ -215,7 +224,7 @@ def calc_damage_3(
         title = "共鸣回路-干涉标记"
         dmg = min(0.4, (attr.energy_regen - 1) * 0.25)
         msg = f"共效超100%每1%计为0.25%伤害提升,上限40%,当前提升{dmg * 100:.2f}%"
-        attr.add_easy_damage(dmg, title, msg)
+        attr.add_dmg_bonus(dmg, title, msg)
 
     title = f"{role_name}-延奏技能"
     msg = "队伍中的角色全伤害加深25%"
@@ -240,7 +249,7 @@ def calc_damage_3(
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "共鸣解放·临界协议造成的伤害提升400%"
-        attr.add_easy_damage(4, title, msg)
+        attr.add_dmg_bonus(4, title, msg)
 
     # 设置角色施放技能 - 增加偏谐值累积效率在前 - 造成共鸣技能伤害吃火套
     damage_func = [cast_skill, cast_damage, cast_healing, cast_liberation]

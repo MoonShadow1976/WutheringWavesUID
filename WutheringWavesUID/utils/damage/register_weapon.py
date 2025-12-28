@@ -973,23 +973,23 @@ class Weapon_21030046(WeaponAbstract):
         if attr.char_damage == attack_damage:
             dmg = f"{self.param(1)}"
             title = self.get_title()
-            msg = f"施放变奏技能或普攻伤害命中时，使自身普攻伤害提高{dmg}"
-            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
+            msg = f"施放变奏技能或普攻伤害命中时，使自身普攻伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
         # 每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使全队角色造成的全伤害提高{3}，最多叠加{4}层
         if attr.is_env_shifting:
             dmg = f"{self.param(3)} * {self.param(4)}"
             title = self.get_title()
-            msg = f"普攻为目标附加【偏移】时，使全队角色造成的全伤害提高{dmg}"
-            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
+            msg = f"普攻为目标附加【偏移】时，使队伍中的角色造成的伤害提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
     def cast_attack(self, attr: DamageAttribute, isGroup: bool = False):
-        # 每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使全队角色造成的全伤害提高{3}，最多叠加{4}层
+        # 每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使队伍中的角色造成的伤害提升{3}，最多叠加{4}层
         if attr.is_env_shifting:
             dmg = f"{self.param(3)} * {self.param(4)}"
             title = self.get_title()
-            msg = f"普攻为目标附加【偏移】时，使全队角色造成的全伤害提高{dmg}"
-            attr.add_easy_damage(calc_percent_expression(dmg), title, msg)
+            msg = f"普攻为目标附加【偏移】时，使队伍中的角色造成的伤害提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21030053(WeaponAbstract):

@@ -320,6 +320,8 @@ class DamageAttribute:
             f"  奶量技能倍率={self.healing_skill_multi}, \n"
             f"  伤害加成百分比={self.dmg_bonus}, \n"
             f"  伤害加深百分比={self.dmg_deepen}, \n"
+            f"  伤害易伤百分比={self.easy_damage}, \n"
+            f"  最终伤害提升百分比={self.final_damage}, \n"
             f"  暴击率={self.crit_rate}, \n"
             f"  暴击伤害={self.crit_dmg}, \n"
             f"  角色等级={self.character_level}, \n"

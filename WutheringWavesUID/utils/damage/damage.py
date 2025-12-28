@@ -104,6 +104,9 @@ class DamageAttribute:
         atk_percent=0,
         life_percent=0,
         def_percent=0,
+        atk_phantom_percent=0,
+        life_phantom_percent=0,
+        def_phantom_percent=0,
         atk_flat=0,
         life_flat=0,
         def_flat=0,
@@ -181,6 +184,12 @@ class DamageAttribute:
         self.life_percent = life_percent
         # 防御力加成百分比
         self.def_percent = def_percent
+        # 声骸攻击力加成百分比
+        self.atk_phantom_percent = atk_phantom_percent
+        # 声骸生命加成百分比
+        self.life_phantom_percent = life_phantom_percent
+        # 声骸防御力加成百分比
+        self.def_phantom_percent = def_phantom_percent
         # 固定攻击数值加成
         self.atk_flat = atk_flat
         # 固定生命数值加成
@@ -300,6 +309,9 @@ class DamageAttribute:
             f"  攻击力加成百分比={self.atk_percent}, \n"
             f"  生命值加成百分比={self.life_percent}, \n"
             f"  防御力加成百分比={self.def_percent}, \n"
+            f"  声骸攻击力加成百分比={self.atk_phantom_percent}, \n"
+            f"  声骸生命值加成百分比={self.life_phantom_percent}, \n"
+            f"  声骸防御力加成百分比={self.def_phantom_percent}, \n"
             f"  声骸固定攻击数值={self.atk_flat}, \n"
             f"  声骸固定生命数值={self.life_flat}, \n"
             f"  声骸固定防御数值={self.def_flat}, \n"
@@ -404,6 +416,24 @@ class DamageAttribute:
     def add_def_percent(self, def_percent: float, title="", msg=""):
         """增加防御力百分比"""
         self.def_percent += def_percent
+        self.add_effect(title, msg)
+        return self
+
+    def add_atk_phantom_percent(self, atk_phantom_percent: float, title="", msg=""):
+        """增加声骸攻击力百分比"""
+        self.atk_phantom_percent += atk_phantom_percent
+        self.add_effect(title, msg)
+        return self
+
+    def add_life_phantom_percent(self, life_phantom_percent: float, title="", msg=""):
+        """增加声骸生命百分比"""
+        self.life_phantom_percent += life_phantom_percent
+        self.add_effect(title, msg)
+        return self
+
+    def add_def_phantom_percent(self, def_phantom_percent: float, title="", msg=""):
+        """增加声骸防御力百分比"""
+        self.def_phantom_percent += def_phantom_percent
         self.add_effect(title, msg)
         return self
 
@@ -741,7 +771,7 @@ class DamageAttribute:
 
         :return: 有效攻击力
         """
-        return self.base_atk * (1 + self.atk_percent) + self.atk_flat
+        return self.base_atk + int(self.base_atk * self.atk_percent) + int(self.base_atk * self.atk_phantom_percent) + self.atk_flat
 
     @property
     def effect_life(self):
@@ -750,7 +780,7 @@ class DamageAttribute:
 
         :return: 计算有效生命
         """
-        return self.char_life * (1 + self.life_percent) + self.life_flat
+        return self.char_life + int(self.char_life * self.life_percent) + int(self.char_life * self.life_phantom_percent) + self.life_flat
 
     @property
     def effect_def(self):
@@ -759,7 +789,7 @@ class DamageAttribute:
 
         :return: 计算有效防御
         """
-        return self.char_def * (1 + self.def_percent) + self.def_flat
+        return self.char_def + int(self.char_def * self.def_percent) + int(self.char_def * self.def_phantom_percent) + self.def_flat
 
     @property
     def defense_ratio(self):

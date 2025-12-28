@@ -171,11 +171,11 @@ class WuWaCalc:
         )
 
         # 基础生命
-        _life = char_result.stats["life"]
+        _life = int(char_result.stats["life"])
         # 基础攻击
-        _atk = char_result.stats["atk"]
+        _atk = int(char_result.stats["atk"])
         # 基础防御
-        _def = char_result.stats["def"]
+        _def = int(char_result.stats["def"])
 
         # 武器基础攻击
         _weapon_atk = weapon_result.stats[0]["value"]
@@ -240,11 +240,11 @@ class WuWaCalc:
         weapon_result: WavesWeaponResult = get_weapon_detail(weapon_id, weapon_level, weapon_breach, weapon_reson_level)
 
         # 基础生命
-        _life = char_result.stats["life"]
+        _life = int(char_result.stats["life"])
         # 基础攻击
-        _atk = char_result.stats["atk"]
+        _atk = int(char_result.stats["atk"])
         # 基础防御
-        _def = char_result.stats["def"]
+        _def = int(char_result.stats["def"])
         # 武器基础攻击
         _weapon_atk = weapon_result.stats[0]["value"]
         card_sort_map["char_atk"] = float(_atk)
@@ -307,23 +307,26 @@ class WuWaCalc:
         base_atk = float(sum_numbers(_atk, _weapon_atk))
         # 各种攻击百分比 = 武器副词条+武器谐振+固有技能
         per_temp = percent_to_float(card_sort_map["攻击"])
-        card_sort_map["atk_percent"] = per_temp + result.get("atk_percent", 0)
+        card_sort_map["atk_percent"] = per_temp
+        card_sort_map["atk_phantom_percent"] = result.get("atk_percent", 0)
         card_sort_map["atk_flat"] = float(result.get("atk_flat", 0))
-        card_sort_map["攻击"] = sum_numbers(base_atk, result.get("攻击", 0), round(base_atk * per_temp))
+        card_sort_map["攻击"] = sum_numbers(base_atk, result.get("攻击", 0), int(base_atk * per_temp))
         card_sort_map["攻击"] = f"{card_sort_map['攻击'].split('.')[0]}"
 
         base_life = float(_life)
         per_life = percent_to_float(card_sort_map["生命"])
-        card_sort_map["life_percent"] = per_life + result.get("life_percent", 0)
+        card_sort_map["life_percent"] = per_life
+        card_sort_map["life_phantom_percent"] = result.get("life_percent", 0)
         card_sort_map["life_flat"] = float(result.get("life_flat", 0))
-        card_sort_map["生命"] = sum_numbers(_life, result.get("生命", 0), round(base_life * per_life))
+        card_sort_map["生命"] = sum_numbers(_life, result.get("生命", 0), int(base_life * per_life))
         card_sort_map["生命"] = f"{card_sort_map['生命'].split('.')[0]}"
 
         base_def = float(_def)
         per_def = percent_to_float(card_sort_map["防御"])
-        card_sort_map["def_percent"] = per_def + result.get("def_percent", 0)
+        card_sort_map["def_percent"] = per_def
+        card_sort_map["def_phantom_percent"] = result.get("def_percent", 0)
         card_sort_map["def_flat"] = float(result.get("def_flat", 0))
-        card_sort_map["防御"] = sum_numbers(_def, result.get("防御", 0), round(base_def * per_def))
+        card_sort_map["防御"] = sum_numbers(_def, result.get("防御", 0), int(base_def * per_def))
         card_sort_map["防御"] = f"{card_sort_map['防御'].split('.')[0]}"
 
         # 固定暴击
@@ -393,6 +396,9 @@ class WuWaCalc:
         attr.add_atk_percent(card_sort_map["atk_percent"])
         attr.add_life_percent(card_sort_map["life_percent"])
         attr.add_def_percent(card_sort_map["def_percent"])
+        attr.add_atk_phantom_percent(card_sort_map["atk_phantom_percent"])
+        attr.add_life_phantom_percent(card_sort_map["life_phantom_percent"])
+        attr.add_def_phantom_percent(card_sort_map["def_phantom_percent"])
         attr.add_crit_rate(card_sort_map["crit_rate"])
         attr.add_crit_dmg(card_sort_map["crit_dmg"])
         attr.add_energy_regen(card_sort_map["energy_regen"])

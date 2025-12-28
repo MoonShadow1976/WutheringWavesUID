@@ -773,7 +773,9 @@ class DamageAttribute:
 
         :return: 有效攻击力
         """
-        return self.base_atk + int(self.base_atk * self.atk_percent) + int(self.base_atk * self.atk_phantom_percent) + self.atk_flat
+        return (
+            self.base_atk + int(self.base_atk * self.atk_percent) + int(self.base_atk * self.atk_phantom_percent) + self.atk_flat
+        )
 
     @property
     def effect_life(self):
@@ -782,7 +784,12 @@ class DamageAttribute:
 
         :return: 计算有效生命
         """
-        return self.char_life + int(self.char_life * self.life_percent) + int(self.char_life * self.life_phantom_percent) + self.life_flat
+        return (
+            self.char_life
+            + int(self.char_life * self.life_percent)
+            + int(self.char_life * self.life_phantom_percent)
+            + self.life_flat
+        )
 
     @property
     def effect_def(self):
@@ -791,7 +798,9 @@ class DamageAttribute:
 
         :return: 计算有效防御
         """
-        return self.char_def + int(self.char_def * self.def_percent) + int(self.char_def * self.def_phantom_percent) + self.def_flat
+        return (
+            self.char_def + int(self.char_def * self.def_percent) + int(self.char_def * self.def_phantom_percent) + self.def_flat
+        )
 
     @property
     def defense_ratio(self):

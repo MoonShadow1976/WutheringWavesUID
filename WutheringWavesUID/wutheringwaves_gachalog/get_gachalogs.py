@@ -411,7 +411,7 @@ def clean_and_convert_gachalogs(logs: list[GachaLog] | None) -> list:
                 exist_error = None
             elif current_time == next_time:
                 exist_error_acount += 1
-                if exist_error == logs[i] and i-1 >= 0 and exist_error != logs[i - 1]:
+                if exist_error == logs[i] and i - 1 >= 0 and exist_error != logs[i - 1]:
                     exist_error = None
                 continue
         records_with_dt.append(logs[i].dict())

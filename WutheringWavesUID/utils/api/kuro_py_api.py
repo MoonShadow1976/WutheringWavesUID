@@ -262,6 +262,7 @@ async def get_base_info_overseas(ck: str, uid: str) -> tuple[None, None] | tuple
     if not role_info:
         return None, None
 
+    logger.debug(f"[鸣潮] 获取国际服用户({uid})基础信息成功: {role_info}")
     basic = role_info.basic
     battle_pass = role_info.battle_pass
 

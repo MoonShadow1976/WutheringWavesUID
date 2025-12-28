@@ -107,6 +107,7 @@ class AccountBaseInfo(BaseModel):
     achievementStar: int | None = None  # 成就星数
     boxList: list[Box | None] | None = None  # 宝箱
     treasureBoxList: list[Box2 | None] | None = None  # 宝箱
+    tidalHeritagesList: list[Box2 | None] | None = None  # 潮汐之遗
     weeklyInstCount: int | None = None  # 周本次数
     weeklyInstCountLimit: int | None = None  # 周本限制次数
     storeEnergy: int | None = None  # 结晶单质数量

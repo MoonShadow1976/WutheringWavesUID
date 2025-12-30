@@ -226,7 +226,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: dict):
     return
 
 
-async def check_phantom_data(data) -> tuple[bool, dict]:
+async def check_phantom_data(data) -> tuple[bool, dict | str]:
     try:
         processed_data = copy.deepcopy(data)
         # 检查词条内容，修正词条数据
@@ -236,13 +236,13 @@ async def check_phantom_data(data) -> tuple[bool, dict]:
             # 分离验证与修正
             is_valid, corrected_list = await validator.validate_phatom_list()
             if not is_valid:
-                return False, data
+                return False, corrected_list
             processed_data["phantomData"]["equipPhantomList"] = corrected_list
 
         return True, processed_data
     except Exception as e:
         logger.warning(f" [鸣潮][dc卡片识别] 角色声骸数据异常：{e}")
-        return False, data
+        return False, "程序异常!"
 
 
 async def compare_update_card_info(uid, waves_data):

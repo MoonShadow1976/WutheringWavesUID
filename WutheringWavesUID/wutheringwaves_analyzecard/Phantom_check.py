@@ -193,13 +193,15 @@ class PhantomValidator:
                 for _prop in props:
                     name_b = exist_attribute_prop(_prop.get("attributeName"))
                     if not name_b:
-                        logger.warning(f"[鸣潮][声骸检验]词条文本检查异常: {_prop.get('attributeName')}")
-                        return False, None
+                        text = f"词条文本检查异常: {_prop.get('attributeName')}"
+                        logger.warning(f"[鸣潮][声骸检验]{text}")
+                        return False, text
 
             value_b, text = self._validate_phantom(phantom)
             if not value_b:
-                logger.warning(f"[鸣潮][声骸检验]词条数值检查异常：{text}")
-                return False, None
+                text = f"词条数值检查异常：{text}"
+                logger.warning(f"[鸣潮][声骸检验]{text}")
+                return False, text
 
         return True, self.equipPhantomList
 

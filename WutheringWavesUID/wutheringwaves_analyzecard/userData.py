@@ -204,7 +204,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: dict):
     # 检查声骸数据是否异常
     is_valid, corrected_data = await check_phantom_data(data)
     if not is_valid:
-        await bot.send("[鸣潮]dc卡片识别数据异常！\n或请使用更高分辨率卡片重新识别！\n", at_sender)
+        await bot.send(f"[鸣潮]dc卡片识别{corrected_data}！\n请调整异常声骸位置后或使用更高分辨率卡片重新识别！\n", at_sender)
         return
 
     # 对比更新

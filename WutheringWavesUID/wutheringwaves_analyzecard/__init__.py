@@ -6,8 +6,8 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from .cardOCR import async_ocr
-from .ScoreQuery import phantom_score_ocr
 from .changeEcho import change_echo, change_weapon_resonLevel
+from .ScoreQuery import phantom_score_ocr
 
 waves_discord_bot_card_analyze = SV("waves分析discord_bot卡片")
 waves_change_sonata_and_first_echo = SV("waves修改首位声骸与套装")

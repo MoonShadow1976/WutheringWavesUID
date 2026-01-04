@@ -96,7 +96,9 @@ async def check_ocr_engine_accessible() -> int:
         return -1
 
 
-async def ocrspace(cropped_images: list[Image.Image], bot: Bot, at_sender: bool, language: str = "cht", isTable: bool = True) -> list | str:
+async def ocrspace(
+    cropped_images: list[Image.Image], bot: Bot, at_sender: bool, language: str = "cht", isTable: bool = True
+) -> list | str:
     """
     异步OCR识别函数
     """
@@ -265,9 +267,10 @@ async def get_image(ev: Event):
             res.append(content.data["url"])
         elif content.type == "text" and content.data and isinstance(content.data, str):
             import re
+
             urls = re.findall(r'https?://[^\s<>"\'()（）]+', content.data)  # 从文本中提取所有HTTP/HTTPS链接
-            url_cut = re.split(r'(https?://)', ' '.join(urls))[1:]  # 拆分连续的URL
-            url_list = [url_cut[i] + url_cut[i+1].strip() for i in range(0, len(url_cut), 2)]
+            url_cut = re.split(r"(https?://)", " ".join(urls))[1:]  # 拆分连续的URL
+            url_list = [url_cut[i] + url_cut[i + 1].strip() for i in range(0, len(url_cut), 2)]
             res.extend(url_list)
 
     if not res and ev.image:

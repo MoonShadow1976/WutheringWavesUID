@@ -96,7 +96,7 @@ async def check_ocr_engine_accessible() -> int:
         return -1
 
 
-async def ocrspace(cropped_images: list[Image.Image], bot: Bot, at_sender: bool) -> list | str:
+async def ocrspace(cropped_images: list[Image.Image], bot: Bot, at_sender: bool, language: str = "cht", isTable: bool = True) -> list | str:
     """
     异步OCR识别函数
     """
@@ -130,7 +130,7 @@ async def ocrspace(cropped_images: list[Image.Image], bot: Bot, at_sender: bool)
         elif NEGINE_NUM == -1:
             return "[鸣潮] 服务器访问OCR服务失败，请检查服务器网络状态。\n"
 
-        ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images)
+        ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images, language=language, isTable=isTable)
         logger.info(f"[鸣潮][OCRspace]dc卡片识别数据:\n{ocr_results}")
         if not ocr_results[0]["error"]:
             logger.success("[鸣潮]OCRspace 识别成功！")
@@ -140,13 +140,13 @@ async def ocrspace(cropped_images: list[Image.Image], bot: Bot, at_sender: bool)
         return "[鸣潮] OCRspace API密钥不可用！请等待额度恢复或更换密钥\n"
 
     if not ocr_results or ocr_results[0]["error"]:
-        logger.warning("[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。")
-        return "[鸣潮]OCRspace识别失败！请检查服务器网络是否正常。\n"
+        logger.warning("[鸣潮]OCRspace识别失败！或是输入异常或是OCR服务故障。")
+        return "[鸣潮]OCRspace识别失败！或是输入异常或是OCR服务故障，请尝试修改输入或等待OCR服务恢复。\n"
 
     return ocr_results
 
 
-async def images_ocrspace(api_key, engine_num, cropped_images):
+async def images_ocrspace(api_key, engine_num, cropped_images, language="cht", isTable=True):
     """
     使用 OCR.space 免费API识别碎块图片
     """
@@ -185,11 +185,11 @@ async def images_ocrspace(api_key, engine_num, cropped_images):
         """
         payload = {
             "apikey": API_KEY,
-            "language": "cht",
+            "language": language,
             "isOverlayRequired": False,
             "base64Image": f"data:image/png;base64,{img_base64}",
             "OCREngine": ENGINE_NUM,
-            "isTable": True,
+            "isTable": isTable,
             "detectOrientation": False,
             "scale": False,
         }

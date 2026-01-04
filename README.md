@@ -57,6 +57,7 @@
 - [ocr.space_code_example](https://github.com/Zaargh/ocr.space_code_example) OCR.space 示例
 - [Wuthery](https://wuthery.com/)与[YashajinAlice](https://github.com/YashajinAlice) 的支持
 - [wuwabot_reader](https://github.com/TedIwaArdN/wuwabot_reader) 图像匹配逻辑
+- [ScoreQuery](https://github.com/alone-art/ScoreQuery) 声骸评分
 - 特别鸣谢以下攻略作者 (排名无先后顺序)
   - [Moealkyne](https://www.taptap.cn/user/533395803)
   - [小沐XMu](https://www.kurobbs.com/person-center?id=10450567)

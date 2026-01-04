@@ -6,11 +6,13 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
 from .cardOCR import async_ocr
+from .ScoreQuery import phantom_score_ocr
 from .changeEcho import change_echo, change_weapon_resonLevel
 
 waves_discord_bot_card_analyze = SV("waves分析discord_bot卡片")
 waves_change_sonata_and_first_echo = SV("waves修改首位声骸与套装")
 waves_change_weapon_reson_level = SV("waves修改武器精炼", priority=5, pm=1)
+waves_phantom_score_ocr_query = SV("waves声骸ocr查分")
 
 
 @waves_discord_bot_card_analyze.on_command(("分析卡片", "卡片分析", "dc卡片", "fx", "分析"), block=True)
@@ -21,20 +23,32 @@ async def analyze_card(bot: Bot, ev: Event):
         await async_ocr(bot, ev)
         return
 
-    try:
-        at_sender = True if ev.group_id else False
-        await bot.send(
-            "[鸣潮] 请在30秒内发送一张dc官方bot生成的卡片图或图片链接\n(分辨率尽可能为1920*1080，过低可能导致识别失败)\n",
-            at_sender,
-        )
+    at_sender = True if ev.group_id else False
+    await bot.send(
+        "[鸣潮][dc卡片分析] 请在30秒内发送一张dc官方bot生成的卡片图或图片链接\n(分辨率尽可能为1920*1080，过低可能导致识别失败)\n",
+        at_sender,
+    )
 
-        resp = await bot.receive_resp(timeout=30)
-        if resp is not None:
-            ev = resp
-    except asyncio.TimeoutError:
+    resp = await bot.receive_resp(timeout=30)
+    if resp is not None:
+        ev = resp
+    else:
         return await bot.send("[鸣潮] 等待超时，discord卡片分析已关闭\n", at_sender)
 
     await async_ocr(bot, ev)
+
+
+@waves_phantom_score_ocr_query.on_regex(r"[\u4e00-\u9fa5]+\s*\d\s*[cC]", block=True)
+async def phantom_score_ocr_query(bot: Bot, ev: Event):
+    """声骸OCR查分"""
+    match = re.search(r"([\u4e00-\u9fa5]+)\s*(\d)\s*[cC]", ev.raw_text)
+    if not match:
+        return
+
+    char_name = match.group(1)
+    cost = match.group(2)
+
+    await phantom_score_ocr(bot, ev, char_name, int(cost))
 
 
 @waves_change_sonata_and_first_echo.on_regex(

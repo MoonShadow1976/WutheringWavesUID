@@ -193,6 +193,14 @@
         "need_admin": false
       },
       {
+        "name": "ocr声骸评分",
+        "desc": "ocr声骸评分",
+        "eg": "莫宁1c",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
         "name": "查询角色面板",
         "desc": "查询角色面板",
         "eg": "椿面板",
@@ -203,7 +211,7 @@
       {
         "name": "查询角色伤害",
         "desc": "查询角色伤害",
-        "eg": "椿伤害3",
+        "eg": "椿伤害(3)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false

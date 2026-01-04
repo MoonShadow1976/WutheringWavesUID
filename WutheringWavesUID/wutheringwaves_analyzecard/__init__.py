@@ -16,23 +16,8 @@ waves_change_weapon_reson_level = SV("waves修改武器精炼", priority=5, pm=1
 @waves_discord_bot_card_analyze.on_command(("分析卡片", "卡片分析", "dc卡片", "fx", "分析"), block=True)
 async def analyze_card(bot: Bot, ev: Event):
     """处理 Discord 上的图片分析请求。"""
-    # 指令与图片链接同时发送时
-    if ev.text.strip():
-        raw_data = ev.content[0].data
-
-        # 直接匹配完整URL（直到遇到空格或右括号为止）
-        url_pattern = r"https?://[^\s)>]+"  # 排除空格、右括号和大于号等常见终止符
-        urls = re.findall(url_pattern, raw_data)
-
-        first_url = urls[0] if urls else ""
-
-        # 覆盖原数据
-        ev.content[0].data = first_url
-        await async_ocr(bot, ev)
-        return
-
-    # 指令与图片同时发送时
-    if ev.image:
+    # 指令与图片或图片链接同时发送时
+    if ev.image or ev.text.strip():
         await async_ocr(bot, ev)
         return
 

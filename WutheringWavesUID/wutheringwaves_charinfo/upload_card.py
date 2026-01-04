@@ -66,8 +66,12 @@ async def get_image(ev: Event) -> list[str] | None:
             and content.data["url"].startswith("http")
         ):  # discord attachment 类
             res.append(content.data["url"])
-        elif content.type == "text" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
-            res.append(content.data)
+        elif content.type == "text" and content.data and isinstance(content.data, str):
+            import re
+            urls = re.findall(r'https?://[^\s<>"\'()（）]+', content.data)  # 从文本中提取所有HTTP/HTTPS链接
+            url_cut = re.split(r'(https?://)', ' '.join(urls))[1:]  # 拆分连续的URL
+            url_list = [url_cut[i] + url_cut[i+1].strip() for i in range(0, len(url_cut), 2)]
+            res.extend(url_list)
 
     if not res and ev.image:
         res.append(ev.image)

@@ -263,8 +263,12 @@ async def get_image(ev: Event):
             and content.data["url"].startswith("http")
         ):  # discord attachment 类
             res.append(content.data["url"])
-        elif content.type == "text" and content.data and isinstance(content.data, str) and content.data.startswith("http"):
-            res.append(content.data)
+        elif content.type == "text" and content.data and isinstance(content.data, str):
+            import re
+            urls = re.findall(r'https?://[^\s<>"\'()（）]+', content.data)  # 从文本中提取所有HTTP/HTTPS链接
+            url_cut = re.split(r'(https?://)', ' '.join(urls))[1:]  # 拆分连续的URL
+            url_list = [url_cut[i] + url_cut[i+1].strip() for i in range(0, len(url_cut), 2)]
+            res.extend(url_list)
 
     if not res and ev.image:
         res.append(ev.image)
@@ -282,10 +286,13 @@ async def get_upload_img(ev: Event):
     if not upload_images:
         return False, None
 
-    logger.info(f"[鸣潮]卡片分析上传链接{upload_images}")
     success = False
-    url = upload_images[0]  # 处理一张图片
-    if url:
+    images = []
+    for url in upload_images:
+        if not url:
+            continue
+        logger.info(f"[鸣潮]卡片分析上传链接：{url}")
+
         if httpx.__version__ >= "0.28.0":
             ssl_context = ssl.create_default_context()
             # ssl_context.set_ciphers("AES128-GCM-SHA256")
@@ -305,7 +312,7 @@ async def get_upload_img(ev: Event):
                     retcode = resp.status
 
             if retcode == 200:
-                image = Image.open(BytesIO(image_data))
+                images.append(Image.open(BytesIO(image_data)))
                 success = True
                 logger.success("[鸣潮]图片获取完成！")
             else:
@@ -316,6 +323,6 @@ async def get_upload_img(ev: Event):
             logger.warning("[鸣潮]图片获取失败！")
 
     if success:
-        return True, image
+        return True, images
     else:
         return False, None

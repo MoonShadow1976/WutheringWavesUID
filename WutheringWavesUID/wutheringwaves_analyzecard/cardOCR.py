@@ -75,11 +75,11 @@ async def async_ocr(bot: Bot, ev: Event):
     """
     at_sender = True if ev.group_id else False
 
-    bool_i, image = await get_upload_img(ev)
-    if not bool_i:
+    bool_i, images = await get_upload_img(ev)
+    if not bool_i or not images:
         return await bot.send("[鸣潮]获取dc卡片图失败！卡片分析已停止。\n", at_sender)
     # 获取dc卡片与共鸣链
-    chain_num, chek_imgs, cropped_images = await cut_card_to_ocr(image)
+    chain_num, chek_imgs, cropped_images = await cut_card_to_ocr(images[0])
 
     # 卡片词条OCR
     ocr_results = await ocrspace(cropped_images, bot, at_sender)

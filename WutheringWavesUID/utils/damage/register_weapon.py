@@ -1303,7 +1303,7 @@ class Weapon_21040045(WeaponAbstract):
         if not attr.env_tune_strain and attr.char_damage != attack_damage:
             return
         title = self.get_title()
-        dmg = f"{self.param(1) * self.param(3)}"
+        dmg = f"{self.param(1)} * {self.param(3)}"
         msg = f"对处于集谐·干涉状态的敌人造成伤害后，普攻伤害加成提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 

@@ -31,7 +31,7 @@ def load_template_images() -> tuple[dict[str, Image.Image], dict[str, Image.Imag
                 img = img.resize(ECHO_SIZE, Image.Resampling.LANCZOS)
                 templates_phantom[file.stem.replace("phantom_", "")] = img
             except Exception as e:
-                print(f"加载声骸模板 {file} 失败: {e}")
+                logger.error(f"加载声骸模板 {file} 失败: {e}")
 
     # 加载套装模板
     attribute_path = TEXT_PATH / "attribute_effect"
@@ -45,7 +45,7 @@ def load_template_images() -> tuple[dict[str, Image.Image], dict[str, Image.Imag
                 img = img.resize(SET_SIZE, Image.Resampling.LANCZOS)
                 templates_set[file.stem.replace("attr_", "")] = img
             except Exception as e:
-                print(f"加载套装模板 {file} 失败: {e}")
+                logger.error(f"加载套装模板 {file} 失败: {e}")
 
     return templates_phantom, templates_set
 

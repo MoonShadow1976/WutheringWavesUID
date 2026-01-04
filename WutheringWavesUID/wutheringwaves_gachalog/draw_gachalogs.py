@@ -459,6 +459,8 @@ async def draw_uid_avatar(uid, ev, card_img):
 
 async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
     """上传抽卡记录统计数据到服务器"""
+    from gsuid_core.logger import logger
+
     try:
         from ..wutheringwaves_config import WutheringWavesConfig
 
@@ -478,14 +480,14 @@ async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
         }
 
         # 打印上传数据
-        print(f"[抽卡记录上传] upload_data: {upload_data}")
+        logger.debug(f"[抽卡记录上传] upload_data: {upload_data}")
 
         # 添加到上传队列
         push_item(QUEUE_GACHA_RECORD, upload_data)
 
     except Exception as e:
         # 记录错误但不影响主要功能
-        print(f"上传抽卡记录时出错: {e}")
+        logger.error(f"上传抽卡记录时出错: {e}")
         pass
 
 

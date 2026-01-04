@@ -223,7 +223,7 @@ async def compress_all_custom_card(bot: Bot, ev: Event):
                     count += 1
 
             except Exception as exc:
-                print(f"Error processing {file_info[0]}: {exc}")
+                logger.error(f"Error processing {file_info[0]}: {exc}")
 
     if count > 0:
         return await bot.send(f"[鸣潮] 压缩【{count}】张面板图成功！\n")

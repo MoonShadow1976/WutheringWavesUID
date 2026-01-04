@@ -104,7 +104,7 @@ def calc_damage_1(
     if crit_rate > 0.5:
         crit_rate = crit_rate - 0.5
         crit_rate_bonus = int(min(max(crit_rate / 0.01, 0), 15))
-        print(crit_rate_bonus)
+        # print(crit_rate_bonus)
         title = "共鸣解放"
         msg = f"暴击伤害提升2*{crit_rate_bonus}%"
         attr.add_crit_dmg(crit_rate_bonus * 0.02, title, msg)

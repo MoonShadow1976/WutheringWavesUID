@@ -1,4 +1,3 @@
-import asyncio
 import re
 
 from gsuid_core.bot import Bot

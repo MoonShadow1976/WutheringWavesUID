@@ -1,5 +1,6 @@
 # change from https://github.com/alone-art/ScoreQuery
 
+import io
 from pathlib import Path
 import re
 
@@ -10,9 +11,7 @@ from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
 from PIL import Image, ImageDraw
 
-from ..utils.api.model import (
-    Props,
-)
+from ..utils.api.model import Props
 from ..utils.ascension.char import get_char_model
 from ..utils.calculate import (
     calc_phantom_entry,
@@ -46,8 +45,8 @@ valid_keys = [
     "暴击伤害", "暴击",
     "普攻伤害加成",
     "重击伤害加成",
-    "共鸣技能伤害加成", "共鸣技能伤害",
-    "共鸣解放伤害加成", "共鸣解放伤害",
+    "共鸣技能伤害加成",
+    "共鸣解放伤害加成",
     "气动伤害加成",
     "冷凝伤害加成",
     "导电伤害加成",
@@ -70,7 +69,7 @@ valid_values = [
 # fmt: on
 
 
-def extract_vaild_info(info):
+def extract_vaild_info(info: list[str]) -> tuple[list, list]:
     """提取有效信息"""
     keys = []
     values = []
@@ -90,17 +89,17 @@ def extract_vaild_info(info):
 
         if len(keys) < 7:
             key = check_in(txt, valid_keys)
-            if key == "共鸣技能伤害" or key == "共鸣解放伤害":  # 适配ww面板图
-                key = f"{key}加成"
+            if not key:  # 适配ww面板图
+                key = check_in(f"{txt}加成", valid_keys)
             if key:
                 keys.append(key)
                 continue
 
         if len(values) < 7:
-            txt = re.sub(r"[•·，,、,]", ".", txt)  # 替换为小数点
+            txt = re.sub(r"[:：•·，,、,]", ".", txt)  # 替换为小数点
             txt = txt.replace("％", "%")
             if len(values) < 1:
-                if "%" in txt:
+                if "%" in txt and re.match(r"^\d+(?:\.\d+)?%$", txt):
                     values.append(txt)
             elif len(values) == 1:
                 match = re.search(r"(\d+)", txt)
@@ -117,7 +116,7 @@ def extract_vaild_info(info):
     return keys, values
 
 
-async def draw_char_with_ring(char_id) -> Image.Image:
+async def draw_char_with_ring(char_id: str) -> Image.Image:
     """绘制角色头像"""
     pic = await get_square_avatar(char_id)
 
@@ -130,7 +129,7 @@ async def draw_char_with_ring(char_id) -> Image.Image:
     return img
 
 
-def fill_color(per):
+def fill_color(per: float) -> tuple[int, int, int, int]:
     """填充颜色"""
     if per > 45:
         return (123, 42, 38, 250)  # 深红色
@@ -144,7 +143,7 @@ def fill_color(per):
         return (255, 255, 255, 250)  # 白色（半透明）
 
 
-async def draw_score(char_name, char_id, props, cost, calc_map):
+async def draw_score(char_name: str, char_id: str, props: list[Props], cost: int, calc_map: dict) -> bytes:
     total_score, level = calc_phantom_score(char_name, props, cost, calc_map)
     level = level.upper()
     logger.debug(f"{char_name} [声骸分数]: {total_score} [声骸评分等级]: {level}")
@@ -225,6 +224,41 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
     return await convert_img(img)
 
 
+def compress_image(images: list[Image.Image], max_size_kb: int) -> list[Image.Image]:
+    max_size = max_size_kb * 1024
+    result = []
+
+    for img in images:
+        img = img.convert("RGB")
+        count = 0
+        while True:
+            buffer = io.BytesIO()
+            img.save(buffer, "JPEG", quality=85, optimize=True)
+            logger.debug(f"图片大小：{buffer.tell() / 1024:.2f}KB")
+            count += 1
+
+            if buffer.tell() <= max_size:
+                break
+
+            width, height = img.size
+            scale = (max_size / buffer.tell()) ** 0.5
+            new_width = max(300, int(width * scale))
+            new_height = max(300, int(height * scale))
+
+            # 如果尺寸已经是最小值，退出循环避免无限循环
+            if new_width == width and new_height == height:
+                logger.warning("压缩后的尺寸已经是最小值，无法继续压缩")
+                break
+
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+        logger.info(f"该图压缩了 {count}次, 最终大小：{buffer.tell() / 1024:.2f}KB")
+        buffer.seek(0)
+        result.append(Image.open(buffer))
+
+    return result
+
+
 async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     """声骸OCR查分"""
     at_sender = True if ev.group_id else False
@@ -253,6 +287,9 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
     if not bool_i or not images:
         return await bot.send("[鸣潮] 获取图片失败！声骸查分已关闭\n", at_sender)
+
+    # 压缩image到90KB以内
+    images = compress_image(images, 90)
 
     ocr_results = await ocrspace(images, bot, at_sender, language="chs", isTable=False)
     if isinstance(ocr_results, str):
@@ -296,3 +333,12 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     if len(msg) == 1:
         return await bot.send(msg[0])
     return await bot.send(msg, at_sender)
+
+
+# if __name__ == "__main__":
+#     ocr_results =  [{'error': None, 'text': '亥强化\n锯袭铁影\n+25\nMAX\n*衍射伤害加成\n×攻击\n• 攻击\n• 暴击伤害\n• 共鸣解放伤害加成\n•暴击\n•共鸣效率\n*15100/15100\n30.0%\n100\n6.4%\n12.6%\n16.1%\n8.1%\n8.4%\n不限\n强化消耗材料（0/50）\n阶段放入'}]
+#     for part in ocr_results:
+#         contexts = part["text"].split("\n")
+#         keys, values = extract_vaild_info(contexts)
+#         print(f"提取词条: {keys}")
+#         print(f"提取值: {values}")

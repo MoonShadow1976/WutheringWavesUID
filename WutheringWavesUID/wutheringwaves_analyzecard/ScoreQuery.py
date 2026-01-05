@@ -262,6 +262,10 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     calc_temp = get_calc_map({}, char_name, char_id)
     msg = []
     for part in ocr_results:
+        if not part["text"]:
+            msg.append("未识别到有效信息！请确保图片内容清晰规范！\n")
+            continue
+
         contexts = part["text"].split("\n")
         logger.debug(f"识别内容: {contexts}")
         keys, values = extract_vaild_info(contexts)
@@ -269,12 +273,12 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
         logger.info(f"提取值: {values}")
 
         if not keys or not values:
-            msg.append("未识别到有效信息！请确保图片清晰！\n")
+            msg.append("未识别到有效信息！请确保图片内容清晰规范！\n")
             continue
 
         props = []
         if len(keys) != len(values):
-            msg.append("识别到的词条和值数量不匹配！请确保图片清晰！\n")
+            msg.append("识别到的词条和值数量不匹配！请确保图片内容清晰规范！\n")
             continue
 
         for i in range(len(keys)):
@@ -284,7 +288,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
             img = await draw_score(char_name, char_id, props, cost, calc_temp)
         except Exception as e:
             logger.warning(f"程序错误：{e}")
-            msg.append("词条错误！请确保图片清晰！\n")
+            msg.append("词条错误！请确保图片内容清晰规范！\n")
             continue
 
         msg.append(img)

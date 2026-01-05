@@ -32,7 +32,7 @@ from ..utils.image import (
     get_role_pile,
     get_square_avatar,
 )
-from ..utils.name_convert import alias_to_char_name, char_name_to_char_id, f
+from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
 from .ocrspace import get_upload_img, ocrspace
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -103,11 +103,11 @@ def extract_vaild_info(info):
                 if "%" in txt:
                     values.append(txt)
             elif len(values) == 1:
-                    match = re.search(r"(\d+)", txt)
-                    if match:
-                        num = int(match.group(1))
-                        if num <= 2280 and num >= 30:
-                            values.append(str(num))
+                match = re.search(r"(\d+)", txt)
+                if match:
+                    num = int(match.group(1))
+                    if num <= 2280 and num >= 30:
+                        values.append(str(num))
             else:
                 key = check_in(txt, valid_values)
                 if key:
@@ -133,7 +133,7 @@ async def draw_char_with_ring(char_id) -> Image.Image:
 def fill_color(per):
     """填充颜色"""
     if per > 45:
-        return (123,42,38, 250)  # 深红色
+        return (123, 42, 38, 250)  # 深红色
     elif 40 <= per <= 45:
         return (255, 50, 50, 250)  # 红色
     elif 30 <= per < 40:
@@ -190,7 +190,7 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
         name_color, num_color = get_valid_color(_prop.attributeName, _prop.attributeValue, calc_map)
 
         font = waves_font_20 if index == 1 else waves_font_24
-        lset =  10 if index > 1 else 0
+        lset = 10 if index > 1 else 0
 
         sh_temp_draw.text(
             (55, 35 + index * oset + lset),
@@ -257,7 +257,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     ocr_results = await ocrspace(images, bot, at_sender, language="chs", isTable=False)
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
-    #ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '◎\n暗鬃狼\nLv.25\n45.93分\n湮灭伤害加成\n攻击\n暴击伤害\n攻击\n该重击伤害加成\n众 共鸣技能伤害\n•暴击\n30.0%\n100\n21.0%\n11.6%\n9.4%\n10.9%\n10.5%'},{'error': None, 'text': 'COST\n11/12\n全部\n3\n合鸣筛选/全部\n+25\n+25\n+25\n+25\n未装备优先\n＜声骸推荐\n简述\n共鸣回•芙露德莉斯\n［COST 4\n+25\n器暴击伤害\n×攻击\n•普攻伤害加成\n暴击\n•牛命\n44.0%\n150\n10.9%\n9.9%\n6.4%\n390\n• 暴击伤害\n21.0%\n声骸技能\nC 使用声骸技能，召唤【破空幻刃】，\n攻击目标，造成八段27.36%和一段\n136.80%的气动伤害。\n在首位装配该声骸技能时，自身气动\n伤害加成提升10.00%，当装配角色\n为漂泊者•气动或卡提希娅时，自身\n气动伤害加成额外提升10.00%。\n卡提希娅装配中\n卸下\n培养\n特征码：117874920'}]
+    # ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '◎\n暗鬃狼\nLv.25\n45.93分\n湮灭伤害加成\n攻击\n暴击伤害\n攻击\n该重击伤害加成\n众 共鸣技能伤害\n•暴击\n30.0%\n100\n21.0%\n11.6%\n9.4%\n10.9%\n10.5%'},{'error': None, 'text': 'COST\n11/12\n全部\n3\n合鸣筛选/全部\n+25\n+25\n+25\n+25\n未装备优先\n＜声骸推荐\n简述\n共鸣回•芙露德莉斯\n［COST 4\n+25\n器暴击伤害\n×攻击\n•普攻伤害加成\n暴击\n•牛命\n44.0%\n150\n10.9%\n9.9%\n6.4%\n390\n• 暴击伤害\n21.0%\n声骸技能\nC 使用声骸技能，召唤【破空幻刃】，\n攻击目标，造成八段27.36%和一段\n136.80%的气动伤害。\n在首位装配该声骸技能时，自身气动\n伤害加成提升10.00%，当装配角色\n为漂泊者•气动或卡提希娅时，自身\n气动伤害加成额外提升10.00%。\n卡提希娅装配中\n卸下\n培养\n特征码：117874920'}]
 
     calc_temp = get_calc_map({}, char_name, char_id)
     msg = []

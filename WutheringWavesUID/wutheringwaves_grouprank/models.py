@@ -1,11 +1,18 @@
 from typing import Optional
 
 from gsuid_core.utils.database.base_models import with_session
-from sqlalchemy import delete
+from gsuid_core.utils.database.startup import exec_list
+from sqlalchemy import delete, tuple_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from sqlalchemy.sql import and_, or_, text
+from sqlalchemy.sql import text
 from sqlmodel import Field, Relationship, SQLModel, select
+
+exec_list.extend(
+    [
+        "ALTER TABLE ww_rank_team ADD COLUMN buff_quality INTEGER DEFAULT 3",
+    ]
+)
 
 
 class GroupRankRole(SQLModel, table=True):
@@ -34,6 +41,7 @@ class GroupRankTeam(SQLModel, table=True):
     team_index: int = Field(description="队伍索引（0或1）")
     team_score: int = Field(description="队伍得分")
     buff_id: int = Field(description="队伍选择的增益ID")
+    buff_quality: int = Field(default=3, description="队伍选择的增益品质")
 
     record: Optional["GroupRankRecord"] = Relationship(back_populates="teams")
     roles: list[GroupRankRole] = Relationship(back_populates="team", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
@@ -115,6 +123,7 @@ class GroupRankRecord(SQLModel, table=True):
                 team_index=index,
                 team_score=half.get("score", 0),
                 buff_id=half.get("buff_id", 0),
+                buff_quality=half.get("buff_quality", 3),
             )
             session.add(team)
             await session.flush()  # 刷新以获取 team.id
@@ -146,27 +155,30 @@ class GroupRankRecord(SQLModel, table=True):
         if not user_uid_pairs:
             return []
 
-        # 构建用户查询条件
-        user_conditions = []
-        for uid, wid in user_uid_pairs:
-            user_conditions.append(and_(cls.user_id == uid, cls.waves_id == wid))
+        results = []
+        # 分批查询，避免 SQLite 参数过多或表达式树过深
+        batch_size = 500
+        for i in range(0, len(user_uid_pairs), batch_size):
+            batch_pairs = user_uid_pairs[i : i + batch_size]
 
-        # 构建总查询条件
-        conditions = [
-            cls.rank_type == rank_type,
-            cls.season_id == season_id,
-            cls.challenge_id == challenge_id,
-            cls.score > 0,  # 只查询有分数的记录
-            or_(*user_conditions),
-        ]
+            # 构建总查询条件
+            conditions = [
+                cls.rank_type == rank_type,
+                cls.season_id == season_id,
+                cls.challenge_id == challenge_id,
+                cls.score > 0,  # 只查询有分数的记录
+                tuple_(cls.user_id, cls.waves_id).in_(batch_pairs),
+            ]
 
-        statement = (
-            select(cls)
-            .where(*conditions)
-            .options(selectinload(cls.teams).selectinload(GroupRankTeam.roles))  # 预加载队伍和角色信息
-        )
-        result = await session.execute(statement)
-        return result.scalars().all()
+            statement = (
+                select(cls)
+                .where(*conditions)
+                .options(selectinload(cls.teams).selectinload(GroupRankTeam.roles))  # 预加载队伍和角色信息
+            )
+            result = await session.execute(statement)
+            results.extend(result.scalars().all())
+
+        return results
 
     @classmethod
     @with_session

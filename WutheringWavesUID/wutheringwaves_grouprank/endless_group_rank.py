@@ -302,7 +302,11 @@ async def _create_rank_bar(
                 buff_bg = Image.new("RGBA", (60, 60), (0, 0, 0, 0))
                 buff_bg_draw = ImageDraw.Draw(buff_bg)
                 buff_bg_draw.rounded_rectangle([0, 0, 50, 50], radius=5, fill=(0, 0, 0, int(0.8 * 255)))
-                buff_color = COLOR_QUALITY.get(buff_model.qualityId, (188, 188, 188))
+
+                # 优先使用数据库中保存的 buff_quality，如果没有则回退到 buff_model.qualityId
+                quality_id = getattr(team, "buff_quality", buff_model.qualityId)
+                buff_color = COLOR_QUALITY.get(quality_id, (188, 188, 188))
+
                 buff_bg_draw.rectangle([0, 45, 50, 50], fill=buff_color)
                 buff_pic = (await pic_download_from_url(SLASH_PATH, buff_model.icon)).resize((50, 50))
                 buff_bg.paste(buff_pic, (0, 0), buff_pic)

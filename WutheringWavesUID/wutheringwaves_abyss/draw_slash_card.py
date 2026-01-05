@@ -393,6 +393,7 @@ async def save_to_group_rank(
             half_list.append(
                 {
                     "buff_id": int(half.buffIcon.split("/")[-1].split(".")[0]),
+                    "buff_quality": half.buffQuality,
                     "score": half.score,
                     "roleList": roles,
                 }

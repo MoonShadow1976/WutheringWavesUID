@@ -275,7 +275,7 @@ async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
     # 处理角色信息（第一个识别结果）0
     if ocr_results:
         first_result = ocr_results[0]
-        if first_result["error"] is None:
+        if first_result["text"] is not None:
             lines = first_result["text"].split("\t")  # 支持"◎\t洛可可\tLV.90\t"
             for line in lines:
                 # 玩家名称
@@ -316,7 +316,7 @@ async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
                     final_result["用户信息"]["UID"] = uid_match.group(1)
 
     # 处理武器信息（第二个结果）1
-    if len(ocr_results) > 1 and ocr_results[1]["error"] is None:
+    if len(ocr_results) > 1 and ocr_results[1]["text"] is not None:
         text = ocr_results[1]["text"]
         lines = [line.strip() for line in text.split("\n") if line.strip()]
 
@@ -339,7 +339,7 @@ async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
 
     # 处理技能等级（第3-7个结果）下标：2 3 4 5 6
     for idx in range(2, 7):
-        if idx >= len(ocr_results) or ocr_results[idx]["error"] is not None:
+        if idx >= len(ocr_results) or ocr_results[idx]["text"] is None:
             final_result["技能等级"].append(1)
             continue
 
@@ -358,7 +358,7 @@ async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
 
     # 处理声骸装备（第8-12个结果）下标：7 8 9 10 11
     for idx in range(7, 12):
-        if idx >= len(ocr_results) or ocr_results[idx]["error"] is not None:
+        if idx >= len(ocr_results) or ocr_results[idx]["text"] is None:
             continue
 
         equipment = {"mainProps": [], "subProps": []}

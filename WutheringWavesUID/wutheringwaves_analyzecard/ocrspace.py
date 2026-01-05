@@ -138,7 +138,7 @@ async def ocrspace(
             return "[鸣潮] 服务器访问OCR服务失败，请检查服务器网络状态。\n"
 
         ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images, language=language, isTable=isTable)
-        logger.info(f"[鸣潮][OCRspace]dc卡片识别数据:\n{ocr_results}")
+        logger.info(f"[鸣潮][OCRspace]dc卡片识别数据: {ocr_results}")
         if ocr_results:
             if need_all_pass:
                 if all(result.get("error") is None for result in ocr_results):
@@ -249,9 +249,12 @@ async def fetch_ocr_result(session, url, payload):
                 return [{"error": f"HTTP Error {response}", "text": None}]
 
             data = await response.json()
+            logger.debug(f"[鸣潮]OCR.space 返回结果：{data}")
 
             # 解析结果
             if not data.get("ParsedResults"):
+                if data.get("ErrorDetails"):
+                    return [{"error": f"{data['ErrorDetails']}", "text": None}]
                 return [{"error": "No Results", "text": None}]
 
             # 提取识别结果
@@ -260,10 +263,10 @@ async def fetch_ocr_result(session, url, payload):
                 if result.get("ParsedText"):
                     return [{"error": None, "text": result.get("ParsedText")}]
 
-            return [{"error": "No Results", "text": None}]
+            return [{"error": None, "text": None}]
 
     except Exception as e:
-        return [{"error": f"Processing Error:{e}", "text": None}]
+        return [{"error": f"Processing Error: {e}", "text": None}]
 
 
 async def get_image(ev: Event):

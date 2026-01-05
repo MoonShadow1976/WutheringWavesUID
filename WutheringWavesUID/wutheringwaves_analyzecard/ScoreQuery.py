@@ -171,8 +171,7 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
     sh_calc_map_draw = ImageDraw.Draw(img)
     sh_calc_map_draw.text((40, 165), f"[评分模版]：{calc_map['name']}", "white", waves_font_24, "lm")
 
-    sh_temp = Image.new("RGBA", (404, 402), (25, 35, 55, 10))
-    oset = 55
+    sh_temp = Image.new("RGBA", (404, 402), (25, 35, 55, 0))
     for index, _prop in enumerate(props):
         char_model = get_char_model(char_id)
         char_attr = ""
@@ -182,15 +181,16 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
         _, score = calc_phantom_entry(index, _prop, cost, calc_map, char_attr)
         logger.debug(f"{char_name} [属性]: {_prop.attributeName} {_prop.attributeValue} [评分]: {score}")
 
+        font = waves_font_20 if index == 1 else waves_font_24
+        lset = 10 if index > 1 else 0
+        oset = 45 if index > 1 else 50
+
         prop_img = await get_attribute_prop(_prop.attributeName)
         prop_img = prop_img.resize((40, 40))
-        sh_temp.alpha_composite(prop_img, (10, 15 + index * oset))
+        sh_temp.alpha_composite(prop_img, (10, 15 + index * oset + lset))
 
         sh_temp_draw = ImageDraw.Draw(sh_temp)
         name_color, num_color = get_valid_color(_prop.attributeName, _prop.attributeValue, calc_map)
-
-        font = waves_font_20 if index == 1 else waves_font_24
-        lset = 10 if index > 1 else 0
 
         sh_temp_draw.text(
             (55, 35 + index * oset + lset),

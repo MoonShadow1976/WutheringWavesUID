@@ -82,7 +82,7 @@ async def async_ocr(bot: Bot, ev: Event):
     chain_num, chek_imgs, cropped_images = await cut_card_to_ocr(images[0])
 
     # 卡片词条OCR
-    ocr_results = await ocrspace(cropped_images, bot, at_sender)
+    ocr_results = await ocrspace(cropped_images, bot, at_sender, need_all_pass=True)
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
 

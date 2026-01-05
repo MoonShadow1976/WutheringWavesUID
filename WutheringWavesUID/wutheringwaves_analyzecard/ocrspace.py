@@ -97,7 +97,12 @@ async def check_ocr_engine_accessible() -> int:
 
 
 async def ocrspace(
-    cropped_images: list[Image.Image], bot: Bot, at_sender: bool, language: str = "cht", isTable: bool = True
+    cropped_images: list[Image.Image],
+    bot: Bot,
+    at_sender: bool,
+    language: str = "cht",
+    isTable: bool = True,
+    need_all_pass: bool = False,
 ) -> list | str:
     """
     异步OCR识别函数
@@ -134,16 +139,31 @@ async def ocrspace(
 
         ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images, language=language, isTable=isTable)
         logger.info(f"[鸣潮][OCRspace]dc卡片识别数据:\n{ocr_results}")
-        if not ocr_results[0]["error"]:
-            logger.success("[鸣潮]OCRspace 识别成功！")
-            break
+        if ocr_results:
+            if need_all_pass:
+                if all(result.get("error") is None for result in ocr_results):
+                    logger.success("[鸣潮]OCRspace 识别成功！")
+                    break
+            else:
+                if any(result.get("error") is None for result in ocr_results):
+                    logger.success("[鸣潮]OCRspace 识别成功！")
+                    break
 
     if API_KEY is None:
         return "[鸣潮] OCRspace API密钥不可用！请等待额度恢复或更换密钥\n"
 
-    if not ocr_results or ocr_results[0]["error"]:
-        logger.warning("[鸣潮]OCRspace识别失败！或是输入异常或是OCR服务故障。")
-        return "[鸣潮]OCRspace识别失败！或是输入异常或是OCR服务故障，请尝试修改输入或等待OCR服务恢复。\n"
+    error_msg = "[鸣潮]OCRspace识别失败！或是输入异常或是OCR服务故障，请尝试修改输入或等待OCR服务恢复\n"
+    if not ocr_results:
+        logger.warning(error_msg)
+        return error_msg
+    if need_all_pass:
+        if not all(result.get("error") is None for result in ocr_results):
+            logger.warning(error_msg)
+            return error_msg
+    else:
+        if not any(result.get("error") is None for result in ocr_results):
+            logger.warning(error_msg)
+            return error_msg
 
     return ocr_results
 

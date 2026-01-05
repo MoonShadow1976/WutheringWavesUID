@@ -22,6 +22,7 @@ from ..utils.calculate import (
 )
 from ..utils.fonts.waves_fonts import (
     waves_font_18,
+    waves_font_20,
     waves_font_24,
     waves_font_36,
 )
@@ -31,7 +32,7 @@ from ..utils.image import (
     get_role_pile,
     get_square_avatar,
 )
-from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
+from ..utils.name_convert import alias_to_char_name, char_name_to_char_id, f
 from .ocrspace import get_upload_img, ocrspace
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -45,8 +46,8 @@ valid_keys = [
     "暴击伤害", "暴击",
     "普攻伤害加成",
     "重击伤害加成",
-    "共鸣技能伤害加成",
-    "共鸣解放伤害加成",
+    "共鸣技能伤害加成", "共鸣技能伤害",
+    "共鸣解放伤害加成", "共鸣解放伤害",
     "气动伤害加成",
     "冷凝伤害加成",
     "导电伤害加成",
@@ -89,6 +90,8 @@ def extract_vaild_info(info):
 
         if len(keys) < 7:
             key = check_in(txt, valid_keys)
+            if key == "共鸣技能伤害" or key == "共鸣解放伤害":  # 适配ww面板图
+                key = f"{key}加成"
             if key:
                 keys.append(key)
                 continue
@@ -96,14 +99,10 @@ def extract_vaild_info(info):
         if len(values) < 7:
             txt = re.sub(r"[•·，,、,]", ".", txt)  # 替换为小数点
             txt = txt.replace("％", "%")
-            if len(values) < 2:
+            if len(values) < 1:
                 if "%" in txt:
-                    match = re.search(r"(\d+(\.\d+)?)%", txt)
-                    if match:
-                        num = float(match.group(1))
-                        formatted_num = f"{num:.1f}"
-                        values.append(f"{formatted_num}%")
-                else:
+                    values.append(txt)
+            elif len(values) == 1:
                     match = re.search(r"(\d+)", txt)
                     if match:
                         num = int(match.group(1))
@@ -134,7 +133,7 @@ async def draw_char_with_ring(char_id) -> Image.Image:
 def fill_color(per):
     """填充颜色"""
     if per > 45:
-        return (255, 0, 255, 250)  # 彩色（品红色，带透明度）
+        return (123,42,38, 250)  # 深红色
     elif 40 <= per <= 45:
         return (255, 50, 50, 250)  # 红色
     elif 30 <= per < 40:
@@ -152,7 +151,7 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
 
     # 背景
     _, role_pile = await get_role_pile(char_id, True)
-    bg_img = role_pile.resize((540, 680), Image.Resampling.LANCZOS)
+    bg_img = role_pile.resize((540, 680))
     img = Image.new("RGBA", (540, 680), (30, 45, 65, 210))
     img = Image.alpha_composite(bg_img, img)
 
@@ -161,13 +160,12 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
     img.paste(avatar, (1, 0), avatar)
 
     ph_name_draw = ImageDraw.Draw(img)
-    ph_name_draw.text((147, 73), f"{char_name}", "white", waves_font_36, "lm")
-    ph_name_draw.text((147, 105), f"Cost {str(cost)}", "white", waves_font_24, "lm")
+    ph_name_draw.text((147, 73), f"{char_name}", "white", waves_font_24, "lm")
+    ph_name_draw.text((147, 105), f"Cost {str(cost)}", "white", waves_font_18, "lm")
 
     # 总评分
     ph_score_img_draw = ImageDraw.Draw(img)
-    ph_score_img_draw.rounded_rectangle([280, 60, 520, 110], radius=12, outline=(255, 255, 255, 100), width=1)
-    ph_score_img_draw.text((320, 84), f"{total_score:.2f}   {level}", fill_color(total_score), waves_font_36, "lm")
+    ph_score_img_draw.text((315, 84), f"{total_score:.2f}   {level}", fill_color(total_score), waves_font_36, "lm")
 
     # 评分表
     sh_calc_map_draw = ImageDraw.Draw(img)
@@ -191,23 +189,26 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
         sh_temp_draw = ImageDraw.Draw(sh_temp)
         name_color, num_color = get_valid_color(_prop.attributeName, _prop.attributeValue, calc_map)
 
+        font = waves_font_20 if index == 1 else waves_font_24
+        lset =  10 if index > 1 else 0
+
         sh_temp_draw.text(
-            (55, 35 + index * oset),
+            (55, 35 + index * oset + lset),
             f"{_prop.attributeName[:6]}",
             name_color,
-            waves_font_24,
+            font,
             "lm",
         )
         sh_temp_draw.text(
-            (317, 35 + index * oset),
+            (317, 35 + index * oset + lset),
             f"{_prop.attributeValue}",
             num_color,
-            waves_font_24,
+            font,
             "rm",
         )
 
         sh_temp_draw.text(
-            (395, 38 + index * oset),
+            (395, 38 + index * oset + lset),
             f"{score}分",
             fill_color((score / total_score) * 100),
             waves_font_18,
@@ -216,10 +217,11 @@ async def draw_score(char_name, char_id, props, cost, calc_map):
 
     # 词条
     sh_temp_bg_draw = ImageDraw.Draw(img)
-    sh_temp_bg_draw.rounded_rectangle([20, 205, 520, 322], radius=12, outline=(255, 255, 255, 100), width=1)
-    sh_temp_bg_draw.rounded_rectangle([20, 324, 520, 610], radius=12, outline=(255, 255, 255, 100), width=1)
+    # sh_temp_bg_draw.rounded_rectangle([20, 205, 520, 322], radius=12, outline=(255, 255, 255, 100), width=1)
+    # sh_temp_bg_draw.rounded_rectangle([20, 324, 520, 610], radius=12, outline=(255, 255, 255, 100), width=1)
     img.alpha_composite(sh_temp, (68, 202))
     img = add_footer(img, 500)
+    img = img.resize((2160, 2720))
     return await convert_img(img)
 
 
@@ -245,7 +247,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
         resp = await bot.receive_resp(timeout=30)
         if resp is not None:
-            bool_i, images = await get_upload_img(ev)
+            bool_i, images = await get_upload_img(resp)
         else:
             return await bot.send("[鸣潮] 等待超时，声骸查分已关闭\n", at_sender)
 
@@ -255,7 +257,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     ocr_results = await ocrspace(images, bot, at_sender, language="chs", isTable=False)
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
-    # ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '矿岩机麋\n+25\nMAX\n×攻击\n×攻击\n• 暴击\n• 生命\n• 共鸣效率\n• 共鸣解放伤害加成\n• 攻击\n15100/15100\n•30.0%•\n•100\n10.5%\n360\n10•8%\n13.8%\n•9.4%'}]
+    #ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '◎\n暗鬃狼\nLv.25\n45.93分\n湮灭伤害加成\n攻击\n暴击伤害\n攻击\n该重击伤害加成\n众 共鸣技能伤害\n•暴击\n30.0%\n100\n21.0%\n11.6%\n9.4%\n10.9%\n10.5%'},{'error': None, 'text': 'COST\n11/12\n全部\n3\n合鸣筛选/全部\n+25\n+25\n+25\n+25\n未装备优先\n＜声骸推荐\n简述\n共鸣回•芙露德莉斯\n［COST 4\n+25\n器暴击伤害\n×攻击\n•普攻伤害加成\n暴击\n•牛命\n44.0%\n150\n10.9%\n9.9%\n6.4%\n390\n• 暴击伤害\n21.0%\n声骸技能\nC 使用声骸技能，召唤【破空幻刃】，\n攻击目标，造成八段27.36%和一段\n136.80%的气动伤害。\n在首位装配该声骸技能时，自身气动\n伤害加成提升10.00%，当装配角色\n为漂泊者•气动或卡提希娅时，自身\n气动伤害加成额外提升10.00%。\n卡提希娅装配中\n卸下\n培养\n特征码：117874920'}]
 
     calc_temp = get_calc_map({}, char_name, char_id)
     msg = []
@@ -263,22 +265,30 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
         contexts = part["text"].split("\n")
         logger.debug(f"识别内容: {contexts}")
         keys, values = extract_vaild_info(contexts)
-        logger.debug(f"提取词条: {keys}")
-        logger.debug(f"提取值: {values}")
+        logger.info(f"提取词条: {keys}")
+        logger.info(f"提取值: {values}")
 
         if not keys or not values:
-            msg.append("未识别到有效信息！\n")
+            msg.append("未识别到有效信息！请确保图片清晰！\n")
             continue
 
         props = []
         if len(keys) != len(values):
-            msg.append("识别到的词条和值数量不匹配！\n")
+            msg.append("识别到的词条和值数量不匹配！请确保图片清晰！\n")
             continue
 
         for i in range(len(keys)):
             props.append(Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]))
 
-        img = await draw_score(char_name, char_id, props, cost, calc_temp)
+        try:
+            img = await draw_score(char_name, char_id, props, cost, calc_temp)
+        except Exception as e:
+            logger.warning(f"程序错误：{e}")
+            msg.append("词条错误！请确保图片清晰！\n")
+            continue
+
         msg.append(img)
 
+    if len(msg) == 1:
+        return await bot.send(msg[0])
     return await bot.send(msg, at_sender)

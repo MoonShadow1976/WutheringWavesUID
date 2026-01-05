@@ -1,5 +1,6 @@
 # 标准库
 import re
+from typing import Literal
 
 # 项目内部模块
 from gsuid_core.bot import Bot
@@ -57,7 +58,8 @@ char_crop_ratios = [
 ECHO_WIDTH = 204
 ECHO_HEIGHT = 230
 echo_crop_ratios = [
-    (110 / ECHO_WIDTH, 40 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 85 / ECHO_HEIGHT),  # 右上角主词条(忽略声骸cost，暂不处理)
+    (110 / ECHO_WIDTH, 40 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 60 / ECHO_HEIGHT),  # 右上角主词条(忽略声骸cost，暂不处理)
+    (162 / ECHO_WIDTH, 60 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 80 / ECHO_HEIGHT),  # 右上角主词条的值
     (24 / ECHO_WIDTH, 105 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 230 / ECHO_HEIGHT),  # 下部6条副词条  zuo 左2
 ]
 
@@ -100,7 +102,7 @@ async def async_ocr(bot: Bot, ev: Event):
     await save_card_dict_to_json(bot, ev, final_result)
 
 
-def cut_image(image, crop_ratios):
+def cut_image(image: Image.Image, crop_ratios: list[tuple[float, float, float, float]]) -> list[Image.Image]:
     # 获取实际分辨率
     img_width, img_height = image.size
     # 裁切图片
@@ -125,30 +127,61 @@ def cut_image(image, crop_ratios):
     return cropped_images
 
 
-def cut_image_need_data(image_need, data_crop_ratios):
+def cut_image_need_data(
+    image_need: Image.Image | list[Image.Image],
+    data_crop_ratios: list[tuple[float, float, float, float]] = [],
+    direction: Literal["down", "right"] = "down",
+) -> Image.Image:
     """
     裁切声骸卡片拼接词条数据: 右上角主词条与余下6条副词条
     裁切角色卡片拼接用户数据: 上面角色数据，下面用户信息
     目的: 优化ocrspace 模型2识别
+
+    参数:
+    - image_need: 需要裁切的原始图像 或 需要拼接的子图列表
+    - data_crop_ratios: 裁切比例列表，每个元素为 (left, top, right, bottom)
+    - direction: 拼接方向，'down'（向下）或 'right'（向右），默认为 'down'
+
+    返回:
+    - image_only_data: 拼接后的图像
     """
     # 获取裁切后的子图列表
-    cropped_images = cut_image(image_need, data_crop_ratios)
+    cropped_images: list[Image.Image] = image_need if isinstance(image_need, list) else cut_image(image_need, data_crop_ratios)
 
-    # 计算拼接后图片的总高度和最大宽度
-    total_height = sum(img.height for img in cropped_images)
-    max_width = max(img.width for img in cropped_images) if cropped_images else 0
+    # 使用字典映射计算画布尺寸
+    size_calc = {
+        "down": lambda imgs: (
+            max(img.width for img in imgs),
+            sum(img.height for img in imgs),
+        ),
+        "right": lambda imgs: (
+            sum(img.width for img in imgs),
+            max(img.height for img in imgs),
+        ),
+    }
+
+    canvas_size = size_calc[direction](cropped_images)
+
+    # 使用字典映射计算偏移增量
+    offset_increment = {
+        "down": lambda img: (0, img.height),
+        "right": lambda img: (img.width, 0),
+    }
 
     # 创建新画布并逐个粘贴子图
-    image_only_data = Image.new("RGB", (max_width, total_height))
-    y_offset = 0
+    image_only_data = Image.new("RGB", canvas_size)
+    x_offset, y_offset = 0, 0
+
     for img in cropped_images:
-        image_only_data.paste(img, (0, y_offset))
-        y_offset += img.height  # 累加y轴偏移量
+        image_only_data.paste(img, (x_offset, y_offset))
+        dx, dy = offset_increment[direction](img)
+        x_offset += dx
+        y_offset += dy
 
     return image_only_data
 
 
-def analyze_chain_num(image):
+def analyze_chain_num(image: Image.Image) -> int:
     cropped_chain_images = cut_image(image, chain_crop_ratios)
 
     avg_colors = []
@@ -196,7 +229,7 @@ def analyze_chain_num(image):
     return chain_num
 
 
-async def cut_card_to_ocr(image):
+async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Image.Image]]:
     """
     裁切卡片：角色，技能树*5，声骸*5，武器
         （按比例适配任意分辨率，1920*1080识别效果优良）
@@ -226,7 +259,9 @@ async def cut_card_to_ocr(image):
             analyze_echoes_results.append(results)
 
         # 裁切数值部分
-        cropped_images[i] = cut_image_need_data(image_echo, echo_crop_ratios)
+        echo_values = cut_image(image_echo, echo_crop_ratios)
+        echo_values_head = cut_image_need_data([echo_values[0], echo_values[1]], direction="right")
+        cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])
 
         # from pathlib import Path # 保存裁切图片用于调试
         # SRC_PATH = Path(__file__).parent / "src"
@@ -236,7 +271,7 @@ async def cut_card_to_ocr(image):
     return chain_num, analyze_echoes_results, cropped_images
 
 
-async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
+async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results: list[dict]) -> tuple[bool, dict[str, dict]]:
     """
     适配OCR.space输出结构的增强版结果解析
     输入结构: [{'text': '...', 'error': ...}, ...]
@@ -422,7 +457,7 @@ async def ocr_results_to_dict(chain_num, chek_imgs, ocr_results):
     return True, final_result
 
 
-async def which_char(bot: Bot, ev: Event, char: str):
+async def which_char(bot: Bot, ev: Event, char: str) -> tuple[None | str, None | str]:
     if not char.strip():  # 为空
         return None, None
 

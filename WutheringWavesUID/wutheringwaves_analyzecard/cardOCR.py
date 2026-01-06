@@ -15,6 +15,8 @@ from ..wutheringwaves_config import WutheringWavesConfig
 from .detail_json import DETAIL
 from .ocrspace import get_upload_img, ocrspace
 
+cc = OpenCC("t2s")  # 繁体转简体
+
 # 原始dc卡片参考分辨率，from example_card_2.png
 REF_WIDTH = 1072
 REF_HEIGHT = 602
@@ -304,8 +306,6 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
         ),  # 不支持英文词条(空格不好处理), 支持处理"暴擊傷害 器44%", "攻擊 ×18%", "熱熔傷害加成 0 3.75%"
         "weapon_info": re.compile(r"([\u4e00-\u9fa5]+)\s+LV\.(\d+)"),
     }
-
-    cc = OpenCC("t2s")  # 繁体转简体
 
     # 处理角色信息（第一个识别结果）0
     if ocr_results:

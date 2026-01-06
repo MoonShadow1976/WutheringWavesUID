@@ -3,7 +3,7 @@
 import io
 from pathlib import Path
 import re
-
+from opencc import OpenCC
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
@@ -33,6 +33,8 @@ from ..utils.image import (
 )
 from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
 from .ocrspace import get_upload_img, ocrspace
+
+cc = OpenCC("t2s")  # 繁体转简体
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -88,6 +90,7 @@ def extract_vaild_info(info: list[str]) -> tuple[list, list]:
             break
 
         if len(keys) < 7:
+            txt = cc.convert(txt)
             key = check_in(txt, valid_keys)
             if not key:  # 适配ww面板图
                 key = check_in(f"{txt}加成", valid_keys)

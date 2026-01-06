@@ -3,12 +3,13 @@
 import io
 from pathlib import Path
 import re
-from opencc import OpenCC
+
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
+from opencc import OpenCC
 from PIL import Image, ImageDraw
 
 from ..utils.api.model import Props

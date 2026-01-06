@@ -59,9 +59,10 @@ char_crop_ratios = [
 # 原始声骸裁切区域参考分辨率，from crop_ratios
 ECHO_WIDTH = 204
 ECHO_HEIGHT = 230
+icon_width_range = 10 / ECHO_WIDTH  # 属性图标横向宽度范围(建议向,小于实际宽度)
 echo_crop_ratios = [
     (110 / ECHO_WIDTH, 40 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 60 / ECHO_HEIGHT),  # 右上角主词条(忽略声骸cost，暂不处理)
-    (162 / ECHO_WIDTH, 60 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 80 / ECHO_HEIGHT),  # 右上角主词条的值
+    (120 / ECHO_WIDTH, 60 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 80 / ECHO_HEIGHT),  # 右上角主词条的值
     (24 / ECHO_WIDTH, 105 / ECHO_HEIGHT, 204 / ECHO_WIDTH, 230 / ECHO_HEIGHT),  # 下部6条副词条  zuo 左2
 ]
 
@@ -183,6 +184,90 @@ def cut_image_need_data(
     return image_only_data
 
 
+def crop_icon_smart(img: Image.Image) -> Image.Image:
+    """智能裁切主词条属性图标"""
+    if img.mode != "RGB":
+        img = img.convert("RGB")
+
+    width, height = img.size
+    img_array = np.array(img)
+
+    icon_width = width * icon_width_range
+
+    """
+        _9参考亮度表(84列像素)
+        [19.41666667 19.41666667 19.41666667 19.51666667 19.51666667 19.66666667
+        19.6        20.         24.66666667 36.26666667 52.33333333 55.38333333
+        49.91666667 43.5        40.         50.93333333 50.56666667 56.48333333
+        53.13333333 37.73333333 23.16666667 19.5        19.2        18.26666667
+        23.48333333 36.96666667 46.36666667 81.73333333 70.95       32.91666667
+        27.16666667 23.31666667 30.36666667 40.25       44.15       49.76666667
+        61.06666667 72.93333333 53.7        27.16666667 21.08333333 31.3
+        33.51666667 24.9        21.95       34.38333333 41.66666667 46.86666667
+        50.26666667 65.7        76.28333333 42.38333333 21.51666667 40.15
+        59.95       50.71666667 45.91666667 50.23333333 65.23333333 56.78333333
+        28.78333333 37.25       45.63333333 36.95       44.96666667 59.45
+        42.76666667 33.76666667 37.43333333 62.01666667 49.65       35.23333333
+        46.5        45.28333333 25.58333333 22.11666667 22.1        22.15
+        22.3        22.38333333 22.5        23.31666667 25.11666667 28.        ]
+    """
+    # 计算每列亮度
+    col_brightness = np.array([np.mean(img_array[:, x, :]) for x in range(width)])
+
+    # 动态计算阈值：取前五列，去掉最大最小值，剩余三个求平均
+    if len(col_brightness) >= 5:
+        first_five = col_brightness[:5].copy()
+        first_five.sort()
+        middle_three = first_five[1:4]  # 取索引1,2,3
+        threshold = np.mean(middle_three)
+    else:
+        threshold = np.median(col_brightness)  # 如果列数不足5列，使用所有列的中位数
+    threshold += 4  # 增加亮度阈值，避免误判
+    logger.debug(f"[图标裁切] 阈值: {threshold:.2f}")
+
+    # 寻找所有高于阈值的区域
+    above_threshold = col_brightness > threshold
+    above_threshold = above_threshold.astype(int)
+
+    # 找到连续的高亮度区域
+    regions = []
+    start = -1
+
+    for i, val in enumerate(above_threshold):
+        if len(regions) >= 3:  # 最多3个区域
+            break
+        if val == 1 and start == -1:
+            start = i
+        elif val == 0 and start != -1:
+            if i - start >= 3:  # 至少3列连续, "1"有5列
+                regions.append((start, i - 1))
+                logger.debug(f"  区域 {len(regions)}: 列 {start}-{i - 1}, 宽度: {i - start}")
+            start = -1
+
+    # 处理最后一个区域
+    if start != -1 and width - start >= 3 and len(regions) < 3:
+        regions.append((start, width - 1))
+        logger.debug(f"  区域 {len(regions)}: 列 {start}-{i - 1}, 宽度: {i - start}")
+
+    if not regions:
+        return img  # 没有找到高亮区域
+
+    first_region = regions[0]  # 假设第一个区域是属性标, 计算图标结束位置
+    icon_end = first_region[1] + 1  # 使用区域结束位置
+
+    # 如果还有第二个区域（可能是数字），检查两个区域之间的间隔
+    if len(regions) > 1:
+        second_region = regions[1]
+        gap = second_region[0] - first_region[1]
+        icon_end = first_region[1] + gap // 2  # 在图标和数字之间裁切
+
+    # 确保裁切位置在合理范围内
+    icon_end = max(icon_end, first_region[0] + icon_width)
+    cropped = img.crop((icon_end, 0, width, height))
+
+    return cropped
+
+
 def analyze_chain_num(image: Image.Image) -> int:
     cropped_chain_images = cut_image(image, chain_crop_ratios)
 
@@ -262,8 +347,9 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
 
         # 裁切数值部分
         echo_values = cut_image(image_echo, echo_crop_ratios)
-        echo_values_head = cut_image_need_data([echo_values[0], echo_values[1]], direction="right")
-        cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])
+        echo_values[1] = crop_icon_smart(echo_values[1])  # 裁切属性标
+        echo_values_head = cut_image_need_data([echo_values[0], echo_values[1]], direction="right")  # 左右拼接主词条
+        cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])  # 上下拼接主副词条
 
         # from pathlib import Path # 保存裁切图片用于调试
         # SRC_PATH = Path(__file__).parent / "src"

@@ -5,14 +5,14 @@ from typing import Any
 
 from gsuid_core.logger import logger
 
-from .detail_json import DETAIL, SONATA_COST_1_ID, SONATA_COST_3_ID, SONATA_COST_4_ID
+from ..utils.resource.constant import CHAR_DETAIL, SONATA_COST_1_ID, SONATA_COST_3_ID, SONATA_COST_4_ID
 
 PLUGIN_PATH = Path(__file__).parent.parent
 FETTERDETAIL_PATH = PLUGIN_PATH / "utils/map/detail_json/sonata"
 
 
 async def get_fetterDetail_from_char(char_id) -> list[dict[Any, Any]]:
-    sonata = DETAIL[char_id]["fetterDetail"]
+    sonata = CHAR_DETAIL[char_id]["fetterDetail"]
 
     if isinstance(sonata, dict):
         sonata_list = []
@@ -122,7 +122,7 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
     # ---------- 获取角色配置 ----------
     try:
         # 获取完整的层级结构
-        full_id_list = await get_first_echo_id_list(DETAIL[char_id]["fetterDetail"])
+        full_id_list = await get_first_echo_id_list(CHAR_DETAIL[char_id]["fetterDetail"])
         # 提取 4cost 的列表
         cost_4_id_list = [echo_id for item in full_id_list if item["cost"] == 4 for echo_id in item["list"]]
         cost_3_id_list = [echo_id for item in full_id_list if item["cost"] == 3 for echo_id in item["list"]]
@@ -131,13 +131,13 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
         logger.error(f"[鸣潮]角色配置数据缺失: {e}")
         return ECHO_ID_COST_ONE, 1  # 降级处理
     except FileNotFoundError:
-        logger.error(f"[鸣潮]角色{DETAIL[char_id]['name']}配置文件不存在")
+        logger.error(f"[鸣潮]角色{CHAR_DETAIL[char_id]['name']}配置文件不存在")
         return ECHO_ID_COST_ONE, 1
 
     # ---------- 4cost分配id逻辑 ----------
     def select_cost4_id():
         """选择cost4的ID（实现44111逻辑）"""
-        needId = DETAIL[char_id].get("needId")  # 指定的声骸id
+        needId = CHAR_DETAIL[char_id].get("needId")  # 指定的声骸id
         if index == 0 and needId and needId in cost_4_id_list:
             return needId
         if len(cost_4_id_list) >= 2:
@@ -150,7 +150,7 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
 
     def select_cost3_id():
         """选择cost3的ID（实现34311逻辑）"""
-        needId = DETAIL[char_id].get("needId")  # 指定的声骸id
+        needId = CHAR_DETAIL[char_id].get("needId")  # 指定的声骸id
         if index == 0 and needId and needId in cost_3_id_list:
             return needId
 

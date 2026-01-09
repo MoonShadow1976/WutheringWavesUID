@@ -189,16 +189,18 @@ def phantom_id_to_phantom_name(phantom_id: str) -> str | None:
 
 
 def alias_to_echo_name(echo_name: str) -> str:
+    if echo_name in echo_alias_data:
+        return echo_name
     for i, j in echo_alias_data.items():
-        if echo_name == i:
-            return i
         if echo_name in j:
+            return i
+
+    for i, j in echo_alias_data.items():
+        if echo_name in i:
             return i
         for k in j:
             if k and echo_name in k:
                 return i
-        if echo_name in i:
-            return i
     return echo_name
 
 

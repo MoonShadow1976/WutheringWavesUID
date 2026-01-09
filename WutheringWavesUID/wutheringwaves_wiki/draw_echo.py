@@ -18,7 +18,7 @@ from ..utils.image import (
     get_attribute_effect,
     get_crop_waves_bg,
 )
-from ..utils.name_convert import alias_to_echo_name, echo_name_to_echo_id
+from ..utils.name_convert import echo_name_to_echo_id
 from ..utils.resource.download_file import get_phantom_img
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -160,7 +160,6 @@ def wrap_text_with_manual_newlines(
 
 
 async def draw_wiki_echo(echo_name: str):
-    echo_name = alias_to_echo_name(echo_name)
     echo_id = echo_name_to_echo_id(echo_name)
     if echo_id is None:
         return None

@@ -15,7 +15,7 @@ from ..utils.name_convert import (
     easy_id_to_name,
     weapon_name_to_weapon_id,
 )
-from ..utils.resource.constant import SONATA_FIRST_ID, SPECIAL_CHAR
+from ..utils.resource.constant import SONATA_COST_4_ID, SPECIAL_CHAR
 from ..utils.waves_api import waves_api
 
 phantom_main_value = [
@@ -652,8 +652,8 @@ async def change_role_detail(
                 if index >= len(sonata_results):
                     break
                 ep.fetterDetail.name = sonata_results[index].name
-                if index == 0 and ep.phantomProp.phantomId not in SONATA_FIRST_ID.get(sonata_results[index].name, []):
-                    ep.phantomProp.phantomId = SONATA_FIRST_ID.get(sonata_results[index].name, [])[0]
+                if index == 0 and ep.phantomProp.phantomId not in SONATA_COST_4_ID.get(sonata_results[index].name, []):
+                    ep.phantomProp.phantomId = SONATA_COST_4_ID.get(sonata_results[index].name, [])[0]
                     ep.phantomProp.name = easy_id_to_name(str(ep.phantomProp.phantomId), ep.phantomProp.name)
 
     # 敌人

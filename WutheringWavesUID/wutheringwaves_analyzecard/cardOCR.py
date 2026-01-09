@@ -10,9 +10,9 @@ import numpy as np
 from opencc import OpenCC
 from PIL import Image
 
+from ..utils.resource.constant import CHAR_DETAIL
 from ..wutheringwaves_analyzecard.userData import save_card_dict_to_json
 from ..wutheringwaves_config import WutheringWavesConfig
-from .detail_json import DETAIL
 from .ocrspace import get_upload_img, ocrspace
 
 cc = OpenCC("t2s")  # 繁体转简体
@@ -550,7 +550,7 @@ async def which_char(bot: Bot, ev: Event, char: str) -> tuple[None | str, None |
     at_sender = True if ev.group_id else False
     # 角色信息
     candidates = []
-    for char_id, info in DETAIL.items():
+    for char_id, info in CHAR_DETAIL.items():
         normalized_name = info["name"].replace("·", "").replace(" ", "")
         if char in normalized_name:
             candidates.append((char_id, info))

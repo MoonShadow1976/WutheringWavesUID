@@ -425,6 +425,1658 @@
   {
     "chainList": [
       {
+        "description": "施放共鸣技能应急预案时，每消耗1点【念意】，白芷额外回复2.5点共鸣能量。",
+        "iconUrl": "",
+        "name": "极简与繁复",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣技能应急预案时，若有4点【念意】，白芷的冷凝伤害加成提升15%，治疗效果加成提升15%，持续12秒。",
+        "iconUrl": "",
+        "name": "沉默的冰原",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "施放变奏技能覆雪流盈时，白芷的生命上限提升12%，持续10秒。",
+        "iconUrl": "",
+        "name": "真理的崇奉",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放刹那合弥时，共鸣解放频隙回响获得强化：\n·频隙回响增加2段；\n·频隙回响治疗倍率提升20%；\n·频隙回响额外造成白芷1.20%生命值上限的冷凝伤害。",
+        "iconUrl": "",
+        "name": "被追溯的本源",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中的白芷存活时，若队伍中的角色（不包含白芷）失去意识，立刻为该角色恢复意识并回复该角色生命上限100%的生命值，该效果每10分钟可触发1次。",
+        "iconUrl": "",
+        "name": "被回应的祈愿",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "角色拾取固有技能天籁时，附近队伍中所有角色的冷凝伤害加成提升12%，持续20秒。",
+        "iconUrl": "",
+        "name": "闻道者的觉悟",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "隐世回光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "治疗效果加成",
+              "attributeValue": "26.4%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "无归的谬误",
+            "phantomId": 6000060,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "隐世回光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "32%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "冥渊守卫",
+            "phantomId": 390077025,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "隐世回光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "32%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "坚岩斗士",
+            "phantomId": 390077021,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "隐世回光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "22.8%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "裂变幼岩",
+            "phantomId": 390070052,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "隐世回光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "22.8%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "呼咻咻",
+            "phantomId": 390070068,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1103,
+      "roleName": "白芷",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 5,
+      "weaponTypeName": "音感仪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n指挥忧昙进行最多4段的连续攻击，造成冷凝伤害。\n\n重击\n持续消耗耐力，牵引忧昙攻击目标，造成冷凝伤害。重击期间可控制忧昙进行移动。\n\n空中攻击\n消耗耐力，在空中召唤忧昙进行下落攻击，造成冷凝伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "应许",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "呼唤忧昙攻击目标，造成冷凝伤害，并立即为附近队伍中所有角色回复生命值。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "应急预案",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "召唤忧昙瞬间为附近队伍中所有角色回复生命值，并依次产生4段频隙回响。\n\n频隙回响\n频隙回响会跟随队伍中登场角色，每2.5秒会消耗1段频隙回响进行协同攻击，命中目标时造成冷凝伤害，并以命中点为中心，为附近队伍中所有角色回复生命值。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "刹那合弥",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "白芷召唤忧昙，进行1次俯冲攻击，造成冷凝伤害，并为附近队伍中所有角色回复生命值。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "覆雪流盈",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "忧昙\n与白芷存在精神连接、能响应其意愿的回音生物，继承白芷的全部属性。白芷闪避时，忧昙会回到白芷身边。\n\n念意\n通过施放重击或共鸣技能应急预案时，消耗所有【念意】，持续为附近队伍中所有角色回复生命值，每消耗1点【念意】则回复1次生命值，每次回复间隔2秒。\n重击消耗【念意】时，白芷额外回复协奏能量和共鸣能量。\n共鸣技能应急预案消耗【念意】时，白芷额外回复协奏能量。\n\n念意获取规则\n【念意】上限4点。\n普攻命中目标时，获得1点【念意】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "溯生环复",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "持续为下一位登场角色回复生命值，每3秒回复白芷1.54%生命上限的生命值，持续30秒。受到此治疗效果时，角色全伤害加深15%，持续6秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "命源输送",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "施放共鸣技能时，回复16点协奏能量，每20秒可触发1次。",
+        "weaponIcon": "",
+        "weaponId": 21050024,
+        "weaponName": "奇幻变奏",
+        "weaponStarLevel": 4,
+        "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "共鸣解放狮子奋迅持续期间提升凌阳的抗打断能力。",
+        "iconUrl": "",
+        "name": "醒狮开光，如意吉祥",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放变奏技能出洞·睡狮蛰醒时，凌阳额外回复10点共鸣能量，每20秒可触发1次。",
+        "iconUrl": "",
+        "name": "威风凛凛，四方张狂",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放狮子奋迅持续期间，凌阳的普攻伤害加成提升20%，共鸣技能伤害加成提升10%。",
+        "iconUrl": "",
+        "name": "瞠目顾盼，其声昂昂",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "凌阳施放延奏技能留痕·踏雪点星时，队伍中的角色冷凝伤害加成提升20%，持续30秒。",
+        "iconUrl": "",
+        "name": "一跳三叫，众仙折腰",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放奋进·狮子奋迅，俱足万行时，将额外造成凌阳200%攻击的冷凝伤害。",
+        "iconUrl": "",
+        "name": "蹑罡踏斗，七星悬朗",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "处于共鸣回路行狮状态时，凌阳每次施放共鸣技能飞身式·翻山越涧后3秒内，下1次普攻的普攻伤害加成提升100%。",
+        "iconUrl": "",
+        "name": "神功盖世，百鬼震惶",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "22%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "辉萤军势",
+            "phantomId": 6000044,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "雪鬃狼",
+            "phantomId": 6000056,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "巡哨机傀",
+            "phantomId": 6000049,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "热熔棱镜",
+            "phantomId": 390077012,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "冷凝棱镜",
+            "phantomId": 390077013,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1104,
+      "roleName": "凌阳",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 4,
+      "weaponTypeName": "臂铠",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多5段攻击，造成冷凝伤害。\n\n普攻·崩拳·当头咆哮\n施放共鸣技能惊跃·郁怒追逃后，普攻第5段替换为崩拳·当头咆哮，造成冷凝伤害。\n\n重击\n消耗耐力攻击目标，造成冷凝伤害。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成冷凝伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "常态·凛凛威风拳",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "冲掌·势式相承\n攻击目标，造成冷凝伤害。\n\n惊跃·郁怒追逃\n第3、4、5段普攻或普攻崩拳·当头咆哮命中目标时，共鸣技能冲掌·势式相承替换为共鸣技能惊跃·郁怒追逃。\n在普攻崩拳·当头咆哮后施放共鸣技能惊跃·郁怒追逃，短按普攻，将会施放第3段普攻。\n\n凌阳的共鸣技能不会打断普攻循环段数。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "冲掌·势式相承",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成冷凝伤害，并受到狮子奋迅祝福。\n\n狮子奋迅\n凌阳的冷凝伤害加成提升50%。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "奋进·狮子奋迅，俱足万行",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "凌阳出场造成冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "出洞·睡狮蛰醒",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "重击·起势·纵地金光\n施放重击时，若满【狮魂】，将会施放起势·纵地金光攻击目标，造成冷凝伤害。\n\n空中攻击·登楼·尾坠千斤\n在自身【狮魂】未满时，重击后短按普攻，将会施放登楼·尾坠千斤攻击目标，造成冷凝伤害。\n\n行狮\n施放重击起势·纵地金光后，进入行狮状态；\n施放变奏技能出洞·睡狮蛰醒或共鸣解放奋进·狮子奋迅，俱足万行后，若满【狮魂】，短按普攻可进入行狮状态。\n在行狮状态中：\n·可在空中进行攻击，若回到地面，施放重击起势·纵地金光可再次回到空中；\n·持续消耗【狮魂】，消耗完后将结束行狮状态，行狮状态可维持5秒；\n·若同时处于共鸣解放狮子奋迅状态，【狮魂】消耗速率降低50%，行狮状态最多可延长至10秒；\n·凌阳的普攻替换为普攻狂态·摇光金狮舞，进行最多2段的连续攻击，造成冷凝伤害；\n·凌阳的共鸣技能替换为共鸣技能飞身式·翻山越涧，造成冷凝伤害；\n·当【狮魂】消耗至10点以下时，短按普攻，将会施放普攻凌云式·腿打连环攻击目标，造成冷凝伤害；施放普攻凌云式·腿打连环后，可施放空中攻击登楼·尾坠千斤；\n·消耗【狮魂】时回复协奏能量。\n\n狮魂的获取规则\n【狮魂】上限100点。\n施放共鸣技能惊跃·郁怒追逃时，回复【狮魂】。\n施放变奏技能出洞·睡狮蛰醒时，回复【狮魂】。\n施放共鸣解放奋进·狮子奋迅，俱足万行时，回复【狮魂】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "形神合一",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "以技能目标为中心，释放冲击波，对范围内的目标造成凌阳587.94%攻击的冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "留痕·踏雪点星",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放普攻时，获得以下效果：自身造成伤害无视目标16%防御，同时自身直接造成的【光噪效应】伤害加深100%，持续6秒。重复获得时刷新持续时间。",
+        "weaponIcon": "",
+        "weaponId": 21040036,
+        "weaponName": "焰光裁定",
+        "weaponStarLevel": 5,
+        "weaponType": 4
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "折枝施放共鸣技能极意·神来之笔时，回复15点共鸣能量，且自身暴击提升10%，持续27秒。",
+        "iconUrl": "",
+        "name": "骨法用笔",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放虚实境趣的墨鹤的最大召唤数增加6只。",
+        "iconUrl": "",
+        "name": "气韵生动",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "折枝施放共鸣技能以形写神、共鸣技能神来之笔或共鸣技能极意·神来之笔时，攻击提升15%，可叠加3层，持续27秒。",
+        "iconUrl": "",
+        "name": "应物象形",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "折枝施放共鸣解放虚实境趣时，队伍中角色攻击提升20%，持续30秒。",
+        "iconUrl": "",
+        "name": "随类赋彩",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放虚实境趣持续期间，每召唤3只墨鹤，会额外召唤1只墨鹤进行协同攻击，能造成等同于墨鹤140%的伤害，此次伤害为普攻伤害，该伤害不会触发召唤墨鹤的效果。",
+        "iconUrl": "",
+        "name": "经营位置",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣技能神来之笔或共鸣技能极意·神来之笔时，会额外召唤一只白鹤，能造成等同于共鸣技能神来之笔120%的伤害，此次伤害为普攻伤害。",
+        "iconUrl": "",
+        "name": "传移摹写",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "22%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "赫卡忒",
+            "phantomId": 6000085,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "暗夜骑士",
+            "phantomId": 6000075,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "琉璃刀伶",
+            "phantomId": 6000080,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "雷鬃狼",
+            "phantomId": 6000062,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "釉变幼岩",
+            "phantomId": 6000094,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1105,
+      "roleName": "折枝",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 5,
+      "weaponTypeName": "音感仪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多3段的连续攻击，造成冷凝伤害。\n\n重击\n消耗耐力攻击目标，造成冷凝伤害。\n重击不会打断普攻段数。\n\n空中攻击\n消耗耐力在空中进行最多2段的连续攻击，造成冷凝伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "轻云淡墨",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成冷凝伤害。若折枝至少拥有60点【灵韵】，则会消耗60点【灵韵】，召唤鹤影·左以及鹤影·右。\n·在地面短按时，鹤影会召唤在地面。\n·在地面长按或空中短按时，鹤影会召唤在空中。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "以形写神",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "折枝召唤墨鹤协助战斗。\n可以在空中施放。\n\n墨鹤\n队伍中在场角色造成伤害时，会召唤墨鹤对目标进行协同攻击，造成冷凝伤害，此次伤害为普攻伤害。\n·造成伤害的接下来3秒内，每秒可召唤1只墨鹤，该效果每秒可触发1次。墨鹤造成的伤害不会触发该效果。\n·墨鹤每秒最多召唤1只，共可召唤21只。\n·效果持续30秒，或持续至墨鹤达到最大召唤数。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "虚实境趣",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成冷凝伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "柔翰生辉",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "鹤影\n折枝施放共鸣技能以形写神或重击构形时，消耗【灵韵】可召唤鹤影。\n鹤影分为鹤影·左，鹤影·中，鹤影·右三种，每种最多存在1幅，持续15秒。\n\n重击·构形\n进行下述5种操作时，可消耗耐力施放该技能攻击目标，造成冷凝伤害。\n·普攻第3段后一定时间内长按普攻\n·施放共鸣技能以形写神后一定时间内短按普攻\n·施放共鸣技能神来之笔、共鸣技能极意·神来之笔后一定时间内长按普攻\n·处于空中状态时长按普攻\n·成功闪避后长按普攻\n若施放时折枝至少拥有30点【灵韵】，则消耗30点【灵韵】在场上召唤鹤影·中。\n\n共鸣技能·神来之笔\n折枝附近存在鹤影时，共鸣技能替换为神来之笔。施放时：\n·移动到鹤影的位置并将它清除，然后召唤白鹤攻击目标，造成冷凝伤害，此次伤害为普攻伤害。若移动到处于空中的鹤影，可重置空中闪避次数。\n·获得1层【极意】，持续8秒，可叠加2层。\n·可在空中施放。\n\n共鸣技能·极意·神来之笔\n折枝附近存在鹤影，且【极意】层数为2时，神来之笔替换为极意·神来之笔。施放时：\n·移除全部【极意】。\n·移动到鹤影的位置并将它清除，然后召唤白鹤攻击目标，造成更高的冷凝伤害，此次伤害为普攻伤害，并且让折枝的普攻伤害加成提升18%，持续27秒。若移动到处于空中的鹤影，可重置空中闪避次数。\n·可在空中施放。\n\n【灵韵】获取规则\n【灵韵】上限为90点。\n常态攻击造成伤害可回复【灵韵】。\n施放变奏技能可回复【灵韵】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "妙笔丹青",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色冷凝伤害加深20%，共鸣技能伤害加深25%，效果持续14秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "提白",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放共鸣技能时，获得效果：自身在场时普攻伤害加成提升24%。该效果可叠加3层，持续6秒。施放延奏技能时，若已累计3层效果，则移除全部层数，使自身不在场时普攻伤害加成提升104%，持续27秒。",
+        "weaponIcon": "",
+        "weaponId": 21050026,
+        "weaponName": "琼枝冰绡",
+        "weaponStarLevel": 5,
+        "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "施放问祯时，釉瑚有10%概率免疫伤害和受击，持续5秒，若切换至其他角色则该效果提前结束。",
+        "iconUrl": "",
+        "name": "港边小憩",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "对偶、联珠、合说对共鸣回路诗中物的伤害提升效果额外生效一次。",
+        "iconUrl": "",
+        "name": "堂侧酣睡",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "釉瑚的攻击提升20%。",
+        "iconUrl": "",
+        "name": "火中噩魇",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "每次施放共鸣技能匣中问祯时，有20%概率不进入冷却状态。",
+        "iconUrl": "",
+        "name": "雪夜迷寐",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "施放变奏技能遂心匣时，釉瑚的暴击提升15%，持续14秒。",
+        "iconUrl": "",
+        "name": "万里浅眠",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣技能奇珍赏时，获得1层霁青效果，最多可叠加4层，持续7秒，每层霁青使釉瑚的暴击伤害提升15%。",
+        "iconUrl": "",
+        "name": "千秋一枕",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "22%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "辉萤军势",
+            "phantomId": 6000044,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "雪鬃狼",
+            "phantomId": 6000056,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "巡哨机傀",
+            "phantomId": 6000049,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "热熔棱镜",
+            "phantomId": 390077012,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凝夜白霜",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "冷凝棱镜",
+            "phantomId": 390077013,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1106,
+      "roleName": "釉瑚",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 4,
+      "weaponTypeName": "臂铠",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段的连续攻击，造成冷凝伤害。\n\n重击\n·当【霜色】达到上限时，长按普攻，将施放落霜坠。\n·处于摇匣状态并攒满【霜色】时，松开普攻，将直接施放落霜坠。若釉瑚此时无法施放落霜坠，则直接进行一次问祯。\n【霜色】的获取规则：\n·当【霜色】未达到上限时，按住普攻，进入摇匣状态，持续积攒【霜色】。\n·普攻命中敌人时，获得【霜色】。\n\n重击·落霜坠\n釉瑚将向前冲击，造成冷凝伤害，并进行一次问祯。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成冷凝伤害。\n\n闪避反击\n成功闪避后，釉瑚未拥有祯祥的情况下，一定时间内短按普攻，将会向前冲击，造成冷凝伤害，并进行一次问祯。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "霜坠",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "釉瑚掷出匣子，造成冷凝伤害，回复附近队伍中所有角色的生命值，并进行一次问祯。\n\n问祯\n进行问祯后，有概率获得不同的祯祥。\n拥有祯祥的状态下，点击普攻时，根据祯祥进行对应的奇珍赏。\n拥有祯祥的状态下获得新的祯祥，则会用新的祯祥替换掉旧的祯祥。\n\n奇珍赏\n·编钟：使用编钟进行攻击，造成冷凝伤害。编钟削减怪物共振度的能力较强。\n·如意：使用如意对前方进行挥打，造成冷凝伤害。如意的伤害倍率较高。\n·鼎：跳上鼎往前位移撞击敌人，造成冷凝伤害。鼎的打断能力较强。\n·面具：丢出面具对前方敌人进行攻击，造成冷凝伤害。面具可牵引飞行路径上的目标。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "匣中问祯",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "釉瑚把匣子用力丢出去，对范围内的敌人造成冷凝伤害。\n爆炸期间会出现按钮，限时内点击按钮可获得对应祯祥，若限时内未点击按钮，则会随机获得一个祯祥。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "如意卜",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "釉瑚掷出匣子，并进行一次问祯。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "遂心匣",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "釉瑚拥有四个【吉兆】时，长按普攻将施放诗中物，造成冷凝伤害，此次伤害为共鸣技能伤害，并且回复附近队伍中所有角色的生命值。\n釉瑚最多同时拥有四个【吉兆】。\n\n诗中物\n对范围敌人造成冷凝伤害，并且根据【吉兆】组合的不同获得以下的一种额外效果：\n·飞白：每种【吉兆】都拥有时。对命中的敌人造成额外共振值伤害。\n·对偶：拥有一对相同的【吉兆】时。诗中物造成的伤害提升70%。\n·双关：拥有两对相同的【吉兆】时。额外回复附近队伍中所有角色的生命值。\n·联珠：拥有三个相同的【吉兆】时。诗中物造成的伤害提升175%。\n·合说：拥有四个相同的【吉兆】时。同时触发飞白、双关、联珠的效果。\n施放诗中物后，清除所有【吉兆】。\n\n【吉兆】的获取规则\n·施放共鸣技能匣中问祯、变奏技能遂心匣、重击落霜坠、共鸣解放如意卜、闪避反击时，获得祯祥。\n·釉瑚拥有祯祥的状态下，点击普攻时，根据祯祥进行对应的奇珍赏，并获得对应的【吉兆】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "诗中物",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色的协同攻击伤害加深100%，效果持续28秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "鉴珍",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放普攻时，获得以下效果：自身造成伤害无视目标16%防御，同时自身直接造成的【光噪效应】伤害加深100%，持续6秒。重复获得时刷新持续时间。",
+        "weaponIcon": "",
+        "weaponId": 21040036,
+        "weaponName": "焰光裁定",
+        "weaponStarLevel": 5,
+        "weaponType": 4
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "珂莱塔对拥有解离效果的目标攻击造成伤害时，该次伤害的暴击提升12.5%。对处于变彩状态下的目标施放共鸣技能示我璀璨并命中时，额外回复30点【灵萃】。",
         "iconUrl": "",
         "name": "美或死，璀璨即凋零",
@@ -827,6 +2479,429 @@
           "iconUrl": "",
           "id": 0,
           "name": "致辞",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能或共鸣解放时，自身共鸣技能伤害加成提升96%，持续5秒。",
+        "weaponIcon": "",
+        "weaponId": 21030016,
+        "weaponName": "死与舞",
+        "weaponStarLevel": 5,
+        "weaponType": 3
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "施放共鸣技能轰轰时，必定暴击。",
+        "iconUrl": "",
+        "name": "剧院的英雄戏",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放炽烈焰火期间，每击败1个目标，回复5点共鸣能量，每次最多可回复20点。",
+        "iconUrl": "",
+        "name": "跃动的火星",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放炽烈焰火对生命值低于50%的目标，伤害提升40%。",
+        "iconUrl": "",
+        "name": "不灭的火把",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放炽烈焰火时，炽霞获得60发【热压弹】，并立即重置一次共鸣技能咻咻斗意的冷却时间。",
+        "iconUrl": "",
+        "name": "英雄的绝招",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "固有技能加麻加辣叠加至满层时，攻击额外提升30%。",
+        "iconUrl": "",
+        "name": "胜利的枪弹焰火",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "触发共鸣技能轰轰后，队伍中的角色普攻伤害加成提升25%，持续15秒。",
+        "iconUrl": "",
+        "name": "剧终的回归彩蛋",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "熔山裂谷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·燎照之骑",
+            "phantomId": 6000091,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "熔山裂谷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "热熔伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "紫羽鹭",
+            "phantomId": 390077004,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "熔山裂谷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "热熔伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "暗鬃狼",
+            "phantomId": 390077033,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "熔山裂谷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "通行灯偶",
+            "phantomId": 6000050,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "熔山裂谷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "融火虫",
+            "phantomId": 6000054,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 2,
+      "attributeName": "热熔",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1202,
+      "roleName": "炽霞",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 3,
+      "weaponTypeName": "佩枪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段连续射击，造成热熔伤害。\n\n重击\n进入瞄准状态，可以进行更强力的射击。\n蓄力完成后攻击目标，造成热熔伤害。\n\n空中攻击\n消耗耐力，在空中进行连续攻击，造成热熔伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "砰砰",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "燃起斗志对目标进行高速连射，造成热熔伤害。\n\n咻咻斗意初始拥有2次可使用次数。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "咻咻斗意",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "体内热流涌现，对附近目标进行快速射击，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "炽烈焰火",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "飒爽登场，对目标进行快速射击，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "堂堂登场",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "共鸣技能·咔咔压制\n长按共鸣技能咻咻斗意，进入咔咔压制状态，在该状态下：\n·持续消耗【热压弹】攻击目标，造成热熔伤害，此次伤害为共鸣技能伤害；\n·短按普攻，将会施放第4段普攻攻击目标，造成热熔伤害，此次伤害为普攻伤害，并退出咔咔压制；\n·若短按普攻时已消耗30发【热压弹】，将会施放共鸣技能轰轰，并退出咔咔压制；\n·当【热压弹】消耗完毕后，退出咔咔压制。\n\n共鸣技能·轰轰\n造成热熔伤害，此次伤害为共鸣技能伤害。\n\n热压弹获取规则\n【热压弹】容量上限60发。\n固有技能灼热弹匣可将【热压弹】容量上限扩充10发。\n常态攻击砰砰命中目标时，可积攒【热压弹】。\n施放变奏技能堂堂登场时，可积攒【热压弹】。\n施放共鸣技能咻咻斗意时，可积攒【热压弹】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "英魂炽火流",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "以技能目标为中心，释放冲击波，对范围内的目标造成炽霞530.00%攻击的热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "跃焰",
           "type": "延奏技能"
         }
       }
@@ -1265,6 +3340,429 @@
         "weaponName": "掣傀之手",
         "weaponStarLevel": 5,
         "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "共鸣解放浮翼狂想持续期间，队伍中登场角色施放共鸣技能时，莫特斐会进行协同攻击，打出2发共鸣解放加强音，造成热熔伤害。",
+        "iconUrl": "",
+        "name": "孤独的练习曲",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "使用声骸技能后，额外回复10点共鸣能量，每20秒可触发1次。",
+        "iconUrl": "",
+        "name": "虚伪的赞美诗",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放浮翼狂想持续期间，共鸣解放加强音的暴击伤害提升30%。",
+        "iconUrl": "",
+        "name": "预热的宣叙调",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放浮翼狂想的持续时间延长7秒。",
+        "iconUrl": "",
+        "name": "宣泄的华尔兹",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能激昂变奏和共鸣技能怒火赋格命中目标时，进行协同攻击，打出4发共鸣解放加强音，造成热熔伤害，此次共鸣解放加强音伤害降低50%。",
+        "iconUrl": "",
+        "name": "葬送的四重奏",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放暴烈终曲时，队伍中的角色攻击提升20%，持续20秒。",
+        "iconUrl": "",
+        "name": "盛怒的无言歌",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "22%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "赫卡忒",
+            "phantomId": 6000085,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "热熔伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "暗夜骑士",
+            "phantomId": 6000075,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "热熔伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "琉璃刀伶",
+            "phantomId": 6000080,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "雷鬃狼",
+            "phantomId": 6000062,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "釉变幼岩",
+            "phantomId": 6000094,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 2,
+      "attributeName": "热熔",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1204,
+      "roleName": "莫特斐",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 3,
+      "weaponTypeName": "佩枪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n使用双枪和火焰对目标进行最多4段的连续攻击，造成热熔伤害。\n\n重击\n进入瞄准状态，可以进行更强力的射击。\n蓄力完成后攻击目标，造成热熔伤害。\n\n空中攻击\n消耗耐力，在空中进行连续攻击，造成热熔伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "即兴发挥",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "向正前方打出高速火焰闪电，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "激昂变奏",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成热熔伤害，并为队伍中所有角色附加浮翼狂想。\n\n浮翼狂想\n·队伍中登场角色的普攻命中目标时，进行协同攻击，打出1发加强音；\n·队伍中登场角色的重击命中目标时，进行协同攻击，打出2发加强音；\n·每0.35秒可进行1次协同攻击。\n\n加强音\n造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "暴烈终曲",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成热熔伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "不协和音",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "共鸣技能·怒火赋格\n莫特斐的【怒气值】到达100时，共鸣技能替换为怒火赋格。\n施放怒火赋格时，消耗所有【怒气值】，用力打出高速火焰闪电，造成热熔伤害，此次伤害视为共鸣技能伤害。\n\n怒气值获取规则\n【怒气值】上限100点。\n常态攻击即兴发挥命中目标时，回复【怒气值】。\n变奏技能不协和音命中目标时，回复【怒气值】。\n共鸣技能激昂变奏命中目标时，回复【怒气值】。\n施放激昂变奏后5秒内，常态攻击即兴发挥命中目标时，额外回复【怒气值】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "怒火赋格",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色重击伤害加深38%，效果持续14秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "怒意移调",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能或共鸣解放时，自身共鸣技能伤害加成提升96%，持续5秒。",
+        "weaponIcon": "",
+        "weaponId": 21030016,
+        "weaponName": "死与舞",
+        "weaponStarLevel": 5,
+        "weaponType": 3
       }
     }
   },
@@ -3015,7 +5513,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "熔山裂谷",
+            "name": "奔狼燎原之焰",
             "num": 5,
             "secondDescription": ""
           },
@@ -3057,8 +5555,8 @@
           "phantomProp": {
             "cost": 4,
             "iconUrl": "",
-            "name": "梦魇·燎照之骑",
-            "phantomId": 6000091,
+            "name": "荣耀狮像",
+            "phantomId": 6000114,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -3071,7 +5569,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "熔山裂谷",
+            "name": "奔狼燎原之焰",
             "num": 5,
             "secondDescription": ""
           },
@@ -3113,8 +5611,8 @@
           "phantomProp": {
             "cost": 3,
             "iconUrl": "",
-            "name": "暗鬃狼",
-            "phantomId": 390077033,
+            "name": "蚀脊龙",
+            "phantomId": 6000120,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -3127,7 +5625,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "熔山裂谷",
+            "name": "奔狼燎原之焰",
             "num": 5,
             "secondDescription": ""
           },
@@ -3169,8 +5667,8 @@
           "phantomProp": {
             "cost": 3,
             "iconUrl": "",
-            "name": "绿熔蜥",
-            "phantomId": 390077028,
+            "name": "角鳄",
+            "phantomId": 6000112,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -3183,7 +5681,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "熔山裂谷",
+            "name": "奔狼燎原之焰",
             "num": 5,
             "secondDescription": ""
           },
@@ -3225,8 +5723,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "热熔棱镜",
-            "phantomId": 390077012,
+            "name": "小翼龙·衍射",
+            "phantomId": 6000108,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -3239,7 +5737,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "熔山裂谷",
+            "name": "奔狼燎原之焰",
             "num": 5,
             "secondDescription": ""
           },
@@ -3281,8 +5779,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "衍射棱镜",
-            "phantomId": 390077016,
+            "name": "小翼龙·湮灭",
+            "phantomId": 6000109,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -3351,7 +5849,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "基准模式\n莫宁初始处于基准模式，可获得【静质量能】。\n\n重击·位势转换\n【静质量能】达到100点时，重击替换为重击·位势转换。\n施放重击·位势转换时，攻击目标造成热熔伤害，此次伤害为重击伤害。随后莫宁转入空中，消耗全部【静质量能】，进入广域观测模式。\n\n广域观测模式\n广域观测模式持续30秒。\n进入广域观测模式时，展开谐振场。\n莫宁处于广域观测模式时，可获得【相对动能】。\n长按普攻时，若【相对动能】未达到100点，可依次循环施放普攻·广域观测模式第1、2、3段，期间若【相对动能】达到100点，可施放重击·反演。\n移动时，莫宁会持续消耗耐力，且处于广域观测模式时无法进行耐力回复。\n向前闪避时，莫宁将进入移速更快的冲刺飞行状态，持续10秒，耐力耗尽或退出广域观测模式时将提前结束冲刺飞行状态。\n若莫宁处于受击或被击飞状态中，短按闪避则可以快速脱离受击或被击飞状态。该效果最多可触发3次，退出广域观测模式时重置可触发次数。\n短按跳跃键时，莫宁将缓慢降落，期间无法施放普攻·广域观测模式、闪避反击·广域观测模式、共鸣技能·分布式阵列、重击·反演。\n当触发特定场景交互、探索工具、切换至其他角色或莫宁不在空中状态时，将退出广域观测模式。\n\n谐振场\n·谐振场持续25秒。\n·展开谐振场时，造成热熔伤害，此次伤害为共鸣解放伤害。\n·持续回复谐振场生效范围内的附近队伍中登场角色的生命值，每3秒可触发1次。\n·谐振场生效范围内附近队伍中所有角色偏谐值累积效率提升50%。\n·谐振场生效范围内附近队伍中登场角色抗打断提升。\n\n重击·反演\n【相对动能】达到100点时，重击替换为重击·反演。\n施放重击·反演时，消耗全部【相对动能】，造成热熔伤害，此次伤害为重击伤害。\n重击·反演命中目标将为其附加观测标记，持续30秒。\n\n观测标记\n队伍中的角色对拥有观测标记的目标造成【谐度破坏】伤害后，莫宁为目标附加干涉标记，持续8秒。\n\n干涉标记\n若目标处于【震谐·干涉】或【集谐·干涉】状态，则附近队伍中所有角色对其造成的伤害提升：莫宁自身共鸣效率大于100%时，每超过1%的共鸣效率计算为0.25%的伤害提升，上限40%。\n\n视域\n队伍中的角色击败被附加观测标记或干涉标记状态的目标后，莫宁获得视域，持续3秒。处于视域下，队伍中的角色造成伤害后，莫宁对目标附加观测标记。\n\n震谐响应·粒子射流\n莫宁对范围内处于【震谐·干涉】状态的目标造成热熔伤害，此次伤害视为震谐伤害。\n\n静质量能获取规则\n【静质量能】上限100点。\n处于基准模式时，施放普攻、重击、闪避反击时，或共鸣技能·最优求解命中目标时，获得【静质量能】。\n\n相对动能获取规则\n【相对动能】上限100点。\n处于广域观测模式时，普攻·广域观测模式、闪避反击·广域观测模式、共鸣技能·分布式阵列命中目标时，获得【相对动能】。\n施放重击·反演期间，无法获得【相对动能】。",
+          "description": "基准模式\n莫宁初始处于基准模式，可获得【静质量能】。\n\n重击·位势转换\n【静质量能】达到100点时，重击替换为重击·位势转换。\n施放重击·位势转换时，攻击目标造成热熔伤害，此次伤害为重击伤害。随后莫宁转入空中，消耗全部【静质量能】，进入广域观测模式。\n\n广域观测模式\n广域观测模式持续30秒。\n进入广域观测模式时，展开谐振场。\n莫宁处于广域观测模式时，可获得【相对动能】。\n长按普攻时，若【相对动能】未达到100点，可依次循环施放普攻·广域观测模式第1、2、3段，期间若【相对动能】达到100点，可施放重击·反演。\n移动时，莫宁会持续消耗耐力，且处于广域观测模式时无法进行耐力回复。\n向前闪避时，莫宁将进入移速更快的冲刺飞行状态，持续10秒，耐力耗尽或退出广域观测模式时将提前结束冲刺飞行状态。\n若莫宁处于受击或被击飞状态中，短按闪避则可以脱离受击或被击飞状态，并视为闪避成功。该效果最多可触发3次，退出广域观测模式时重置可触发次数。\n短按跳跃时，莫宁将缓慢降落，期间无法施放普攻·广域观测模式、共鸣技能·分布式阵列、重击·反演。若耐力耗尽时短按跳跃，莫宁将退出广域观测模式。缓慢降落期间，短按闪避、跳跃或进行空中攻击时，莫宁也将退出广域观测模式。\n此外，当触发特定场景交互、探索工具、切换至其他角色或莫宁不在空中状态时，将退出广域观测模式。\n\n谐振场\n·谐振场持续25秒。\n·展开谐振场时，造成热熔伤害，此次伤害为共鸣解放伤害。\n·持续回复谐振场生效范围内的附近队伍中登场角色的生命值，每3秒可触发1次。\n·谐振场生效范围内附近队伍中所有角色偏谐值累积效率提升50%。\n·谐振场生效范围内附近队伍中登场角色抗打断提升。\n\n重击·反演\n【相对动能】达到100点时，重击替换为重击·反演。\n施放重击·反演时，消耗全部【相对动能】，造成热熔伤害，此次伤害为重击伤害。\n重击·反演命中目标将为其附加观测标记，持续30秒。\n\n观测标记\n队伍中的角色对拥有观测标记的目标造成【谐度破坏】伤害后，莫宁为目标附加干涉标记，持续8秒。\n\n干涉标记\n若目标处于【震谐·干涉】或【集谐·干涉】状态，则附近队伍中所有角色对其造成的伤害提升：莫宁自身共鸣效率大于100%时，每超过1%的共鸣效率计算为0.25%的伤害提升，上限40%。\n\n视域\n队伍中的角色击败被附加观测标记或干涉标记状态的目标后，莫宁获得视域，持续3秒。处于视域下，队伍中的角色造成伤害后，莫宁对目标附加观测标记。\n\n震谐响应·粒子射流\n莫宁对范围内处于【震谐·干涉】状态的目标造成热熔伤害，此次伤害视为震谐伤害。\n\n静质量能获取规则\n【静质量能】上限100点。\n处于基准模式时，施放普攻、重击、闪避反击时，或共鸣技能·最优求解命中目标时，获得【静质量能】。\n\n相对动能获取规则\n【相对动能】上限100点。\n处于广域观测模式时，普攻·广域观测模式、闪避反击·广域观测模式、共鸣技能·分布式阵列命中目标时，获得【相对动能】。\n施放重击·反演期间，无法获得【相对动能】。",
           "iconUrl": "",
           "id": 0,
           "name": "质能等价",
@@ -4226,6 +6724,429 @@
         "weaponName": "掣傀之手",
         "weaponStarLevel": 5,
         "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "渊武处在共鸣回路雷厉风行状态时，自身的普攻攻速提升20%，重击攻速提升20%。",
+        "iconUrl": "",
+        "name": "点一盏清茗",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放变奏技能轰雷时，渊武额外回复15点共鸣能量。",
+        "iconUrl": "",
+        "name": "敛狂戾之心",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能雷之楔的协同攻击命中目标时，基于渊武20%防御额外提升伤害。",
+        "iconUrl": "",
+        "name": "正周身之气",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放寂土重明时，队伍中在场角色获得渊武自身200%防御的护盾，持续10秒。",
+        "iconUrl": "",
+        "name": "挥刚猛之拳",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能雷之楔在场时，渊武的共鸣解放伤害加成提升50%。",
+        "iconUrl": "",
+        "name": "顾一方天地",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "处在共鸣技能雷之楔范围内的附近队伍中所有角色将持续获得效果：防御提升32%，该效果持续时间3秒。",
+        "iconUrl": "",
+        "name": "保八方平安",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "赫卡忒",
+            "phantomId": 6000085,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "暗夜骑士",
+            "phantomId": 6000075,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "琉璃刀伶",
+            "phantomId": 6000080,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "雷鬃狼",
+            "phantomId": 6000062,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "高天共奏之曲",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "釉变幼岩",
+            "phantomId": 6000094,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 3,
+      "attributeName": "导电",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1303,
+      "roleName": "渊武",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 4,
+      "weaponTypeName": "臂铠",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多5段的连续攻击，造成导电伤害。\n\n重击\n消耗耐力攻击目标，造成导电伤害。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成导电伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成导电伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "雷煌拳",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "雷之楔\n召唤雷之楔，造成导电伤害，并以雷之楔为中心，形成雷池，雷之楔持续12秒。\n施放共鸣回路万壑雷及共鸣解放寂土重明时会立刻引爆场上的共鸣技能雷之楔，造成导电伤害，此次伤害为共鸣技能伤害。\n\n雷池\n队伍中登场角色处于雷池内将持续获得效果：攻击命中目标时，共鸣技能雷之楔会进行协同攻击，造成导电伤害，每1.2秒可触发1次，该效果持续时间1.5秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "拳震凌武",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "唤醒雷电之力，为附近队伍中所有角色提供共鸣回路雷厉风行状态，持续10秒，并全力攻击目标，造成导电伤害。\n",
+          "iconUrl": "",
+          "id": 0,
+          "name": "寂土重明",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成导电伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "轰雷",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "万壑雷\n【锋芒】充满时，长按共鸣技能，将会消耗所有【锋芒】，施放万壑雷，造成导电伤害，并使渊武进入雷厉风行状态。\n\n掀雷\n【锋芒】充满时，共鸣技能雷之楔将会施放掀雷，造成导电伤害。\n\n雷厉风行\n在雷厉风行状态下的角色抗打断能力提升。\n渊武处于该状态下时：\n·普攻的攻击范围扩大，削减怪物共振度的能力提升；\n·重击的攻击更为迅猛，削减怪物共振度的能力提升；\n·闪避反击的攻击更为迅猛，削减怪物共振度的能力提升；\n·施放重击或成功触发逆势回击后3秒内短按普攻，将会施放蹑风追雷攻击目标，造成导电伤害，此次伤害为普攻伤害；\n·不会回复【锋芒】。\n\n锋芒获取规则\n【锋芒】上限100点。\n场上存在共鸣技能雷之楔时，每秒回复6点【锋芒】，渊武不在场时该效果依然生效。\n共鸣技能雷之楔协同攻击命中目标时，回复5点【锋芒】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "沉雷藏锋",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "以技能目标为中心，降落闪电，对命中的敌人造成大量共振值伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "驱雷",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "全属性伤害加成提升24%。施放共鸣解放时，自身共鸣解放伤害加成提升96%，持续8秒；施放共鸣技能时，该效果延长5秒，最多可延长3次。",
+        "weaponIcon": "",
+        "weaponId": 21040016,
+        "weaponName": "诸方玄枢",
+        "weaponStarLevel": 5,
+        "weaponType": 4
       }
     }
   },
@@ -5884,6 +8805,852 @@
   {
     "chainList": [
       {
+        "description": "施放变奏技能湛蓝礼赞后，秧秧的气动伤害加成额外提升15%，效果持续8秒。",
+        "iconUrl": "",
+        "name": "底色湛蓝如洗",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "重击命中目标时，秧秧额外回复10点共鸣能量，每20秒可触发1次。",
+        "iconUrl": "",
+        "name": "雀鸟衔枝而行",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能伤害加成提升40%，风场对周围目标的牵引效果增强，牵引范围增加33%。",
+        "iconUrl": "",
+        "name": "流息声声不绝",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "空中攻击释羽的伤害提升95%。",
+        "iconUrl": "",
+        "name": "若可侧耳倾听",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放朔风旋涌的伤害提升85%。",
+        "iconUrl": "",
+        "name": "绪风于此响彻",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "施放空中攻击释羽后，队伍中的角色的攻击提升20%，效果持续20秒。",
+        "iconUrl": "",
+        "name": "致美好以颂歌",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·飞廉之猩",
+            "phantomId": 6000086,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "青羽鹭",
+            "phantomId": 390077005,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "戏猿",
+            "phantomId": 6000040,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "幼猿",
+            "phantomId": 6000038,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "侏侏鸵",
+            "phantomId": 6000055,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 4,
+      "attributeName": "气动",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1402,
+      "roleName": "秧秧",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 2,
+      "weaponTypeName": "迅刀",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段的连续攻击，造成气动伤害。\n\n重击\n消耗耐力攻击目标，造成气动伤害。\n\n重击·风吟\n重击或闪避反击后一定时间内短按普攻，将会施放重击风吟攻击目标，造成气动伤害。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成气动伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "风羽为刃",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "使用迅刀划分风场，并将周围的目标牵引至风场中心，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "流风载域",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "挥刃制造旋风，将周围的目标牵引至旋风中心，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "朔风旋涌",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "使用迅刀击飞目标，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "湛蓝礼赞",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "重击·风袭\n当秧秧持有3声【流响】时，施放重击或闪避反击后可触发风袭，造成气动伤害。\n\n空中攻击·释羽\n当秧秧持有3声【流响】时，在空中使用普攻，将消耗所有【流响】，发动连续攻击，并自空中俯冲造成气动伤害。落地后，秧秧将收刀攻击，造成气动伤害，此次伤害为普攻伤害。\n\n流响获取规则\n【流响】上限3声。\n第4段普攻命中目标时，获取1声【流响】。\n重击风吟命中目标时，获取1声【流响】。\n共鸣技能流风载域命中目标时，获取1声【流响】。\n施放变奏技能湛蓝礼赞时，获取1声【流响】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "覆声裁羽",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "持续为下一位登场角色回复共鸣能量，每秒回复4点共鸣能量，持续5秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "衍息",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "共鸣效率提升25.6%。施放共鸣技能时，攻击提升12%，可叠加2层，持续10秒。",
+        "weaponIcon": "",
+        "weaponId": 21020015,
+        "weaponName": "千古洑流",
+        "weaponStarLevel": 5,
+        "weaponType": 2
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "共鸣技能移位戏法的冷却时间减少4秒。",
+        "iconUrl": "",
+        "name": "恶作剧开场",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "【雾化分身】继承的生命值提升100%，秋水攻击被分身嘲讽的目标时，攻击提升15%。",
+        "iconUrl": "",
+        "name": "织雾首秀",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "秋水的普攻或空中攻击穿过【雾气】时，会额外生成2颗子弹，共造成普攻或空中攻击的50%伤害。",
+        "iconUrl": "",
+        "name": "雾化转场",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能雾化子弹伤害提升30%，共鸣回路迷雾潜行状态下秋水受到的伤害降低30%。",
+        "iconUrl": "",
+        "name": "终幕的黑花",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "处于共鸣回路迷雾潜行时，秋水的气动伤害加成提升25%，效果持续6秒。",
+        "iconUrl": "",
+        "name": "迷途者喝彩",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放雾里观花的效果会使暴击额外提升8%，秋水的重击穿过【虚实之门】时，伤害额外提升50%。",
+        "iconUrl": "",
+        "name": "幕后卖家",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·飞廉之猩",
+            "phantomId": 6000086,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "青羽鹭",
+            "phantomId": 390077005,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "戏猿",
+            "phantomId": 6000040,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "幼猿",
+            "phantomId": 6000038,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "侏侏鸵",
+            "phantomId": 6000055,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 4,
+      "attributeName": "气动",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1403,
+      "roleName": "秋水",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 3,
+      "weaponTypeName": "佩枪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多5段连续射击，造成气动伤害，普攻第4段会向前方扩散出【雾气】，【雾气】持续1.5秒。\n\n重击\n进入瞄准状态，可以进行更强力的射击。\n蓄力完成后攻击目标，造成气动伤害。\n\n空中攻击\n消耗耐力，在空中进行连续攻击，造成气动伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "真假参半",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "雾化幻影\n施放【雾气】和1个【雾化分身】嘲讽周围的目标，分身会继承秋水一定比例生命值，并在幻影周围生成6颗【雾化子弹】，造成气动伤害。\n\n雾化子弹\n造成气动伤害，此次伤害为共鸣技能伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "移位戏法",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "在面前生成【虚实之门】，造成气动伤害且当攻击穿过【虚实之门】时攻击提升，【虚实之门】持续10秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "雾里观花",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "秋水神出鬼没，进行快速的连续射击，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "虚晃一枪",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "当秋水穿过【雾气】或【虚实之门】时，会进入迷雾潜行状态。\n\n迷雾潜行\n·移动速度提升；\n·期间可持续消耗【雾滴】，每消耗1点【雾滴】，生成1颗共鸣技能【雾化子弹】。\n\n雾滴获取规则\n【雾滴】上限6点。\n普攻或空中攻击穿过【雾气】命中目标时，回复1点【雾滴】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "雾色掩护",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色气动伤害加深23%，效果持续14秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "雾解",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能或普攻伤害命中时，使自身普攻伤害加成提升72%，持续4秒。每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使队伍中的角色造成的伤害提升16%，最多叠加3层，持续30秒，同名效果之间不可叠加。",
+        "weaponIcon": "",
+        "weaponId": 21030046,
+        "weaponName": "溢彩荧辉",
+        "weaponStarLevel": 5,
+        "weaponType": 3
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "共鸣技能枪扫风定可使用次数增加1次。\n施放共鸣技能枪扫风定时，消耗的【破阵值】减少15点。",
         "iconUrl": "",
         "name": "济世",
@@ -6301,6 +10068,429 @@
         "weaponName": "苍鳞千嶂",
         "weaponStarLevel": 5,
         "weaponType": 1
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "施放变奏技能掌息之要后，普攻获得的【气】额外增加100%，持续10秒。",
+        "iconUrl": "",
+        "name": "林间青枝",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能静气循行的使用次数额外增加1次。",
+        "iconUrl": "",
+        "name": "道者稚徒",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能静气循行进入架势姿态持续2.5秒后，可以直接打出共鸣技能行气反击。",
+        "iconUrl": "",
+        "name": "无心无为",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣回路重击·混元气旋时，鉴心共鸣解放涤净力场伤害提升80%，持续14秒。",
+        "iconUrl": "",
+        "name": "十问之思",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放涤净力场范围增加33%。",
+        "iconUrl": "",
+        "name": "经世自鉴",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣回路重击·混元气旋期间施展冲拳，获得强化共鸣技能特殊行气反击，5秒内可施放1次。特殊行气反击：造成鉴心556.67%攻击的气动伤害，此次伤害为重击伤害，同时获得达到大周天·外阶段的护盾（受固有技能覆映吾身的加成影响）。",
+        "iconUrl": "",
+        "name": "向己而生",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·飞廉之猩",
+            "phantomId": 6000086,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "青羽鹭",
+            "phantomId": 390077005,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "气动伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "戏猿",
+            "phantomId": 6000040,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "幼猿",
+            "phantomId": 6000038,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "啸谷长风",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "侏侏鸵",
+            "phantomId": 6000055,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 4,
+      "attributeName": "气动",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1405,
+      "roleName": "鉴心",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 4,
+      "weaponTypeName": "臂铠",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段的连续攻击，造成气动伤害。\n\n重击\n消耗耐力攻击目标，造成气动伤害。\n\n空中攻击\n消耗耐力，从空中快速下落使出腿技，造成气动伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "风仪拳术",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "按住共鸣技能，进入架势姿态。\n\n行气反击\n在架势姿态中受到攻击时，免疫此次伤害并施放行气反击，造成气动伤害。\n\n降气反击\n在架势姿态中松开共鸣技能，将会中断架势姿态并施放降气反击，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "静气循行",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "制造强力风场，持续将风场范围内的目标牵引至风场中央并造成气动伤害，风场消失时会炸裂，并对风场范围内的所有目标再造成一次气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "涤净力场",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "牵引范围内的目标，造成气动伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "掌息之要",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "重击·混元气旋\n当【气】达到上限时，按住普攻，将会施放混元气旋，进入运气状态。\n\n运气状态\n鉴心的抗打断能力提升，受到伤害降低50%；\n持续消耗【气】，并持续施放运气攻击附近的目标，造成气动伤害；\n随着运气状态时间推移，鉴心逐渐达到不同周天，达到不同周天时：\n·未达到小周天：获得运气1层的护盾。中断运气状态时，施放冲拳攻击目标，造成气动伤害；\n·小周天：获得运气2层的护盾，并震气攻击目标，造成气动伤害。中断运气状态时，施放推手攻击目标，造成气动伤害；\n·大周天·内：获得运气3层的护盾，并震气攻击目标，造成气动伤害。中断运气状态时，施放推手攻击目标，造成气动伤害；\n·大周天·外：获得运气4层的护盾，并震气攻击目标，造成气动伤害；\n·松开普攻时，中断运气状态，并消耗所有【气】；\n·消耗完所有【气】时，结束运气状态；\n\n运气状态结束时，根据周天阶段再次获得对应周天的护盾；\n重击·混元气旋所获得的护盾持续期间，每6秒回复一次队伍中登场角色的生命值；\n\n气获取规则\n【气】上限120点。\n常态攻击风仪拳术命中目标时，获得【气】。\n施放共鸣技能静气循行时，获得【气】。\n共鸣技能行气反击或共鸣技能降气反击命中目标时，获得【气】。\n变奏技能掌息之要命中目标时，获得【气】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "混元气旋",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色共鸣解放伤害加深38%，效果持续14秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "化境",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放普攻或变奏技能时，自身重击伤害加成提升96%，持续3秒。",
+        "weaponIcon": "",
+        "weaponId": 21040026,
+        "weaponName": "悲喜剧",
+        "weaponStarLevel": 5,
+        "weaponType": 4
       }
     }
   },
@@ -8805,6 +12995,429 @@
   {
     "chainList": [
       {
+        "description": "施放强化·后撤后3秒内，逐渐回复60点耐力。",
+        "iconUrl": "",
+        "name": "包裹正等待揽收",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "强化·前扑和强化·后撤攻击敌人时，无视对方20%的防御。",
+        "iconUrl": "",
+        "name": "呜呜物流已收件",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放啾啾专送造成的伤害提升30%。",
+        "iconUrl": "",
+        "name": "特快专递运输中",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "灯灯普攻伤害加成提升30%。",
+        "iconUrl": "",
+        "name": "灯灯正为您派送",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "【光能】充满时，强光穿射造成的伤害倍率提升100%。",
+        "iconUrl": "",
+        "name": "快件已顺利签收",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "施放共鸣解放啾啾专送时，队伍中的角色的攻击提升20%，持续20秒。",
+        "iconUrl": "",
+        "name": "给个五星好评哦",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "彻空冥雷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·云闪之鳞",
+            "phantomId": 6000088,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "彻空冥雷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "奏谕乐师",
+            "phantomId": 390077022,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "彻空冥雷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "紫羽鹭",
+            "phantomId": 390077004,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "彻空冥雷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "通行灯偶",
+            "phantomId": 6000050,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "彻空冥雷",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "湮灭棱镜",
+            "phantomId": 390077017,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 3,
+      "attributeName": "导电",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1504,
+      "roleName": "灯灯",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 1,
+      "weaponTypeName": "长刃",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "黄灯·普攻\n召唤啾啾进行三连射击，造成导电伤害。\n\n黄灯·加速\n短按闪避，可施放加速，并进入疾奔状态，加速无法成功闪避敌人的攻击。\n\n黄灯·疾奔\n该状态下，自动释放飞星攻击被锁定的敌人，造成导电伤害，此次伤害为普攻伤害。\n\n黄灯·下落攻击\n消耗耐力进行空中下落攻击，造成导电伤害。\n\n红灯·普攻\n进行最多3段的连续攻击，造成导电伤害。\n\n红灯·重击\n消耗耐力，啾啾和灯灯一同下砸，攻击目标，造成导电伤害，此次伤害为普攻伤害。\n\n红灯·下落攻击\n消耗耐力进行空中下落攻击，造成导电伤害。\n\n红灯·闪避反击\n成功闪避后一定时间内短按普攻，攻击目标，造成导电伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "前路领航",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "前扑\n黄灯模式期间，共鸣技能转换为前扑，消耗耐力，灯灯朝技能目标位置进行前冲爪击，并切换为红灯模式。\n灯灯登场时会施放一次不消耗耐力的前扑。\n\n后撤\n红灯模式期间，共鸣技能转换为后撤，消耗耐力，灯灯朝后方撤退，攻击目标，并切换为黄灯模式。\n\n黄灯模式\n黄灯模式期间，进行远程攻击。\n\n红灯模式\n红灯模式期间，进行近战攻击。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "灯光探照",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "灯灯将啾啾巨大化之后投掷出去，攻击目标，造成导电伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "啾啾专送",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "进入黄灯模式，攻击目标，造成导电伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "专项派送",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "强化·前扑\n当【黄灯光能】满时，共鸣技能替换为强化·前扑，造成导电伤害，并进入红灯聚光模式，此次伤害为普攻伤害。\n红灯聚光模式期间，红灯·普攻和红灯·重击造成伤害的倍率提升，回复的【光能】增加。\n施放4次普攻或重击后，退出红灯聚光模式。\n\n强化·后撤\n当【红灯光能】满时，共鸣技能替换为强化·后撤，造成导电伤害，并进入黄灯聚光模式，此次伤害为普攻伤害。\n黄灯聚光模式期间，飞星替换为强光，造成伤害的倍率提升，回复的【光能】增加。\n施放6次强光后，退出黄灯聚光模式。\n\n强光穿射\n灯灯施放延奏技能时，消耗当前模式的全部【光能】。\n消耗的【光能】大于等于25点时，可施放强光穿射，造成导电伤害，此次伤害为普攻伤害。\n每25点【光能】可使强光穿射的伤害段数加1，最多4段。\n\n黄灯光能获取规则\n上限100点。\n黄灯·普攻命中目标，可获得【黄灯光能】。\n飞星命中目标，可获得【黄灯光能】。\n强光命中目标，可获得【黄灯光能】。\n共鸣技能强化·后撤命中目标，可获得【黄灯光能】。\n施放变奏技能专项派送时，可获得【黄灯光能】。\n\n红灯光能获取规则\n上限100点。\n红灯或红灯聚光模式期间，常态攻击前路领航命中目标，可获得【红灯光能】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "信号闪耀",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色共鸣技能伤害加深38%，效果持续10秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "护航",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能或共鸣解放时，共鸣解放伤害提升48%，持续6秒；造成重击伤害时，该效果延长4秒，最多可延长1次。成功延长效果时，使队伍中的角色热熔伤害加成提升48%，持续30秒，同名效果之间不可叠加。",
+        "weaponIcon": "",
+        "weaponId": 21010036,
+        "weaponName": "焰痕",
+        "weaponStarLevel": 5,
+        "weaponType": 1
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "共鸣解放终末回环展开的星域获得加强：\n·治疗和增益效果生效范围增加150%。\n·持续时间增加10秒。\n·施放变奏技能洞悉后不再结束星域。",
         "iconUrl": "",
         "name": "不语者假想",
@@ -9275,6 +13888,62 @@
       "cost": 12,
       "equipPhantomList": [
         {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "此间永驻之光",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "衍射伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "荣光节使",
+            "phantomId": 6000104,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
           "cost": 4,
           "fetterDetail": {
             "firstDescription": "",
@@ -9324,62 +13993,6 @@
             "iconUrl": "",
             "name": "梦魇·哀声鸷",
             "phantomId": 6000092,
-            "phantomPropId": 0,
-            "quality": 5,
-            "skillDescription": ""
-          },
-          "quality": 5
-        },
-        {
-          "cost": 3,
-          "fetterDetail": {
-            "firstDescription": "",
-            "groupId": 0,
-            "iconUrl": "",
-            "name": "此间永驻之光",
-            "num": 5,
-            "secondDescription": ""
-          },
-          "level": 25,
-          "mainProps": [
-            {
-              "attributeName": "衍射伤害加成",
-              "attributeValue": "30%",
-              "iconUrl": ""
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "100",
-              "iconUrl": ""
-            }
-          ],
-          "subProps": [
-            {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
-            },
-            {
-              "attributeName": "暴击伤害",
-              "attributeValue": "21.0%"
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "11.6%"
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "60"
-            },
-            {
-              "attributeName": "重击伤害加成",
-              "attributeValue": "11.6%"
-            }
-          ],
-          "phantomProp": {
-            "cost": 3,
-            "iconUrl": "",
-            "name": "凝水贵族",
-            "phantomId": 6000078,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -10511,7 +15124,7 @@
         "unlocked": true
       },
       {
-        "description": "普攻·视觉冲击和普攻·虹彩飞溅的伤害倍率提升90%。\n战斗状态期间，【流光】大于等于120点时，每1秒获得一层预调色，上限25层。每层预调色使加色混合造成的衍射伤害提高55%。施放加色混合期间不会获得预调色，加色混合结束时，移除所有预调色。【流光】小于120点时，每0.5秒失去一层预调色。\n非战斗状态期间，【流光】大于等于120点时，每0.5秒获取一层预调色，【流光】小于120点时，每1秒失去一层预调色。",
+        "description": "普攻·视觉冲击和普攻·虹彩飞溅的伤害倍率提升90%。\n战斗状态期间，【流光】大于等于120点时，每1秒获得一层预调色，上限25层。每层预调色使加色混合的衍射伤害加成提升55%。施放加色混合期间不会获得预调色，加色混合结束时，移除所有预调色。【流光】小于120点时，每0.5秒失去一层预调色。\n非战斗状态期间，【流光】大于等于120点时，每0.5秒获取一层预调色，【流光】小于120点时，每1秒失去一层预调色。",
         "iconUrl": "",
         "name": "为一瞬的绚烂",
         "order": 3,
@@ -10532,7 +15145,7 @@
         "unlocked": true
       },
       {
-        "description": "每次施放绮彩巡游·跃动集束或绮彩巡游·空中重击时，为自身叠加1层心之彩，最多叠加3层，每层心之彩使目标受到普攻·虹彩飞溅和普攻·视觉冲击的伤害提高30%。施放普攻·虹彩飞溅或普攻·视觉冲击后，移除所有心之彩。\n施放普攻·幻光折跃时，刷新绮彩巡游·空中重击的可施放次数。\n施放绮彩巡游·空中重击期间免疫打断且受到伤害降低30%。\n施放延奏技能·有空一起兜风！时，琳奈不会退出绮彩巡游状态。\n【流光】上限由120提升至360。且【流光】达到上限时，轮滑速度进一步提升。\n施放变奏技能时，若处于绮彩巡游状态，回复120点【流光】。",
+        "description": "每次施放绮彩巡游·跃动集束或绮彩巡游·空中重击时，为自身叠加1层心之彩，最多叠加3层，每层心之彩使目标受到普攻·虹彩飞溅和普攻·视觉冲击的伤害提升30%。施放普攻·虹彩飞溅或普攻·视觉冲击后，移除所有心之彩。\n施放普攻·幻光折跃时，刷新绮彩巡游·空中重击的可施放次数。\n施放绮彩巡游·空中重击期间免疫打断且受到伤害降低30%。\n施放延奏技能·有空一起兜风！时，琳奈不会退出绮彩巡游状态。\n【流光】上限由120提升至360。且【流光】达到上限时，轮滑速度进一步提升。\n施放变奏技能时，若处于绮彩巡游状态，回复120点【流光】。",
         "iconUrl": "",
         "name": "以「我」为名的真彩",
         "order": 6,
@@ -10865,7 +15478,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "造成衍射伤害。施放时使附近队伍中所有角色的伤害加成提升24%，持续30秒。\n\n普攻·向着多彩的明天！\n施放共鸣解放·爆炸喷涂一定时间内，短按普攻，可以施放普攻·向着多彩的明天！，造成衍射伤害。\n绮彩巡游状态下，施放该技能期间，一定时间内短按普攻将会施放绮彩巡游·普攻第2段。",
+          "description": "造成衍射伤害。施放时使附近队伍中所有角色造成的伤害提升24%，持续30秒。\n\n普攻·向着多彩的明天！\n施放共鸣解放·爆炸喷涂一定时间内，短按普攻，可以施放普攻·向着多彩的明天！，造成衍射伤害。\n绮彩巡游状态下，施放该技能期间，一定时间内短按普攻将会施放绮彩巡游·普攻第2段。",
           "iconUrl": "",
           "id": 0,
           "name": "爆炸喷涂",
@@ -10908,12 +15521,435 @@
       "level": 90,
       "resonLevel": 5,
       "weapon": {
-        "weaponEffectName": "攻击提升24%。施放变奏技能或普攻伤害命中时，使自身普攻伤害提高72%，持续4秒。每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使全队角色造成的全伤害提高16%，最多叠加3层，持续30秒，同名效果之间不可叠加。",
+        "weaponEffectName": "攻击提升24%。施放变奏技能或普攻伤害命中时，使自身普攻伤害加成提升72%，持续4秒。每次自身施放普攻技能期间为目标附加【震谐·偏移】或【集谐·偏移】时，使队伍中的角色造成的伤害提升16%，最多叠加3层，持续30秒，同名效果之间不可叠加。",
         "weaponIcon": "",
         "weaponId": 21030046,
         "weaponName": "溢彩荧辉",
         "weaponStarLevel": 5,
         "weaponType": 3
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "共鸣回路攻防转换获得的护盾量提升40%。",
+        "iconUrl": "",
+        "name": "怀悠然之心",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放不动如山的暴击提升20%，暴击伤害提升20%。",
+        "iconUrl": "",
+        "name": "假泯于众人",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能磐岩护壁的持续时间延长至30秒。",
+        "iconUrl": "",
+        "name": "观万物之细",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "成功触发重击后发制人时，回复桃祈25%生命值，同时防御提升50%，持续5秒，每15秒可触发1次。",
+        "iconUrl": "",
+        "name": "承负重之担",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣回路攻防转换的伤害提升50%，共鸣回路攻防转换命中目标时，回复20点共鸣能量。",
+        "iconUrl": "",
+        "name": "解市井民忧",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣技能磐岩护壁获得的护盾持续期间，桃祈普攻和重击的伤害提升40%。",
+        "iconUrl": "",
+        "name": "护城邦安危",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "沉日劫明",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "41.8%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·无冠者",
+            "phantomId": 6000090,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "沉日劫明",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "38%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "刺玫菇",
+            "phantomId": 390077029,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "沉日劫明",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "38%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "振铎乐师",
+            "phantomId": 390077023,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "沉日劫明",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "刺玫菇（稚形）",
+            "phantomId": 390070079,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "沉日劫明",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "防御",
+              "attributeValue": "14.7%"
+            },
+            {
+              "attributeName": "防御",
+              "attributeValue": "70"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "遁地鼠",
+            "phantomId": 390070077,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 6,
+      "attributeName": "湮灭",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1601,
+      "roleName": "桃祈",
+      "rolePicUrl": "",
+      "starLevel": 4,
+      "weaponTypeId": 1,
+      "weaponTypeName": "长刃",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段的连续攻击，造成湮灭伤害。\n\n重击\n消耗耐力，造成湮灭伤害。\n若长按普攻，则进入磐岩守势状态。\n\n磐岩守势\n·桃祈受到的伤害降低35%；\n·若磐岩守势期间桃祈受到攻击，将会自动施放后发制人；\n·磐岩守势持续3秒后，将会自动施放后发制人；\n在施放共鸣技能固若金汤时若受到攻击，将会自动施放后发制人。\n\n后发制人\n攻击目标，造成湮灭伤害。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成湮灭伤害。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成湮灭伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "重器藏锋",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "对周围的目标造成湮灭伤害，回复桃祈生命值，同时生成3个【磐岩护壁】。\n若在施放固若金汤期间受到攻击，将会自动施放普攻后发制人。\n\n磐岩护壁\n当队伍中登场角色受到攻击时，消耗1个【磐岩护壁】，降低此次受到的伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "固若金汤",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "对目标发动一次基于桃祈防御力的攻击，造成湮灭伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "不动如山",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成湮灭伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "携攻守阵",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "御反之隙\n拥有【刚柔化势】时，施放重击后发制人或变奏技能携攻守阵后一定时间内，短按普攻，可施放御反之隙。\n进行最多3段的连续攻击，造成湮灭伤害，此次伤害为普攻伤害。\n御反之隙命中目标时消耗1点【刚柔化势】，同时获得护盾。\n在施放变奏技能携攻守阵后使用普攻，可直接施放御反之隙。\n\n刚柔化势获取规则\n【刚柔化势】上限3点。\n第4段普攻会消耗桃祈所有的【磐岩护壁】，并获得同等数量的【刚柔化势】。\n磐岩护壁持续期间，队伍中登场角色受到攻击时，消耗1个【磐岩护壁】，回复【刚柔化势】。\n磐岩护壁结束后，会消耗剩余的【磐岩护壁】，并获得等同数量的【刚柔化势】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "攻防转换",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "下一位登场角色共鸣技能伤害加深38%，效果持续14秒，若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "千钧",
+          "type": "延奏技能"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "施放变奏技能时，自身攻击提升16%，防御提升30%，持续15秒。",
+        "weaponIcon": "",
+        "weaponId": 21010044,
+        "weaponName": "永夜长明",
+        "weaponStarLevel": 4,
+        "weaponType": 1
       }
     }
   },
@@ -12664,7 +17700,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "幽夜隐匿之帷",
+            "name": "沉日劫明",
             "num": 5,
             "secondDescription": ""
           },
@@ -12706,8 +17742,8 @@
           "phantomProp": {
             "cost": 4,
             "iconUrl": "",
-            "name": "罗蕾莱",
-            "phantomId": 6000082,
+            "name": "梦魇·无冠者",
+            "phantomId": 6000090,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -12720,7 +17756,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "幽夜隐匿之帷",
+            "name": "沉日劫明",
             "num": 5,
             "secondDescription": ""
           },
@@ -12762,8 +17798,8 @@
           "phantomProp": {
             "cost": 3,
             "iconUrl": "",
-            "name": "巡游骑士",
-            "phantomId": 6000073,
+            "name": "刺玫菇",
+            "phantomId": 390077029,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -12776,7 +17812,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "幽夜隐匿之帷",
+            "name": "沉日劫明",
             "num": 5,
             "secondDescription": ""
           },
@@ -12818,8 +17854,8 @@
           "phantomProp": {
             "cost": 3,
             "iconUrl": "",
-            "name": "暗夜骑士",
-            "phantomId": 6000075,
+            "name": "振铎乐师",
+            "phantomId": 390077023,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -12832,7 +17868,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "幽夜隐匿之帷",
+            "name": "沉日劫明",
             "num": 5,
             "secondDescription": ""
           },
@@ -12874,8 +17910,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "雷鬃狼",
-            "phantomId": 6000062,
+            "name": "刺玫菇（稚形）",
+            "phantomId": 390070079,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -12888,7 +17924,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "幽夜隐匿之帷",
+            "name": "沉日劫明",
             "num": 5,
             "secondDescription": ""
           },
@@ -12930,8 +17966,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "霜鬃狼",
-            "phantomId": 6000063,
+            "name": "遁地鼠",
+            "phantomId": 390070077,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""

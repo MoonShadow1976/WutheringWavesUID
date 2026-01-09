@@ -4,26 +4,26 @@
             "libId": 1,
             "fetterList": [
                 {
-                    "fetterDetailName": "此间永驻之光",
+                    "fetterDetailName": "啸谷长风",
                     "equipPhantomList": [
                         {
-                            "phantomId": 6000092,
+                            "phantomId": 6000086,
                             "cost": 4
                         },
                         {
-                            "phantomId": 6000078,
+                            "phantomId": 390077005,
                             "cost": 3
                         },
                         {
-                            "phantomId": 6000074,
+                            "phantomId": 6000040,
                             "cost": 3
                         },
                         {
-                            "phantomId": 6000071,
+                            "phantomId": 6000038,
                             "cost": 1
                         },
                         {
-                            "phantomId": 6000093,
+                            "phantomId": 6000055,
                             "cost": 1
                         }
                     ]
@@ -72,12 +72,10 @@
                         },
                         {
                             "phantomId": 390077029,
-                            "mainPropName": "属性伤害加成",
                             "cost": 3
                         },
                         {
                             "phantomId": 390077023,
-                            "mainPropName": "属性伤害加成",
                             "cost": 3
                         },
                         {
@@ -347,27 +345,26 @@
             "libId": 12,
             "fetterList": [
                 {
-                    "fetterDetailName": "幽夜隐匿之帷",
+                    "fetterDetailName": "彻空冥雷",
                     "equipPhantomList": [
                         {
-                            "phantomId": 6000082,
+                            "phantomId": 6000088,
                             "cost": 4
                         },
                         {
-                            "phantomId": 6000073,
-                            "mainPropName": "攻击%",
+                            "phantomId": 390077022,
                             "cost": 3
                         },
                         {
-                            "phantomId": 6000075,
+                            "phantomId": 390077004,
                             "cost": 3
                         },
                         {
-                            "phantomId": 6000062,
+                            "phantomId": 6000050,
                             "cost": 1
                         },
                         {
-                            "phantomId": 6000063,
+                            "phantomId": 390077017,
                             "cost": 1
                         }
                     ]
@@ -809,10 +806,10 @@
             "libId": 26,
             "fetterList": [
                 {
-                    "fetterDetailName": "熔山裂谷",
+                    "fetterDetailName": "奔狼燎原之焰",
                     "equipPhantomList": [
                         {
-                            "phantomId": 6000091,
+                            "phantomId": 6000114,
                             "mainPropName": "暴击伤害",
                             "subPropName":[
                                 "防御%",
@@ -821,7 +818,7 @@
                             "cost": 4
                         },
                         {
-                            "phantomId": 390077033,
+                            "phantomId": 6000120,
                             "mainPropName": "防御%",
                             "subPropName":[
                                 "防御%",
@@ -830,16 +827,16 @@
                             "cost": 3
                         },
                         {
-                            "phantomId": 390077028,
+                            "phantomId": 6000112,
                             "mainPropName": "防御%",
                             "cost": 3
                         },
                         {
-                            "phantomId": 390077012,
+                            "phantomId": 6000108,
                             "cost": 1
                         },
                         {
-                            "phantomId": 390077016,
+                            "phantomId": 6000109,
                             "cost": 1
                         }
                     ]
@@ -883,7 +880,7 @@
             "charId": 1506,
             "name": "菲比",
             "weaponId": 21050046,
-            "sonataLibId": 1
+            "sonataLibId": 14
         },
         {
             "calcFile": "calc.json",
@@ -894,9 +891,23 @@
         },
         {
             "calcFile": "calc.json",
+            "charId": 1202,
+            "name": "炽霞",
+            "weaponId": 21030016,
+            "sonataLibId": 2
+        },
+        {
+            "calcFile": "calc.json",
             "charId": 1602,
             "name": "丹瑾",
             "weaponId": 21020016,
+            "sonataLibId": 3
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1601,
+            "name": "桃祈",
+            "weaponId": 21010044,
             "sonataLibId": 3
         },
         {
@@ -950,6 +961,27 @@
         },
         {
             "calcFile": "calc.json",
+            "charId": 1403,
+            "name": "秋水",
+            "weaponId": 21030046,
+            "sonataLibId": 1
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1402,
+            "name": "秧秧",
+            "weaponId": 21020015,
+            "sonataLibId": 1
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1405,
+            "name": "鉴心",
+            "weaponId": 21040026,
+            "sonataLibId": 1
+        },
+        {
+            "calcFile": "calc.json",
             "charId": 1203,
             "name": "安可",
             "weaponId": 21050016,
@@ -964,6 +996,20 @@
         },
         {
             "calcFile": "calc.json",
+            "charId": 1104,
+            "name": "凌阳",
+            "weaponId": 21040036,
+            "sonataLibId": 10
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1106,
+            "name": "釉瑚",
+            "weaponId": 21040036,
+            "sonataLibId": 10
+        },
+        {
+            "calcFile": "calc.json",
             "charId": 1305,
             "name": "相里要",
             "weaponId": 21040016,
@@ -971,9 +1017,37 @@
         },
         {
             "calcFile": "calc.json",
+            "charId": 1504,
+            "name": "灯灯",
+            "weaponId": 21010036,
+            "sonataLibId": 12
+        },
+        {
+            "calcFile": "calc.json",
             "charId": 1302,
             "name": "吟霖",
             "weaponId": 21050016,
+            "sonataLibId": 15
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1105,
+            "name": "折枝",
+            "weaponId": 21050026,
+            "sonataLibId": 15
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1303,
+            "name": "渊武",
+            "weaponId": 21040016,
+            "sonataLibId": 15
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1204,
+            "name": "莫特斐",
+            "weaponId": 21030016,
             "sonataLibId": 15
         },
         {
@@ -1002,7 +1076,7 @@
             "charId": 1607,
             "name": "坎特蕾拉",
             "weaponId": 21050056,
-            "sonataLibId": 12
+            "sonataLibId": 6
         },
         {
             "calcFile": "calc.json",
@@ -1043,6 +1117,13 @@
             "calcFile": "calc.json",
             "charId": 1307,
             "name": "卜灵",
+            "weaponId": 21050024,
+            "sonataLibId": 17
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1103,
+            "name": "白芷",
             "weaponId": 21050024,
             "sonataLibId": 17
         },

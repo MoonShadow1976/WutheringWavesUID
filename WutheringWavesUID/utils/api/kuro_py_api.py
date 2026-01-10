@@ -14,7 +14,7 @@ from ..database.models import WavesUser
 from .model import AccountBaseInfo, BattlePassData, Box2, DailyData, EnergyData, LivenessData
 
 # 构造retry的RoleInfo类
-fake_basic = BasicRoleInfo(
+fake_basic = BasicRoleInfo.model_construct(
     Name="!请稍后重试!",
     Id=1,
     CreatTime=datetime.datetime.now(),
@@ -22,18 +22,14 @@ fake_basic = BasicRoleInfo(
     Level=0,
     WorldLevel=0,
     RoleNum=1,
-    SoundBox=1,
     Energy=1,
     MaxEnergy=240,
     StoreEnergy=1,
-    StoreEnergyRecoverTime=datetime.datetime.now(),
+    MaxStoreEnergy=480,
     EnergyRecoverTime=datetime.datetime.now(),
     Liveness=1,
     LivenessMaxCount=100,
-    LivenessUnlock=False,
-    ChapterId=1,
     WeeklyInstCount=0,
-    Boxes={},
     BasicBoxes={
         "1": 0,
         "2": 0,
@@ -45,21 +41,13 @@ fake_basic = BasicRoleInfo(
         "2": 0,
         "3": 0,
     },
-    BirthMon=1,
-    BirthDay=1,
 )
 
-fake_battle_pass = BattlePassRoleInfo(
+fake_battle_pass = BattlePassRoleInfo.model_construct(
     Level=1,
-    WeekExp=1,
-    WeekMaxExp=1,
-    IsUnlock=False,
-    IsOpen=False,
-    Exp=1,
-    ExpLimit=1,
 )
 
-fake_role_info = RoleInfo(
+fake_role_info = RoleInfo.model_construct(
     Base=fake_basic,
     BattlePass=fake_battle_pass,
 )
@@ -297,7 +285,7 @@ async def get_base_info_overseas(ck: str, uid: str) -> tuple[None, None] | tuple
         weeklyInstCount=basic.weekly_challenge,
         weeklyInstCountLimit=3,
         storeEnergy=basic.refined_waveplates,
-        storeEnergyLimit=480,
+        storeEnergyLimit=basic.max_refined_waveplates,
         rougeScore=0,
         rougeScoreLimit=6000,
     )

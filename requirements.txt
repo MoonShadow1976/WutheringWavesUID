@@ -1,2 +1,2 @@
 opencc>=1.1.9
-kuro-py>=0.6.1
+kuro-py>=0.7.1

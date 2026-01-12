@@ -470,7 +470,7 @@
                     "equipPhantomList": [
                         {
                             "phantomId": 6000045,
-                            "mainPropName": "暴击伤害",
+                            "mainPropName": "生命%",
                             "cost": 4
                         },
                         {
@@ -810,7 +810,7 @@
                     "equipPhantomList": [
                         {
                             "phantomId": 6000114,
-                            "mainPropName": "暴击伤害",
+                            "mainPropName": "防御%",
                             "subPropName":[
                                 "防御%",
                                 "暴击"

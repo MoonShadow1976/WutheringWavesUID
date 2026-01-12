@@ -236,13 +236,23 @@
             }
         },
         {
-            "level": 10,
+            "level": 1,
             "skill": {
                 "description": "",
                 "iconUrl": "",
                 "id": 0,
                 "name": "",
                 "type": "延奏技能"
+            }
+        },
+        {
+            "level": 1,
+            "skill": {
+                "description": "",
+                "iconUrl": "",
+                "id": 0,
+                "name": "",
+                "type": "谐度破坏"
             }
         }
     ],

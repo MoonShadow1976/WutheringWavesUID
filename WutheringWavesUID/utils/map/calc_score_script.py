@@ -342,6 +342,7 @@ def calc_char_limit(char_limit, calc_file_dict):
         "共鸣解放": "3",
         "变奏技能": "6",
         "延奏技能": "8",
+        "谐度破坏": "17",
     }
     for i in char_template_data["skillList"]:
         temp_skill = i["skill"]

@@ -80,6 +80,7 @@ from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
 from ..utils.resource.constant import (
     ATTRIBUTE_ID_MAP,
     DEAFAULT_WEAPON_ID,
+    SKILL_MAP,
     SPECIAL_CHAR,
     WEAPON_TYPE_ID_MAP,
     get_short_name,
@@ -1332,18 +1333,10 @@ async def generate_online_role_detail(char_id: str):
         j["unlocked"] = False
 
     # 技能
-    skill_map = {
-        "常态攻击": "1",
-        "共鸣技能": "2",
-        "共鸣回路": "7",
-        "共鸣解放": "3",
-        "变奏技能": "6",
-        "延奏技能": "8",
-    }
     for i in char_template_data["skillList"]:
         temp_skill = i["skill"]
         skill_type = temp_skill["type"]
-        skill_detail = char_model.skillTree[skill_map[skill_type]]["skill"]
+        skill_detail = char_model.skillTree[SKILL_MAP[skill_type]]["skill"]
 
         temp_skill["name"] = skill_detail.name
         temp_skill["description"] = skill_detail.desc.format(*skill_detail.param)

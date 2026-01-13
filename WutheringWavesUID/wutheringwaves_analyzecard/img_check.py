@@ -1,4 +1,5 @@
 # change from https://github.com/TedIwaArdN/wuwabot_reader
+from functools import lru_cache
 
 from gsuid_core.logger import logger
 import numpy as np
@@ -13,6 +14,7 @@ SET_SIZE = (8, 8)
 
 
 # 加载模板图像的函数
+@lru_cache(maxsize=1)
 def load_template_images() -> tuple[dict[str, Image.Image], dict[str, Image.Image]]:
     """加载声骸和套装模板图像"""
     templates_phantom = {}
@@ -46,11 +48,8 @@ def load_template_images() -> tuple[dict[str, Image.Image], dict[str, Image.Imag
             except Exception as e:
                 logger.error(f"加载套装模板 {file} 失败: {e}")
 
+    logger.info(f"[鸣潮][图片匹配] 加载完成，声骸模板数量：{len(templates_phantom)}, 套装模板数量：{len(templates_set)}")
     return templates_phantom, templates_set
-
-
-# 加载模板图像
-templates_phantom, templates_set = load_template_images()
 
 
 def diff_val(a, b):
@@ -267,6 +266,9 @@ async def batch_analyze_card_img(cropped_icons: list[Image.Image], i: str) -> di
     """
     cropped_icons: 裁切出的声骸图像和套装图像
     """
+    # 加载模板图像
+    templates_phantom, templates_set = load_template_images()
+
     echo_icon = cropped_icons[0]  # 声骸图标
     set_icon = cropped_icons[1]  # 套装图标
 
@@ -308,6 +310,9 @@ async def batch_analyze_card_img(cropped_icons: list[Image.Image], i: str) -> di
     for echo_id in echo_ids_for_set:
         name = str(echo_id)
         template_img = templates_phantom.get(name)
+        if not template_img:
+            logger.warning(f"未找到声骸：{name}")
+            continue
         # 直接比较两个图像
         similarity = ImageComparer.compare_echo_images(echo_icon, template_img)
         if similarity > echo_confidence and similarity > 0.05:

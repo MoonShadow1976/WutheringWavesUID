@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw
 from ..utils.ascension.echo import echo_id_data, set_name_to_echo_ids
 from ..utils.ascension.sonata import sonata_id_data
 from ..utils.ascension.weapon import weapon_id_data
-from ..utils.fonts.waves_fonts import waves_font_16, waves_font_18, waves_font_24
+from ..utils.fonts.waves_fonts import waves_font_16, waves_font_18, waves_font_24, waves_font_36
 from ..utils.image import (
     SPECIAL_GOLD,
     add_footer,
@@ -95,11 +95,13 @@ async def draw_weapon_list(weapon_type: str):
 
     # 绘制标题
     title = "武器一览"
-    draw.text((int(width / 2), 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt")
-    draw.text((int(width / 2), 63), f"使用【{PREFIX}'武器名'图鉴】查询具体介绍", font=waves_font_16, fill="#AAAAAA", anchor="mt")
+    draw.text((int(width / 2), 25), title, font=waves_font_36, fill=SPECIAL_GOLD, anchor="mt")
+    draw.text(
+        (int(width / 2), 63), f"使用【{PREFIX}'武器名'介绍】查询武器具体信息", font=waves_font_24, fill="#AAAAAA", anchor="mt"
+    )
 
     # 当前绘制位置
-    y_offset = 80
+    y_offset = 90
 
     # 添加组间分隔线
     draw.line((40, y_offset, width - 40, y_offset), fill=SPECIAL_GOLD, width=1)
@@ -204,10 +206,11 @@ async def draw_sonata_list():
 
     # 绘制标题
     title = "声骸套装一览"
-    draw.text((700, 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt")
+    draw.text((700, 25), title, font=waves_font_36, fill=SPECIAL_GOLD, anchor="mt")
+    draw.text((700, 63), f"使用【{PREFIX}'套装名'声骸列表】查看指定套装声骸", font=waves_font_24, fill="#AAAAAA", anchor="mt")
 
     # 当前绘制位置
-    y_offset = 80
+    y_offset = 90
     col_width = 14  # 列宽调整为14个字符（四列布局）
     des_height = 25  # 套装效果描述高度
 
@@ -388,17 +391,17 @@ async def draw_echo_list(sonata_type: str):
 
     # 绘制标题
     if sonata_name and sonata_name in set_name_to_echo_ids:
-        title = f"{sonata_name} - 声骸列表一览"
-        subtitle = f"包含 {len(echoes)} 个声骸"
+        title = f"套装 {sonata_name} 声骸一览"
+        subtitle = f"使用【{PREFIX}'声骸名'介绍】查询具体信息"
     else:
-        title = "声骸列表一览"
-        subtitle = f"使用【{PREFIX}'套装名'声骸列表】查询指定套装声骸"
+        title = "全部声骸一览"
+        subtitle = f"使用【{PREFIX}'套装名'声骸列表】查看指定套装声骸、【{PREFIX}'声骸名'介绍】查询声骸具体信息"
 
-    draw.text((int(width / 2), 30), title, font=waves_font_24, fill=SPECIAL_GOLD, anchor="mt")
+    draw.text((int(width / 2), 25), title, font=waves_font_36, fill=SPECIAL_GOLD, anchor="mt")
     draw.text(
         (int(width / 2), 63),
         subtitle,
-        font=waves_font_16,
+        font=waves_font_24,
         fill="#AAAAAA",
         anchor="mt",
     )

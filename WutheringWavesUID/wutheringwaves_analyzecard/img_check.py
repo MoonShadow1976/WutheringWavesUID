@@ -1,7 +1,6 @@
 # change from https://github.com/TedIwaArdN/wuwabot_reader
 
-from venv import logger
-
+from gsuid_core.logger import logger
 import numpy as np
 from PIL import Image
 
@@ -296,6 +295,7 @@ async def batch_analyze_card_img(cropped_icons: list[Image.Image], i: str) -> di
 
     # 根据套装名获取对应的声骸ID列表，避免无效比较
     echo_ids_for_set = get_echo_ids_by_set_name(set_match)
+    logger.debug(f"匹配套装 '{set_match}' 对应的声骸ID列表：{echo_ids_for_set}")
     if not echo_ids_for_set:
         logger.warning(f"未找到套装 '{set_match}' 对应的声骸ID列表，使用全部声骸模板进行比较!")
         echo_ids_for_set = templates_phantom.keys()

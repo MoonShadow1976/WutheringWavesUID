@@ -58,6 +58,20 @@ def get_breach(breach: int | None, level: int):
     return breach
 
 
+def extract_param_index(desc: str, search_text: str) -> int | None:
+    """提取描述中search_text后面的第一个占位符索引"""
+    if (start := desc.find(search_text)) == -1:
+        return None
+    if (brace_start := desc.find("{", start)) == -1:
+        return None
+    if (brace_end := desc.find("}", brace_start)) == -1:
+        return None
+    try:
+        return int(desc[brace_start+1:brace_end])
+    except ValueError:
+        return None
+
+
 def get_char_detail(char_id: str | int, level: int, breach: int | None = None) -> WavesCharResult:
     """
     breach 突破
@@ -76,24 +90,44 @@ def get_char_detail(char_id: str | int, level: int, breach: int | None = None) -
     result.stats = copy.deepcopy(char_data["stats"][str(breach)][str(level)])
     result.skillTrees = char_data["skillTree"]
 
-    char_data["skillTree"].items()
-    for key, value in char_data["skillTree"].items():
+    # 技能树 check from wutheringwaves_wiki\draw_char.py keys
+    # 技能树映射：breach阈值 -> 技能键列表
+    skill_tree_map = {
+        0: ["1", "2", "3", "6", "7", "8", "17"],
+        2: ["4", "10", "11"],
+        3: ["9", "12"],
+        4: ["5", "14", "15"],
+        5: ["13", "16"]
+    }
+
+    # 构建skill_tree列表
+    skill_tree = []
+    for threshold, keys in skill_tree_map.items():
+        if breach >= threshold:
+            skill_tree.extend(char_data["skillTree"][key] for key in keys if key in char_data["skillTree"])
+
+    for value in skill_tree:
         skill_info = value.get("skill", {})
-        name = skill_info.get("name", "")
-        if name in fixed_name and breach >= 3:
-            name = name.replace("提升", "").replace("全", "")
-            if name not in result.fixed_skill:
-                result.fixed_skill[name] = "0%"
+        name, desc, params = skill_info.get("name", ""), skill_info.get("desc", ""), skill_info.get("param", [])
 
-            result.fixed_skill[name] = sum_percentages(skill_info["param"][0], result.fixed_skill[name])
+        search_text = None
+        if name in fixed_name:
+            search_text = name
+        elif skill_info.get("type") == "固有技能":
+            for fixed_skill_name in fixed_name:
+                if desc.startswith(fixed_skill_name) or desc.startswith(f"{char_data['name']}的{fixed_skill_name}"):
+                    search_text = fixed_skill_name
+                    break
+        if not search_text:
+            continue
 
-        if skill_info.get("type") == "固有技能":
-            for i, name in enumerate(fixed_name):
-                if skill_info["desc"].startswith(name) or skill_info["desc"].startswith(f"{char_data['name']}的{name}"):
-                    name = name.replace("提升", "").replace("全", "")
-                    if name not in result.fixed_skill:
-                        result.fixed_skill[name] = "0%"
-                    result.fixed_skill[name] = sum_percentages(skill_info["param"][0], result.fixed_skill[name])
+        logger.debug(f"get_char_detail search_text: {search_text}, name: {name}")
+        if (index := extract_param_index(desc, search_text)) is not None and index < len(params):
+            clean_name = search_text.replace("提升", "").replace("全", "")
+            if clean_name not in result.fixed_skill:
+                result.fixed_skill[clean_name] = "0%"
+            result.fixed_skill[clean_name] = sum_percentages(params[index], result.fixed_skill[clean_name])
+            logger.debug(f"get_char_detail {search_text}: {params[index]}")
 
     return result
 

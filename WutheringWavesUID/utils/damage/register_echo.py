@@ -415,6 +415,11 @@ class Echo_6000060(EchoAbstract):
 
     # 自身共鸣效率提升10%，全队角色攻击提升10%
     def damage(self, attr: DamageAttribute, isGroup: bool = False):
+        title = self.name
+        msg = "自身共鸣效率提升10%"
+        attr.add_effect(title, msg)
+        attr.add_energy_regen(0.1)
+
         if attr.char_template == temp_atk:
             title = self.name
             msg = "全队角色攻击提升10%"

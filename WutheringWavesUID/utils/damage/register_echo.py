@@ -225,21 +225,6 @@ class Echo_390080007(EchoAbstract):
             attr.add_dmg_bonus(0.12, title, msg)
 
 
-class Echo_391070105(EchoAbstract):
-    id = 391070105
-    name = "异相·寒霜陆龟"
-
-
-class Echo_391077024(EchoAbstract):
-    id = 391077024
-    name = "异相·磐石守卫"
-
-
-class Echo_391080003(Echo_390080003):
-    id = 391080003
-    name = "异相·云闪之鳞"
-
-
 class Echo_6000038(EchoAbstract):
     id = 6000038
     name = "幼猿"
@@ -304,11 +289,6 @@ class Echo_6000043(EchoAbstract):
             title = self.name
             msg = "重击伤害加成提升12.00%"
             attr.add_dmg_bonus(0.12, title, msg)
-
-
-class Echo_390180010(Echo_6000043):
-    id = 390180010
-    name = "异相·飞廉之猩"
 
 
 class Echo_6000044(EchoAbstract):

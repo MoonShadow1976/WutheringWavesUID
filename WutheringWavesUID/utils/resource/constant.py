@@ -157,7 +157,7 @@ CHAR_DETAIL = {
     "1508": {"name": "千咲", "fetterDetail": {"命理崩毁之弦": 3, "沉日劫明": 2}},
     "1509": {"name": "琳奈", "fetterDetail": "逆光跃彩之约"},
     "1209": {"name": "莫宁", "fetterDetail": "星构寻辉之环"},
-    "1510": {"name": "陆·赫斯", "needId": 6000180,  "fetterDetail": "流金溯真之式"},
+    "1510": {"name": "陆·赫斯", "needId": 6000180, "fetterDetail": "流金溯真之式"},
     "1210": {"name": "爱弥斯", "fetterDetail": "长路启航之星"},
 }
 

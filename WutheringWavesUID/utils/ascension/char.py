@@ -67,7 +67,7 @@ def extract_param_index(desc: str, search_text: str) -> int | None:
     if (brace_end := desc.find("}", brace_start)) == -1:
         return None
     try:
-        return int(desc[brace_start+1:brace_end])
+        return int(desc[brace_start + 1 : brace_end])
     except ValueError:
         return None
 
@@ -97,7 +97,7 @@ def get_char_detail(char_id: str | int, level: int, breach: int | None = None) -
         2: ["4", "10", "11"],
         3: ["9", "12"],
         4: ["5", "14", "15"],
-        5: ["13", "16"]
+        5: ["13", "16"],
     }
 
     # 构建skill_tree列表

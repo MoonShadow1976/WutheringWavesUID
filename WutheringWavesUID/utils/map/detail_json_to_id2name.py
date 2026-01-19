@@ -8,6 +8,7 @@ ECHO_DETAIL_PATH = DETAIL_PATH / "echo"
 MATERIAL_DETAIL_PATH = DETAIL_PATH / "material"
 
 ID_NAME_PATH = Path(__file__).parent / "id2name.json"
+CHAR_ID_NAME_PATH = ID_NAME_PATH.parent / "CharId2Data.json"
 
 
 def process_json_files(directory):
@@ -50,10 +51,12 @@ def generate_id2name_mapping():
     # 按照要求顺序合并映射
     # 角色 -> 武器 -> 声骸 -> 材料
     full_mapping = {}
+    char_id_data = {}
 
     # 合并角色映射（按id排序）
     for char_id in sorted(char_mapping.keys()):
         full_mapping[char_id] = char_mapping[char_id]
+        char_id_data[char_id] = {"name": char_mapping[char_id]}
 
     # 合并武器映射（按id排序）
     for weapon_id in sorted(weapon_mapping.keys()):
@@ -70,6 +73,9 @@ def generate_id2name_mapping():
     # 写入文件
     with open(ID_NAME_PATH, "w", encoding="utf-8") as f:
         json.dump(full_mapping, f, ensure_ascii=False, indent=2)
+
+    with open(CHAR_ID_NAME_PATH, "w", encoding="utf-8") as f:
+        json.dump(char_id_data, f, ensure_ascii=False, indent=2)
 
     print(f"成功生成映射文件，共 {len(full_mapping)} 条记录")
     print(f"角色: {len(char_mapping)} 条")

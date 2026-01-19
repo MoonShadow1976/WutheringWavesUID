@@ -8,6 +8,7 @@ from ..utils.name_convert import char_name_to_char_id
 from .draw_char import draw_char_wiki
 from .draw_echo import draw_wiki_echo
 from .draw_list import draw_echo_list, draw_sonata_list, draw_weapon_list
+from .draw_monster import draw_resist_table
 from .draw_weapon import draw_wiki_weapon
 from .guide import get_guide
 
@@ -96,4 +97,19 @@ async def send_echo_list(bot: Bot, ev: Event):
     ev.regex_dict = match.groupdict()
     sonata_type = ev.regex_dict.get("type", "")
     img = await draw_echo_list(sonata_type)
+    await bot.send(img)
+
+
+@sv_waves_guide.on_regex(r"抗性表?(?P<num>\d+)?", block=True)
+async def send_resist_table(bot: Bot, ev: Event):
+    match = re.search(r"抗性表?(?P<num>\d+)?", ev.raw_text)
+    if not match:
+        return
+    ev.regex_dict = match.groupdict()
+    num = ev.regex_dict.get("num")
+
+    index = int(num) - 1 if num else 3
+    index = min(index, 3)
+
+    img = await draw_resist_table(index)
     await bot.send(img)

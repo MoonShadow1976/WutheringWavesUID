@@ -1,0 +1,1519 @@
+{
+    "310000010": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 390070051,
+        "name": "先锋幼岩"
+    },
+    "310000020": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 390070052,
+        "name": "裂变幼岩"
+    },
+    "310000030": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 390070053,
+        "name": "惊蛰猎手"
+    },
+    "310000040": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 390070070,
+        "name": "破霜猎手"
+    },
+    "310000050": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 390070071,
+        "name": "巡徊猎手"
+    },
+    "310000060": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390070064,
+        "name": "鸣泣战士"
+    },
+    "310000070": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390070065,
+        "name": "审判战士"
+    },
+    "310000080": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390070066,
+        "name": "咔嚓嚓"
+    },
+    "310000090": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 390070067,
+        "name": "阿嗞嗞"
+    },
+    "310000100": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 390070068,
+        "name": "呼咻咻"
+    },
+    "310000110": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390070069,
+        "name": "呜咔咔"
+    },
+    "310000120": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 390070076,
+        "name": "咕咕河豚"
+    },
+    "310000130": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000047,
+        "name": "啾啾河豚"
+    },
+    "310000140": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 390077013,
+        "name": "冷凝棱镜"
+    },
+    "310000150": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390077012,
+        "name": "热熔棱镜"
+    },
+    "310000160": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 390077016,
+        "name": "衍射棱镜"
+    },
+    "310000170": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390077017,
+        "name": "湮灭棱镜"
+    },
+    "310000180": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 390070074,
+        "name": "游弋蝶"
+    },
+    "310000190": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 390070075,
+        "name": "碎獠猪"
+    },
+    "310000200": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390070077,
+        "name": "遁地鼠"
+    },
+    "310000210": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390070078,
+        "name": "绿熔蜥（稚形）"
+    },
+    "310000220": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390070079,
+        "name": "刺玫菇（稚形）"
+    },
+    "310000230": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "流放者"
+    },
+    "310000232": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 0,
+        "name": "流放者"
+    },
+    "310000233": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 0,
+        "name": "流放者"
+    },
+    "310000250": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "抛石幼猿"
+    },
+    "310000251": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000038,
+        "name": "幼猿"
+    },
+    "310000260": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000041,
+        "name": "晶螯蝎"
+    },
+    "310000270": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 390070105,
+        "name": "寒霜陆龟"
+    },
+    "310000280": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390070100,
+        "name": "火鬃狼"
+    },
+    "310000290": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "残星·重锤造匠"
+    },
+    "310000300": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "锐爪幼猿"
+    },
+    "310000310": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "残星·枭面造匠"
+    },
+    "310000320": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "残星·枪肢造匠"
+    },
+    "310000330": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000050,
+        "name": "通行灯偶"
+    },
+    "310000340": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000051,
+        "name": "叮咚咚"
+    },
+    "310000350": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000054,
+        "name": "融火虫"
+    },
+    "310000360": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000055,
+        "name": "侏侏鸵"
+    },
+    "310000370": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000061,
+        "name": "风鬃狼"
+    },
+    "310000380": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000062,
+        "name": "雷鬃狼"
+    },
+    "310000390": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000063,
+        "name": "霜鬃狼"
+    },
+    "310000400": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000064,
+        "name": "浮灵偶·海德"
+    },
+    "310000410": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000065,
+        "name": "浮灵偶·蕾弗"
+    },
+    "310000420": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000066,
+        "name": "浮灵偶·莱特"
+    },
+    "310000430": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000067,
+        "name": "幽翎火"
+    },
+    "310000440": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000068,
+        "name": "云海妖精"
+    },
+    "310000450": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000069,
+        "name": "魔术先生"
+    },
+    "310000460": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000070,
+        "name": "寂寞小姐"
+    },
+    "310000470": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000071,
+        "name": "工头布偶"
+    },
+    "310000480": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000072,
+        "name": "欺诈奇藏"
+    },
+    "310000490": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000093,
+        "name": "愚金幼岩"
+    },
+    "310000500": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000094,
+        "name": "釉变幼岩"
+    },
+    "310000510": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000095,
+        "name": "气动棱镜"
+    },
+    "310000520": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000098,
+        "name": "卫冕节使"
+    },
+    "310000530": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000099,
+        "name": "赦罪节使"
+    },
+    "310000540": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000100,
+        "name": "慈悲节使"
+    },
+    "310000550": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000101,
+        "name": "小翼龙·气动"
+    },
+    "310000560": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000102,
+        "name": "小翼龙·导电"
+    },
+    "310000570": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000103,
+        "name": "小翼龙·冷凝"
+    },
+    "310000580": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000107,
+        "name": "小翼龙·热熔"
+    },
+    "310000590": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000108,
+        "name": "小翼龙·衍射"
+    },
+    "310000600": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000109,
+        "name": "小翼龙·湮灭"
+    },
+    "310000610": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000110,
+        "name": "苦信者的作俑"
+    },
+    "310000620": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 0,
+        "name": "残星·深海造匠"
+    },
+    "310000690": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "夜归队员"
+    },
+    "310000710": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "帮派打手"
+    },
+    "310000740": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000174,
+        "name": "颤栗战士"
+    },
+    "310000770": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000175,
+        "name": "莳植熊蜂"
+    },
+    "310000780": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000176,
+        "name": "矿岩熊蜂"
+    },
+    "310000790": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000177,
+        "name": "岩蛛S4型"
+    },
+    "310000800": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "执刃流民"
+    },
+    "310000810": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "雷杖流民"
+    },
+    "310000820": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000178,
+        "name": "噼啪啪"
+    },
+    "310000830": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000196,
+        "name": "敬请期待"
+    },
+    "310000840": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000197,
+        "name": "敬请期待"
+    },
+    "320000010": {
+        "rarity": 2,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 390077021,
+        "name": "坚岩斗士"
+    },
+    "320000020": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 390077004,
+        "name": "紫羽鹭"
+    },
+    "320000030": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 390077005,
+        "name": "青羽鹭"
+    },
+    "320000040": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 390077022,
+        "name": "奏谕乐师"
+    },
+    "320000050": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390077023,
+        "name": "振铎乐师"
+    },
+    "320000060": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 390077024,
+        "name": "磐石守卫"
+    },
+    "320000070": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390077025,
+        "name": "冥渊守卫"
+    },
+    "320000080": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390077028,
+        "name": "绿熔蜥"
+    },
+    "320000090": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390077029,
+        "name": "刺玫菇"
+    },
+    "320000100": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 390077033,
+        "name": "暗鬃狼"
+    },
+    "320000110": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "嚣风戏猿"
+    },
+    "320000111": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000040,
+        "name": "戏猿"
+    },
+    "320000120": {
+        "rarity": 2,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 390077038,
+        "name": "箭簇熊"
+    },
+    "320000130": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000046,
+        "name": "车刃镰"
+    },
+    "320000140": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "流放者首领"
+    },
+    "320000150": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 0,
+        "name": "流放者工匠"
+    },
+    "320000160": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "处刑人"
+    },
+    "320000170": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "躁乱戏猿"
+    },
+    "320000180": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000049,
+        "name": "巡哨机傀"
+    },
+    "320000190": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000056,
+        "name": "雪鬃狼"
+    },
+    "320000200": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000057,
+        "name": "游鳞机枢"
+    },
+    "320000210": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000058,
+        "name": "踏光兽"
+    },
+    "320000220": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000073,
+        "name": "巡游骑士"
+    },
+    "320000230": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000074,
+        "name": "幻昼骑士"
+    },
+    "320000240": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000075,
+        "name": "暗夜骑士"
+    },
+    "320000250": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000076,
+        "name": "毒冠贵族"
+    },
+    "320000260": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000077,
+        "name": "持刃贵族"
+    },
+    "320000270": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000078,
+        "name": "凝水贵族"
+    },
+    "320000280": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000079,
+        "name": "浮灵偶"
+    },
+    "320000290": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000080,
+        "name": "琉璃刀伶"
+    },
+    "320000300": {
+        "rarity": 2,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000081,
+        "name": "巨布偶"
+    },
+    "320000310": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000096,
+        "name": "重塑雕像的拳砾"
+    },
+    "320000320": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000097,
+        "name": "飓力熊"
+    },
+    "320000330": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000104,
+        "name": "荣光节使"
+    },
+    "320000340": {
+        "rarity": 2,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000112,
+        "name": "角鳄"
+    },
+    "320000350": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000111,
+        "name": "传道者的遗形"
+    },
+    "320000360": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 0,
+        "name": "炽冠角斗家"
+    },
+    "320000370": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "羽冠角斗家"
+    },
+    "320000380": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 0,
+        "name": "耀冠角斗家"
+    },
+    "320000390": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 0,
+        "name": "凛冠角斗家"
+    },
+    "320000400": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 0,
+        "name": "雷冠角斗家"
+    },
+    "320000410": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "冥冠角斗家"
+    },
+    "320000420": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "裁夺者"
+    },
+    "320000440": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000120,
+        "name": "蚀脊龙"
+    },
+    "320000490": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000179,
+        "name": "双极·星升辉铳"
+    },
+    "320000500": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000180,
+        "name": "双极·渊陨重锋"
+    },
+    "320000510": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000181,
+        "name": "莳植机麋"
+    },
+    "320000520": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000182,
+        "name": "矿岩机麋"
+    },
+    "320000530": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000183,
+        "name": "重工铁蹄"
+    },
+    "320000540": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000184,
+        "name": "探隧重机"
+    },
+    "320000550": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000185,
+        "name": "锯袭铁影"
+    },
+    "320000560": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000186,
+        "name": "隐迹铁影"
+    },
+    "320000570": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000187,
+        "name": "霜鳞蜃甲"
+    },
+    "320000580": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000188,
+        "name": "风鳞蜃甲"
+    },
+    "320000590": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000193,
+        "name": "敬请期待"
+    },
+    "320000600": {
+        "rarity": 2,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000194,
+        "name": "敬请期待"
+    },
+    "320000610": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000195,
+        "name": "敬请期待"
+    },
+    "330000010": {
+        "rarity": 3,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000039,
+        "name": "朔雷之鳞"
+    },
+    "330000020": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 390080007,
+        "name": "燎照之骑"
+    },
+    "330000030": {
+        "rarity": 3,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000052,
+        "name": "无常凶鹭"
+    },
+    "330000040": {
+        "rarity": 3,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000044,
+        "name": "辉萤军势"
+    },
+    "330000050": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000043,
+        "name": "飞廉之猩"
+    },
+    "330000060": {
+        "rarity": 3,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000045,
+        "name": "哀声鸷"
+    },
+    "330000070": {
+        "rarity": 3,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000060,
+        "name": "无归的谬误"
+    },
+    "330000100": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 0,
+        "name": "伤痕·光暗逆位"
+    },
+    "330000110": {
+        "rarity": 3,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000082,
+        "name": "罗蕾莱"
+    },
+    "330000120": {
+        "rarity": 3,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000083,
+        "name": "异构武装"
+    },
+    "330000130": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000084,
+        "name": "叹息古龙"
+    },
+    "340000010": {
+        "rarity": 3,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000042,
+        "name": "无冠者"
+    },
+    "340000020": {
+        "rarity": 4,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 390080005,
+        "name": "鸣钟之龟"
+    },
+    "340000050": {
+        "rarity": 4,
+        "attributeId": 5,
+        "elementResistance": [
+            5,
+            6
+        ],
+        "echo": 0,
+        "name": "伤痕·异生梦魇"
+    },
+    "340000060": {
+        "rarity": 3,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000048,
+        "name": "聚械机偶"
+    },
+    "340000070": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000053,
+        "name": "无妄者"
+    },
+    "340000080": {
+        "rarity": 3,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 390080003,
+        "name": "云闪之鳞"
+    },
+    "340000090": {
+        "rarity": 4,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000059,
+        "name": "角"
+    },
+    "340000100": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000085,
+        "name": "赫卡忒"
+    },
+    "340000112": {
+        "rarity": 3,
+        "attributeId": 1,
+        "elementResistance": [
+            1,
+            4
+        ],
+        "echo": 0,
+        "name": "凯尔匹"
+    },
+    "340000120": {
+        "rarity": 4,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "芙露德莉斯"
+    },
+    "340000121": {
+        "rarity": 4,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000106,
+        "name": "共鸣回响·芙露德莉斯"
+    },
+    "340000140": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000114,
+        "name": "荣耀狮像"
+    },
+    "340000150": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "芬莱克"
+    },
+    "340000151": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000116,
+        "name": "共鸣回响·芬莱克"
+    },
+    "340000170": {
+        "rarity": 3,
+        "attributeId": 3,
+        "elementResistance": [
+            3,
+            6
+        ],
+        "echo": 6000121,
+        "name": "伪作的神王"
+    },
+    "340000180": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000160,
+        "name": "海之女"
+    },
+    "340000190": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "赫卡忒"
+    },
+    "340000200": {
+        "rarity": 4,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 0,
+        "name": "鸣式·利维亚坦"
+    },
+    "340000201": {
+        "rarity": 4,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000167,
+        "name": "共鸣回响·鸣式·利维亚坦"
+    },
+    "340000210": {
+        "rarity": 3,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000189,
+        "name": "海维夏"
+    },
+    "340000220": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000190,
+        "name": "炉芯机骸"
+    },
+    "340000250": {
+        "rarity": 4,
+        "attributeId": 5,
+        "elementResistance": [
+            5,
+            2
+        ],
+        "echo": 6000191,
+        "name": "辛吉勒姆"
+    },
+    "340000260": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000192,
+        "name": "敬请期待"
+    },
+    "350000360": {
+        "rarity": 4,
+        "attributeId": 5,
+        "elementResistance": [
+            5,
+            2
+        ],
+        "echo": 6010191,
+        "name": "敬请期待"
+    },
+    "350000370": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6010196,
+        "name": "敬请期待"
+    }
+}

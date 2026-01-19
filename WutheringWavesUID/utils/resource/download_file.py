@@ -5,6 +5,7 @@ from .RESOURCE_PATH import (
     FETTER_PATH,
     MATERIAL_PATH,
     MISSING_IMG,
+    MONSTER_PATH,
     PHANTOM_PATH,
     ROLE_DETAIL_CHAINS_PATH,
     ROLE_DETAIL_SKILL_PATH,
@@ -52,6 +53,16 @@ async def get_phantom_img(phantom_id: int, pic_url: str) -> Image.Image:
             await download(pic_url, PHANTOM_PATH, name, tag="[鸣潮]")
         else:
             _path = MISSING_IMG
+
+    return Image.open(_path).convert("RGBA")
+
+
+async def get_monster_img(monster_id: int, need_echo: bool = False) -> Image.Image:
+    _path = MONSTER_PATH / f"monster_{monster_id}.png"
+    if need_echo:
+        _path = PHANTOM_PATH / f"phantom_{monster_id}.png"
+    if not _path.exists():
+        _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")
 

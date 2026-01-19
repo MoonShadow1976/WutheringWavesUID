@@ -226,3 +226,20 @@ class EchoModel(BaseModel):
 
     def get_group_name(self) -> list[str]:
         return [i["name"] for i in self.group.values()]
+
+
+class MonsterModel(BaseModel):
+    rarity: int
+    attributeId: int
+    elementResistance: list[int]
+    echo: int
+    name: str
+
+    def get_attribute_name(self) -> str:
+        return ATTRIBUTE_ID_MAP[self.attributeId]
+
+    def get_element_resistance(self) -> list[str]:
+        return [ATTRIBUTE_ID_MAP[i] for i in self.elementResistance]
+
+    def get_link_echo(self) -> tuple[int, bool]:
+        return self.echo, self.echo > 0

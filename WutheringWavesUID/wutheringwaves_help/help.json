@@ -103,6 +103,14 @@
         "need_admin": false
       },
       {
+        "name": "开启战双自动签到",
+        "desc": "开启战双自动签到",
+        "eg": "开启战双自动签到",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
         "name": "角色养成",
         "desc": "角色养成",
         "eg": "菲比养成",
@@ -589,6 +597,14 @@
         "name": "声骸介绍",
         "desc": "声骸介绍",
         "eg": "角介绍",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "怪物抗性查询",
+        "desc": "怪物抗性查询",
+        "eg": "抗性表(3/1星)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

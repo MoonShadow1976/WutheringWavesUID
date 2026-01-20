@@ -642,7 +642,8 @@
         "rarity": 1,
         "attributeId": 0,
         "elementResistance": [
-            0
+            0,
+            3
         ],
         "echo": 0,
         "name": "雷杖流民"
@@ -1345,19 +1346,11 @@
         "rarity": 4,
         "attributeId": 5,
         "elementResistance": [
-            5
+            5,
+            3
         ],
         "echo": 6000059,
         "name": "角"
-    },
-    "340000100": {
-        "rarity": 4,
-        "attributeId": 6,
-        "elementResistance": [
-            6
-        ],
-        "echo": 6000085,
-        "name": "赫卡忒"
     },
     "340000112": {
         "rarity": 3,
@@ -1378,15 +1371,6 @@
         "echo": 0,
         "name": "芙露德莉斯"
     },
-    "340000121": {
-        "rarity": 4,
-        "attributeId": 4,
-        "elementResistance": [
-            4
-        ],
-        "echo": 6000106,
-        "name": "共鸣回响·芙露德莉斯"
-    },
     "340000140": {
         "rarity": 3,
         "attributeId": 2,
@@ -1404,15 +1388,6 @@
         ],
         "echo": 0,
         "name": "芬莱克"
-    },
-    "340000151": {
-        "rarity": 3,
-        "attributeId": 4,
-        "elementResistance": [
-            4
-        ],
-        "echo": 6000116,
-        "name": "共鸣回响·芬莱克"
     },
     "340000170": {
         "rarity": 3,
@@ -1446,19 +1421,11 @@
         "rarity": 4,
         "attributeId": 4,
         "elementResistance": [
-            4
+            4,
+            6
         ],
         "echo": 0,
         "name": "鸣式·利维亚坦"
-    },
-    "340000201": {
-        "rarity": 4,
-        "attributeId": 4,
-        "elementResistance": [
-            4
-        ],
-        "echo": 6000167,
-        "name": "共鸣回响·鸣式·利维亚坦"
     },
     "340000210": {
         "rarity": 3,

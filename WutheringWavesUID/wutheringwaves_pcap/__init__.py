@@ -198,9 +198,9 @@ async def pcap_parse(bot: Bot, ev: Event):
 )
 async def pcap_help(bot: Bot, ev: Event):
     """Wuthery pcap 数据导入帮助"""
-    url = "https://wuthery.com/guides"
+    url = "https://wuthery.COM/guides"
     if WutheringWavesConfig.get_config("WavesTencentWord").data:
-        url = f"https://docs.qq.com/scenario/link.html?url={url}"
+        url = f"https://docs.qq.COM/scenario/link.html?url={url}"
 
     warn = "\n".join(
         [

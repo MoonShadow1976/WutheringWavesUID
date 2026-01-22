@@ -97,8 +97,8 @@ async def draw_card_help():
             "2.关键字搜索:[game2]的请求",
             "3.点击`请求`",
             "4.点击最下方的`查看JSON`，全选，复制",
-            "国服域名：[gmserver-api.aki-game2.com]",
-            "国际服域名：[gmserver-api.aki-game2.net]",
+            "国服域名：[gmserver-api.aki-game2.COM]",
+            "国际服域名：[gmserver-api.aki-game2.NET]",
             "\n",
         ]
     )
@@ -120,7 +120,7 @@ async def draw_card_help():
         [
             "云游戏获取方式",
             "1.复制以下链接到浏览器打开",
-            "kokos.icu",
+            "https://kokos.ICU",
             "2.登录后,依次点击`刷新记录`,`复制记录`按钮",
         ]
     )

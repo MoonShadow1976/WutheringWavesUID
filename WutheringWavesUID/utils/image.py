@@ -298,8 +298,11 @@ async def get_qqgroup_avatar(
 ) -> Image.Image:
     if qid:
         data = await WavesUserAvatar.select_data(str(qid), "qqgroup")
-        appid = data.avatar_hash if data else ""
-        avatar_url = f"http://q.qlogo.cn/qqapp/{appid}/{qid}/{size}"
+        if data:
+            appid = data.avatar_hash
+            avatar_url = f"http://q.qlogo.cn/qqapp/{appid}/{qid}/{size}"
+        else:
+            avatar_url = f"http://q1.qlogo.cn/g?b=qq&nk={qid}&s={size}"
     elif avatar_url is None:
         avatar_url = f"https://q.qlogo.cn/qqapp/0/0/{size}"
 

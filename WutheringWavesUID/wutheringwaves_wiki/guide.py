@@ -78,8 +78,8 @@ async def get_guide_pic(guide_path: Path, pattern: re.Pattern, guide_author: str
             continue
         imgs.extend(await process_images_new(file))
 
-    if len(imgs) > 0:
-        imgs.insert(0, f"攻略作者：{guide_author}")
+    # if len(imgs) > 0:
+    #     imgs.insert(0, f"攻略作者：{guide_author}")
 
     return imgs
 

@@ -11,12 +11,6 @@ from PIL import Image, ImageDraw
 from pydantic import BaseModel
 
 from ..utils.cache import TimedCache
-from ..utils.calc import WuWaCalc
-from ..utils.calculate import (
-    calc_phantom_score,
-    get_calc_map,
-)
-from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind, WavesUser
 from ..utils.fonts.waves_fonts import (
     waves_font_12,
@@ -38,9 +32,10 @@ from ..utils.image import (
     get_square_avatar,
     get_waves_bg,
 )
-from ..utils.util import hide_uid, send_master_info
-from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank, get_user_detail_info
+from ..utils.util import hide_uid
+from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -77,61 +72,34 @@ async def get_waves_token_condition(ev):
     return flag, wavesTokenUsersMap
 
 
-async def calculate_user_total_score(user_id, uid: str) -> BotTotalRankDetail | None:
+async def calculate_user_total_score(record: GroupRankRecord) -> BotTotalRankDetail | None:
     """计算用户的练度总分"""
-    role_details = await get_all_role_detail_info_list(uid)
-    if not role_details:
+    if not record or not record.train_roles:
         return None
 
-    total_score = 0
+    # total_score = 0
     char_score_details = []
 
     # 计算每个角色的分数
-    for role_detail in role_details:
-        if not role_detail.phantomData or not role_detail.phantomData.equipPhantomList:
-            continue
+    for role in record.train_roles:
+        if role.train_score >= 175:  # 只计算分数>=175的角色
+            # total_score += role.train_score
+            char_score_details.append({"char_id": role.role_id, "phantom_score": role.train_score})
 
-        equipPhantomList = role_detail.phantomData.equipPhantomList
-
-        calc: WuWaCalc = WuWaCalc(role_detail)
-        calc.phantom_pre = calc.prepare_phantom()
-        calc.phantom_card = calc.enhance_summation_phantom_value(calc.phantom_pre)
-        calc.calc_temp = get_calc_map(
-            calc.phantom_card,
-            role_detail.role.roleName,
-            role_detail.role.roleId,
-        )
-
-        # 评分
-        phantom_score = 0
-        # calc_temp = get_calc_map(phantom_sum_value, role_detail.role.roleName)
-        for i, _phantom in enumerate(equipPhantomList):
-            if _phantom and _phantom.phantomProp:
-                props = _phantom.get_props()
-                _score, _bg = calc_phantom_score(role_detail.role.roleId, props, _phantom.cost, calc.calc_temp)
-                phantom_score += _score
-
-        if phantom_score >= 175:  # 只计算分数>=175的角色
-            total_score += phantom_score
-            char_score_details.append({"char_id": role_detail.role.roleId, "phantom_score": phantom_score})
-
-    if total_score == 0 or not char_score_details:
+    if not char_score_details:
         return None
 
     # 按角色分数排序
     char_score_details.sort(key=lambda x: x["phantom_score"], reverse=True)
 
     # 获取区服信息
-    region_text, region_color = get_region_for_rank(uid)
-
-    # 获取用户信息
-    account_info = await get_user_detail_info(uid)
+    region_text, region_color = get_region_for_rank(record.waves_id)
 
     return BotTotalRankDetail(
-        user_id=user_id,  # 这里可能需要调整，根据实际需求
-        kuro_name=account_info.name[:6],
-        waves_id=uid,
-        total_score=total_score,
+        user_id=record.user_id,
+        kuro_name=record.name[:6],
+        waves_id=record.waves_id,
+        total_score=record.train_score,
         char_score_details=char_score_details,
         rank=0,  # 排名后面统一计算
         server=region_text,
@@ -149,36 +117,29 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> list[BotTotalRan
     if not users:
         return []
 
+    user_uid_pairs = []
     tokenLimitFlag, wavesTokenUsersMap = await get_waves_token_condition(ev)
 
-    semaphore = asyncio.Semaphore(10)  # 限制并发数
+    for user in users:
+        if not user.uid:
+            continue
 
-    async def process_user(user):
-        async with semaphore:
-            if not user.uid:
-                return []
+        for uid in user.uid.split("_"):
+            if tokenLimitFlag and (user.user_id, uid) not in wavesTokenUsersMap:
+                continue
+            user_uid_pairs.append((user.user_id, uid))
 
-            rank_data_list = []
-            for uid in user.uid.split("_"):
-                if tokenLimitFlag and (user.user_id, uid) not in wavesTokenUsersMap:
-                    continue
-                try:
-                    rank_data = await calculate_user_total_score(user.user_id, uid)
-                    if rank_data:
-                        rank_data_list.append(rank_data)
-                except Exception as e:
-                    logger.warning(f"用户 {user.user_id} 的UID {uid} 计算练度总分失败: {e}")
-                    await send_master_info(f"用户 {user.user_id} 的UID {uid} 计算练度总分失败: {e}")
-
-            return rank_data_list
-
-    tasks = [process_user(user) for user in users]
-    results = await asyncio.gather(*tasks)
+    # 从数据库中获取用户的练度记录
+    db_records = await GroupRankRecord.get_train_records(user_uid_pairs=user_uid_pairs)
+    if not db_records:
+        return []
 
     # 扁平化结果列表并排序
     all_rank_data = []
-    for result in results:
-        all_rank_data.extend(result)
+    for record in db_records:
+        rank_data = await calculate_user_total_score(record)
+        if rank_data:
+            all_rank_data.append(rank_data)
 
     # 按总分排序
     all_rank_data.sort(key=lambda x: x.total_score, reverse=True)

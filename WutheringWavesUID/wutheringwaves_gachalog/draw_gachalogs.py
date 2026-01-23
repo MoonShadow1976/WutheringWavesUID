@@ -80,19 +80,15 @@ async def draw_card_help():
             "\n",
         ]
     )
-    android = "\n".join(
+    method = "\n".join(
         [
-            "安卓手机获取链接方式",
+            "【安卓手机】获取链接方式",
             "1.打开游戏抽卡界面",
             "2.关闭网络或打开飞行模式",
             "3.点开换取记录",
             "4.长按左上角区域，全选，复制",
             "\n",
-        ]
-    )
-    ios = "\n".join(
-        [
-            "苹果手机获取方式",
+            "【苹果手机】获取方式",
             "1.使用Stream抓包（详细教程网上搜索）",
             "2.关键字搜索:[game2]的请求",
             "3.点击`请求`",
@@ -100,11 +96,7 @@ async def draw_card_help():
             "国服域名：[gmserver-api.aki-game2.COM]",
             "国际服域名：[gmserver-api.aki-game2.NET]",
             "\n",
-        ]
-    )
-    pc = "\n".join(
-        [
-            "PC获取方式",
+            "【PC】获取方式",
             "1.打开游戏抽卡界面，点开换取记录",
             "2.在鸣潮安装的目录下进入目录：`Wuthering Waves\\Wuthering Waves Game\\Client\\Saved\\Logs`",
             "3.找到文件`Client.log`并用记事本打开",
@@ -113,12 +105,7 @@ async def draw_card_help():
             "国际服域名：[aki-gm-resources-oversea.aki-game]",
             "5.复制一整行链接",
             "\n",
-        ]
-    )
-
-    yun = "\n".join(
-        [
-            "云游戏获取方式",
+            "【国服云游戏】获取方式",
             "1.复制以下链接到浏览器打开",
             "https://kokos.ICU",
             "2.登录后,依次点击`刷新记录`,`复制记录`按钮",
@@ -134,7 +121,7 @@ async def draw_card_help():
             "抽卡链接具有有效期，请在有效期内尽快导入",
         ]
     )
-    msg = [warn, android, ios, pc, yun, text]
+    msg = [warn, method, text]
     return msg
 
 

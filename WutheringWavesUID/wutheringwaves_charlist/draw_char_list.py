@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -41,11 +42,41 @@ from ..utils.image import (
 from ..utils.refresh_char_detail import refresh_char
 from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.download_file import get_skill_img
+from ..utils.util import send_master_info
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
+
+
+async def save_train_data_to_db(
+    user_id: str,
+    waves_id: str,
+    name: str,
+    waves_char_rank: list,
+) -> bool:
+    """保存练度数据到数据库"""
+    try:
+        total_score = sum(c.score for c in waves_char_rank if c.score and c.score >= 175)
+        char_scores = [{"role_id": c.roleId, "score": c.score} for c in waves_char_rank if c.score and c.score >= 175]
+
+        await GroupRankRecord.save_train_record(
+            user_id=user_id,
+            waves_id=waves_id,
+            name=name,
+            train_score=total_score,
+            char_scores=char_scores,
+        )
+        logger.debug(
+            f"[练度排行] 用户{user_id} 的UID {waves_id} 练度数据保存到数据库成功, 总分 {total_score}，角色分数 {char_scores}"
+        )
+        return True
+    except Exception as e:
+        logger.warning(f"[练度排行] 用户{user_id} 的UID {waves_id} 练度数据保存到数据库失败: {e}")
+        await send_master_info(f"[练度排行] 用户{user_id} 的UID {waves_id} 练度数据保存到数据库失败: {e}")
+        return False
 
 
 async def get_all_roleid_detail_info(
@@ -105,6 +136,9 @@ async def draw_char_list_img(
 
     waves_char_rank = await get_waves_char_rank(uid, all_role_detail)
     waves_char_rank.sort(key=lambda i: (i.score, i.starLevel, i.level, i.chain, i.roleId), reverse=True)
+
+    # 保存练度数据到数据库
+    await save_train_data_to_db(user_id=user_id, waves_id=uid, name=account_info.name, waves_char_rank=waves_char_rank)
 
     avatar_h = 230
     info_bg_h = 260

@@ -11,6 +11,10 @@ from sqlmodel import Field, Relationship, SQLModel, select
 exec_list.extend(
     [
         "ALTER TABLE ww_rank_team ADD COLUMN buff_quality INTEGER DEFAULT 3",
+        # 练度排行新增字段
+        "ALTER TABLE ww_rank_record ADD COLUMN train_score REAL DEFAULT 0.0",
+        "ALTER TABLE ww_rank_role ADD COLUMN record_id INTEGER",
+        "ALTER TABLE ww_rank_role ADD COLUMN train_score REAL DEFAULT 0.0",
     ]
 )
 
@@ -21,13 +25,16 @@ class GroupRankRole(SQLModel, table=True):
     __tablename__ = "ww_rank_role"
 
     id: int | None = Field(default=None, primary_key=True)
-    team_id: int = Field(foreign_key="ww_rank_team.id", description="所属队伍ID")
+    team_id: int | None = Field(default=None, foreign_key="ww_rank_team.id", description="所属队伍ID（无尽排行使用）")
+    record_id: int | None = Field(default=None, foreign_key="ww_rank_record.id", description="所属记录ID（练度排行使用）")
 
     role_id: int = Field(description="角色ID")
-    level: int = Field(description="角色等级")
-    chain: int = Field(description="角色共鸣链")
+    level: int = Field(default=0, description="角色等级")
+    chain: int = Field(default=0, description="角色共鸣链")
+    train_score: float = Field(default=0.0, description="角色练度分数")
 
     team: Optional["GroupRankTeam"] = Relationship(back_populates="roles")
+    record: Optional["GroupRankRecord"] = Relationship(back_populates="train_roles")
 
 
 class GroupRankTeam(SQLModel, table=True):
@@ -48,8 +55,6 @@ class GroupRankTeam(SQLModel, table=True):
 
 
 class GroupRankRecord(SQLModel, table=True):
-    __tablename__ = "ww_rank_record"
-
     """群排行总记录"""
 
     __tablename__ = "ww_rank_record"
@@ -57,16 +62,24 @@ class GroupRankRecord(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     user_id: str = Field(index=True, description="GSUID用户ID")
     waves_id: str = Field(index=True, description="鸣潮游戏UID")
-    name: str = Field(description="玩家昵称")
+    name: str = Field(default="", description="玩家昵称")
 
-    rank_type: str = Field(index=True, description="排行类型 (例如 'endless')")
-    season_id: int = Field(index=True, description="赛季ID (通常是结束时间的时间戳)")
-    challenge_id: int = Field(index=True, description="挑战ID")
+    rank_type: str = Field(index=True, description="排行类型 (endless/train)")
+    season_id: int = Field(default=0, index=True, description="赛季ID (通常是结束时间的时间戳)")
+    challenge_id: int = Field(default=0, index=True, description="挑战ID")
 
-    score: int = Field(description="总得分")
-    rank_level: str = Field(description="评级 (例如 'S')")
+    score: int = Field(default=0, description="无尽排行总得分")
+    train_score: float = Field(default=0.0, description="练度总分")
+    rank_level: str = Field(default="", description="评级 (例如 'S')")
 
     teams: list[GroupRankTeam] = Relationship(back_populates="record", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+    train_roles: list[GroupRankRole] = Relationship(
+        back_populates="record",
+        sa_relationship_kwargs={
+            "cascade": "all, delete-orphan",
+            "foreign_keys": "[GroupRankRole.record_id]",
+        },
+    )
 
     @classmethod
     @with_session
@@ -233,3 +246,112 @@ class GroupRankRecord(SQLModel, table=True):
         for table in tables_to_drop:
             await session.execute(text(f"DROP TABLE IF EXISTS {table};"))
         await session.commit()
+
+    # ==================== 练度排行相关方法 ====================
+
+    @classmethod
+    @with_session
+    async def save_train_record(
+        cls,
+        session: AsyncSession,
+        user_id: str,
+        waves_id: str,
+        name: str,
+        train_score: float,
+        char_scores: list[dict],
+    ) -> "GroupRankRecord":
+        """
+        保存或更新练度排行记录
+
+        Args:
+            user_id: GSUID用户ID
+            waves_id: 鸣潮游戏UID
+            name: 玩家昵称
+            train_score: 练度总分
+            char_scores: 角色分数列表，格式为 [{"role_id": int, "score": float}, ...]
+        """
+        # 查找现有记录
+        result = await session.execute(select(cls).where((cls.waves_id == waves_id) & (cls.rank_type == "train")))
+        existing_record = result.scalar_one_or_none()
+
+        if existing_record:
+            # 更新现有记录
+            existing_record.user_id = user_id
+            existing_record.name = name
+            existing_record.train_score = train_score
+            # 删除旧的角色分数记录
+            await session.execute(delete(GroupRankRole).where(GroupRankRole.record_id == existing_record.id))
+            record = existing_record
+        else:
+            # 创建新记录
+            record = cls(
+                user_id=user_id,
+                waves_id=waves_id,
+                name=name,
+                rank_type="train",
+                train_score=train_score,
+            )
+            session.add(record)
+            await session.flush()
+
+        # 创建角色分数记录
+        # 注意：由于现有数据库中 team_id 有 NOT NULL 约束，我们使用 0 作为占位值
+        # 表示该角色记录属于练度排行而非无尽排行
+        for char in char_scores:
+            role_record = GroupRankRole(
+                team_id=0,  # 使用 0 作为占位值，表示练度排行（无队伍）
+                record_id=record.id,
+                role_id=char.get("role_id", 0),
+                train_score=char.get("score", 0.0),
+            )
+            session.add(role_record)
+
+        await session.commit()
+        await session.refresh(record)
+        return record
+
+    @classmethod
+    @with_session
+    async def get_train_records(
+        cls,
+        session: AsyncSession,
+        user_uid_pairs: list[tuple[str, str]],
+    ) -> list["GroupRankRecord"]:
+        """
+        获取指定用户的练度排行记录
+
+        Args:
+            user_uid_pairs: 用户ID和游戏UID的元组列表
+        """
+        if not user_uid_pairs:
+            return []
+
+        results = []
+        batch_size = 500
+        for i in range(0, len(user_uid_pairs), batch_size):
+            batch_pairs = user_uid_pairs[i : i + batch_size]
+
+            conditions = [
+                cls.rank_type == "train",
+                cls.train_score > 0,
+                tuple_(cls.user_id, cls.waves_id).in_(batch_pairs),
+            ]
+
+            statement = select(cls).where(*conditions).options(selectinload(cls.train_roles))
+            result = await session.execute(statement)
+            results.extend(result.scalars().all())
+
+        return results
+
+    @classmethod
+    @with_session
+    async def get_train_record_by_waves_id(
+        cls,
+        session: AsyncSession,
+        waves_id: str,
+    ) -> Optional["GroupRankRecord"]:
+        """根据 waves_id 获取练度排行记录"""
+        result = await session.execute(
+            select(cls).where((cls.waves_id == waves_id) & (cls.rank_type == "train")).options(selectinload(cls.train_roles))
+        )
+        return result.scalar_one_or_none()

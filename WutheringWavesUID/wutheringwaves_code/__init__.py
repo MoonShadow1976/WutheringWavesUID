@@ -42,10 +42,14 @@ async def get_sign_func(bot: Bot, ev: Event):
             continue
         reward = code.get("reward", "")
         label = code.get("label", "")
+
+        if order == "MINGCHAO666":
+            label += "国服专属长期兑换码"
+
         msg = [f"兑换码: {order}", f"奖励: {reward}", label]
         msgs.append("\n".join(msg))
 
-    await bot.send(msgs)
+    await bot.send("\n\n".join(msgs))
 
 
 async def get_code_list():

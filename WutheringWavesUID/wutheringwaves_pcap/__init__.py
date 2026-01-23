@@ -214,7 +214,7 @@ async def pcap_help(bot: Bot, ev: Event):
             "\n",
         ]
     )
-    method_pc = "\n".join(
+    method = "\n".join(
         [
             "【PC端方法】使用 Wireshark:",
             "1. 安装 Wireshark 并打开",
@@ -225,10 +225,6 @@ async def pcap_help(bot: Bot, ev: Event):
             "6. 前往导入页面，上传刚才保存的 .pcap 文件",
             "注意：也可以使用其他能导出 .pcap 文件的抓包工具",
             "\n",
-        ]
-    )
-    method_android = "\n".join(
-        [
             "【安卓端方法】使用 PCAPdroid:",
             "1. 安装 PCAPdroid，在 Traffic dump 选 .pcap 文件",
             "2. Target apps 中选择 Wuthering Waves",
@@ -246,7 +242,7 @@ async def pcap_help(bot: Bot, ev: Event):
             "\n",
         ]
     )
-    msg = [warn, method_pc, method_android, upload_note]
+    msg = [warn, method, upload_note]
 
     await bot.send(msg)
 

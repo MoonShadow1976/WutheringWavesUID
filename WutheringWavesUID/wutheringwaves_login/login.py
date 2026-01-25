@@ -6,7 +6,6 @@ import uuid
 
 from async_timeout import timeout
 from gsuid_core.bot import Bot
-from gsuid_core.config import core_config
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.segment import MessageSegment
@@ -16,10 +15,10 @@ import httpx
 from pydantic import BaseModel
 from starlette.responses import HTMLResponse
 
+from ..utils.bot_url import get_url
 from ..utils.cache import TimedCache
 from ..utils.database.models import WavesBind, WavesUser
 from ..utils.resource.RESOURCE_PATH import waves_templates
-from ..utils.util import get_public_ip
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
@@ -43,24 +42,6 @@ class InternationalLoginModel(BaseModel):
     email: str
     password: str
     geetest_data: str | None = None  # Geetest 驗證數據
-
-
-async def get_url() -> tuple[str, bool]:
-    url = WutheringWavesConfig.get_config("WavesLoginUrl").data
-    if url:
-        if not url.startswith("http"):
-            url = f"https://{url}"
-        return url, WutheringWavesConfig.get_config("WavesLoginUrlSelf").data
-    else:
-        HOST = core_config.get_config("HOST")
-        PORT = core_config.get_config("PORT")
-
-        if HOST == "localhost" or HOST == "127.0.0.1":
-            _host = "localhost"
-        else:
-            _host = await get_public_ip(HOST)
-
-        return f"http://{_host}:{PORT}", True
 
 
 def is_valid_chinese_phone_number(phone_number):
@@ -104,7 +85,7 @@ async def send_login(bot: Bot, ev: Event, url):
             path.unlink()
     else:
         if WutheringWavesConfig.get_config("WavesTencentWord").data:
-            url = f"https://docs.qq.com/scenario/link.html?url={url}"
+            url = f"https://docs.qq.COM/scenario/link.html?url={url}"
         im = [
             f"{game_title} 您的id为【{ev.user_id}】",
             "请复制地址到浏览器打开",

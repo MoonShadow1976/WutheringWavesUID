@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 import tempfile
-import time
 
 import aiohttp
 from gsuid_core.bot import Bot
@@ -16,30 +15,18 @@ from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .pcap_api import pcap_api
 from .pcap_file_handler import PcapFileHandler
 from .pcap_parser import PcapDataParser
+from .upload import page_upload
 
+sv_pcap_upload = SV("pcap上传")
 sv_pcap_parse = SV("pcap解析")
 sv_pcap_file = SV("pcap文件处理")
 sv_pcap_help = SV("pcap帮助")
 
 
-# 臨時文件清理函數
-def safe_unlink(file_path: Path, max_retries: int = 3):
-    """安全地刪除文件，處理 Windows 權限問題"""
-    for attempt in range(max_retries):
-        try:
-            if file_path.exists():
-                file_path.unlink()
-            return True
-        except PermissionError:
-            if attempt < max_retries - 1:
-                time.sleep(0.1 * (attempt + 1))  # 遞增等待時間
-            else:
-                logger.warning(f"無法刪除臨時文件: {file_path}")
-                return False
-        except Exception as e:
-            logger.warning(f"刪除臨時文件時發生錯誤: {e}")
-            return False
-    return False
+@sv_pcap_upload.on_fullmatch(("上传pcap", "pcap上传", "upload pcap"), block=True)
+async def pcap_upload(bot: Bot, ev: Event):
+    """pcap 上传"""
+    return await page_upload(bot, ev)
 
 
 # 文件處理指令 - qq 用户使用（官方bot暂不支持）
@@ -103,7 +90,12 @@ async def pcap_parse(bot: Bot, ev: Event):
             result = await pcap_api.parse_pcap_file(temp_path)
 
             # 清理臨時文件
-            safe_unlink(temp_path)
+            try:
+                if temp_path.exists():
+                    temp_path.unlink()
+            except Exception:
+                logger.warning(f"清理临时文件 {temp_path} 时发生异常: {e}")
+                pass
 
             if not result:
                 return await bot.send("解析失败：API 返回空结果\n", at_sender)
@@ -236,6 +228,7 @@ async def pcap_help(bot: Bot, ev: Event):
     upload_note = "\n".join(
         [
             "【上传方法】:",
+            f"使用命令[{PREFIX}上传pcap]访问网页上传 .pcap 文件  --推荐",
             "• qq用户请直接发送 .pcap 文件到本群或私聊机器人(qq官方bot暂不支持)",
             f"• discord用户请使用命令[{PREFIX}解析pcap]并上传 .pcap 文件为附件",
             "• 其他平台暂未测试",

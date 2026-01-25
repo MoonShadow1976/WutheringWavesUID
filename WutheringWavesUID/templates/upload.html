@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WutheringWavesUID 文件上传</title>
+    <link rel="icon" href="https://web-static.kurobbs.com/resource/prod/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Microsoft YaHei', sans-serif;
+            color: #fff;
+        }
+
+        body {
+            background-image: url('https://prod-alicdn-community.kurobbs.com/forum/465dcb694966492aba4d4982c47f0e8520240914.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 500px;
+            max-width: 90%;
+            transition: all 0.3s ease;
+        }
+
+        .upload-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+        }
+
+        .upload-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            justify-content: space-between;
+        }
+
+        .banner {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 0.5rem;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            flex: 1;
+            padding-right: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .welcome-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .kurobbs-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #e6e6e6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 上传区域 */
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(102, 126, 234, 0.8);
+        }
+
+        .upload-icon {
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text h3 {
+            margin: 0 0 0.5rem 0;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .upload-text p {
+            margin: 0 0 1.5rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .browse-button {
+            background-color: rgba(74, 144, 226, 0.8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .browse-button:hover {
+            background-color: rgba(53, 122, 189, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 文件列表 */
+        .file-list {
+            margin-bottom: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: rgba(74, 144, 226, 0.9);
+        }
+
+        .file-info {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .file-progress {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .file-action-btn:hover {
+            color: rgba(74, 144, 226, 0.9);
+        }
+
+        /* 按钮区域 */
+        .upload-button {
+            flex-grow: 1;
+            padding: 0.75rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-button:disabled {
+            background: linear-gradient(45deg, #666, #888);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .cancel-button {
+            flex-grow: 1;
+            padding: 0.75rem;
+            background-color: rgba(255, 107, 107, 0.8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .cancel-button:hover {
+            background-color: rgba(238, 90, 36, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .upload-container {
+                width: 90%;
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        /* 状态提示 */
+        .status-message {
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .status-message.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+            color: #2ecc71;
+            display: block;
+        }
+
+        .status-message.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            color: #e74c3c;
+            display: block;
+        }
+
+        .status-message.info {
+            background-color: rgba(52, 152, 219, 0.2);
+            border: 1px solid rgba(52, 152, 219, 0.5);
+            color: #3498db;
+            display: block;
+        }
+
+        /* 按钮组 */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 400px;
+            max-width: 90%;
+            border-radius: 12px;
+            text-align: center;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            color: #333;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .modal-message {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #555;
+            text-align: left;
+            white-space: pre-line;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .modal-success {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-error {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-success .modal-icon {
+            color: #2ecc71;
+        }
+
+        .modal-error .modal-icon {
+            color: #e74c3c;
+        }
+
+        .modal-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .modal-button {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .modal-button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-button-secondary {
+            background-color: rgba(231, 76, 60, 0.8);
+            color: white;
+        }
+
+        .modal-button-secondary:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="upload-header">
+            <div class="banner-text">
+                <div class="welcome-text">文件上传</div>
+                <div class="logo-text">WutheringWavesUID</div>
+                <div class="kurobbs-text">鸣潮UID文件管理中心</div>
+            </div>
+            <div class="banner">
+                <img src="https://web-static.kurobbs.com/adminConfig/27/role_icon/1727419309663.png" alt="Banner">
+            </div>
+        </div>
+
+        <!-- 状态提示 -->
+        <div id="statusMessage" class="status-message"></div>
+
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="upload-text">
+                <h3>拖放文件到此处</h3>
+                <p>或点击下方按钮选择文件</p>
+                <button class="browse-button" id="browseButton">浏览文件</button>
+            </div>
+            <input type="file" id="fileInput" multiple style="display: none;">
+        </div>
+
+        <!-- 文件列表 -->
+        <div class="file-list" id="fileList">
+            <!-- 文件项将通过JS动态添加 -->
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="button-group">
+            <button class="upload-button" id="uploadButton" disabled>开始上传</button>
+            <button class="cancel-button" id="cancelButton">取消</button>
+        </div>
+    </div>
+
+    <!-- 结果弹窗 -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalIcon" class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div id="modalTitle" class="modal-title"></div>
+            <div id="modalMessage" class="modal-message"></div>
+            <div class="modal-actions">
+                <button id="modalCloseButton" class="modal-button modal-button-primary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM元素
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const browseButton = document.getElementById('browseButton');
+        const fileList = document.getElementById('fileList');
+        const uploadButton = document.getElementById('uploadButton');
+        const cancelButton = document.getElementById('cancelButton');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        // 弹窗元素
+        const resultModal = document.getElementById('resultModal');
+        const modalCloseBtn = resultModal.querySelector('.close');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalCloseButton = document.getElementById('modalCloseButton');
+
+        // 文件列表
+        let files = [];
+        let uploadInProgress = false;
+
+        // 事件监听器
+        browseButton.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadButton.addEventListener('click', startUpload);
+        cancelButton.addEventListener('click', resetUpload);
+        
+        // 弹窗事件监听
+        modalCloseBtn.addEventListener('click', () => closeModal());
+        modalCloseButton.addEventListener('click', () => closeModal());
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', (event) => {
+            if (event.target === resultModal) {
+                closeModal();
+            }
+        });
+
+        // 拖放功能
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            if (uploadInProgress) {
+                showMessage('当前有文件正在上传中，请等待完成后再添加新文件。', 'error');
+                return;
+            }
+            
+            const droppedFiles = e.dataTransfer.files;
+            handleFiles(droppedFiles);
+        });
+
+        // 处理文件选择
+        function handleFileSelect(e) {
+            if (uploadInProgress) {
+                showMessage('当前有文件正在上传中，请等待完成后再添加新文件。', 'error');
+                return;
+            }
+            
+            const selectedFiles = e.target.files;
+            handleFiles(selectedFiles);
+        }
+
+        // 处理文件
+        function handleFiles(fileList) {
+            const newFiles = Array.from(fileList);
+            
+            // 检查文件大小限制（最大5MB）
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            const oversizedFiles = newFiles.filter(file => file.size > maxSize);
+            
+            if (oversizedFiles.length > 0) {
+                showMessage(`部分文件超过5MB限制，已自动跳过：${oversizedFiles.map(f => f.name).join(', ')}`, 'error');
+            }
+            
+            // 过滤出符合大小的文件
+            const validFiles = newFiles.filter(file => file.size <= maxSize);
+            
+            // 添加到文件列表
+            files = [...files, ...validFiles];
+            
+            if (validFiles.length > 0) {
+                updateFileList();
+                showMessage(`已添加 ${validFiles.length} 个文件`, 'info');
+            }
+        }
+
+        // 更新文件列表显示
+        function updateFileList() {
+            fileList.innerHTML = '';
+            
+            if (files.length === 0) {
+                uploadButton.disabled = true;
+                return;
+            }
+            
+            uploadButton.disabled = false;
+            
+            files.forEach((file, index) => {
+                const fileItem = createFileItem(file, index);
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // 创建文件项
+        function createFileItem(file, index) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.dataset.index = index;
+            
+            // 根据文件类型选择图标
+            const fileIcon = getFileIcon(file.name);
+            
+            // 格式化文件大小
+            const fileSize = formatFileSize(file.size);
+            
+            fileItem.innerHTML = `
+                <div class="file-icon">
+                    <i class="${fileIcon}"></i>
+                </div>
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${fileSize}</div>
+                    <div class="file-progress">
+                        <div class="progress-bar" id="progress-${index}"></div>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="file-action-btn" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            return fileItem;
+        }
+
+        // 获取文件类型对应的图标
+        function getFileIcon(fileName) {
+            const extension = fileName.toLowerCase().split('.').pop();
+            
+            if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(extension)) {
+                return 'fas fa-file-image';
+            } else if (['mp4', 'avi', 'mov', 'wmv', 'flv'].includes(extension)) {
+                return 'fas fa-file-video';
+            } else if (['mp3', 'wav', 'flac', 'aac'].includes(extension)) {
+                return 'fas fa-file-audio';
+            } else if (extension === 'pdf') {
+                return 'fas fa-file-pdf';
+            } else if (extension === 'pcap') {
+                return 'fas fa-network-wired';
+            } else if (['zip', 'rar', '7z', 'tar', 'gz'].includes(extension)) {
+                return 'fas fa-file-archive';
+            } else if (['txt', 'log'].includes(extension)) {
+                return 'fas fa-file-alt';
+            }
+            
+            return 'fas fa-file';
+        }
+
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // 删除文件
+        function removeFile(index) {
+            if (uploadInProgress) {
+                showMessage('当前有文件正在上传中，无法删除文件。', 'error');
+                return;
+            }
+            
+            files.splice(index, 1);
+            updateFileList();
+            
+            if (files.length === 0) {
+                showMessage('已删除所有文件', 'info');
+            }
+        }
+
+        // 开始上传
+        function startUpload() {
+            if (files.length === 0) {
+                showMessage('请先选择要上传的文件', 'error');
+                return;
+            }
+            
+            uploadInProgress = true;
+            uploadButton.disabled = true;
+            browseButton.disabled = true;
+            uploadButton.textContent = '上传中...';
+            
+            showMessage(`开始上传 ${files.length} 个文件...`, 'info');
+            
+            // 上传文件
+            uploadFiles();
+        }
+
+        // 上传文件
+        function uploadFiles() {
+            const formData = new FormData();
+            
+            // 将文件添加到FormData
+            files.forEach((file, index) => {
+                formData.append('files', file);
+            });
+            
+            // 从URL获取auth
+            const pathParts = window.location.pathname.split('/');
+            const auth = pathParts[pathParts.length - 1];
+            
+            // 发送文件到服务器
+            fetch(`/waves/upload_files/${auth}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 更新进度条为100%
+                files.forEach((file, index) => {
+                    const progressBar = document.getElementById(`progress-${index}`);
+                    if (progressBar) {
+                        progressBar.style.width = '100%';
+                    }
+                });
+                
+                // 所有文件上传完成
+                uploadComplete(data);
+            })
+            .catch(error => {
+                console.error('上传错误:', error);
+                showResultModal(false, '上传失败', '上传失败，请检查网络连接');
+                resetUpload();
+            });
+            
+            // 同时显示进度条动画
+            files.forEach((file, index) => {
+                const progressBar = document.getElementById(`progress-${index}`);
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress > 90) progress = 90; // 最多到90%，等待服务器响应
+                    progressBar.style.width = `${progress}%`;
+                }, 200);
+            });
+        }
+
+        // 上传完成
+        function uploadComplete(data) {
+            uploadInProgress = false;
+            uploadButton.disabled = false;
+            browseButton.disabled = false;
+            uploadButton.textContent = '开始上传';
+            
+            // 显示结果弹窗
+            if (data.success) {
+                showResultModal(true, '🎉 上传成功', data.msg);
+            } else {
+                showResultModal(false, '❌ 上传失败', data.msg);
+            }
+            
+            // 清空文件列表
+            files = [];
+            fileInput.value = '';
+            updateFileList();
+        }
+
+        // 显示结果弹窗
+        function showResultModal(success, title, message) {
+            // 设置弹窗样式
+            if (success) {
+                modalIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                modalTitle.className = 'modal-title modal-success';
+                modalTitle.textContent = title;
+            } else {
+                modalIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+                modalTitle.className = 'modal-title modal-error';
+                modalTitle.textContent = title;
+            }
+            
+            // 设置消息内容，将换行符转换为HTML换行
+            modalMessage.innerHTML = message.replace(/\n/g, '<br>');
+            
+            // 显示弹窗
+            resultModal.classList.add('show');
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            resultModal.classList.remove('show');
+        }
+
+        // 重置上传
+        function resetUpload() {
+            if (uploadInProgress) {
+                showMessage('上传已取消', 'info');
+            }
+            
+            files = [];
+            fileInput.value = '';
+            uploadInProgress = false;
+            uploadButton.disabled = true;
+            browseButton.disabled = false;
+            uploadButton.textContent = '开始上传';
+            
+            updateFileList();
+        }
+
+        // 显示消息
+        function showMessage(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            
+            // 3秒后自动隐藏信息提示（成功/错误信息除外）
+            if (type === 'info') {
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

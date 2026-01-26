@@ -23,7 +23,6 @@ from .pcap_parser import PcapDataParser
 
 # 文件上传缓存，10分钟过期
 upload_cache = TimedCache(timeout=600, maxsize=10)
-parser = PcapDataParser()
 
 
 def get_token(userId: str):
@@ -175,6 +174,7 @@ async def handle_file_list(files: list[UploadFile]) -> ResultModel:
                 continue
 
             # 解析数据
+            parser = PcapDataParser()
             waves_data = await parser.parse_pcap_data(result["data"])
 
             # 删除临时文件

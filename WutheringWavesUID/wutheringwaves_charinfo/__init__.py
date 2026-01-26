@@ -300,6 +300,8 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
                 is_refresh = 1 if msg else 0
             if isinstance(msg, str):
                 is_refresh = -1
+        if msg:
+            logger.warning(msg)
 
         im = await draw_char_detail_img(
             ev, uid, char, user_id, waves_id, change_list_regex=change_list_regex, is_refresh=is_refresh

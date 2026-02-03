@@ -1176,7 +1176,7 @@
         "elementResistance": [
             4
         ],
-        "echo": 6000194,
+        "echo": 0,
         "name": "冠顶苍隼"
     },
     "320000610": {
@@ -1449,8 +1449,7 @@
         "rarity": 4,
         "attributeId": 5,
         "elementResistance": [
-            5,
-            2
+            5
         ],
         "echo": 6000191,
         "name": "辛吉勒姆"

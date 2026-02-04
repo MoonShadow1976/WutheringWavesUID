@@ -872,6 +872,37 @@
                     ]
                 }
             ]
+        },
+        {
+            "libId": 28,
+            "fetterList": [
+                {
+                    "fetterDetailName": "长路启航之星",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000191,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000193,
+                            "mainPropName": "攻击%",
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000195,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000196,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000197,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "charList": [
@@ -1196,6 +1227,20 @@
             "name": "琳奈",
             "weaponId": 21030046,
             "sonataLibId": 27
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1510,
+            "name": "陆·赫斯",
+            "weaponId": 21040056,
+            "sonataLibId": 27
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1210,
+            "name": "爱弥斯",
+            "weaponId": 21020076,
+            "sonataLibId": 28
         }
     ]
 }

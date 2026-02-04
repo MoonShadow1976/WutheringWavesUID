@@ -27,6 +27,9 @@ SONATA_SCISSOR = "命理崩毁之弦"
 SONATA_PRISMATIC = "逆光跃彩之约"
 SONATA_SPAGYRIC = "流金溯真之式"
 SONATA_SIDEREAL = "星构寻辉之环"
+SONATA_TRAILBLAZE = "长路启航之星"
+SONATA_FOAM = "斑驳粉饰之沫"
+SONATA_TRUENAME = "听唤语义之愿"
 
 CHAR_ATTR_FREEZING = "冷凝"
 CHAR_ATTR_CELESTIAL = "衍射"
@@ -94,6 +97,12 @@ Spectro_Frazzle_Role_Ids = [1501, 1502, 1506, 1507]
 
 # 虚湮效应
 Havoc_Bane_Role_Ids = [1508]
+
+# 聚爆效应 need update
+Fusion_Burst_Role_Ids = [1210]
+
+# 震谐伤害
+Tune_Rupture_Role_Ids = [1209, 1210, 1509]
 
 # 失序彼岸之梦 套装
 Ancient_Role_Ids = [1608]

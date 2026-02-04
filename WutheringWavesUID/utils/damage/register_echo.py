@@ -962,6 +962,7 @@ class Echo_6000180(EchoAbstract):
     name = "双极·渊陨重锋"
 
     # 在首位装配该声骸技能时，自身导电伤害加成提升12.00%，普攻伤害加成提升12.00%
+    # 自身同时装配双极·星升辉铳时，首位装配该声骸技能时获得的导电伤害加成将变为衍射伤害加成
     def do_equipment_first(self, role_id: int):
         """首位装备"""
         return {"普攻伤害加成": "12%", "导电伤害加成": "12%"}
@@ -1011,6 +1012,8 @@ class Echo_6000189(EchoAbstract):
     id = 6000189
     name = "海维夏"
 
+    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色全属性伤害加成提升10.00%
+
 
 class Echo_6000190(EchoAbstract):
     id = 6000190
@@ -1020,6 +1023,54 @@ class Echo_6000190(EchoAbstract):
     def do_equipment_first(self, role_id: int):
         """首位装备"""
         return {"共鸣效率": "10%"}
+
+
+class Echo_6000191(EchoAbstract):
+    id = 6000191
+    name = "辛吉勒姆"
+
+    # 在首位装配该声骸技能时，若装配角色为爱弥斯，则自身共鸣解放伤害加成提升25.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        if role_id == 1210:
+            return {"共鸣解放伤害加成": "25%"}
+
+
+class Echo_6000192(EchoAbstract):
+    id = 6000192
+    name = "无铭探索者"
+
+    # 在首位装配该声骸技能时，自身气动伤害加成提升12.00%，声骸技能伤害加成提升20.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"气动伤害加成": "12%", "声骸技能伤害加成": "20%"}
+
+
+class Echo_6000193(EchoAbstract):
+    id = 6000193
+    name = "冠顶械隼"
+
+
+class Echo_6000194(EchoAbstract):
+    id = 6000194
+    name = "共鸣回响·冠顶苍隼"
+
+
+class Echo_6000195(EchoAbstract):
+    id = 6000195
+    name = "格洛犸图"
+
+    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色冷凝伤害加成提升12.00%
+
+
+class Echo_6000196(EchoAbstract):
+    id = 6000196
+    name = "冰盈舞者"
+
+
+class Echo_6000197(EchoAbstract):
+    id = 6000197
+    name = "影烁者"
 
 
 def register_echo():

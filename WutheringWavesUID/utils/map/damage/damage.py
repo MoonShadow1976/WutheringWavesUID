@@ -15,6 +15,7 @@ from ...damage.utils import (
     SONATA_EMPYREAN,
     SONATA_ETERNAL,
     SONATA_FIREWALL,
+    SONATA_FOAM,
     SONATA_FREEZING,
     SONATA_FROSTY,
     SONATA_HARMONY,
@@ -31,6 +32,8 @@ from ...damage.utils import (
     SONATA_SINKING,
     SONATA_SPAGYRIC,
     SONATA_TIDEBREAKING,
+    SONATA_TRAILBLAZE,
+    SONATA_TRUENAME,
     SONATA_VOID,
     SONATA_WELKIN,
     Havoc_Bane_Role_Ids,
@@ -344,8 +347,9 @@ def phase_damage(
             title = f"{phase_name}-{ph_detail.ph_name}"
             msg = "角色为敌人添加【虚湮效应】时，自身攻击提升20%"
             attr.add_atk_percent(0.2, title, msg)
-            msg = "角色为敌人添加【虚湮效应】时，共鸣解放伤害加成提升30%"
-            attr.add_dmg_bonus(0.3, title, msg)
+            if attr.char_damage == liberation_damage:
+                msg = "角色为敌人添加【虚湮效应】时，共鸣解放伤害加成提升30%"
+                attr.add_dmg_bonus(0.3, title, msg)
 
         # 逆光跃彩之约
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_PRISMATIC):
@@ -375,3 +379,37 @@ def phase_damage(
             title = f"{phase_name}-{ph_detail.ph_name}"
             msg = f"治疗时，自身每1%偏谐累积效率提升攻击0.2%,上限25%(当前提升{dmg * 100:.2f}%)"
             attr.add_atk_percent(dmg, title, msg)
+
+        # 长路启航之星
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_TRAILBLAZE):
+            # 角色为敌人添加【聚爆效应】或【震谐·偏移】时，自身暴击提升20%，热熔伤害提升20%
+            if not attr.env_tune_rupture and not attr.env_fusion_burst:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "角色为敌人添加【聚爆效应】或【震谐·偏移】时，自身暴击提升20%"
+            attr.add_crit_rate(0.2, title, msg)
+            if attr.char_attr == CHAR_ATTR_MOLTEN:
+                msg = "角色为敌人添加【聚爆效应】或【震谐·偏移】时，自身热熔伤害提升20%"
+                attr.add_dmg_bonus(0.2, title, msg)
+
+        # 斑驳粉饰之沫
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_FOAM):
+            # 角色为敌人添加【聚爆效应】时，自身获得下述效果：热熔伤害提升10%
+            # 持续期间内施放延奏技能后，下一个变奏技能登场的角色热熔伤害提升25%
+            if attr.char_attr != CHAR_ATTR_MOLTEN or not attr.env_fusion_burst:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "角色为敌人添加【聚爆效应】时，自身热熔伤害提升10%"
+            attr.add_dmg_bonus(0.1, title, msg)
+
+        # 听唤语义之愿
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_TRUENAME):
+            # 角色造成声骸技能伤害时，声骸技能伤害的暴击提升20%，自身气动伤害提升15%
+            if attr.char_damage != phantom_damage:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "角色造成声骸技能伤害时，声骸技能伤害的暴击提升20%"
+            attr.add_crit_rate(0.2, title, msg)
+            if attr.char_attr == CHAR_ATTR_SIERRA:
+                msg = "角色造成声骸技能伤害时，自身气动伤害提升15%"
+                attr.add_dmg_bonus(0.15, title, msg)

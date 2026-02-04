@@ -365,6 +365,34 @@ class Char_1209(CharAbstract):
                 method(attr, isGroup)
 
 
+class Char_1210(CharAbstract):
+    id = 1210
+    name = "爱弥斯"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        title = "爱弥斯-延奏技能"
+        # ·处于共鸣模态·震谐时，队伍中除爱弥斯以外的角色全伤害加深10%，持续20秒。角色附加【震谐·偏移】时，该角色的该全伤害加深效果提升至20%
+        # ·处于共鸣模态·聚爆时，队伍中除爱弥斯以外的角色全伤害加深10%，持续20秒。角色附加【聚爆效应】时，该角色的该全伤害加深效果提升至20%
+        if attr.env_tune_rupture or attr.env_fusion_burst:
+            msg = "角色附加聚爆效应或震谐·偏移时,全伤害加深效果提升至20%"
+            attr.add_dmg_deepen(0.2, title, msg)
+        else:
+            msg = "队伍中除爱弥斯以外的角色全伤害加深10%"
+            attr.add_dmg_deepen(0.1, title, msg)
+
+        if chain >= 4:
+            title = "爱弥斯-四链"
+            msg = "队伍中的角色全属性伤害加成提升20%"
+            attr.add_dmg_bonus(0.2, title, msg)
+
+
 class Char_1301(CharAbstract):
     id = 1301
     name = "卡卡罗"
@@ -961,6 +989,12 @@ class Char_1509(CharAbstract):
             method = getattr(w, "cast_attack", None)
             if callable(method):
                 method(attr, isGroup)
+
+
+class Char_1510(CharAbstract):
+    id = 1510
+    name = "陆·赫斯"
+    starLevel = 5
 
 
 class Char_1601(CharAbstract):

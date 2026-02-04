@@ -729,6 +729,32 @@ class Weapon_21020074(WeaponAbstract):
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
+class Weapon_21020076(WeaponAbstract):
+    id = 21020076
+    type = 2
+    name = "永远的启明星"
+
+    # 附加震谐·偏移或聚爆效应时，共鸣解放伤害无视目标{1}防御，共鸣解放伤害无视目标{2}热熔抗性
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if not attr.env_tune_rupture and not attr.env_fusion_burst:
+            return
+        if attr.char_damage == liberation_damage:
+            dmg = f"{self.param(1)}"
+            title = self.get_title()
+            msg = f"附加震谐·偏移或聚爆效应时，共鸣解放伤害无视目标{dmg}防御"
+            attr.add_defense_reduction(calc_percent_expression(dmg), title, msg)
+
+            dmg = f"{self.param(2)}"
+            title = self.get_title()
+            msg = f"附加震谐·偏移或聚爆效应时，共鸣解放伤害无视目标{dmg}热熔抗性"
+            attr.add_enemy_resistance(-calc_percent_expression(dmg), title, msg)
+
+
 class Weapon_21020084(WeaponAbstract):
     id = 21020084
     type = 2
@@ -1355,6 +1381,37 @@ class Weapon_21040053(WeaponAbstract):
     id = 21040053
     type = 4
     name = "戍关臂铠·拔山"
+
+
+class Weapon_21040056(WeaponAbstract):
+    id = 21040056
+    type = 4
+    name = "白昼之脊"
+
+    # 造成普攻伤害后，衍射伤害加成提升{1}
+    # 每次为敌方怪物附加【集谐·偏移】后，普攻伤害加深{3}，且普攻伤害能无视目标{4}防御
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if attr.char_damage != attack_damage:
+            return
+        title = self.get_title()
+        dmg = f"{self.param(1)}"
+        msg = f"造成普攻伤害后，衍射伤害加成提升{dmg}"
+        attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+        if not attr.env_tune_strain:
+            return
+        dmg = f"{self.param(3)}"
+        msg = f"附加【集谐·偏移】后，普攻伤害加深{dmg}"
+        attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+        dmg = f"{self.param(4)}"
+        msg = f"附加【集谐·偏移】后，普攻伤害能无视目标{dmg}防御"
+        attr.add_defense_reduction(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21040064(WeaponAbstract):

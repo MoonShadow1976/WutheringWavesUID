@@ -53,7 +53,7 @@ class WavesEchoRank(BaseModel):
     phantom: EquipPhantom  # 声骸
 
 
-async def get_draw_list(ev: Event, uid: str, user_id: str) -> str | bytes:
+async def get_draw_list(ev: Event, uid: str, user_id: str, page_index: int = 1) -> str | bytes:
     account_info = await get_user_detail_info(uid)
 
     all_role_detail: dict[str, RoleDetailData] | None = await get_all_role_detail_info(uid)
@@ -116,9 +116,22 @@ async def get_draw_list(ev: Event, uid: str, user_id: str) -> str | bytes:
 
     waves_echo_rank.sort(key=lambda i: (i.score, i.roleId), reverse=True)
 
-    render_list = waves_echo_rank[:28]
+    # 分页处理
+    page_size = 28
+    total_pages = (len(waves_echo_rank) + page_size - 1) // page_size
+    if page_index > total_pages:
+        page_index = total_pages
+
+    render_list = waves_echo_rank[(page_index - 1) * page_size:page_index * page_size]
     target_height = 220 + ((len(render_list) + 3) // 4) * 570 + 200
     img = get_waves_bg(1600, int(target_height), "bg3")
+
+    # 右上角页码
+    page_info = f"第{page_index}/{total_pages}页"
+    page_draw = ImageDraw.Draw(img)
+    # 用圆角矩形边框框起来，透明，白色边框
+    page_draw.rounded_rectangle((1250, 75, 1450, 155), radius=20, outline=GREY, width=2)
+    page_draw.text((1350, 115), page_info, "white", waves_font_42, "mm")
 
     # 头像部分
     avatar, avatar_ring = await draw_pic_with_ring(ev)

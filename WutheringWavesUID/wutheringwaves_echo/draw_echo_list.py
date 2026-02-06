@@ -122,7 +122,7 @@ async def get_draw_list(ev: Event, uid: str, user_id: str, page_index: int = 1) 
     if page_index > total_pages:
         page_index = total_pages
 
-    render_list = waves_echo_rank[(page_index - 1) * page_size:page_index * page_size]
+    render_list = waves_echo_rank[(page_index - 1) * page_size : page_index * page_size]
     target_height = 220 + ((len(render_list) + 3) // 4) * 570 + 200
     img = get_waves_bg(1600, int(target_height), "bg3")
 

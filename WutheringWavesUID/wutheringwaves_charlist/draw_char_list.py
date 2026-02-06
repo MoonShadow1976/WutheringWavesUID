@@ -180,7 +180,7 @@ async def draw_char_list_img(
     if page_index > total_pages:
         page_index = total_pages
 
-    render_list = waves_char_rank[(page_index - 1) * page_size:page_index * page_size]
+    render_list = waves_char_rank[(page_index - 1) * page_size : page_index * page_size]
 
     avatar_h = 230
     info_bg_h = 260

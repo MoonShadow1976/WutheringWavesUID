@@ -223,7 +223,7 @@ def calc_damage_2(
         title = f"{role_name}-三链"
         tip = "过载" if HeavenfallEdict == "Overdrive" else "终结"
         skill_ratio = 0.4 if HeavenfallEdict == "Overdrive" else 1
-        msg = f"共鸣解放星辉破界而来·{tip}的伤害倍率提升{skill_ratio*100}%"
+        msg = f"共鸣解放星辉破界而来·{tip}的伤害倍率提升{skill_ratio * 100}%"
         attr.add_skill_ratio(skill_ratio, title, msg)
 
     if chain_num >= 4:

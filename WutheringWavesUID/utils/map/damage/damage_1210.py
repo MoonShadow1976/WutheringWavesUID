@@ -120,7 +120,7 @@ def calc_damage_1(
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "目标受到爱弥斯的共鸣解放伤害提升40%"
-        attr.add_dmg_bonus(0.4, title, msg)
+        attr.add_easy_damage(0.4, title, msg)
 
     # 设置角色施放技能
     damage_func = [cast_skill, cast_damage, cast_liberation]
@@ -234,7 +234,7 @@ def calc_damage_2(
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "目标受到爱弥斯的共鸣解放伤害提升40%"
-        attr.add_dmg_bonus(0.4, title, msg)
+        attr.add_easy_damage(0.4, title, msg)
 
     # 设置角色施放技能
     damage_func = [cast_damage, cast_liberation]

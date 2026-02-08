@@ -13,7 +13,7 @@ from .draw_echo_list import get_draw_list
 sv_waves_echo_list = SV("声骸展示")
 
 
-@sv_waves_echo_list.on_regex(r"^声骸(\d+)?", block=True)
+@sv_waves_echo_list.on_regex(r"^声骸(\d+)?$", block=True)
 async def send_echo_list_msg(bot: Bot, ev: Event):
     match = re.search(r"声骸(?P<num>\d+)?", ev.raw_text)
     if not match:

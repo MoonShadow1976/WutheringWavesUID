@@ -179,7 +179,7 @@
       {
         "name": "练度统计",
         "desc": "查询练度统计一览",
-        "eg": "练度统计",
+        "eg": "练度统计(2)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
@@ -195,7 +195,7 @@
       {
         "name": "查询声骸",
         "desc": "查询声骸",
-        "eg": "声骸",
+        "eg": "(2)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false

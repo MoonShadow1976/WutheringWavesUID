@@ -204,7 +204,8 @@ async def draw_refresh_char_detail_img(
         account_info = await get_user_detail_info(uid)
 
         # pcap 模式下設置為已登錄狀態
-        self_ck = True
+        ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
+        self_ck = True if ck else False
     else:
         time_stamp = can_refresh_card(user_id, uid, refresh_type)
         if time_stamp > 0:
@@ -216,7 +217,15 @@ async def draw_refresh_char_detail_img(
         account_info = await waves_api.get_base_info(uid, ck)
         if not account_info.success:
             return account_info.throw_msg()
-        account_info = AccountBaseInfo.model_validate(account_info.data)
+        if not account_info.data:
+            from gsuid_core.logger import logger
+
+            from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+
+            logger.warning("账号信息为空，或请检查登录状态")
+            account_info = await get_user_detail_info(uid)
+        else:
+            account_info = AccountBaseInfo.model_validate(account_info.data)
         # 更新group id
         await WavesBind.insert_waves_uid(user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9)
 

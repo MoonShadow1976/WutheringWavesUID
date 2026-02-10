@@ -263,6 +263,11 @@ def calc_damage_10(
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
+    if Mode == "tune_rupture":
+        title = "共鸣模态·震谐"
+        msg = "特定攻击为命中目标附加【震谐·偏移】"
+        attr.set_env_tune_rupture()
+
     # 莫宁buff
     mornye_buff(attr, 0, 1, isGroup)
 

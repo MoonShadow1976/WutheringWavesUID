@@ -80,6 +80,8 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
         account_info = await waves_api.get_base_info(uid, ck)
         if not account_info.success:
             return account_info.throw_msg()
+        if not account_info.data:
+            return "账号信息为空，或请检查登录状态"
         account_info = AccountBaseInfo.model_validate(account_info.data)
 
         # 数据坞

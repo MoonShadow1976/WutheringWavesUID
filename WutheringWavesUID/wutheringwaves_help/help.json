@@ -195,7 +195,7 @@
       {
         "name": "查询声骸",
         "desc": "查询声骸",
-        "eg": "(2)",
+        "eg": "声骸(2)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false

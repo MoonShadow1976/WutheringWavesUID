@@ -100,7 +100,7 @@ async def send_echo_list(bot: Bot, ev: Event):
     await bot.send(img)
 
 
-@sv_waves_guide.on_regex(r"抗性表?(?P<num>\d+)?$", block=True)
+@sv_waves_guide.on_regex(r"抗性表?(?P<num>\d+)?", block=True)
 async def send_resist_table(bot: Bot, ev: Event):
     match = re.search(r"抗性表?(?P<num>\d+)?", ev.raw_text)
     if not match:

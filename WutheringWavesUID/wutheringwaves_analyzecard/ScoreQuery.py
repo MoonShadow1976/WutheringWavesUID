@@ -1,9 +1,9 @@
 # change from https://github.com/alone-art/ScoreQuery
 
+import difflib
 import io
 from pathlib import Path
 import re
-import difflib
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger

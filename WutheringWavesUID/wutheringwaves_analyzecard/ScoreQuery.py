@@ -3,6 +3,7 @@
 import io
 from pathlib import Path
 import re
+import difflib
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -80,10 +81,14 @@ def extract_vaild_info(info: list[str]) -> tuple[list, list]:
     def check_in(txt, valid_list):
         if txt in valid_list:
             return txt
-        else:
-            for k in valid_list:
-                if k in txt:
-                    return k
+        for k in valid_list:
+            if k in txt:
+                return k
+
+        close_matches = difflib.get_close_matches(txt, valid_list, n=1, cutoff=0.5)
+        if close_matches:
+            return close_matches[0]
+
         return None
 
     for txt in info:
@@ -319,6 +324,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
         props = []
         if len(keys) != len(values):
+            logger.warning(f"识别到的词条和值数量不匹配！keys: {keys}, values: {values}")
             msg.append("识别到的词条和值数量不匹配！请确保图片内容清晰规范！\n")
             continue
 

@@ -73,7 +73,7 @@ valid_values = [
 # fmt: on
 
 
-def extract_vaild_info(info: list[str]) -> tuple[list, list]:
+def extract_valid_info(info: list[str]) -> tuple[list, list]:
     """提取有效信息"""
     keys = []
     values = []
@@ -92,6 +92,7 @@ def extract_vaild_info(info: list[str]) -> tuple[list, list]:
         return None
 
     for txt in info:
+        txt = txt.strip()
         if len(keys) >= 7 and len(values) >= 7:
             break
 
@@ -105,9 +106,8 @@ def extract_vaild_info(info: list[str]) -> tuple[list, list]:
                 continue
 
         if len(values) < 7:
-            txt = re.sub(r"[:：•·，,、,]", ".", txt)  # 替换为小数点
-            txt = txt.replace("％", "%")
-            if len(values) < 1:
+            txt = clean_ocr_num(txt)  # 清洗文本
+            if len(values) < 1:  # 刚需主词条
                 if "%" in txt and re.match(r"^\d+(?:\.\d+)?%$", txt):
                     values.append(txt)
             elif len(values) == 1:
@@ -123,6 +123,31 @@ def extract_vaild_info(info: list[str]) -> tuple[list, list]:
                     continue
 
     return keys, values
+
+
+def clean_ocr_num(txt: str) -> str:
+    # 1. 全角转半角（数字、字母、符号）
+    txt = re.sub(r"[０-９]", lambda x: chr(ord(x.group(0)) - 0xFEE0), txt)  # 全角数字
+    txt = re.sub(r"[Ａ-Ｚａ-ｚ]", lambda x: chr(ord(x.group(0)) - 0xFEE0), txt)  # 全角字母
+    txt = re.sub(
+        r"[！＂＃＄％＆＇（）＊＋，．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～－]", lambda x: chr(ord(x.group(0)) - 0xFEE0), txt
+    )  # 全角标点
+    txt = txt.replace("\u3000", " ")  # 全角空格
+
+    # 2. 移除不可见字符
+    txt = re.sub(r"[\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]", "", txt)
+
+    # 3. 统一各种形似小数点的符号（此时已半角化，正则可以简化）
+    txt = re.sub(r"[•·‥…∶]", ".", txt)  # 根据需要增删
+    txt = re.sub(r"[，、；]", " ", txt)  # 中文逗号顿号改为空格，避免粘连
+
+    # 4. 合并连续小数点
+    txt = re.sub(r"\.{2,}", ".", txt)
+
+    # 5. 百分号归一化（此时全角％已在上文转为半角%，此步可保留以防遗漏）
+    txt = re.sub(r"[％﹪٪]", "%", txt)
+
+    return txt.strip()
 
 
 async def draw_char_with_ring(char_id: str) -> Image.Image:
@@ -314,7 +339,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
         contexts = part["text"].split("\n")
         logger.debug(f"识别内容: {contexts}")
-        keys, values = extract_vaild_info(contexts)
+        keys, values = extract_valid_info(contexts)
         logger.info(f"提取词条: {keys}")
         logger.info(f"提取值: {values}")
 
@@ -346,9 +371,14 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
 
 # if __name__ == "__main__":
-#     ocr_results =  [{'error': None, 'text': '亥强化\n锯袭铁影\n+25\nMAX\n*衍射伤害加成\n×攻击\n• 攻击\n• 暴击伤害\n• 共鸣解放伤害加成\n•暴击\n•共鸣效率\n*15100/15100\n30.0%\n100\n6.4%\n12.6%\n16.1%\n8.1%\n8.4%\n不限\n强化消耗材料（0/50）\n阶段放入'}]
+#     ocr_results = [
+#         {
+#             "error": None,
+#             "text": "影烁者\r\nMAX\r\n+25\r\n×攻击\r\n生命\r\n·攻击\r\n·重击伤害加成\r\n·防御\r\n·暴击伤害\r\n·攻击\r\n00\r\n15100/15100\r\n18．0％\r\n2280\r\n101％\r\n8·6％\r\n60\r\n13·8％\r\n50\r\n",
+#         }
+#     ]
 #     for part in ocr_results:
 #         contexts = part["text"].split("\n")
-#         keys, values = extract_vaild_info(contexts)
+#         keys, values = extract_valid_info(contexts)
 #         print(f"提取词条: {keys}")
 #         print(f"提取值: {values}")

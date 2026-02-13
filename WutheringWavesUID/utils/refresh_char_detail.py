@@ -6,7 +6,7 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 
 from ..utils.api.model import AccountBaseInfo, RoleList
-from ..utils.error_reply import WAVES_CODE_101, WAVES_CODE_102
+from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_101, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.hint import error_reply
 from ..utils.queues.const import QUEUE_SCORE_RANK
@@ -168,6 +168,8 @@ async def refresh_char(
     refresh_type: str | list[str] = "all",
 ) -> str | list:
     waves_datas = []
+    if waves_api.is_net(uid):
+        return error_reply(WAVES_CODE_098)
     if not ck:
         is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:

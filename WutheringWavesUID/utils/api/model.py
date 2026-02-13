@@ -733,8 +733,8 @@ class PhantomBattle(BaseModel):
     exp: int  # 经验
     expLimit: int  # 经验上限
     level: int  # 等级
-    levelIcon: str  # 等级图标
-    levelName: str  # 等级名称
+    levelIcon: str = ""  # 等级图标
+    levelName: str = "暂无信息"  # 等级名称
     maxBadgeNum: int  # 最大勋章数量
     maxCardNum: int  # 最大卡片数量
     sort: int  # 排序

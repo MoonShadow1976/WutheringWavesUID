@@ -304,6 +304,11 @@ async def draw_refresh_char_detail_img(
 
     waves_char_rank = await get_waves_char_rank(uid, role_detail_list)
 
+    # 保存练度数据到数据库
+    from ..wutheringwaves_charlist.draw_char_list import save_train_data_to_db
+
+    await save_train_data_to_db(user_id=user_id, waves_id=uid, name=account_info.name, waves_char_rank=waves_char_rank)
+
     map_update = []
     map_unchanged = []
     for _, char_rank in enumerate(waves_char_rank):

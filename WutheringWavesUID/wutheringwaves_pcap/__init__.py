@@ -93,7 +93,7 @@ async def pcap_parse(bot: Bot, ev: Event):
             try:
                 if temp_path.exists():
                     temp_path.unlink()
-            except Exception:
+            except Exception as e:
                 logger.warning(f"清理临时文件 {temp_path} 时发生异常: {e}")
                 pass
 

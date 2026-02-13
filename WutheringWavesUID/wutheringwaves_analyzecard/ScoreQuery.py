@@ -78,19 +78,6 @@ def extract_valid_info(info: list[str]) -> tuple[list, list]:
     keys = []
     values = []
 
-    def check_in(txt, valid_list):
-        if txt in valid_list:
-            return txt
-        for k in valid_list:
-            if k in txt:
-                return k
-
-        close_matches = difflib.get_close_matches(txt, valid_list, n=1, cutoff=0.5)
-        if close_matches:
-            return close_matches[0]
-
-        return None
-
     for txt in info:
         txt = txt.strip()
         if len(keys) >= 7 and len(values) >= 7:
@@ -123,6 +110,20 @@ def extract_valid_info(info: list[str]) -> tuple[list, list]:
                     continue
 
     return keys, values
+
+
+def check_in(txt, valid_list):
+    if txt in valid_list:
+        return txt
+    for k in valid_list:
+        if k in txt:
+            return k
+
+    close_matches = difflib.get_close_matches(txt, valid_list, n=1, cutoff=0.5)
+    if close_matches:
+        return close_matches[0]
+
+    return None
 
 
 def clean_ocr_num(txt: str) -> str:

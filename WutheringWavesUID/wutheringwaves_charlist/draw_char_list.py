@@ -91,6 +91,9 @@ async def get_all_roleid_detail_info(
         all_role_detail = await get_all_roleid_detail_info_int(uid)
         if all_role_detail:
             return all_role_detail
+    elif waves_api.is_net(uid):
+        # refresh_char接口在国际服可能会有问题，先不让国际服使用这个功能了
+        return None
     else:
         # 根据面板数据获取详细信息
         if is_refresh or is_peek:

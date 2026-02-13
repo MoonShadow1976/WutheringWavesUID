@@ -14,12 +14,12 @@ sv_waves_char_list = SV("ww角色练度统计")
 
 
 @sv_waves_char_list.on_regex(
-    r"^(\d+)?(练度|练度统计|角色列表|刷新练度|刷新练度统计|刷新角色列表)(\d+)?$",
+    r"^(\d+)?(练度统计|刷新练度统计|练度|刷新练度|角色列表|刷新角色列表)(\d+)?$",
     block=True,
 )
 async def send_char_list_msg_new(bot: Bot, ev: Event):
     match = re.search(
-        r"(?P<waves_id>\d+)?(?P<query_type>练度|练度统计|角色列表|刷新练度|刷新练度统计|刷新角色列表)(?P<num>\d+)?",
+        r"(?P<waves_id>\d+)?(?P<query_type>练度统计|刷新练度统计|练度|刷新练度|角色列表|刷新角色列表)(?P<num>\d+)?",
         ev.raw_text,
     )
     if not match:

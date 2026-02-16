@@ -640,7 +640,7 @@ class SlashHalf(BaseModel):
 class SlashChallenge(BaseModel):
     challengeId: int  # 挑战ID
     challengeName: str  # 挑战名称
-    halfList: list[SlashHalf] = Field(default_factory=list)  # 半场列表
+    halfList: list[SlashHalf | None] = Field(default_factory=list)  # 半场列表
     rank: str | None = Field(default="")  # 等级
     score: int  # 分数
 

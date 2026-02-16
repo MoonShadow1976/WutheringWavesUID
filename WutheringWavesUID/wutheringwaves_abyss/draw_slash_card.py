@@ -253,6 +253,8 @@ async def draw_slash_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             role_bg = Image.open(TEXT_PATH / "role_hang_bg.png")
             # 获取角色信息
             for half_index, slash_half in enumerate(challenge.halfList):
+                if slash_half is None:
+                    continue
                 role_hang_bg = Image.new("RGBA", (1100, info_h // 2), (255, 255, 255, 0))
                 role_hang_bg_draw = ImageDraw.Draw(role_hang_bg)
                 text_dui = "队伍一" if half_index == 0 else "队伍二"
@@ -375,6 +377,8 @@ async def save_to_group_rank(
         # 构建数据
         half_list = []
         for half in target_challenge.halfList:
+            if half is None:
+               continue
             roles = []
             for role in half.roleList:
                 char_model = get_char_model(role.roleId)
@@ -466,6 +470,8 @@ async def upload_slash_record(
 
     half_list = []
     for half in challenge.halfList:
+        if half is None:
+            continue
         half_list.append(
             {
                 "buffIcon": half.buffIcon,

@@ -378,7 +378,7 @@ async def save_to_group_rank(
         half_list = []
         for half in target_challenge.halfList:
             if half is None:
-               continue
+                continue
             roles = []
             for role in half.roleList:
                 char_model = get_char_model(role.roleId)

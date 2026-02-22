@@ -124,9 +124,17 @@ async def get_new_gachalog(
         for log in gacha_log:
             if log.cardPoolType != card_pool_type:
                 log.cardPoolType = card_pool_type
-        old_length = find_length(full_data[gacha_name], gacha_log)
-        _add = gacha_log if old_length == 0 else gacha_log[:-old_length]
-        new[gacha_name] = _add + copy.deepcopy(full_data[gacha_name])
+        indices = find_longest_common_subarray_indices(full_data[gacha_name], gacha_log)
+        if not indices:
+            _add = gacha_log
+            _old = full_data[gacha_name]
+        else:
+            (a_start, a_end), (b_start, b_end) = indices
+            _add = gacha_log[:b_start]
+            _old = full_data[gacha_name][a_start:]
+            if a_start > 0:
+                logger.warning(f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{a_start}个，与链接记录正确数据{b_end - b_start + 1}个，已忽略错误数据")
+        new[gacha_name] = _add + copy.deepcopy(_old)
         new_count[gacha_name] = len(_add)
         await asyncio.sleep(1)
 
@@ -309,6 +317,8 @@ async def import_gachalogs(ev: Event, history_url: str, type: str, uid: str) -> 
             "你当前导入的抽卡记录文件不支持, 目前支持的文件类型有:",
             "1.WutheringWavesUID",
             "2.Waves-Plugin",
+            "",
+            "或请考虑使用工具(如：https://github.COM/MoonShadow1976/record_2_wuwaUID)转换您的抽卡记录文件为WutheringWavesUID格式",
         ]
         return "\n".join(err_res)
 

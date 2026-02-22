@@ -368,6 +368,10 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
     if len(msg) == 1:
         return await bot.send(msg[0])
+    if ev.bot_id == "qqgroup":
+        for img in msg:
+            await bot.send(img, at_sender)
+        return
     return await bot.send(msg, at_sender)
 
 

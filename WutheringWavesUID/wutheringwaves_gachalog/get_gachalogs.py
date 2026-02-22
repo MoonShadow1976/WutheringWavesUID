@@ -133,7 +133,9 @@ async def get_new_gachalog(
             _add = gacha_log[:b_start]
             _old = full_data[gacha_name][a_start:]
             if a_start > 0:
-                logger.warning(f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{a_start}个，与链接记录正确数据{b_end - b_start + 1}个，已忽略错误数据")
+                logger.warning(
+                    f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{a_start}个，与链接记录正确数据{b_end - b_start + 1}个，已忽略错误数据"
+                )
         new[gacha_name] = _add + copy.deepcopy(_old)
         new_count[gacha_name] = len(_add)
         await asyncio.sleep(1)

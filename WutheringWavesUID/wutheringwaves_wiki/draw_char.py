@@ -71,7 +71,7 @@ async def draw_char_skill(char_id: str):
     card_img.paste(char_bg, (0, -5), char_bg)
     card_img.alpha_composite(char_skill, (0, 600))
 
-    card_img = add_footer(card_img, 800, 20, color="hakush")
+    card_img = add_footer(card_img, 800, 20, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 
@@ -109,7 +109,7 @@ async def draw_char_chain(char_id: str):
     card_img.paste(char_bg, (0, -5), char_bg)
     card_img.alpha_composite(char_chain, (0, 600))
 
-    card_img = add_footer(card_img, 800, 20, color="hakush")
+    card_img = add_footer(card_img, 800, 20, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 

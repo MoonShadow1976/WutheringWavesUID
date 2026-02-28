@@ -135,7 +135,7 @@ async def draw_monster_resistance_table(monster_list: dict) -> bytes:
         draw.line([(start_x, line_y), (start_x + num_columns * column_width, line_y)], fill=(100, 100, 100, 150), width=2)
 
     # 添加脚注
-    main_img = add_footer(main_img, total_width, 20, color="hakush")
+    main_img = add_footer(main_img, total_width, 20, color="encore")
 
     return await convert_img(main_img)
 

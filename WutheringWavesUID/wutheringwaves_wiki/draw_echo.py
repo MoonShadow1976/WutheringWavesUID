@@ -137,7 +137,7 @@ async def create_image(echo_id, echo_model: EchoModel):
     await parse_echo_statistic_content(echo_model, echo_image)
     await parse_echo_detail_content(echo_model, card_img)
     card_img.alpha_composite(echo_image, (0, 0))
-    card_img = add_footer(card_img, 800, 20, color="hakush")
+    card_img = add_footer(card_img, 800, 20, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 

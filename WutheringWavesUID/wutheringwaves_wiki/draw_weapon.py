@@ -164,7 +164,7 @@ async def create_image(weapon_id, weapon_model: WeaponModel):
     await parse_weapon_detail_content(weapon_model, card_img)
     await parse_weapon_material_content(weapon_model, card_img)
     card_img.alpha_composite(weapon_image, (0, 0))
-    card_img = add_footer(card_img, 800, 20, color="hakush")
+    card_img = add_footer(card_img, 800, 20, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 

@@ -93,11 +93,6 @@ def calc_damage_1(
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
-    if chain_num >= 1:
-        title = f"{role_name}-一链"
-        msg = "空中攻击伤害加成提升150%"
-        attr.add_dmg_bonus(1.5, title, msg)
-
     if chain_num >= 4:
         title = f"{role_name}-四链"
         msg = "队中角色造成谐度破坏伤害后使队中所有角色伤害提升20%，无法叠加"
@@ -200,11 +195,6 @@ def calc_damage_2(
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
-    if chain_num >= 1:
-        title = f"{role_name}-一链"
-        msg = "空中攻击伤害加成提升150%"
-        attr.add_dmg_bonus(1.5, title, msg)
-
     if chain_num >= 3:
         title = f"{role_name}-三链"
         msg = "黄金的裁量状态下斩杀日冕伤害倍率提升136%"
@@ -317,11 +307,6 @@ def calc_damage_3(
 
     # 设置共鸣链
     chain_num = role.get_chain_num()
-    if chain_num >= 1:
-        title = f"{role_name}-一链"
-        msg = "空中攻击伤害加成提升150%"
-        attr.add_dmg_bonus(1.5, title, msg)
-
     if chain_num >= 3:
         title = f"{role_name}-三链"
         msg = "空中攻击·判决大地裂响和日髓阵列伤害倍率提升136%"
@@ -433,11 +418,6 @@ def calc_damage_4(
     attr.set_phantom_dmg_bonus()
 
     # 设置共鸣链
-    if chain_num >= 1:
-        title = f"{role_name}-一链"
-        msg = "空中攻击伤害加成提升150%"
-        attr.add_dmg_bonus(1.5, title, msg)
-
     if chain_num >= 2:
         title = f"{role_name}-二链"
         msg = "共鸣解放于永冻中释义伤害倍率提升60%"

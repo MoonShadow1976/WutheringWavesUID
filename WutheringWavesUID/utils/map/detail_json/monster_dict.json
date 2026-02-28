@@ -230,17 +230,8 @@
         "elementResistance": [
             4
         ],
-        "echo": 0,
-        "name": "抛石幼猿"
-    },
-    "310000251": {
-        "rarity": 1,
-        "attributeId": 4,
-        "elementResistance": [
-            4
-        ],
         "echo": 6000038,
-        "name": "幼猿"
+        "name": "抛石幼猿"
     },
     "310000260": {
         "rarity": 1,
@@ -771,17 +762,8 @@
         "elementResistance": [
             4
         ],
-        "echo": 0,
-        "name": "嚣风戏猿"
-    },
-    "320000111": {
-        "rarity": 2,
-        "attributeId": 4,
-        "elementResistance": [
-            4
-        ],
         "echo": 6000040,
-        "name": "戏猿"
+        "name": "嚣风戏猿"
     },
     "320000120": {
         "rarity": 2,
@@ -1176,7 +1158,7 @@
         "elementResistance": [
             4
         ],
-        "echo": 0,
+        "echo": 6000194,
         "name": "冠顶苍隼"
     },
     "320000610": {

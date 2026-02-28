@@ -63,7 +63,7 @@ def calc_damage_1(
                 deepen_per_TBB = 0.1
 
             deepen = min(max_deepen, (attr.tune_break_boost // 10) * deepen_per_TBB)
-            msg = f"每10点谐度破坏增幅使伤害加深{deepen_per_TBB * 100:.0f}%，最高{max_deepen * 100:.0f}%。当前提升{deepen * 100:.2f}%"
+            msg = f"对集谐·干涉目标每10点谐度破坏增幅伤害加深{deepen_per_TBB * 100:.0f}%,当前{deepen * 100:.0f}%.最高{max_deepen * 100:.0f}%"
             attr.add_dmg_deepen(deepen, title, msg)
 
         title = "固有技能-无因的医谕"
@@ -170,7 +170,7 @@ def calc_damage_2(
                 deepen_per_TBB = 0.1
 
             deepen = min(max_deepen, (attr.tune_break_boost // 10) * deepen_per_TBB)
-            msg = f"每10点谐度破坏增幅使伤害加深{deepen_per_TBB * 100:.0f}%，最高{max_deepen * 100:.0f}%。当前提升{deepen * 100:.2f}%"
+            msg = f"对集谐·干涉目标每10点谐度破坏增幅伤害加深{deepen_per_TBB * 100:.0f}%,当前{deepen * 100:.0f}%.最高{max_deepen * 100:.0f}%"
             attr.add_dmg_deepen(deepen, title, msg)
 
         title = "固有技能-无因的医谕"
@@ -287,7 +287,7 @@ def calc_damage_3(
                 deepen_per_TBB = 0.1
 
             deepen = min(max_deepen, (attr.tune_break_boost // 10) * deepen_per_TBB)
-            msg = f"每10点谐度破坏增幅使伤害加深{deepen_per_TBB * 100:.0f}%，最高{max_deepen * 100:.0f}%。当前提升{deepen * 100:.2f}%"
+            msg = f"对集谐·干涉目标每10点谐度破坏增幅伤害加深{deepen_per_TBB * 100:.0f}%,当前{deepen * 100:.0f}%.最高{max_deepen * 100:.0f}%"
             attr.add_dmg_deepen(deepen, title, msg)
 
         title = "固有技能-无因的医谕"
@@ -375,6 +375,9 @@ def calc_damage_4(
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
 
+    # 设置角色等级
+    attr.set_character_level(role.role.level)
+
     # 附加集谐·偏移
     title = f"{role_name}-常态"
     msg = "特定攻击为命中目标附加【集谐·偏移】"
@@ -401,7 +404,7 @@ def calc_damage_4(
                 deepen_per_TBB = 0.1
 
             deepen = min(max_deepen, (attr.tune_break_boost // 10) * deepen_per_TBB)
-            msg = f"每10点谐度破坏增幅使伤害加深{deepen_per_TBB * 100:.0f}%，最高{max_deepen * 100:.0f}%。当前提升{deepen * 100:.2f}%"
+            msg = f"对集谐·干涉目标每10点谐度破坏增幅伤害加深{deepen_per_TBB * 100:.0f}%,当前{deepen * 100:.0f}%.最高{max_deepen * 100:.0f}%"
             attr.add_dmg_deepen(deepen, title, msg)
 
         title = "固有技能-无因的医谕"
@@ -474,6 +477,10 @@ def calc_damage_10(
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
+    title = "·陆赫斯-常态"
+    msg = "特定攻击为命中目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
+
     # 莫宁buff
     mornye_buff(attr, 0, 1, isGroup)
 
@@ -489,6 +496,10 @@ def calc_damage_11(
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
+
+    title = "·陆赫斯-常态"
+    msg = "特定攻击为命中目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
 
     # 莫宁buff
     mornye_buff(attr, 0, 1, isGroup)

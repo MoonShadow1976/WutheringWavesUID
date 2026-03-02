@@ -17,7 +17,7 @@ from PIL import Image
 from ..wutheringwaves_config import WutheringWavesConfig
 
 # 全局配置
-OCR_TIMEOUT = ClientTimeout(total=10)  # 总超时 10 秒
+OCR_TIMEOUT = 60  # 访问超时
 OCR_SESSION = None  # 全局会话实例
 
 
@@ -242,7 +242,7 @@ async def process_with_semaphore(task, semaphore):
 async def fetch_ocr_result(session, url, payload):
     """发送OCR请求并处理响应"""
     try:
-        async with session.post(url, data=payload, timeout=10) as response:  # ✅ 添加单次请求超时
+        async with session.post(url, data=payload, timeout=OCR_TIMEOUT) as response:  # ✅ 添加单次请求超时
             # 检查HTTP状态码
             if response.status != 200:
                 # 修改错误返回格式为字典（与其他成功结果结构一致）
@@ -264,8 +264,11 @@ async def fetch_ocr_result(session, url, payload):
                     return [{"error": None, "text": result.get("ParsedText")}]
 
             return [{"error": None, "text": None}]
-
+    except asyncio.TimeoutError:
+        logger.warning(f"[鸣潮] OCR.space 请求超时({OCR_TIMEOUT}秒)")
+        return [{"error": f"Request Timeout: {OCR_TIMEOUT} seconds", "text": None}]
     except Exception as e:
+        logger.warning(f"[鸣潮] OCR.space 请求异常: {e}")
         return [{"error": f"Processing Error: {e}", "text": None}]
 
 

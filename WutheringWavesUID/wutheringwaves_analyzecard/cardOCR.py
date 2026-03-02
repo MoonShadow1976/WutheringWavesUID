@@ -1,5 +1,6 @@
 # 标准库
 import re
+import time
 from typing import Literal
 
 # 项目内部模块
@@ -10,6 +11,7 @@ import numpy as np
 from opencc import OpenCC
 from PIL import Image
 
+from ..utils.cache import TimedCache
 from ..utils.resource.constant import CHAR_DETAIL
 from ..wutheringwaves_analyzecard.userData import save_card_dict_to_json
 from ..wutheringwaves_config import WutheringWavesConfig
@@ -73,12 +75,38 @@ echo_icon_crop_ratios = [
     (137 / ECHO_WIDTH, 9 / ECHO_HEIGHT, 164 / ECHO_WIDTH, 37 / ECHO_HEIGHT),  # 套装
 ]
 
+WAIT_TIME = 300  # 等待时间 5分钟
+timed_cache = TimedCache(timeout=WAIT_TIME, maxsize=10000)
+
+
+def can_analyze_card(user_id: str) -> int:
+    """检查是否可以分析卡片"""
+    key = str(user_id)
+    if timed_cache:
+        now = int(time.time())
+        time_stamp = timed_cache.get(key)
+        if time_stamp and time_stamp > now:
+            return time_stamp - now
+    return 0
+
+
+def set_cache_analyze_card(user_id: str, is_running: bool):
+    """设置时限缓存"""
+    key = str(user_id)
+    if timed_cache:
+        wait_time = WAIT_TIME if is_running else 0
+        timed_cache.set(key, int(time.time()) + wait_time)
+
 
 async def async_ocr(bot: Bot, ev: Event):
     """
     异步OCR识别函数
     """
     at_sender = True if ev.group_id else False
+
+    time_stamp = can_analyze_card(ev.user_id)
+    if time_stamp > 0:
+        return await bot.send(f"[鸣潮]卡片分析进行中，请等待分析完成或{time_stamp}秒后再分析卡片！\n", at_sender)
 
     bool_i, images = await get_upload_img(ev)
     if not bool_i or not images:
@@ -87,7 +115,9 @@ async def async_ocr(bot: Bot, ev: Event):
     chain_num, chek_imgs, cropped_images = await cut_card_to_ocr(images[0])
 
     # 卡片词条OCR
+    set_cache_analyze_card(ev.user_id, True)  # 设置时限
     ocr_results = await ocrspace(cropped_images, bot, at_sender, need_all_pass=True)
+    set_cache_analyze_card(ev.user_id, False)  # 清除时限
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
 

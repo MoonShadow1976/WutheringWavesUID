@@ -4,6 +4,7 @@ import difflib
 import io
 from pathlib import Path
 import re
+import time
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -15,6 +16,7 @@ from PIL import Image, ImageDraw
 
 from ..utils.api.model import Props
 from ..utils.ascension.char import get_char_model
+from ..utils.cache import TimedCache
 from ..utils.calculate import (
     calc_phantom_entry,
     calc_phantom_score,
@@ -71,6 +73,28 @@ valid_values = [
     "12.6%", "13.8%", "15.0%", "16.2%", "17.4%", "18.6%", "19.8%", "21.0%",
 ]
 # fmt: on
+
+WAIT_TIME = 120  # 等待时间 2分钟
+timed_cache = TimedCache(timeout=WAIT_TIME, maxsize=10000)
+
+
+def can_score_query_card(user_id: str) -> int:
+    """检查是否可以分析卡片"""
+    key = str(user_id)
+    if timed_cache:
+        now = int(time.time())
+        time_stamp = timed_cache.get(key)
+        if time_stamp and time_stamp > now:
+            return time_stamp - now
+    return 0
+
+
+def set_cache_score_query_card(user_id: str, is_running: bool):
+    """设置时限缓存"""
+    key = str(user_id)
+    if timed_cache:
+        wait_time = WAIT_TIME if is_running else 0
+        timed_cache.set(key, int(time.time()) + wait_time)
 
 
 def extract_valid_info(info: list[str]) -> tuple[list, list]:
@@ -298,6 +322,10 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     """声骸OCR查分"""
     at_sender = True if ev.group_id else False
 
+    time_stamp = can_score_query_card(ev.user_id)
+    if time_stamp > 0:
+        return await bot.send(f"[鸣潮]声骸评分进行中，请等待评分完成或{time_stamp}秒后再进行评分！\n", at_sender)
+
     char_name = alias_to_char_name(char_name)
     char_id = char_name_to_char_id(char_name)
     if not char_id:
@@ -326,7 +354,9 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     # 压缩image到90KB以内
     images = compress_image(images, 90)
 
+    set_cache_score_query_card(ev.user_id, True)  # 设置时限
     ocr_results = await ocrspace(images, bot, at_sender, language="chs", isTable=False)
+    set_cache_score_query_card(ev.user_id, False)  # 清除时限
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
     # ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '◎\n暗鬃狼\nLv.25\n45.93分\n湮灭伤害加成\n攻击\n暴击伤害\n攻击\n该重击伤害加成\n众 共鸣技能伤害\n•暴击\n30.0%\n100\n21.0%\n11.6%\n9.4%\n10.9%\n10.5%'},{'error': None, 'text': 'COST\n11/12\n全部\n3\n合鸣筛选/全部\n+25\n+25\n+25\n+25\n未装备优先\n＜声骸推荐\n简述\n共鸣回•芙露德莉斯\n［COST 4\n+25\n器暴击伤害\n×攻击\n•普攻伤害加成\n暴击\n•牛命\n44.0%\n150\n10.9%\n9.9%\n6.4%\n390\n• 暴击伤害\n21.0%\n声骸技能\nC 使用声骸技能，召唤【破空幻刃】，\n攻击目标，造成八段27.36%和一段\n136.80%的气动伤害。\n在首位装配该声骸技能时，自身气动\n伤害加成提升10.00%，当装配角色\n为漂泊者•气动或卡提希娅时，自身\n气动伤害加成额外提升10.00%。\n卡提希娅装配中\n卸下\n培养\n特征码：117874920'}]

@@ -163,8 +163,7 @@ def clean_ocr_num(txt: str) -> str:
     txt = re.sub(r"[\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]", "", txt)
 
     # 3. 统一各种形似小数点的符号（此时已半角化，正则可以简化）
-    txt = re.sub(r"[•·‥…∶]", ".", txt)  # 根据需要增删
-    txt = re.sub(r"[，、；]", " ", txt)  # 中文逗号顿号改为空格，避免粘连
+    txt = re.sub(r"[•·‥…∶,`：';*_，、；。]", ".", txt)
 
     # 4. 合并连续小数点
     txt = re.sub(r"\.{2,}", ".", txt)
@@ -409,7 +408,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 #     ocr_results = [
 #         {
 #             "error": None,
-#             "text": "影烁者\r\nMAX\r\n+25\r\n×攻击\r\n生命\r\n·攻击\r\n·重击伤害加成\r\n·防御\r\n·暴击伤害\r\n·攻击\r\n00\r\n15100/15100\r\n18．0％\r\n2280\r\n101％\r\n8·6％\r\n60\r\n13·8％\r\n50\r\n",
+#             "text": "《声骸推荐\n简述\n梦魇 •哀声鸷\nCOST 4\n+25\n然暴击伤害\n×攻击\n• 暴击\n• 防御\n• 暴击伤害\n•生命\n• 攻击\n44,0%\n150\n8.7%\n• 60\n21.0%\n8.6%\n10.1%\n声骸技能\n◎ 召唤梦魇•哀声鸷，对周围敌人造成\n衍射伤害，对受「光噪效应」影响的\n敌人造成更多伤害。在首位装配时提\n高自身的衍射伤害。\n合鸣效果\nY 此间永驻之光\n（2/2）\n衍射伤害提升\n赞妮装配中",
 #         }
 #     ]
 #     for part in ocr_results:

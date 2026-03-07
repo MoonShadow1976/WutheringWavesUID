@@ -666,6 +666,24 @@
         "echo": 6000197,
         "name": "影烁者"
     },
+    "310000850": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "残星·扼拊爪匠"
+    },
+    "310000860": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "残星·餮餍袖匠"
+    },
     "320000010": {
         "rarity": 2,
         "attributeId": 0,
@@ -1158,7 +1176,7 @@
         "elementResistance": [
             4
         ],
-        "echo": 6000194,
+        "echo": 0,
         "name": "冠顶苍隼"
     },
     "320000610": {
@@ -1169,6 +1187,44 @@
         ],
         "echo": 6000195,
         "name": "格洛犸图"
+    },
+    "320000620": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "残星·刑锯帽匠"
+    },
+    "320000630": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "噬影人·喜忧"
+    },
+    "320000640": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6,
+            5
+        ],
+        "echo": 0,
+        "name": "噬影人·狂喜"
+    },
+    "320000650": {
+        "rarity": 2,
+        "attributeId": 6,
+        "elementResistance": [
+            6,
+            5
+        ],
+        "echo": 0,
+        "name": "噬影人·悲戚"
     },
     "330000010": {
         "rarity": 3,
@@ -1426,6 +1482,15 @@
         ],
         "echo": 6000190,
         "name": "炉芯机骸"
+    },
+    "340000240": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 0,
+        "name": "虚诞虫"
     },
     "340000250": {
         "rarity": 4,

@@ -903,6 +903,36 @@
                     ]
                 }
             ]
+        },
+        {
+            "libId": 29,
+            "fetterList": [
+                {
+                    "fetterDetailName": "听唤语义之愿",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000192,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000185,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000186,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000175,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000176,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "charList": [
@@ -1241,6 +1271,13 @@
             "name": "爱弥斯",
             "weaponId": 21020076,
             "sonataLibId": 28
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1412,
+            "name": "西格莉卡",
+            "weaponId": 21040066,
+            "sonataLibId": 29
         }
     ]
 }

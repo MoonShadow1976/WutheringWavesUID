@@ -159,6 +159,7 @@ CHAR_DETAIL = {
     "1209": {"name": "莫宁", "fetterDetail": "星构寻辉之环"},
     "1510": {"name": "陆·赫斯", "needId": 6000179, "fetterDetail": "流金溯真之式"},
     "1210": {"name": "爱弥斯", "fetterDetail": "长路启航之星"},
+    "1412": {"name": "西格莉卡", "fetterDetail": "听唤语义之愿"},
 }
 
 # 首位buff

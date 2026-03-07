@@ -13345,6 +13345,439 @@
   {
     "chainList": [
       {
+        "description": "普攻·明悟、闪避反击·解读、共鸣技能·大嘭嘭！和共鸣技能·日灵帮帮忙伤害倍率提升70%。\n西格莉卡施放普攻·明悟、共鸣技能·大嘭嘭！和共鸣技能·日灵帮帮忙期间，免疫打断。\n凝语层数上限改为3层，西格莉卡施放延奏技能在这一瞬间，可额外获得1层凝语。",
+        "iconUrl": "",
+        "name": "那本该闪耀的光辉",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣回路·我即语义伤害倍率提升115%。\n西格莉卡处于非战斗状态大于4秒时，获得专注。",
+        "iconUrl": "",
+        "name": "那深含期待的苦涩",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "「天赋？」层数上限改为4层且西格莉卡施放共鸣回路·我即语义后或切换至其他角色时不再结束该效果。\n西格莉卡处于非战斗状态大于30秒时移除「天赋？」。",
+        "iconUrl": "",
+        "name": "逃避着，寻找着",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中的角色施放声骸技能时，使队伍中的角色攻击提升20%，持续20秒。",
+        "iconUrl": "",
+        "name": "失去着，收获着",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放如那期望般！伤害倍率提升30%。",
+        "iconUrl": "",
+        "name": "直到沉于影下",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "敌方目标受到西格莉卡的伤害提升30%。\n「天赋？」获得下述额外效果：\n·每层使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义造成的伤害加深15%，至多使造成的伤害加深60%。\n·每层使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义造成的伤害无视目标5%防御，至多使造成的伤害无视目标20%防御。",
+        "iconUrl": "",
+        "name": "语义点亮，光芒升起",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "听唤语义之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "无铭探索者",
+            "phantomId": 6000192,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "听唤语义之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "锯袭铁影",
+            "phantomId": 6000185,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "听唤语义之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "隐迹铁影",
+            "phantomId": 6000186,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "听唤语义之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "莳植熊蜂",
+            "phantomId": 6000175,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "听唤语义之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "矿岩熊蜂",
+            "phantomId": 6000176,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 4,
+      "attributeName": "气动",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1412,
+      "roleName": "西格莉卡",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 4,
+      "weaponTypeName": "臂铠",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "普攻\n进行最多4段的连续攻击，造成气动伤害。\n施放普攻第4段后进入解读状态，持续5秒。\n若西格莉卡至少拥有50点【句点】，普攻从第2段开始。\n\n普攻·明悟\n处于解读状态时，地面短按普攻施放普攻·明悟，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。\n\n重击\n消耗耐力攻击目标，造成气动伤害。\n施放重击后的一段时间内，短按普攻施放普攻第2段。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成气动伤害。\n施放空中下落攻击后的一段时间内，短按普攻施放普攻第2段。\n\n闪避反击\n在地面成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。\n施放闪避反击后的一段时间内，短按普攻施放普攻第4段。\n\n闪避反击·解读\n处于解读状态时，在地面成功闪避后一定时间内短按普攻，将会施放闪避反击·解读，攻击目标，造成气动伤害。\n施放时退出解读状态。\n\n空中闪避反击\n在空中成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。\n施放空中闪避反击后的一段时间内，短按普攻施放普攻第2段。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "一、二、三……",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "嘭嘭！\n攻击目标，造成气动伤害。\n施放嘭嘭！后的一段时间内，短按普攻施放普攻第3段。\n\n大嘭嘭！\n处于解读状态时，地面短按共鸣技能可施放大嘭嘭！，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。\n\n日灵帮帮忙\n处于解读状态时，若西格莉卡至少拥有50点【句点】，地面短按共鸣技能可施放日灵帮帮忙，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "罗伊近身格斗技",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成气动伤害，本次伤害为声骸技能伤害。西格莉卡获得专注，持续20秒。\n\n专注\n西格莉卡下一次获取【符文】时，可额外获取一枚不同的【符文】，并移除专注。\n西格莉卡同时拥有专注和回声时，回声优先生效。\n西格莉卡【句点】为100点时，专注不生效。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "如那期望般！",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成气动伤害。\n施放变奏技能后的一段时间内，短按普攻施放普攻第2段。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "昭日的语源",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "重击·符语本源\n长按普攻，施放重击·符语本源，造成气动伤害并消耗两枚【符文】。根据消耗的【符文】类型，获得以下效果：\n·若消耗【符文】为一枚【符文·期望】和一枚【符文·答问】，追加符语爆破效果。\n·若消耗【符文】为两枚【符文·期望】，追加符语链刃效果。\n·若消耗【符文】为两枚【符文·答问】，追加符语日灵效果。\n消耗【符文】时，若【日灵能量】不少于30点，消耗30点【日灵能量】，本次符语爆破、符语链刃和符语日灵伤害倍率提升50%，并为自身叠加一层「天赋？」。\n消耗【符文】时，若【日灵能量】少于30点，消耗全部【日灵能量】，每消耗10点【日灵能量】，使得本次符语爆破、符语链刃和符语日灵造成的伤害加深15%。\n重击·符语本源造成的伤害为声骸技能伤害。\n\n符语爆破\n造成气动伤害，本次伤害为声骸技能伤害。\n\n符语链刃\n停滞附近目标，造成气动伤害，本次伤害为声骸技能伤害。\n\n符语日灵\n牵引附近目标，造成气动伤害，本次伤害为声骸技能伤害。\n\n共鸣回路·我即语义\n【句点】为100点时，若共鸣回路·我即语义不处于冷却状态，共鸣技能·日灵帮帮忙改为短按并松开时施放，长按共鸣技能消耗全部【句点】可施放共鸣回路·我即语义，造成气动伤害，本次伤害为声骸技能伤害。\n\n「天赋？」\n「天赋？」可叠加的层数上限为2层，每层可以使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义伤害加深30%。\n西格莉卡施放共鸣回路·我即语义后或切换至其他角色该效果结束。\n\n【符文】获取规则\n【符文】累积上限4枚，未拥有【句点】时仅可累积2枚，达上限时再次获取【符文】，已有【符文】将左移一格，最左侧的【符文】将被移除。拥有50点【句点】后可继续累积2枚【符文】。\n施放普攻·明悟或闪避反击·解读命中目标时，可获取一枚【符文·期望】。\n施放共鸣技能·大嘭嘭！或共鸣技能·日灵帮帮忙命中目标时，可获取一枚【符文·答问】。\n\n【句点】获取规则\n施放重击·符语本源可以获得50点【句点】。\n\n【日灵能量】获取规则\n附近队伍中所有角色施放声骸技能时，西格莉卡可以获得10点【日灵能量】，上限60点，同名声骸仅可触发一次该效果。施放延奏技能·在这一瞬间时，重置同名声骸记录。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "在那浩瀚中",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "攻击目标，造成西格莉卡795%攻击的气动伤害。西格莉卡给自身叠加2层凝语，持续30秒。\n\n凝语\n附近队伍中所有角色施放声骸技能时，停滞目标，并减少1层凝语，凝语可叠加的层数上限为2层。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "在这一瞬间",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标【偏谐值】满时，可对其施放【谐度破坏】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·臂铠",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能或声骸技能时，声骸技能伤害加深64%，持续15秒。造成声骸技能伤害时，气动伤害无视目标20%防御，持续6秒。",
+        "weaponIcon": "",
+        "weaponId": 21040066,
+        "weaponName": "昭日译注",
+        "weaponStarLevel": 5,
+        "weaponType": 4
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "施放延奏技能盛放时，队伍中登场角色额外获得持续回复生命效果，每5秒回复维里奈20%攻击的生命值，持续30秒。",
         "iconUrl": "",
         "name": "萌芽的一瞬",

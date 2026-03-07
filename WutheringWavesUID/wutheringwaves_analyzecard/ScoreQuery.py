@@ -119,8 +119,9 @@ def extract_valid_info(info: list[str]) -> tuple[list, list]:
         if len(values) < 7:
             txt = clean_ocr_num(txt)  # 清洗文本
             if len(values) < 1:  # 刚需主词条
-                if "%" in txt and re.match(r"^\d+(?:\.\d+)?%$", txt):
-                    values.append(txt)
+                percent_match = re.search(r"(\d+(?:\.\d+)?%)", txt)
+                if percent_match:
+                    values.append(percent_match.group(1))
             elif len(values) == 1:
                 match = re.search(r"(\d+)", txt)
                 if match:
@@ -143,7 +144,7 @@ def check_in(txt, valid_list):
         if k in txt:
             return k
 
-    close_matches = difflib.get_close_matches(txt, valid_list, n=1, cutoff=0.5)
+    close_matches = difflib.get_close_matches(txt, valid_list, n=1, cutoff=0.7)
     if close_matches:
         return close_matches[0]
 
@@ -408,7 +409,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 #     ocr_results = [
 #         {
 #             "error": None,
-#             "text": "《声骸推荐\n简述\n梦魇 •哀声鸷\nCOST 4\n+25\n然暴击伤害\n×攻击\n• 暴击\n• 防御\n• 暴击伤害\n•生命\n• 攻击\n44,0%\n150\n8.7%\n• 60\n21.0%\n8.6%\n10.1%\n声骸技能\n◎ 召唤梦魇•哀声鸷，对周围敌人造成\n衍射伤害，对受「光噪效应」影响的\n敌人造成更多伤害。在首位装配时提\n高自身的衍射伤害。\n合鸣效果\nY 此间永驻之光\n（2/2）\n衍射伤害提升\n赞妮装配中",
+#             "text": "《声骸推荐\n简述\n哀声鸷气动\nCOST 4\n+25\n暴然伤害\n×攻击中\n• 暴击\n• 防御\n• 暴击伤害\n•王命\n• 攻击\n666: 44,0%66\nL 150\n8.7%\n• 60\n21.0%\n8.6%\n10.1%\n声骸技能\n◎ 召唤梦魇•哀声鸷，对周围敌人造成\n衍射伤害，对受「光噪效应」影响的\n敌人造成更多伤害。在首位装配时提\n高自身的衍射伤害。\n合鸣效果\nY 此间永驻之光\n（2/2）\n衍射伤害提升\n赞妮装配中",
 #         }
 #     ]
 #     for part in ocr_results:

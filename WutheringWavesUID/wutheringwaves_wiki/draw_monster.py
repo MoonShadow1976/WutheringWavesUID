@@ -104,8 +104,7 @@ async def draw_monster_resistance_table(monster_list: dict) -> bytes:
 
             # 绘制怪物图片
             try:
-                echo, echo_exist = monster.get_link_echo()
-                monster_img = await get_monster_img(int(monster_id)) if not echo_exist else await get_monster_img(echo, True)
+                monster_img = await get_monster_img(int(monster_id), monster.echo)
                 monster_img = monster_img.resize((100, 100))
                 monster_img = crop_center_img(monster_img, 100, 100)  # 保持100x100裁剪
 

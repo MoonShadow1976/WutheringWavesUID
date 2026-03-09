@@ -240,6 +240,3 @@ class MonsterModel(BaseModel):
 
     def get_element_resistance(self) -> list[str]:
         return [ATTRIBUTE_ID_MAP[i] for i in self.elementResistance]
-
-    def get_link_echo(self) -> tuple[int, bool]:
-        return self.echo, self.echo > 0

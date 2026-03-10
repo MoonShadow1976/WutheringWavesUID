@@ -11,13 +11,18 @@ from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_103
 from ..utils.hint import error_reply
 from ..utils.waves_api import waves_api
 from .draw_abyss_card import draw_abyss_img
+from .draw_abyss_info import draw_abyss_info_img
 from .draw_challenge_card import draw_challenge_img
 from .draw_slash_card import draw_slash_img
+from .draw_slash_info import draw_slash_info_img
 
 sv_waves_abyss = SV("waves查询深渊")
 sv_waves_challenge = SV("waves查询全息")
 sv_waves_slash = SV("waves查询冥海")
 sv_waves_rank_slash = SV("waves冥海总排行", priority=0)
+
+sv_waves_tower_info = SV("waves深塔信息", priority=4)
+sv_waves_slash_info = SV("waves海墟信息", priority=4)
 
 
 @sv_waves_abyss.on_command(
@@ -138,3 +143,22 @@ async def send_waves_rank_slash_info(bot: Bot, ev: Event):
 
     im = await draw_all_slash_rank_card(bot, ev)
     return await bot.send(im)
+
+
+@sv_waves_tower_info.on_command(("深塔信息", "深塔查询"), block=True)
+async def send_tower_schedule_info(bot: Bot, ev: Event):
+    # 提取参数，例如 "下期", "31", "12"
+    param = ev.text.strip()
+    await bot.logger.info(f"开始执行[查询深塔信息] 参数: {param}")
+
+    im = await draw_abyss_info_img(param)
+    await bot.send(im)
+
+
+@sv_waves_slash_info.on_command(("海墟信息", "海墟查询", "无尽信息", "无尽查询"), block=True)
+async def send_slash_schedule_info(bot: Bot, ev: Event):
+    param = ev.text.strip()
+    await bot.logger.info(f"开始执行[查询海墟信息] 参数: {param}")
+
+    im = await draw_slash_info_img(param)
+    await bot.send(im)

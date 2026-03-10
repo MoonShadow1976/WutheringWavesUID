@@ -57,12 +57,15 @@ async def get_phantom_img(phantom_id: int, pic_url: str) -> Image.Image:
     return Image.open(_path).convert("RGBA")
 
 
-async def get_monster_img(monster_id: int, need_echo_id: int = 0) -> Image.Image:
+async def get_monster_img(monster_id: int, need_echo_id: int = 0, pic_url: str = "") -> Image.Image:
     _path = MONSTER_PATH / f"monster_{monster_id}.png"
-    if need_echo_id != 0:
+    if need_echo_id != 0 and not _path.exists():
         _path = PHANTOM_PATH / f"phantom_{need_echo_id}.png"
     if not _path.exists():
-        _path = MISSING_IMG
+        if pic_url:
+            await download(pic_url, MONSTER_PATH, f"monster_{monster_id}.png", tag="[鸣潮]")
+        else:
+            _path = MISSING_IMG
 
     return Image.open(_path).convert("RGBA")
 

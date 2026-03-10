@@ -302,7 +302,7 @@
     "desc": "深塔数据查询，暂不支持国际服（出场率查询不影响）",
     "data": [
       {
-        "name": "深塔",
+        "name": "逆境深塔",
         "desc": "查询深塔",
         "eg": "st/深塔",
         "need_ck": true,
@@ -340,7 +340,23 @@
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
-      }
+      },
+      {
+        "name": "逆境深塔buff信息",
+        "desc": "逆境深塔buff信息",
+        "eg": "深塔信息(下期/33)",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "冥歌海墟buff信息",
+        "desc": "查询冥歌buff信息",
+        "eg": "海墟信息(下期/14)",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
     ]
   },
   "排行查询": {

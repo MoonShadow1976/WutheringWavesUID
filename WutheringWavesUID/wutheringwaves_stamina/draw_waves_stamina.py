@@ -1,7 +1,8 @@
 import asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import time
+from zoneinfo import ZoneInfo
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -241,16 +242,23 @@ async def _draw_stamina_img(ev: Event, valid: dict) -> Image.Image:
     time_img_draw = ImageDraw.Draw(time_img)
     time_img_draw.rounded_rectangle([0, 0, 190, 33], radius=15, fill=(186, 55, 42, int(0.7 * 255)))
     if refreshTimeStamp != curr_time:
-        date_from_timestamp = datetime.fromtimestamp(refreshTimeStamp)
-        now = datetime.now()
+        # 获取用户时区设置，默认为上海时间
+        user_timezone = user.timezone_value if user and user.timezone_value else "Asia/Shanghai"
+        try:
+            tz = ZoneInfo(user_timezone)
+        except Exception:
+            tz = ZoneInfo("Asia/Shanghai")
+        
+        timestamp = datetime.fromtimestamp(refreshTimeStamp, tz=tz)
+        now = datetime.now(tz=tz)
         today = now.date()
         tomorrow = today + timedelta(days=1)
 
-        remain_time = datetime.fromtimestamp(refreshTimeStamp).strftime("%m.%d %H:%M:%S")
-        if date_from_timestamp.date() == today:
-            remain_time = "今天 " + datetime.fromtimestamp(refreshTimeStamp).strftime("%H:%M:%S")
-        elif date_from_timestamp.date() == tomorrow:
-            remain_time = "明天 " + datetime.fromtimestamp(refreshTimeStamp).strftime("%H:%M:%S")
+        remain_time = timestamp.strftime("%m.%d %H:%M:%S")
+        if timestamp.date() == today:
+            remain_time = "今天 " + timestamp.strftime("%H:%M:%S")
+        elif timestamp.date() == tomorrow:
+            remain_time = "明天 " + timestamp.strftime("%H:%M:%S")
 
         time_img_draw.text((10, 15), f"{remain_time}", "white", waves_font_24, "lm")
     else:

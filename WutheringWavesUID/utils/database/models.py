@@ -21,6 +21,7 @@ exec_list.extend(
         'ALTER TABLE WavesUser ADD COLUMN bbs_sign_switch TEXT DEFAULT "off"',
         'ALTER TABLE WavesUser ADD COLUMN bat TEXT DEFAULT ""',
         'ALTER TABLE WavesUser ADD COLUMN did TEXT DEFAULT ""',
+        'ALTER TABLE WavesUser ADD COLUMN timezone_value TEXT DEFAULT "Asia/Shanghai"',
         'ALTER TABLE WavesPush ADD COLUMN push_time_value TEXT DEFAULT ""',
     ]
 )
@@ -120,6 +121,7 @@ class WavesUser(User, table=True):
     bbs_sign_switch: str = Field(default="off", title="自动社区签到")
     bat: str = Field(default="", title="bat")
     did: str = Field(default="", title="did")
+    timezone_value: str = Field(default="Asia/Shanghai", title="时区")
 
     @classmethod
     @with_session

@@ -1,5 +1,5 @@
 import asyncio
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 import time
 from zoneinfo import ZoneInfo
@@ -248,7 +248,7 @@ async def _draw_stamina_img(ev: Event, valid: dict) -> Image.Image:
             tz = ZoneInfo(user_timezone)
         except Exception:
             tz = ZoneInfo("Asia/Shanghai")
-        
+
         timestamp = datetime.fromtimestamp(refreshTimeStamp, tz=tz)
         now = datetime.now(tz=tz)
         today = now.date()

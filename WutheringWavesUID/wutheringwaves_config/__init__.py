@@ -83,35 +83,35 @@ async def send_config_ev(bot: Bot, ev: Event):
         im = await set_waves_user_value(ev, func, uid, char_name)
     elif "时区" in ev.text:
         from zoneinfo import ZoneInfo, available_timezones
-        
+
         func = "时区"
         value = ev.text.replace(func, "").strip()
         if not value:
             return await bot.send(
-                "[鸣潮] 请输入正确的IANA时区名...\n\n常用时区:\n" +
-                "Asia/Shanghai (北京)\n" +
-                "Asia/Tokyo (东京)\n" +
-                "America/New_York (纽约)\n" +
-                "Europe/London (伦敦)\n" +
-                "IANA标准时区查询: https://time.is/your_time_zone\n",
+                "[鸣潮] 请输入正确的IANA时区名...\n\n常用时区:\n"
+                + "Asia/Shanghai (北京)\n"
+                + "Asia/Tokyo (东京)\n"
+                + "America/New_York (纽约)\n"
+                + "Europe/London (伦敦)\n"
+                + "IANA标准时区查询: https://time.is/your_time_zone\n",
                 at_sender,
             )
-        
+
         # 验证时区是否有效
         try:
             ZoneInfo(value)
         except Exception:
             return await bot.send(
-                f"[鸣潮] 时区【{value}】无效!\n\n" +
-                "常用时区:\n" +
-                "Asia/Shanghai (北京)\n" +
-                "Asia/Tokyo (东京)\n" +
-                "America/New_York (纽约)\n" +
-                "Europe/London (伦敦)\n" +
-                "IANA标准时区查询: https://time.is/your_time_zone\n",
+                f"[鸣潮] 时区【{value}】无效!\n\n"
+                + "常用时区:\n"
+                + "Asia/Shanghai (北京)\n"
+                + "Asia/Tokyo (东京)\n"
+                + "America/New_York (纽约)\n"
+                + "Europe/London (伦敦)\n"
+                + "IANA标准时区查询: https://time.is/your_time_zone\n",
                 at_sender,
             )
-        
+
         im = await set_waves_user_value(ev, func, uid, value)
     elif "群排行" in ev.text:
         if ev.user_pm > 3:

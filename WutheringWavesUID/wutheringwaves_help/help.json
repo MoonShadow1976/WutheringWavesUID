@@ -714,7 +714,7 @@
       {
         "name": "设置体力时区",
         "desc": "设置时区",
-        "eg": "设置时区Asia/Tokyo",
+        "eg": "设置时区Asia/Shanghai",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

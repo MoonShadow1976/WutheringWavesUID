@@ -2,7 +2,6 @@ import asyncio
 from datetime import datetime, timedelta
 from pathlib import Path
 import time
-from zoneinfo import ZoneInfo
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -242,15 +241,19 @@ async def _draw_stamina_img(ev: Event, valid: dict) -> Image.Image:
     time_img_draw = ImageDraw.Draw(time_img)
     time_img_draw.rounded_rectangle([0, 0, 190, 33], radius=15, fill=(186, 55, 42, int(0.7 * 255)))
     if refreshTimeStamp != curr_time:
-        # 获取用户时区设置，默认为上海时间
-        user_timezone = user.timezone_value if user and user.timezone_value else "Asia/Shanghai"
-        try:
-            tz = ZoneInfo(user_timezone)
-        except Exception:
-            tz = ZoneInfo("Asia/Shanghai")
+        user_timezone = user.timezone_value if user and user.timezone_value else None
+        if user_timezone:
+            from zoneinfo import ZoneInfo
 
-        timestamp = datetime.fromtimestamp(refreshTimeStamp, tz=tz)
-        now = datetime.now(tz=tz)
+            tz = ZoneInfo(user_timezone)
+            timestamp = datetime.fromtimestamp(refreshTimeStamp, tz=tz)
+            now = datetime.now(tz=tz)
+            timezone_img_draw = ImageDraw.Draw(info)
+            timezone_img_draw.text((175, 165), f"时区 {user_timezone}", "grey", waves_font_24, "lm")
+        else:
+            timestamp = datetime.fromtimestamp(refreshTimeStamp)
+            now = datetime.now()
+
         today = now.date()
         tomorrow = today + timedelta(days=1)
 

@@ -51,7 +51,7 @@ async def all_check(push_data: dict, msg_dict: dict[str, dict[str, dict]], user:
         time_now,
         timestamp,
     )
-    logger.info(f"用户{uid} 体力提醒是否应推送:{_push}，开启状态：{push_data[f'{mode}_push']}")
+    logger.debug(f"用户{uid} 体力提醒是否应推送:{_push}，开启状态：{push_data[f'{mode}_push']}")
 
     if push_data[f"{mode}_is_push"] == "on":  # 已经推送过，启动催命模式
         if WutheringWavesConfig.get_config("CrazyNotice").data:
@@ -72,7 +72,7 @@ async def all_check(push_data: dict, msg_dict: dict[str, dict[str, dict]], user:
                 time_push = datetime.fromtimestamp(time_out)
                 await WavesPush.update_data_by_uid(uid=uid, bot_id=bot_id, **{f"{status}_value": str(time_push)})
                 logger.info(f"催命模式设置成功!\n当前用户{uid} 体力提醒下一次推送时间:{time_push}\n")
-            return
+        return
 
     # 准备推送
     if _push:

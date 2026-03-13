@@ -82,7 +82,7 @@ async def send_config_ev(bot: Bot, ev: Event):
             )
         im = await set_waves_user_value(ev, func, uid, char_name)
     elif "时区" in ev.text:
-        from zoneinfo import ZoneInfo, available_timezones
+        from zoneinfo import ZoneInfo
 
         func = "时区"
         value = ev.text.replace(func, "").strip()

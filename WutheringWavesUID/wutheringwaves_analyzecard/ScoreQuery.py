@@ -108,7 +108,7 @@ def extract_valid_info(info: list[str]) -> list[tuple[list, list, int]]:
     for txt in info:
         txt = txt.strip()
         if not cost:
-            cost_match = re.search(r'COST\s*(\d+)', txt, re.IGNORECASE)
+            cost_match = re.search(r"COST\s*(\d+)", txt, re.IGNORECASE)
             if cost_match:
                 cost = int(cost_match.group(1))
                 continue

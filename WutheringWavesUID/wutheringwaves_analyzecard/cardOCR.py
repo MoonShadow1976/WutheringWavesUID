@@ -546,20 +546,21 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                 # 属性清洗
                 attr = attr.strip()
                 value = value.strip()
-                # # 自定义替换优先执行（在繁转简之前）
-                # if re.search(r"暴.(傷害)?", attr):
-                #     attr = re.sub(r"暴.(傷害)?", r"暴擊\1", attr)
-                # attr = attr.replace("箓擎傷害", "暴擊傷害").replace("箓擎", "暴擊")
-                # attr = re.sub(r"^攻.*$", "攻擊", attr)
-                # attr = re.sub(r".*效率$", "共鳴效率", attr)
-                # attr = re.sub(r"^重.傷害加成*$", "重擊傷害加成", attr)
+                # 错别字替换
+                if re.search(r"暴.(傷害)?", attr):
+                    attr = re.sub(r"暴.(傷害)?", r"暴擊\1", attr)
+                attr = attr.replace("箓擎傷害", "暴擊傷害").replace("箓擎", "暴擊")
+                attr = attr.replace("泰擎傷害", "暴擊傷害").replace("泰擎", "暴擊")
+                attr = re.sub(r"^攻.*$", "攻擊", attr)
+                attr = re.sub(r".*效率$", "共鳴效率", attr)
+                attr = re.sub(r"^重.傷害加成*$", "重擊傷害加成", attr)
                 cc_attr = cc.convert(attr)  # 标准繁简转换
 
                 clean_attr = check_in(cc_attr, valid_keys)
                 clean_value = clean_ocr_num(value)
 
                 # 验证属性名是否符合预期（至少两个中文字符，且不含数字）
-                if len(clean_attr) >= 2 and not re.search(r"[0-9]", clean_attr):
+                if clean_attr and len(clean_attr) >= 2 and not re.search(r"[0-9]", clean_attr):
                     valid_entries.append((clean_attr, clean_value))
 
         # 分配主副属性

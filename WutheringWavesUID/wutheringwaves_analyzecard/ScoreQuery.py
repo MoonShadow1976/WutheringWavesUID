@@ -97,15 +97,21 @@ def set_cache_score_query_card(user_id: str, is_running: bool):
         timed_cache.set(key, int(time.time()) + wait_time)
 
 
-def extract_valid_info(info: list[str]) -> tuple[list, list]:
+def extract_valid_info(info: list[str]) -> list[tuple[list, list, int]]:
     """提取有效信息"""
+    result = []
+
+    cost = None
     keys = []
     values = []
 
     for txt in info:
         txt = txt.strip()
-        if len(keys) >= 7 and len(values) >= 7:
-            break
+        if not cost:
+            cost_match = re.search(r'COST\s*(\d+)', txt, re.IGNORECASE)
+            if cost_match:
+                cost = int(cost_match.group(1))
+                continue
 
         if len(keys) < 7:
             txt = cc.convert(txt)
@@ -122,19 +128,34 @@ def extract_valid_info(info: list[str]) -> tuple[list, list]:
                 percent_match = re.search(r"(\d+(?:\.\d+)?%)", txt)
                 if percent_match:
                     values.append(percent_match.group(1))
+                    continue
             elif len(values) == 1:
                 match = re.search(r"(\d+)", txt)
                 if match:
                     num = int(match.group(1))
                     if num <= 2280 and num >= 30:
                         values.append(str(num))
+                        continue
             else:
                 key = check_in(txt, valid_values)
                 if key:
                     values.append(key)
                     continue
 
-    return keys, values
+        if len(keys) >= 7 and len(values) >= 7:
+            result.append((keys[0:7], values[0:7], cost))
+            keys = []
+            values = []
+            cost = None
+
+    # 循环结束后，处理可能剩余的不完整声骸
+    if keys and values and len(keys) == len(values):
+        result.append((keys, values, cost))
+    elif keys or values:
+        # 数量不匹配，说明识别可能有误，记录日志但不添加
+        logger.warning(f"丢弃不完整声骸: keys={keys}, values={values}, cost={cost}")
+
+    return result
 
 
 def check_in(txt, valid_list):
@@ -359,7 +380,7 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     set_cache_score_query_card(ev.user_id, False)  # 清除时限
     if isinstance(ocr_results, str):
         return await bot.send(ocr_results, at_sender)
-    # ocr_results = [{'error': None, 'text':""},{'error': None, 'text': '◎\n暗鬃狼\nLv.25\n45.93分\n湮灭伤害加成\n攻击\n暴击伤害\n攻击\n该重击伤害加成\n众 共鸣技能伤害\n•暴击\n30.0%\n100\n21.0%\n11.6%\n9.4%\n10.9%\n10.5%'},{'error': None, 'text': 'COST\n11/12\n全部\n3\n合鸣筛选/全部\n+25\n+25\n+25\n+25\n未装备优先\n＜声骸推荐\n简述\n共鸣回•芙露德莉斯\n［COST 4\n+25\n器暴击伤害\n×攻击\n•普攻伤害加成\n暴击\n•牛命\n44.0%\n150\n10.9%\n9.9%\n6.4%\n390\n• 暴击伤害\n21.0%\n声骸技能\nC 使用声骸技能，召唤【破空幻刃】，\n攻击目标，造成八段27.36%和一段\n136.80%的气动伤害。\n在首位装配该声骸技能时，自身气动\n伤害加成提升10.00%，当装配角色\n为漂泊者•气动或卡提希娅时，自身\n气动伤害加成额外提升10.00%。\n卡提希娅装配中\n卸下\n培养\n特征码：117874920'}]
+    # ocr_results = [{'error': None, 'text': '异相•冰盈舞者\nCOST 1\n+25\n攻击\n◎ 生命\n•攻击\n• 暴击伤害\n•共鸣技能伤害加成\n• 暴击\n• 共鸣效率\n18.0%\n2280\n10.9%\n17.4%\n7.9%\n8.7%\n9.2%\n异相•冰盈舞者\nCOST 1\n+25\n攻击\n◎ 生命\n• 暴击\n• 暴击伤害\n• 共鸣解放伤害加成\n• 攻击\n•共鸣效率\n18.0%\n2280\n10.5%\n15.0%\n7.9%\n50\n10.0%'}]
 
     calc_temp = get_calc_map({}, char_name, char_id)
     msg = []
@@ -370,31 +391,32 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
 
         contexts = part["text"].split("\n")
         logger.debug(f"识别内容: {contexts}")
-        keys, values = extract_valid_info(contexts)
-        logger.info(f"提取词条: {keys}")
-        logger.info(f"提取值: {values}")
-
-        if not keys or not values:
+        results = extract_valid_info(contexts)
+        if not results:
             msg.append("未识别到有效信息！请确保图片内容清晰规范！\n")
             continue
 
-        props = []
-        if len(keys) != len(values):
-            logger.warning(f"识别到的词条和值数量不匹配！keys: {keys}, values: {values}")
-            msg.append("识别到的词条和值数量不匹配！请确保图片内容清晰规范！\n")
-            continue
+        for keys, values, ocr_cost in results:
+            logger.info(f"[鸣潮][声骸查分] 提取结果: cost {ocr_cost}, 词条：{keys}, 数值：{values}")
+            props = []
+            if len(keys) != len(values):
+                logger.warning(f"识别到的词条和值数量不匹配！keys: {keys}, values: {values}")
+                msg.append("识别到的词条和值数量不匹配！请确保图片内容清晰规范！\n")
+                continue
 
-        for i in range(len(keys)):
-            props.append(Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]))
+            for i in range(len(keys)):
+                props.append(Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]))
 
-        try:
-            img = await draw_score(char_name, char_id, props, cost, calc_temp)
-        except Exception as e:
-            logger.warning(f"程序错误：{e}")
-            msg.append("词条错误！请确保图片内容清晰规范！\n")
-            continue
+            final_cost = ocr_cost if ocr_cost else cost
 
-        msg.append(img)
+            try:
+                img = await draw_score(char_name, char_id, props, final_cost, calc_temp)
+            except Exception as e:
+                logger.warning(f"程序错误：{e}")
+                msg.append("词条错误！请确保图片内容清晰规范！\n")
+                continue
+
+            msg.append(img)
 
     if len(msg) == 1:
         return await bot.send(msg[0])

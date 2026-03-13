@@ -11,7 +11,10 @@ PUSH_MAP = {
     "体力": "resin",
     "时间": "push_time",
 }
-WAVES_USER_MAP = {"体力背景": "stamina_bg"}
+WAVES_USER_MAP = {
+    "体力背景": "stamina_bg",
+    "时区": "timezone",
+}
 
 task_name_resin = "订阅体力推送"
 

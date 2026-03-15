@@ -196,12 +196,12 @@ async def get_tower_detail(season_id: str) -> dict[str, dict[str, AreaDetail]] |
                     buffs = {str(i + 1): b for i, b in enumerate(instance.buffs)}
                     monsters = []
                     for monster in instance.monsters:
+                        monster.element_list = [e.id for e in monster.elements]
                         for prop in monster.whiteGreenProps:
                             if prop.key == "LifeMax":
                                 monster.Life = prop.value
                             elif prop.key == "Lv":
                                 monster.Level = prop.value
-                            monster.element_list = [e.id for e in monster.elements]
                         monsters.append(monster)
             floors[floor_num] = AreaDetail(monsters=monsters, buffs=buffs)
         areas[area_num] = floors
@@ -436,8 +436,10 @@ async def draw_floor_monsters(
         # 等级和生命
         stats_x = name_x
         stats_y = name_y + 22
-        draw.text((stats_x, stats_y), f"等级 {m_data.Level}", fill="white", font=MONSTER_STATS_FONT)
-        draw.text((stats_x, stats_y + 20), f"生命 {int(m_data.Life)}", fill="white", font=MONSTER_STATS_FONT)
+        if m_data.Level > 0:
+            draw.text((stats_x, stats_y), f"等级 {m_data.Level}", fill="white", font=MONSTER_STATS_FONT)
+        if m_data.Life > 0:
+            draw.text((stats_x, stats_y + 20), f"生命 {int(m_data.Life)}", fill="white", font=MONSTER_STATS_FONT)
 
 
 async def draw_buff_section(

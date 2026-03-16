@@ -10,30 +10,23 @@ from .models import GroupRankRecord
 sv_endless_group_rank = SV("ww群排行", priority=4)
 
 
-@sv_endless_group_rank.on_fullmatch(("无尽排行", "无尽排名"), block=True)
+@sv_endless_group_rank.on_command(("无尽排行", "无尽排名"), block=True)
 async def send_endless_rank_card(bot: Bot, ev: Event):
     """处理“无尽排行”命令，显示当前赛季的群内排行。"""
+    index = 0  # 0 表示当前赛季, 1 表示上一个赛季
+    param = ev.text.strip()
     all_season_ids = await GroupRankRecord.get_all_season_ids(rank_type="endless")
     if not all_season_ids:
         return await bot.send("暂无任何赛季的排行数据")
+    if "上期" in param:
+        if len(all_season_ids) < 2:
+            return await bot.send("暂无上期排行数据")
+        index = 1
 
     all_season_ids.sort(reverse=True)
-    current_season_id = all_season_ids[0]
+    current_season_id = all_season_ids[index]
 
     await _handle_rank_request(bot, ev, "endless", current_season_id, 12, "海蚀无尽群排行")
-
-
-@sv_endless_group_rank.on_fullmatch(("无尽排行上期", "无尽排名上期"), block=True)
-async def send_previous_endless_rank_card(bot: Bot, ev: Event):
-    """处理“无尽排行上期”命令，显示上一个赛季的群内排行。"""
-    all_season_ids = await GroupRankRecord.get_all_season_ids(rank_type="endless")
-    if not all_season_ids or len(all_season_ids) < 2:
-        return await bot.send("暂无上期排行数据")
-
-    all_season_ids.sort(reverse=True)
-    previous_season_id = all_season_ids[1]
-
-    await _handle_rank_request(bot, ev, "endless", previous_season_id, 12, "海蚀无尽群排行(上期)")
 
 
 @sv_endless_group_rank.on_command("清理旧排行表", block=True)
@@ -62,12 +55,15 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
         challenge_id: 挑战 ID。
         title: 排行榜标题。
     """
-    if not ev.group_id:
-        return await bot.send("请在群聊中使用")
-
     try:
-        # 1. 获取群内所有已绑定UID的用户
-        users = await WavesBind.get_group_all_uid(ev.group_id)
+        # 1. 获取用户
+        param = ev.text.strip()
+        if "bot" in param:
+            users = await WavesBind.get_all_data()
+        else:
+            if not ev.group_id:
+                return await bot.send("请在群聊中使用")
+            users = await WavesBind.get_group_all_uid(ev.group_id)
 
         # 2. 自动处理发送者：如果发送者已绑定但未加入群排行，自动将其加入
         sender_in_list = any(user.user_id == ev.user_id for user in users) if users else False

@@ -486,7 +486,7 @@
       {
         "name": "无尽群排行",
         "desc": "无尽群排行",
-        "eg": "无尽排行(上期)",
+        "eg": "无尽排行(bot)(上期)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

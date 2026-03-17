@@ -1176,7 +1176,7 @@
         "elementResistance": [
             4
         ],
-        "echo": 0,
+        "echo": 6000194,
         "name": "冠顶苍隼"
     },
     "320000610": {
@@ -1220,8 +1220,7 @@
         "rarity": 2,
         "attributeId": 6,
         "elementResistance": [
-            6,
-            5
+            6
         ],
         "echo": 0,
         "name": "噬影人·悲戚"

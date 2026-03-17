@@ -107,7 +107,7 @@ async def draw_card_help():
             "\n",
             "【国服云游戏】获取方式",
             "1.复制以下链接到浏览器打开",
-            "https://kokos.ICU",
+            "https://log.maiio.TOP",
             "2.登录后,依次点击`刷新记录`,`复制记录`按钮",
         ]
     )

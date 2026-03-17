@@ -15,6 +15,7 @@ async def send_endless_rank_card(bot: Bot, ev: Event):
     """处理“无尽排行”命令，显示当前赛季的群内排行。"""
     index = 0  # 0 表示当前赛季, 1 表示上一个赛季
     param = ev.text.strip()
+    title = "海蚀无尽群排行"
     all_season_ids = await GroupRankRecord.get_all_season_ids(rank_type="endless")
     if not all_season_ids:
         return await bot.send("暂无任何赛季的排行数据")
@@ -22,11 +23,12 @@ async def send_endless_rank_card(bot: Bot, ev: Event):
         if len(all_season_ids) < 2:
             return await bot.send("暂无上期排行数据")
         index = 1
+        title = "海蚀无尽Bot排行"
 
     all_season_ids.sort(reverse=True)
     current_season_id = all_season_ids[index]
 
-    await _handle_rank_request(bot, ev, "endless", current_season_id, 12, "海蚀无尽群排行")
+    await _handle_rank_request(bot, ev, "endless", current_season_id, 12, title)
 
 
 @sv_endless_group_rank.on_command("清理旧排行表", block=True)
@@ -79,7 +81,7 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
                 users = await WavesBind.get_group_all_uid(ev.group_id)  # 重新获取用户列表
 
         if not users:
-            return await bot.send(f"[鸣潮] 群【{ev.group_id}】暂无用户。")
+            return await bot.send("[鸣潮] " +  "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 3. 准备数据库查询所需的用户ID和游戏UID对
         user_uid_pairs = []
@@ -91,7 +93,7 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
                     user_uid_pairs.append((user.user_id, uid))
 
         if not user_uid_pairs:
-            return await bot.send(f"[鸣潮] 群【{ev.group_id}】暂无有效的用户数据。")
+            return await bot.send("[鸣潮] " +  "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 4. 从数据库获取排行记录
         records = await GroupRankRecord.get_group_records(
@@ -103,8 +105,8 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
 
         # 5. 如果没有数据，发送提示信息
         if not records:
-            msg = [f"[鸣潮] 群【{ev.group_id}】暂无{title}数据。"]
-            msg.append("请群友使用【ww无尽】上传数据后再次查询。")
+            msg = [f"[鸣潮] 暂无{title}数据。"]
+            msg.append("请使用【ww无尽】上传数据后再次查询。")
             return await bot.send("\n".join(msg))
 
         # 6. 绘制并发送排行榜图片

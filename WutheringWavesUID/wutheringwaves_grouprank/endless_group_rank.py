@@ -83,7 +83,7 @@ async def draw_group_rank_card(bot: Bot, ev: Event, records: list[GroupRankRecor
         成功时返回绘制好的图片（bytes），失败时返回错误信息（str）。
     """
     if not records:
-        msg = [f"[鸣潮] 群【{ev.group_id}】暂无有效的{title}数据。"]
+        msg = [f"[鸣潮] 暂无有效的{title}数据。"]
         msg.append(f"请使用【{PREFIX}无尽】上传更新数据后再试。")
         return "\n".join(msg)
 

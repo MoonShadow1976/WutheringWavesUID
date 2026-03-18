@@ -81,7 +81,7 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
                 users = await WavesBind.get_group_all_uid(ev.group_id)  # 重新获取用户列表
 
         if not users:
-            return await bot.send("[鸣潮] " +  "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
+            return await bot.send("[鸣潮] " + "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 3. 准备数据库查询所需的用户ID和游戏UID对
         user_uid_pairs = []
@@ -93,7 +93,7 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
                     user_uid_pairs.append((user.user_id, uid))
 
         if not user_uid_pairs:
-            return await bot.send("[鸣潮] " +  "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
+            return await bot.send("[鸣潮] " + "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 4. 从数据库获取排行记录
         records = await GroupRankRecord.get_group_records(

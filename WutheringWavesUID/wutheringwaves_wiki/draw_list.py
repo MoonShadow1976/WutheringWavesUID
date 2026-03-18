@@ -7,7 +7,8 @@ from gsuid_core.logger import logger
 from gsuid_core.utils.image.convert import convert_img
 from PIL import Image, ImageDraw
 
-from ..utils.ascension.echo import echo_id_data, set_name_to_echo_ids
+from ..utils.ascension.echo import echo_id_data, get_echo_model, set_name_to_echo_ids
+from ..utils.ascension.model import EchoModel
 from ..utils.ascension.sonata import sonata_id_data
 from ..utils.ascension.weapon import weapon_id_data
 from ..utils.fonts.waves_fonts import waves_font_16, waves_font_18, waves_font_24, waves_font_36
@@ -315,56 +316,32 @@ async def draw_echo_list(sonata_type: str):
     temp_cost = {0: "1", 1: "3", 2: "4", 3: "4"}
 
     # 收集声骸数据
-    echoes = []
+    echoes: list[EchoModel] = []
     if sonata_name and sonata_name in set_name_to_echo_ids:
         # 如果指定了套装类型，只收集该套装类型的声骸
         target_set = sonata_name
         echo_ids = set_name_to_echo_ids[target_set]
-
-        for echo_id in echo_ids:
-            echo_str_id = str(echo_id)
-            if echo_str_id in echo_id_data:
-                data = echo_id_data[echo_str_id]
-                name = data.get("name", "未知声骸")
-                name = name.replace("·", " ").replace("（", " ").replace("）", "")
-                name = get_short_name(echo_id, name)
-                intensity_code = data.get("intensityCode", 0)
-                if "异相" in name:
-                    continue  # 排除异相声骸
-
-                echoes.append(
-                    {
-                        "id": echo_id,
-                        "name": name,
-                        "intensity_code": intensity_code,
-                    }
-                )
     else:
         # 如果没有指定套装，显示所有声骸
-        for echo_str_id, data in echo_id_data.items():
-            echo_id = int(echo_str_id)
-            name = data.get("name", "未知声骸")
-            name = name.replace("·", " ").replace("（", " ").replace("）", "")
-            name = get_short_name(echo_id, name)
-            intensity_code = data.get("intensityCode", 0)
-            if "异相" in name:
+        echo_ids = echo_id_data.keys()
+
+    for echo_id in echo_ids:
+        echo = get_echo_model(echo_id)
+        if echo:
+            echo.name = echo.name.replace("·", "").replace("（", "").replace("）", "")
+            echo.name = get_short_name(echo_id, echo.name)
+            if "异相" in echo.name:
                 continue  # 排除异相声骸
 
-            echoes.append(
-                {
-                    "id": echo_id,
-                    "name": name,
-                    "intensity_code": intensity_code,
-                }
-            )
+            echoes.append(echo)
 
     # 按intensity_code降序排序（值越大越稀有），相同intensity_code时按名称升序
-    echoes.sort(key=lambda x: (-x["intensity_code"], x["id"]))
+    echoes.sort(key=lambda x: (-x.intensityCode, x.id))
 
     # 按intensity_code分组
-    grouped_echoes = defaultdict(list)
+    grouped_echoes: dict[int, list[EchoModel]] = defaultdict(list)
     for echo in echoes:
-        grouped_echoes[echo["intensity_code"]].append(echo)
+        grouped_echoes[echo.intensityCode].append(echo)
 
     # 按intensity_code降序排序分组
     sorted_groups = sorted(grouped_echoes.items(), key=lambda x: -x[0])
@@ -454,14 +431,28 @@ async def draw_echo_list(sonata_type: str):
                 x_pos = 40 + col * horizontal_spacing
 
                 # 获取声骸图标
-                echo_icon = await get_phantom_img(echo["id"], "")
+                echo_icon = await get_phantom_img(echo.id, "")
                 echo_icon = echo_icon.resize((icon_size, icon_size))
-
-                # 合并图标
                 img.alpha_composite(echo_icon, (x_pos, row_y))
 
+                # 绘制套装
+                f_icon_size = icon_size // 6  # 套装图标大小
+                x_start = x_pos - f_icon_size // 3  # 起始 x 偏移（保持原样）
+                f_x = x_start
+                f_y = row_y + icon_size - 2 * f_icon_size // 3  # 初始 y 位于主图标下方
+
+                for set_name in echo.get_group_name():
+                    if f_x + f_icon_size > x_pos + icon_size:  # 检查当前图标是否超出主图标右边界
+                        f_x = x_start  # 重置到最左边
+                        f_y -= f_icon_size  # 上移一行（减小 y）
+
+                    fetter_icon = await get_attribute_effect(set_name)
+                    fetter_icon = fetter_icon.resize((f_icon_size, f_icon_size))
+                    img.alpha_composite(fetter_icon, (f_x, f_y))
+                    f_x += f_icon_size
+
                 # 绘制声骸名称（可能需要截断长名称）
-                display_name = echo["name"]
+                display_name = echo.name
                 # 根据列数决定名称截断长度
                 max_length = 6 if echoes_per_row >= 8 else 8  # 列数多时截断更短
                 if len(display_name) > max_length:

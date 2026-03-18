@@ -53,12 +53,13 @@ async def parse_echo_base_content(echo_id, echo_model: EchoModel, image, card_im
         card_img.alpha_composite(effect_image, (echo_name_width + index * 35, 40))
 
 
-async def parse_echo_detail_content(echo_model: EchoModel, card_img):
+async def parse_echo_detail_content(echo_model: EchoModel) -> Image.Image:
+    """绘制声骸技能描述，返回动态高度的图像。"""
     y_padding = 20  # 初始位移
-    x_padding = 20  # 初始位移
     line_spacing = 10  # 行间距
     block_line_spacing = 10  # 块行间距
     shadow_radius = 20  # 阴影半径
+    padding = 20  # 背景矩形内边距
 
     title_color = SPECIAL_GOLD
     title_font_size = 20
@@ -68,29 +69,42 @@ async def parse_echo_detail_content(echo_model: EchoModel, card_img):
     detail_font_size = 14
     detail_font = waves_font_origin(detail_font_size)
 
-    image = Image.new("RGBA", (650, 320), (255, 255, 255, 0))
-    image_draw = ImageDraw.Draw(image)
-    image_draw.rounded_rectangle([20, 20, 630, 300], radius=20, fill=(0, 0, 0, int(0.3 * 255)))
     title = "技能描述"
     desc = echo_model.get_skill_detail()
 
-    # 分行显示标题
     wrapped_title = textwrap.fill(title, width=10)
-    # wrapped_desc = textwrap.fill(desc, width=44)
     wrapped_desc = wrap_text_with_manual_newlines(desc, width=44)
 
-    # 获取每行的宽度，确保不会超过设定的 image_width
     lines_title = wrapped_title.split("\n")
     lines_desc = wrapped_desc.split("\n")
 
-    # 计算总的绘制高度
-    total_text_height = y_padding + block_line_spacing + shadow_radius * 2
-    total_text_height += len(lines_title) * (title_font_size + line_spacing)  # 标题部分的总高度
-    total_text_height += len(lines_desc) * (detail_font_size + line_spacing)  # 描述部分的总高度
+    # 计算文本总高度（从文本起始点开始累加）
+    text_height = (
+        len(lines_title) * (title_font_size + line_spacing)
+        + len(lines_desc) * (detail_font_size + line_spacing)
+        + block_line_spacing
+    )
 
-    # 绘制标题文本
-    y_offset = y_padding + shadow_radius
-    x_offset = x_padding + shadow_radius
+    # 图像内文本起始 Y 坐标（原逻辑保留）
+    text_start_y = y_padding + shadow_radius  # 40
+    # 图像总高度 = 文本起始Y + 文本高度 + 底部内边距
+    img_height = text_start_y + text_height + padding
+    img_height = max(img_height, 200)  # 设置一个最小高度
+
+    width = 650
+    image = Image.new("RGBA", (width, img_height), (255, 255, 255, 0))
+    image_draw = ImageDraw.Draw(image)
+
+    # 绘制背景圆角矩形（边距统一为 padding）
+    image_draw.rounded_rectangle(
+        [padding, padding, width - padding, img_height - padding],
+        radius=20,
+        fill=(0, 0, 0, int(0.3 * 255)),
+    )
+
+    # 绘制标题
+    y_offset = text_start_y
+    x_offset = y_padding + shadow_radius  # 40
     for line in lines_title:
         image_draw.text(
             (x_offset, y_offset),
@@ -112,7 +126,7 @@ async def parse_echo_detail_content(echo_model: EchoModel, card_img):
         )
         y_offset += detail_font.size + line_spacing
 
-    card_img.alpha_composite(image, (330, 80))
+    return image
 
 
 async def parse_echo_statistic_content(echo_model: EchoModel, echo_image):
@@ -130,14 +144,23 @@ async def parse_echo_statistic_content(echo_model: EchoModel, echo_image):
 
 
 async def create_image(echo_id, echo_model: EchoModel):
-    echo_image = Image.new("RGBA", (350, 400), (255, 255, 255, 0))
+    detail_image = await parse_echo_detail_content(echo_model)
+    H_detail = detail_image.height
 
-    card_img = get_crop_waves_bg(1000, 420, "bg5")
+    footer_height = 20
+    content_bottom = max(400, 80 + H_detail)  # 取 echo_image 底部和 detail 图像底部的最大值
+    total_height = max(420, content_bottom + footer_height)  # 保持最小高度 420
+
+    card_img = get_crop_waves_bg(1000, total_height, "bg5")
+
+    echo_image = Image.new("RGBA", (350, 400), (255, 255, 255, 0))
     await parse_echo_base_content(echo_id, echo_model, echo_image, card_img)
     await parse_echo_statistic_content(echo_model, echo_image)
-    await parse_echo_detail_content(echo_model, card_img)
+
     card_img.alpha_composite(echo_image, (0, 0))
-    card_img = add_footer(card_img, 800, 20, color="encore")
+    card_img.alpha_composite(detail_image, (330, 80))
+
+    card_img = add_footer(card_img, 800, footer_height, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 

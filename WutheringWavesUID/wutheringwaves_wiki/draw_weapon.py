@@ -94,12 +94,22 @@ async def parse_weapon_material_content(weapon_model: WeaponModel, card_img):
     card_img.alpha_composite(material_img, (680, 15))
 
 
-async def parse_weapon_detail_content(weapon_model: WeaponModel, card_img):
+# 在文件顶部添加辅助函数（或从其他模块导入）
+def wrap_text_with_manual_newlines(text: str, width: int = 70) -> str:
+    """
+    处理文本，优先保留原始文本中的 \n，再使用 textwrap 进行换行。
+    """
+    lines = text.split("\n")
+    wrapped_lines = [textwrap.fill(line, width=width) for line in lines]
+    return "\n".join(wrapped_lines)
+
+
+async def parse_weapon_detail_content(weapon_model: WeaponModel) -> Image.Image:
     y_padding = 20  # 初始位移
-    x_padding = 20  # 初始位移
     line_spacing = 10  # 行间距
     block_line_spacing = 10  # 块行间距
     shadow_radius = 20  # 阴影半径
+    padding = 20  # 背景内边距
 
     title_color = SPECIAL_GOLD
     title_font_size = 20
@@ -109,35 +119,43 @@ async def parse_weapon_detail_content(weapon_model: WeaponModel, card_img):
     detail_font_size = 14
     detail_font = waves_font_origin(detail_font_size)
 
-    image = Image.new("RGBA", (650, 270), (255, 255, 255, 0))
-    image_draw = ImageDraw.Draw(image)
-    image_draw.rounded_rectangle([20, 20, 630, 250], radius=20, fill=(0, 0, 0, int(0.3 * 255)))
     title = weapon_model.effectName
     desc = weapon_model.get_effect_detail()
 
-    # 分行显示标题
     wrapped_title = textwrap.fill(title, width=10)
-    wrapped_desc = textwrap.fill(desc, width=44)
+    wrapped_desc = wrap_text_with_manual_newlines(desc, width=44)
 
-    # 获取每行的宽度，确保不会超过设定的 image_width
     lines_title = wrapped_title.split("\n")
     lines_desc = wrapped_desc.split("\n")
 
-    # 计算总的绘制高度
-    total_text_height = y_padding + block_line_spacing + shadow_radius * 2
-    total_text_height += len(lines_title) * (title_font_size + line_spacing)  # 标题部分的总高度
-    total_text_height += len(lines_desc) * (detail_font_size + line_spacing)  # 描述部分的总高度
+    # 计算文本总高度
+    text_height = (
+        len(lines_title) * (title_font_size + line_spacing)
+        + len(lines_desc) * (detail_font_size + line_spacing)
+        + block_line_spacing
+    )
 
-    # 绘制标题文本
-    y_offset = y_padding + shadow_radius
-    x_offset = x_padding + shadow_radius
+    # 文本起始 Y 坐标（原逻辑中的 y_offset 起点）
+    text_start_y = y_padding + shadow_radius  # 40
+    img_height = text_start_y + text_height + padding
+    img_height = max(img_height, 200)  # 设置一个最小高度
+
+    width = 650
+    image = Image.new("RGBA", (width, img_height), (255, 255, 255, 0))
+    image_draw = ImageDraw.Draw(image)
+
+    # 绘制背景圆角矩形
+    image_draw.rounded_rectangle(
+        [padding, padding, width - padding, img_height - padding],
+        radius=20,
+        fill=(0, 0, 0, int(0.3 * 255)),
+    )
+
+    # 绘制标题
+    y_offset = text_start_y
+    x_offset = y_padding + shadow_radius
     for line in lines_title:
-        image_draw.text(
-            (x_offset, y_offset),
-            line,
-            font=title_font,
-            fill=title_color,
-        )
+        image_draw.text((x_offset, y_offset), line, font=title_font, fill=title_color)
         y_offset += title_font.size + line_spacing
 
     y_offset += block_line_spacing
@@ -152,19 +170,28 @@ async def parse_weapon_detail_content(weapon_model: WeaponModel, card_img):
         )
         y_offset += detail_font.size + line_spacing
 
-    card_img.alpha_composite(image, (330, 130))
+    return image
 
 
 async def create_image(weapon_id, weapon_model: WeaponModel):
     weapon_image = Image.new("RGBA", (350, 400), (255, 255, 255, 0))
 
-    card_img = get_crop_waves_bg(1000, 420, "bg5")
+    detail_image = await parse_weapon_detail_content(weapon_model)
+    H_detail = detail_image.height
+
+    footer_height = 20
+    total_height = max(420, 130 + H_detail + footer_height)
+
+    card_img = get_crop_waves_bg(1000, total_height, "bg5")
+
     await parse_weapon_base_content(weapon_id, weapon_model, weapon_image, card_img)
     await parse_weapon_statistic_content(weapon_model, weapon_image)
-    await parse_weapon_detail_content(weapon_model, card_img)
-    await parse_weapon_material_content(weapon_model, card_img)
+
     card_img.alpha_composite(weapon_image, (0, 0))
-    card_img = add_footer(card_img, 800, 20, color="encore")
+    card_img.alpha_composite(detail_image, (330, 130))
+    await parse_weapon_material_content(weapon_model, card_img)
+
+    card_img = add_footer(card_img, 800, footer_height, color="encore")
     card_img = await convert_img(card_img)
     return card_img
 

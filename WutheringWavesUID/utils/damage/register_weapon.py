@@ -1426,6 +1426,44 @@ class Weapon_21040064(WeaponAbstract):
         attr.add_def_percent(calc_percent_expression(dmg), title, msg)
 
 
+class Weapon_21040066(WeaponAbstract):
+    id = 21040066
+    type = 4
+    name = "昭日译注"
+
+    # 施放变奏技能或声骸技能时，声骸技能伤害加深{1}
+    # 造成声骸技能伤害时，气动伤害无视目标{3}防御
+    def cast_phantom(self, attr: DamageAttribute, isGroup: bool = False):
+        """施放声骸技能"""
+        if attr.char_damage != phantom_damage:
+            return
+        dmg = f"{self.param(1)}"
+        title = self.get_title()
+        msg = f"施放声骸技能时，声骸技能伤害加深{dmg}"
+        attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+        if attr.char_attr == CHAR_ATTR_SIERRA:
+            dmg = f"{self.param(3)}"
+            msg = f"造成声骸技能伤害时，气动伤害无视目标{dmg}防御"
+            attr.add_defense_reduction(calc_percent_expression(dmg), title, msg)
+        return True
+
+    def cast_variation(self, attr: DamageAttribute, isGroup: bool = False):
+        """施放变奏技能"""
+        if attr.char_damage != phantom_damage:
+            return
+        dmg = f"{self.param(1)}"
+        title = self.get_title()
+        msg = f"施放变奏技能时，声骸技能伤害加深{dmg}"
+        attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+        if attr.char_attr == CHAR_ATTR_SIERRA:
+            dmg = f"{self.param(3)}"
+            msg = f"造成声骸技能伤害时，气动伤害无视目标{dmg}防御"
+            attr.add_defense_reduction(calc_percent_expression(dmg), title, msg)
+        return True
+
+
 class Weapon_21040074(WeaponAbstract):
     id = 21040074
     type = 4

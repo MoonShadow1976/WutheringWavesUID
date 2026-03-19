@@ -655,6 +655,34 @@ class Char_1411(CharAbstract):
                 method(attr, isGroup)
 
 
+class Char_1412(CharAbstract):
+    id = 1412
+    name = "西格莉卡"
+    starLevel = 55
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 每层语义的祝福使队伍中登场角色气动伤害加成提升3%，声骸技能伤害加成提升3%
+        title = "西格莉卡-固有技能-语义共鸣"
+        if attr.char_attr == CHAR_ATTR_SIERRA:
+            msg = "6层语义的祝福使队伍中登场角色气动伤害加成提升18%"
+            attr.add_dmg_bonus(0.18, title, msg)
+        if attr.char_damage == phantom_damage:
+            msg = "6层语义的祝福使队伍中登场角色声骸技能伤害加成提升18%"
+            attr.add_dmg_bonus(0.18, title, msg)
+
+        # 队伍中的角色施放声骸技能时，使队伍中的角色攻击提升20%，持续20秒
+        if chain >= 4:
+            title = "西格莉卡-四链"
+            msg = "队伍中的角色释放声骸技能时,使队伍中的角色攻击提升20%"
+            attr.add_atk_percent(0.2, title, msg)
+
+
 class Char_1501(CharAbstract):
     id = 1501
     name = "漂泊者·衍射"

@@ -1126,6 +1126,34 @@ class Char_1606(CharAbstract):
                 attr.add_dmg_bonus(0.1 * 4, title, msg)
 
 
+class Char_1607(CharAbstract):
+    id = 1607
+    name = "坎特蕾拉"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 下一位登场角色湮灭伤害加深20%，共鸣技能伤害加深25%
+        if CHAR_ATTR_SINKING == attr.char_attr:
+            title = "坎特蕾拉-合鸣效果-幽夜隐匿之帷"
+            msg = "使下一个登场角色湮灭属性伤害加成提升15%"
+            attr.add_dmg_bonus(0.15, title, msg)
+
+            title = "坎特蕾拉-延奏技能"
+            msg = "下一位登场角色湮灭伤害加深23%"
+            attr.add_dmg_deepen(0.23, title, msg)
+
+        if skill_damage == attr.char_damage:
+            title = "坎特蕾拉-延奏技能"
+            msg = "下一位登场角色共鸣技能伤害加深25%"
+            attr.add_dmg_deepen(0.25, title, msg)
+
+
 def register_char():
     # 自动注册所有以 Char_ 开头的类
     for name, obj in globals().items():

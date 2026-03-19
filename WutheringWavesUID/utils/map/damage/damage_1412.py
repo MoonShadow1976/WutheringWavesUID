@@ -15,7 +15,7 @@ from ...damage.utils import (
     phantom_damage,
     skill_damage_calc,
 )
-from .buff import qiuyuan_buff, shouanren_buff
+from .buff import cantarella_buff, qiuyuan_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -301,7 +301,26 @@ def calc_damage_10(
     return calc_damage_1(attr, role, isGroup, actionType, rounds)
 
 
-def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+def calc_damage_11(
+    attr: DamageAttribute,
+    role: RoleDetailData,
+    isGroup: bool = True,
+    actionType: Literal["z", "z1", "z2", "z3", "ez"] = "ez",
+    rounds: int = 1,  # 轮数
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 坎特蕾拉buff
+    cantarella_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_1(attr, role, isGroup, actionType, rounds)
+
+
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(phantom_damage)
     attr.set_char_template("temp_atk")
 
@@ -328,25 +347,25 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_2(attr, role),
     },
     {
-        "title": "共鸣回路·我即语义",
+        "title": "回路·我即语义",
         "func": lambda attr, role: calc_damage_1(attr, role, actionType="ez"),
     },
     {
-        "title": "(2轮)共鸣回路·我即语义",
-        "func": lambda attr, role: calc_damage_1(attr, role, actionType="ez", rounds=2),
+        "title": "01守/坎/(2轮)回路·我即语义",
+        "func": lambda attr, role: calc_damage_11(attr, role, actionType="ez", rounds=2),
     },
     {
         "title": "01守/01仇/如那期望般！",
-        "func": lambda attr, role: calc_damage_11(attr, role),
+        "func": lambda attr, role: calc_damage_12(attr, role),
     },
     {
-        "title": "01守/01仇/共鸣回路·我即语义",
+        "title": "01守/01仇/回路·我即语义",
         "func": lambda attr, role: calc_damage_10(attr, role, actionType="ez"),
     },
     {
-        "title": "01守/01仇/(2轮)共鸣回路·我即语义",
+        "title": "01守/01仇/(2轮)回路·我即语义",
         "func": lambda attr, role: calc_damage_10(attr, role, actionType="ez", rounds=2),
     },
 ]
 
-rank = damage_detail[4]
+rank = damage_detail[3]

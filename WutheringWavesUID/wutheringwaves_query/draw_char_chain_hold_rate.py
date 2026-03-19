@@ -206,7 +206,8 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         y = header_height + row * item_height
 
         # 绘制背景框
-        bg_box = Image.new("RGBA", (column_width, item_height - 20), (0, 0, 0, 150))
+        color = CHAIN_COLOR_LIST[int(chain_level)] + (150,)  # 根据链级设置不同颜色
+        bg_box = Image.new("RGBA", (column_width, item_height - 20), color)
         img.paste(bg_box, (x, y), bg_box)
 
         # 排名序号
@@ -226,7 +227,7 @@ async def draw_char_chain_hold_rate(ev: Event, data, group_id: str = "") -> byte
         img.paste(avatar, (x + 10, y + 10), avatar)
 
         # 链级
-        draw.text((x + 42, y + 90), f"{chain_level}链", CHAIN_COLOR_LIST[int(chain_level)], waves_font_24, "lm")
+        draw.text((x + 42, y + 90), f"{chain_level}链", "white", waves_font_24, "lm")
 
         # 持有数量
         if not use_rate:

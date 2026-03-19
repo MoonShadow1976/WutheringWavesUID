@@ -108,7 +108,7 @@ def get_ICON():
 
 async def get_random_share_bg():
     path = random.choice(os.listdir(f"{SHARE_BG_PATH}"))
-    return Image.open(f"{SHARE_BG_PATH}/{path}").convert("RGBA")
+    return Image.open(f"{SHARE_BG_PATH}/{path}").convert("RGBA").resize((2560, 1440))
 
 
 async def get_random_share_bg_path():

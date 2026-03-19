@@ -30,7 +30,7 @@ from ..utils.image import (
     RED,
     add_footer,
     draw_text_with_shadow,
-    get_random_share_bg_path,
+    get_random_share_bg,
     get_square_avatar,
     get_star_bg,
     sync_non_onebot_user_avatar,
@@ -49,12 +49,6 @@ refresh_yes = Image.open(TEXT_PATH / "refresh_yes.png")
 refresh_yes = refresh_yes.resize((40, 40))
 refresh_no = Image.open(TEXT_PATH / "refresh_no.png")
 refresh_no = refresh_no.resize((40, 40))
-
-
-refresh_role_map = {
-    "share_02.webp": (1000, 180, 2560, 1320),
-    "share_14.webp": (1000, 180, 2560, 1320),
-}
 
 refresh_interval: int = WutheringWavesConfig.get_config("RefreshIntervalOne").data
 refresh_intervalAll: int = WutheringWavesConfig.get_config("RefreshIntervalAll").data
@@ -110,13 +104,8 @@ def get_refresh_interval_notify(time_stamp: int):
 
 
 async def get_refresh_role_img(width: int, height: int):
-    path = await get_random_share_bg_path()
-    img = Image.open(path).convert("RGBA")
-    if path.name in refresh_role_map:
-        img = img.crop(refresh_role_map[path.name])
-    else:
-        # 2560, 1440
-        img = img.crop((700, 100, 2300, 1340))
+    img = await get_random_share_bg()  # 2560, 1440
+    img = img.crop((700, 100, 2300, 1340))
     if height > img.height:
         img = crop_center_img(img, width, height)
     else:

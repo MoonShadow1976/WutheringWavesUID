@@ -73,7 +73,7 @@ async def parse_echo_detail_content(echo_model: EchoModel) -> Image.Image:
     desc = echo_model.get_skill_detail()
 
     wrapped_title = textwrap.fill(title, width=10)
-    wrapped_desc = wrap_text_with_manual_newlines(desc, width=44)
+    wrapped_desc = wrap_text_with_manual_newlines(desc, width=41)
 
     lines_title = wrapped_title.split("\n")
     lines_desc = wrapped_desc.split("\n")

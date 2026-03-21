@@ -67,19 +67,6 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
                 return await bot.send("请在群聊中使用")
             users = await WavesBind.get_group_all_uid(ev.group_id)
 
-        # 2. 自动处理发送者：如果发送者已绑定但未加入群排行，自动将其加入
-        sender_in_list = any(user.user_id == ev.user_id for user in users) if users else False
-        if not sender_in_list:
-            sender_uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
-            if sender_uid:
-                await WavesBind.insert_waves_uid(
-                    user_id=ev.user_id,
-                    bot_id=ev.bot_id,
-                    uid=sender_uid,
-                    group_id=ev.group_id,
-                )
-                users = await WavesBind.get_group_all_uid(ev.group_id)  # 重新获取用户列表
-
         if not users:
             return await bot.send("[鸣潮] " + "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 

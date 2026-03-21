@@ -22,12 +22,12 @@ from ..utils.fonts.waves_fonts import (
     waves_font_58,
 )
 from ..utils.image import (
-    AVATAR_GETTERS,
     RED,
     SPECIAL_GOLD,
     add_footer,
     get_ICON,
     get_square_avatar,
+    get_user_avatar,
     get_waves_bg,
     pic_download_from_url,
 )
@@ -183,19 +183,13 @@ async def get_avatar(
     char_id: int | str,
 ) -> Image.Image:
     try:
-        # 尝试从平台获取头像
-        get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
-        if not get_bot_avatar:
-            raise ValueError("未找到对应的头像获取器")
-
-        # 使用带时间的缓存策略
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(qid)
             if not pic:
-                pic = await get_bot_avatar(qid, size=100)
+                pic = await get_user_avatar(qid, size=100)
                 pic_cache.set(qid, pic)
         else:
-            pic = await get_bot_avatar(qid, size=100)
+            pic = await get_user_avatar(qid, size=100)
             pic_cache.set(qid, pic)
 
         # 统一处理裁剪和遮罩
@@ -205,9 +199,9 @@ async def get_avatar(
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
 
-    except Exception:
+    except Exception as e:
         # 打印异常，进行降级处理
-        logger.warning("头像获取失败，使用默认头像")
+        logger.warning(f"头像获取失败，使用默认头像: {e}")
         pic = await get_square_avatar(char_id)
 
         pic_temp = Image.new("RGBA", pic.size)

@@ -5,7 +5,7 @@ import re
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
-from gsuid_core.utils.image.image_tools import crop_center_img, get_qq_avatar
+from gsuid_core.utils.image.image_tools import crop_center_img
 import httpx
 from PIL import Image, ImageDraw, ImageEnhance
 
@@ -53,7 +53,6 @@ from ..utils.fonts.waves_fonts import (
     waves_font_50,
 )
 from ..utils.image import (
-    AVATAR_GETTERS,
     GOLD,
     GREY,
     SPECIAL_GOLD,
@@ -73,6 +72,7 @@ from ..utils.image import (
     get_small_logo,
     get_square_avatar,
     get_square_weapon,
+    get_user_avatar,
     get_waves_bg,
     get_weapon_type,
 )
@@ -1278,8 +1278,7 @@ async def draw_pic_with_ring(ev: Event, is_force_avatar=False, force_resource_id
     elif not is_force_avatar:
         pic = await get_event_avatar(ev)
     else:
-        get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id, get_qq_avatar)
-        pic = await get_bot_avatar(ev.user_id)
+        pic = await get_user_avatar(ev.user_id)
 
     mask_pic = Image.open(TEXT_PATH / "avatar_mask.png")
     img = Image.new("RGBA", (180, 180))

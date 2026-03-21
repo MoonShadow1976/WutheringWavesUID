@@ -9,8 +9,29 @@ from ..api.wwapi import (
     UPLOAD_SLASH_RECORD_URL,
     UPLOAD_URL,
 )
+from ..database.models import WavesUserAvatar
 from .const import QUEUE_ABYSS_RECORD, QUEUE_GACHA_RECORD, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD
 from .queues import event_handler, start_dispatcher
+
+
+async def concatenate_user_id_for_avatar(item: dict) -> dict:
+    """拼接用户id与获取头像有关的字符串 - 头像hash"""
+    if "user_id" in item:
+        qid = item["user_id"]
+        logger.debug(f"[鸣潮][总排行上传] 用户id: {qid}")
+        data = await WavesUserAvatar.select_data(qid)
+        if data:
+            logger.debug(f"[鸣潮][总排行上传] 用户别名hash: {data}")
+            if data.bot_id in ["qqgroup", "qq_official"]:
+                appid = data.avatar_hash
+                item["user_id"] = f"{appid}/{qid}"
+            elif data.bot_id in ["discord"]:
+                avatar_hash = data.avatar_hash
+                item["user_id"] = f"{qid}/{avatar_hash}"
+            else:
+                logger.warning(f"[鸣潮][总排行上传] 用户别名处理不支持的 bot_id: {data.bot_id}")
+
+    return item
 
 
 @event_handler(QUEUE_SCORE_RANK)
@@ -25,6 +46,9 @@ async def send_score_rank(item: Any):
 
     if not WavesToken:
         return
+
+    item = await concatenate_user_id_for_avatar(item)
+    logger.debug(f"[鸣潮][总排行上传] item: {item}")
 
     async with httpx.AsyncClient() as client:
         res = None
@@ -56,6 +80,8 @@ async def send_abyss_record(item: Any):
     if not WavesToken:
         return
 
+    item = await concatenate_user_id_for_avatar(item)
+
     async with httpx.AsyncClient() as client:
         res = None
         try:
@@ -86,6 +112,8 @@ async def send_slash_record(item: Any):
     if not WavesToken:
         return
 
+    item = await concatenate_user_id_for_avatar(item)
+
     async with httpx.AsyncClient() as client:
         res = None
         try:
@@ -115,6 +143,8 @@ async def send_gacha_record(item: Any):
 
     if not WavesToken:
         return
+
+    item = await concatenate_user_id_for_avatar(item)
 
     async with httpx.AsyncClient() as client:
         res = None

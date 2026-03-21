@@ -40,8 +40,8 @@ from ..utils.image import (
     WAVES_VOID,
     add_footer,
     get_ICON,
-    get_qq_avatar,
     get_square_avatar,
+    get_user_avatar,
     get_waves_bg,
 )
 from ..utils.util import get_version
@@ -325,25 +325,27 @@ async def draw_total_rank(bot: Bot, ev: Event, pages: int) -> str | bytes:
 async def get_avatar(
     qid: str | None,
 ) -> Image.Image:
-    # 检查qid 为纯数字
-    if qid and qid.isdigit():
+    try:
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(qid)
             if not pic:
-                pic = await get_qq_avatar(qid, size=100)
+                pic = await get_user_avatar(qid, size=100)
                 pic_cache.set(qid, pic)
         else:
-            pic = await get_qq_avatar(qid, size=100)
+            pic = await get_user_avatar(qid, size=100)
             pic_cache.set(qid, pic)
-        pic_temp = crop_center_img(pic, 120, 120)
 
+        # 统一处理 crop 和遮罩（onebot/discord 共用逻辑）
+        pic_temp = crop_center_img(pic, 120, 120)
         img = Image.new("RGBA", (180, 180))
         avatar_mask_temp = avatar_mask.copy()
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
-    else:
-        default_avatar_char_id = "1505"
-        pic = await get_square_avatar(default_avatar_char_id)
+
+    except Exception as e:
+        # 打印异常，进行降级处理
+        logger.warning(f"头像获取失败，使用默认头像: {e}")
+        pic = await get_square_avatar("1505")
 
         pic_temp = Image.new("RGBA", pic.size)
         pic_temp.paste(pic.resize((160, 160)), (10, 10))

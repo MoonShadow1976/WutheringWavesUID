@@ -118,7 +118,7 @@ async def set_config_func(ev: Event, uid: str = "0"):
         if not await get_push_config():
             return "体力推送功能已禁用!\n"
 
-        if ev.bot_id == "qqgroup" and option not in ["on", "off"]:
+        if ev.bot_id in ["qqgroup", "qq_official"] and option not in ["on", "off"]:
             return "官Q体力推送功能请在私聊消息开启!\n"
 
         # 执行设置

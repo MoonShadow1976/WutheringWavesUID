@@ -251,7 +251,7 @@ async def sync_non_onebot_user_avatar(ev: Event):
         parts = avatar_url.split("/")
         index = parts.index(str(ev.user_id))
         avatar_hash = parts[index + 1]
-    elif ev.bot_id == "qqgroup":
+    elif ev.bot_id in ["qqgroup", "qq_official"]:
         avatar_hash = ev.bot_self_id
 
     data = await WavesUserAvatar.select_data(ev.user_id, ev.bot_id)
@@ -261,57 +261,37 @@ async def sync_non_onebot_user_avatar(ev: Event):
         await WavesUserAvatar.insert_data(user_id=ev.user_id, bot_id=ev.bot_id, avatar_hash=avatar_hash)
 
 
-async def get_qq_avatar(
+async def get_user_avatar(
     qid: int | str | None = None,
     avatar_url: str | None = None,
     size: int = 640,
 ) -> Image.Image:
+    qid = str(qid)
     if qid:
-        avatar_url = f"http://q1.qlogo.cn/g?b=qq&nk={qid}&s={size}"
-    elif avatar_url is None:
-        avatar_url = f"https://q1.qlogo.cn/g?b=qq&nk=3399214199&s={size}"
-    char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
-    return char_pic
+        data = await WavesUserAvatar.select_data(qid)
+        if data:  # 说明本地有个人数据，没有是排行数据
+            if data.bot_id in ["qqgroup", "qq_official"]:
+                appid = data.avatar_hash
+                avatar_url = f"http://q.qlogo.cn/qqapp/{appid}/{qid}/{size}"
+            elif data.bot_id in ["discord"]:
+                avatar_hash = data.avatar_hash
+                avatar_url = f"https://cdn.discordapp.com/avatars/{qid}/{avatar_hash}.png?size={size}"
+                # else:
+                #     avatar_url = f"https://cdn.discordapp.com/embed/avatars/0.png?size={size}"
 
+        if not avatar_url:  # 尝试获取排行用户数据或非官方bot的qq用户数据
+            if qid.isdigit():
+                avatar_url = f"http://q1.qlogo.cn/g?b=qq&nk={qid}&s={size}"
+            elif "/" in qid and qid.split("/")[0].isdigit():  # qq官方bot
+                avatar_url = f"http://q.qlogo.cn/qqapp/{qid}/{size}"
+            elif "/" in qid and qid.split("/")[1].isdigit():
+                avatar_url = f"https://cdn.discordapp.com/avatars/{qid}.png?size={size}"
 
-async def get_discord_avatar(
-    qid: int | str | None = None,
-    avatar_url: str | None = None,
-    size: int = 640,
-) -> Image.Image:
-    if qid:
-        data = await WavesUserAvatar.select_data(str(qid), "discord")
-        avatar_hash = data.avatar_hash if data else ""
-        avatar_url = f"https://cdn.discordapp.com/avatars/{qid}/{avatar_hash}"
-    elif avatar_url is None:
-        avatar_url = "https://cdn.discordapp.com/embed/avatars/0.png"
-
-    avatar_url = avatar_url + f".png?size={size}" if not avatar_url.endswith(".png") else avatar_url
-    char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
-    return char_pic
-
-
-async def get_qqgroup_avatar(
-    qid: int | str | None = None,
-    avatar_url: str | None = None,
-    size: int = 640,
-) -> Image.Image:
-    if qid:
-        data = await WavesUserAvatar.select_data(str(qid), "qqgroup")
-        if data:
-            appid = data.avatar_hash
-            avatar_url = f"http://q.qlogo.cn/qqapp/{appid}/{qid}/{size}"
-        else:
-            avatar_url = f"http://q1.qlogo.cn/g?b=qq&nk={qid}&s={size}"
-    elif avatar_url is None:
-        avatar_url = f"https://q.qlogo.cn/qqapp/0/0/{size}"
+    if not avatar_url:
+        raise ValueError("无法获取用户头像")
 
     char_pic = Image.open(BytesIO((await sget(avatar_url)).content)).convert("RGBA")
     return char_pic
-
-
-# 获取对应bot_id的头像获取函数
-AVATAR_GETTERS = {"onebot": get_qq_avatar, "discord": get_discord_avatar, "qqgroup": get_qqgroup_avatar}
 
 
 async def get_event_avatar(
@@ -327,12 +307,17 @@ async def get_event_avatar(
 
         is_valid_at_param = is_valid_at(ev)
 
-    get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
-
     # 尝试获取@用户的头像
-    if get_bot_avatar and ev.at and is_valid_at_param:
+    if ev.at and is_valid_at_param:
         try:
-            img = await get_bot_avatar(ev.at, size=size)
+            img = await get_user_avatar(qid=ev.at, size=size)
+        except Exception:
+            img = None
+
+    # 尝试获取使用者头像
+    if img is None:
+        try:
+            img = await get_user_avatar(qid=ev.user_id, size=size)
         except Exception:
             img = None
 
@@ -344,13 +329,6 @@ async def get_event_avatar(
                 img = Image.open(BytesIO(content)).convert("RGBA")
             except Exception:
                 img = None
-
-    # 尝试获取使用者头像
-    if img is None and get_bot_avatar:
-        try:
-            img = await get_bot_avatar(ev.user_id, size=size)
-        except Exception:
-            img = None
 
     if img is None and avatar_path:
         pic_path_list = list(avatar_path.iterdir())

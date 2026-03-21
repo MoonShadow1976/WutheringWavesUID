@@ -40,8 +40,8 @@ from ..utils.image import (
     WAVES_VOID,
     add_footer,
     get_ICON,
-    get_qq_avatar,
     get_square_avatar,
+    get_user_avatar,
     get_waves_bg,
 )
 from ..utils.util import get_version
@@ -259,7 +259,7 @@ async def draw_rank_card(
 
     # 获取头像
     details = rank_list
-    tasks = [get_user_avatar(detail.user_id) for detail in details]
+    tasks = [get_avatar(detail.user_id) for detail in details]
     results = await asyncio.gather(*tasks)
 
     # bot颜色映射
@@ -501,29 +501,28 @@ async def draw_rank_card(
     return await convert_img(card_img)
 
 
-async def get_user_avatar(user_id: str) -> Image.Image:
+async def get_avatar(user_id: str) -> Image.Image:
     """获取用户头像 - 与练度总排行一致"""
-    from ..wutheringwaves_config import WutheringWavesConfig
-
-    # 检查user_id 为纯数字
-    if user_id and user_id.isdigit():
+    try:
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(user_id)
             if not pic:
-                pic = await get_qq_avatar(user_id, size=100)
+                pic = await get_user_avatar(user_id, size=100)
                 pic_cache.set(user_id, pic)
         else:
-            pic = await get_qq_avatar(user_id, size=100)
+            pic = await get_user_avatar(user_id, size=100)
             pic_cache.set(user_id, pic)
-        pic_temp = crop_center_img(pic, 120, 120)
 
+        # 统一处理 crop 和遮罩（onebot/discord 共用逻辑）
+        pic_temp = crop_center_img(pic, 120, 120)
         img = Image.new("RGBA", (180, 180))
         avatar_mask_temp = avatar_mask.copy()
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
-    else:
-        default_avatar_char_id = "1505"
-        pic = await get_square_avatar(default_avatar_char_id)
+
+    except Exception:
+        # 打印异常，进行降级处理
+        pic = await get_square_avatar("1505")
 
         pic_temp = Image.new("RGBA", pic.size)
         pic_temp.paste(pic.resize((160, 160)), (10, 10))

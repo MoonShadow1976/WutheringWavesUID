@@ -164,7 +164,7 @@ async def draw_refresh_char_detail_img(
     refresh_type: str | list[str] = "all",
     need_boolean: bool = False,
 ):
-    if ev.bot_id == "discord" or ev.bot_id == "qqgroup":
+    if ev.bot_id in ["discord", "qqgroup", "qq_official"]:
         await sync_non_onebot_user_avatar(ev)
 
     if waves_api.is_net(uid):

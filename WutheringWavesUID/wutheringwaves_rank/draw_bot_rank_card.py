@@ -33,7 +33,6 @@ from ..utils.fonts.waves_fonts import (
     waves_font_44,
 )
 from ..utils.image import (
-    AVATAR_GETTERS,
     CHAIN_COLOR,
     GREY,
     RED,
@@ -45,6 +44,7 @@ from ..utils.image import (
     get_role_pile_old,
     get_square_avatar,
     get_square_weapon,
+    get_user_avatar,
     get_waves_bg,
 )
 from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
@@ -255,7 +255,7 @@ async def get_waves_token_condition(ev):
     WavesRankUseTokenGroup = WutheringWavesConfig.get_config("WavesRankUseTokenGroup").data
     # 全局 主人定义的
     RankUseToken = WutheringWavesConfig.get_config("RankUseToken").data
-    if (WavesRankUseTokenGroup and ev.group_id in WavesRankUseTokenGroup) or RankUseToken:
+    if (WavesRankUseTokenGroup and ev.group_id and ev.group_id in WavesRankUseTokenGroup) or RankUseToken:
         wavesTokenUsers = await WavesUser.get_waves_all_user()
         wavesTokenUsersMap = {(w.user_id, w.uid): w.cookie for w in wavesTokenUsers}
         flag = True
@@ -563,15 +563,13 @@ async def get_avatar(
     char_id: int | str,
 ) -> Image.Image:
     try:
-        get_bot_avatar = AVATAR_GETTERS.get(ev.bot_id)
-
         if WutheringWavesConfig.get_config("QQPicCache").data:
             pic = pic_cache.get(qid)
             if not pic:
-                pic = await get_bot_avatar(qid, size=100)
+                pic = await get_user_avatar(qid, size=100)
                 pic_cache.set(qid, pic)
         else:
-            pic = await get_bot_avatar(qid, size=100)
+            pic = await get_user_avatar(qid, size=100)
             pic_cache.set(qid, pic)
 
         # 统一处理 crop 和遮罩（onebot/discord 共用逻辑）
@@ -581,9 +579,9 @@ async def get_avatar(
         mask_pic_temp = avatar_mask_temp.resize((120, 120))
         img.paste(pic_temp, (0, -5), mask_pic_temp)
 
-    except Exception:
+    except Exception as e:
         # 打印异常，进行降级处理
-        logger.warning("头像获取失败，使用默认头像")
+        logger.warning(f"头像获取失败，使用默认头像: {e}")
         pic = await get_square_avatar(char_id)
 
         pic_temp = Image.new("RGBA", pic.size)

@@ -3,7 +3,6 @@ import copy
 from pathlib import Path
 
 from gsuid_core.bot import Bot
-from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -182,7 +181,6 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages:
         if not waves_id_list:
             return f"{user_type}内暂无用户"
 
-    logger.info(f"获取{rank_type_clean}排行，请求参数：{pages=}, {waves_id=}, {waves_id_list=}")
     # 获取排行数据
     rank_data = await get_gacha_rank(
         rank_type=api_rank_type,
@@ -199,7 +197,7 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages:
         return f"{rank_type_clean}暂无数据"
 
     # 绘制排行榜
-    return await draw_rank_card(ev, rank_data, rank_type_clean, waves_id)
+    return await draw_rank_card(ev, rank_data, rank_type_clean, waves_id, user_type)
 
 
 async def draw_rank_card(
@@ -207,6 +205,7 @@ async def draw_rank_card(
     rank_data,
     rank_type: str,
     user_waves_id: str,
+    user_type: str = "",
 ) -> bytes:
     """绘制排行卡片 - 采用练度总排行风格"""
     rank_list = rank_data.data.rank_list
@@ -453,7 +452,7 @@ async def draw_rank_card(
             max_up = detail.max_consecutive_up
             up_color = SPECIAL_GOLD if max_up >= 3 else "white"
             bar_draw.text((700, 35), f"{max_up}", up_color, waves_font_40, "mm")
-            bar_draw.text((700, 70), "连金", GREY, waves_font_16, "mm")
+            bar_draw.text((700, 70), "连续UP", GREY, waves_font_16, "mm")
 
             # 平均UP
             avg_up = detail.avg_up
@@ -507,7 +506,8 @@ async def draw_rank_card(
     title_bg.paste(icon, (60, 240), icon)
 
     # title
-    title_text = f"#{rank_type}"
+    user_type = "群" if user_type == "group" else user_type
+    title_text = f"#{user_type}{rank_type}" if user_type else f"#{rank_type}"
     title_bg_draw = ImageDraw.Draw(title_bg)
     title_bg_draw.text((220, 290), title_text, "white", waves_font_58, "lm")
 

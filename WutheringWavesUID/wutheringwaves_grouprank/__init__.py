@@ -10,7 +10,19 @@ from .models import GroupRankRecord
 sv_endless_group_rank = SV("ww群排行", priority=4)
 
 
-@sv_endless_group_rank.on_regex(("无尽排行", "无尽排名"), block=True)
+@sv_endless_group_rank.on_regex(
+    (
+        "无尽排行",
+        "无尽排名",
+        "无尽群排行",
+        "无尽群排名",
+        "冥海排行",
+        "冥海排名",
+        "冥海群排行",
+        "冥海群排名",
+    ),
+    block=True,
+)
 async def send_endless_rank_card(bot: Bot, ev: Event):
     """处理“无尽排行”命令，显示当前赛季的群内排行。"""
     index = 0  # 0 表示当前赛季, 1 表示上一个赛季

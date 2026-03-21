@@ -272,6 +272,7 @@ class GachaRankItem(BaseModel):
     waves_id: str
     version: str
     rank_type: str  # character_event, weapon_event, lucky_rank, unlucky_rank
+    waves_id_list: list[str] = []
 
 
 class GachaRankDetail(BaseModel):

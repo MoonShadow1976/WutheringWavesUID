@@ -10,7 +10,7 @@ from .models import GroupRankRecord
 sv_endless_group_rank = SV("ww群排行", priority=4)
 
 
-@sv_endless_group_rank.on_command(("无尽排行", "无尽排名"), block=True)
+@sv_endless_group_rank.on_regex(("无尽排行", "无尽排名"), block=True)
 async def send_endless_rank_card(bot: Bot, ev: Event):
     """处理“无尽排行”命令，显示当前赛季的群内排行。"""
     index = 0  # 0 表示当前赛季, 1 表示上一个赛季
@@ -59,7 +59,7 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
     """
     try:
         # 1. 获取用户
-        param = ev.text.strip()
+        param = ev.text.strip().lower()
         if "bot" in param:
             users = await WavesBind.get_all_data()
         else:

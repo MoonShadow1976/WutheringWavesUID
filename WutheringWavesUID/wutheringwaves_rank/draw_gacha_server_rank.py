@@ -3,6 +3,7 @@ import copy
 from pathlib import Path
 
 from gsuid_core.bot import Bot
+from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -69,6 +70,7 @@ async def get_gacha_rank(
     page: int = 1,
     page_num: int = 20,
     waves_id: str = "",
+    waves_id_list: list[str] = [],
 ) -> GachaRankRes | None:
     """
     获取抽卡排行数据
@@ -84,6 +86,7 @@ async def get_gacha_rank(
         page: 页码
         page_num: 每页数量
         waves_id: 用户特征码（可选）
+        waves_id_list: 请求用户特征码列表（可选）
 
     Returns:
         GachaRankRes: 排行榜数据，失败返回None
@@ -100,6 +103,7 @@ async def get_gacha_rank(
         waves_id=waves_id,
         version=get_version(),
         rank_type=rank_type,
+        waves_id_list=waves_id_list,
     )
 
     async with httpx.AsyncClient() as client:
@@ -119,11 +123,11 @@ async def get_gacha_rank(
             else:
                 return None
 
-        except Exception as e:
+        except Exception:
             return None
 
 
-async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str) -> str | bytes:
+async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages: int = 1, user_type: str = "") -> str | bytes:
     """
     绘制抽卡排行榜图片
 
@@ -153,6 +157,8 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str) -> str
     if not api_rank_type:
         return f"未知的排行类型: {rank_type_clean}"
 
+    pages = max(min(pages, 10), 1)  # 大于1小于10
+
     # 获取用户的waves_id（如果有绑定）
     from ..utils.database.models import WavesBind
 
@@ -160,12 +166,30 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str) -> str
     if not waves_id:
         waves_id = ""
 
+    # 获取请求用户特征码列表
+    users = []
+    if user_type == "bot":
+        users = await WavesBind.get_all_data()
+    elif user_type == "group":
+        if not ev.group_id:
+            return "请在群聊中使用"
+        users = await WavesBind.get_group_all_uid(ev.group_id)
+
+    waves_id_list = []
+    if users:
+        # 集合推导式，自动去重，然后转换为列表
+        waves_id_list = list({uid for user in users if user.uid for uid in user.uid.split('_')})
+        if not waves_id_list:
+            return f"{user_type}内暂无用户"
+
+    logger.info(f"获取{rank_type_clean}排行，请求参数：{pages=}, {waves_id=}, {waves_id_list=}")
     # 获取排行数据
     rank_data = await get_gacha_rank(
         rank_type=api_rank_type,
-        page=1,
+        page=pages,
         page_num=20,
         waves_id=waves_id,
+        waves_id_list=waves_id_list,
     )
 
     if not rank_data:

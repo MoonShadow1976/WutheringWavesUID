@@ -390,7 +390,7 @@
       {
         "name": "欧狗榜",
         "desc": "欧狗榜",
-        "eg": "欧狗榜",
+        "eg": "(群/bot)欧狗榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -398,7 +398,7 @@
       {
         "name": "武器欧狗榜",
         "desc": "武器欧狗榜",
-        "eg": "武器欧狗榜",
+        "eg": "(群/bot)武器欧狗榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -430,7 +430,7 @@
       {
         "name": "非酋榜",
         "desc": "非酋榜",
-        "eg": "非酋榜",
+        "eg": "(群/bot)非酋榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -438,7 +438,7 @@
       {
         "name": "武器非酋榜",
         "desc": "武器非酋榜",
-        "eg": "武器非酋榜",
+        "eg": "(群/bot)武器非酋榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -470,7 +470,7 @@
       {
         "name": "连金榜",
         "desc": "连金榜",
-        "eg": "连金榜",
+        "eg": "(群/bot)连金榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -478,7 +478,7 @@
       {
         "name": "连歪榜",
         "desc": "连歪榜",
-        "eg": "连歪榜",
+        "eg": "(群/bot)连歪榜(2)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -486,7 +486,7 @@
       {
         "name": "无尽群排行",
         "desc": "无尽群排行",
-        "eg": "无尽排行(bot)(上期)",
+        "eg": "(群/bot)无尽排行(上期)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

@@ -133,16 +133,26 @@ async def send_total_rank_card(bot: Bot, ev: Event):
     await bot.send(im)
 
 
-@sv_waves_gacha_server_rank.on_fullmatch(("欧狗榜", "武器欧狗榜", "连金榜", "连歪榜", "非酋榜", "武器非酋榜"), block=True)
+@sv_waves_gacha_server_rank.on_regex(("连金榜", "连歪榜", "武器欧狗榜", "欧狗榜", "武器非酋榜", "非酋榜"), block=True)
 async def send_gacha_server_rank_card(bot: Bot, ev: Event):
-    """抽卡全服排行榜（基于服务器API）"""
-    # 使用 raw_text 去除前缀后获取命令
-    # 例如: "ww连金榜" -> "连金榜"
-    from ..wutheringwaves_config import PREFIX
+    """抽卡全服排行榜（基于服务器API）(支持群聊与bot用户)"""
+    rank_type = ev.raw_text.strip().lower()
 
-    rank_type = ev.raw_text.replace(PREFIX, "").strip()
+    user_type = ""
+    if "群" in rank_type or "group" in rank_type:
+        user_type = "group"
+    elif "机器人" in rank_type or "bot" in rank_type:
+        user_type = "bot"
 
-    im = await draw_gacha_server_rank_img(bot, ev, rank_type)
+    pages = re.search(r"(\d+)", rank_type)
+    pages = int(pages.group(1)) if pages else 1
+
+    for i in ["连金榜", "连歪榜", "武器欧狗榜", "欧狗榜", "武器非酋榜", "非酋榜"]:
+        if i in rank_type:  # 清洗多余的参数，如："ww群武器欧狗榜" -> "武器欧狗榜"，请求总排行需要干净
+            rank_type = i
+            break
+
+    im = await draw_gacha_server_rank_img(bot, ev, rank_type, pages, user_type)
 
     if isinstance(im, str):
         at_sender = True if ev.group_id else False

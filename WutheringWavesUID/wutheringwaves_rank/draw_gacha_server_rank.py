@@ -178,7 +178,7 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages:
     waves_id_list = []
     if users:
         # 集合推导式，自动去重，然后转换为列表
-        waves_id_list = list({uid for user in users if user.uid for uid in user.uid.split('_')})
+        waves_id_list = list({uid for user in users if user.uid for uid in user.uid.split("_")})
         if not waves_id_list:
             return f"{user_type}内暂无用户"
 

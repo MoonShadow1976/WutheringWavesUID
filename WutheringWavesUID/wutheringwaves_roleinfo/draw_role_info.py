@@ -140,6 +140,23 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
 
         for b in account_info.treasureBoxList:
             base_info_value_list.append({"key": b.name, "value": f"{b.num}", "info_block": ""})
+    else:
+        base_info_value_list = [
+            {"key": "当前账号", "value": "= =", "info_block": "",},
+            {"key": "无完整数据", "value": "! ! !", "info_block": ""},
+            {"key": "", "value": "", "info_block": "",},
+            {"key": "请登录获取", "value": "√", "info_block": ""},
+            {"key": "", "value": "", "info_block": "",},
+            {"key": "完整数据", "value": "", "info_block": "",},
+            {"key": "可以查看", "value": "", "info_block": ""},
+            {"key": "活跃天数", "value": "", "info_block": "",},
+            {"key": "还有宝箱", "value": "", "info_block": ""},
+            {"key": "", "value": "", "info_block": "",},
+            {"key": "国际服用户", "value": "", "info_block": "",},
+            {"key": "成就要抓包", "value": "! ! !", "info_block": "",},
+        ]
+        # 提示重新登录，走is_full
+        account_info.creatTime = 1
 
     # 初始化基础信息栏位
     bs = Image.open(TEXT_PATH / "bs.png")
@@ -147,7 +164,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     # 角色信息
     roleTotalNum = (
         account_info.roleNum
-        if (account_info.is_full and "!请稍后重试!" not in account_info.name and account_info.activeDays != 0)
+        if (account_info.roleNum and account_info.is_full and "!请稍后重试!" not in account_info.name and account_info.activeDays != 0)
         else len(role_info.roleList)
     )
     xset = 50

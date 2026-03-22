@@ -79,7 +79,7 @@ async def get_gacha_log_by_link(bot: Bot, ev: Event):
 @sv_gacha_log.on_fullmatch("抽卡记录")
 async def send_gacha_log_card_info(bot: Bot, ev: Event):
     await bot.logger.info("[鸣潮]开始执行 抽卡记录")
-    uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
+    uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)  # 影响后面总排行上传
     if not uid:
         return await bot.send(ERROR_CODE[WAVES_CODE_103])
 

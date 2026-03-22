@@ -29,10 +29,11 @@ from ..utils.image import (
     get_square_weapon,
     get_waves_bg,
 )
-from ..utils.queues.const import QUEUE_GACHA_RECORD
+from ..utils.queues.const import QUEUE_GACHA_RECORD, QUEUE_SCORE_RANK
 from ..utils.queues.queues import push_item
 from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
+from ..utils.util import get_version
 from ..wutheringwaves_config import PREFIX
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -471,6 +472,21 @@ async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
 
         # 添加到上传队列
         push_item(QUEUE_GACHA_RECORD, upload_data)
+
+        # 上传用户基本信息
+        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+
+        base_info = await get_user_detail_info(uid)
+        metadata = {
+            "user_id": ev.user_id,
+            "waves_id": f"{uid}",
+            "kuro_name": base_info.name,
+            "version": get_version(),
+            "char_info": [],
+            "role_num": 0,
+            "single_refresh": 0,
+        }
+        push_item(QUEUE_SCORE_RANK, metadata)
 
     except Exception as e:
         # 记录错误但不影响主要功能

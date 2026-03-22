@@ -48,16 +48,38 @@ gachalogs_history_meta = {
 ERROR_MSG_INVALID_LINK = "当前抽卡链接已经失效，请重新导入抽卡链接"
 
 
-def find_length(A, B) -> int:
-    """数组最长公共子串长度"""
-    n, m = len(A), len(B)
-    dp = [[0] * (m + 1) for _ in range(n + 1)]
-    ans = 0
-    for i in range(n - 1, -1, -1):
-        for j in range(m - 1, -1, -1):
-            dp[i][j] = dp[i + 1][j + 1] + 1 if A[i] == B[j] else 0
-            ans = max(ans, dp[i][j])
-    return ans
+def find_longest_suffix_in_old(
+    old: list[GachaLog], new: list[GachaLog]
+) -> tuple[tuple[int, int], tuple[int, int]] | None:
+    """
+    返回以新记录最后一个元素结尾的最长公共子串的索引范围。
+    如果不存在任何匹配，返回 None。
+    返回值格式：((old_start, old_end), (new_start, new_end))
+    """
+    n, m = len(old), len(new)
+    max_len = 0
+    best_old_end = best_new_end = -1
+
+    # 新记录从末尾开始向前检查，旧记录从任意位置开始向后匹配
+    for i in range(m):   # i 表示新记录中匹配的起始索引（从 0 到 m-1）
+        # 当前新记录的后缀是 new[i:]
+        # 我们希望在 old 中找到与这个后缀相等的最长子串
+        # 可以通过遍历 old 的每个位置 j，尝试匹配
+        for j in range(n):
+            # 从 (i, j) 开始向后匹配，直到不相等或越界
+            k = 0
+            while i + k < m and j + k < n and new[i + k] == old[j + k]:
+                k += 1
+            # 如果这个匹配延伸到新记录的末尾（i+k == m），且长度大于当前最大
+            if i + k == m and k > max_len:
+                max_len = k
+                best_old_end = j + k - 1
+                best_new_end = i + k - 1
+
+    if max_len == 0:
+        return None
+
+    return (best_old_end - max_len + 1, best_old_end), (best_new_end - max_len + 1, best_new_end)
 
 
 # 找到两个数组中最长公共子串的下标
@@ -124,17 +146,21 @@ async def get_new_gachalog(
         for log in gacha_log:
             if log.cardPoolType != card_pool_type:
                 log.cardPoolType = card_pool_type
-        indices = find_longest_common_subarray_indices(full_data[gacha_name], gacha_log)
+        indices = find_longest_suffix_in_old(full_data[gacha_name], gacha_log)
         if not indices:
+            # 理论上不会发生（新记录末尾至少有一项能与旧记录匹配），但以防万一：
+            # 选择保存所有新记录，保持旧记录不变
             _add = gacha_log
             _old = full_data[gacha_name]
         else:
-            (a_start, a_end), (b_start, b_end) = indices
-            _add = gacha_log[:b_start]
-            _old = full_data[gacha_name][a_start:]
-            if a_start > 0:
+            (old_start, old_end), (new_start, new_end) = indices
+            # 新记录中匹配部分（后缀）丢弃，匹配部分之前的是新增数据
+            _add = gacha_log[:new_start]
+            # 旧记录中匹配部分之后的是更早的数据（应保留）
+            _old = full_data[gacha_name][old_start:]
+            if old_start > 0:
                 logger.warning(
-                    f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{a_start}个，与链接记录正确数据{b_end - b_start + 1}个，已忽略错误数据"
+                    f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{old_start}个，与链接记录正确数据{old_end - old_start + 1}个，已忽略错误数据"
                 )
         new[gacha_name] = _add + copy.deepcopy(_old)
         new_count[gacha_name] = len(_add)

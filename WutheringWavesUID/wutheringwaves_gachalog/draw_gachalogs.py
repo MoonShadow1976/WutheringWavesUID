@@ -474,17 +474,34 @@ async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
         push_item(QUEUE_GACHA_RECORD, upload_data)
 
         # 上传用户基本信息
+        from ..utils.expression_ctx import WavesCharRank
         from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
+        fake_role = WavesCharRank(
+            roleId=1000,
+            roleName="抽卡用户基本信息",
+            starLevel=5,
+            level=1,
+            chain=0,
+            chainName="零",
+            score=0,
+            score_bg="c",
+            expected_damage=1,
+            weaponId=10000000,
+            weaponLevel=1,
+            weaponResonLevel=1,
+            sonataName="",
+            expected_name="",
+        )
         base_info = await get_user_detail_info(uid)
         metadata = {
             "user_id": ev.user_id,
             "waves_id": f"{uid}",
             "kuro_name": base_info.name,
             "version": get_version(),
-            "char_info": [],
-            "role_num": 0,
-            "single_refresh": 0,
+            "char_info": [fake_role.to_rank_dict()],
+            "role_num": 1,
+            "single_refresh": 1,
         }
         push_item(QUEUE_SCORE_RANK, metadata)
 

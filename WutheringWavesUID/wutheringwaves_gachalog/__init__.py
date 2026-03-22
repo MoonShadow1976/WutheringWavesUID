@@ -6,14 +6,17 @@ from gsuid_core.models import Event
 from gsuid_core.segment import MessageSegment
 from gsuid_core.sv import SV
 
+from ..utils.bot_url import get_url
 from ..utils.button import WavesButton
 from ..utils.database.models import WavesBind
 from ..utils.error_reply import ERROR_CODE, WAVES_CODE_103
 from ..wutheringwaves_config import PREFIX
 from .draw_gachalogs import draw_card, draw_card_help
+from .edit_gachalogs import send_edit_link
 from .get_gachalogs import export_gachalogs, import_gachalogs, save_gachalogs
 
 sv_gacha_log = SV("waves抽卡记录")
+sv_edit_gacha_log = SV("waves修改抽卡记录")
 sv_gacha_help_log = SV("waves抽卡记录帮助")
 sv_get_gachalog_by_link = SV("waves导入抽卡链接", area="DIRECT")
 sv_import_gacha_log = SV("waves导入抽卡记录", area="DIRECT")
@@ -85,6 +88,16 @@ async def send_gacha_log_card_info(bot: Bot, ev: Event):
 
     im = await draw_card(uid, ev)
     await bot.send(im)
+
+
+@sv_edit_gacha_log.on_fullmatch("修改抽卡记录")
+async def edit_gacha_log(bot: Bot, ev: Event):
+    await bot.logger.info("[鸣潮]开始执行 修改抽卡记录")
+    url, is_local = await get_url()
+    if is_local:
+        await send_edit_link(bot, ev, url)
+    else:
+        await bot.send("当前环境不支持外网访问，请使用本地地址。")
 
 
 @sv_gacha_help_log.on_fullmatch(("抽卡帮助", "抽卡分析"))

@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鸣潮抽卡记录编辑器</title>
+    <style>
+        /* 原有样式保持不变，此处省略，实际使用时请保留原样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .info-panel {
+            padding: 20px 30px;
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            margin: 0 30px 20px;
+            border-radius: 4px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .info-item strong {
+            color: #1976D2;
+        }
+
+        .filters {
+            padding: 20px 30px;
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        .table-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .quality-3 {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .quality-4 {
+            color: #9b59b6;
+            font-weight: 600;
+        }
+
+        .quality-5 {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .editable {
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .editable:hover {
+            background: #e9ecef;
+        }
+
+        .editing {
+            background: #fff3cd;
+        }
+
+        .edit-input {
+            width: 100%;
+            padding: 4px 8px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .stats {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-card h4 {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 30px;
+            color: #6c757d;
+        }
+
+        .empty-state svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .pagination {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            max-width: 400px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid #28a745;
+        }
+
+        .toast.error {
+            border-left: 4px solid #dc3545;
+        }
+
+        .toast.warning {
+            border-left: 4px solid #ffc107;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+            color: #212529;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌊 鸣潮抽卡记录编辑器</h1>
+            <p>导入、编辑、保存您的抽卡记录数据</p>
+            <div id="countdown" style="font-size: 14px; margin-top: 10px; opacity: 0.9;">剩余时间: --:--</div>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <div class="file-input-wrapper">
+                    <label for="fileInput" class="btn btn-primary">📁 导入JSON文件</label>
+                    <input type="file" id="fileInput" accept=".json">
+                </div>
+                <button class="btn btn-success" id="exportBtn" disabled>💾 导出JSON</button>
+                <!-- 保存按钮和获取按钮初始隐藏，根据权限显示 -->
+                <button class="btn btn-success" id="saveBtn" style="display: none;" disabled>💾 保存到服务器</button>
+                <button class="btn btn-info" id="fetchBtn" style="display: none;" disabled>📥 从服务器获取</button>
+                <button class="btn btn-warning" id="addRecordBtn" disabled>➕ 添加记录</button>
+                <button class="btn btn-warning" id="batchInsertBtn" disabled>📦 批量插入</button>
+                <button class="btn btn-danger" id="deleteSelectedBtn" disabled>🗑️ 删除选中</button>
+                <button class="btn btn-danger" id="closeBtn">🚪 关闭界面</button>
+            </div>
+        </div>
+
+        <div id="infoPanel" class="info-panel" style="display: none;">
+            <h3>📊 文件信息</h3>
+            <div class="info-grid">
+                <div class="info-item"><strong>UID:</strong><span id="infoUid">-</span></div>
+                <div class="info-item"><strong>导出时间:</strong><span id="infoExportTime">-</span></div>
+                <div class="info-item"><strong>导出应用:</strong><span id="infoExportApp">-</span></div>
+                <div class="info-item"><strong>版本:</strong><span id="infoVersion">-</span></div>
+                <div class="info-item"><strong>总记录数:</strong><span id="infoTotalRecords">-</span></div>
+            </div>
+        </div>
+
+        <div id="filters" class="filters" style="display: none;">
+            <div class="filter-group"><label>卡池类型:</label><select id="poolTypeFilter">
+                    <option value="">全部</option>
+                </select></div>
+            <div class="filter-group"><label>品质:</label><select id="qualityFilter">
+                    <option value="">全部</option>
+                    <option value="5">5星</option>
+                    <option value="4">4星</option>
+                    <option value="3">3星</option>
+                </select></div>
+            <div class="filter-group"><label>类型:</label><select id="resourceTypeFilter">
+                    <option value="">全部</option>
+                    <option value="角色">角色</option>
+                    <option value="武器">武器</option>
+                </select></div>
+            <div class="filter-group"><label>搜索:</label><input type="text" id="searchInput" placeholder="搜索名称..."></div>
+            <div class="filter-group">
+                <label>序号范围:</label>
+                <input type="number" id="rangeStart" placeholder="起始" min="1" style="width:80px;">
+                <span>-</span>
+                <input type="number" id="rangeEnd" placeholder="结束" min="1" style="width:80px;">
+                <button class="btn btn-sm btn-primary" id="rangeSelectBtn">选择范围</button>
+            </div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+            <h3>暂无数据</h3>
+            <p>请导入JSON文件开始编辑</p>
+        </div>
+
+        <div id="tableContainer" class="table-container" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>序号</th>
+                        <th>卡池类型</th>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>品质</th>
+                        <th>距上个5星</th>
+                        <th>资源ID</th>
+                        <th>数量</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="pagination" class="pagination" style="display: none;">
+            <div class="pagination-info">显示 <span id="pageStart">0</span> - <span id="pageEnd">0</span> / 共 <span
+                    id="totalRecords">0</span> 条</div>
+            <div class="pagination-controls"><button class="btn btn-sm btn-primary" id="prevPage">上一页</button><button
+                    class="btn btn-sm btn-primary" id="nextPage">下一页</button></div>
+        </div>
+
+        <div id="stats" class="stats" style="display: none;">
+            <div class="stats-grid" id="statsGrid"></div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">编辑记录</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label>卡池类型:</label><select id="editCardPoolType">
+                        <option value="角色精准调谐">角色精准调谐</option>
+                        <option value="武器精准调谐">武器精准调谐</option>
+                        <option value="角色调谐（常驻池）">角色调谐（常驻池）</option>
+                        <option value="武器调谐（常驻池）">武器调谐（常驻池）</option>
+                        <option value="新手调谐">新手调谐</option>
+                        <option value="新手自选唤取">新手自选唤取</option>
+                        <option value="新手自选唤取（感恩定向唤取）">新手自选唤取（感恩定向唤取）</option>
+                        <option value="角色新旅唤取">角色新旅唤取</option>
+                        <option value="武器新旅唤取">武器新旅唤取</option>
+                    </select></div>
+                <div class="form-group"><label>名称:</label><input type="text" id="editName"></div>
+                <div class="form-group"><label>类型:</label><select id="editResourceType">
+                        <option value="角色">角色</option>
+                        <option value="武器">武器</option>
+                    </select></div>
+                <div class="form-group"><label>品质:</label><select id="editQualityLevel">
+                        <option value="3">3星</option>
+                        <option value="4">4星</option>
+                        <option value="5">5星</option>
+                    </select></div>
+                <div class="form-group"><label>资源ID:</label><input type="number" id="editResourceId"></div>
+                <div class="form-group"><label>数量:</label><input type="number" id="editCount" value="1"></div>
+                <div class="form-group"><label>时间:</label><input type="datetime-local" id="editTime"></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" id="saveEdit">保存</button><button class="btn"
+                    id="cancelEdit">取消</button></div>
+        </div>
+    </div>
+
+    <div id="batchInsertModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📦 批量插入记录</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label>插入位置（在此记录之后插入）:</label><select id="batchInsertPosition">
+                        <option value="start">开始位置（最新）</option>
+                    </select></div>
+                <div class="form-group"><label>卡池类型:</label><select id="batchCardPoolType">
+                        <option value="角色精准调谐">角色精准调谐</option>
+                        <option value="武器精准调谐">武器精准调谐</option>
+                        <option value="角色调谐（常驻池）">角色调谐（常驻池）</option>
+                        <option value="武器调谐（常驻池）">武器调谐（常驻池）</option>
+                        <option value="新手调谐">新手调谐</option>
+                        <option value="新手自选唤取">新手自选唤取</option>
+                        <option value="新手自选唤取（感恩定向唤取）">新手自选唤取（感恩定向唤取）</option>
+                        <option value="角色新旅唤取">角色新旅唤取</option>
+                        <option value="武器新旅唤取">武器新旅唤取</option>
+                    </select></div>
+                <div class="form-group"><label>插入数量:</label><input type="number" id="batchInsertCount" value="10"
+                        min="1" max="100"></div>
+                <div class="form-group"><label>品质:</label><select id="batchQualityLevel">
+                        <option value="3">3星</option>
+                        <option value="4">4星</option>
+                        <option value="5">5星</option>
+                    </select></div>
+                <div class="form-group"><label>类型:</label><select id="batchResourceType">
+                        <option value="角色">角色</option>
+                        <option value="武器">武器</option>
+                    </select></div>
+                <div class="form-group"><label>名称（可选，留空自动生成）:</label><input type="text" id="batchName"
+                        placeholder="留空将自动生成"></div>
+                <div class="form-group"><label>资源ID（可选，留空自动生成）:</label><input type="number" id="batchResourceId"
+                        placeholder="留空将自动生成"></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" id="saveBatchInsert">批量插入</button><button
+                    class="btn" id="cancelBatchInsert">取消</button></div>
+        </div>
+    </div>
+
+    <script>
+        // 从模板传入的权限等级和auth
+        const userPm = {{ userPm }};
+        const timeoutSeconds = {{ timeout }};   // 从后端获取超时时间（秒）
+        const poolTypes = {{ poolTypes | safe }};
+        const auth = window.location.pathname.split('/').pop();
+        let gachaData = null;
+        let currentPage = 1;
+        const itemsPerPage = 50;
+        let filteredData = [];
+        let selectedRows = new Set();
+        let editingIndex = -1;
+
+        // 超级管理员（pm <= 1）不自动加载数据
+        const autoLoad = userPm > 1;  // true: 普通用户自动加载；false: 超级管理员手动加载
+
+        // 根据权限显示或隐藏保存和获取按钮
+        if (userPm <= 1) {
+            document.getElementById('saveBtn').style.display = 'inline-flex';
+            document.getElementById('fetchBtn').style.display = 'inline-flex';
+        }
+
+        let timerInterval = null;
+
+        function startCountdown(seconds) {
+            let remaining = seconds;
+            const countdownEl = document.getElementById('countdown');
+            function updateDisplay() {
+                const minutes = Math.floor(remaining / 60);
+                const secs = remaining % 60;
+                countdownEl.textContent = `剩余时间: ${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                if (remaining <= 0) {
+                    clearInterval(timerInterval);
+                    showToast('页面已超时，即将关闭', 'warning');
+                    // 通知后端删除缓存（不等待结果，避免阻塞关闭）
+                    fetch(`/waves/close/${auth}`, { method: 'DELETE' }).catch(err => console.error(err));
+                }
+                remaining--;
+            }
+            updateDisplay();
+            timerInterval = setInterval(updateDisplay, 1000);
+        }
+
+        // 页面加载时从服务器获取数据
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (autoLoad) {
+                // 普通用户：自动加载自己的数据
+                try {
+                    const response = await fetch(`/waves/edit_data/${auth}`);
+                    if (!response.ok) {
+                        const error = await response.json();
+                        showToast(error.msg || '加载数据失败', 'error');
+                        return;
+                    }
+                    const data = await response.json();
+                    if (validateGachaData(data)) {
+                        gachaData = data;
+                        initializeData();
+                        showToast('数据加载成功', 'success');
+                    } else {
+                        showToast('数据格式错误', 'error');
+                    }
+                } catch (err) {
+                    showToast('网络错误：' + err.message, 'error');
+                }
+            } else {
+                // 超级管理员：显示空状态，等待手动获取
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('infoPanel').style.display = 'none';
+                document.getElementById('filters').style.display = 'none';
+                document.getElementById('tableContainer').style.display = 'none';
+                document.getElementById('pagination').style.display = 'none';
+                document.getElementById('stats').style.display = 'none';
+                // 启用获取按钮，保存按钮先禁用（等有数据后再启用）
+                document.getElementById('fetchBtn').disabled = false;
+                document.getElementById('saveBtn').disabled = true;
+                // 修改空状态提示文字
+                const emptyDiv = document.getElementById('emptyState');
+                emptyDiv.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    <h3>暂无数据</h3>
+                    <p>请点击“从服务器获取”按钮加载抽卡记录。</p>
+                `;
+            }
+            startCountdown(timeoutSeconds);  // 启动倒计时
+        });
+
+        // 验证数据格式
+        function validateGachaData(data) {
+            return data && data.info && data.info.uid && data.list && Array.isArray(data.list);
+        }
+
+        // 初始化数据（不再依赖文件导入）
+        function initializeData() {
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('infoPanel').style.display = 'block';
+            document.getElementById('filters').style.display = 'flex';
+            document.getElementById('tableContainer').style.display = 'block';
+            document.getElementById('pagination').style.display = 'flex';
+            document.getElementById('stats').style.display = 'block';
+
+            document.getElementById('exportBtn').disabled = false;
+            // 保存按钮根据权限启用
+            if (userPm <= 1) document.getElementById('saveBtn').disabled = false;
+            document.getElementById('fetchBtn').disabled = false;
+            document.getElementById('addRecordBtn').disabled = false;
+            document.getElementById('batchInsertBtn').disabled = false;
+
+            updateInfoPanel();
+            updatePoolTypeFilter();
+            applyFilters();
+            updateStats();
+        }
+
+        // 更新信息面板
+        function updateInfoPanel() {
+            document.getElementById('infoUid').textContent = gachaData.info.uid || '-';
+            document.getElementById('infoExportTime').textContent = gachaData.info.export_time || '-';
+            document.getElementById('infoExportApp').textContent = gachaData.info.export_app || '-';
+            document.getElementById('infoVersion').textContent = gachaData.info.version || '-';
+            document.getElementById('infoTotalRecords').textContent = gachaData.list.length;
+        }
+
+        // 更新卡池类型筛选器
+        function updatePoolTypeFilter() {
+            const select = document.getElementById('poolTypeFilter');
+            const uniqueTypes = [...new Set(gachaData.list.map(item => item.cardPoolType))];
+            select.innerHTML = '<option value="">全部</option>';
+            uniqueTypes.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                select.appendChild(option);
+            });
+        }
+
+        // 更新序号范围输入框的占位提示（显示当前最大序号）
+        function updateRangePlaceholder() {
+            const total = filteredData.length;
+            if (total > 0) {
+                document.getElementById('rangeStart').placeholder = `1`;
+                document.getElementById('rangeEnd').placeholder = `${total}`;
+            } else {
+                document.getElementById('rangeStart').placeholder = '-';
+                document.getElementById('rangeEnd').placeholder = '-';
+            }
+        }
+
+        // 应用筛选
+        function applyFilters() {
+            const poolType = document.getElementById('poolTypeFilter').value;
+            const quality = document.getElementById('qualityFilter').value;
+            const resourceType = document.getElementById('resourceTypeFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            filteredData = gachaData.list.filter(item => {
+                if (poolType && item.cardPoolType !== poolType) return false;
+                if (quality && item.qualityLevel.toString() !== quality) return false;
+                if (resourceType && item.resourceType !== resourceType) return false;
+                if (search && !item.name.toLowerCase().includes(search)) return false;
+                return true;
+            });
+
+            currentPage = 1;
+            selectedRows.clear();
+            renderTable();
+            updatePagination();
+            updateRangePlaceholder();
+        }
+
+        // 添加范围选择按钮事件
+        document.getElementById('rangeSelectBtn').addEventListener('click', function () {
+            let start = parseInt(document.getElementById('rangeStart').value);
+            let end = parseInt(document.getElementById('rangeEnd').value);
+            const total = filteredData.length;
+            if (isNaN(start)) start = 1;
+            if (isNaN(end)) end = total;
+            if (start < 1) start = 1;
+            if (end > total) end = total;
+            if (start > end) {
+                showToast('起始序号不能大于结束序号', 'warning');
+                return;
+            }
+            if (total === 0) {
+                showToast('没有记录可选', 'warning');
+                return;
+            }
+            // 添加符合条件的索引到 selectedRows
+            for (let i = start - 1; i <= end - 1; i++) {
+                selectedRows.add(i);
+            }
+            // 重新渲染当前页面，以更新 checkbox 状态
+            renderTable();
+            // 更新全选 checkbox 状态（基于当前页）
+            const allCheckboxes = document.querySelectorAll('.row-select');
+            const allChecked = allCheckboxes.length > 0 && Array.from(allCheckboxes).every(cb => cb.checked);
+            document.getElementById('selectAll').checked = allChecked;
+            updateDeleteButton();
+            showToast(`已选中序号 ${start} 到 ${end} 的记录`, 'success');
+        });
+
+        // 计算距离上一个5星的抽数
+        function calculate5StarGaps() {
+            const gaps = {};
+            const oldestIndexPerPool = {};
+
+            // 第一步：记录每个卡池最老记录的索引（最大值）
+            for (let i = 0; i < filteredData.length; i++) {
+                const pool = filteredData[i].cardPoolType;
+                oldestIndexPerPool[pool] = i; // 不断更新，最终保留最后一个（最老）的索引
+            }
+
+            // 第二步：计算每个记录的距离上一个5星的抽数
+            for (let i = 0; i < filteredData.length; i++) {
+                const item = filteredData[i];
+                const pool = item.cardPoolType;
+                let next5StarIndex = -1;
+
+                // 向索引增加方向（更老）查找同卡池的5星
+                for (let j = i + 1; j < filteredData.length; j++) {
+                    if (filteredData[j].cardPoolType === pool && filteredData[j].qualityLevel === 5) {
+                        next5StarIndex = j;
+                        break;
+                    }
+                }
+
+                if (next5StarIndex !== -1) {
+                    gaps[i] = next5StarIndex - i; // 间隔为索引差
+                } else {
+                    const oldestIdx = oldestIndexPerPool[pool];
+                    gaps[i] = oldestIdx - i + 1; // 从最老记录到当前记录的抽数
+                }
+            }
+
+            return gaps;
+        }
+
+        // 渲染表格
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = filteredData.slice(start, end);
+            const gaps = calculate5StarGaps();
+
+            pageData.forEach((item, index) => {
+                const globalIndex = start + index;
+                const gap = gaps[globalIndex] || '-';
+                const gapDisplay = gap !== '-' ? (item.qualityLevel === 5 ? `<strong style="color: #f39c12;">${gap}抽</strong>` : `${gap}抽`) : '-';
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" class="row-select" data-index="${globalIndex}"></td>
+                    <td>${globalIndex + 1}</td>
+                    <td>${item.cardPoolType}</td>
+                    <td class="quality-${item.qualityLevel}">${item.name}</td>
+                    <td>${item.resourceType}</td>
+                    <td class="quality-${item.qualityLevel}">${item.qualityLevel}星</td>
+                    <td>${gapDisplay}</td>
+                    <td>${item.resourceId}</td>
+                    <td>${item.count}</td>
+                    <td>${item.time}</td>
+                    <td class="action-btns">
+                        <button class="btn btn-sm btn-primary edit-btn" data-index="${globalIndex}">编辑</button>
+                        <button class="btn btn-sm btn-warning insert-after-btn" data-index="${globalIndex}" title="在此之后批量插入">📦</button>
+                        <button class="btn btn-sm btn-danger delete-btn" data-index="${globalIndex}">删除</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            document.querySelectorAll('.row-select').forEach(cb => {
+                cb.addEventListener('change', function () {
+                    const idx = parseInt(this.dataset.index);
+                    if (this.checked) selectedRows.add(idx);
+                    else selectedRows.delete(idx);
+                    updateDeleteButton();
+                });
+            });
+            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', function () { openEditModal(parseInt(this.dataset.index)); }));
+            document.querySelectorAll('.insert-after-btn').forEach(btn => btn.addEventListener('click', function () { openBatchInsertModal(parseInt(this.dataset.index)); }));
+            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', function () { deleteRecord(parseInt(this.dataset.index)); }));
+        }
+
+        function updatePagination() {
+            const total = filteredData.length;
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(start + itemsPerPage - 1, total);
+            document.getElementById('pageStart').textContent = total > 0 ? start : 0;
+            document.getElementById('pageEnd').textContent = end;
+            document.getElementById('totalRecords').textContent = total;
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = end >= total;
+        }
+
+        function updateStats() {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = '';
+            const stats = {
+                '总记录数': gachaData.list.length,
+                '5星': gachaData.list.filter(i => i.qualityLevel === 5).length,
+                '4星': gachaData.list.filter(i => i.qualityLevel === 4).length,
+                '3星': gachaData.list.filter(i => i.qualityLevel === 3).length,
+            };
+            poolTypes.forEach(pt => {
+                const cnt = gachaData.list.filter(i => i.cardPoolType === pt).length;
+                if (cnt > 0) stats[pt] = cnt;
+            });
+            Object.entries(stats).forEach(([k, v]) => {
+                const card = document.createElement('div');
+                card.className = 'stat-card';
+                card.innerHTML = `<h4>${k}</h4><div class="value">${v}</div>`;
+                statsGrid.appendChild(card);
+            });
+        }
+
+        function openEditModal(index = -1) {
+            editingIndex = index;
+            const modal = document.getElementById('editModal');
+            if (index >= 0) {
+                const item = filteredData[index];
+                document.getElementById('modalTitle').textContent = '编辑记录';
+                document.getElementById('editCardPoolType').value = item.cardPoolType;
+                document.getElementById('editName').value = item.name;
+                document.getElementById('editResourceType').value = item.resourceType;
+                document.getElementById('editQualityLevel').value = item.qualityLevel;
+                document.getElementById('editResourceId').value = item.resourceId;
+                document.getElementById('editCount').value = item.count;
+                document.getElementById('editTime').value = formatDateTimeLocal(item.time);
+            } else {
+                document.getElementById('modalTitle').textContent = '添加记录';
+                document.getElementById('editCardPoolType').value = '角色精准调谐';
+                document.getElementById('editName').value = '';
+                document.getElementById('editResourceType').value = '角色';
+                document.getElementById('editQualityLevel').value = '4';
+                document.getElementById('editResourceId').value = '';
+                document.getElementById('editCount').value = '1';
+                document.getElementById('editTime').value = formatDateTimeLocal(new Date().toISOString());
+            }
+            modal.classList.add('active');
+        }
+
+        document.getElementById('saveEdit').addEventListener('click', function () {
+            const newItem = {
+                cardPoolType: document.getElementById('editCardPoolType').value,
+                name: document.getElementById('editName').value,
+                resourceType: document.getElementById('editResourceType').value,
+                qualityLevel: parseInt(document.getElementById('editQualityLevel').value),
+                resourceId: parseInt(document.getElementById('editResourceId').value),
+                count: parseInt(document.getElementById('editCount').value),
+                time: formatDateTime(document.getElementById('editTime').value)
+            };
+            if (!newItem.name || !newItem.resourceId) { showToast('请填写完整信息', 'warning'); return; }
+            if (editingIndex >= 0) {
+                const originalIndex = gachaData.list.indexOf(filteredData[editingIndex]);
+                gachaData.list[originalIndex] = newItem;
+                showToast('记录已更新', 'success');
+            } else {
+                gachaData.list.unshift(newItem);
+                showToast('记录已添加', 'success');
+            }
+            closeEditModal();
+            updateInfoPanel();
+            applyFilters();
+            updateStats();
+        });
+
+        function closeEditModal() { document.getElementById('editModal').classList.remove('active'); editingIndex = -1; }
+        document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
+
+        function deleteRecord(index) {
+            if (!confirm('确定要删除这条记录吗？')) return;
+            const originalIndex = gachaData.list.indexOf(filteredData[index]);
+            gachaData.list.splice(originalIndex, 1);
+            showToast('记录已删除', 'success');
+            updateInfoPanel();
+            applyFilters();
+            updateStats();
+        }
+
+        document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
+            if (selectedRows.size === 0) return;
+            if (!confirm(`确定删除选中的${selectedRows.size}条记录吗？`)) return;
+            const indices = Array.from(selectedRows).sort((a, b) => b - a);
+            indices.forEach(idx => {
+                const originalIndex = gachaData.list.indexOf(filteredData[idx]);
+                gachaData.list.splice(originalIndex, 1);
+            });
+            selectedRows.clear();
+            showToast(`已删除${indices.length}条记录`, 'success');
+            updateInfoPanel();
+            applyFilters();
+            updateStats();
+            updateDeleteButton();
+        });
+
+        function updateDeleteButton() { document.getElementById('deleteSelectedBtn').disabled = selectedRows.size === 0; }
+
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            if (confirm('确定要关闭此页面吗？')) {
+                // 通知后端删除缓存（不等待结果，避免阻塞关闭）
+                fetch(`/waves/close/${auth}`, { method: 'DELETE' }).catch(err => console.error(err));
+            }
+        });
+
+        document.getElementById('selectAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('.row-select');
+            checkboxes.forEach(cb => {
+                cb.checked = this.checked;
+                const idx = parseInt(cb.dataset.index);
+                if (this.checked) selectedRows.add(idx);
+                else selectedRows.delete(idx);
+            });
+            updateDeleteButton();
+        });
+
+        // 保存到服务器（仅管理员可见）
+        document.getElementById('saveBtn').addEventListener('click', async function () {
+            if (!gachaData) return;
+            // 更新导出时间
+            const now = new Date();
+            gachaData.info.export_time = formatDateTime(now.toISOString());
+            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
+            try {
+                const response = await fetch(`/waves/edit_data/${auth}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(gachaData)
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showToast('保存成功！', 'success');
+                } else {
+                    showToast(result.msg || '保存失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误：' + err.message, 'error');
+            }
+        });
+
+        // 从服务器获取其他UID的记录（仅管理员可见）
+        document.getElementById('fetchBtn').addEventListener('click', async function () {
+            const uid = prompt('请输入要获取抽卡记录的UID（九位数字）:');
+            if (!uid) return;
+            if (!/^\d{9}$/.test(uid)) {
+                showToast('UID必须是九位数字', 'warning');
+                return;
+            }
+            try {
+                const response = await fetch(`/waves/fetch_gacha/${auth}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ uid: uid })
+                });
+                const result = await response.json();
+                if (response.ok && result.info && result.list) {
+                    gachaData = result;
+                    initializeData();
+                    showToast(`成功加载UID ${uid} 的抽卡记录`, 'success');
+                } else {
+                    showToast(result.msg || '获取失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误：' + err.message, 'error');
+            }
+        });
+
+        // 导出JSON（本地文件）
+        document.getElementById('exportBtn').addEventListener('click', function () {
+            if (!gachaData) return;
+            const now = new Date();
+            gachaData.info.export_time = formatDateTime(now.toISOString());
+            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
+            const dataStr = JSON.stringify(gachaData, null, 4);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `export_${gachaData.info.uid}_edited.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('文件导出成功！', 'success');
+        });
+
+        document.getElementById('addRecordBtn').addEventListener('click', function () { openEditModal(-1); });
+
+        function openBatchInsertModal(afterIndex = -1) {
+            const modal = document.getElementById('batchInsertModal');
+            const posSelect = document.getElementById('batchInsertPosition');
+            posSelect.innerHTML = '<option value="start">开始位置（最新）</option>';
+            filteredData.forEach((item, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `#${idx + 1} - ${item.name} (${item.time})`;
+                if (idx === afterIndex) opt.selected = true;
+                posSelect.appendChild(opt);
+            });
+            // 如果选择了某个记录，将卡池类型默认设置为该记录的卡池类型
+            if (afterIndex >= 0 && filteredData[afterIndex]) {
+                const item = filteredData[afterIndex];
+                document.getElementById('batchCardPoolType').value = item.cardPoolType;
+            }
+            // 重置默认值
+            document.getElementById('batchInsertCount').value = '10';
+            document.getElementById('batchQualityLevel').value = '3';
+            document.getElementById('batchResourceType').value = '武器';
+            document.getElementById('batchName').value = '';
+            document.getElementById('batchResourceId').value = '';
+            modal.classList.add('active');
+        }
+
+        document.getElementById('batchInsertBtn').addEventListener('click', function () { openBatchInsertModal(-1); });
+
+        // 自动计算插入记录的时间（基于前后记录列表）
+        function generateRecordTimes(prevTimes, nextTimes, count) {
+            const times = [];
+            console.log(`prevTimes: ${prevTimes}, nextTimes: ${nextTimes}, count: ${count}`);
+
+            // ---------- 情况1：前后都有记录（均匀插值）----------
+            if (prevTimes.length > 0 && nextTimes.length > 0) {
+                const prevTime = prevTimes[0];
+                const nextTime = nextTimes[0];
+                const isDescending = prevTime > nextTime;
+                const startTime = isDescending ? prevTime : nextTime;
+                const endTime = isDescending ? nextTime : prevTime;
+                const totalSpan = Math.abs(startTime - endTime);
+                const step = totalSpan === 0 ? 1 : totalSpan / (count + 1);
+                for (let i = 0; i < count; i++) {
+                    let time;
+                    if (isDescending) {
+                        time = startTime - step * (i + 1);
+                    } else {
+                        const s = prevTime;
+                        const e = nextTime;
+                        const step2 = (e - s) / (count + 1);
+                        time = s + step2 * (i + 1);
+                    }
+                    times.push(new Date(time));
+                }
+                return times;
+            }
+
+            // ---------- 情况2：只有一侧有记录（向外延伸）----------
+            const isPrevSide = prevTimes.length > 0;          // true: 前侧有记录, false: 后侧有记录
+            let refTimes = isPrevSide ? prevTimes : nextTimes;
+
+            // 计算步长：优先使用参考记录间的实际间隔
+            let step = 60 * 1000;                             // 默认1分钟
+            if (refTimes.length >= 2) {
+                const t1 = refTimes[0];
+                const t2 = refTimes[1];
+                const diff = Math.abs(t1 - t2);
+                if (diff > 0) step = diff;
+            }
+            // 若步长仍为0（两记录时间相同）则保持默认步长
+
+            // 确定延伸方向：
+            // - 前侧有记录（插入点不是开头）→ 向更早时间延伸（方向 = -1）
+            // - 后侧有记录（插入点是开头）  → 向更晚时间延伸（方向 = +1）
+            const direction = isPrevSide ? -1 : 1;
+
+            // 生成时间序列
+            const baseTime = refTimes[0].getTime();
+            for (let i = 0; i < count; i++) {
+                let newTime = baseTime + direction * step * (i + 1);
+                // 防御：若计算结果无效，回退到默认步长重新计算
+                if (isNaN(newTime)) {
+                    step = 60 * 1000;
+                    newTime = baseTime + direction * step * (i + 1);
+                }
+
+                // 检查是否与已有记录时间重合（精确到秒）
+                const allRefTimes = [...prevTimes, ...nextTimes];
+                let isDuplicate = false;
+                for (let t of allRefTimes) {
+                    if (Math.abs(t.getTime() - newTime) < 1000) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (isDuplicate) {
+                    newTime += direction * 1000;   // 微调1秒
+                }
+
+                times.push(new Date(newTime));
+            }
+
+            // 调试输出（可在控制台查看）
+            console.log('[时间生成] 参考时间:', refTimes.map(t => formatDateTime(t.toISOString())));
+            console.log('[时间生成] 步长:', step, '毫秒，方向:', direction);
+            console.log('[时间生成] 生成时间序列:', times.map(t => formatDateTime(t.toISOString())));
+
+            return times;
+        }
+
+        // 替换原有 saveBatchInsert 事件监听
+        document.getElementById('saveBatchInsert').addEventListener('click', function () {
+            const position = document.getElementById('batchInsertPosition').value;
+            const cardPoolType = document.getElementById('batchCardPoolType').value;
+            const count = parseInt(document.getElementById('batchInsertCount').value);
+            const qualityLevel = parseInt(document.getElementById('batchQualityLevel').value);
+            const resourceType = document.getElementById('batchResourceType').value;
+            const name = document.getElementById('batchName').value;
+            const resourceId = document.getElementById('batchResourceId').value;
+
+            if (count < 1 || count > 100) { showToast('插入数量需1-100', 'warning'); return; }
+
+            // 确定插入位置在 gachaData.list 中的索引
+            let insertIndex;
+            if (position === 'start') {
+                insertIndex = 0;
+            } else {
+                const filterIdx = parseInt(position);
+                const originalItem = filteredData[filterIdx];
+                insertIndex = gachaData.list.indexOf(originalItem) + 1;
+            }
+
+            // 获取前后记录的时间（各最多2个，仅限同卡池）
+            let prevTimes = [];
+            let nextTimes = [];
+            const targetPool = cardPoolType; // 当前要插入的卡池类型
+
+            // 收集前侧最多2个不同时间（仅限同卡池）
+            let idx = insertIndex - 1;
+            while (idx >= 0 && prevTimes.length < 2) {
+                const item = gachaData.list[idx];
+                if (item.cardPoolType === targetPool) {  // 只取同卡池记录
+                    const itemTime = new Date(item.time);
+                    if (prevTimes.length === 0 || itemTime.getTime() !== prevTimes[prevTimes.length - 1].getTime()) {
+                        prevTimes.push(itemTime);
+                    }
+                }
+                idx--;
+            }
+
+            // 收集后侧最多2个不同时间（仅限同卡池）
+            idx = insertIndex;
+            while (idx < gachaData.list.length && nextTimes.length < 2) {
+                const item = gachaData.list[idx];
+                if (item.cardPoolType === targetPool) {  // 只取同卡池记录
+                    const itemTime = new Date(item.time);
+                    if (nextTimes.length === 0 || itemTime.getTime() !== nextTimes[nextTimes.length - 1].getTime()) {
+                        nextTimes.push(itemTime);
+                    }
+                }
+                idx++;
+            }
+
+            // 自动生成时间序列
+            const recordTimes = generateRecordTimes(prevTimes, nextTimes, count);
+
+            // 头部插入时，反转时间序列，使新记录按时间从大到小排列（保持列表倒序）
+            if (insertIndex === 0) {
+                recordTimes.reverse();
+            }
+
+            // 生成新记录
+            const newRecords = [];
+            for (let i = 0; i < count; i++) {
+                const recordTime = recordTimes[i];
+                const recordName = name || `${resourceType}_${qualityLevel}星_${i + 1}`;
+                const recordResourceId = resourceId ? parseInt(resourceId) + i : 10000000 + Math.floor(Math.random() * 90000000);
+                newRecords.push({
+                    cardPoolType: cardPoolType,
+                    resourceId: recordResourceId,
+                    qualityLevel: qualityLevel,
+                    resourceType: resourceType,
+                    name: recordName,
+                    count: 1,
+                    time: formatDateTime(recordTime.toISOString())
+                });
+            }
+
+            gachaData.list.splice(insertIndex, 0, ...newRecords);
+            closeBatchInsertModal();
+            showToast(`成功插入${count}条记录`, 'success');
+            updateInfoPanel();
+            applyFilters();
+            updateStats();
+        });
+        function closeBatchInsertModal() { document.getElementById('batchInsertModal').classList.remove('active'); }
+        document.getElementById('cancelBatchInsert').addEventListener('click', closeBatchInsertModal);
+
+        document.getElementById('poolTypeFilter').addEventListener('change', applyFilters);
+        document.getElementById('qualityFilter').addEventListener('change', applyFilters);
+        document.getElementById('resourceTypeFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+        document.getElementById('prevPage').addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); updatePagination(); } });
+        document.getElementById('nextPage').addEventListener('click', () => { const maxPage = Math.ceil(filteredData.length / itemsPerPage); if (currentPage < maxPage) { currentPage++; renderTable(); updatePagination(); } });
+
+        function formatDateTime(isoString) {
+            const d = new Date(isoString);
+            const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), day = String(d.getDate()).padStart(2, '0'), h = String(d.getHours()).padStart(2, '0'), min = String(d.getMinutes()).padStart(2, '0'), s = String(d.getSeconds()).padStart(2, '0');
+            return `${y}-${m}-${day} ${h}:${min}:${s}`;
+        }
+        function formatDateTimeLocal(isoString) {
+            const d = new Date(isoString);
+            const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), day = String(d.getDate()).padStart(2, '0'), h = String(d.getHours()).padStart(2, '0'), min = String(d.getMinutes()).padStart(2, '0');
+            return `${y}-${m}-${day}T${h}:${min}`;
+        }
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // 文件导入（保留原有功能）
+        document.getElementById('fileInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    if (validateGachaData(data)) {
+                        gachaData = data;
+                        initializeData();
+                        showToast('文件导入成功', 'success');
+                    } else showToast('文件格式不正确', 'error');
+                } catch (err) { showToast('JSON解析失败：' + err.message, 'error'); }
+            };
+            reader.readAsText(file);
+        });
+    </script>
+</body>
+
+</html>

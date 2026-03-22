@@ -535,6 +535,14 @@
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
+      },
+      {
+        "name": "修改抽卡记录",
+        "desc": "修改抽卡记录",
+        "eg": "修改抽卡记录",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
       }
     ]
   },

@@ -48,9 +48,7 @@ gachalogs_history_meta = {
 ERROR_MSG_INVALID_LINK = "当前抽卡链接已经失效，请重新导入抽卡链接"
 
 
-def find_longest_suffix_in_old(
-    old: list[GachaLog], new: list[GachaLog]
-) -> tuple[tuple[int, int], tuple[int, int]] | None:
+def find_longest_suffix_in_old(old: list[GachaLog], new: list[GachaLog]) -> tuple[tuple[int, int], tuple[int, int]] | None:
     """
     返回以新记录最后一个元素结尾的最长公共子串的索引范围。
     如果不存在任何匹配，返回 None。
@@ -61,7 +59,7 @@ def find_longest_suffix_in_old(
     best_old_end = best_new_end = -1
 
     # 新记录从末尾开始向前检查，旧记录从任意位置开始向后匹配
-    for i in range(m):   # i 表示新记录中匹配的起始索引（从 0 到 m-1）
+    for i in range(m):  # i 表示新记录中匹配的起始索引（从 0 到 m-1）
         # 当前新记录的后缀是 new[i:]
         # 我们希望在 old 中找到与这个后缀相等的最长子串
         # 可以通过遍历 old 的每个位置 j，尝试匹配

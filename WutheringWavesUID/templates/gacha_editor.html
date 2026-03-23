@@ -668,7 +668,7 @@
         <!-- 五星角色抽数卡片区域 -->
         <div id="fiveStarCards"
             style="padding: 20px 30px; background: #f8f9fa; border-top: 1px solid #e9ecef; display: none;">
-            <h3 style="margin-bottom: 15px; font-size: 18px;">⭐ 五星角色抽数统计</h3>
+            <h3 style="margin-bottom: 15px; font-size: 18px;">⭐ 五星抽数统计</h3>
             <div id="fiveStarCardsContainer"></div>
         </div>
     </div>
@@ -1140,7 +1140,7 @@
                 // 找出所有五星角色记录
                 const fiveStars = [];
                 for (let i = 0; i < sorted.length; i++) {
-                    if (sorted[i].qualityLevel === 5 && sorted[i].resourceType === '角色') {
+                    if (sorted[i].qualityLevel === 5) {
                         fiveStars.push({ record: sorted[i], index: i });
                     }
                 }

@@ -6,11 +6,12 @@ import httpx
 from ..api.wwapi import (
     UPLOAD_ABYSS_RECORD_URL,
     UPLOAD_GACHA_RECORD_URL,
+    UPLOAD_ROLE_DETAIL_URL,
     UPLOAD_SLASH_RECORD_URL,
     UPLOAD_URL,
 )
 from ..database.models import WavesUserAvatar
-from .const import QUEUE_ABYSS_RECORD, QUEUE_GACHA_RECORD, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD
+from .const import QUEUE_ABYSS_RECORD, QUEUE_GACHA_RECORD, QUEUE_ROLE_DETAIL, QUEUE_SCORE_RANK, QUEUE_SLASH_RECORD
 from .queues import event_handler, start_dispatcher
 
 
@@ -161,6 +162,38 @@ async def send_gacha_record(item: Any):
             logger.info(f"上传抽卡记录结果: {res.status_code} - {res.text}")
         except Exception as e:
             logger.exception(f"上传抽卡记录失败: {res.text if res else ''} {e}")
+
+
+@event_handler(QUEUE_ROLE_DETAIL)
+async def send_role_detail(item: Any):
+    if not item:
+        return
+    if not isinstance(item, dict):
+        return
+    from ...wutheringwaves_config import WutheringWavesConfig
+
+    WavesToken = WutheringWavesConfig.get_config("WavesToken").data
+
+    if not WavesToken:
+        return
+
+    item = await concatenate_user_id_for_avatar(item)
+
+    async with httpx.AsyncClient() as client:
+        res = None
+        try:
+            res = await client.post(
+                UPLOAD_ROLE_DETAIL_URL,
+                json=item,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {WavesToken}",
+                },
+                timeout=httpx.Timeout(10),
+            )
+            logger.info(f"上传角色细节结果: {res.status_code} - {res.text}")
+        except Exception as e:
+            logger.exception(f"上传角色细节失败: {res.text if res else ''} {e}")
 
 
 def init_queues():

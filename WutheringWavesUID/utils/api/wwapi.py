@@ -21,6 +21,8 @@ GET_SLASH_APPEAR_RATE = f"{MAIN_URL}/api/waves/slash/appear_rate"
 GET_SLASH_RANK_URL = f"{MAIN_URL}/top/waves/slash/rank"
 UPLOAD_GACHA_RECORD_URL = f"{MAIN_URL}/top/waves/gacha/upload"
 GET_GACHA_RANK_URL = f"{MAIN_URL}/top/waves/gacha/rank"
+UPLOAD_ROLE_DETAIL_URL = f"{MAIN_URL}/top/global/upload"
+GET_ROLE_DETAIL_URL = f"{MAIN_URL}/top/global/get"
 
 ABYSS_TYPE = Literal["l4", "m4", "r4", "a"]
 
@@ -299,3 +301,20 @@ class GachaRankRes(BaseModel):
     code: int
     message: str
     data: GachaRankData | None = None
+
+
+# ------------------------------------------------------------
+# 角色细节
+# ------------------------------------------------------------
+
+
+class RoleDetail(BaseModel):
+    waves_id: str
+    username: str
+    kuro_name: str
+    data: list
+
+class RoleDetailResponse(BaseModel):
+    code: int
+    message: str
+    data: RoleDetail

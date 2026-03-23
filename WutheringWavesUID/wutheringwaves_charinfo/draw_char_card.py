@@ -17,7 +17,7 @@ from ..utils.api.model import (
     WeaponData,
 )
 from ..utils.api.model_other import EnemyDetailData
-from ..utils.api.wwapi import ONE_RANK_URL, OneRankRequest, OneRankResponse
+from ..utils.api.wwapi import GET_ROLE_DETAIL_URL, ONE_RANK_URL, OneRankRequest, OneRankResponse, RoleDetailResponse
 from ..utils.ascension.char import get_char_model
 from ..utils.ascension.template import get_template_data
 from ..utils.ascension.weapon import (
@@ -189,6 +189,65 @@ async def get_one_rank(item: OneRankRequest) -> OneRankResponse | None:
                 return OneRankResponse.model_validate(res.json())
         except Exception as e:
             logger.exception(f"获取排行失败: {e}")
+
+
+async def get_role_detail(waves_id: str | int) -> RoleDetailResponse | None:
+    WavesToken = WutheringWavesConfig.get_config("WavesToken").data
+
+    if not WavesToken:
+        return
+
+    async with httpx.AsyncClient() as client:
+        try:
+            res = await client.post(
+                GET_ROLE_DETAIL_URL,
+                json={"waves_id": str(waves_id)},
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {WavesToken}",
+                },
+                timeout=httpx.Timeout(10),
+            )
+            # logger.debug(f"获取角色细节: {res.text}")
+            if res.status_code == 200:
+                return RoleDetailResponse.model_validate(res.json())
+        except Exception as e:
+            logger.exception(f"获取角色细节失败: {e}")
+
+
+async def get_user_role_data_online(ev: Event, char_id: str, uid: str, waves_id: str | None = None):
+    result = await get_role_detail(uid)
+    if not result:
+        return None, None, None
+
+    all_role = {}
+    for r in result.data.data:
+        r = RoleDetailData(**r)
+        all_role[str(r.role.roleId)] = r
+    query_list = [char_id] if char_id not in SPECIAL_CHAR else SPECIAL_CHAR.copy()[char_id]
+
+    for temp_char_id in query_list:
+        if all_role and temp_char_id in all_role:
+            role_detail = all_role[temp_char_id]
+            break
+    else:
+        return None, None, "未获取到角色数据"
+
+    account_info = AccountBaseInfo.model_validate(
+        {
+            "name": result.data.kuro_name,
+            "id": result.data.waves_id,
+            "level": 1, "worldLevel": 1, "creatTime": 1,
+        }
+    )
+
+    avatar = (
+        await draw_pic_with_ring(ev)
+        if not waves_id
+        else await draw_char_with_ring(char_id)
+    )
+
+    return account_info, avatar, role_detail
 
 
 def parse_text_and_number(text):
@@ -651,7 +710,12 @@ async def draw_char_detail_img(
         change_list_regex,
     )
     if isinstance(role_detail, str):
-        return role_detail
+        error_msg = role_detail
+        account_info, avatar, role_detail = await get_user_role_data_online(ev, char_id, uid, waves_id)
+        if isinstance(role_detail, str):
+            return role_detail
+        if not role_detail:
+            return error_msg
 
     change_command = ""
     oneRank: OneRankResponse | None = None
@@ -983,7 +1047,9 @@ async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, wave
     # 获取数据
     avatar, role_detail = await get_role_need(ev, char_id, ck, uid, char_name, waves_id)
     if isinstance(role_detail, str):
-        avatar, role_detail = await get_role_need(ev, char_id, ck, "1", char_name)
+        account_info, avatar, role_detail = await get_user_role_data_online(ev, char_id, uid)
+        if not account_info:
+            avatar, role_detail = await get_role_need(ev, char_id, ck, "1", char_name)
     if isinstance(role_detail, str):
         return role_detail
 

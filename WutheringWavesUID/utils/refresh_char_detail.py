@@ -9,7 +9,7 @@ from ..utils.api.model import AccountBaseInfo, RoleList
 from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_101, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.hint import error_reply
-from ..utils.queues.const import QUEUE_SCORE_RANK
+from ..utils.queues.const import QUEUE_ROLE_DETAIL, QUEUE_SCORE_RANK
 from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
 from ..utils.util import get_version, send_master_info
@@ -53,6 +53,19 @@ class SemaphoreManager:
 semaphore_manager = SemaphoreManager()
 
 
+
+def clear_descriptions(obj):
+    """递归地将 obj 中所有 description 字段的值设为空字符串"""
+    if isinstance(obj, dict):
+        if "description" in obj:
+            obj["description"] = ""
+        for value in obj.values():
+            clear_descriptions(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            clear_descriptions(item)
+
+
 async def send_card(
     uid: str,
     user_id: str,
@@ -65,6 +78,14 @@ async def send_card(
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if WavesToken:
+        if waves_api.is_net(uid):  # 国际服用户同时上传完整角色数据
+            clear_descriptions(waves_data)
+            player_role_detail = {
+                "waves_id": uid,
+                "data": waves_data
+            }
+            push_item(QUEUE_ROLE_DETAIL, player_role_detail)
+
         waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
     if is_self_ck and token and waves_char_rank and WavesToken and waves_data and user_id:
@@ -317,13 +338,13 @@ async def refresh_char_from_pcap(
                 # 验证构建RoleDetailData类
                 from ..utils.api.model import RoleDetailData
 
-                RoleDetailData.model_validate(r)
+                r_success = RoleDetailData.model_validate(r)
             except Exception as e:
                 await send_master_info(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
                 logger.warning(f"[鸣潮] 刷新用户{user_id} id{uid} 角色{role_name} 的数据时，数据结构异常，错误：{e}")
                 return
 
-            waves_data.append(r)
+            waves_data.append(r_success.model_dump())
 
         # 确定需要处理的角色
         if refresh_type == "all":

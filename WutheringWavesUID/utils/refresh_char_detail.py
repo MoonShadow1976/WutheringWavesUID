@@ -53,7 +53,6 @@ class SemaphoreManager:
 semaphore_manager = SemaphoreManager()
 
 
-
 def clear_descriptions(obj):
     """递归地将 obj 中所有 description 字段的值设为空字符串"""
     if isinstance(obj, dict):
@@ -80,10 +79,7 @@ async def send_card(
     if WavesToken:
         if waves_api.is_net(uid):  # 国际服用户同时上传完整角色数据
             clear_descriptions(waves_data)
-            player_role_detail = {
-                "waves_id": uid,
-                "data": waves_data
-            }
+            player_role_detail = {"waves_id": uid, "data": waves_data}
             push_item(QUEUE_ROLE_DETAIL, player_role_detail)
 
         waves_char_rank = await get_waves_char_rank(uid, waves_data, True)

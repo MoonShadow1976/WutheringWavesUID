@@ -237,15 +237,13 @@ async def get_user_role_data_online(ev: Event, char_id: str, uid: str, waves_id:
         {
             "name": result.data.kuro_name,
             "id": result.data.waves_id,
-            "level": 1, "worldLevel": 1, "creatTime": 1,
+            "level": 1,
+            "worldLevel": 1,
+            "creatTime": 1,
         }
     )
 
-    avatar = (
-        await draw_pic_with_ring(ev)
-        if not waves_id
-        else await draw_char_with_ring(char_id)
-    )
+    avatar = await draw_pic_with_ring(ev) if not waves_id else await draw_char_with_ring(char_id)
 
     return account_info, avatar, role_detail
 

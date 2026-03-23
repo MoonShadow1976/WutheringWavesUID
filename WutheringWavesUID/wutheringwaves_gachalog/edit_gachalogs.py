@@ -16,8 +16,10 @@ from starlette.responses import HTMLResponse, JSONResponse
 from ..utils.bot_url import get_url
 from ..utils.cache import TimedCache
 from ..utils.database.models import WavesBind
+from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH, waves_templates
 from ..wutheringwaves_config import WutheringWavesConfig
+from .draw_gachalogs import gacha_type_meta_rename
 
 # 编辑缓存，有效期30分钟
 TIMEOUT = 1800
@@ -169,10 +171,9 @@ async def waves_edit_index(auth: str):
         template = waves_templates.get_template("404.html")
         return HTMLResponse(template.render())
     else:
-        from .draw_gachalogs import gacha_type_meta_rename
-
         pool_types = list(gacha_type_meta_rename.keys())
         pool_types_json = json.dumps(pool_types)
+        normal_names_json = json.dumps(NORMAL_LIST)
 
         create_time = temp.get("create_time", datetime.now().timestamp())
         elapsed = datetime.now().timestamp() - create_time
@@ -187,6 +188,7 @@ async def waves_edit_index(auth: str):
                 userId=temp.get("user_id", ""),
                 userPm=temp.get("pm", 6),  # 传递权限等级到前端
                 poolTypes=pool_types_json,
+                normalNames=normal_names_json,  # 常驻抽卡对象
                 timeout=int(remaining),  # 传递剩余秒数
             )
         )

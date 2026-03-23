@@ -314,6 +314,7 @@ class RoleDetail(BaseModel):
     kuro_name: str
     data: list
 
+
 class RoleDetailResponse(BaseModel):
     code: int
     message: str

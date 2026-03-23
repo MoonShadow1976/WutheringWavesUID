@@ -433,6 +433,132 @@
             gap: 10px;
             justify-content: flex-end;
         }
+
+        /* 五星卡片区域整体样式 */
+        .five-star-pool {
+            margin-bottom: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .pool-header {
+            background: #667eea;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pool-title {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .pool-pity {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .pool-total-pulls {
+            font-size: 14px;
+            font-weight: normal;
+            color: #ffd966;
+            margin-left: 10px;
+        }
+
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            background: #fefefe;
+        }
+
+        /* 单个五星卡片 */
+        .five-star-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80px;
+            text-align: center;
+            transition: transform 0.2s;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .five-star-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 通用上下部分样式 */
+        .card-name {
+            padding: 12px 8px;
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: none;
+            /* 取消分割线 */
+        }
+
+        .card-pull {
+            padding: 12px 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* 常驻角色背景色系（灰色） */
+        .standard .card-name {
+            background: #4a4a4a;
+            /* 深灰 */
+            color: white;
+        }
+
+        .standard .card-pull {
+            background: #e0e0e0;
+            /* 浅灰 */
+            color: #333;
+        }
+
+        /* 非常驻角色背景色系（蓝色） */
+        .limited .card-name {
+            background: #5c9bd5;
+            /* 深蓝 */
+            color: white;
+        }
+
+        .limited .card-pull {
+            background: #e6f0fa;
+            /* 浅蓝 */
+            color: #333;
+        }
+
+        /* 抽出数颜色分级 */
+        .card-pull.green {
+            color: #4caf50 !important;
+            font-weight: bold;
+        }
+
+        .card-pull.yellow {
+            color: #ffc107 !important;
+            font-weight: bold;
+        }
+
+        .card-pull.warning {
+            color: #ff9800 !important;
+            font-weight: bold;
+        }
+
+        .card-pull.danger {
+            color: #f44336 !important;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -451,6 +577,7 @@
                     <input type="file" id="fileInput" accept=".json">
                 </div>
                 <button class="btn btn-success" id="exportBtn" disabled>💾 导出JSON</button>
+                <button class="btn btn-primary" id="toggleTableBtn" disabled>📋 显示记录</button>
                 <!-- 保存按钮和获取按钮初始隐藏，根据权限显示 -->
                 <button class="btn btn-success" id="saveBtn" style="display: none;" disabled>💾 保存到服务器</button>
                 <button class="btn btn-info" id="fetchBtn" style="display: none;" disabled>📥 从服务器获取</button>
@@ -472,31 +599,6 @@
             </div>
         </div>
 
-        <div id="filters" class="filters" style="display: none;">
-            <div class="filter-group"><label>卡池类型:</label><select id="poolTypeFilter">
-                    <option value="">全部</option>
-                </select></div>
-            <div class="filter-group"><label>品质:</label><select id="qualityFilter">
-                    <option value="">全部</option>
-                    <option value="5">5星</option>
-                    <option value="4">4星</option>
-                    <option value="3">3星</option>
-                </select></div>
-            <div class="filter-group"><label>类型:</label><select id="resourceTypeFilter">
-                    <option value="">全部</option>
-                    <option value="角色">角色</option>
-                    <option value="武器">武器</option>
-                </select></div>
-            <div class="filter-group"><label>搜索:</label><input type="text" id="searchInput" placeholder="搜索名称..."></div>
-            <div class="filter-group">
-                <label>序号范围:</label>
-                <input type="number" id="rangeStart" placeholder="起始" min="1" style="width:80px;">
-                <span>-</span>
-                <input type="number" id="rangeEnd" placeholder="结束" min="1" style="width:80px;">
-                <button class="btn btn-sm btn-primary" id="rangeSelectBtn">选择范围</button>
-            </div>
-        </div>
-
         <div id="emptyState" class="empty-state">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -505,36 +607,69 @@
             <p>请导入JSON文件开始编辑</p>
         </div>
 
-        <div id="tableContainer" class="table-container" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" id="selectAll"></th>
-                        <th>序号</th>
-                        <th>卡池类型</th>
-                        <th>名称</th>
-                        <th>类型</th>
-                        <th>品质</th>
-                        <th>距上个5星</th>
-                        <th>资源ID</th>
-                        <th>数量</th>
-                        <th>时间</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
+        <!-- 新增：包裹筛选器、空状态、表格、分页的容器，默认隐藏 -->
+        <div id="tableSection" style="display: none;">
+            <div id="filters" class="filters" style="display: none;">
+                <div class="filter-group"><label>卡池类型:</label><select id="poolTypeFilter">
+                        <option value="">全部</option>
+                    </select></div>
+                <div class="filter-group"><label>搜索:</label><input type="text" id="searchInput" placeholder="搜索名称...">
+                </div>
+                <div class="filter-group">
+                    <label>序号范围:</label>
+                    <input type="number" id="rangeStart" placeholder="起始" min="1" style="width:80px;">
+                    <span>-</span>
+                    <input type="number" id="rangeEnd" placeholder="结束" min="1" style="width:80px;">
+                    <button class="btn btn-sm btn-primary" id="rangeSelectBtn">选择范围</button>
+                </div>
+            </div>
 
-        <div id="pagination" class="pagination" style="display: none;">
-            <div class="pagination-info">显示 <span id="pageStart">0</span> - <span id="pageEnd">0</span> / 共 <span
-                    id="totalRecords">0</span> 条</div>
-            <div class="pagination-controls"><button class="btn btn-sm btn-primary" id="prevPage">上一页</button><button
-                    class="btn btn-sm btn-primary" id="nextPage">下一页</button></div>
-        </div>
+            <div id="tableContainer" class="table-container" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>序号</th>
+                            <th>卡池类型</th>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>品质</th>
+                            <th>距上个5星</th>
+                            <th>资源ID</th>
+                            <th>数量</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
 
+            <div id="pagination" class="pagination" style="display: none;">
+                <div class="pagination-info">
+                    显示 <span id="pageStart">0</span> - <span id="pageEnd">0</span> / 共 <span id="totalRecords">0</span>
+                    条
+                </div>
+                <div class="pagination-controls">
+                    <button class="btn btn-sm btn-primary" id="prevPage">上一页</button>
+                    <button class="btn btn-sm btn-primary" id="nextPage">下一页</button>
+                    <span style="margin-left: 15px;">第</span>
+                    <input type="number" id="jumpPageInput" min="1" style="width: 60px; text-align: center;">
+                    <span>页</span>
+                    <span id="totalPagesSpan"></span>
+                    <button class="btn btn-sm btn-primary" id="jumpPageBtn">跳转</button>
+                </div>
+            </div>
+        </div>
+        <!-- 统计区域 -->
         <div id="stats" class="stats" style="display: none;">
             <div class="stats-grid" id="statsGrid"></div>
+        </div>
+        <!-- 五星角色抽数卡片区域 -->
+        <div id="fiveStarCards"
+            style="padding: 20px 30px; background: #f8f9fa; border-top: 1px solid #e9ecef; display: none;">
+            <h3 style="margin-bottom: 15px; font-size: 18px;">⭐ 五星角色抽数统计</h3>
+            <div id="fiveStarCardsContainer"></div>
         </div>
     </div>
 
@@ -544,17 +679,7 @@
                 <h3 id="modalTitle">编辑记录</h3>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>卡池类型:</label><select id="editCardPoolType">
-                        <option value="角色精准调谐">角色精准调谐</option>
-                        <option value="武器精准调谐">武器精准调谐</option>
-                        <option value="角色调谐（常驻池）">角色调谐（常驻池）</option>
-                        <option value="武器调谐（常驻池）">武器调谐（常驻池）</option>
-                        <option value="新手调谐">新手调谐</option>
-                        <option value="新手自选唤取">新手自选唤取</option>
-                        <option value="新手自选唤取（感恩定向唤取）">新手自选唤取（感恩定向唤取）</option>
-                        <option value="角色新旅唤取">角色新旅唤取</option>
-                        <option value="武器新旅唤取">武器新旅唤取</option>
-                    </select></div>
+                <div class="form-group"><label>卡池类型:</label><select id="editCardPoolType"></select></div>
                 <div class="form-group"><label>名称:</label><input type="text" id="editName"></div>
                 <div class="form-group"><label>类型:</label><select id="editResourceType">
                         <option value="角色">角色</option>
@@ -583,17 +708,7 @@
                 <div class="form-group"><label>插入位置（在此记录之后插入）:</label><select id="batchInsertPosition">
                         <option value="start">开始位置（最新）</option>
                     </select></div>
-                <div class="form-group"><label>卡池类型:</label><select id="batchCardPoolType">
-                        <option value="角色精准调谐">角色精准调谐</option>
-                        <option value="武器精准调谐">武器精准调谐</option>
-                        <option value="角色调谐（常驻池）">角色调谐（常驻池）</option>
-                        <option value="武器调谐（常驻池）">武器调谐（常驻池）</option>
-                        <option value="新手调谐">新手调谐</option>
-                        <option value="新手自选唤取">新手自选唤取</option>
-                        <option value="新手自选唤取（感恩定向唤取）">新手自选唤取（感恩定向唤取）</option>
-                        <option value="角色新旅唤取">角色新旅唤取</option>
-                        <option value="武器新旅唤取">武器新旅唤取</option>
-                    </select></div>
+                <div class="form-group"><label>卡池类型:</label><select id="batchCardPoolType"></select></div>
                 <div class="form-group"><label>插入数量:</label><input type="number" id="batchInsertCount" value="10"
                         min="1" max="100"></div>
                 <div class="form-group"><label>品质:</label><select id="batchQualityLevel">
@@ -620,6 +735,7 @@
         const userPm = {{ userPm }};
         const timeoutSeconds = {{ timeout }};   // 从后端获取超时时间（秒）
         const poolTypes = {{ poolTypes | safe }};
+        const normalNames = {{ normalNames | safe }};  // 常驻抽卡对象
         const auth = window.location.pathname.split('/').pop();
         let gachaData = null;
         let currentPage = 1;
@@ -627,6 +743,7 @@
         let filteredData = [];
         let selectedRows = new Set();
         let editingIndex = -1;
+        let tableSectionVisible = false;   // 记录当前表格区域是否可见
 
         // 超级管理员（pm <= 1）不自动加载数据
         const autoLoad = userPm > 1;  // true: 普通用户自动加载；false: 超级管理员手动加载
@@ -656,6 +773,23 @@
             }
             updateDisplay();
             timerInterval = setInterval(updateDisplay, 1000);
+        }
+
+        // 用后端传入的 poolTypes 动态生成卡池类型下拉框选项
+        function initPoolTypeSelects() {
+            const selects = ['editCardPoolType', 'batchCardPoolType'];
+            selects.forEach(id => {
+                const select = document.getElementById(id);
+                if (select) {
+                    select.innerHTML = ''; // 清空现有选项
+                    poolTypes.forEach(type => {
+                        const option = document.createElement('option');
+                        option.value = type;
+                        option.textContent = type;
+                        select.appendChild(option);
+                    });
+                }
+            });
         }
 
         // 页面加载时从服务器获取数据
@@ -701,6 +835,7 @@
                     <p>请点击“从服务器获取”按钮加载抽卡记录。</p>
                 `;
             }
+            initPoolTypeSelects();
             startCountdown(timeoutSeconds);  // 启动倒计时
         });
 
@@ -725,11 +860,35 @@
             document.getElementById('addRecordBtn').disabled = false;
             document.getElementById('batchInsertBtn').disabled = false;
 
+            // 隐藏表格区域（符合默认隐藏）
+            const tableSection = document.getElementById('tableSection');
+            tableSection.style.display = 'none';
+            tableSectionVisible = false;
+            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
+            document.getElementById('toggleTableBtn').disabled = false;  // 启用按钮
+
             updateInfoPanel();
             updatePoolTypeFilter();
-            applyFilters();
+            applyFilters(true);
             updateStats();
+            updateFiveStarCards();
         }
+
+        document.getElementById('toggleTableBtn').addEventListener('click', function () {
+            const tableSection = document.getElementById('tableSection');
+            if (tableSection.style.display === 'none') {
+                tableSection.style.display = 'block';
+                tableSectionVisible = true;
+                document.getElementById('toggleTableBtn').textContent = '📋 隐藏记录';
+                // 刷新表格显示（确保最新数据）
+                renderTable();
+                updatePagination();
+            } else {
+                tableSection.style.display = 'none';
+                tableSectionVisible = false;
+                document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
+            }
+        });
 
         // 更新信息面板
         function updateInfoPanel() {
@@ -738,6 +897,12 @@
             document.getElementById('infoExportApp').textContent = gachaData.info.export_app || '-';
             document.getElementById('infoVersion').textContent = gachaData.info.version || '-';
             document.getElementById('infoTotalRecords').textContent = gachaData.list.length;
+
+            // 隐藏表格区域
+            const tableSection = document.getElementById('tableSection');
+            tableSection.style.display = 'none';
+            tableSectionVisible = false;
+            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
         }
 
         // 更新卡池类型筛选器
@@ -766,22 +931,26 @@
         }
 
         // 应用筛选
-        function applyFilters() {
+        function applyFilters(resetPage = true) {
             const poolType = document.getElementById('poolTypeFilter').value;
-            const quality = document.getElementById('qualityFilter').value;
-            const resourceType = document.getElementById('resourceTypeFilter').value;
             const search = document.getElementById('searchInput').value.toLowerCase();
 
             filteredData = gachaData.list.filter(item => {
                 if (poolType && item.cardPoolType !== poolType) return false;
-                if (quality && item.qualityLevel.toString() !== quality) return false;
-                if (resourceType && item.resourceType !== resourceType) return false;
                 if (search && !item.name.toLowerCase().includes(search)) return false;
                 return true;
             });
 
-            currentPage = 1;
+            if (resetPage) {
+                currentPage = 1;
+            }
             selectedRows.clear();
+
+            // 边界修正：确保 currentPage 在有效范围内
+            const totalPages = Math.max(1, Math.ceil(filteredData.length / itemsPerPage));
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
             renderTable();
             updatePagination();
             updateRangePlaceholder();
@@ -909,7 +1078,18 @@
             document.getElementById('pageEnd').textContent = end;
             document.getElementById('totalRecords').textContent = total;
             document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = end >= total;
+            const totalPages = Math.ceil(total / itemsPerPage);
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+
+            const jumpInput = document.getElementById('jumpPageInput');
+            const totalPagesSpan = document.getElementById('totalPagesSpan');
+            if (jumpInput) {
+                jumpInput.value = currentPage;
+                jumpInput.max = totalPages || 1;
+            }
+            if (totalPagesSpan) {
+                totalPagesSpan.textContent = `/共 ${totalPages || 1} 页`;
+            }
         }
 
         function updateStats() {
@@ -921,15 +1101,119 @@
                 '4星': gachaData.list.filter(i => i.qualityLevel === 4).length,
                 '3星': gachaData.list.filter(i => i.qualityLevel === 3).length,
             };
-            poolTypes.forEach(pt => {
-                const cnt = gachaData.list.filter(i => i.cardPoolType === pt).length;
-                if (cnt > 0) stats[pt] = cnt;
-            });
             Object.entries(stats).forEach(([k, v]) => {
                 const card = document.createElement('div');
                 card.className = 'stat-card';
                 card.innerHTML = `<h4>${k}</h4><div class="value">${v}</div>`;
                 statsGrid.appendChild(card);
+            });
+
+            // 隐藏表格区域
+            const tableSection = document.getElementById('tableSection');
+            tableSection.style.display = 'none';
+            tableSectionVisible = false;
+            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
+        }
+
+        // 更新五星角色抽数卡片（基于原始数据，不受筛选影响）
+        function updateFiveStarCards() {
+            const container = document.getElementById('fiveStarCardsContainer');
+            const section = document.getElementById('fiveStarCards');
+            if (!gachaData || !gachaData.list || gachaData.list.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            section.style.display = 'block';
+
+            const pools = new Map();
+            gachaData.list.forEach(record => {
+                const pool = record.cardPoolType;
+                if (!pools.has(pool)) pools.set(pool, []);
+                pools.get(pool).push(record);
+            });
+
+            let html = '';
+            for (let [poolName, records] of pools.entries()) {
+                const sorted = [...records].sort((a, b) => new Date(a.time) - new Date(b.time));
+                const totalPulls = sorted.length;   // 总抽数
+
+                // 找出所有五星角色记录
+                const fiveStars = [];
+                for (let i = 0; i < sorted.length; i++) {
+                    if (sorted[i].qualityLevel === 5 && sorted[i].resourceType === '角色') {
+                        fiveStars.push({ record: sorted[i], index: i });
+                    }
+                }
+
+                let lastIndex = -1;
+                const cards = [];
+                for (let fs of fiveStars) {
+                    let pulls = fs.index - lastIndex;
+                    cards.push({ name: fs.record.name, pulls: pulls });
+                    lastIndex = fs.index;
+                }
+
+                let currentPity = 0;
+                if (fiveStars.length > 0) {
+                    const lastFiveIndex = fiveStars[fiveStars.length - 1].index;
+                    currentPity = sorted.length - lastFiveIndex;
+                } else {
+                    currentPity = sorted.length;
+                }
+
+                html += `
+                    <div class="five-star-pool">
+                        <div class="pool-header">
+                            <span class="pool-title">
+                                ${escapeHtml(poolName)}
+                                <span class="pool-total-pulls">(总抽数: ${totalPulls})</span>
+                            </span>
+                            <span class="pool-pity">📊 已有 ${currentPity} 抽未出五星</span>
+                        </div>
+                        <div class="cards-grid">
+                `;
+                if (cards.length === 0) {
+                    html += `<div style="padding: 20px; text-align: center; color: #6c757d;">暂无五星角色记录</div>`;
+                } else {
+                    cards.forEach(card => {
+                        // 背景类：常驻 => 'standard'，非常驻 => 'limited'
+                        const backgroundClass = normalNames.includes(card.name) ? 'standard' : 'limited';
+
+                        // 抽卡数颜色类（新规则）
+                        let pullColorClass = '';
+                        if (card.pulls <= 30) {
+                            pullColorClass = 'green';
+                        } else if (card.pulls <= 60) {
+                            pullColorClass = 'yellow';
+                        } else if (card.pulls <= 70) {
+                            pullColorClass = 'warning';
+                        } else {
+                            pullColorClass = 'danger';
+                        }
+
+                        html += `
+                            <div class="five-star-card ${backgroundClass}">
+                                <div class="card-name">${escapeHtml(card.name)}</div>
+                                <div class="card-pull ${pullColorClass}">${card.pulls} <small>抽出</small></div>
+                            </div>
+                        `;
+                    });
+                }
+                html += `</div></div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        // 简单的 XSS 防护
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function (c) {
+                return c;
             });
         }
 
@@ -939,7 +1223,14 @@
             if (index >= 0) {
                 const item = filteredData[index];
                 document.getElementById('modalTitle').textContent = '编辑记录';
-                document.getElementById('editCardPoolType').value = item.cardPoolType;
+                const poolSelect = document.getElementById('editCardPoolType');
+                if (!Array.from(poolSelect.options).some(opt => opt.value === item.cardPoolType)) {
+                    const newOption = document.createElement('option');
+                    newOption.value = item.cardPoolType;
+                    newOption.textContent = item.cardPoolType;
+                    poolSelect.appendChild(newOption);
+                }
+                poolSelect.value = item.cardPoolType;
                 document.getElementById('editName').value = item.name;
                 document.getElementById('editResourceType').value = item.resourceType;
                 document.getElementById('editQualityLevel').value = item.qualityLevel;
@@ -980,8 +1271,9 @@
             }
             closeEditModal();
             updateInfoPanel();
-            applyFilters();
+            applyFilters(false);
             updateStats();
+            updateFiveStarCards();
         });
 
         function closeEditModal() { document.getElementById('editModal').classList.remove('active'); editingIndex = -1; }
@@ -993,8 +1285,9 @@
             gachaData.list.splice(originalIndex, 1);
             showToast('记录已删除', 'success');
             updateInfoPanel();
-            applyFilters();
+            applyFilters(false);
             updateStats();
+            updateFiveStarCards();
         }
 
         document.getElementById('deleteSelectedBtn').addEventListener('click', function () {
@@ -1008,9 +1301,10 @@
             selectedRows.clear();
             showToast(`已删除${indices.length}条记录`, 'success');
             updateInfoPanel();
-            applyFilters();
+            applyFilters(false);
             updateStats();
             updateDeleteButton();
+            updateFiveStarCards();
         });
 
         function updateDeleteButton() { document.getElementById('deleteSelectedBtn').disabled = selectedRows.size === 0; }
@@ -1117,7 +1411,14 @@
             // 如果选择了某个记录，将卡池类型默认设置为该记录的卡池类型
             if (afterIndex >= 0 && filteredData[afterIndex]) {
                 const item = filteredData[afterIndex];
-                document.getElementById('batchCardPoolType').value = item.cardPoolType;
+                const poolSelect = document.getElementById('batchCardPoolType');
+                if (!Array.from(poolSelect.options).some(opt => opt.value === item.cardPoolType)) {
+                    const newOption = document.createElement('option');
+                    newOption.value = item.cardPoolType;
+                    newOption.textContent = item.cardPoolType;
+                    poolSelect.appendChild(newOption);
+                }
+                poolSelect.value = item.cardPoolType;
             }
             // 重置默认值
             document.getElementById('batchInsertCount').value = '10';
@@ -1294,16 +1595,15 @@
             closeBatchInsertModal();
             showToast(`成功插入${count}条记录`, 'success');
             updateInfoPanel();
-            applyFilters();
+            applyFilters(false);
             updateStats();
+            updateFiveStarCards();
         });
         function closeBatchInsertModal() { document.getElementById('batchInsertModal').classList.remove('active'); }
         document.getElementById('cancelBatchInsert').addEventListener('click', closeBatchInsertModal);
 
-        document.getElementById('poolTypeFilter').addEventListener('change', applyFilters);
-        document.getElementById('qualityFilter').addEventListener('change', applyFilters);
-        document.getElementById('resourceTypeFilter').addEventListener('change', applyFilters);
-        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('poolTypeFilter').addEventListener('change', () => applyFilters(true));
+        document.getElementById('searchInput').addEventListener('input', () => applyFilters(true));
 
         document.getElementById('prevPage').addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); updatePagination(); } });
         document.getElementById('nextPage').addEventListener('click', () => { const maxPage = Math.ceil(filteredData.length / itemsPerPage); if (currentPage < maxPage) { currentPage++; renderTable(); updatePagination(); } });
@@ -1342,6 +1642,24 @@
                 } catch (err) { showToast('JSON解析失败：' + err.message, 'error'); }
             };
             reader.readAsText(file);
+        });
+
+        document.getElementById('jumpPageBtn').addEventListener('click', function () {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            let targetPage = parseInt(document.getElementById('jumpPageInput').value);
+            if (isNaN(targetPage)) targetPage = 1;
+            targetPage = Math.min(Math.max(targetPage, 1), totalPages);
+            if (targetPage !== currentPage) {
+                currentPage = targetPage;
+                renderTable();
+                updatePagination();
+            }
+        });
+
+        document.getElementById('jumpPageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                document.getElementById('jumpPageBtn').click();
+            }
         });
     </script>
 </body>

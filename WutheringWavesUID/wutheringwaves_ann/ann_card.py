@@ -190,10 +190,16 @@ def wrap_text_smart(text, font, max_w):
     return lines or [""]
 
 
-async def ann_batch_card(post_content: list, drow_height: float) -> bytes:
-    im = Image.new("RGB", (1080, drow_height), "#f9f6f2")  # type: ignore
+async def ann_batch_card(post_content: list, drow_height: float, time_str: str = "") -> bytes:
+    if time_str:
+        drow_height += 50
+    im = Image.new("RGB", (1080, int(drow_height)), "#f9f6f2")  # type: ignore
     draw = ImageDraw.Draw(im)
     x, y = 0, 0
+
+    if time_str:
+        draw.text((20, 10), time_str, fill=(128, 128, 128), font=ww_font_24)
+        y += 50
 
     for temp in post_content:
         if temp["contentType"] == 1:
@@ -285,14 +291,18 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
 
         index_end = index + 1
         if drow_height > 5000:
-            img = await ann_batch_card(post_content[index_start:index_end], drow_height)
+            img = await ann_batch_card(
+                post_content[index_start:index_end], drow_height, str(res.get("postTime", "")) if index_start == 0 else ""
+            )
             index_start = index_end
             index_end = index + 1
             drow_height = 0
             imgs.append(img)
     else:
         if drow_height and index_end > index_start:
-            img = await ann_batch_card(post_content[index_start:index_end], drow_height)
+            img = await ann_batch_card(
+                post_content[index_start:index_end], drow_height, str(res.get("postTime", "")) if index_start == 0 else ""
+            )
             imgs.append(img)
 
     return imgs

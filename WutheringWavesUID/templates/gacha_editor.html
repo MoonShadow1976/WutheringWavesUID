@@ -515,27 +515,27 @@
 
         /* 常驻角色背景色系（灰色） */
         .standard .card-name {
-            background: #4a4a4a;
-            /* 深灰 */
-            color: white;
-        }
-
-        .standard .card-pull {
-            background: #e0e0e0;
-            /* 浅灰 */
-            color: #333;
-        }
-
-        /* 非常驻角色背景色系（蓝色） */
-        .limited .card-name {
             background: #5c9bd5;
             /* 深蓝 */
             color: white;
         }
 
-        .limited .card-pull {
+        .standard .card-pull {
             background: #e6f0fa;
             /* 浅蓝 */
+            color: #333;
+        }
+
+        /* 非常驻角色背景色系（蓝色） */
+        .limited .card-name {
+            background: #e6c24d;
+            /* 深金 */
+            color: white;
+        }
+
+        .limited .card-pull {
+            background: #fdf2df;
+            /* 浅金/米金 */
             color: #333;
         }
 
@@ -844,6 +844,12 @@
             return data && data.info && data.info.uid && data.list && Array.isArray(data.list);
         }
 
+        // 按时间倒序排序（最新的记录在前）
+        function sortGachaDataDesc() {
+            if (!gachaData || !gachaData.list) return;
+            gachaData.list.sort((a, b) => new Date(b.time) - new Date(a.time));
+        }
+
         // 初始化数据（不再依赖文件导入）
         function initializeData() {
             document.getElementById('emptyState').style.display = 'none';
@@ -869,6 +875,7 @@
 
             updateInfoPanel();
             updatePoolTypeFilter();
+            sortGachaDataDesc();
             applyFilters(true);
             updateStats();
             updateFiveStarCards();
@@ -897,12 +904,6 @@
             document.getElementById('infoExportApp').textContent = gachaData.info.export_app || '-';
             document.getElementById('infoVersion').textContent = gachaData.info.version || '-';
             document.getElementById('infoTotalRecords').textContent = gachaData.list.length;
-
-            // 隐藏表格区域
-            const tableSection = document.getElementById('tableSection');
-            tableSection.style.display = 'none';
-            tableSectionVisible = false;
-            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
         }
 
         // 更新卡池类型筛选器
@@ -1107,12 +1108,6 @@
                 card.innerHTML = `<h4>${k}</h4><div class="value">${v}</div>`;
                 statsGrid.appendChild(card);
             });
-
-            // 隐藏表格区域
-            const tableSection = document.getElementById('tableSection');
-            tableSection.style.display = 'none';
-            tableSectionVisible = false;
-            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
         }
 
         // 更新五星角色抽数卡片（基于原始数据，不受筛选影响）
@@ -1134,10 +1129,9 @@
 
             let html = '';
             for (let [poolName, records] of pools.entries()) {
-                const sorted = [...records].sort((a, b) => new Date(a.time) - new Date(b.time));
+                const sorted = [...records].sort((a, b) => new Date(b.time) - new Date(a.time));
                 const totalPulls = sorted.length;   // 总抽数
 
-                // 找出所有五星角色记录
                 const fiveStars = [];
                 for (let i = 0; i < sorted.length; i++) {
                     if (sorted[i].qualityLevel === 5) {
@@ -1145,21 +1139,16 @@
                     }
                 }
 
-                let lastIndex = -1;
+                let lastIndex = sorted.length;  // 初始设为数组末尾,用于计算上一个5星的抽数(倒序)
                 const cards = [];
-                for (let fs of fiveStars) {
-                    let pulls = fs.index - lastIndex;
+                for (let fs of fiveStars.reverse()) {
+                    let pulls = lastIndex - fs.index;
                     cards.push({ name: fs.record.name, pulls: pulls });
                     lastIndex = fs.index;
                 }
 
-                let currentPity = 0;
-                if (fiveStars.length > 0) {
-                    const lastFiveIndex = fiveStars[fiveStars.length - 1].index;
-                    currentPity = sorted.length - lastFiveIndex;
-                } else {
-                    currentPity = sorted.length;
-                }
+                let currentPity = lastIndex;  // 还有多少抽数未出五星
+                cards.reverse();  // 翻转，最新的记录在前
 
                 html += `
                     <div class="five-star-pool">
@@ -1269,6 +1258,7 @@
                 gachaData.list.unshift(newItem);
                 showToast('记录已添加', 'success');
             }
+            sortGachaDataDesc();
             closeEditModal();
             updateInfoPanel();
             applyFilters(false);
@@ -1284,6 +1274,7 @@
             const originalIndex = gachaData.list.indexOf(filteredData[index]);
             gachaData.list.splice(originalIndex, 1);
             showToast('记录已删除', 'success');
+            sortGachaDataDesc();
             updateInfoPanel();
             applyFilters(false);
             updateStats();
@@ -1300,6 +1291,7 @@
             });
             selectedRows.clear();
             showToast(`已删除${indices.length}条记录`, 'success');
+            sortGachaDataDesc();
             updateInfoPanel();
             applyFilters(false);
             updateStats();
@@ -1592,6 +1584,7 @@
             }
 
             gachaData.list.splice(insertIndex, 0, ...newRecords);
+            sortGachaDataDesc();
             closeBatchInsertModal();
             showToast(`成功插入${count}条记录`, 'success');
             updateInfoPanel();

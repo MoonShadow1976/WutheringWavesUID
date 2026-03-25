@@ -764,6 +764,14 @@
         "need_ck": false,
         "need_sk": false,
         "need_admin": true
+      },
+      {
+        "name": "排行清理",
+        "desc": "清除群友的群绑定数据",
+        "eg": "清理123456789",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": true
       }
     ]
   },

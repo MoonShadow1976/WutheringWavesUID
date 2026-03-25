@@ -267,6 +267,7 @@ async def get_user_avatar(
     size: int = 640,
 ) -> Image.Image:
     qid = str(qid)
+    logger.debug(f"[鸣潮] 获取头像: {qid} {avatar_url} {size}")
     if qid:
         data = await WavesUserAvatar.select_data(qid)
         if data:  # 说明本地有个人数据，没有是排行数据

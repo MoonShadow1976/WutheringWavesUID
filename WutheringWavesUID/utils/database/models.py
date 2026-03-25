@@ -110,6 +110,37 @@ class WavesBind(Bind, table=True):
             )
         return res
 
+    @classmethod
+    async def delete_uid_by_group(
+        cls: type[T_WavesBind],
+        bot_id: str,
+        uid: str,
+        group_id: str,
+    ) -> int:
+        all_binds = await cls.get_group_all_uid(group_id)
+
+        for bind in all_binds:
+            if bind.bot_id != bot_id:
+                continue
+
+            uid_list = [i for i in bind.uid.split("_") if i] if bind.uid else []
+            if uid not in uid_list:
+                continue
+
+            group_list = [i for i in bind.group_id.split("_") if i] if bind.group_id else []
+            if group_id not in group_list:
+                return -1
+
+            group_list.remove(group_id)
+            await cls.update_data(
+                user_id=bind.user_id,
+                bot_id=bot_id,
+                **{"group_id": "_".join(group_list) or None},
+            )
+            return 0
+
+        return -1
+
 
 class WavesUser(User, table=True):
     __table_args__: dict[str, Any] = {"extend_existing": True}

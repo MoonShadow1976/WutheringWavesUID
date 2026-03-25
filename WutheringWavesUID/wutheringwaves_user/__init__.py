@@ -20,6 +20,7 @@ waves_add_ck = SV("鸣潮添加token", priority=5)
 waves_del_ck = SV("鸣潮删除token", priority=5)
 waves_get_ck = SV("waves获取ck", area="DIRECT")
 waves_del_all_invalid_ck = SV("鸣潮删除无效token", priority=1, pm=1)
+waves_admin_del_uid = SV("鸣潮清理特征码", priority=10, pm=3)
 
 
 def get_ck_and_devcode(text: str, split_str: str = ",") -> tuple[str, str]:
@@ -225,3 +226,28 @@ async def send_diff_msg(bot: Bot, code: Any, data: dict, at_sender=False):
     for retcode in data:
         if code == retcode:
             return await bot.send(data[retcode], at_sender)
+
+
+@waves_admin_del_uid.on_command(("清理",), block=True)
+async def admin_delete_uid_binding(bot: Bot, ev: Event):
+    if not ev.group_id:
+        return await bot.send("[鸣潮] 该命令仅能在群聊中使用\n")
+
+    uid = ev.text.strip().replace("uid", "").replace("UID", "")
+
+    if not uid:
+        return await bot.send(f"[鸣潮] 该命令需要带上要删除的特征码!\n例如【{PREFIX}清理123456789】\n")
+
+    if not uid.isdigit() or len(uid) != 9:
+        return await bot.send("[鸣潮] 特征码格式错误!\n")
+
+    result = await WavesBind.delete_uid_by_group(
+        bot_id=ev.bot_id,
+        uid=uid,
+        group_id=ev.group_id,
+    )
+
+    if result == 0:
+        return await bot.send(f"[鸣潮] 成功删除特征码[{uid}]在本群的绑定\n")
+    else:
+        return await bot.send(f"[鸣潮] 未找到特征码[{uid}]的绑定记录\n")

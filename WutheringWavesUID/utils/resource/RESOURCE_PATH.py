@@ -50,6 +50,7 @@ CUSTOM_MR_CARD_PATH = MAIN_PATH / "custom_mr_role_pile"
 OTHER_PATH = MAIN_PATH / "other"
 CALENDAR_PATH = OTHER_PATH / "calendar"
 SLASH_PATH = OTHER_PATH / "slash"
+MATRIX_PATH = OTHER_PATH / "matrix"
 CHALLENGE_PATH = OTHER_PATH / "challenge"
 ANN_CARD_PATH = OTHER_PATH / "ann_card"
 POKER_PATH = OTHER_PATH / "poker"
@@ -87,6 +88,9 @@ def init_dir():
         CUSTOM_CARD_PATH,
         OTHER_PATH,
         CALENDAR_PATH,
+        SLASH_PATH,
+        MATRIX_PATH,
+        CHALLENGE_PATH,
         ANN_CARD_PATH,
         ALIAS_PATH,
         CUSTOM_MR_CARD_PATH,

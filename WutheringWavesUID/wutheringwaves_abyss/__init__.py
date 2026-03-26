@@ -13,6 +13,7 @@ from ..utils.waves_api import waves_api
 from .draw_abyss_card import draw_abyss_img
 from .draw_abyss_info import draw_abyss_info_img
 from .draw_challenge_card import draw_challenge_img
+from .draw_matrix_card import draw_matrix_img
 from .draw_slash_card import draw_slash_img
 from .draw_slash_info import draw_slash_info_img
 
@@ -20,6 +21,7 @@ sv_waves_abyss = SV("waves查询深渊")
 sv_waves_challenge = SV("waves查询全息")
 sv_waves_slash = SV("waves查询冥海")
 sv_waves_rank_slash = SV("waves冥海总排行", priority=0)
+sv_waves_matrix = SV("waves查询矩阵")
 
 sv_waves_tower_info = SV("waves深塔信息", priority=4)
 sv_waves_slash_info = SV("waves海墟信息", priority=4)
@@ -162,3 +164,24 @@ async def send_slash_schedule_info(bot: Bot, ev: Event):
 
     im = await draw_slash_info_img(param)
     await bot.send(im)
+
+
+@sv_waves_matrix.on_command(
+    (
+        "查询矩阵",
+        "矩阵",
+        "jz",
+        "终焉矩阵",
+    ),
+    block=True,
+)
+async def send_waves_matrix_info(bot: Bot, ev: Event):
+    user_id = ruser_id(ev)
+    uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
+    if not uid:
+        return await bot.send(error_reply(WAVES_CODE_103))
+    if waves_api.is_net(uid):
+        return await bot.send(error_reply(WAVES_CODE_098))
+
+    im = await draw_matrix_img(ev, uid, user_id)
+    return await bot.send(im)

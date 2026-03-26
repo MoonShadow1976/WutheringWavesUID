@@ -11,12 +11,15 @@ from .draw_bot_rank_card import draw_bot_rank_img
 from .draw_gacha_server_rank import draw_gacha_server_rank_img
 from .draw_local_total_rank_card import draw_local_total_rank
 from .draw_total_rank_card import draw_total_rank
+from .matrix_rank import draw_all_matrix_rank_card
 
 sv_waves_rank_list = SV("ww角色排行")
 sv_waves_rank_all_list = SV("ww角色总排行", priority=1)
 sv_waves_rank_bot_list = SV("ww角色bot排行", priority=1)
 sv_waves_rank_total_list = SV("ww练度总排行", priority=0)
 sv_waves_gacha_server_rank = SV("ww抽卡全服排行", priority=0)
+sv_waves_matrix_rank = SV("ww矩阵群排行", priority=-1)
+sv_waves_matrix_rank_all = SV("ww矩阵总排行", priority=-1)
 
 
 @sv_waves_rank_list.on_regex("^[\u4e00-\u9fa5]+(?:排行|排名)$", block=True)
@@ -159,3 +162,24 @@ async def send_gacha_server_rank_card(bot: Bot, ev: Event):
         await bot.send(im, at_sender)
     elif isinstance(im, bytes):
         await bot.send(im)
+
+
+@sv_waves_matrix_rank.on_regex(
+    r"^矩阵(群)?排行(\d+)?$",
+    block=True,
+)
+async def send_matrix_rank_card(bot: Bot, ev: Event):
+    if not ev.group_id:
+        return await bot.send("请在群聊中使用群排行功能")
+
+    im = await draw_all_matrix_rank_card(bot, ev, is_global=False)
+    await bot.send(im)
+
+
+@sv_waves_matrix_rank_all.on_regex(
+    r"^矩阵总排行(\d+)?$",
+    block=True,
+)
+async def send_matrix_rank_all_card(bot: Bot, ev: Event):
+    im = await draw_all_matrix_rank_card(bot, ev, is_global=True)
+    await bot.send(im)

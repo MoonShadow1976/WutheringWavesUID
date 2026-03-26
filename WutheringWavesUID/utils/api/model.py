@@ -746,3 +746,53 @@ class MoreActivity(BaseModel):
 
     permanentRouge: PermanentRouge  # 浸梦海床
     phantomBattle: PhantomBattle  # 激斗！向着荣耀之丘
+
+
+class MatrixBuff(BaseModel):
+    """终焉矩阵增益"""
+
+    buffIcon: str
+    buffId: int
+    buffName: str
+    desc: str
+
+
+class MatrixRole(BaseModel):
+    """终焉矩阵角色"""
+
+    roleId: int | None = None
+    iconUrl: str | None = None
+
+
+class MatrixTeam(BaseModel):
+    """终焉矩阵队伍"""
+
+    bossCount: int
+    buffs: list[MatrixBuff] | None = None
+    passBoss: int
+    roleIcons: list[str] | None = None
+    roleList: list[MatrixRole] | None = None
+    round: int
+    score: int
+
+
+class MatrixModeDetail(BaseModel):
+    """终焉矩阵模式详情"""
+
+    bossCount:  int | None = 0
+    hasRecord: bool
+    isUnlock: bool
+    modeId: int
+    passBoss:  int | None = 0
+    rank: int
+    round: int | None = 0
+    score: int
+    teams: list[MatrixTeam] | None = None
+
+
+class MatrixData(BaseModel):
+    """终焉矩阵数据"""
+
+    endTime: int
+    isUnlock: bool
+    modeDetails: list[MatrixModeDetail] | None = None

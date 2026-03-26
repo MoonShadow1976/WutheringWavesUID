@@ -23,6 +23,8 @@ UPLOAD_GACHA_RECORD_URL = f"{MAIN_URL}/top/waves/gacha/upload"
 GET_GACHA_RANK_URL = f"{MAIN_URL}/top/waves/gacha/rank"
 UPLOAD_ROLE_DETAIL_URL = f"{MAIN_URL}/top/global/upload"
 GET_ROLE_DETAIL_URL = f"{MAIN_URL}/top/global/get"
+UPLOAD_MATRIX_RECORD_URL = f"{MAIN_URL}/top/waves/matrix/upload"
+GET_MATRIX_RANK_URL = f"{MAIN_URL}/top/waves/matrix/rank"
 
 ABYSS_TYPE = Literal["l4", "m4", "r4", "a"]
 
@@ -319,3 +321,51 @@ class RoleDetailResponse(BaseModel):
     code: int
     message: str
     data: RoleDetail
+
+
+# ------------------------------------------------------------
+# 矩阵排行相关
+# ------------------------------------------------------------
+
+
+class MatrixRankItem(BaseModel):
+    page: int
+    page_num: int
+    waves_id: str
+    version: str
+    waves_id_list: list[str] | None = None
+
+
+class MatrixCharDetail(BaseModel):
+    char_id: int  # 角色id
+    chain: int  # 角色链
+
+
+class MatrixTeamDetail(BaseModel):
+    buff_icon: str  # buff图标
+    char_detail: list[MatrixCharDetail]  # 角色详细数据
+    score: int  # 队伍分数
+
+
+class MatrixRank(BaseModel):
+    team: MatrixTeamDetail  # 最高分队伍详细数据
+    total_score: int  # 总分数
+    team_count: int | None = 0  # 队伍总数量（可选，兼容旧数据）
+    rank: int  # 总排名
+    user_id: str  # 用户id
+    waves_id: str  # 鸣潮id
+    kuro_name: str  # 库洛用户名
+    alias_name: str  # 主人别名
+
+
+class MatrixRankData(BaseModel):
+    page: int  # 页码
+    page_num: int  # 每页数量
+    start_date: str  # 开始日期
+    rank_list: list[MatrixRank]  # 排行数据
+
+
+class MatrixRankRes(BaseModel):
+    code: int
+    message: str
+    data: MatrixRankData | None = None

@@ -24,7 +24,7 @@ from ..utils.fonts.waves_fonts import (
     waves_font_42,
 )
 from ..utils.hint import error_reply
-from ..utils.image import GOLD, GREY, add_footer, get_waves_bg, pic_download_from_url
+from ..utils.image import GOLD, GREY, add_footer, pic_download_from_url
 from ..utils.imagetool import draw_pic, draw_pic_with_ring
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
 from ..utils.waves_api import waves_api

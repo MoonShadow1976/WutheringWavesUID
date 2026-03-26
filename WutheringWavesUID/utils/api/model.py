@@ -779,11 +779,11 @@ class MatrixTeam(BaseModel):
 class MatrixModeDetail(BaseModel):
     """终焉矩阵模式详情"""
 
-    bossCount:  int | None = 0
+    bossCount: int | None = 0
     hasRecord: bool
     isUnlock: bool
     modeId: int
-    passBoss:  int | None = 0
+    passBoss: int | None = 0
     rank: int
     round: int | None = 0
     score: int

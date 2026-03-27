@@ -768,10 +768,10 @@ class MatrixTeam(BaseModel):
     """终焉矩阵队伍"""
 
     bossCount: int
-    buffs: list[MatrixBuff] | None = None
+    buffs: list[MatrixBuff] = []
     passBoss: int
-    roleIcons: list[str] | None = None
-    roleList: list[MatrixRole] | None = None
+    roleIcons: list[str] = []
+    roleList: list[MatrixRole] = []
     round: int
     score: int
 
@@ -779,15 +779,15 @@ class MatrixTeam(BaseModel):
 class MatrixModeDetail(BaseModel):
     """终焉矩阵模式详情"""
 
-    bossCount:  int | None = 0
+    bossCount: int | None = 0
     hasRecord: bool
     isUnlock: bool
     modeId: int
-    passBoss:  int | None = 0
+    passBoss: int | None = 0
     rank: int
     round: int | None = 0
     score: int
-    teams: list[MatrixTeam] | None = None
+    teams: list[MatrixTeam] = []
 
 
 class MatrixData(BaseModel):
@@ -795,4 +795,4 @@ class MatrixData(BaseModel):
 
     endTime: int
     isUnlock: bool
-    modeDetails: list[MatrixModeDetail] | None = None
+    modeDetails: list[MatrixModeDetail] = []

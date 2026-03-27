@@ -51,6 +51,7 @@ TOWER_INDEX_URL = f"{MAIN_URL}/aki/roleBox/akiBox/towerIndex"
 TOWER_DETAIL_URL = f"{MAIN_URL}/aki/roleBox/akiBox/towerDataDetail"
 SLASH_INDEX_URL = f"{MAIN_URL}/aki/roleBox/akiBox/slashIndex"
 SLASH_DETAIL_URL = f"{MAIN_URL}/aki/roleBox/akiBox/slashDetail"
+MATRIX_INDEX_URL = f"{MAIN_URL}/aki/roleBox/akiBox/newTowerIndex"
 MATRIX_DETAIL_URL = f"{MAIN_URL}/aki/roleBox/akiBox/newTowerDetail"
 # 浸梦海床+激斗！向着荣耀之丘
 MORE_ACTIVITY_URL = f"{MAIN_URL}/aki/roleBox/akiBox/moreActivity"

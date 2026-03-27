@@ -167,12 +167,7 @@ async def send_slash_schedule_info(bot: Bot, ev: Event):
 
 
 @sv_waves_matrix.on_command(
-    (
-        "查询矩阵",
-        "矩阵",
-        "jz",
-        "终焉矩阵",
-    ),
+    ("查询矩阵", "矩阵", "jz", "终焉矩阵", "奇点", "奇点扩张", "稳态", "稳态协议"),
     block=True,
 )
 async def send_waves_matrix_info(bot: Bot, ev: Event):

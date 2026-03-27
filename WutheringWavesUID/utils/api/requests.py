@@ -28,6 +28,7 @@ from .api import (
     LOGIN_LOG_URL,
     LOGIN_URL,
     MATRIX_DETAIL_URL,
+    MATRIX_INDEX_URL,
     MONTH_LIST_URL,
     MORE_ACTIVITY_URL,
     MR_REFRESH_URL,
@@ -434,6 +435,19 @@ class WavesApi:
             "roleId": roleId,
         }
         return await self._waves_request(SLASH_DETAIL_URL, "POST", header, data=data)
+
+    async def get_matrix_index(self, roleId: str, token: str, serverId: str | None = None):
+        """终焉矩阵"""
+        header = await get_base_header()
+        used_headers = await self.get_used_headers(cookie=token, uid=roleId)
+        header.update(used_headers)
+
+        data = {
+            "gameId": GAME_ID,
+            "serverId": self.get_server_id(roleId, serverId),
+            "roleId": roleId,
+        }
+        return await self._waves_request(MATRIX_INDEX_URL, "POST", header, data=data)
 
     async def get_matrix_detail(self, roleId: str, token: str, serverId: str | None = None):
         """终焉矩阵"""

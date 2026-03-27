@@ -1,34 +1,34 @@
 from pathlib import Path
 
+from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
-from gsuid_core.utils.image.image_tools import crop_center_img
 from PIL import Image, ImageDraw
 
 from ..utils.api.model import (
     AccountBaseInfo,
     MatrixData,
-    RoleDetailData,
     RoleList,
 )
 from ..utils.char_info_utils import get_all_roleid_detail_info
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
+    waves_font_16,
     waves_font_18,
     waves_font_20,
     waves_font_25,
     waves_font_26,
     waves_font_30,
-    waves_font_32,
-    waves_font_36,
     waves_font_42,
 )
 from ..utils.hint import error_reply
-from ..utils.image import GOLD, GREY, add_footer, get_waves_bg, pic_download_from_url
-from ..utils.imagetool import draw_pic, draw_pic_with_ring
+from ..utils.image import GOLD, GREY, add_footer, get_random_share_bg, pic_download_from_url
+from ..utils.imagetool import draw_pic_with_ring, get_square_avatar
+from ..utils.queues.const import QUEUE_MATRIX_RECORD
+from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
 from ..utils.waves_api import waves_api
-from ..wutheringwaves_config import PREFIX
+from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -39,28 +39,31 @@ MATRIX_MODE_NAMES = {
     0: "稳态协议",
     1: "奇点扩张",
 }
-no_login_msg = [
-    "[鸣潮]",
-    ">您当前为仅绑定鸣潮特征码",
-    f">请使用命令【{PREFIX}登录】后查询详细终焉矩阵数据",
-    "",
-]
-MATRIX_ERROR_MESSAGE_LOGIN = "\n".join(no_login_msg)
 
 
 async def get_matrix_data(uid: str, ck: str, is_self_ck: bool):
-    matrix_data = await waves_api.get_matrix_detail(uid, ck)
+    if is_self_ck:
+        matrix_data = await waves_api.get_matrix_detail(uid, ck)
+    else:
+        matrix_data = await waves_api.get_matrix_index(uid, ck)
 
     if not matrix_data.success:
         return matrix_data.throw_msg()
 
     matrix_data = matrix_data.data
-    if not matrix_data or (isinstance(matrix_data, dict) and not matrix_data.get("isUnlock", False)):
+    if not matrix_data:
         if not is_self_ck:
-            return MATRIX_ERROR_MESSAGE_LOGIN
+            return MATRIX_ERROR_MESSAGE_NO_UNLOCK
         return MATRIX_ERROR_MESSAGE_NO_DATA
-    else:
-        return MatrixData.model_validate(matrix_data)
+
+    matrix_data = MatrixData.model_validate(matrix_data)
+
+    if not matrix_data.isUnlock:
+        return MATRIX_ERROR_MESSAGE_NO_UNLOCK
+    if not matrix_data.modeDetails:
+        return MATRIX_ERROR_MESSAGE_NO_DATA
+
+    return matrix_data
 
 
 async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
@@ -83,30 +86,34 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
 
     # 终焉矩阵
     matrix_data = await get_matrix_data(uid, ck, is_self_ck)
-    if isinstance(matrix_data, str) or not matrix_data:
+    if isinstance(matrix_data, str):
         return matrix_data
-    if not matrix_data.isUnlock:
-        return MATRIX_ERROR_MESSAGE_NO_UNLOCK
 
-    if not matrix_data.modeDetails:
-        return MATRIX_ERROR_MESSAGE_NO_DATA
+    command = ev.command
+    text = ev.text.strip()
+    modeIds = [1] if is_self_ck else [1, 0]  # MATRIX_MODE_NAMES
+    if "稳态" in text or "稳态" in command:
+        modeIds = [0]
+    elif text.isdigit() and 0 <= int(text) <= 1:
+        modeIds = [int(text)]
+    logger.debug(f"[鸣潮][终焉矩阵] modeIds: {modeIds}")
 
-    # 先创建一个足够大的画布，使用矩阵专属背景
-    matrix_bg_original = Image.open(TEXT_PATH / "matrix_bg.png").convert("RGBA")
-    # 使用crop_center_img裁剪中心区域，不拉伸图片
-    card_img = crop_center_img(matrix_bg_original, 950, 5000)
+    # 画布 2560 * 1440
+    card_img = await get_random_share_bg()  # 已返回 2560 x 1440 图像
+    img = Image.new("RGBA", (2560, 1440), (30, 45, 65, 210))
+    card_img = Image.alpha_composite(card_img, img)
 
-    # 基础信息 名字 特征码
+    # 基础信息
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
     base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
     base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
-    card_img.paste(base_info_bg, (15, 20), base_info_bg)
+    card_img.paste(base_info_bg, (-30, -70), base_info_bg)
 
-    # 头像 头像环
+    # 头像、头像环
     avatar, avatar_ring = await draw_pic_with_ring(ev)
-    card_img.paste(avatar, (25, 70), avatar)
-    card_img.paste(avatar_ring, (35, 80), avatar_ring)
+    card_img.paste(avatar, (-20, -20), avatar)
+    card_img.paste(avatar_ring, (-10, -10), avatar_ring)
 
     # 账号基本信息
     if account_info.is_full:
@@ -114,33 +121,42 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
         title_bar_draw = ImageDraw.Draw(title_bar)
         title_bar_draw.text((660, 125), "账号等级", GREY, waves_font_26, "mm")
         title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
-
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
         title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
-        card_img.paste(title_bar, (-20, 70), title_bar)
+        card_img.paste(title_bar, (-65, -20), title_bar)
 
-    # 根据面板数据获取详细信息
+    # 获取角色详情
     role_detail_info_map = await get_all_roleid_detail_info(uid)
 
-    # 从这里开始绘制模式数据
-    y_offset = 330
+    # 绘制模式数据（改用内容宽度 1220，左右边距 30）
+    y_offset = 165
+    content_width = 1500 - 60  # 左右边距各30
+    available_height = card_img.height - y_offset - 20  # 1275
 
-    # 绘制每个模式的数据
+    # 卡片基础尺寸与比例（宽128，高448，比例 1:3.5）
+    base_width = 128
+    base_height = 124 * 3 + 76  # 三角色 一标题
+    aspect_ratio = base_height / base_width  # 3.5
+
+    # 间距
+    card_h_gap = 30  # 水平间距
+    card_v_gap = 20  # 垂直间距
+
     for mode_index, mode in enumerate(matrix_data.modeDetails):
         if not mode.hasRecord:
             continue
+        if mode.modeId not in modeIds:
+            continue
 
-        # 模式信息背景
-        mode_bg = Image.new("RGBA", (900, 100), (0, 0, 0, 0))
+        # 模式信息背景（宽度自适应）
+        mode_bg = Image.open(TEXT_PATH / "matrix_score_level_bg.png")
+        mode_bg = mode_bg.resize((528, 360), Image.Resampling.LANCZOS)
         mode_draw = ImageDraw.Draw(mode_bg)
-        mode_draw.rounded_rectangle([(0, 0), (900, 100)], radius=10, fill=(40, 40, 60, 180))
 
-        mode_name = MATRIX_MODE_NAMES.get(mode.modeId, f"模式 {mode.modeId}")
-        # 主标题上下居中
-        mode_draw.text((30, 50), mode_name, "white", waves_font_32, "lm")
-
-        # 显示评级图标（根据分数自动选择）
+        # 评级与分数（位置根据新宽度微调）
         score = mode.score
+        rank_icon_name = "matrix_largerempty.png"
+        score_color = GREY  # 未达标 - 灰色
 
         # 稳态协议（modeId=0）使用不同的评分标准
         if mode.modeId == 0:
@@ -153,9 +169,6 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             elif score >= 4800:
                 rank_icon_name = "matrix_b.png"
                 score_color = "#FFCC66"  # B - 淡金色
-            else:
-                rank_icon_name = "matrix_largerempty.png"
-                score_color = GREY  # 未达标 - 灰色
         else:
             # 奇点扩张（modeId=1）使用原有的评分标准
             if score >= 58000:
@@ -179,145 +192,183 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             elif score >= 12000:
                 rank_icon_name = "matrix_b.png"
                 score_color = "#FFCC66"  # B - 淡金色
-            else:
-                rank_icon_name = "matrix_largerempty.png"
-                score_color = GREY  # 未达标 - 灰色
 
         if rank_icon_name:
             try:
                 rank_icon = Image.open(TEXT_PATH / rank_icon_name)
-                rank_icon = rank_icon.resize((80, 80), Image.Resampling.LANCZOS)
-                mode_bg.paste(rank_icon, (640, 10), rank_icon)
+                rank_icon = rank_icon.resize((320, 320), Image.Resampling.LANCZOS)
+                mode_bg.paste(
+                    rank_icon, ((mode_bg.width - rank_icon.width) // 2, (mode_bg.height - rank_icon.height) // 2), rank_icon
+                )
             except Exception:
                 pass
 
-        # 在评级图标后面显示总分数（大号字体，上下居中，增加间隔，根据等级显示不同颜色）
-        mode_draw.text((800, 47), f"{mode.score}", score_color, waves_font_42, "mm")
+        # 分数显示在图右侧
+        mode_draw.text((mode_bg.width // 2, mode_bg.height - 40), f"{mode.score}", score_color, waves_font_42, "mm")
 
-        card_img.paste(mode_bg, (25, y_offset), mode_bg)
-        y_offset += 120
+        fix_y = 100
+        if len(modeIds) > 1 and mode_index > 0 and not mode.teams:
+            fix_y = -360
+            bug_draw = ImageDraw.Draw(card_img)
+            bug_draw.text((100, 400), "请登录查询完整数据", GREY, waves_font_42, "lm")
 
-        # 绘制队伍信息
+        card_img.paste(mode_bg, (2560 - mode_bg.width, y_offset - fix_y), mode_bg)
+
         if mode.teams:
-            for team_index, team in enumerate(mode.teams):
-                team_bg = Image.new("RGBA", (900, 200), (0, 0, 0, 0))
+            team_count = len(mode.teams)
+
+            # 寻找最优每行数量 N 和缩放因子 factor
+            if team_count < 5:  # 避免队伍卡片过大
+                available_height = available_height // 3 * 2
+            best_N = 1
+            best_factor = 0.0
+            for N in range(1, team_count + 1):
+                # 水平最小宽度
+                min_width = N * base_width + (N - 1) * card_h_gap
+                if min_width > content_width:
+                    continue
+                # 水平方向最大宽度（填满）
+                max_width_by_width = (content_width - (N - 1) * card_h_gap) / N
+                # 所需行数
+                rows = (team_count + N - 1) // N
+                # 垂直方向允许的最大高度
+                max_height_per_card = (available_height - (rows - 1) * card_v_gap) / rows
+                max_width_by_height = max_height_per_card / aspect_ratio
+                # 实际宽度取较小值，得到缩放因子
+                actual_width = min(max_width_by_width, max_width_by_height)
+                factor = actual_width / base_width
+                if factor > best_factor:
+                    best_factor = factor
+                    best_N = N
+
+            # 若未找到（如队伍太多，水平放不下），则取最小宽度并限制高度
+            if best_factor <= 0:
+                best_N = max(1, int(content_width / (base_width + card_h_gap)))
+                best_factor = min(1.0, (content_width - (best_N - 1) * card_h_gap) / (best_N * base_width))
+                rows = (team_count + best_N - 1) // best_N
+                max_height_per_card = (available_height - (rows - 1) * card_v_gap) / rows
+                max_factor_by_height = max_height_per_card / base_height
+                best_factor = min(best_factor, max_factor_by_height)
+
+            # 最终卡片尺寸
+            card_width = int(base_width * best_factor)
+            card_height = int(base_height * best_factor)
+            logger.debug(f"最终尺寸：{card_width}x{card_height}, 缩放因子：{best_factor}, 一行队伍数：{best_N}")
+
+            # 加载并缩放装饰背景到原始尺寸
+            team_card_line_deco = Image.open(TEXT_PATH / "matrix_team_card_line_deco.png")
+            team_card_line_deco = team_card_line_deco.resize((128, 76), Image.Resampling.LANCZOS)
+
+            role_card_bg = Image.open(TEXT_PATH / "matrix_role_card_bg.png")
+            role_card_bg = role_card_bg.resize((128, 124), Image.Resampling.LANCZOS)
+
+            rows = (team_count + best_N - 1) // best_N
+            total_teams_height = rows * card_height + (rows - 1) * card_v_gap
+            row_y = y_offset
+
+            # 遍历队伍，构建每个队伍的完整卡片（标题区+角色卡）
+            for idx, team in enumerate(mode.teams):
+                col = idx % best_N
+                row = idx // best_N
+                x = 30 + col * (card_width + card_h_gap)
+                y = row_y + row * (card_height + card_v_gap)
+
+                # 标题区 team_bg
+                team_bg = team_card_line_deco.copy()
                 team_draw = ImageDraw.Draw(team_bg)
-                team_draw.rounded_rectangle([(0, 0), (900, 200)], radius=10, fill=(30, 30, 50, 150))
 
-                team_draw.text((20, 20), f"第{team.round}轮", "white", waves_font_26, "lm")
-                team_draw.text((20, 50), f"通关: {team.passBoss}/{team.bossCount}", GREY, waves_font_20, "lm")
-                # 显示分数图标（在分数前面）
-                try:
-                    score_icon = Image.open(TEXT_PATH / "matrix_score.png")
-                    score_icon = score_icon.resize((50, 50), Image.Resampling.LANCZOS)
-                    team_bg.paste(score_icon, (20, 70), score_icon)
-                except Exception:
-                    pass
+                # 轮次、通关信息、分数
+                team_draw.text((0, 14), f"第{team.round}轮", "white", waves_font_20, "lm")
+                team_draw.text((60, 15), f"M{team.passBoss}/{team.bossCount}", GREY, waves_font_18, "lm")
+                team_draw.text((52, 50), f"+{team.score}", GOLD, waves_font_18, "lm")
 
-                # 分数显示在图标后面
-                team_draw.text((80, 93), f"{team.score}", GOLD, waves_font_36, "lm")
-
-                # 绘制增益信息和图标（在分数下方）
+                # 增益信息
                 if team.buffs and len(team.buffs) > 0:
                     buff = team.buffs[0]
-                    buff_text = buff.buffName[:10]
-
-                    # 下载并显示增益图标（在文本前面）
+                    buff_text = buff.buffName[:4]
                     if buff.buffIcon:
                         try:
                             buff_pic = await pic_download_from_url(MATRIX_PATH, buff.buffIcon)
-                            buff_pic = buff_pic.resize((40, 40))
-                            team_bg.paste(buff_pic, (20, 135), buff_pic)
-                            # 图标后面显示文字
-                            team_draw.text((70, 155), f"增益: {buff_text}", "white", waves_font_20, "lm")
+                            buff_pic = buff_pic.resize((40, 40), Image.Resampling.LANCZOS)
+                            team_bg.paste(buff_pic, (5, 30), buff_pic)
                         except Exception:
-                            # 如果图标加载失败，只显示文字
-                            team_draw.text((20, 155), f"增益: {buff_text}", "white", waves_font_20, "lm")
+                            pass
                     else:
-                        team_draw.text((20, 155), f"增益: {buff_text}", "white", waves_font_20, "lm")
+                        team_draw.text((0, 50), f"{buff_text}", "white", waves_font_16, "lm")
 
-                # 绘制角色头像
+                # 构建角色卡列表 role_cards
+                role_cards = []
                 if team.roleIcons and len(team.roleIcons) > 0:
+                    role_card_h = int(124 * best_factor)
+                    role_card_w = card_width
                     for role_index, icon_url in enumerate(team.roleIcons[:3]):
                         if not icon_url:
                             continue
-
-                        # 通过roleIconUrl匹配找到对应的角色
-                        role = next(
-                            (r for r in role_info.roleList if r.roleIconUrl == icon_url),
-                            None,
-                        )
+                        role = next((r for r in role_info.roleList if r.roleIconUrl == icon_url), None)
                         if not role:
                             continue
-
-                        # 使用draw_pic获取角色头像（与深塔海墟一致）
-                        avatar = await draw_pic(role.roleId)
-                        char_bg = Image.open(TEXT_PATH / f"char_bg{role.starLevel}.png")
-                        char_bg_draw = ImageDraw.Draw(char_bg)
-                        char_bg_draw.text((90, 150), f"{role.roleName}", "white", waves_font_18, "mm")
-                        char_bg.paste(avatar, (0, 0), avatar)
-
+                        avatar = await get_square_avatar(role.roleId)
+                        avatar = avatar.resize((128, 124), Image.Resampling.LANCZOS)
+                        role_bg = role_card_bg.copy()
+                        role_bg.paste(avatar, (0, 10), avatar)  # 原始偏移 10px
+                        role_bg_draw = ImageDraw.Draw(role_bg)
+                        role_bg_draw.text((0, 116), f"{role.roleName}", "white", waves_font_16, "lm")  # 居中偏下
+                        # 共鸣链信息
                         if role_detail_info_map and str(role.roleId) in role_detail_info_map:
-                            temp: RoleDetailData = role_detail_info_map[str(role.roleId)]
-                            info_block = Image.new("RGBA", (40, 20), color=(255, 255, 255, 0))
+                            temp = role_detail_info_map[str(role.roleId)]
+                            info_block = Image.new("RGBA", (35, 17), (0, 0, 0, 0))
                             info_block_draw = ImageDraw.Draw(info_block)
-                            info_block_draw.rectangle([0, 0, 40, 20], fill=(96, 12, 120, int(0.9 * 255)))
-                            info_block_draw.text(
-                                (2, 10),
-                                f"{temp.get_chain_name()}",
-                                "white",
-                                waves_font_18,
-                                "lm",
-                            )
-                            char_bg.paste(info_block, (110, 35), info_block)
+                            info_block_draw.rectangle([0, 0, 35, 17], fill=(96, 12, 120, int(0.9 * 255)))
+                            info_block_draw.text((2, 8), f"{temp.get_chain_name()}", "white", waves_font_16, "lm")
+                            role_bg.paste(info_block, (82, 10), info_block)
+                        role_cards.append(role_bg)
 
-                        team_bg.alpha_composite(char_bg, (350 + role_index * 150, 0))
-                else:
-                    # 当没有角色信息时显示提示（在三个角色头像中间位置，上下居中）
-                    team_draw.text((575, 100), "暂无角色数据", GREY, waves_font_20, "mm")
+                # 组合标题区 + 角色卡列表（原始尺寸，宽度固定128，高度动态）
+                team_card = Image.new("RGBA", (128, team_bg.height + sum(c.height for c in role_cards)), (0, 0, 0, 0))
+                team_card.paste(team_bg, (0, 0), team_bg)
+                y_offset_role = team_bg.height
+                for role_card in role_cards:
+                    team_card.paste(role_card, (0, y_offset_role), role_card)  # 左对齐
+                    y_offset_role += role_card.height
 
-                card_img.paste(team_bg, (25, y_offset), team_bg)
-                y_offset += 220
+                # 将 team_card 粘贴到最终画布
+                # 目标尺寸（基于 best_factor 计算）
+                card_width = int(128 * best_factor)
+                card_height_new = int(team_card.height * best_factor)  # 按实际原始高度等比缩放
+
+                team_card_scaled = team_card.resize((card_width, card_height_new), Image.Resampling.LANCZOS)
+
+                # 粘贴位置仍用原布局的 x,y（布局计算中仍使用 card_height = 448 * best_factor 占位）
+                card_img.paste(team_card_scaled, (x, y), team_card_scaled)
+
+            # 更新 y_offset（所有队伍卡片之后）
+            y_offset += total_teams_height
 
     # 上传矩阵数据到排行榜
-    await upload_matrix_record(is_self_ck, uid, matrix_data, role_info, role_detail_info_map)
+    await upload_matrix_record(uid, matrix_data, role_info, role_detail_info_map)
 
-    # 裁剪画布到实际使用的高度，添加适当的底部边距
-    final_height = y_offset + 50  # 添加50px底部边距
-    card_img = card_img.crop((0, 0, 950, final_height))
-
-    card_img = add_footer(card_img, 600, 20)
+    # 裁剪画布到实际使用的高度，并添加页脚
+    final_height = max(y_offset, 1440)
+    card_img = card_img.crop((0, 0, 2560, final_height))
+    card_img = add_footer(card_img, 600, 20, color="black")
     card_img = await convert_img(card_img)
     return card_img
 
 
 async def upload_matrix_record(
-    is_self_ck: bool,
     waves_id: str,
     matrix_data: MatrixData,
     role_info: RoleList,
-    role_detail_info_map: dict,
+    role_detail_info_map: dict | None = None,
 ):
     """上传矩阵数据到排行榜服务器"""
-    from gsuid_core.logger import logger
-
-    from ..utils.queues.const import QUEUE_MATRIX_RECORD
-    from ..utils.queues.queues import push_item
-    from ..wutheringwaves_config import WutheringWavesConfig
-
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
     if not WavesToken:
         logger.info("[矩阵数据上传] 跳过上传: 未配置WavesToken")
         return
 
-    if not matrix_data:
-        logger.info("[矩阵数据上传] 跳过上传: 矩阵数据为空")
-        return
     if not matrix_data.modeDetails:
         logger.info("[矩阵数据上传] 跳过上传: 无模式数据")
-        return
-    if not is_self_ck:
-        logger.info("[矩阵数据上传] 跳过上传: 非自己的CK")
         return
 
     # 找到奇点扩张模式（modeId=1）
@@ -357,8 +408,14 @@ async def upload_matrix_record(
             continue
 
         # 从角色详细信息中获取链度
-        role_detail = role_detail_info_map.get(str(role.roleId))
-        chain = role_detail.get_chain_num() if role_detail else 0
+        chain = None
+        if role_detail_info_map:
+            role_detail = role_detail_info_map.get(str(role.roleId))
+            chain = role_detail.get_chain_num() if role_detail else None
+
+        if not chain:
+            logger.warning(f"[矩阵数据上传] 跳过上传: 无法匹配本地角色信息 (id={role.roleId}, name={role.roleName})")
+            return
 
         char_infos.append(
             {
@@ -389,8 +446,6 @@ async def upload_matrix_record(
     }
 
     # 推送到上传队列
-    from gsuid_core.logger import logger
-
     logger.info(
         f"[矩阵数据上传] 特征码: {waves_id}, 总分: {singularity_mode.score}, 队伍分数: {highest_team.score}, 角色数: {len(char_infos)}, 队伍数量: {len(singularity_mode.teams)}"
     )

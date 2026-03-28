@@ -303,17 +303,17 @@
     "desc": "深塔数据查询，暂不支持国际服（出场率查询不影响）",
     "data": [
       {
-        "name": "逆境深塔",
-        "desc": "查询深塔",
-        "eg": "st/深塔",
+        "name": "全息战略",
+        "desc": "查询全息战略",
+        "eg": "qx/全息",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
       },
       {
-        "name": "全息战略",
-        "desc": "查询全息战略",
-        "eg": "qx/全息",
+        "name": "逆境深塔",
+        "desc": "查询深塔",
+        "eg": "st/深塔",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
@@ -343,6 +343,22 @@
         "need_admin": false
       },
       {
+        "name": "终焉矩阵",
+        "desc": "查询终焉矩阵",
+        "eg": "jz/终焉矩阵",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "终焉矩阵出场率",
+        "desc": "终焉矩阵出场率",
+        "eg": "矩阵出场率",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
         "name": "逆境深塔buff信息",
         "desc": "逆境深塔buff信息",
         "eg": "深塔信息(下期/33)",
@@ -354,6 +370,14 @@
         "name": "冥歌海墟buff信息",
         "desc": "查询冥歌buff信息",
         "eg": "海墟信息(下期/14)",
+        "need_ck": true,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "终焉矩阵buff信息",
+        "desc": "查询矩阵buff信息",
+        "eg": "矩阵信息(下期)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
@@ -495,6 +519,14 @@
         "name": "无尽总排行",
         "desc": "无尽总排行",
         "eg": "无尽总排行",
+        "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "矩阵排行",
+        "desc": "矩阵排行",
+        "eg": "矩阵(bot/总)排行",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

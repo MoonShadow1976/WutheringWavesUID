@@ -164,22 +164,10 @@ async def send_gacha_server_rank_card(bot: Bot, ev: Event):
         await bot.send(im)
 
 
-@sv_waves_matrix_rank.on_regex(
-    r"^矩阵(群)?排行(\d+)?$",
-    block=True,
-)
-async def send_matrix_rank_card(bot: Bot, ev: Event):
-    if not ev.group_id:
-        return await bot.send("请在群聊中使用群排行功能")
-
-    im = await draw_all_matrix_rank_card(bot, ev, is_global=False)
-    await bot.send(im)
-
-
 @sv_waves_matrix_rank_all.on_regex(
-    r"^矩阵总排行(\d+)?$",
+    r"^矩阵(群|总|bot)?排行(\d+)?$",
     block=True,
 )
 async def send_matrix_rank_all_card(bot: Bot, ev: Event):
-    im = await draw_all_matrix_rank_card(bot, ev, is_global=True)
+    im = await draw_all_matrix_rank_card(bot, ev)
     await bot.send(im)

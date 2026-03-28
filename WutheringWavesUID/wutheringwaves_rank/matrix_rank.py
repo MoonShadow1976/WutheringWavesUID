@@ -1,5 +1,6 @@
 import asyncio
 import copy
+from datetime import datetime, timedelta
 from pathlib import Path
 import re
 
@@ -110,7 +111,7 @@ async def get_rank(item: MatrixRankItem) -> MatrixRankRes | None:
             logger.exception(f"获取矩阵排行失败: {e}")
 
 
-async def draw_all_matrix_rank_card(bot: Bot, ev: Event, is_global: bool = True):
+async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     waves_id = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     match = re.search(r"(\d+)", ev.raw_text)
     if match:
@@ -122,8 +123,16 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event, is_global: bool = True)
     page_num = 20
 
     waves_id_list = None
-    if not is_global and ev.group_id:
-        group_binds = await WavesBind.get_group_all_uid(group_id=ev.group_id)
+    title = "总"
+    if "总" not in ev.raw_text:
+        if "bot" in ev.raw_text:
+            group_binds = await WavesBind.get_all_data()
+            title = "bot"
+        else:
+            if not ev.group_id:
+                return "请在群聊中使用"
+            group_binds = await WavesBind.get_group_all_uid(group_id=ev.group_id)
+            title = "群"
         if group_binds:
             uid_set = set()
             for bind in group_binds:
@@ -181,9 +190,34 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event, is_global: bool = True)
     title_bg.paste(icon, (60, 240), icon)
 
     # title
-    title_text = "#矩阵总排行" if is_global else "#矩阵群排行"
+    title_text = f"#矩阵{title}排行"
     title_bg_draw = ImageDraw.Draw(title_bg)
     title_bg_draw.text((220, 290), title_text, "white", waves_font_58, "lm")
+
+    # 计算距离刷新的剩余时间
+    now = datetime.now()
+    # 起始时间：2026年3月26日凌晨4:00
+    start_time = datetime(2026, 3, 26, 4, 0, 0)
+    # 每34天刷新一次
+    cycle_days = 34
+
+    # 计算已经过了多少个周期
+    elapsed = now - start_time
+    elapsed_days = elapsed.total_seconds() / 86400
+    current_cycle = int(elapsed_days / cycle_days)
+
+    # 计算下次刷新时间
+    next_refresh = start_time + timedelta(days=(current_cycle + 1) * cycle_days)
+
+    # 计算剩余时间
+    remaining = next_refresh - now
+    remaining_days = remaining.days
+    remaining_hours = remaining.seconds // 3600
+    remaining_minutes = (remaining.seconds % 3600) // 60
+
+    # 副标题：距离刷新还剩
+    subtitle_text = f"距离刷新还剩: {remaining_days}天{remaining_hours}小时{remaining_minutes}分钟"
+    title_bg_draw.text((220, 350), subtitle_text, (255, 215, 100), waves_font_20, "lm")
 
     # 遮罩
     char_mask = Image.open(TEXT_PATH / "char_mask.png").convert("RGBA")
@@ -331,25 +365,9 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event, is_global: bool = True)
 
             role_bg.alpha_composite(char_avatar, (720 + role_index * 50, 20))
 
-        # buff图标
-        buff_bg = Image.new("RGBA", (50, 50), (255, 255, 255, 0))
-        buff_bg_draw = ImageDraw.Draw(buff_bg)
-        buff_bg_draw.rounded_rectangle(
-            [0, 0, 50, 50],
-            radius=5,
-            fill=(0, 0, 0, int(0.8 * 255)),
-        )
-        # 默认品质为5（金色）
-        buff_color = COLOR_QUALITY.get(5, (255, 215, 0))
-        buff_bg_draw.rectangle(
-            [0, 45, 50, 50],
-            fill=buff_color,
-        )
         buff_pic = await pic_download_from_url(MATRIX_PATH, team.buff_icon)
         buff_pic = buff_pic.resize((50, 50))
-        buff_bg.paste(buff_pic, (0, 0), buff_pic)
-
-        role_bg.alpha_composite(buff_bg, (870, 15))
+        role_bg.alpha_composite(buff_pic, (870, 15))
 
         # 队伍分数
         role_bg_draw.text(

@@ -47,7 +47,6 @@ from ..utils.image import (
 )
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
 from ..utils.util import get_version
-from ..wutheringwaves_abyss.draw_slash_card import COLOR_QUALITY
 from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"

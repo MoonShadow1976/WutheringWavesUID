@@ -419,7 +419,7 @@ async def upload_matrix_record(
             role_detail = role_detail_info_map.get(str(role.roleId))
             chain = role_detail.get_chain_num() if role_detail else None
 
-        if not chain:
+        if chain is None:
             logger.warning(f"[矩阵数据上传] 跳过上传: 无法匹配本地角色信息 (id={role.roleId}, name={role.roleName})")
             return
 

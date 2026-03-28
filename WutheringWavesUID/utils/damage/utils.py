@@ -108,7 +108,7 @@ Tune_Rupture_Role_Ids = [1209, 1210, 1509]
 Ancient_Role_Ids = [1608]
 
 # 释放声骸技能
-Phantom_Role_Dict = {1411: 3, 1607: 3}
+Phantom_Role_Dict = {1411: 3, 1607: 3, 1606: 1, 1608: 1}
 
 # 异常效应
 AbnormalType = Literal[

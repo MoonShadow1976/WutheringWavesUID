@@ -14,7 +14,6 @@ from ..utils.char_info_utils import get_all_roleid_detail_info
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
     waves_font_16,
-    waves_font_18,
     waves_font_20,
     waves_font_25,
     waves_font_26,
@@ -100,20 +99,21 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
 
     # 画布 2560 * 1440
     card_img = await get_random_share_bg()  # 已返回 2560 x 1440 图像
-    img = Image.new("RGBA", (2560, 1440), (30, 45, 65, 210))
+    img = Image.new("RGBA", (2560, 1440), (30, 45, 65, 70))  # 遮罩
     card_img = Image.alpha_composite(card_img, img)
 
     # 基础信息
-    base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
-    base_info_draw = ImageDraw.Draw(base_info_bg)
+    base_info_bg = Image.new("RGBA", (2560, 1440), (0, 0, 0, 0))
+    base_info = Image.open(TEXT_PATH / "base_info_bg.png")
+    base_info_draw = ImageDraw.Draw(base_info)
     base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
     base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
-    card_img.paste(base_info_bg, (-30, -70), base_info_bg)
+    base_info_bg.paste(base_info, (-30, -70), base_info)
 
     # 头像、头像环
     avatar, avatar_ring = await draw_pic_with_ring(ev)
-    card_img.paste(avatar, (-20, -20), avatar)
-    card_img.paste(avatar_ring, (-10, -10), avatar_ring)
+    base_info_bg.paste(avatar, (-20, -20), avatar)
+    base_info_bg.paste(avatar_ring, (-10, -10), avatar_ring)
 
     # 账号基本信息
     if account_info.is_full:
@@ -123,24 +123,29 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
         title_bar_draw.text((660, 78), f"Lv.{account_info.level}", "white", waves_font_42, "mm")
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
         title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
-        card_img.paste(title_bar, (-65, -20), title_bar)
+        base_info_bg.paste(title_bar, (-65, -20), title_bar)
+
+    base_info_bg = base_info_bg.resize((int(2560 * 0.8), int(1440 * 0.8)))
+    card_img.paste(base_info_bg, (30, 10), base_info_bg)
 
     # 获取角色详情
     role_detail_info_map = await get_all_roleid_detail_info(uid)
 
     # 绘制模式数据（改用内容宽度 1220，左右边距 30）
-    y_offset = 165
+    y_offset = 200
     content_width = 1500 - 60  # 左右边距各30
-    available_height = card_img.height - y_offset - 20  # 1275
+    available_height = card_img.height - y_offset - 100  # 1275 - 100 底部留空
 
     # 卡片基础尺寸与比例（宽128，高448，比例 1:3.5）
     base_width = 128
-    base_height = 124 * 3 + 76  # 三角色 一标题
+    team_header_height = 76
+    team_role_height = 124
+    base_height = team_role_height * 3 + team_header_height  # 三角色 一标题
     aspect_ratio = base_height / base_width  # 3.5
 
     # 间距
-    card_h_gap = 30  # 水平间距
-    card_v_gap = 20  # 垂直间距
+    card_h_gap = 20  # 水平间距
+    card_v_gap = 40  # 垂直间距
 
     for mode_index, mode in enumerate(matrix_data.modeDetails):
         if not mode.hasRecord:
@@ -219,7 +224,7 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
 
             # 寻找最优每行数量 N 和缩放因子 factor
             if team_count < 5:  # 避免队伍卡片过大
-                available_height = available_height // 3 * 2
+                available_height = available_height // 5 * 3
             best_N = 1
             best_factor = 0.0
             for N in range(1, team_count + 1):
@@ -256,11 +261,12 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             logger.debug(f"最终尺寸：{card_width}x{card_height}, 缩放因子：{best_factor}, 一行队伍数：{best_N}")
 
             # 加载并缩放装饰背景到原始尺寸
-            team_card_line_deco = Image.open(TEXT_PATH / "matrix_team_card_line_deco.png")
-            team_card_line_deco = team_card_line_deco.resize((128, 76), Image.Resampling.LANCZOS)
+            team_card_line_deco = Image.open(TEXT_PATH / "matrix_team_top.png")
+            team_card_line_deco = team_card_line_deco.rotate(180)
+            team_card_line_deco = team_card_line_deco.resize((base_width, team_header_height), Image.Resampling.LANCZOS)
 
             role_card_bg = Image.open(TEXT_PATH / "matrix_role_card_bg.png")
-            role_card_bg = role_card_bg.resize((128, 124), Image.Resampling.LANCZOS)
+            role_card_bg = role_card_bg.resize((base_width, team_role_height), Image.Resampling.LANCZOS)
 
             rows = (team_count + best_N - 1) // best_N
             total_teams_height = rows * card_height + (rows - 1) * card_v_gap
@@ -278,9 +284,8 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                 team_draw = ImageDraw.Draw(team_bg)
 
                 # 轮次、通关信息、分数
-                team_draw.text((0, 14), f"第{team.round}轮", "white", waves_font_20, "lm")
-                team_draw.text((60, 15), f"M{team.passBoss}/{team.bossCount}", GREY, waves_font_18, "lm")
-                team_draw.text((52, 50), f"+{team.score}", GOLD, waves_font_18, "lm")
+                team_draw.text((10, 65), f"第{team.round}轮 M{team.passBoss}/{team.bossCount}", "white", waves_font_20, "lm")
+                team_draw.text((25, 40), f"+{team.score}", GOLD, waves_font_20, "lm")
 
                 # 增益信息
                 if team.buffs and len(team.buffs) > 0:
@@ -289,18 +294,16 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                     if buff.buffIcon:
                         try:
                             buff_pic = await pic_download_from_url(MATRIX_PATH, buff.buffIcon)
-                            buff_pic = buff_pic.resize((40, 40), Image.Resampling.LANCZOS)
-                            team_bg.paste(buff_pic, (5, 30), buff_pic)
+                            buff_pic = buff_pic.resize((30, 30), Image.Resampling.LANCZOS)
+                            team_bg.paste(buff_pic, ((base_width - 30) // 2, 0), buff_pic)
                         except Exception:
                             pass
                     else:
-                        team_draw.text((0, 50), f"{buff_text}", "white", waves_font_16, "lm")
+                        team_draw.text((35, 0), f"{buff_text}", "white", waves_font_16, "lm")
 
                 # 构建角色卡列表 role_cards
                 role_cards = []
                 if team.roleIcons and len(team.roleIcons) > 0:
-                    role_card_h = int(124 * best_factor)
-                    role_card_w = card_width
                     for role_index, icon_url in enumerate(team.roleIcons[:3]):
                         if not icon_url:
                             continue
@@ -321,14 +324,17 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                             info_block_draw.rectangle([0, 0, 35, 17], fill=(96, 12, 120, int(0.9 * 255)))
                             info_block_draw.text((2, 8), f"{temp.get_chain_name()}", "white", waves_font_16, "lm")
                             role_bg.paste(info_block, (82, 10), info_block)
+                        role_bg = role_bg.resize((110, 110), Image.Resampling.LANCZOS)
                         role_cards.append(role_bg)
 
-                # 组合标题区 + 角色卡列表（原始尺寸，宽度固定128，高度动态）
-                team_card = Image.new("RGBA", (128, team_bg.height + sum(c.height for c in role_cards)), (0, 0, 0, 0))
-                team_card.paste(team_bg, (0, 0), team_bg)
+                # 组合标题区 + 角色卡列表
+                team_card = Image.new("RGBA", (base_width, base_height), (0, 0, 0, 0))
+                team_card_draw = ImageDraw.Draw(team_card)
+                team_card_draw.rounded_rectangle([0, 0, base_width, base_height], 50, (30, 30, 50, 150))
+                team_card.paste(team_bg, ((base_width - team_bg.width) // 2, 0), team_bg)
                 y_offset_role = team_bg.height
                 for role_card in role_cards:
-                    team_card.paste(role_card, (0, y_offset_role), role_card)  # 左对齐
+                    team_card.paste(role_card, ((base_width - role_card.width) // 2, y_offset_role), role_card)  # 左对齐
                     y_offset_role += role_card.height
 
                 # 将 team_card 粘贴到最终画布

@@ -793,6 +793,6 @@ class MatrixModeDetail(BaseModel):
 class MatrixData(BaseModel):
     """终焉矩阵数据"""
 
-    endTime: int
-    isUnlock: bool
+    endTime: int = 0
+    isUnlock: bool = False
     modeDetails: list[MatrixModeDetail] = []

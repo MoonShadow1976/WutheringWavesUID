@@ -75,6 +75,30 @@ def shenhai_node(now: datetime):
     }
 
 
+def matrix_node(now: datetime):
+    start_time = datetime(2026, 3, 26, 4, 0)
+    date_range = 86400 * 34  # 34天为一周期（秒）
+    # 将秒数转为 timedelta 对象
+    date_range_td = timedelta(seconds=date_range)
+
+    # 计算周期编号
+    elapsed_time = (now - start_time).total_seconds()  # 当前时间与开始时间的差值（秒）
+    period_index = int(elapsed_time // date_range)  # 周期编号（从 0 开始）
+
+    # 当前周期的起始和结束时间
+    period_start = start_time + period_index * date_range_td
+    period_end = period_start + date_range_td
+
+    start_date_str = period_start.strftime("%Y-%m-%d %H:%M")
+    end_date_str = period_end.strftime("%Y-%m-%d %H:%M")
+
+    return {
+        "title": "终焉矩阵",
+        "contentUrl": "matrix.png",
+        "countDown": {"dateRange": [start_date_str, end_date_str]},
+    }
+
+
 async def draw_calendar_img(ev: Event, uid: str):
     wiki_home = await waves_api.get_wiki_home()
     if wiki_home["code"] != 200:
@@ -95,8 +119,17 @@ async def draw_calendar_img(ev: Event, uid: str):
             gacha_weapon_list = await draw_calendar_gacha(side_module, "武器")
 
         elif side_module["title"] == "版本活动":
-            side_module["content"].insert(0, tower_node(now))
-            side_module["content"].insert(1, shenhai_node(now))
+            # 过滤掉API返回的终焉矩阵
+            side_module["content"] = [
+                activity for activity in side_module["content"]
+                if activity.get("title") != "终焉矩阵"
+            ]
+
+            # 插入本地节点
+            side_module["content"].insert(0, matrix_node(now))
+            side_module["content"].insert(1, tower_node(now))
+            side_module["content"].insert(2, shenhai_node(now))
+
             content = VersionActivity(**side_module)
 
     title_high = 150
@@ -250,6 +283,7 @@ async def draw_calendar_img(ev: Event, uid: str):
 
         else:
             linkUrl = Image.open(TEXT_PATH / cont.contentUrl)
+        linkUrl = linkUrl.convert("RGBA")
         linkUrl = linkUrl.resize((100, 100))  # type: ignore
         event_bg.paste(linkUrl, (40, 40), linkUrl)
         event_bg_draw.text((160, 60), f"{cont.title}", SPECIAL_GOLD, ww_font_30, "lm")

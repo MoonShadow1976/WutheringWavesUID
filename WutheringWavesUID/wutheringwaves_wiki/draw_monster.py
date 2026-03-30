@@ -68,12 +68,14 @@ async def draw_monster_resistance_table(monster_list: dict) -> bytes:
     draw.text((total_width // 2, 30), "怪物额外属性抗性表", fill=SPECIAL_GOLD, font=waves_font_44, anchor="mm")
 
     # 绘制描述文字
-    description_text = "基础全属性抗性10%，额外属性抗性：大世界30%，深塔50%，全息70%"
+    description_text = "基础全属性抗性：大世界(包含全息) 10%；深塔、海墟、矩阵 20%"
     draw.text((total_width // 2, 70), description_text, fill=(200, 200, 200), font=waves_font_28, anchor="mm")
+    description_text = "额外属性抗性：矩阵20%，大世界30%，海墟30%，深塔40%，全息70%"
+    draw.text((total_width // 2, 100), description_text, fill=(200, 200, 200), font=waves_font_28, anchor="mm")
 
     # 绘制属性列标题
     start_x = 20
-    start_y = 110
+    start_y = 130
 
     # 绘制每个属性列
     for col_idx, attr_name in enumerate(attributes):

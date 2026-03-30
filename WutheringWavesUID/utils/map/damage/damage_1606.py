@@ -84,7 +84,7 @@ def calc_damage_0(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "普攻幻想照进现实攻击目标时，无视对方60%的防御。"
-        attr.add_defense_reduction(0.6, title, msg)
+        attr.add_defense_ignore(0.6, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -215,7 +215,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "普攻幻想照进现实攻击目标时，无视对方60%的防御。"
-        attr.add_defense_reduction(0.6, title, msg)
+        attr.add_defense_ignore(0.6, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)

@@ -123,6 +123,7 @@ class DamageAttribute:
         crit_dmg=0,
         character_level=0,
         defense_reduction=0,
+        defense_ignore=0,
         enemy_resistance=0.1,
         dmg_bonus_phantom: DamageBonusPhantom | None = None,
         ph_detail=None,
@@ -154,10 +155,13 @@ class DamageAttribute:
         :param skill_ratio: 技能倍率加成 (如命座 椿2命 = 1.2）
         :param dmg_bonus: 伤害加成百分比(热熔伤害加成+技能伤害加成）
         :param dmg_deepen: 伤害加深百分比
+        :param easy_damage: 易伤百分比
+        :param final_damage: 最终伤害提升百分比
         :param crit_rate: 暴击率 (例如 0.5 表示 50%)
         :param crit_dmg: 暴击伤害倍率 (例如 2.0 表示 200%)
         :param character_level: 角色等级
         :param defense_reduction: 减防百分比
+        :param defense_ignore: 无视防御百分比
         :param enemy_resistance: 敌人抗性百分比
         :param dmg_bonus_phantom: 伤害加成百分比 -> DamageBonusPhantom
         :param ph_detail: 声骸个数和名字 -> List[PhantomDetail]
@@ -222,6 +226,8 @@ class DamageAttribute:
         self.character_level = character_level
         # 减防百分比
         self.defense_reduction = defense_reduction
+        # 无视防御百分比
+        self.defense_ignore = defense_ignore
         # 敌人抗性百分比
         self.enemy_resistance = 0
         # 伤害加成百分比 -> DamageBonusPhantom
@@ -327,6 +333,7 @@ class DamageAttribute:
             f"  角色等级={self.character_level}, \n"
             f"  敌人等级={self.enemy_level}, \n"
             f"  减防百分比={self.defense_reduction}, \n"
+            f"  无视防御百分比={self.defense_ignore}, \n"
             f"  减防乘区={self.defense_ratio}, \n"
             f"  敌人抗性百分比={self.enemy_resistance}, \n"
             f"  声骸的加成百分比={self.dmg_bonus_phantom}, \n"
@@ -567,6 +574,12 @@ class DamageAttribute:
     def add_defense_reduction(self, defense_reduction: float, title="", msg=""):
         """增加减防百分比"""
         self.defense_reduction += defense_reduction
+        self.add_effect(title, msg)
+        return self
+
+    def add_defense_ignore(self, defense_ignore: float, title="", msg=""):
+        """增加无视防御百分比"""
+        self.defense_ignore += defense_ignore
         self.add_effect(title, msg)
         return self
 
@@ -811,8 +824,9 @@ class DamageAttribute:
         """
         # enemy_defense = 1512
         enemy_defense = self.enemy_level * 8 + 792
-        # 计算公式为 (800 + 8 * 等级) / (800 + 8 * 等级 + 敌人防御 * (1 - 减防))
-        return (800 + 8 * self.character_level) / (800 + 8 * self.character_level + enemy_defense * (1 - self.defense_reduction))
+        character_defense = self.character_level * 8 + 800
+        # 计算公式为 (800 + 8 * 等级) / (800 + 8 * 等级 + 敌人防御 * (1 - 减防) * (1 - 无视防御))
+        return character_defense / (character_defense + enemy_defense * (1 - self.defense_reduction) * (1 - self.defense_ignore))
 
     @property
     def valid_enemy_resistance(self):

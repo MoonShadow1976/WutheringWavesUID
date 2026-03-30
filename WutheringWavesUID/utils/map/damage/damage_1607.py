@@ -68,7 +68,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -133,7 +133,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -198,7 +198,7 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -261,7 +261,7 @@ def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
         attr.add_skill_ratio(0.8, title, msg)
 
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -326,7 +326,7 @@ def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)
@@ -391,7 +391,7 @@ def calc_damage_6(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "施放共鸣解放陷溺时，坎特蕾拉的伤害无视目标30%防御"
-        attr.add_defense_reduction(0.3, title, msg)
+        attr.add_defense_ignore(0.3, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)

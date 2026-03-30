@@ -69,7 +69,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 4:
         title = f"{role_name}-四链"
         msg = "夏空造成共鸣解放伤害时无视敌人45%的防御。"
-        attr.add_defense_reduction(0.45, title, msg)
+        attr.add_defense_ignore(0.45, title, msg)
 
     if chain_num >= 5:
         title = f"{role_name}-五链"
@@ -141,7 +141,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 4:
         title = f"{role_name}-四链"
         msg = "夏空重击四拍重奏造成伤害时无视敌人45%的防御。"
-        attr.add_defense_reduction(0.45, title, msg)
+        attr.add_defense_ignore(0.45, title, msg)
 
     # 声骸
     echo_damage(attr, isGroup)

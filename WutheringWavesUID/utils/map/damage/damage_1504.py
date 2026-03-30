@@ -63,7 +63,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 2:
         title = f"{role_name}-二链"
         msg = "强化前扑攻击敌人时，无视对方20%的防御"
-        attr.add_defense_reduction(0.2, title, msg)
+        attr.add_defense_ignore(0.2, title, msg)
 
     if chain_num >= 4:
         title = f"{role_name}-四链"
@@ -131,7 +131,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     if chain_num >= 2:
         title = f"{role_name}-二链"
         msg = "强化后撤攻击敌人时，无视对方20%的防御"
-        attr.add_defense_reduction(0.2, title, msg)
+        attr.add_defense_ignore(0.2, title, msg)
 
     if chain_num >= 4:
         title = f"{role_name}-四链"

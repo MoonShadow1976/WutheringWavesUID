@@ -169,7 +169,7 @@ def calc_damage_1(
                 attr.add_dmg_deepen(value, title, msg)
                 value = min(0.3, 0.075 * innate_gift)
                 msg = f"每层额外无视防御7.5%,至多30%,当前{value * 100:.0f}%"
-                attr.add_defense_reduction(value, title, msg)
+                attr.add_defense_ignore(value, title, msg)
 
     if chain_num >= 2:
         if actionType == "ez":

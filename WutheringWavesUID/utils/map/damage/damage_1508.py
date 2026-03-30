@@ -53,7 +53,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 虚湮之线
     title = "共鸣回路-虚湮之线"
     msg = "对拥有虚无绞痕的目标造成伤害时，可无视其18%防御"
-    attr.add_defense_reduction(0.18, title, msg)
+    attr.add_defense_ignore(0.18, title, msg)
 
     # 虚湮效应（3层）
     title = "虚湮效应"
@@ -228,7 +228,7 @@ def calc_damage_3(
     # 虚湮之线
     title = "共鸣回路-虚湮之线"
     msg = "对拥有虚无绞痕的目标造成伤害时，可无视其18%防御"
-    attr.add_defense_reduction(0.18, title, msg)
+    attr.add_defense_ignore(0.18, title, msg)
 
     # 虚湮效应（3层）
     title = "虚湮效应"

@@ -917,7 +917,7 @@ class Char_1508(CharAbstract):
 
         title = "千咲-共鸣回路-虚湮之线"
         msg = "对拥有虚无绞痕的目标造成伤害时，可无视其18%防御"
-        attr.add_defense_reduction(0.18, title, msg)
+        attr.add_defense_ignore(0.18, title, msg)
 
         # 异常效应层数上限增加3层
         title = "千咲-延奏技能-解弦式第零定律"

@@ -86,7 +86,7 @@ def calc_damage_1(
     if chain_num >= 5:
         title = f"{role_name}-五链"
         msg = "无视目标15%的防御"
-        attr.add_defense_reduction(0.15, title, msg)
+        attr.add_defense_ignore(0.15, title, msg)
 
     if chain_num >= 6:
         title = f"{role_name}-六链"
@@ -188,7 +188,7 @@ def calc_damage_2(
     if chain_num >= 5:
         title = f"{role_name}-五链"
         msg = "无视目标15%的防御"
-        attr.add_defense_reduction(0.15, title, msg)
+        attr.add_defense_ignore(0.15, title, msg)
 
     if chain_num >= 6:
         title = f"{role_name}-六链"

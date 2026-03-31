@@ -152,6 +152,9 @@ async def draw_card(uid: str, ev: Event):
             "short_gacha_data": {"time": 0, "num": 0},
             "long_gacha_data": {"time": 0, "num": 0},
             "level": 0,  # 抽卡等级
+            "non_deviation_rate": "-",  # 不歪率
+            "max_consecutive_up": 0,  # 最大连up
+            "max_consecutive_non_up": 0,  # 最大连歪
         }
 
     for gacha_name in gachalogs:
@@ -199,6 +202,42 @@ async def draw_card(uid: str, ev: Event):
         else:
             _u = sum(current_data["r_num"]) / len(current_data["up_list"])
             current_data["avg_up"] = float(f"{_u:.2f}")
+        # 计算不歪率（仅角色精准调谐）
+        if gacha_name == "角色精准调谐" and len(current_data["rank_s_list"]) > 0:
+            # 计算小保底不歪率：UP五星之后依然是UP五星的概率（排除大保底UP）
+            up_after_up_count = 0  # 小保底不歪的次数
+            total_small_guarantee = 0  # 小保底总次数
+
+            rank_s_list = current_data["rank_s_list"]
+
+            # 检查第一个五星（如果是角色）
+            if len(rank_s_list) > 0:
+                first = rank_s_list[0]
+                if first.get("resourceType") == "角色" and first.get("qualityLevel") == 5:
+                    total_small_guarantee += 1
+                    if first.get("is_up", False):
+                        up_after_up_count += 1
+
+            # 检查后续五星：只统计UP之后的情况
+            for i in range(len(rank_s_list) - 1):
+                # 只统计五星角色
+                if rank_s_list[i].get("resourceType") == "角色" and rank_s_list[i].get("qualityLevel") == 5:
+                    # 如果当前五星是UP
+                    if rank_s_list[i].get("is_up", False):
+                        # 检查下一个五星
+                        if rank_s_list[i + 1].get("resourceType") == "角色" and rank_s_list[i + 1].get("qualityLevel") == 5:
+                            total_small_guarantee += 1
+                            if rank_s_list[i + 1].get("is_up", False):
+                                up_after_up_count += 1
+
+            if total_small_guarantee > 0:
+                current_data["non_deviation_rate"] = float(f"{up_after_up_count / total_small_guarantee * 100:.1f}")
+            else:
+                current_data["non_deviation_rate"] = "-"
+
+            # 计算最大连up和最大连歪
+            current_data["max_consecutive_up"] = calculate_max_consecutive_up(current_data["rank_s_list"])
+            current_data["max_consecutive_non_up"] = calculate_max_consecutive_non_up(current_data["rank_s_list"])
 
         current_data["level"] = 2
         if current_data["avg_up"] == "-" and current_data["avg"] == "-":
@@ -206,9 +245,9 @@ async def draw_card(uid: str, ev: Event):
         else:
             if gacha_name == "角色精准调谐":
                 if current_data["avg_up"] != "-":
-                    current_data["level"] = get_level_from_list(current_data["avg_up"], [74, 87, 99, 105, 120])
+                    current_data["level"] = get_level_from_list(current_data["avg_up"], [65, 80, 85, 113, 128])
                 elif current_data["avg"] != "-":
-                    current_data["level"] = get_level_from_list(current_data["avg"], [53, 60, 68, 73, 75])
+                    current_data["level"] = get_level_from_list(current_data["avg"], [36, 52, 56, 71, 74])
             elif gacha_name in [
                 "武器精准调谐",
                 "角色调谐（常驻池）",
@@ -216,13 +255,13 @@ async def draw_card(uid: str, ev: Event):
                 "新手自选唤取",
             ]:
                 if current_data["avg"] != "-":
-                    current_data["level"] = get_level_from_list(current_data["avg"], [45, 52, 59, 65, 70])
+                    current_data["level"] = get_level_from_list(current_data["avg"], [36, 52, 56, 71, 74])
             elif gacha_name == "新手调谐":
                 if current_data["avg"] != "-":
                     current_data["level"] = get_level_from_list(current_data["avg"], [10, 20, 30, 40, 45])
 
     oset = 280
-    bset = 170
+    bset = 150
 
     _numlen = 0
     newbie_flag = False
@@ -236,7 +275,7 @@ async def draw_card(uid: str, ev: Event):
             if _num == 0:
                 _numlen += 50
             else:
-                _numlen += bset * get_num_h(_num, 5)
+                _numlen += bset * get_num_h(_num, 6)
 
     _newbielen = 395 if newbie_flag else 0
     _header = 380
@@ -251,19 +290,20 @@ async def draw_card(uid: str, ev: Event):
     up_icon = up_icon.resize((68, 52))
 
     async def draw_pic(item) -> Image.Image:
-        item_bg = Image.new("RGBA", (167, 170))
+        item_bg = Image.new("RGBA", (145, 150))
         item_fg_cp = item_fg.copy()
+        item_fg_cp = item_fg_cp.resize((145, 150))
         item_bg.paste(item_fg_cp, (0, 0), item_fg_cp)
 
-        item_temp = Image.new("RGBA", (167, 170))
+        item_temp = Image.new("RGBA", (145, 150))
         if item["resourceType"] == "武器":
             item_icon = await get_square_weapon(item["resourceId"])
-            item_icon = item_icon.resize((130, 130)).convert("RGBA")
-            item_temp.paste(item_icon, (22, 0), item_icon)
+            item_icon = item_icon.resize((115, 115)).convert("RGBA")
+            item_temp.paste(item_icon, (19, 0), item_icon)
         else:
             item_icon = await get_square_avatar(item["resourceId"])
-            item_icon = await cropped_square_avatar(item_icon, 130)
-            item_temp.paste(item_icon, (22, 0), item_icon)
+            item_icon = await cropped_square_avatar(item_icon, 115)
+            item_temp.paste(item_icon, (19, 0), item_icon)
 
         item_bg.paste(item_temp, (-2, -2), item_temp)
         gnum = item["gacha_num"]
@@ -274,16 +314,17 @@ async def draw_card(uid: str, ev: Event):
             gcolor = (43, 210, 43)
         else:
             gcolor = "white"
-        info_block = Image.new("RGBA", (137, 28), color=(255, 255, 255, 0))
+        info_block = Image.new("RGBA", (120, 25), color=(255, 255, 255, 0))
         info_block_draw = ImageDraw.Draw(info_block)
-        info_block_draw.rectangle([0, 0, 137, 28], fill=(0, 0, 0, int(0.6 * 255)))
-        info_block_draw.text((65, 12), f"{item['gacha_num']}抽", gcolor, waves_font_20, "mm")
+        info_block_draw.rectangle([0, 0, 120, 25], fill=(0, 0, 0, int(0.6 * 255)))
+        info_block_draw.text((58, 11), f"{item['gacha_num']}抽", gcolor, waves_font_18, "mm")
 
-        item_bg.paste(info_block, (15, 130), info_block)
+        item_bg.paste(info_block, (13, 115), info_block)
 
         if item["is_up"]:
             up_icon_cp = up_icon.copy()
-            item_bg.paste(up_icon_cp, (88, 3), up_icon_cp)
+            up_icon_cp = up_icon_cp.resize((59, 46))
+            item_bg.paste(up_icon_cp, (77, 2), up_icon_cp)
         return item_bg
 
     y = 0
@@ -292,7 +333,11 @@ async def draw_card(uid: str, ev: Event):
         if "新手" in gacha_name:
             continue
         gacha_data = total_data[gacha_name]
-        title = Image.open(TEXT_PATH / "bar.png")
+        # 角色精准调谐使用bar_up.png，其他使用bar.png
+        if gacha_name == "角色精准调谐":
+            title = Image.open(TEXT_PATH / "bar_up.png")
+        else:
+            title = Image.open(TEXT_PATH / "bar.png")
         title_draw = ImageDraw.Draw(title)
 
         remain_s = f"{gacha_data['remain']}"
@@ -300,6 +345,8 @@ async def draw_card(uid: str, ev: Event):
         avg_up_s = f"{gacha_data['avg_up']}"
         total = f"{gacha_data['total']}"
         level = gacha_data["level"]
+        non_deviation_rate = gacha_data.get("non_deviation_rate", "-")
+        max_consecutive_non_up = gacha_data.get("max_consecutive_non_up", 0)
 
         if gacha_data["time_range"]:
             time_range = gacha_data["time_range"]
@@ -318,9 +365,27 @@ async def draw_card(uid: str, ev: Event):
         level_icon = level_icon.resize((140, 140)).convert("RGBA")
         tag = HOMO_TAG[level]
 
-        title_draw.text((160, 178), avg_s, "white", waves_font_32, "mm")
-        title_draw.text((300, 178), avg_up_s, "white", waves_font_32, "mm")
-        title_draw.text((457, 178), total, "white", waves_font_32, "mm")
+        # 显示不歪率和最大连歪（仅角色精准调谐）
+        if gacha_name == "角色精准调谐":
+            # 缩小20%的字体和间隔
+            title_draw.text((150, 178), avg_s, "white", waves_font_25, "mm")
+            title_draw.text((150, 205), "平均出金", "white", waves_font_18, "mm")
+            title_draw.text((260, 178), avg_up_s, "white", waves_font_25, "mm")
+            title_draw.text((260, 205), "平均up", "white", waves_font_18, "mm")
+            title_draw.text((370, 178), total, "white", waves_font_25, "mm")
+            title_draw.text((370, 205), "总抽数", "white", waves_font_18, "mm")
+            if non_deviation_rate != "-":
+                title_draw.text((480, 178), f"{non_deviation_rate}%", "white", waves_font_25, "mm")
+                title_draw.text((480, 205), "小保底不歪率", "white", waves_font_18, "mm")
+            if max_consecutive_non_up > 0:
+                title_draw.text((590, 178), str(max_consecutive_non_up), "white", waves_font_25, "mm")
+                title_draw.text((590, 205), "最多连歪", "white", waves_font_18, "mm")
+        else:
+            # 其他卡池保持原样
+            title_draw.text((160, 178), avg_s, "white", waves_font_32, "mm")
+            title_draw.text((300, 178), avg_up_s, "white", waves_font_32, "mm")
+            title_draw.text((457, 178), total, "white", waves_font_32, "mm")
+
         title_draw.text((110, 80), gacha_type_meta_rename[gacha_name], "white", waves_font_40, "lm")
         title_draw.text((380, 87), "已", "white", waves_font_23, "rm")
         title_draw.text((410, 84), remain_s, "red", waves_font_40, "mm")
@@ -336,8 +401,9 @@ async def draw_card(uid: str, ev: Event):
         for index, item in enumerate(s_list):
             item_bg = await draw_pic(item)
 
-            _x = 95 + 162 * (index % 5)
-            _y = _header + bset * (index // 5) + y + gindex * oset
+            # 6列居中：总宽度 = 6*145 + 5*(-10间距) = 820，居中起始位置 = (1000-820)/2 = 90
+            _x = 90 + 135 * (index % 6)
+            _y = _header + bset * (index // 6) + y + gindex * oset
 
             card_img.paste(
                 item_bg,
@@ -354,7 +420,7 @@ async def draw_card(uid: str, ev: Event):
             )
             y += 50
         else:
-            y += get_num_h(len(s_list), 5) * bset
+            y += get_num_h(len(s_list), 6) * bset
 
     newbie_bg = Image.open(TEXT_PATH / "newbie.png")
     nindex = 0
@@ -518,13 +584,12 @@ def extract_gacha_statistics(total_data: dict) -> dict:
     # 角色精准调谐
     if "角色精准调谐" in total_data:
         char_data = total_data["角色精准调谐"]
-        rank_s_list = char_data.get("rank_s_list", [])
         stats["character_event"] = {
             "total_pulls": char_data.get("total", 0),
             "avg_gold": char_data.get("avg") if char_data.get("avg") != "-" else None,
             "avg_up": char_data.get("avg_up") if char_data.get("avg_up") != "-" else None,
-            "max_consecutive_up": calculate_max_consecutive_up(rank_s_list),
-            "max_consecutive_non_up": calculate_max_consecutive_non_up(rank_s_list),
+            "max_consecutive_up": char_data.get("max_consecutive_up", 0),
+            "max_consecutive_non_up": char_data.get("max_consecutive_non_up", 0),
         }
 
     # 武器精准调谐

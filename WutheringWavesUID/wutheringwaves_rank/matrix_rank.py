@@ -178,7 +178,7 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     try:
         title_bg = Image.open(TEXT_PATH / "matrix_bg.png").convert("RGBA")
         title_bg = crop_center_img(title_bg, width, 500)
-    except:
+    except Exception:
         # 如果矩阵背景不存在，使用海墟背景
         title_bg = Image.open(TEXT_PATH / "slash.jpg")
         title_bg = title_bg.crop((0, 0, width, 500))

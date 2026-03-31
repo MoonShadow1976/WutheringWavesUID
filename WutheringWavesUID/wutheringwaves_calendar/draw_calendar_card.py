@@ -120,10 +120,7 @@ async def draw_calendar_img(ev: Event, uid: str):
 
         elif side_module["title"] == "版本活动":
             # 过滤掉API返回的终焉矩阵
-            side_module["content"] = [
-                activity for activity in side_module["content"]
-                if activity.get("title") != "终焉矩阵"
-            ]
+            side_module["content"] = [activity for activity in side_module["content"] if activity.get("title") != "终焉矩阵"]
 
             # 插入本地节点
             side_module["content"].insert(0, matrix_node(now))

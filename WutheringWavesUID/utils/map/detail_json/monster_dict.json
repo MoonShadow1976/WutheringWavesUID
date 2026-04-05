@@ -1225,6 +1225,15 @@
         "echo": 0,
         "name": "噬影人·悲戚"
     },
+    "320000660": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000198,
+        "name": "迷胧幻蛾"
+    },
     "330000010": {
         "rarity": 3,
         "attributeId": 3,
@@ -1508,5 +1517,24 @@
         ],
         "echo": 6000192,
         "name": "无铭探索者"
+    },
+    "340000270": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6,
+            2
+        ],
+        "echo": 6000199,
+        "name": "敬请期待"
+    },
+    "340000280": {
+        "rarity": 4,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000200,
+        "name": "敬请期待"
     }
 }

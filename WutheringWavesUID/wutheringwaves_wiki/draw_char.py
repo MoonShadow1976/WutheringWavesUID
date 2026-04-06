@@ -578,18 +578,33 @@ def wrap_text_with_manual_newlines(
                             current_line += char
                             current_length += 1
                 elif segment[0] == "colored":
-                    full_tag = segment[1]
+                    color_name = re.search(r"<color=([^>]+)>", segment[1]).group(1)
                     plain_text = segment[2]
-                    text_len = len(plain_text)
+                    in_color_tag = False
 
-                    # 如果加上这个标签会超出宽度，先换行
-                    if current_length + text_len > width and current_line:
-                        result_lines.append(current_line)
-                        current_line = full_tag
-                        current_length = text_len
-                    else:
-                        current_line += full_tag
-                        current_length += text_len
+                    # 对彩色文本也按字符进行换行
+                    for i, char in enumerate(plain_text):
+                        if current_length >= width:
+                            # 如果当前在颜色标签内，先关闭标签
+                            if in_color_tag:
+                                current_line += "</color>"
+                                in_color_tag = False
+                            result_lines.append(current_line)
+                            # 新行开始，添加颜色标签
+                            current_line = f"<color={color_name}>{char}"
+                            current_length = 1
+                            in_color_tag = True
+                        else:
+                            # 如果是第一个字符，需要开启标签
+                            if not in_color_tag:
+                                current_line += f"<color={color_name}>"
+                                in_color_tag = True
+                            current_line += char
+                            current_length += 1
+
+                    # 关闭颜色标签
+                    if in_color_tag:
+                        current_line += "</color>"
 
             if current_line:
                 result_lines.append(current_line)

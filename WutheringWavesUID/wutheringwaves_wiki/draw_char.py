@@ -357,7 +357,7 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
 
         # 分行显示标题
         wrapped_title = textwrap.fill(title, width=10)
-        wrapped_desc = wrap_text_with_manual_newlines(desc, width=70)
+        wrapped_desc = wrap_text_with_manual_newlines(desc, width=65)
 
         # 获取每行的宽度，确保不会超过设定的 image_width
         lines_title = wrapped_title.split("\n")
@@ -368,7 +368,7 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
             _type = relate_item.type if relate_item.type else "属性加成"
             relate_title = f"{_type}: {relate_item.name}"
             relate_desc = relate_item.get_desc_detail()
-            wrapped_relate_desc = wrap_text_with_manual_newlines(relate_desc, width=70)
+            wrapped_relate_desc = wrap_text_with_manual_newlines(relate_desc, width=65)
 
             lines_desc.append(relate_title)
             lines_desc.extend(wrapped_relate_desc.split("\n"))
@@ -560,7 +560,7 @@ def wrap_text_with_manual_newlines(
             if last_end < len(line):
                 segments.append(("plain", line[last_end:]))
 
-            # 手动换行，保持标签完整
+            # 手动换行，保持标签完整，按字符处理
             current_line = ""
             current_length = 0
             result_lines = []
@@ -568,25 +568,15 @@ def wrap_text_with_manual_newlines(
             for segment in segments:
                 if segment[0] == "plain":
                     text_part = segment[1]
-                    # 对纯文本进行换行
-                    words = text_part.split()
-                    for word in words:
-                        word_len = len(word)
-                        if current_length + word_len + (1 if current_line else 0) > width:
-                            if current_line:
-                                result_lines.append(current_line)
-                                current_line = word
-                                current_length = word_len
-                            else:
-                                current_line = word
-                                current_length = word_len
+                    # 对纯文本按字符进行换行
+                    for char in text_part:
+                        if current_length >= width:
+                            result_lines.append(current_line)
+                            current_line = char
+                            current_length = 1
                         else:
-                            if current_line:
-                                current_line += " " + word
-                                current_length += 1 + word_len
-                            else:
-                                current_line = word
-                                current_length = word_len
+                            current_line += char
+                            current_length += 1
                 elif segment[0] == "colored":
                     full_tag = segment[1]
                     plain_text = segment[2]

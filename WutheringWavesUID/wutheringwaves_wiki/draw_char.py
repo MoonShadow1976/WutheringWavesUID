@@ -254,7 +254,7 @@ async def parse_char_chain(data: dict[int, Chain]):
 
         # 分行显示标题
         wrapped_title = textwrap.fill(title, width=20)
-        wrapped_desc = textwrap.fill(desc, width=31)
+        wrapped_desc = wrap_text_with_manual_newlines(desc, width=31)
 
         # 获取每行的宽度，确保不会超过设定的 image_width
         lines_title = wrapped_title.split("\n")

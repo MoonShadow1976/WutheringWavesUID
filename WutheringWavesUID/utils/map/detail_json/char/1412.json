@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "一、二、三……",
-        "desc": "普攻\n进行最多4段的连续攻击，造成气动伤害。\n施放普攻第4段后进入解读状态，持续{0}秒，若切换至其他角色则该效果提前结束。\n若西格莉卡至少拥有{1}点【句点】，普攻从第2段开始。\n\n普攻·明悟\n处于解读状态时，地面短按普攻施放普攻·明悟，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。\n\n重击\n消耗耐力攻击目标，造成气动伤害。\n施放重击后的一段时间内，短按普攻施放普攻第2段。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成气动伤害。\n施放空中下落攻击后的一段时间内，短按普攻施放普攻第2段。\n\n闪避反击\n在地面成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。\n施放闪避反击后的一段时间内，短按普攻施放普攻第4段。\n\n闪避反击·解读\n处于解读状态时，在地面成功闪避后一定时间内短按普攻，将会施放闪避反击·解读，攻击目标，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。\n\n空中闪避反击\n在空中成功闪避后一定时间内短按普攻，将会攻击目标，造成气动伤害。\n施放空中闪避反击后的一段时间内，短按普攻施放普攻第2段。",
+        "desc": "<color=Title>普攻</color>\n进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>普攻第4段</color>后进入<color=Highlight>解读</color>状态，持续{0}秒，若切换至其他角色则该效果提前结束。\n若西格莉卡至少拥有{1}点<color=Highlight>【句点】</color>，普攻从第2段开始。\n\n<color=Title>普攻·明悟</color>\n处于<color=Highlight>解读</color>状态时，地面短按普攻施放<color=Highlight>普攻·明悟</color>，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n施放时退出<color=Highlight>解读</color>状态。\n\n<color=Title>重击</color>\n消耗耐力攻击目标，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>重击</color>后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Wind>气动伤害</color>。\n施放空中下落攻击后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>闪避反击</color>\n在地面成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>闪避反击</color>后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第4段</color>。\n\n<color=Title>闪避反击·解读</color>\n处于<color=Highlight>解读</color>状态时，在地面成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会施放<color=Highlight>闪避反击·解读</color>，攻击目标，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n施放时退出<color=Highlight>解读</color>状态。\n\n<color=Title>空中闪避反击</color>\n在空中成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>空中闪避反击</color>后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第2段</color>。",
         "param": [
           "5",
           "50"
@@ -861,13 +861,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021051,
+              "value": 2
+            },
+            {
+              "key": 41100081,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021051,
+              "value": 3
+            },
+            {
+              "key": 41100081,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021052,
+              "value": 2
+            },
+            {
+              "key": 41100082,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021053,
+              "value": 5
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021054,
+              "value": 2
+            },
+            {
+              "key": 41100084,
+              "value": 2
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021054,
+              "value": 6
+            },
+            {
+              "key": 41100084,
+              "value": 4
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "2": {
       "skill": {
         "name": "罗伊近身格斗技",
-        "desc": "嘭嘭！\n攻击目标，造成气动伤害。\n施放嘭嘭！后的一段时间内，短按普攻施放普攻第3段。\n\n大嘭嘭！\n处于解读状态时，地面短按共鸣技能可施放大嘭嘭！，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。\n\n日灵帮帮忙\n处于解读状态时，若西格莉卡至少拥有{0}点【句点】，地面短按共鸣技能可施放日灵帮帮忙，造成气动伤害，本次伤害为声骸技能伤害。\n施放时退出解读状态。",
+        "desc": "<color=Title>嘭嘭！</color>\n攻击目标，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>嘭嘭！</color>后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第3段</color>。\n\n<color=Title>大嘭嘭！</color>\n处于<color=Highlight>解读</color>状态时，地面<color=Highlight>短按共鸣技能</color>可施放<color=Highlight>大嘭嘭！</color>，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n施放时退出<color=Highlight>解读</color>状态。\n\n<color=Title>日灵帮帮忙</color>\n处于<color=Highlight>解读</color>状态时，若西格莉卡至少拥有{0}点<color=Highlight>【句点】</color>，地面<color=Highlight>短按共鸣技能</color>可施放<color=Highlight>日灵帮帮忙</color>，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n施放时退出<color=Highlight>解读</color>状态。",
         "param": [
           "50"
         ],
@@ -981,13 +1126,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021051,
+              "value": 2
+            },
+            {
+              "key": 41100081,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021051,
+              "value": 3
+            },
+            {
+              "key": 41100081,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021052,
+              "value": 2
+            },
+            {
+              "key": 41100082,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021053,
+              "value": 5
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021054,
+              "value": 2
+            },
+            {
+              "key": 41100084,
+              "value": 2
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021054,
+              "value": 6
+            },
+            {
+              "key": 41100084,
+              "value": 4
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "3": {
       "skill": {
         "name": "如那期望般！",
-        "desc": "造成气动伤害，本次伤害为声骸技能伤害。西格莉卡获得专注，持续{0}秒。\n\n专注\n西格莉卡下一次获取【符文】时，可额外获取一枚不同的【符文】，并移除专注。\n西格莉卡同时拥有专注和回声时，回声优先生效。\n西格莉卡【句点】为{1}点时，专注不生效。",
+        "desc": "造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。西格莉卡获得<color=Highlight>专注</color>，持续{0}秒。\n\n<color=Title>专注</color>\n西格莉卡下一次获取<color=Highlight>【符文】</color>时，可额外获取一枚不同的<color=Highlight>【符文】</color>，并移除<color=Highlight>专注</color>。\n西格莉卡同时拥有<color=Highlight>专注</color>和<color=Highlight>回声</color>时，<color=Highlight>回声</color>优先生效。\n西格莉卡<color=Highlight>【句点】</color>为{1}点时，<color=Highlight>专注</color>不生效。",
         "param": [
           "20",
           "100"
@@ -1102,25 +1392,190 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021051,
+              "value": 2
+            },
+            {
+              "key": 41100081,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021051,
+              "value": 3
+            },
+            {
+              "key": 41100081,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021052,
+              "value": 2
+            },
+            {
+              "key": 41100082,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021053,
+              "value": 5
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021054,
+              "value": 2
+            },
+            {
+              "key": 41100084,
+              "value": 2
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021054,
+              "value": 6
+            },
+            {
+              "key": 41100084,
+              "value": 4
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "4": {
       "skill": {
         "name": "语义复现",
-        "desc": "施放变奏技能·昭日的语源后，西格莉卡获得回声，持续{0}秒。\n\n回声\n西格莉卡下一次获取【符文】时，可额外获取一枚相同的【符文】，并移除回声。\n西格莉卡同时拥有专注和回声时，回声优先生效。\n西格莉卡【句点】为{1}点时，回声不生效。",
+        "desc": "施放<color=Highlight>变奏技能·昭日的语源</color>后，西格莉卡获得<color=Highlight>回声</color>，持续{0}秒。\n\n<color=Title>回声</color>\n西格莉卡下一次获取<color=Highlight>【符文】</color>时，可额外获取一枚相同的<color=Highlight>【符文】</color>，并移除<color=Highlight>回声</color>。\n西格莉卡同时拥有<color=Highlight>专注</color>和<color=Highlight>回声</color>时，<color=Highlight>回声</color>优先生效。\n西格莉卡<color=Highlight>【句点】</color>为{1}点时，<color=Highlight>回声</color>不生效。",
         "param": [
           "20",
           "100"
         ],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 10000
+            }
+          ]
+        }
       }
     },
     "5": {
       "skill": {
         "name": "语义共鸣",
-        "desc": "队伍中的角色施放声骸技能时，西格莉卡为自身叠加一层语义的祝福，最多叠加{0}层，同名声骸仅可触发一次该效果。\n角色编入队伍时，重置该效果。\n\n语义的祝福\n每层语义的祝福使队伍中登场角色气动伤害加成提升{1}，声骸技能伤害加成提升{2}。\n语义的祝福达到{3}层时，西格莉卡的气动伤害加成和声骸技能伤害加成额外提升{4}。\n\n西格莉卡自身的共鸣效率大于{5}时，每超过{6}的共鸣效率使自身声骸技能伤害加成提升{7}，上限{8}。",
+        "desc": "队伍中的角色施放声骸技能时，西格莉卡为自身叠加一层<color=Highlight>语义的祝福</color>，最多叠加{0}层，同名声骸仅可触发一次该效果。\n角色编入队伍时，重置该效果。\n\n<color=Title>语义的祝福</color>\n每层<color=Highlight>语义的祝福</color>使队伍中登场角色气动伤害加成提升{1}，声骸技能伤害加成提升{2}。\n<color=Highlight>语义的祝福</color>达到{3}层时，西格莉卡的气动伤害加成和声骸技能伤害加成额外提升{4}。\n\n西格莉卡自身的共鸣效率大于{5}时，每超过{6}的共鸣效率使自身声骸技能伤害加成提升{7}，上限{8}。",
         "param": [
           "6",
           "3%",
@@ -1133,13 +1588,33 @@
           "50%"
         ],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 20000
+            }
+          ]
+        }
       }
     },
     "6": {
       "skill": {
         "name": "昭日的语源",
-        "desc": "造成气动伤害。\n施放变奏技能后的一段时间内，短按普攻施放普攻第2段。",
+        "desc": "造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>变奏技能</color>后的一段时间内，<color=Highlight>短按普攻</color>施放<color=Highlight>普攻第2段</color>。",
         "param": [],
         "type": "变奏技能",
         "level": {
@@ -1197,13 +1672,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021051,
+              "value": 2
+            },
+            {
+              "key": 41100081,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021051,
+              "value": 3
+            },
+            {
+              "key": 41100081,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021052,
+              "value": 2
+            },
+            {
+              "key": 41100082,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021053,
+              "value": 5
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021054,
+              "value": 2
+            },
+            {
+              "key": 41100084,
+              "value": 2
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021054,
+              "value": 6
+            },
+            {
+              "key": 41100084,
+              "value": 4
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "7": {
       "skill": {
         "name": "在那浩瀚中",
-        "desc": "重击·符语本源\n长按普攻，施放重击·符语本源，造成气动伤害并消耗两枚【符文】。根据消耗的【符文】类型，获得以下效果：\n·若消耗【符文】为一枚【符文·期望】和一枚【符文·答问】，追加符语爆破效果。\n·若消耗【符文】为两枚【符文·期望】，追加符语链刃效果。\n·若消耗【符文】为两枚【符文·答问】，追加符语日灵效果。\n消耗【符文】时，若【日灵能量】不少于{0}点，消耗{1}点【日灵能量】，本次符语爆破、符语链刃和符语日灵伤害倍率提升{2}，并为自身叠加一层「天赋？」。\n消耗【符文】时，若【日灵能量】少于{3}点，消耗全部【日灵能量】，每消耗{4}点【日灵能量】，使得本次符语爆破、符语链刃和符语日灵造成的伤害加深{5}。\n重击·符语本源造成的伤害为声骸技能伤害。\n\n符语爆破\n造成气动伤害，本次伤害为声骸技能伤害。\n\n符语链刃\n停滞附近目标，造成气动伤害，本次伤害为声骸技能伤害。\n\n符语日灵\n牵引附近目标，造成气动伤害，本次伤害为声骸技能伤害。\n\n共鸣回路·我即语义\n【句点】为{6}点时，若共鸣回路·我即语义不处于冷却状态，共鸣技能·嘭嘭！和共鸣技能·日灵帮帮忙改为短按并松开时施放，长按共鸣技能消耗全部【句点】可施放共鸣回路·我即语义，造成气动伤害，本次伤害为声骸技能伤害。\n\n「天赋？」\n「天赋？」可叠加的层数上限为{7}层，每层可以使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义伤害加深{8}。\n西格莉卡施放共鸣回路·我即语义后或切换至其他角色该效果结束。\n\n【符文】获取规则\n【符文】累积上限{9}枚，未拥有【句点】时仅可累积{10}枚，达上限时再次获取【符文】，已有【符文】将左移一格，最左侧的【符文】将被移除。拥有{11}点【句点】后可继续累积{12}枚【符文】。\n施放普攻·明悟或闪避反击·解读期间，普攻·明悟或闪避反击·解读命中目标时，可获取一枚【符文·期望】。\n施放共鸣技能·大嘭嘭！或共鸣技能·日灵帮帮忙期间，共鸣技能·大嘭嘭！或共鸣技能·日灵帮帮忙命中目标时，可获取一枚【符文·答问】。\n\n【句点】获取规则\n施放重击·符语本源后可以获得{13}点【句点】，上限100点。\n\n【日灵能量】获取规则\n附近队伍中所有角色施放声骸技能时，西格莉卡可以获得{14}点【日灵能量】，上限{15}点，同名声骸仅可触发一次该效果。施放延奏技能·在这一瞬间时，重置同名声骸记录。",
+        "desc": "<color=Title>重击·符语本源</color>\n<color=Highlight>长按普攻</color>，施放<color=Highlight>重击·符语本源</color>，造成<color=Wind>气动伤害</color>并消耗两枚<color=Highlight>【符文】</color>。根据消耗的<color=Highlight>【符文】</color>类型，获得以下效果：\n·若消耗<color=Highlight>【符文】</color>为一枚<color=Highlight>【符文·期望】</color>和一枚<color=Highlight>【符文·答问】</color>，追加<color=Highlight>符语爆破</color>效果。\n·若消耗<color=Highlight>【符文】</color>为两枚<color=Highlight>【符文·期望】</color>，追加<color=Highlight>符语链刃</color>效果。\n·若消耗<color=Highlight>【符文】</color>为两枚<color=Highlight>【符文·答问】</color>，追加<color=Highlight>符语日灵</color>效果。\n消耗<color=Highlight>【符文】</color>时，若<color=Highlight>【日灵能量】</color>不少于{0}点，消耗{1}点<color=Highlight>【日灵能量】</color>，本次<color=Highlight>符语爆破</color>、<color=Highlight>符语链刃</color>和<color=Highlight>符语日灵</color>伤害倍率提升{2}，并为自身叠加一层<color=Highlight>「天赋？」</color>。\n消耗<color=Highlight>【符文】</color>时，若<color=Highlight>【日灵能量】</color>少于{3}点，消耗全部<color=Highlight>【日灵能量】</color>，每消耗{4}点<color=Highlight>【日灵能量】</color>，使得本次<color=Highlight>符语爆破</color>、<color=Highlight>符语链刃</color>和<color=Highlight>符语日灵</color>造成的伤害加深{5}。\n<color=Highlight>重击·符语本源</color>造成的伤害为声骸技能伤害。\n\n<color=Title>符语爆破</color>\n造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n\n<color=Title>符语链刃</color>\n停滞附近目标，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n\n<color=Title>符语日灵</color>\n牵引附近目标，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n\n<color=Title>共鸣回路·我即语义</color>\n<color=Highlight>【句点】</color>为{6}点时，若<color=Highlight>共鸣回路·我即语义</color>不处于冷却状态，<color=Highlight>共鸣技能·嘭嘭！</color>和<color=Highlight>共鸣技能·日灵帮帮忙</color>改为短按并松开时施放，<color=Highlight>长按共鸣技能</color>消耗全部<color=Highlight>【句点】</color>可施放<color=Highlight>共鸣回路·我即语义</color>，造成<color=Wind>气动伤害</color>，本次伤害为声骸技能伤害。\n\n<color=Title>「天赋？」</color>\n<color=Highlight>「天赋？」</color>可叠加的层数上限为{7}层，每层可以使得西格莉卡<color=Highlight>符语爆破</color>、<color=Highlight>符语链刃</color>、<color=Highlight>符语日灵</color>和<color=Highlight>共鸣回路·我即语义</color>伤害加深{8}。\n西格莉卡施放<color=Highlight>共鸣回路·我即语义</color>后或切换至其他角色该效果结束。\n\n<color=Title>【符文】获取规则</color>\n<color=Highlight>【符文】</color>累积上限{9}枚，未拥有<color=Highlight>【句点】</color>时仅可累积{10}枚，达上限时再次获取<color=Highlight>【符文】</color>，已有<color=Highlight>【符文】</color>将左移一格，最左侧的<color=Highlight>【符文】</color>将被移除。拥有{11}点<color=Highlight>【句点】</color>后可继续累积{12}枚<color=Highlight>【符文】</color>。\n施放<color=Highlight>普攻·明悟</color>或<color=Highlight>闪避反击·解读</color>期间，<color=Highlight>普攻·明悟</color>或<color=Highlight>闪避反击·解读</color>命中目标时，可获取一枚<color=Highlight>【符文·期望】</color>。\n施放<color=Highlight>共鸣技能·大嘭嘭！</color>或<color=Highlight>共鸣技能·日灵帮帮忙</color>期间，<color=Highlight>共鸣技能·大嘭嘭！</color>或<color=Highlight>共鸣技能·日灵帮帮忙</color>命中目标时，可获取一枚<color=Highlight>【符文·答问】</color>。\n\n<color=Title>【句点】获取规则</color>\n施放<color=Highlight>重击·符语本源后</color>可以获得{13}点<color=Highlight>【句点】</color>，上限100点。\n\n<color=Title>【日灵能量】获取规则</color>\n附近队伍中所有角色施放声骸技能时，西格莉卡可以获得{14}点<color=Highlight>【日灵能量】</color>，上限{15}点，同名声骸仅可触发一次该效果。施放<color=Highlight>延奏技能·在这一瞬间</color>时，重置同名声骸记录。",
         "param": [
           "30",
           "30",
@@ -1413,13 +2033,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021051,
+              "value": 2
+            },
+            {
+              "key": 41100081,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021051,
+              "value": 3
+            },
+            {
+              "key": 41100081,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021052,
+              "value": 2
+            },
+            {
+              "key": 41100082,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021052,
+              "value": 3
+            },
+            {
+              "key": 41100082,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021053,
+              "value": 5
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021054,
+              "value": 2
+            },
+            {
+              "key": 41100084,
+              "value": 2
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021054,
+              "value": 6
+            },
+            {
+              "key": 41100084,
+              "value": 4
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "8": {
       "skill": {
         "name": "在这一瞬间",
-        "desc": "攻击目标，造成西格莉卡{0}攻击的气动伤害。西格莉卡给自身叠加{1}层凝语，持续{2}秒。\n\n凝语\n附近队伍中所有角色施放声骸技能时，停滞目标，并减少{3}层凝语，凝语可叠加的层数上限为{4}层。\n西格莉卡被移出编队时清除全部凝语层数。",
+        "desc": "攻击目标，造成西格莉卡{0}攻击的<color=Wind>气动伤害</color>。西格莉卡给自身叠加{1}层<color=Highlight>凝语</color>，持续{2}秒。\n\n<color=Title>凝语</color>\n附近队伍中所有角色施放声骸技能时，停滞目标，并减少{3}层<color=Highlight>凝语</color>，<color=Highlight>凝语</color>可叠加的层数上限为{4}层。\n西格莉卡被移出编队时清除全部<color=Highlight>凝语</color>层数。",
         "param": [
           "795%",
           "2",
@@ -1428,7 +2193,10 @@
           "2"
         ],
         "type": "延奏技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     },
     "9": {
@@ -1437,7 +2205,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "10": {
@@ -1446,7 +2230,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "11": {
@@ -1455,7 +2255,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "12": {
@@ -1464,7 +2280,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021053,
+              "value": 3
+            },
+            {
+              "key": 41100083,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "13": {
@@ -1473,7 +2305,27 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "14": {
@@ -1482,7 +2334,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "15": {
@@ -1491,7 +2363,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "16": {
@@ -1500,23 +2392,46 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021054,
+              "value": 3
+            },
+            {
+              "key": 41100084,
+              "value": 3
+            },
+            {
+              "key": 41400294,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "17": {
       "skill": {
         "name": "谐度破坏·臂铠",
-        "desc": "目标【偏谐值】满时，可对其施放【谐度破坏】。",
+        "desc": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
         "param": [],
         "type": "谐度破坏",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     }
   },
   "chains": {
     "1": {
       "name": "那本该闪耀的光辉",
-      "desc": "普攻·明悟、闪避反击·解读、共鸣技能·大嘭嘭！和共鸣技能·日灵帮帮忙伤害倍率提升{0}。\n西格莉卡施放普攻·明悟、共鸣技能·大嘭嘭！和共鸣技能·日灵帮帮忙期间，免疫打断。\n凝语层数上限改为{1}层，西格莉卡施放延奏技能在这一瞬间，可额外获得{2}层凝语。",
+      "desc": "<color=Highlight>普攻·明悟</color>、<color=Highlight>闪避反击·解读</color>、<color=Highlight>共鸣技能·大嘭嘭！</color>和<color=Highlight>共鸣技能·日灵帮帮忙</color>伤害倍率提升{0}。\n西格莉卡施放<color=Highlight>普攻·明悟</color>、<color=Highlight>共鸣技能·大嘭嘭！</color>和<color=Highlight>共鸣技能·日灵帮帮忙</color>期间，免疫打断。\n<color=Highlight>凝语</color>层数上限改为{1}层，西格莉卡施放延奏技能<color=Highlight>在这一瞬间</color>，可额外获得{2}层<color=Highlight>凝语</color>。",
       "param": [
         "70%",
         "3",
@@ -1525,7 +2440,7 @@
     },
     "2": {
       "name": "那深含期待的苦涩",
-      "desc": "共鸣回路·我即语义伤害倍率提升{0}。\n西格莉卡处于非战斗状态大于{1}秒时，获得专注，每{2}秒只生效{3}次。",
+      "desc": "<color=Highlight>共鸣回路·我即语义</color>伤害倍率提升{0}。\n西格莉卡处于非战斗状态大于{1}秒时，获得<color=Highlight>专注</color>，每{2}秒只生效{3}次。",
       "param": [
         "120%",
         "4",
@@ -1535,7 +2450,7 @@
     },
     "3": {
       "name": "逃避着，寻找着",
-      "desc": "「天赋？」层数上限改为{0}层且西格莉卡施放共鸣回路·我即语义后或切换至其他角色时不再结束该效果。\n西格莉卡处于非战斗状态时，每{1}秒会清除全部「天赋？」层数。",
+      "desc": "<color=Highlight>「天赋？」</color>层数上限改为{0}层且西格莉卡施放<color=Highlight>共鸣回路·我即语义</color>后或切换至其他角色时不再结束该效果。\n西格莉卡处于非战斗状态时，每{1}秒会清除全部<color=Highlight>「天赋？」</color>层数。",
       "param": [
         "4",
         "30"
@@ -1551,14 +2466,14 @@
     },
     "5": {
       "name": "直到沉于影下",
-      "desc": "共鸣解放如那期望般！伤害倍率提升{0}。",
+      "desc": "共鸣解放<color=Highlight>如那期望般！</color>伤害倍率提升{0}。",
       "param": [
         "30%"
       ]
     },
     "6": {
       "name": "语义点亮，光芒升起",
-      "desc": "目标受到西格莉卡的伤害提升{0}。\n「天赋？」获得下述额外效果：\n·每层使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义造成的伤害加深{1}，至多使造成的伤害加深{2}。\n·每层使得西格莉卡符语爆破、符语链刃、符语日灵和共鸣回路·我即语义造成的伤害无视目标{3}防御，至多使造成的伤害无视目标{4}防御。",
+      "desc": "目标受到西格莉卡的伤害提升{0}。\n<color=Highlight>「天赋？」</color>获得下述额外效果：\n·每层使得西格莉卡<color=Highlight>符语爆破</color>、<color=Highlight>符语链刃</color>、<color=Highlight>符语日灵</color>和<color=Highlight>共鸣回路·我即语义</color>造成的伤害加深{1}，至多使造成的伤害加深{2}。\n·每层使得西格莉卡<color=Highlight>符语爆破</color>、<color=Highlight>符语链刃</color>、<color=Highlight>符语日灵</color>和<color=Highlight>共鸣回路·我即语义</color>造成的伤害无视目标{3}防御，至多使造成的伤害无视目标{4}防御。",
       "param": [
         "30%",
         "15%",

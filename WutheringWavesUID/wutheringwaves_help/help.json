@@ -112,14 +112,6 @@
         "need_admin": false
       },
       {
-        "name": "角色养成",
-        "desc": "角色养成",
-        "eg": "菲比养成",
-        "need_ck": true,
-        "need_sk": false,
-        "need_admin": false
-      },
-      {
         "name": "星声统计",
         "desc": "星声",
         "eg": "星声(5月/2.3版本)",
@@ -579,6 +571,7 @@
     ]
   },
   "面板图帮助": {
+    "pm": 3,
     "desc": "面板图帮助",
     "data": [
       {
@@ -639,6 +632,14 @@
         "desc": "角色技能",
         "eg": "维里奈技能",
         "need_ck": false,
+        "need_sk": false,
+        "need_admin": false
+      },
+      {
+        "name": "角色养成",
+        "desc": "角色养成",
+        "eg": "菲比养成",
+        "need_ck": true,
         "need_sk": false,
         "need_admin": false
       },

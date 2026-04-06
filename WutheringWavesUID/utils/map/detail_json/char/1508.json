@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "俱寂",
-        "desc": "普攻\n进行最多2段的连续攻击，造成湮灭伤害。\n施放普攻第2段后在一定时间内短按普攻，将会施放纷裂贯穿。\n\n纷裂贯穿\n造成湮灭伤害。\n在地面施放该技能后一定时间内短按普攻，将会施放断命之铗。\n在空中施放该技能后一定时间内按下普攻，将会施放垂落终焉。\n\n断命之铗\n张开剪刀，造成湮灭伤害，一段时间后剪出，造成湮灭伤害，回复附近队伍中所有角色的生命值。\n施放该技能期间按下普攻，可额外造成湮灭伤害，再次按下普攻，将直接剪出。\n该技能伤害为共鸣解放伤害。\n断命之铗剪出后一定时间内短按普攻，将会施放撤弦。\n\n撤弦\n造成湮灭伤害。\n施放该技能一定时间内，可以触发成功闪避效果。\n\n重击\n跃至空中，消耗耐力攻击目标，造成湮灭伤害。\n处于电锯模式时无法施放该技能。\n施放该技能后进行下述操作，将会施放垂落终焉：\n·一定时间内短按普攻。\n·一定时间后施放命弦·掠行，在落地前下一次短按普攻。\n施放重击至落地期间，下一次长按普攻，将会施放重击·碎响切面。\n\n空中攻击\n消耗耐力进行空中下落攻击，造成湮灭伤害。\n不处于电锯模式时，施放该技能后一定时间内短按普攻，将会施放普攻第2段。\n\n重击·碎响切面\n造成湮灭伤害。\n施放重击·碎响切面后一定时间内按下普攻，将会施放垂落终焉。\n施放重击·碎响切面期间，若被打断，则在落地前，下一次长按普攻，可再次施放重击·碎响切面，落地前无法重复触发该效果。\n\n垂落终焉\n消耗耐力进行空中下落攻击，造成湮灭伤害。\n在地面施放该技能后一定时间内短按普攻，将会施放断命之铗。\n\n闪避反击\n成功闪避后一定时间内短按普攻，将会攻击目标，造成湮灭伤害。\n施放该技能后一定时间内短按普攻，将会施放纷裂贯穿。\n\n闪避反击·解弦之眼·收弦\n在地面时，成功闪避后保持按住闪避，将会施放闪避反击·解弦之眼·收弦攻击目标，停滞目标，造成湮灭伤害。\n·不处于电锯模式时，施放该技能后，下次在地面短按普攻或在空中按下普攻，将会施放纷裂贯穿，进入电锯模式时，移除该效果。\n·处于电锯模式时，施放该技能后一定时间内短按普攻，将会施放锯环·疾攻第3段。",
+        "desc": "<color=Title>普攻</color>\n进行最多2段的连续攻击，造成<color=Dark>湮灭伤害</color>。\n施放<color=Highlight>普攻第2段</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>纷裂贯穿</color>。\n\n<color=Title>纷裂贯穿</color>\n造成<color=Dark>湮灭伤害</color>。\n在地面施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>断命之铗</color>。\n在空中施放该技能后一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>垂落终焉</color>。\n\n<color=Title>断命之铗</color>\n张开剪刀，造成<color=Dark>湮灭伤害</color>，一段时间后剪出，造成<color=Dark>湮灭伤害</color>，回复附近队伍中所有角色的生命值。\n施放该技能期间按下<color=Highlight>普攻</color>，可额外造成<color=Dark>湮灭伤害</color>，再次按下<color=Highlight>普攻</color>，将直接剪出。\n该技能伤害为<color=Highlight>共鸣解放伤害</color>。\n<color=Highlight>断命之铗</color>剪出后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>撤弦</color>。\n\n<color=Title>撤弦</color>\n造成<color=Dark>湮灭伤害</color>。\n施放该技能一定时间内，可以触发成功闪避效果。\n\n<color=Title>重击</color>\n跃至空中，消耗耐力攻击目标，造成<color=Dark>湮灭伤害</color>。\n处于<color=Highlight>电锯模式</color>时无法施放该技能。\n施放该技能后进行下述操作，将会施放<color=Highlight>垂落终焉</color>：\n·一定时间内短按<color=Highlight>普攻</color>。\n·一定时间后施放<color=Highlight>命弦·掠行</color>，在落地前下一次短按<color=Highlight>普攻</color>。\n施放<color=Highlight>重击</color>至落地期间，下一次长按<color=Highlight>普攻</color>，将会施放<color=Highlight>重击·碎响切面</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Dark>湮灭伤害</color>。\n不处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>重击·碎响切面</color>\n造成<color=Dark>湮灭伤害</color>。\n施放<color=Highlight>重击·碎响切面</color>后一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>垂落终焉</color>。\n施放<color=Highlight>重击·碎响切面</color>期间，若被打断，则在落地前，下一次长按<color=Highlight>普攻</color>，可再次施放<color=Highlight>重击·碎响切面</color>，落地前无法重复触发该效果。\n\n<color=Title>垂落终焉</color>\n消耗耐力进行空中下落攻击，造成<color=Dark>湮灭伤害</color>。\n在地面施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>断命之铗</color>。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Dark>湮灭伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>纷裂贯穿</color>。\n\n<color=Title>闪避反击·解弦之眼·收弦</color>\n在地面时，成功<color=Highlight>闪避</color>后保持按住<color=Highlight>闪避</color>，将会施放<color=Highlight>闪避反击·解弦之眼·收弦</color>攻击目标，停滞目标，造成<color=Dark>湮灭伤害</color>。\n·不处于<color=Highlight>电锯模式</color>时，施放该技能后，下次在地面短按<color=Highlight>普攻</color>或在空中按下<color=Highlight>普攻</color>，将会施放<color=Highlight>纷裂贯穿</color>，进入<color=Highlight>电锯模式</color>时，移除该效果。\n·处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第3段</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -966,13 +966,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43020041,
+              "value": 2
+            },
+            {
+              "key": 41100041,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43020041,
+              "value": 3
+            },
+            {
+              "key": 41100041,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43020042,
+              "value": 2
+            },
+            {
+              "key": 41100042,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43020043,
+              "value": 5
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43020044,
+              "value": 2
+            },
+            {
+              "key": 41100044,
+              "value": 2
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43020044,
+              "value": 6
+            },
+            {
+              "key": 41100044,
+              "value": 4
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "2": {
       "skill": {
         "name": "碎面构图",
-        "desc": "解弦之眼\n停滞目标，造成湮灭伤害。\n·不处于电锯模式时，施放该技能后，下次在地面短按普攻或在空中按下普攻，将会施放纷裂贯穿，进入电锯模式时，移除该效果。\n·在地面且处于电锯模式时，施放该技能后一定时间内短按普攻，将会施放锯环·疾攻第2段。\n可在空中施放。\n\n齿轨轮回\n在地面且【锯环残响】充满时，共鸣技能替换为齿轨轮回。\n停滞目标，造成湮灭伤害，牵引附近的目标。\n施放该技能后，进入电锯模式，共鸣技能替换为解弦之眼。\n施放该技能后一定时间内按下普攻，将会施放锯环·疾攻第2段。\n施放该技能期间，按住共鸣技能，可持续攻击目标，并持续牵引附近的目标。期间松开共鸣技能或一段时间后，施放锯环·疾攻第1段。",
+        "desc": "<color=Title>解弦之眼</color>\n停滞目标，造成<color=Dark>湮灭伤害</color>。\n·不处于<color=Highlight>电锯模式</color>时，施放该技能后，下次在地面短按<color=Highlight>普攻</color>或在空中按下<color=Highlight>普攻</color>，将会施放<color=Highlight>纷裂贯穿</color>，进入<color=Highlight>电锯模式</color>时，移除该效果。\n·在地面且处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第2段</color>。\n可在空中施放。\n\n<color=Title>齿轨轮回</color>\n在地面且<color=Highlight>【锯环残响】</color>充满时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>齿轨轮回</color>。\n停滞目标，造成<color=Dark>湮灭伤害</color>，牵引附近的目标。\n施放该技能后，进入<color=Highlight>电锯模式</color>，<color=Highlight>共鸣技能</color>替换为<color=Highlight>解弦之眼</color>。\n施放该技能后一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第2段</color>。\n施放该技能期间，按住<color=Highlight>共鸣技能</color>，可持续攻击目标，并持续牵引附近的目标。期间松开<color=Highlight>共鸣技能</color>或一段时间后，施放<color=Highlight>锯环·疾攻第1段</color>。",
         "param": [],
         "type": "共鸣技能",
         "level": {
@@ -1084,13 +1229,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43020041,
+              "value": 2
+            },
+            {
+              "key": 41100041,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43020041,
+              "value": 3
+            },
+            {
+              "key": 41100041,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43020042,
+              "value": 2
+            },
+            {
+              "key": 41100042,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43020043,
+              "value": 5
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43020044,
+              "value": 2
+            },
+            {
+              "key": 41100044,
+              "value": 2
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43020044,
+              "value": 6
+            },
+            {
+              "key": 41100044,
+              "value": 4
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "3": {
       "skill": {
         "name": "即刻·归无",
-        "desc": "造成湮灭伤害，并回复附近队伍中所有角色的生命值。\n施放时进入万缕·汇终，持续{0}秒。\n不处于电锯模式时，施放该技能后一定时间内短按普攻，将会施放普攻第2段。\n该技能可在低空中施放。\n\n万缕·汇终\n锯环·疾攻、电锯模式·闪避反击、锯环·终结伤害倍率提升{1}。\n锯环·疾攻、电锯模式·闪避反击消耗【锯环残响】提供的锯环·终结倍率增加效果提升{2}。\n施放锯环·终结后提前结束万缕·汇终。",
+        "desc": "造成<color=Dark>湮灭伤害</color>，并回复附近队伍中所有角色的生命值。\n施放时进入<color=Highlight>万缕·汇终</color>，持续{0}秒。\n不处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻第2段</color>。\n该技能可在低空中施放。\n\n<color=Title>万缕·汇终</color>\n<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>、<color=Highlight>锯环·终结</color>伤害倍率提升{1}。\n<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>消耗<color=Highlight>【锯环残响】</color>提供的<color=Highlight>锯环·终结</color>倍率增加效果提升{2}。\n施放<color=Highlight>锯环·终结</color>后提前结束<color=Highlight>万缕·汇终</color>。",
         "param": [
           "15",
           "120%",
@@ -1233,24 +1523,189 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43020041,
+              "value": 2
+            },
+            {
+              "key": 41100041,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43020041,
+              "value": 3
+            },
+            {
+              "key": 41100041,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43020042,
+              "value": 2
+            },
+            {
+              "key": 41100042,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43020043,
+              "value": 5
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43020044,
+              "value": 2
+            },
+            {
+              "key": 41100044,
+              "value": 2
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43020044,
+              "value": 6
+            },
+            {
+              "key": 41100044,
+              "value": 4
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "4": {
       "skill": {
         "name": "无解的命途",
-        "desc": "队伍中的角色击败拥有虚无绞痕的目标时，重置千咲的共鸣技能解弦之眼冷却时间，该效果每{0}秒最多触发1次。",
+        "desc": "队伍中的角色击败拥有<color=Highlight>虚无绞痕</color>的目标时，重置千咲的共鸣技能<color=Highlight>解弦之眼</color>冷却时间，该效果每{0}秒最多触发1次。",
         "param": [
           "3"
         ],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 10000
+            }
+          ]
+        }
       }
     },
     "5": {
       "skill": {
         "name": "终点在此处",
-        "desc": "施放变奏技能鸣响·再临或共鸣解放即刻·归无时，湮灭伤害加成提升{0}，治疗加成提升{1}，持续{2}秒。\n队伍中拥有虚湮之线的角色击败拥有虚无绞痕的目标时，千咲获得解弦视界，持续{3}秒。\n处于解弦视界下，队伍中拥有虚湮之线的角色造成伤害时，千咲对目标附加虚无绞痕，持续{4}秒。",
+        "desc": "施放变奏技能<color=Highlight>鸣响·再临</color>或共鸣解放<color=Highlight>即刻·归无</color>时，湮灭伤害加成提升{0}，治疗加成提升{1}，持续{2}秒。\n队伍中拥有<color=Highlight>虚湮之线</color>的角色击败拥有<color=Highlight>虚无绞痕</color>的目标时，千咲获得解弦视界，持续{3}秒。\n处于解弦视界下，队伍中拥有<color=Highlight>虚湮之线</color>的角色造成伤害时，千咲对目标附加<color=Highlight>虚无绞痕</color>，持续{4}秒。",
         "param": [
           "20%",
           "20%",
@@ -1259,13 +1714,33 @@
           "30"
         ],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 20000
+            }
+          ]
+        }
       }
     },
     "6": {
       "skill": {
         "name": "鸣响·再临",
-        "desc": "攻击目标，造成湮灭伤害。\n不处于电锯模式时，施放该技能后一定时间内短按普攻，将会施放普攻第2段。\n处于电锯模式时，施放该技能后一定时间内按下普攻，将会施放锯环·疾攻第2段。",
+        "desc": "攻击目标，造成<color=Dark>湮灭伤害</color>。\n不处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻第2段</color>。\n处于<color=Highlight>电锯模式</color>时，施放该技能后一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第2段</color>。",
         "param": [],
         "type": "变奏技能",
         "level": {
@@ -1323,13 +1798,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43020041,
+              "value": 2
+            },
+            {
+              "key": 41100041,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43020041,
+              "value": 3
+            },
+            {
+              "key": 41100041,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43020042,
+              "value": 2
+            },
+            {
+              "key": 41100042,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43020043,
+              "value": 5
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43020044,
+              "value": 2
+            },
+            {
+              "key": 41100044,
+              "value": 2
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43020044,
+              "value": 6
+            },
+            {
+              "key": 41100044,
+              "value": 4
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "7": {
       "skill": {
         "name": "解弦视界·万理归尘",
-        "desc": "虚无绞痕\n进行下述4种操作时，可为目标附加虚无绞痕，持续{0}秒。\n·共鸣技能命中目标。\n·施放齿轨轮回一定时间内，命中目标。\n·闪避反击·解弦之眼·收弦命中目标。\n·锁定目标。\n拥有虚无绞痕的目标受到角色直接造成的伤害时，千咲为目标附加{1}层虚湮效应，该效果每{2}秒最多触发1次。\n\n虚湮之线\n对拥有虚无绞痕的目标造成伤害时，可无视其{4}防御。\n\n电锯模式\n千咲处于电锯模式时，解锁锯环·疾攻、锯环·终结、电锯模式·闪避反击。\n锯环·疾攻、电锯模式·闪避反击命中目标时消耗【锯环残响】。\n\n锯环·疾攻\n锯环·疾攻进行最多3段的连续攻击，造成湮灭伤害。\n短按普攻将从锯环·疾攻第1段开始施放，长按普攻将从锯环·疾攻第2段开始施放。\n施放锯环·疾攻第2段时，按住普攻，可持续攻击目标，锯环·疾攻第2段结束后，将会自动施放锯环·疾攻第3段。\n施放锯环·疾攻第2段时，松开普攻或向后闪避，将自动施放锯环·疾攻第2段·折鸣，造成湮灭伤害，施放锯环·疾攻第2段·折鸣一定时间内，可以触发成功闪避效果。\n施放锯环·疾攻第2段·折鸣一定时间内按下普攻，将会施放锯环·疾攻第3段。\n施放锯环·疾攻第3段时，按住普攻，可持续攻击目标，锯环·疾攻第3段结束后，将会自动施放锯环·终结。\n施放锯环·疾攻第3段时，松开普攻，将自动施放锯环·疾攻第3段·坠响，造成湮灭伤害。\n锯环·疾攻伤害为共鸣解放伤害。\n\n电锯模式·闪避反击\n处于电锯模式时，成功闪避后一定时间内短按普攻，将会施放电锯模式·闪避反击，造成湮灭伤害。\n施放电锯模式·闪避反击后一定时间内按下普攻，将会施放锯环·疾攻第3段。\n施放电锯模式·闪避反击时，按住普攻，可持续攻击目标，电锯模式·闪避反击结束后，将会自动施放锯环·疾攻第3段。\n施放电锯模式·闪避反击时，松开普攻或向后闪避，将自动施放锯环·疾攻第2段·折鸣。\n电锯模式·闪避反击伤害为共鸣解放伤害。\n\n锯环·终结\n处于电锯模式时，进行下述2种操作时，施放锯环·终结。\n·施放锯环·疾攻第3段·坠响后，下一次按下普攻。\n·施放锯环·疾攻或电锯模式·闪避反击将【锯环残响】消耗至0后，下一次按下普攻。\n锯环·终结攻击目标，造成湮灭伤害，附近队伍中所有角色获得护盾，持续{5}秒。\n该技能伤害为共鸣解放伤害。\n施放锯环·疾攻、电锯模式·闪避反击每消耗{6}点【锯环残响】，可增加下一次锯环·终结伤害倍率，最多计入{7}点。\n施放该技能时，退出电锯模式并清空【锯环残响】。\n\n【电锯热力】\n处于电锯模式时，【命弦·本流】条替换为【电锯热力】条。\n【电锯热力】初始为100%，\n千咲在一定时间内没有造成伤害，【电锯热力】将快速衰减，衰减至0时，进入熄火状态，退出电锯模式。\n处于电锯模式时，千咲造成伤害或施放共鸣解放即刻·归无、变奏技能鸣响·再临、锯环·疾攻第3段·坠响时，可重置【电锯热力】。\n处于熄火状态时，【锯环残响】将快速衰减，衰减至0时，退出熄火状态。\n处于熄火状态时，千咲造成伤害或施放共鸣解放即刻·归无、变奏技能鸣响·再临时，退出熄火状态。\n\n命弦·掠行\n不处于电锯模式且【命弦·本流】大于{3}时，进行下述5种操作时，可施放命弦·掠行，施放后消耗{8}点【命弦·本流】。\n·施放重击跃起至落地期间，在空中短按闪避。\n·处于空中时，施放共鸣技能解弦之眼或纷裂贯穿至落地期间，在空中短按闪避。\n·施放撤弦后一定时间内向前闪避。\n·被击飞至落地期间，短按闪避。\n·施放命弦·掠行至落地期间，在空中短按闪避。\n施放该技能时，可以牵引附近拥有虚无绞痕的敌人。\n施放该技能期间，保持长按闪避可乘着武器滑翔一段距离。\n施放该技能一定时间内，可以触发成功闪避效果。\n\n【锯环残响】获取规则\n【锯环残响】上限{9}点。\n常态攻击、共鸣技能解弦之眼命中目标时，获得【锯环残响】。\n施放共鸣解放即刻·归无时，获得{10}点【锯环残响】。\n施放变奏技能鸣响·再临时，获得{11}点【锯环残响】。\n\n【命弦·本流】获取规则\n【命弦·本流】上限{12}点。\n随时间持续获得【命弦·本流】。\n千咲自身击败目标获得{13}点【命弦·本流】。\n退出电锯模式时，重置【命弦·本流】至上限。\n施放命弦·掠行一定时间内无法随时间持续获得【命弦·本流】。",
+        "desc": "<color=Title>虚无绞痕</color>\n进行下述4种操作时，可为目标附加<color=Highlight>虚无绞痕</color>，持续{0}秒。\n·<color=Highlight>共鸣技能</color>命中目标。\n·施放<color=Highlight>齿轨轮回</color>一定时间内，命中目标。\n·<color=Highlight>闪避反击·解弦之眼·收弦</color>命中目标。\n·<color=Highlight>锁定</color>目标。\n拥有<color=Highlight>虚无绞痕</color>的目标受到角色直接造成的伤害时，千咲为目标附加{1}层<color=Highlight>虚湮效应</color>，该效果每{2}秒最多触发1次。\n\n<color=Title>虚湮之线</color>\n对拥有<color=Highlight>虚无绞痕</color>的目标造成伤害时，可无视其{4}防御。\n\n<color=Title>电锯模式</color>\n千咲处于<color=Highlight>电锯模式</color>时，解锁<color=Highlight>锯环·疾攻</color>、<color=Highlight>锯环·终结</color>、<color=Highlight>电锯模式·闪避反击</color>。\n<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>命中目标时消耗<color=Highlight>【锯环残响】</color>。\n\n<color=Title>锯环·疾攻</color>\n<color=Highlight>锯环·疾攻</color>进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>。\n短按<color=Highlight>普攻</color>将从<color=Highlight>锯环·疾攻第1段</color>开始施放，长按<color=Highlight>普攻</color>将从<color=Highlight>锯环·疾攻第2段</color>开始施放。\n施放<color=Highlight>锯环·疾攻第2段</color>时，按住<color=Highlight>普攻</color>，可持续攻击目标，<color=Highlight>锯环·疾攻第2段</color>结束后，将会自动施放<color=Highlight>锯环·疾攻第3段</color>。\n施放<color=Highlight>锯环·疾攻第2段</color>时，松开<color=Highlight>普攻</color>或向后<color=Highlight>闪避</color>，将自动施放<color=Highlight>锯环·疾攻第2段·折鸣</color>，造成<color=Dark>湮灭伤害</color>，施放<color=Highlight>锯环·疾攻第2段·折鸣</color>一定时间内，可以触发成功闪避效果。\n施放<color=Highlight>锯环·疾攻第2段·折鸣</color>一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第3段</color>。\n施放<color=Highlight>锯环·疾攻第3段</color>时，按住<color=Highlight>普攻</color>，可持续攻击目标，<color=Highlight>锯环·疾攻第3段</color>结束后，将会自动施放<color=Highlight>锯环·终结</color>。\n施放<color=Highlight>锯环·疾攻第3段</color>时，松开<color=Highlight>普攻</color>，将自动施放<color=Highlight>锯环·疾攻第3段·坠响</color>，造成<color=Dark>湮灭伤害</color>。\n<color=Highlight>锯环·疾攻</color>伤害为<color=Highlight>共鸣解放伤害</color>。\n\n<color=Title>电锯模式·闪避反击</color>\n处于<color=Highlight>电锯模式</color>时，成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>电锯模式·闪避反击</color>，造成<color=Dark>湮灭伤害</color>。\n施放<color=Highlight>电锯模式·闪避反击</color>后一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>锯环·疾攻第3段</color>。\n施放<color=Highlight>电锯模式·闪避反击</color>时，按住<color=Highlight>普攻</color>，可持续攻击目标，<color=Highlight>电锯模式·闪避反击</color>结束后，将会自动施放<color=Highlight>锯环·疾攻第3段</color>。\n施放<color=Highlight>电锯模式·闪避反击</color>时，松开<color=Highlight>普攻</color>或向后<color=Highlight>闪避</color>，将自动施放<color=Highlight>锯环·疾攻第2段·折鸣</color>。\n<color=Highlight>电锯模式·闪避反击</color>伤害为<color=Highlight>共鸣解放伤害</color>。\n\n<color=Title>锯环·终结</color>\n处于<color=Highlight>电锯模式</color>时，进行下述2种操作时，施放<color=Highlight>锯环·终结</color>。\n·施放<color=Highlight>锯环·疾攻第3段·坠响</color>后，下一次按下<color=Highlight>普攻</color>。\n·施放<color=Highlight>锯环·疾攻</color>或<color=Highlight>电锯模式·闪避反击</color>将<color=Highlight>【锯环残响】</color>消耗至0后，下一次按下<color=Highlight>普攻</color>。\n<color=Highlight>锯环·终结</color>攻击目标，造成<color=Dark>湮灭伤害</color>，附近队伍中所有角色获得护盾，持续{5}秒。\n该技能伤害为<color=Highlight>共鸣解放伤害</color>。\n施放<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>每消耗{6}点<color=Highlight>【锯环残响】</color>，可增加下一次<color=Highlight>锯环·终结</color>伤害倍率，最多计入{7}点。\n施放该技能时，退出<color=Highlight>电锯模式</color>并清空<color=Highlight>【锯环残响】</color>。\n\n<color=Title>【电锯热力】</color>\n处于<color=Highlight>电锯模式</color>时，<color=Highlight>【命弦·本流】</color>条替换为<color=Highlight>【电锯热力】</color>条。\n<color=Highlight>【电锯热力】</color>初始为100%，\n千咲在一定时间内没有造成伤害，<color=Highlight>【电锯热力】</color>将快速衰减，衰减至0时，进入<color=Highlight>熄火状态</color>，退出<color=Highlight>电锯模式</color>。\n处于<color=Highlight>电锯模式</color>时，千咲造成伤害或施放共鸣解放<color=Highlight>即刻·归无</color>、变奏技能<color=Highlight>鸣响·再临</color>、<color=Highlight>锯环·疾攻第3段·坠响</color>时，可重置<color=Highlight>【电锯热力】</color>。\n处于<color=Highlight>熄火状态</color>时，<color=Highlight>【锯环残响】</color>将快速衰减，衰减至0时，退出<color=Highlight>熄火状态</color>。\n处于<color=Highlight>熄火状态</color>时，千咲造成伤害或施放共鸣解放<color=Highlight>即刻·归无</color>、变奏技能<color=Highlight>鸣响·再临</color>时，退出<color=Highlight>熄火状态</color>。\n\n<color=Title>命弦·掠行</color>\n不处于<color=Highlight>电锯模式</color>且<color=Highlight>【命弦·本流】</color>大于{3}时，进行下述5种操作时，可施放<color=Highlight>命弦·掠行</color>，施放后消耗{8}点<color=Highlight>【命弦·本流】</color>。\n·施放<color=Highlight>重击</color>跃起至落地期间，在空中短按<color=Highlight>闪避</color>。\n·处于空中时，施放共鸣技能<color=Highlight>解弦之眼</color>或<color=Highlight>纷裂贯穿</color>至落地期间，在空中短按<color=Highlight>闪避</color>。\n·施放<color=Highlight>撤弦</color>后一定时间内向前<color=Highlight>闪避</color>。\n·被击飞至落地期间，短按<color=Highlight>闪避</color>。\n·施放<color=Highlight>命弦·掠行</color>至落地期间，在空中短按<color=Highlight>闪避</color>。\n施放该技能时，可以牵引附近拥有<color=Highlight>虚无绞痕</color>的敌人。\n施放该技能期间，保持长按<color=Highlight>闪避</color>可乘着武器滑翔一段距离。\n施放该技能一定时间内，可以触发成功闪避效果。\n\n<color=Title>【锯环残响】获取规则</color>\n<color=Highlight>【锯环残响】</color>上限{9}点。\n<color=Highlight>常态攻击</color>、共鸣技能<color=Highlight>解弦之眼</color>命中目标时，获得<color=Highlight>【锯环残响】</color>。\n施放共鸣解放<color=Highlight>即刻·归无</color>时，获得{10}点<color=Highlight>【锯环残响】</color>。\n施放变奏技能<color=Highlight>鸣响·再临</color>时，获得{11}点<color=Highlight>【锯环残响】</color>。\n\n<color=Title>【命弦·本流】获取规则</color>\n<color=Highlight>【命弦·本流】</color>上限{12}点。\n随时间持续获得<color=Highlight>【命弦·本流】</color>。\n千咲自身击败目标获得{13}点<color=Highlight>【命弦·本流】</color>。\n退出<color=Highlight>电锯模式</color>时，重置<color=Highlight>【命弦·本流】</color>至上限。\n施放<color=Highlight>命弦·掠行</color>一定时间内无法随时间持续获得<color=Highlight>【命弦·本流】</color>。",
         "param": [
           "30",
           "1",
@@ -1699,13 +2319,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43020041,
+              "value": 2
+            },
+            {
+              "key": 41100041,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43020041,
+              "value": 3
+            },
+            {
+              "key": 41100041,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43020042,
+              "value": 2
+            },
+            {
+              "key": 41100042,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43020042,
+              "value": 3
+            },
+            {
+              "key": 41100042,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43020043,
+              "value": 5
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43020044,
+              "value": 2
+            },
+            {
+              "key": 41100044,
+              "value": 2
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43020044,
+              "value": 6
+            },
+            {
+              "key": 41100044,
+              "value": 4
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "8": {
       "skill": {
         "name": "解弦式第零定律",
-        "desc": "附近队伍中所有角色获得拖曳终焉之弦，持续{0}秒。\n拖曳终焉之弦状态下：\n·攻击命中后，使目标【异常效应】、【电磁爆发】层数上限增加{1}层，持续{2}秒。该效果无法叠加。\n·附加【异常效应】或造成异常效应伤害后，获得虚湮之线，持续{3}秒。",
+        "desc": "附近队伍中所有角色获得<color=Highlight>拖曳终焉之弦</color>，持续{0}秒。\n<color=Highlight>拖曳终焉之弦</color>状态下：\n·攻击命中后，使目标<color=Highlight>【异常效应】</color>、<color=Highlight>【电磁爆发】</color>层数上限增加{1}层，持续{2}秒。该效果无法叠加。\n·附加<color=Highlight>【异常效应】</color>或造成<color=Highlight>异常效应伤害</color>后，获得<color=Highlight>虚湮之线</color>，持续{3}秒。",
         "param": [
           "20",
           "3",
@@ -1713,7 +2478,10 @@
           "15"
         ],
         "type": "延奏技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     },
     "9": {
@@ -1722,7 +2490,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "10": {
@@ -1731,7 +2515,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "11": {
@@ -1740,7 +2540,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "12": {
@@ -1749,7 +2565,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020043,
+              "value": 3
+            },
+            {
+              "key": 41100043,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "13": {
@@ -1758,7 +2590,27 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "14": {
@@ -1767,7 +2619,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "15": {
@@ -1776,7 +2648,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "16": {
@@ -1785,23 +2677,46 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43020044,
+              "value": 3
+            },
+            {
+              "key": 41100044,
+              "value": 3
+            },
+            {
+              "key": 41400204,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "17": {
       "skill": {
         "name": "谐度破坏·长刃",
-        "desc": "目标【偏谐值】满时，可对其施放【谐度破坏】。",
+        "desc": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
         "param": [],
         "type": "谐度破坏",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     }
   },
   "chains": {
     "1": {
       "name": "穿行于荒芜长廊",
-      "desc": "千咲施放锯环·疾攻、锯环·终结、电锯模式·闪避反击期间，免疫打断。\n\n千咲附加虚无绞痕时，触发下述效果：\n·自身攻击提升{0}，持续{1}秒。\n·对目标造成{2}点固定湮灭伤害，最多可将目标生命扣除至{3}，同一目标最多可受到1次该伤害。此次伤害为普攻伤害，不受伤害加成影响。",
+      "desc": "千咲施放<color=Highlight>锯环·疾攻</color>、<color=Highlight>锯环·终结</color>、<color=Highlight>电锯模式·闪避反击</color>期间，免疫打断。\n\n千咲附加<color=Highlight>虚无绞痕</color>时，触发下述效果：\n·自身攻击提升{0}，持续{1}秒。\n·对目标造成{2}点固定<color=Dark>湮灭伤害</color>，最多可将目标生命扣除至{3}，同一目标最多可受到1次该伤害。此次伤害为普攻伤害，不受伤害加成影响。",
       "param": [
         "30%",
         "15",
@@ -1811,7 +2726,7 @@
     },
     "2": {
       "name": "织作牵绊的弦网",
-      "desc": "造成伤害无视目标{0}湮灭伤害抗性。\n附近队伍中的角色处于虚湮之线状态时，全属性伤害加成提升{1}。",
+      "desc": "造成伤害无视目标{0}湮灭伤害抗性。\n附近队伍中的角色处于<color=Highlight>虚湮之线</color>状态时，全属性伤害加成提升{1}。",
       "param": [
         "10%",
         "50%"
@@ -1819,7 +2734,7 @@
     },
     "3": {
       "name": "踱过长夜的迷惘",
-      "desc": "锯环·疾攻、电锯模式·闪避反击、锯环·终结的伤害倍率提升{0}，该倍率提升效果与万缕·汇终的倍率提升效果相互叠加。\n锯环·疾攻、电锯模式·闪避反击消耗【锯环残响】提供的锯环·终结倍率增加效果提升{1}，该倍率提升效果与万缕·汇终的倍率提升效果相互叠加。\n锯环·疾攻、电锯模式·闪避反击、锯环·终结破共振度能力提升{2}。",
+      "desc": "<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>、<color=Highlight>锯环·终结</color>的伤害倍率提升{0}，该倍率提升效果与<color=Highlight>万缕·汇终</color>的倍率提升效果相互叠加。\n<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>消耗<color=Highlight>【锯环残响】</color>提供的<color=Highlight>锯环·终结</color>倍率增加效果提升{1}，该倍率提升效果与<color=Highlight>万缕·汇终</color>的倍率提升效果相互叠加。\n<color=Highlight>锯环·疾攻</color>、<color=Highlight>电锯模式·闪避反击</color>、<color=Highlight>锯环·终结</color>破共振度能力提升{2}。",
       "param": [
         "120%",
         "120%",
@@ -1828,7 +2743,7 @@
     },
     "4": {
       "name": "斩断循环的劫章",
-      "desc": "虚无绞痕效果替换为：\n拥有虚无绞痕的目标受到角色直接造成的伤害时，千咲为目标附加{0}层【虚湮效应】，该效果每{1}秒最多触发1次。",
+      "desc": "<color=Highlight>虚无绞痕</color>效果替换为：\n拥有<color=Highlight>虚无绞痕</color>的目标受到角色直接造成的伤害时，千咲为目标附加{0}层<color=Highlight>【虚湮效应】</color>，该效果每{1}秒最多触发1次。",
       "param": [
         "1",
         "1"
@@ -1836,7 +2751,7 @@
     },
     "5": {
       "name": "万盏灯火将照亮归途所向",
-      "desc": "共鸣解放即刻·归无的伤害加成提升{0}。\n命弦·掠行消耗的【命弦·本流】降低{1}。",
+      "desc": "共鸣解放<color=Highlight>即刻·归无</color>的伤害加成提升{0}。\n<color=Highlight>命弦·掠行</color>消耗的<color=Highlight>【命弦·本流】</color>降低{1}。",
       "param": [
         "100%",
         "50%"
@@ -1844,7 +2759,7 @@
     },
     "6": {
       "name": "由此重铸希望，与天光",
-      "desc": "千咲施放锯环·疾攻、锯环·终结、电锯模式·闪避反击期间，受到致死伤害时不会倒下，最少保留1点生命。\n\n虚无绞痕强化为虚无绞痕·终焉，获得下述效果：\n·虚无绞痕·终焉拥有虚无绞痕的所有效果。\n·拥有虚无绞痕·终焉的目标受到异常效应伤害加深{0}。\n·拥有虚无绞痕·终焉的目标受到千咲伤害提升{1}。",
+      "desc": "千咲施放<color=Highlight>锯环·疾攻</color>、<color=Highlight>锯环·终结</color>、<color=Highlight>电锯模式·闪避反击</color>期间，受到致死伤害时不会倒下，最少保留1点生命。\n\n<color=Highlight>虚无绞痕</color>强化为<color=Highlight>虚无绞痕·终焉</color>，获得下述效果：\n·<color=Highlight>虚无绞痕·终焉</color>拥有<color=Highlight>虚无绞痕</color>的所有效果。\n·拥有<color=Highlight>虚无绞痕·终焉</color>的目标受到异常效应伤害加深{0}。\n·拥有<color=Highlight>虚无绞痕·终焉</color>的目标受到千咲伤害提升{1}。",
       "param": [
         "30%",
         "40%"

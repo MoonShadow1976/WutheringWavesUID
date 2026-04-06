@@ -138,7 +138,7 @@ async def parse_weapon_detail_content(weapon_model: WeaponModel) -> Image.Image:
     # 文本起始 Y 坐标（原逻辑中的 y_offset 起点）
     text_start_y = y_padding + shadow_radius  # 40
     img_height = text_start_y + text_height + padding
-    img_height = max(img_height, 200)  # 设置一个最小高度
+    img_height = max(img_height, 270)  # 设置一个最小高度
 
     width = 650
     image = Image.new("RGBA", (width, img_height), (255, 255, 255, 0))

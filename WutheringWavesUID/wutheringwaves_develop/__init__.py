@@ -5,7 +5,7 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
-from ..wutheringwaves_develop.develop import calc_develop_cost
+from ..wutheringwaves_develop.develop import calc_develop_cost, mock_calc_develop_cost
 
 role_develop = SV("waves角色培养")
 
@@ -27,5 +27,8 @@ async def calc_develop(bot: Bot, ev: Event):
     logger.info(f"养成列表: {develop_list}")
 
     develop_cost = await calc_develop_cost(ev, develop_list)
-    if isinstance(develop_cost, str) or isinstance(develop_cost, bytes):
+    if isinstance(develop_cost, bytes):
         return await bot.send(develop_cost)
+    else:
+        logger.warning(f"用户养成返回错误，使用默认。错误提示: {develop_cost}")
+        return await bot.send(await mock_calc_develop_cost(develop_list))

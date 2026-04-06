@@ -24,6 +24,11 @@ class LevelExp(BaseModel):
     exp: int
 
 
+class AscensionMaterial(BaseModel):
+    key: int
+    value: int
+
+
 class SkillLevel(BaseModel):
     name: str
     param: list[list[str]]
@@ -35,6 +40,7 @@ class Skill(BaseModel):
     param: list[str]
     type: str | None = None
     level: dict[str, SkillLevel] | None = None
+    consume: dict[str, list[AscensionMaterial]] | None = None
 
     def get_desc_detail(self):
         return format_with_defaults(self.desc, self.param)
@@ -47,11 +53,6 @@ class Chain(BaseModel):
 
     def get_desc_detail(self):
         return format_with_defaults(self.desc, self.param)
-
-
-class AscensionMaterial(BaseModel):
-    key: int
-    value: int
 
 
 class CharacterModel(BaseModel):
@@ -240,3 +241,14 @@ class MonsterModel(BaseModel):
 
     def get_element_resistance(self) -> list[str]:
         return [ATTRIBUTE_ID_MAP[i] for i in self.elementResistance]
+
+
+class Material(BaseModel):
+    id: int
+    rarity: int
+    type: int
+    tag_num: list[int]
+    name: str
+    desc: str
+    bg: str
+    source: list[str]

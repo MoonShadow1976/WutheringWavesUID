@@ -1,8 +1,9 @@
 from pathlib import Path
+import re
 import textwrap
 
 from gsuid_core.utils.image.convert import convert_img
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from ..utils.ascension.char import get_char_model
 from ..utils.ascension.model import (
@@ -27,6 +28,81 @@ from ..utils.image import (
 )
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
+
+# 颜色标签映射
+COLOR_TAG_MAP = {
+    "Title": SPECIAL_GOLD,  # 标题
+    "Highlight": SPECIAL_GOLD,  # 高亮
+    "HighlightB": SPECIAL_GOLD,  # 高亮B
+    "Wind": (22, 145, 121),  # 气动 - 啸谷长风
+    "Ice": (53, 152, 219),  # 冷凝 - 凝夜白霜
+    "Fire": (186, 55, 42),  # 热熔 - 熔山裂谷
+    "Thunder": (185, 106, 217),  # 导电 - 彻空冥雷
+    "Light": (241, 196, 15),  # 衍射 - 浮星祛暗
+    "Dark": (132, 63, 161),  # 湮灭 - 沉日劫明
+}
+
+
+def parse_color_text(text: str) -> list[tuple[str, tuple[int, int, int] | str]]:
+    """解析带有 <color> 标签的文本，返回 [(文本片段, 颜色), ...]
+
+    Args:
+        text: 包含 <color=XXX>文本</color> 标签的字符串
+
+    Returns:
+        列表，每个元素是 (文本内容, 颜色) 的元组
+    """
+    pattern = r"<color=([^>]+)>([^<]*)</color>"
+    result = []
+    last_end = 0
+
+    for match in re.finditer(pattern, text):
+        # 添加标签前的普通文本
+        if match.start() > last_end:
+            result.append((text[last_end : match.start()], "white"))
+
+        # 获取颜色和文本
+        color_name = match.group(1)
+        color_text = match.group(2)
+        color = COLOR_TAG_MAP.get(color_name, "white")
+        result.append((color_text, color))
+
+        last_end = match.end()
+
+    # 添加最后剩余的普通文本
+    if last_end < len(text):
+        result.append((text[last_end:], "white"))
+
+    return result if result else [(text, "white")]
+
+
+def draw_text_with_color(
+    draw: ImageDraw.ImageDraw, text: str, x: int, y: int, font: ImageFont.FreeTypeFont, default_color: str | tuple = "white"
+) -> int:
+    """绘制带有颜色标签的文本
+
+    Args:
+        draw: ImageDraw 对象
+        text: 包含 <color> 标签的文本
+        x: 起始 x 坐标
+        y: 起始 y 坐标
+        font: 字体
+        default_color: 默认颜色
+
+    Returns:
+        绘制文本的总宽度
+    """
+    parsed_text = parse_color_text(text)
+    current_x = x
+
+    for text_part, color in parsed_text:
+        if not text_part:  # 跳过空字符串
+            continue
+        draw.text((current_x, y), text_part, font=font, fill=color)
+        bbox = draw.textbbox((current_x, y), text_part, font=font)
+        current_x = bbox[2]  # 移动到文本末尾
+
+    return int(current_x - x)
 
 
 async def draw_char_wiki(char_id: str, query_role_type: str):
@@ -215,17 +291,19 @@ async def parse_char_chain(data: dict[int, Chain]):
                 font=title_font,
                 fill=title_color,
             )
-            y_offset += title_font.size + line_spacing
+            y_offset += int(title_font.size) + line_spacing
 
         y_offset += block_line_spacing
 
         # 绘制描述文本
         for line in lines_desc:
-            draw.text(
-                (x_offset, y_offset),
+            draw_text_with_color(
+                draw,
                 line,
-                font=detail_font,
-                fill=detail_color,
+                x_offset,
+                y_offset,
+                detail_font,
+                detail_color,
             )
             y_offset += detail_font.size + line_spacing
 
@@ -279,7 +357,7 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
 
         # 分行显示标题
         wrapped_title = textwrap.fill(title, width=10)
-        wrapped_desc = wrap_text_with_manual_newlines(desc, width=65)
+        wrapped_desc = wrap_text_with_manual_newlines(desc, width=70)
 
         # 获取每行的宽度，确保不会超过设定的 image_width
         lines_title = wrapped_title.split("\n")
@@ -290,7 +368,7 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
             _type = relate_item.type if relate_item.type else "属性加成"
             relate_title = f"{_type}: {relate_item.name}"
             relate_desc = relate_item.get_desc_detail()
-            wrapped_relate_desc = wrap_text_with_manual_newlines(relate_desc, width=65)
+            wrapped_relate_desc = wrap_text_with_manual_newlines(relate_desc, width=70)
 
             lines_desc.append(relate_title)
             lines_desc.extend(wrapped_relate_desc.split("\n"))
@@ -326,18 +404,20 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
                 font=title_font,
                 fill=title_color,
             )
-            y_offset += title_font.size + line_spacing
+            y_offset += int(title_font.size) + line_spacing
 
         y_offset += block_line_spacing
 
         # 绘制描述文本
         for line in lines_desc:
             color = title_color if line.startswith("属性加成") or line.startswith("固有技能") else detail_color
-            draw.text(
-                (x_offset, y_offset),
+            draw_text_with_color(
+                draw,
                 line,
-                font=detail_font,
-                fill=color,
+                x_offset,
+                y_offset,
+                detail_font,
+                color,
             )
             y_offset += detail_font.size + line_spacing
 
@@ -452,12 +532,81 @@ def wrap_text_with_manual_newlines(
 ) -> str:
     """
     处理文本，优先保留原始文本中的 \n，再使用 textwrap 进行换行。
+    对包含 <color> 标签的文本进行智能换行，保持标签完整。
 
     :param text: 原始文本
     :param width: 自动换行的宽度
     :return: 处理后的文本
     """
     lines = text.split("\n")
-    wrapped_lines = [textwrap.fill(line, width=width) for line in lines]
-    final_text = "\n".join(wrapped_lines)
-    return final_text
+    wrapped_lines = []
+
+    for line in lines:
+        # 如果这行包含 color 标签，需要特殊处理
+        if "<color=" in line:
+            # 将行分割成带标签和不带标签的片段
+            segments = []
+            last_end = 0
+
+            for match in re.finditer(r"<color=([^>]+)>([^<]*)</color>", line):
+                # 添加标签前的文本
+                if match.start() > last_end:
+                    segments.append(("plain", line[last_end : match.start()]))
+                # 添加带标签的文本（作为一个整体）
+                segments.append(("colored", match.group(0), match.group(2)))
+                last_end = match.end()
+
+            # 添加最后剩余的文本
+            if last_end < len(line):
+                segments.append(("plain", line[last_end:]))
+
+            # 手动换行，保持标签完整
+            current_line = ""
+            current_length = 0
+            result_lines = []
+
+            for segment in segments:
+                if segment[0] == "plain":
+                    text_part = segment[1]
+                    # 对纯文本进行换行
+                    words = text_part.split()
+                    for word in words:
+                        word_len = len(word)
+                        if current_length + word_len + (1 if current_line else 0) > width:
+                            if current_line:
+                                result_lines.append(current_line)
+                                current_line = word
+                                current_length = word_len
+                            else:
+                                current_line = word
+                                current_length = word_len
+                        else:
+                            if current_line:
+                                current_line += " " + word
+                                current_length += 1 + word_len
+                            else:
+                                current_line = word
+                                current_length = word_len
+                elif segment[0] == "colored":
+                    full_tag = segment[1]
+                    plain_text = segment[2]
+                    text_len = len(plain_text)
+
+                    # 如果加上这个标签会超出宽度，先换行
+                    if current_length + text_len > width and current_line:
+                        result_lines.append(current_line)
+                        current_line = full_tag
+                        current_length = text_len
+                    else:
+                        current_line += full_tag
+                        current_length += text_len
+
+            if current_line:
+                result_lines.append(current_line)
+
+            wrapped_lines.extend(result_lines)
+        else:
+            # 没有 color 标签的行正常换行
+            wrapped_lines.append(textwrap.fill(line, width=width))
+
+    return "\n".join(wrapped_lines)

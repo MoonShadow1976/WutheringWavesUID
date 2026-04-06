@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "灼樱刀术",
-        "desc": "普攻·常世身\n连续短按或按住普攻，进行最多3段的连续攻击，造成冷凝伤害。\n普攻·常世身第3段会为命中的目标附加1次【霜渐效应】。\n\n寒簇·常世身\n【心念】满300点时，解锁寒簇·常世身。\n长按普攻，消耗耐力施放，期间免疫打断。绯雪依次射出三支箭矢，造成冷凝伤害，此次伤害为共鸣解放伤害。\n射出最后一支箭矢时，消耗300点【心念】，解锁预求我身·见心，该箭矢命中目标时，为命中的目标附加1次【霜渐效应】。\n\n空中攻击·常世身\n消耗耐力进行空中下落攻击，造成冷凝伤害。\n\n闪避反击·常世身\n成功闪避后一定时间内短按普攻，将会攻击目标，造成冷凝伤害。\n施放该技能后在一定时间内短按普攻，将会施放普攻·常世身第3段。\n\n普攻·预求身\n进行最多5段的连续攻击，造成冷凝伤害，此次伤害为共鸣解放伤害。\n普攻·预求身第3、4、5段会为命中的目标附加1次【霜渐效应】。\n\n重击·预求身\n预求身期间，按住普攻，进入【沉息】，【沉息】期间持续消耗耐力。松开普攻或耐力耗尽时，将消耗耐力，施放重击·预求身，造成冷凝伤害，此次伤害为共鸣解放伤害。施放该技能后在一定时间内短按普攻，将会施放普攻·预求身第2段。\n若施放重击·预求身的一定时间内受到敌方目标攻击，此次伤害降低100%同时停滞周围的目标，且施放该技能后在一定时间内短按普攻改为衔接普攻·预求身第4段。\n\n枯霜·预求身\n【淬寒·枯霜】满时，重击·预求身替换为枯霜·预求身。\n绯雪处于地面时，长按重击施放。绯雪处于空中时，若长按重击，绯雪会回到地面，随后施放枯霜·预求身。\n消耗耐力，施放期间消耗3点【淬寒·枯霜】，获得1点【锻雪·归刃】，造成冷凝伤害，此次伤害为共鸣解放伤害，期间时间暂时停止。\n枯霜·预求身会为命中的目标附加1次【霜渐效应】。\n\n空中攻击·预求身\n消耗耐力，在空中进行最多2段的连续攻击，造成冷凝伤害，此次伤害为共鸣解放伤害。\n空中攻击·预求身第2段会为命中的目标附加1次【霜渐效应】。\n施放空中攻击·预求身一定时间后，在空中施放除居合以外的技能时，空中攻击·预求身的连击段数不会被重置。落地时，重置空中攻击·预求身的连击段数。\n施放空中攻击·预求身第2段一定时间内短按普攻，将会施放空中下落攻击·预求身。\n\n空中下落攻击·预求身\n在空中长按普攻，消耗耐力进行空中下落攻击，造成冷凝伤害，此次伤害为共鸣解放伤害。\n空中下落攻击·预求身会为命中的目标附加1次【霜渐效应】。\n\n闪避反击·预求身\n成功闪避后一定时间内短按普攻，将会攻击目标，造成冷凝伤害，此次伤害为共鸣解放伤害。\n施放该技能后在一定时间内短按普攻，将会施放普攻·预求身第3段。",
+        "desc": "<color=Title>普攻·常世身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>。\n<color=Highlight>普攻·常世身第3段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>寒簇·常世身</color>\n<color=Highlight>【心念】</color>满300点时，解锁<color=Highlight>寒簇·常世身</color>。\n长按<color=Highlight>普攻</color>，消耗耐力施放，期间免疫打断。绯雪依次射出三支箭矢，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n射出最后一支箭矢时，消耗300点<color=Highlight>【心念】</color>，解锁<color=Highlight>预求我身·见心</color>，该箭矢命中目标时，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>空中攻击·常世身</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>闪避反击·常世身</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n\n<color=Title>普攻·预求身</color>\n进行最多5段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n<color=Highlight>普攻·预求身第3、4、5段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>重击·预求身</color>\n<color=Highlight>预求身</color>期间，按住<color=Highlight>普攻</color>，进入<color=Highlight>【沉息】</color>，<color=Highlight>【沉息】</color>期间持续消耗耐力。松开<color=Highlight>普攻</color>或耐力耗尽时，将消耗耐力，施放<color=Highlight>重击·预求身</color>，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第2段</color>。\n若施放<color=Highlight>重击·预求身</color>的一定时间内受到敌方目标攻击，此次伤害降低100%同时停滞周围的目标，且施放该技能后在一定时间内短按<color=Highlight>普攻</color>改为衔接<color=Highlight>普攻·预求身第4段</color>。\n\n<color=Title>枯霜·预求身</color>\n<color=Highlight>【淬寒·枯霜】</color>满时，<color=Highlight>重击·预求身</color>替换为<color=Highlight>枯霜·预求身</color>。\n绯雪处于地面时，长按<color=Highlight>重击</color>施放。绯雪处于空中时，若长按<color=Highlight>重击</color>，绯雪会回到地面，随后施放<color=Highlight>枯霜·预求身</color>。\n消耗耐力，施放期间消耗3点<color=Highlight>【淬寒·枯霜】</color>，获得1点<color=Highlight>【锻雪·归刃】</color>，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害，期间时间暂时停止。\n<color=Highlight>枯霜·预求身</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>空中攻击·预求身</color>\n消耗耐力，在空中进行最多2段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n<color=Highlight>空中攻击·预求身第2段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n施放<color=Highlight>空中攻击·预求身</color>一定时间后，在空中施放除<color=Highlight>居合</color>以外的技能时，<color=Highlight>空中攻击·预求身</color>的连击段数不会被重置。落地时，重置<color=Highlight>空中攻击·预求身</color>的连击段数。\n施放<color=Highlight>空中攻击·预求身</color>第2段一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>空中下落攻击·预求身</color>。\n\n<color=Title>空中下落攻击·预求身</color>\n在空中长按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n<color=Highlight>空中下落攻击·预求身</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>闪避反击·预求身</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第3段</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -1209,13 +1209,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021011,
+              "value": 2
+            },
+            {
+              "key": 41100061,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021011,
+              "value": 3
+            },
+            {
+              "key": 41100061,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021012,
+              "value": 2
+            },
+            {
+              "key": 41100062,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021013,
+              "value": 5
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021014,
+              "value": 2
+            },
+            {
+              "key": 41100064,
+              "value": 2
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021014,
+              "value": 6
+            },
+            {
+              "key": 41100064,
+              "value": 4
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "2": {
       "skill": {
         "name": "霜罚",
-        "desc": "共鸣技能·常世身\n造成冷凝伤害。\n施放时，使下一次普攻·常世身第3段获得强化：施放时额外回复100点【心念】。若切换至其他角色则失去该效果。\n施放该技能后在一定时间内短按普攻，将会施放普攻·常世身第3段。\n施放该技能后在一定时间内长按普攻，若【心念】低于300点，将会施放普攻·常世身第3段。\n\n霜罚·白玉切\n处于地面时，短按共鸣技能，牵引周围的目标，造成冷凝伤害。\n若施放霜罚·白玉切的一定时间内受到敌方目标攻击，此次伤害降低100%。\n该技能与霜罚·落华共享冷却时间。\n\n霜罚·落华\n处于空中时，短按共鸣技能，牵引周围的目标，造成冷凝伤害。\n若施放霜罚·落华的一定时间内受到敌方目标攻击，此次伤害降低100%。\n该技能与霜罚·白玉切共享冷却时间。",
+        "desc": "<color=Title>共鸣技能·常世身</color>\n造成<color=Ice>冷凝伤害</color>。\n施放时，使下一次<color=Highlight>普攻·常世身第3段</color>获得强化：施放时额外回复100点<color=Highlight>【心念】</color>。若切换至其他角色则失去该效果。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n施放该技能后在一定时间内长按<color=Highlight>普攻</color>，若<color=Highlight>【心念】</color>低于300点，将会施放<color=Highlight>普攻·常世身第3段</color>。\n\n<color=Title>霜罚·白玉切</color>\n处于地面时，短按<color=Highlight>共鸣技能</color>，牵引周围的目标，造成<color=Ice>冷凝伤害</color>。\n若施放<color=Highlight>霜罚·白玉切</color>的一定时间内受到敌方目标攻击，此次伤害降低100%。\n该技能与<color=Highlight>霜罚·落华</color>共享冷却时间。\n\n<color=Title>霜罚·落华</color>\n处于空中时，短按<color=Highlight>共鸣技能</color>，牵引周围的目标，造成<color=Ice>冷凝伤害</color>。\n若施放<color=Highlight>霜罚·落华</color>的一定时间内受到敌方目标攻击，此次伤害降低100%。\n该技能与<color=Highlight>霜罚·白玉切</color>共享冷却时间。",
         "param": [],
         "type": "共鸣技能",
         "level": {
@@ -1354,13 +1499,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021011,
+              "value": 2
+            },
+            {
+              "key": 41100061,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021011,
+              "value": 3
+            },
+            {
+              "key": 41100061,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021012,
+              "value": 2
+            },
+            {
+              "key": 41100062,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021013,
+              "value": 5
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021014,
+              "value": 2
+            },
+            {
+              "key": 41100064,
+              "value": 2
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021014,
+              "value": 6
+            },
+            {
+              "key": 41100064,
+              "value": 4
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "3": {
       "skill": {
         "name": "预求我身",
-        "desc": "预求我身·见心\n施放寒簇·常世身后，解锁预求我身·见心。\n常世身期间，短按共鸣解放施放。造成冷凝伤害。施放时获得3点【武霜·居合】，清除300点【心念】和【寒意】，并进入预求身。\n预求我身·见心会为命中的目标附加4次【霜渐效应】。\n施放预求我身·见心不消耗共鸣能量。\n\n预求我身·归刃\n预求身期间，可通过以下两种方式施放预求我身·归刃：\n·点按共鸣解放，消耗所有【锻雪·归刃】，施放预求我身·归刃\n·按住共鸣解放，绯雪进入蓄力状态，期间时间暂时停止，不能切换角色，{0}秒后消耗1点【锻雪·归刃】，后续每{1}秒消耗1点。松开共鸣解放时，施放预求我身·归刃。【锻雪·归刃】归零后，会自动施放预求我身·归刃。\n绯雪造成冷凝伤害，每消耗1点【锻雪·归刃】会使该次攻击的伤害倍率提升。\n施放后退出预求身。",
+        "desc": "<color=Title>预求我身·见心</color>\n施放<color=Highlight>寒簇·常世身</color>后，解锁<color=Highlight>预求我身·见心</color>。\n<color=Highlight>常世身</color>期间，短按<color=Highlight>共鸣解放</color>施放。造成<color=Ice>冷凝伤害</color>。施放时获得3点<color=Highlight>【武霜·居合】</color>，清除300点<color=Highlight>【心念】</color>和<color=Highlight>【寒意】</color>，并进入<color=Highlight>预求身</color>。\n<color=Highlight>预求我身·见心</color>会为命中的目标附加4次<color=Highlight>【霜渐效应】</color>。\n施放<color=Highlight>预求我身·见心</color>不消耗共鸣能量。\n\n<color=Title>预求我身·归刃</color>\n<color=Highlight>预求身</color>期间，可通过以下两种方式施放<color=Highlight>预求我身·归刃</color>：\n·点按<color=Highlight>共鸣解放</color>，消耗所有<color=Highlight>【锻雪·归刃】</color>，施放<color=Highlight>预求我身·归刃</color>\n·按住<color=Highlight>共鸣解放</color>，绯雪进入蓄力状态，期间时间暂时停止，<color=Highlight>不能切换角色</color>，{0}秒后消耗1点<color=Highlight>【锻雪·归刃】</color>，后续每{1}秒消耗1点。松开<color=Highlight>共鸣解放</color>时，施放<color=Highlight>预求我身·归刃</color>。<color=Highlight>【锻雪·归刃】</color>归零后，会自动施放<color=Highlight>预求我身·归刃</color>。\n绯雪造成<color=Ice>冷凝伤害</color>，每消耗1点<color=Highlight>【锻雪·归刃】</color>会使该次攻击的伤害倍率提升。\n施放后退出<color=Highlight>预求身</color>。",
         "param": [
           "1",
           "0.9"
@@ -1637,13 +1927,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021011,
+              "value": 2
+            },
+            {
+              "key": 41100061,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021011,
+              "value": 3
+            },
+            {
+              "key": 41100061,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021012,
+              "value": 2
+            },
+            {
+              "key": 41100062,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021013,
+              "value": 5
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021014,
+              "value": 2
+            },
+            {
+              "key": 41100064,
+              "value": 2
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021014,
+              "value": 6
+            },
+            {
+              "key": 41100064,
+              "value": 4
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "4": {
       "skill": {
         "name": "细雪",
-        "desc": "队伍中的角色附加【霜渐效应】时，绯雪获得1层【雪锈】。队伍中的角色附加【虚湮效应】或【震谐·偏移】时，绯雪获得1层【雪锈】，该效果最多触发1次。【雪锈】最多可叠加{0}层，每名角色仅可通过上述方式使绯雪获得1层【雪锈】。绯雪根据持有的【雪锈】层数，获得以下增益，可叠加：\n1层【雪锈】：队伍中登场角色一定范围内的目标受到【霜冻效应】伤害加深{1}。\n2层【雪锈】：绯雪的暴击伤害提升{2}，且自身为队伍中在场角色时，每次自身附加【霜渐效应】时，额外附加一段{3}异常倍率的【霜冻效应】伤害。\n3层【雪锈】：队伍中登场角色一定范围内的目标受到【霜冻效应】伤害额外加深{4}。\n角色编入队伍时，重置该效果。",
+        "desc": "队伍中的角色附加<color=Highlight>【霜渐效应】</color>时，绯雪获得1层<color=Highlight>【雪锈】</color>。队伍中的角色附加<color=Highlight>【虚湮效应】</color>或<color=Highlight>【震谐·偏移】</color>时，绯雪获得1层<color=Highlight>【雪锈】</color>，该效果最多触发1次。<color=Highlight>【雪锈】</color>最多可叠加{0}层，每名角色仅可通过上述方式使绯雪获得1层<color=Highlight>【雪锈】</color>。绯雪根据持有的<color=Highlight>【雪锈】</color>层数，获得以下增益，可叠加：\n1层<color=Highlight>【雪锈】</color>：队伍中登场角色一定范围内的目标受到<color=Highlight>【霜冻效应】</color>伤害加深{1}。\n2层<color=Highlight>【雪锈】</color>：绯雪的暴击伤害提升{2}，且自身为队伍中在场角色时，每次自身附加<color=Highlight>【霜渐效应】</color>时，额外附加一段{3}异常倍率的<color=Highlight>【霜冻效应】</color>伤害。\n3层<color=Highlight>【雪锈】</color>：队伍中登场角色一定范围内的目标受到<color=Highlight>【霜冻效应】</color>伤害额外加深{4}。\n角色编入队伍时，重置该效果。",
         "param": [
           "3",
           "30%",
@@ -1652,22 +2087,62 @@
           "30%"
         ],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 10000
+            }
+          ]
+        }
       }
     },
     "5": {
       "skill": {
         "name": "无常世",
-        "desc": "处于非战斗状态大于4秒时，如果自身的【锻雪·归刃】点数小于1点，则回复1点。",
+        "desc": "处于非战斗状态大于4秒时，如果自身的<color=Highlight>【锻雪·归刃】</color>点数小于1点，则回复1点。",
         "param": [],
         "type": "固有技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 20000
+            }
+          ]
+        }
       }
     },
     "6": {
       "skill": {
         "name": "霜锋",
-        "desc": "造成冷凝伤害，此次伤害为共鸣解放伤害，为命中的目标附加1次【霜渐效应】。\n如果处于常世身，施放时回复100点【心念】。\n如果处于预求身，施放该技能后在一定时间内短按普攻，将会施放普攻·预求身第2段。",
+        "desc": "造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n如果处于<color=Highlight>常世身</color>，施放时回复100点<color=Highlight>【心念】</color>。\n如果处于<color=Highlight>预求身</color>，施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第2段</color>。",
         "param": [],
         "type": "变奏技能",
         "level": {
@@ -1725,13 +2200,158 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021011,
+              "value": 2
+            },
+            {
+              "key": 41100061,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021011,
+              "value": 3
+            },
+            {
+              "key": 41100061,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021012,
+              "value": 2
+            },
+            {
+              "key": 41100062,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021013,
+              "value": 5
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021014,
+              "value": 2
+            },
+            {
+              "key": 41100064,
+              "value": 2
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021014,
+              "value": 6
+            },
+            {
+              "key": 41100064,
+              "value": 4
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "7": {
       "skill": {
         "name": "万世霜天",
-        "desc": "霜冻效应\n·绯雪处于编队时，附近队伍的角色对目标附加【霜渐效应】时，改为附加【霜冻效应】。【霜冻效应】被附加在目标上时，会按照目标当前【霜冻效应】上限层数结算一次【霜冻效应】伤害。【霜冻效应】伤害视为【霜渐效应】伤害。\n·预求我身·见心和居合命中目标时，若目标【霜冻效应】层数不低于{0}层，会消耗目标{1}层【霜冻效应】，并造成一次【霜结】。\n·绯雪进入编队时，会清空所有目标的【霜渐效应】层数。绯雪离开编队时，如果编队中没有其他能将【霜渐效应】转变为【霜冻效应】的角色，会清空目标的【霜冻效应】层数。\n\n常世身\n绯雪初始处于常世身，常世身期间，施放普攻·常世身第3段和共鸣技能·常世身时，回复100点【心念】。\n\n预求身\n绯雪施放预求我身·见心时，进入预求身。\n\n居合架势\n若【寒意】不低于100点时进行以下操作，绯雪会向后瞬身，进入【居合架势】：\n·施放除枯霜·预求身以外的常态攻击·预求身、霜罚·白玉切、霜罚·落华后短按闪避。\n·通过按住共鸣技能施放霜罚·白玉切、霜罚·落华后继续按住共鸣技能。\n·施放霜罚·白玉切、霜罚·落华后一定时间内按住共鸣技能。\n当拥有技能目标且按住前方向时，绯雪会瞬移至敌人身后，进入【居合架势】。\n若空中进入【居合架势】，架势期间回到地面，则会退出【居合架势】。\n\n居合\n【居合架势】期间，短按普攻可以消耗100点【寒意】，施放居合，造成冷凝伤害，此次伤害为共鸣解放伤害。\n若施放后【寒意】仍不低于100点，一定时间内可以短按普攻再次施放居合。\n若施放居合的一定时间内受到敌方目标攻击，此次伤害降低100%。\n每次施放居合期间，若拥有【武霜·居合】，绯雪会消耗1层【武霜·居合】，使本次居合的伤害倍率提升，并为命中的目标附加3次【霜渐效应】，同时绯雪获得1层【淬寒·枯霜】。\n\n心念\n【心念】上限300点。\n常世身期间，施放普攻·常世身第3段时，回复100点【心念】。施放共鸣技能·常世身时，使下一次普攻·常世身第3段获得强化：施放时额外回复100点【心念】。\n\n寒意\n【寒意】上限300点。\n施放霜罚·白玉切、霜罚·落华时，或是除枯霜·预求身以外的常态攻击·预求身命中目标时，回复【寒意】。\n\n武霜·居合\n【武霜·居合】上限3点。\n施放预求我身·见心时获得3点【武霜·居合】。\n\n淬寒·枯霜\n【淬寒·枯霜】上限3层。\n每次通过施放居合消耗【武霜·居合】时，获得1层【淬寒·枯霜】。\n\n锻雪·归刃\n【锻雪·归刃】上限3点。\n每次施放枯霜·预求身期间，获得1点【锻雪·归刃】。",
+        "desc": "<color=Title>霜冻效应</color>\n·绯雪处于编队时，附近队伍的角色对目标附加<color=Highlight>【霜渐效应】</color>时，改为附加<color=Highlight>【霜冻效应】</color>。<color=Highlight>【霜冻效应】</color>被附加在目标上时，会按照目标当前<color=Highlight>【霜冻效应】</color>上限层数结算一次<color=Highlight>【霜冻效应】</color>伤害。<color=Highlight>【霜冻效应】</color>伤害视为<color=Highlight>【霜渐效应】</color>伤害。\n·<color=Highlight>预求我身·见心</color>和<color=Highlight>居合</color>命中目标时，若目标<color=Highlight>【霜冻效应】</color>层数不低于{0}层，会消耗目标{1}层<color=Highlight>【霜冻效应】</color>，并造成一次<color=Highlight>【霜结】</color>。\n·绯雪进入编队时，会清空所有目标的<color=Highlight>【霜渐效应】</color>层数。绯雪离开编队时，如果编队中没有其他能将<color=Highlight>【霜渐效应】</color>转变为<color=Highlight>【霜冻效应】</color>的角色，会清空目标的<color=Highlight>【霜冻效应】</color>层数。\n\n<color=Title>常世身</color>\n绯雪初始处于<color=Highlight>常世身</color>，<color=Highlight>常世身</color>期间，施放<color=Highlight>普攻·常世身第3段</color>和<color=Highlight>共鸣技能·常世身</color>时，回复100点<color=Highlight>【心念】</color>。\n\n<color=Title>预求身</color>\n绯雪施放<color=Highlight>预求我身·见心</color>时，进入<color=Highlight>预求身</color>。\n\n<color=Title>居合架势</color>\n若<color=Highlight>【寒意】</color>不低于100点时进行以下操作，绯雪会向后瞬身，进入<color=Highlight>【居合架势】</color>：\n·施放除<color=Highlight>枯霜·预求身</color>以外的<color=Highlight>常态攻击·预求身</color>、<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>后短按<color=Highlight>闪避</color>。\n·通过按住<color=Highlight>共鸣技能</color>施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>后继续按住<color=Highlight>共鸣技能</color>。\n·施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>后一定时间内按住<color=Highlight>共鸣技能</color>。\n当拥有技能目标且按住前方向时，绯雪会瞬移至敌人身后，进入<color=Highlight>【居合架势】</color>。\n若空中进入<color=Highlight>【居合架势】</color>，架势期间回到地面，则会退出<color=Highlight>【居合架势】</color>。\n\n<color=Title>居合</color>\n<color=Highlight>【居合架势】</color>期间，短按<color=Highlight>普攻</color>可以消耗100点<color=Highlight>【寒意】</color>，施放<color=Highlight>居合</color>，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n若施放后<color=Highlight>【寒意】</color>仍不低于100点，一定时间内可以短按<color=Highlight>普攻</color>再次施放<color=Highlight>居合</color>。\n若施放<color=Highlight>居合</color>的一定时间内受到敌方目标攻击，此次伤害降低100%。\n每次施放<color=Highlight>居合</color>期间，若拥有<color=Highlight>【武霜·居合】</color>，绯雪会消耗1层<color=Highlight>【武霜·居合】</color>，使本次<color=Highlight>居合</color>的伤害倍率提升，并为命中的目标附加3次<color=Highlight>【霜渐效应】</color>，同时绯雪获得1层<color=Highlight>【淬寒·枯霜】</color>。\n\n<color=Title>心念</color>\n<color=Highlight>【心念】</color>上限300点。\n<color=Highlight>常世身</color>期间，施放<color=Highlight>普攻·常世身第3段</color>时，回复100点<color=Highlight>【心念】</color>。施放<color=Highlight>共鸣技能·常世身</color>时，使下一次<color=Highlight>普攻·常世身第3段</color>获得强化：施放时额外回复100点<color=Highlight>【心念】</color>。\n\n<color=Title>寒意</color>\n<color=Highlight>【寒意】</color>上限300点。\n施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>时，或是除<color=Highlight>枯霜·预求身</color>以外的<color=Highlight>常态攻击·预求身</color>命中目标时，回复<color=Highlight>【寒意】</color>。\n\n<color=Title>武霜·居合</color>\n<color=Highlight>【武霜·居合】</color>上限3点。\n施放<color=Highlight>预求我身·见心</color>时获得3点<color=Highlight>【武霜·居合】</color>。\n\n<color=Title>淬寒·枯霜</color>\n<color=Highlight>【淬寒·枯霜】</color>上限3层。\n每次通过施放<color=Highlight>居合</color>消耗<color=Highlight>【武霜·居合】</color>时，获得1层<color=Highlight>【淬寒·枯霜】</color>。\n\n<color=Title>锻雪·归刃</color>\n<color=Highlight>【锻雪·归刃】</color>上限3点。\n每次施放<color=Highlight>枯霜·预求身</color>期间，获得1点<color=Highlight>【锻雪·归刃】</color>。",
         "param": [
           "10",
           "10"
@@ -1819,19 +2439,167 @@
               ]
             ]
           }
+        },
+        "consume": {
+          "1": [],
+          "2": [
+            {
+              "key": 43021011,
+              "value": 2
+            },
+            {
+              "key": 41100061,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 1500
+            }
+          ],
+          "3": [
+            {
+              "key": 43021011,
+              "value": 3
+            },
+            {
+              "key": 41100061,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 2000
+            }
+          ],
+          "4": [
+            {
+              "key": 43021012,
+              "value": 2
+            },
+            {
+              "key": 41100062,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 4500
+            }
+          ],
+          "5": [
+            {
+              "key": 43021012,
+              "value": 3
+            },
+            {
+              "key": 41100062,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 6000
+            }
+          ],
+          "6": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 2
+            },
+            {
+              "key": 2,
+              "value": 16000
+            }
+          ],
+          "7": [
+            {
+              "key": 43021013,
+              "value": 5
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 30000
+            }
+          ],
+          "8": [
+            {
+              "key": 43021014,
+              "value": 2
+            },
+            {
+              "key": 41100064,
+              "value": 2
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ],
+          "9": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 70000
+            }
+          ],
+          "10": [
+            {
+              "key": 43021014,
+              "value": 6
+            },
+            {
+              "key": 41100064,
+              "value": 4
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
         }
       }
     },
     "8": {
       "skill": {
         "name": "挽雪照身",
-        "desc": "附近队伍中除绯雪以外的角色对拥有【霜渐效应】的敌人造成的冷凝伤害加深{0}，持续{1}秒。",
+        "desc": "附近队伍中除绯雪以外的角色对拥有<color=Highlight>【霜渐效应】</color>的敌人造成的冷凝伤害加深{0}，持续{1}秒。",
         "param": [
           "20%",
           "20"
         ],
         "type": "延奏技能",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     },
     "9": {
@@ -1840,7 +2608,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "10": {
@@ -1849,7 +2633,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "11": {
@@ -1858,7 +2658,23 @@
         "desc": "攻击提升{0}",
         "param": [
           "1.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "12": {
@@ -1867,7 +2683,23 @@
         "desc": "暴击提升{0}",
         "param": [
           "1.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021013,
+              "value": 3
+            },
+            {
+              "key": 41100063,
+              "value": 3
+            },
+            {
+              "key": 2,
+              "value": 50000
+            }
+          ]
+        }
       }
     },
     "13": {
@@ -1876,7 +2708,27 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "14": {
@@ -1885,7 +2737,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "15": {
@@ -1894,7 +2766,27 @@
         "desc": "攻击提升{0}",
         "param": [
           "4.20%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "16": {
@@ -1903,30 +2795,53 @@
         "desc": "暴击提升{0}",
         "param": [
           "2.80%"
-        ]
+        ],
+        "consume": {
+          "1": [
+            {
+              "key": 43021014,
+              "value": 3
+            },
+            {
+              "key": 41100064,
+              "value": 3
+            },
+            {
+              "key": 41400304,
+              "value": 1
+            },
+            {
+              "key": 2,
+              "value": 100000
+            }
+          ]
+        }
       }
     },
     "17": {
       "skill": {
         "name": "谐度破坏·迅刀",
-        "desc": "目标【偏谐值】满时，可对其施放【谐度破坏】。\n\n常世身期间，施放【谐度破坏】后在一定时间内短按普攻，将会施放普攻·常世身第3段。\n预求身期间，施放【谐度破坏】后在一定时间内短按普攻，将会施放普攻·预求身第3段。",
+        "desc": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。\n\n<color=Highlight>常世身</color>期间，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n<color=Highlight>预求身</color>期间，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第3段</color>。",
         "param": [],
         "type": "谐度破坏",
-        "level": {}
+        "level": {},
+        "consume": {
+          "1": []
+        }
       }
     }
   },
   "chains": {
     "1": {
       "name": "不见春",
-      "desc": "普攻·预求身、重击·预求身、空中攻击·预求身、空中下落攻击·预求身、闪避反击·预求身的伤害倍率提升{0}。\n\n普攻·预求身第3段的攻击范围提升，且会将攻击范围内的敌人向中心进行牵引。施放普攻·预求身第4、5段期间免疫打断。\n\n施放预求我身·见心时，使下一次普攻·预求身第1段和下一次普攻·预求身第2段获得强化，命中目标时会为目标附加1次【霜渐效应】。",
+      "desc": "<color=Highlight>普攻·预求身</color>、<color=Highlight>重击·预求身</color>、<color=Highlight>空中攻击·预求身</color>、<color=Highlight>空中下落攻击·预求身</color>、<color=Highlight>闪避反击·预求身</color>的伤害倍率提升{0}。\n\n<color=Highlight>普攻·预求身第3段</color>的攻击范围提升，且会将攻击范围内的敌人向中心进行牵引。施放<color=Highlight>普攻·预求身第4、5段</color>期间免疫打断。\n\n施放<color=Highlight>预求我身·见心</color>时，使下一次<color=Highlight>普攻·预求身第1段</color>和下一次<color=Highlight>普攻·预求身第2段</color>获得强化，命中目标时会为目标附加1次<color=Highlight>【霜渐效应】</color>。",
       "param": [
         "120%"
       ]
     },
     "2": {
       "name": "于无声处冰冷燃烧",
-      "desc": "居合的伤害倍率提升{0}。\n\n处于非战斗状态大于{1}秒时，触发以下效果：\n·【武霜·居合】回复{2}点。\n·重置{3}次霜罚·白玉切的冷却时间。\n·下{4}次霜罚·白玉切或霜罚·落华额外回复{5}点【寒意】。",
+      "desc": "<color=Highlight>居合</color>的伤害倍率提升{0}。\n\n处于非战斗状态大于{1}秒时，触发以下效果：\n·<color=Highlight>【武霜·居合】</color>回复{2}点。\n·重置{3}次<color=Highlight>霜罚·白玉切</color>的冷却时间。\n·下{4}次<color=Highlight>霜罚·白玉切</color>或<color=Highlight>霜罚·落华</color>额外回复{5}点<color=Highlight>【寒意】</color>。",
       "param": [
         "140%",
         "4",
@@ -1938,7 +2853,7 @@
     },
     "3": {
       "name": "我身无我亦无穷",
-      "desc": "每次角色编入队伍{0}秒后，绯雪获得1层【雪锈】。\n\n寒簇·常世身和枯霜·预求身的伤害倍率提升{1}。\n\n持有2层【雪锈】时，自身为队伍中在场角色时，每次自身附加【霜渐效应】时，额外附加的异常倍率提升{2}。",
+      "desc": "每次角色编入队伍{0}秒后，绯雪获得1层<color=Highlight>【雪锈】</color>。\n\n<color=Highlight>寒簇·常世身</color>和<color=Highlight>枯霜·预求身</color>的伤害倍率提升{1}。\n\n持有2层<color=Highlight>【雪锈】</color>时，自身为队伍中在场角色时，每次自身附加<color=Highlight>【霜渐效应】</color>时，额外附加的异常倍率提升{2}。",
       "param": [
         "2",
         "120%",
@@ -1947,7 +2862,7 @@
     },
     "4": {
       "name": "有如苇草浮沉",
-      "desc": "施放共鸣技能·常世身、霜罚·白玉切或霜罚·落华时，使附近队伍中所有角色造成的伤害提升{0}，持续{1}秒。\n\n每次施放霜罚·白玉切或霜罚·落华时，回复自身{2}最大生命值的生命值。",
+      "desc": "施放<color=Highlight>共鸣技能·常世身</color>、<color=Highlight>霜罚·白玉切</color>或<color=Highlight>霜罚·落华</color>时，使附近队伍中所有角色造成的伤害提升{0}，持续{1}秒。\n\n每次施放<color=Highlight>霜罚·白玉切</color>或<color=Highlight>霜罚·落华</color>时，回复自身{2}最大生命值的生命值。",
       "param": [
         "20%",
         "30",
@@ -1956,14 +2871,14 @@
     },
     "5": {
       "name": "千祈万愿尽求我身",
-      "desc": "共鸣技能·常世身、霜罚·白玉切或霜罚·落华的伤害倍率提升{0}。",
+      "desc": "<color=Highlight>共鸣技能·常世身</color>、<color=Highlight>霜罚·白玉切</color>或<color=Highlight>霜罚·落华</color>的伤害倍率提升{0}。",
       "param": [
         "80%"
       ]
     },
     "6": {
       "name": "纵使前路永夜无终",
-      "desc": "预求我身·见心、预求我身·归刃的伤害倍率提升{0}。\n\n持有2层【雪锈】时，“自身为队伍中在场角色时，每次自身附加【霜渐效应】时，额外附加异常倍率”改为“自身为队伍中在场角色时，每次队伍中的角色附加【霜渐效应】时，额外附加异常倍率”。\n持有2层【雪锈】时，队伍中登场角色一定范围内的目标受到【霜冻效应】的最终伤害提升{1}，且绯雪的暴击伤害提升{2}。\n\n固有技能无常世替换为以下效果：\n处于非战斗状态大于4秒时，回复{3}点【锻雪·归刃】。",
+      "desc": "<color=Highlight>预求我身·见心</color>、<color=Highlight>预求我身·归刃</color>的伤害倍率提升{0}。\n\n持有2层<color=Highlight>【雪锈】</color>时，“自身为队伍中在场角色时，每次自身附加<color=Highlight>【霜渐效应】</color>时，额外附加异常倍率”改为“自身为队伍中在场角色时，每次队伍中的角色附加<color=Highlight>【霜渐效应】</color>时，额外附加异常倍率”。\n持有2层<color=Highlight>【雪锈】</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜冻效应】</color>的最终伤害提升{1}，且绯雪的暴击伤害提升{2}。\n\n固有技能<color=Highlight>无常世</color>替换为以下效果：\n处于非战斗状态大于4秒时，回复{3}点<color=Highlight>【锻雪·归刃】</color>。",
       "param": [
         "150%",
         "25%",

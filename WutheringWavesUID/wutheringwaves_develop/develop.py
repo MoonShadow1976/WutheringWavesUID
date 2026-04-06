@@ -17,6 +17,9 @@ from ..utils.api.model import (
     RoleCultivateStatusList,
     RoleDetailData,
 )
+from ..utils.ascension.char import get_char_model
+from ..utils.ascension.material import get_material_model
+from ..utils.ascension.weapon import get_weapon_model
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind
 from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_102, WAVES_CODE_103
@@ -265,6 +268,171 @@ async def calc_develop_cost(ev: Event, develop_list: list[str], is_flush=False):
     height = material_height + 50
     card_img = get_waves_bg(1100, height, "bg8")
 
+    temp_height = 0
+    for img in all_card:
+        card_img.alpha_composite(img, (20, temp_height))
+        temp_height += img.size[1] + height_block
+    card_img = add_footer(card_img)
+    card_img = await convert_img(card_img)
+    return card_img
+
+
+async def mock_calc_develop_cost(develop_list: list[str]):
+    alias_char_ids = []
+    for name in develop_list:
+        cid = char_name_to_char_id(name)
+        if cid:
+            alias_char_ids.append(cid)
+    if not alias_char_ids:
+        return "未找到养成角色"
+    if len(alias_char_ids) > 2:
+        return "暂不支持查询两个以上角色养成"
+
+    # 构造养成数据
+    content_role_map = {}
+    content_weapon_map = {}
+    content_map = {}
+    cost_details = []
+    for cid in alias_char_ids:
+        role = get_char_model(cid)
+        if not role:
+            return "未找到养成角色"
+        content_role_map[str(cid)] = OnlineRole(
+            roleId=cid,
+            roleName=role.name,
+            roleIconUrl="",
+            starLevel=role.starLevel,
+            attributeId=role.attributeId,
+            weaponTypeId=role.weaponTypeId,
+            weaponTypeName="",
+            acronym="",
+            isPreview=False,
+            isNew=False,
+            priority=1,
+        )
+
+        weapon_name = f"{role.name}专武"
+        weapon_id = weapon_name_to_weapon_id(weapon_name)
+        weapon = get_weapon_model(weapon_id) if weapon_id else None
+        if weapon and weapon_id:
+            content_weapon_map[str(weapon_id)] = OnlineWeapon(
+                weaponId=int(weapon_id),
+                weaponName=weapon.name,
+                weaponType=weapon.type,
+                weaponStarLevel=weapon.starLevel,
+                weaponIcon="",
+                acronym="",
+                isPreview=False,
+                isNew=False,
+                priority=1,
+            )
+
+        template = copy.deepcopy(template_role_develop)
+        template["roleId"] = cid
+        template["weaponId"] = weapon_id
+        content_map[str(cid)] = template
+
+        # 养成材料
+        mock_all_costs: dict[str, CultivateCost] = {}
+        mock_role_costs: dict[str, CultivateCost] = {}
+        mock_skill_costs: dict[str, CultivateCost] = {}
+        mock_weapon_costs: dict[str, CultivateCost] = {}
+
+        # 角色养成材料
+        for ascensions in role.ascensions.values():
+            for m in ascensions:
+                material = get_material_model(m.key)
+                if material:
+                    m_cost = CultivateCost(
+                        id=str(m.key),
+                        name=material.name,
+                        iconUrl="",
+                        num=int(m.value or 0),
+                        type=material.type,
+                        quality=material.rarity,
+                        isPreview=False,
+                    )
+                    if str(m.key) in mock_role_costs:
+                        mock_role_costs[str(m.key)].num += m_cost.num
+                    else:
+                        mock_role_costs[str(m.key)] = m_cost
+
+        # 角色技能养成材料
+        for skills in role.skillTree.values():
+            for skill in skills.values():
+                if not skill.consume:
+                    continue
+                for consume in skill.consume.values():
+                    for m in consume:
+                        material = get_material_model(m.key)
+                        if material:
+                            m_cost = CultivateCost(
+                                id=str(m.key),
+                                name=material.name,
+                                iconUrl="",
+                                num=int(m.value or 0),
+                                type=material.type,
+                                quality=material.rarity,
+                                isPreview=False,
+                            )
+                            if str(m.key) in mock_skill_costs:
+                                mock_skill_costs[str(m.key)].num += m_cost.num
+                            else:
+                                mock_skill_costs[str(m.key)] = m_cost
+
+        # 武器养成材料
+        if weapon:
+            for ascensions in weapon.ascensions.values():
+                for m in ascensions:
+                    material = get_material_model(m.key)
+                    if material:
+                        m_cost = CultivateCost(
+                            id=str(m.key),
+                            name=material.name,
+                            iconUrl="",
+                            num=int(m.value or 0),
+                            type=material.type,
+                            quality=material.rarity,
+                            isPreview=False,
+                        )
+                        if str(m.key) in mock_weapon_costs:
+                            mock_weapon_costs[str(m.key)].num += m_cost.num
+                        else:
+                            mock_weapon_costs[str(m.key)] = m_cost
+
+        # 合并到mock_all_costs
+        for cost_dict in (mock_role_costs, mock_skill_costs, mock_weapon_costs):
+            for mid, m in cost_dict.items():
+                if mid in mock_all_costs:
+                    mock_all_costs[mid].num += m.num
+                else:
+                    mock_all_costs[mid] = m.model_copy()
+
+        cost_detail = RoleCostDetail(
+            allCost=list(mock_all_costs.values()),
+            missingCost=None,  # 不需要"仍需材料"
+            synthetic=None,
+            missingRoleCost=list(mock_role_costs.values()),
+            missingSkillCost=list(mock_skill_costs.values()),
+            missingWeaponCost=list(mock_weapon_costs.values()),
+            roleId=cid,
+            weaponId=content_map[str(cid)].get("weaponId"),
+            strategyList=None,
+            showStrategy=False,
+        )
+        cost_details.append(cost_detail)
+
+    all_card = []
+    for cost in cost_details:
+        role_card = await calc_role_need_card(cost, content_role_map, content_weapon_map, content_map)
+        all_card.extend(role_card)
+
+    height_block = 40
+    material_height = 0
+    for img in all_card:
+        material_height += img.size[1] + height_block
+    height = material_height + 50
+    card_img = get_waves_bg(1100, height, "bg8")
     temp_height = 0
     for img in all_card:
         card_img.alpha_composite(img, (20, temp_height))

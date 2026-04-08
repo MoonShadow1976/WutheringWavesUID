@@ -5,6 +5,7 @@ from gsuid_core.logger import logger
 from msgspec import json as msgjson
 
 from ..ascension.constant import fixed_name, sum_percentages
+from ..resource.constant import SKILL_TREE_BREACH_MAP
 from .model import CharacterModel
 
 MAP_PATH = Path(__file__).parent.parent / "map/detail_json/char"
@@ -90,19 +91,9 @@ def get_char_detail(char_id: str | int, level: int, breach: int | None = None) -
     result.stats = copy.deepcopy(char_data["stats"][str(breach)][str(level)])
     result.skillTrees = char_data["skillTree"]
 
-    # 技能树 check from wutheringwaves_wiki\draw_char.py keys
-    # 技能树映射：breach阈值 -> 技能键列表
-    skill_tree_map = {
-        0: ["1", "2", "3", "6", "7", "8", "17"],
-        2: ["4", "10", "11"],
-        3: ["9", "12"],
-        4: ["5", "14", "15"],
-        5: ["13", "16"],
-    }
-
     # 构建skill_tree列表
     skill_tree = []
-    for threshold, keys in skill_tree_map.items():
+    for threshold, keys in SKILL_TREE_BREACH_MAP.items():
         if breach >= threshold:
             skill_tree.extend(char_data["skillTree"][key] for key in keys if key in char_data["skillTree"])
 

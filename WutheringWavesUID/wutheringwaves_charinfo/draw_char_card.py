@@ -17,7 +17,7 @@ from ..utils.api.model import (
     WeaponData,
 )
 from ..utils.api.model_other import EnemyDetailData
-from ..utils.api.wwapi import GET_ROLE_DETAIL_URL, ONE_RANK_URL, OneRankRequest, OneRankResponse, RoleDetailResponse
+from ..utils.api.wwapi import ONE_RANK_URL, OneRankRequest, OneRankResponse
 from ..utils.ascension.char import get_char_model
 from ..utils.ascension.template import get_template_data
 from ..utils.ascension.weapon import (
@@ -35,7 +35,7 @@ from ..utils.calculate import (
     get_total_score_bg,
     get_valid_color,
 )
-from ..utils.char_info_utils import get_all_roleid_detail_info
+from ..utils.char_info_utils import get_all_roleid_detail_info, get_role_detail_online
 from ..utils.damage.abstract import DamageDetailRegister
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
@@ -191,32 +191,8 @@ async def get_one_rank(item: OneRankRequest) -> OneRankResponse | None:
             logger.exception(f"获取排行失败: {e}")
 
 
-async def get_role_detail(waves_id: str | int) -> RoleDetailResponse | None:
-    WavesToken = WutheringWavesConfig.get_config("WavesToken").data
-
-    if not WavesToken:
-        return
-
-    async with httpx.AsyncClient() as client:
-        try:
-            res = await client.post(
-                GET_ROLE_DETAIL_URL,
-                json={"waves_id": str(waves_id)},
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": f"Bearer {WavesToken}",
-                },
-                timeout=httpx.Timeout(10),
-            )
-            # logger.debug(f"获取角色细节: {res.text}")
-            if res.status_code == 200:
-                return RoleDetailResponse.model_validate(res.json())
-        except Exception as e:
-            logger.exception(f"获取角色细节失败: {e}")
-
-
 async def get_user_role_data_online(ev: Event, char_id: str, uid: str, waves_id: str | None = None):
-    result = await get_role_detail(uid)
+    result = await get_role_detail_online(uid)
     if not result:
         return None, None, None
 

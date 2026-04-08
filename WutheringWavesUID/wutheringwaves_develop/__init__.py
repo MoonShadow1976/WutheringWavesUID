@@ -31,4 +31,4 @@ async def calc_develop(bot: Bot, ev: Event):
         return await bot.send(develop_cost)
     else:
         logger.warning(f"用户养成返回错误，使用默认。错误提示: {develop_cost}")
-        return await bot.send(await mock_calc_develop_cost(develop_list))
+        return await bot.send(await mock_calc_develop_cost(ev, develop_list))

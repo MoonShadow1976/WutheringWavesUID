@@ -20,7 +20,8 @@ from ..utils.api.model import (
 from ..utils.ascension.char import get_char_model
 from ..utils.ascension.material import get_material_model
 from ..utils.ascension.weapon import get_weapon_model
-from ..utils.char_info_utils import get_all_role_detail_info_list
+from ..utils.at_help import ruser_id
+from ..utils.char_info_utils import get_all_role_detail_info_list, get_all_roleid_detail_info, get_roleid_detail_online
 from ..utils.database.models import WavesBind
 from ..utils.error_reply import WAVES_CODE_098, WAVES_CODE_102, WAVES_CODE_103
 from ..utils.fonts.waves_fonts import (
@@ -42,7 +43,7 @@ from ..utils.name_convert import (
     weapon_name_to_weapon_id,
 )
 from ..utils.refresh_char_detail import refresh_char
-from ..utils.resource.constant import SPECIAL_CHAR
+from ..utils.resource.constant import SKILL_TREE_BREACH_MAP, SPECIAL_CHAR, SPECIAL_CHAR_INT_ALL
 from ..utils.resource.download_file import get_material_img
 from ..utils.waves_api import waves_api
 
@@ -277,7 +278,7 @@ async def calc_develop_cost(ev: Event, develop_list: list[str], is_flush=False):
     return card_img
 
 
-async def mock_calc_develop_cost(develop_list: list[str]):
+async def mock_calc_develop_cost(ev: Event, develop_list: list[str]):
     alias_char_ids = []
     for name in develop_list:
         cid = char_name_to_char_id(name)
@@ -288,17 +289,35 @@ async def mock_calc_develop_cost(develop_list: list[str]):
     if len(alias_char_ids) > 2:
         return "暂不支持查询两个以上角色养成"
 
+    # 获取用户本地数据
+    all_role = {}
+    user_id = ruser_id(ev)
+    uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
+    if uid:
+        all_role = await get_all_roleid_detail_info(uid)
+        if not all_role:
+            all_role = await get_roleid_detail_online(uid)  # 获取在线数据
+
     # 构造养成数据
     content_role_map = {}
     content_weapon_map = {}
     content_map = {}
     cost_details = []
     for cid in alias_char_ids:
+        cid = str(cid)
+        user_role = None
+        query_list = [cid] if int(cid) not in SPECIAL_CHAR_INT_ALL else SPECIAL_CHAR_INT_ALL
+        for temp_char_id in query_list:
+            temp_char_id = str(temp_char_id)
+            if all_role and temp_char_id in all_role:
+                user_role = all_role[temp_char_id]
+                break
+
         role = get_char_model(cid)
         if not role:
             return "未找到养成角色"
-        content_role_map[str(cid)] = OnlineRole(
-            roleId=cid,
+        content_role_map[cid] = OnlineRole(
+            roleId=int(cid),
             roleName=role.name,
             roleIconUrl="",
             starLevel=role.starLevel,
@@ -313,6 +332,8 @@ async def mock_calc_develop_cost(develop_list: list[str]):
 
         weapon_name = f"{role.name}专武"
         weapon_id = weapon_name_to_weapon_id(weapon_name)
+        if user_role:
+            weapon_id = user_role.weaponData.weapon.weaponId
         weapon = get_weapon_model(weapon_id) if weapon_id else None
         if weapon and weapon_id:
             content_weapon_map[str(weapon_id)] = OnlineWeapon(
@@ -330,7 +351,37 @@ async def mock_calc_develop_cost(develop_list: list[str]):
         template = copy.deepcopy(template_role_develop)
         template["roleId"] = cid
         template["weaponId"] = weapon_id
-        content_map[str(cid)] = template
+        if user_role:
+            template["roleStartLevel"] = user_role.role.level
+            template["weaponStartLevel"] = user_role.weaponData.level
+            template["weaponEndLevel"] = 70 if weapon and weapon.starLevel <= 2 else 90
+            for skill_name in skill_name_list:
+                if skill_name == "其他技能":
+                    continue
+                skill_index = skill_index_kuro[skill_name]
+                skill = template["skillLevelUpList"][skill_index]
+                _skill = next((skill for skill in user_role.skillList if skill.skill.type == skill_name), None)
+                skill["startLevel"] = _skill.level if _skill else 1
+        content_map[cid] = template
+
+        def get_breach(level: int):
+            if level <= 20:
+                breach = 0
+            elif level <= 40:
+                breach = 1
+            elif level <= 50:
+                breach = 2
+            elif level <= 60:
+                breach = 3
+            elif level <= 70:
+                breach = 4
+            elif level <= 80:
+                breach = 5
+            elif level <= 90:
+                breach = 6
+            else:
+                breach = 0
+            return breach
 
         # 养成材料
         mock_all_costs: dict[str, CultivateCost] = {}
@@ -339,7 +390,10 @@ async def mock_calc_develop_cost(develop_list: list[str]):
         mock_weapon_costs: dict[str, CultivateCost] = {}
 
         # 角色养成材料
-        for ascensions in role.ascensions.values():
+        role_breach = get_breach(template["roleStartLevel"])
+        for b, ascensions in role.ascensions.items():
+            if role_breach >= int(b):
+                continue
             for m in ascensions:
                 material = get_material_model(m.key)
                 if material:
@@ -358,11 +412,22 @@ async def mock_calc_develop_cost(develop_list: list[str]):
                         mock_role_costs[str(m.key)] = m_cost
 
         # 角色技能养成材料
-        for skills in role.skillTree.values():
+        need_skill_type: list[str] = []  # 需要养成的技能
+        for b, skill_type_list in SKILL_TREE_BREACH_MAP.items():
+            if b == 0:  # 基础技能
+                need_skill_type.extend(skill_type_list)
+            if b > role_breach:  # 未解锁的技能树侧枝
+                need_skill_type.extend(skill_type_list)
+        for skill_type, skills in role.skillTree.items():
+            if skill_type not in need_skill_type:
+                continue
             for skill in skills.values():
                 if not skill.consume:
                     continue
-                for consume in skill.consume.values():
+                for level, consume in skill.consume.items():
+                    if skill.type and skill.type in skill_name_list:
+                        if int(level) <= template["skillLevelUpList"][skill_index_kuro[skill.type]]["startLevel"]:
+                            continue
                     for m in consume:
                         material = get_material_model(m.key)
                         if material:
@@ -382,7 +447,12 @@ async def mock_calc_develop_cost(develop_list: list[str]):
 
         # 武器养成材料
         if weapon:
-            for ascensions in weapon.ascensions.values():
+            weapon_breach = get_breach(template["weaponStartLevel"])
+            for b, ascensions in weapon.ascensions.items():
+                if weapon_breach >= int(b) + 1 or int(b) + 1 == len(
+                    weapon.ascensions
+                ):  # 武器的ascensions是从0开始，且最后一个忽略
+                    continue
                 for m in ascensions:
                     material = get_material_model(m.key)
                     if material:
@@ -415,8 +485,8 @@ async def mock_calc_develop_cost(develop_list: list[str]):
             missingRoleCost=list(mock_role_costs.values()),
             missingSkillCost=list(mock_skill_costs.values()),
             missingWeaponCost=list(mock_weapon_costs.values()),
-            roleId=cid,
-            weaponId=content_map[str(cid)].get("weaponId"),
+            roleId=int(cid),
+            weaponId=content_map[cid].get("weaponId"),
             strategyList=None,
             showStrategy=False,
         )

@@ -26,6 +26,7 @@ from ..utils.image import (
     get_role_pile,
     get_waves_bg,
 )
+from ..utils.resource.constant import SKILL_TREE_MAP
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -337,18 +338,8 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
     detail_color_size = 14
     detail_font = waves_font_origin(detail_color_size)
 
-    keys = [
-        ("常态攻击", "1", ["12", "13"]),
-        ("共鸣技能", "2", ["10", "14"]),
-        ("共鸣回路", "7", ["4", "5"]),
-        ("共鸣解放", "3", ["11", "15"]),
-        ("变奏技能", "6", ["9", "16"]),
-        ("谐度破坏", "17", []),
-        ("延奏技能", "8", []),
-    ]
-
     images = []
-    for skill_type, skill_tree_id, relate_skill_tree_ids in keys:
+    for skill_type, skill_tree_id, relate_skill_tree_ids in SKILL_TREE_MAP:
         item = data[skill_tree_id]["skill"]
 
         # 拼接文本

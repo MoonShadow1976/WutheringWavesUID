@@ -577,13 +577,11 @@
                     <input type="file" id="fileInput" accept=".json">
                 </div>
                 <button class="btn btn-success" id="exportBtn" disabled>💾 导出JSON</button>
-                <button class="btn btn-primary" id="toggleTableBtn" disabled>📋 显示记录</button>
                 <!-- 保存按钮和获取按钮初始隐藏，根据权限显示 -->
                 <button class="btn btn-success" id="saveBtn" style="display: none;" disabled>💾 保存到服务器</button>
                 <button class="btn btn-info" id="fetchBtn" style="display: none;" disabled>📥 从服务器获取</button>
-                <button class="btn btn-warning" id="addRecordBtn" disabled>➕ 添加记录</button>
-                <button class="btn btn-warning" id="batchInsertBtn" disabled>📦 批量插入</button>
-                <button class="btn btn-danger" id="deleteSelectedBtn" disabled>🗑️ 删除选中</button>
+                <button class="btn btn-warning" id="toggleTableBtn" disabled>📋 显示完整记录</button>
+                <button class="btn btn-warning" id="addRecordBtn" style="display: none;" disabled>➕ 添加记录(在最前方)</button>
                 <button class="btn btn-danger" id="closeBtn">🚪 关闭界面</button>
             </div>
         </div>
@@ -611,7 +609,6 @@
         <div id="tableSection" style="display: none;">
             <div id="filters" class="filters" style="display: none;">
                 <div class="filter-group"><label>卡池类型:</label><select id="poolTypeFilter">
-                        <option value="">全部</option>
                     </select></div>
                 <div class="filter-group"><label>搜索:</label><input type="text" id="searchInput" placeholder="搜索名称...">
                 </div>
@@ -621,6 +618,7 @@
                     <span>-</span>
                     <input type="number" id="rangeEnd" placeholder="结束" min="1" style="width:80px;">
                     <button class="btn btn-sm btn-primary" id="rangeSelectBtn">选择范围</button>
+                    <button class="btn btn-sm btn-danger" id="deleteSelectedBtn">删除选中</button>
                 </div>
             </div>
 
@@ -705,12 +703,10 @@
                 <h3>📦 批量插入记录</h3>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>插入位置（在此记录之后插入）:</label><select id="batchInsertPosition">
-                        <option value="start">开始位置（最新）</option>
-                    </select></div>
+                <div class="form-group" id="posGroup" style="display: flex;">
+                    <label>插入位置:</label><select id="batchInsertPosition"></select>
+                </div>
                 <div class="form-group"><label>卡池类型:</label><select id="batchCardPoolType"></select></div>
-                <div class="form-group"><label>插入数量:</label><input type="number" id="batchInsertCount" value="10"
-                        min="1" max="100"></div>
                 <div class="form-group"><label>品质:</label><select id="batchQualityLevel">
                         <option value="3">3星</option>
                         <option value="4">4星</option>
@@ -720,10 +716,17 @@
                         <option value="角色">角色</option>
                         <option value="武器">武器</option>
                     </select></div>
-                <div class="form-group"><label>名称（可选，留空自动生成）:</label><input type="text" id="batchName"
-                        placeholder="留空将自动生成"></div>
-                <div class="form-group"><label>资源ID（可选，留空自动生成）:</label><input type="number" id="batchResourceId"
-                        placeholder="留空将自动生成"></div>
+                <div class="form-group"><label>插入数量:</label><input type="number" id="batchInsertCount" value="10"
+                        min="1" max="100"></div>
+                <div class="form-group" style="position: relative;">
+                    <label>名称（支持自动补全，留空自动生成）:</label>
+                    <input type="text" id="batchName" autocomplete="off">
+                    <div id="autocompleteList"
+                        style="position: absolute; background: white; border: 1px solid #ccc; max-height: 150px; overflow-y: auto; width: 100%; z-index: 1000; display: none;">
+                    </div>
+                </div>
+                <div class="form-group"><label>资源ID（自动关联，留空自动生成）:</label><input type="number" id="batchResourceId">
+                </div>
             </div>
             <div class="modal-footer"><button class="btn btn-primary" id="saveBatchInsert">批量插入</button><button
                     class="btn" id="cancelBatchInsert">取消</button></div>
@@ -736,6 +739,7 @@
         const timeoutSeconds = {{ timeout }};   // 从后端获取超时时间（秒）
         const poolTypes = {{ poolTypes | safe }};
         const normalNames = {{ normalNames | safe }};  // 常驻抽卡对象
+        const resourceData = {{ resourceData | safe }};  // 默认抽卡对象
         const auth = window.location.pathname.split('/').pop();
         let gachaData = null;
         let currentPage = 1;
@@ -864,13 +868,12 @@
             if (userPm <= 1) document.getElementById('saveBtn').disabled = false;
             document.getElementById('fetchBtn').disabled = false;
             document.getElementById('addRecordBtn').disabled = false;
-            document.getElementById('batchInsertBtn').disabled = false;
 
             // 隐藏表格区域（符合默认隐藏）
             const tableSection = document.getElementById('tableSection');
             tableSection.style.display = 'none';
             tableSectionVisible = false;
-            document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
+            document.getElementById('toggleTableBtn').textContent = '📋 显示完整记录';
             document.getElementById('toggleTableBtn').disabled = false;  // 启用按钮
 
             updateInfoPanel();
@@ -883,17 +886,22 @@
 
         document.getElementById('toggleTableBtn').addEventListener('click', function () {
             const tableSection = document.getElementById('tableSection');
+            const addRecordBtn = document.getElementById('addRecordBtn');
             if (tableSection.style.display === 'none') {
                 tableSection.style.display = 'block';
+                addRecordBtn.style.display = 'block';
                 tableSectionVisible = true;
-                document.getElementById('toggleTableBtn').textContent = '📋 隐藏记录';
+                addRecordBtnVisible = true;
+                document.getElementById('toggleTableBtn').textContent = '📋 隐藏完整记录';
                 // 刷新表格显示（确保最新数据）
                 renderTable();
                 updatePagination();
             } else {
                 tableSection.style.display = 'none';
+                addRecordBtn.style.display = 'none';
                 tableSectionVisible = false;
-                document.getElementById('toggleTableBtn').textContent = '📋 显示记录';
+                addRecordBtnVisible = false;
+                document.getElementById('toggleTableBtn').textContent = '📋 显示完整记录';
             }
         });
 
@@ -910,7 +918,6 @@
         function updatePoolTypeFilter() {
             const select = document.getElementById('poolTypeFilter');
             const uniqueTypes = [...new Set(gachaData.list.map(item => item.cardPoolType))];
-            select.innerHTML = '<option value="">全部</option>';
             uniqueTypes.forEach(type => {
                 const option = document.createElement('option');
                 option.value = type;
@@ -1051,7 +1058,7 @@
                     <td>${item.time}</td>
                     <td class="action-btns">
                         <button class="btn btn-sm btn-primary edit-btn" data-index="${globalIndex}">编辑</button>
-                        <button class="btn btn-sm btn-warning insert-after-btn" data-index="${globalIndex}" title="在此之后批量插入">📦</button>
+                        <button class="btn btn-sm btn-warning insert-after-btn" data-index="${globalIndex}" title="在此记录之后批量插入新纪录">后方插入</button>
                         <button class="btn btn-sm btn-danger delete-btn" data-index="${globalIndex}">删除</button>
                     </td>
                 `;
@@ -1070,6 +1077,56 @@
             document.querySelectorAll('.insert-after-btn').forEach(btn => btn.addEventListener('click', function () { openBatchInsertModal(parseInt(this.dataset.index)); }));
             document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', function () { deleteRecord(parseInt(this.dataset.index)); }));
         }
+
+        function filterDefaultItems() {
+            const nameInput = document.getElementById('batchName');
+            const quality = parseInt(document.getElementById('batchQualityLevel').value);
+            const resourceType = document.getElementById('batchResourceType').value;
+            const searchText = nameInput.value.trim().toLowerCase();
+            let filtered = resourceData.filter(item =>
+                item.quality === quality && item.resourceType === resourceType
+            );
+            if (searchText) {
+                filtered = filtered.filter(item => item.name.toLowerCase().includes(searchText));
+            }
+            return filtered;
+        }
+
+        // 自动补充抽卡对象
+        function showAutocomplete() {
+            const items = filterDefaultItems();
+            const nameInput = document.getElementById('batchName');
+            const autocompleteDiv = document.getElementById('autocompleteList');
+            if (items.length === 0) {
+                autocompleteDiv.style.display = 'none';
+                return;
+            }
+            autocompleteDiv.innerHTML = items.map(item =>
+                `<div data-name="${item.name}" data-id="${item.resourceId}" style="padding: 6px 10px; cursor: pointer;">${item.name} (ID:${item.resourceId})</div>`
+            ).join('');
+            autocompleteDiv.style.display = 'block';
+            // 点击填充
+            autocompleteDiv.querySelectorAll('div').forEach(div => {
+                div.addEventListener('click', (e) => {
+                    nameInput.value = div.dataset.name;
+                    document.getElementById('batchResourceId').value = div.dataset.id;
+                    autocompleteDiv.style.display = 'none';
+                });
+            });
+        }
+
+        document.getElementById('batchName').addEventListener('input', showAutocomplete);
+        // 点击其他地方关闭浮层
+        document.addEventListener('click', function (e) {
+            const nameInput = document.getElementById('batchName');
+            const autocompleteDiv = document.getElementById('autocompleteList');
+            if (e.target !== nameInput && !autocompleteDiv.contains(e.target)) {
+                autocompleteDiv.style.display = 'none';
+            }
+        });
+        // 品质或类型改变时，清空名称并重新触发补全（可选）
+        document.getElementById('batchQualityLevel').addEventListener('change', () => { nameInput.value = ''; showAutocomplete(); });
+        document.getElementById('batchResourceType').addEventListener('change', () => { nameInput.value = ''; showAutocomplete(); });
 
         function updatePagination() {
             const total = filteredData.length;
@@ -1206,39 +1263,6 @@
             });
         }
 
-        function openEditModal(index = -1) {
-            editingIndex = index;
-            const modal = document.getElementById('editModal');
-            if (index >= 0) {
-                const item = filteredData[index];
-                document.getElementById('modalTitle').textContent = '编辑记录';
-                const poolSelect = document.getElementById('editCardPoolType');
-                if (!Array.from(poolSelect.options).some(opt => opt.value === item.cardPoolType)) {
-                    const newOption = document.createElement('option');
-                    newOption.value = item.cardPoolType;
-                    newOption.textContent = item.cardPoolType;
-                    poolSelect.appendChild(newOption);
-                }
-                poolSelect.value = item.cardPoolType;
-                document.getElementById('editName').value = item.name;
-                document.getElementById('editResourceType').value = item.resourceType;
-                document.getElementById('editQualityLevel').value = item.qualityLevel;
-                document.getElementById('editResourceId').value = item.resourceId;
-                document.getElementById('editCount').value = item.count;
-                document.getElementById('editTime').value = formatDateTimeLocal(item.time);
-            } else {
-                document.getElementById('modalTitle').textContent = '添加记录';
-                document.getElementById('editCardPoolType').value = '角色精准调谐';
-                document.getElementById('editName').value = '';
-                document.getElementById('editResourceType').value = '角色';
-                document.getElementById('editQualityLevel').value = '4';
-                document.getElementById('editResourceId').value = '';
-                document.getElementById('editCount').value = '1';
-                document.getElementById('editTime').value = formatDateTimeLocal(new Date().toISOString());
-            }
-            modal.classList.add('active');
-        }
-
         document.getElementById('saveEdit').addEventListener('click', function () {
             const newItem = {
                 cardPoolType: document.getElementById('editCardPoolType').value,
@@ -1319,78 +1343,60 @@
             updateDeleteButton();
         });
 
-        // 保存到服务器（仅管理员可见）
-        document.getElementById('saveBtn').addEventListener('click', async function () {
-            if (!gachaData) return;
-            // 更新导出时间
-            const now = new Date();
-            gachaData.info.export_time = formatDateTime(now.toISOString());
-            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
-            try {
-                const response = await fetch(`/waves/edit_data/${auth}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(gachaData)
-                });
-                const result = await response.json();
-                if (result.success) {
-                    showToast('保存成功！', 'success');
-                } else {
-                    showToast(result.msg || '保存失败', 'error');
+        document.getElementById('addRecordBtn').addEventListener('click', function () { openFixedBatchInsertModal(); });
+
+        function openEditModal(index = -1) {
+            editingIndex = index;
+            const modal = document.getElementById('editModal');
+            if (index >= 0) {
+                const item = filteredData[index];
+                document.getElementById('modalTitle').textContent = '编辑记录';
+                const poolSelect = document.getElementById('editCardPoolType');
+                if (!Array.from(poolSelect.options).some(opt => opt.value === item.cardPoolType)) {
+                    const newOption = document.createElement('option');
+                    newOption.value = item.cardPoolType;
+                    newOption.textContent = item.cardPoolType;
+                    poolSelect.appendChild(newOption);
                 }
-            } catch (err) {
-                showToast('网络错误：' + err.message, 'error');
+                poolSelect.value = item.cardPoolType;
+                document.getElementById('editName').value = item.name;
+                document.getElementById('editResourceType').value = item.resourceType;
+                document.getElementById('editQualityLevel').value = item.qualityLevel;
+                document.getElementById('editResourceId').value = item.resourceId;
+                document.getElementById('editCount').value = item.count;
+                document.getElementById('editTime').value = formatDateTimeLocal(item.time);
+            } else {
+                document.getElementById('modalTitle').textContent = '添加记录';
+                document.getElementById('editCardPoolType').value = '角色精准调谐';
+                document.getElementById('editName').value = '';
+                document.getElementById('editResourceType').value = '角色';
+                document.getElementById('editQualityLevel').value = '4';
+                document.getElementById('editResourceId').value = '';
+                document.getElementById('editCount').value = '1';
+                document.getElementById('editTime').value = formatDateTimeLocal(new Date().toISOString());
             }
-        });
+            modal.classList.add('active');
+        }
 
-        // 从服务器获取其他UID的记录（仅管理员可见）
-        document.getElementById('fetchBtn').addEventListener('click', async function () {
-            const uid = prompt('请输入要获取抽卡记录的UID（九位数字）:');
-            if (!uid) return;
-            if (!/^\d{9}$/.test(uid)) {
-                showToast('UID必须是九位数字', 'warning');
-                return;
-            }
-            try {
-                const response = await fetch(`/waves/fetch_gacha/${auth}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ uid: uid })
-                });
-                const result = await response.json();
-                if (response.ok && result.info && result.list) {
-                    gachaData = result;
-                    initializeData();
-                    showToast(`成功加载UID ${uid} 的抽卡记录`, 'success');
-                } else {
-                    showToast(result.msg || '获取失败', 'error');
-                }
-            } catch (err) {
-                showToast('网络错误：' + err.message, 'error');
-            }
-        });
-
-        // 导出JSON（本地文件）
-        document.getElementById('exportBtn').addEventListener('click', function () {
-            if (!gachaData) return;
-            const now = new Date();
-            gachaData.info.export_time = formatDateTime(now.toISOString());
-            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
-            const dataStr = JSON.stringify(gachaData, null, 4);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `export_${gachaData.info.uid}_edited.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('文件导出成功！', 'success');
-        });
-
-        document.getElementById('addRecordBtn').addEventListener('click', function () { openEditModal(-1); });
+        function openFixedBatchInsertModal() {
+            const modal = document.getElementById('batchInsertModal');
+            // 隐藏位置选择区域
+            const posGroup = document.getElementById('posGroup');
+            if (posGroup) posGroup.style.display = 'none';
+            // 重置表单默认值（可选）
+            document.getElementById('batchCardPoolType').value = '角色精准调谐';
+            document.getElementById('batchInsertCount').value = '1';
+            document.getElementById('batchQualityLevel').value = '5';
+            document.getElementById('batchResourceType').value = '武器';
+            document.getElementById('batchName').value = '';
+            document.getElementById('batchResourceId').value = '';
+            modal.classList.add('active');
+        }
 
         function openBatchInsertModal(afterIndex = -1) {
             const modal = document.getElementById('batchInsertModal');
+            const posGroup = document.getElementById('posGroup');
+            if (posGroup) posGroup.style.display = 'block';
             const posSelect = document.getElementById('batchInsertPosition');
             posSelect.innerHTML = '<option value="start">开始位置（最新）</option>';
             filteredData.forEach((item, idx) => {
@@ -1420,8 +1426,6 @@
             document.getElementById('batchResourceId').value = '';
             modal.classList.add('active');
         }
-
-        document.getElementById('batchInsertBtn').addEventListener('click', function () { openBatchInsertModal(-1); });
 
         // 自动计算插入记录的时间（基于前后记录列表）
         function generateRecordTimes(prevTimes, nextTimes, count) {
@@ -1507,7 +1511,14 @@
 
         // 替换原有 saveBatchInsert 事件监听
         document.getElementById('saveBatchInsert').addEventListener('click', function () {
-            const position = document.getElementById('batchInsertPosition').value;
+            const posGroup = document.getElementById('posGroup');
+            const isFixed = posGroup && posGroup.style.display === 'none';
+            let position;
+            if (isFixed) {
+                position = 'start';
+            } else {
+                position = document.getElementById('batchInsertPosition').value;
+            }
             const cardPoolType = document.getElementById('batchCardPoolType').value;
             const count = parseInt(document.getElementById('batchInsertCount').value);
             const qualityLevel = parseInt(document.getElementById('batchQualityLevel').value);
@@ -1631,10 +1642,78 @@
                         gachaData = data;
                         initializeData();
                         showToast('文件导入成功', 'success');
-                    } else showToast('文件格式不正确', 'error');
-                } catch (err) { showToast('JSON解析失败：' + err.message, 'error'); }
+                    } else alert('文件格式错误，或请使用工具转换记录：\nhttps://github.com/MoonShadow1976/wutheringwaves_gacha_record_converter');
+                } catch (err) { alert('JSON解析失败：' + err.message); }
             };
             reader.readAsText(file);
+        });
+
+        // 保存到服务器（仅管理员可见）
+        document.getElementById('saveBtn').addEventListener('click', async function () {
+            if (!gachaData) return;
+            // 更新导出时间
+            const now = new Date();
+            gachaData.info.export_time = formatDateTime(now.toISOString());
+            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
+            try {
+                const response = await fetch(`/waves/edit_data/${auth}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(gachaData)
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showToast('保存成功！', 'success');
+                } else {
+                    showToast(result.msg || '保存失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误：' + err.message, 'error');
+            }
+        });
+
+        // 从服务器获取其他UID的记录（仅管理员可见）
+        document.getElementById('fetchBtn').addEventListener('click', async function () {
+            const uid = prompt('请输入要获取抽卡记录的UID（九位数字）:');
+            if (!uid) return;
+            if (!/^\d{9}$/.test(uid)) {
+                showToast('UID必须是九位数字', 'warning');
+                return;
+            }
+            try {
+                const response = await fetch(`/waves/fetch_gacha/${auth}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ uid: uid })
+                });
+                const result = await response.json();
+                if (response.ok && result.info && result.list) {
+                    gachaData = result;
+                    initializeData();
+                    showToast(`成功加载UID ${uid} 的抽卡记录`, 'success');
+                } else {
+                    showToast(result.msg || '获取失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误：' + err.message, 'error');
+            }
+        });
+
+        // 导出JSON（本地文件）
+        document.getElementById('exportBtn').addEventListener('click', function () {
+            if (!gachaData) return;
+            const now = new Date();
+            gachaData.info.export_time = formatDateTime(now.toISOString());
+            gachaData.info.export_timestamp = Math.floor(now.getTime() / 1000);
+            const dataStr = JSON.stringify(gachaData, null, 4);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `export_${gachaData.info.uid}_edited.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('文件导出成功！', 'success');
         });
 
         document.getElementById('jumpPageBtn').addEventListener('click', function () {

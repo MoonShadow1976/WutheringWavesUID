@@ -344,7 +344,7 @@ async def import_gachalogs(ev: Event, history_url: str, type: str, uid: str) -> 
             "1.WutheringWavesUID",
             "2.Waves-Plugin",
             "",
-            "或请考虑使用工具(如：https://github.COM/MoonShadow1976/record_2_wuwaUID)转换您的抽卡记录文件为WutheringWavesUID格式",
+            "或请考虑使用工具(如：https://github.COM/MoonShadow1976/wutheringwaves_gacha_record_converter)转换您的抽卡记录文件为WutheringWavesUID格式",
         ]
         return "\n".join(err_res)
 

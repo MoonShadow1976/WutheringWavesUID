@@ -13,6 +13,8 @@ from gsuid_core.utils.cookie_manager.qrlogin import get_qrcode_base64
 from gsuid_core.web_app import app
 from starlette.responses import HTMLResponse, JSONResponse
 
+from ..utils.ascension.char import char_id_data
+from ..utils.ascension.weapon import weapon_id_data
 from ..utils.bot_url import get_url
 from ..utils.cache import TimedCache
 from ..utils.database.models import WavesBind
@@ -162,6 +164,19 @@ def convert_export_to_storage(export_data, uid):
     return storage
 
 
+def get_resource_data():
+    resource_data = []
+    for rid, data in char_id_data.items():
+        resource_data.append(
+            {"name": str(data["name"]), "quality": int(data["starLevel"]), "resourceId": int(rid), "resourceType": "角色"}
+        )
+    for wid, data in weapon_id_data.items():
+        resource_data.append(
+            {"name": str(data["name"]), "quality": int(data["starLevel"]), "resourceId": int(wid), "resourceType": "武器"}
+        )
+    return resource_data
+
+
 # ==================== FastAPI 路由 ====================
 @app.get("/waves/edit/{auth}")
 async def waves_edit_index(auth: str):
@@ -190,6 +205,7 @@ async def waves_edit_index(auth: str):
                 poolTypes=pool_types_json,
                 normalNames=normal_names_json,  # 常驻抽卡对象
                 timeout=int(remaining),  # 传递剩余秒数
+                resourceData=json.dumps(get_resource_data()),  # 资源数据
             )
         )
 

@@ -15,6 +15,7 @@ from ..utils.fonts.waves_fonts import (
     ww_font_20,
     ww_font_24,
     ww_font_26,
+    ww_font_30,
 )
 from ..utils.image import add_footer, pic_download_from_url
 from ..utils.resource.RESOURCE_PATH import ANN_CARD_PATH
@@ -190,17 +191,27 @@ def wrap_text_smart(text, font, max_w):
     return lines or [""]
 
 
-async def ann_batch_card(post_content: list, drow_height: float, time_str: str = "") -> bytes:
+async def ann_batch_card(post_content: list, drow_height: float, time_str: str = "", title: str = "") -> bytes:
+    if title:
+        drow_height += 50
     if time_str:
         drow_height += 50
-    im = Image.new("RGB", (1080, int(drow_height)), "#f9f6f2")  # type: ignore
+
+    im = Image.new("RGB", (1080, int(drow_height)), "#f9f6f2")
     draw = ImageDraw.Draw(im)
     x, y = 0, 0
 
-    if time_str:
-        draw.text((20, 10), time_str, fill=(128, 128, 128), font=ww_font_24)
+    # 绘制标题
+    if title:
+        draw.text((0, 10), title, fill=(0, 0, 0), font=ww_font_30)
         y += 50
 
+    # 绘制时间
+    if time_str:
+        draw.text((20, y + 10), time_str, fill=(128, 128, 128), font=ww_font_24)
+        y += 100  # 与正文隔开一行
+
+    # 绘制正文内容
     for temp in post_content:
         if temp["contentType"] == 1:
             content = temp["content"]
@@ -208,7 +219,7 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
             for duanluo, line_count in drow_duanluo:
                 draw.text((x, y), duanluo, fill=(0, 0, 0), font=ww_font_26)
                 y += drow_line_height * line_count + 30
-        elif temp["contentType"] == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp")):
+        elif temp["contentType"] == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp", "gif")):
             img = await pic_download_from_url(ANN_CARD_PATH, temp["url"])
             img_x = 0
             if img.width > im.width:
@@ -219,6 +230,7 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
             easy_paste(im, img, (img_x, y))
             y += img.size[1] + 40
 
+    # 添加内边距
     if hasattr(ww_font_26, "getbbox"):
         bbox = ww_font_26.getbbox("囗")
         padding = (
@@ -279,7 +291,7 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
                 x_drow_height,
             ) = split_text(content)
             drow_height += x_drow_height + 30
-        elif content_type == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp")):
+        elif content_type == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp", "gif")):
             # 图片
             _size = (temp["imgWidth"], temp["imgHeight"])
             img = await pic_download_from_url(ANN_CARD_PATH, temp["url"])
@@ -292,7 +304,10 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
         index_end = index + 1
         if drow_height > 5000:
             img = await ann_batch_card(
-                post_content[index_start:index_end], drow_height, str(res.get("postTime", "")) if index_start == 0 else ""
+                post_content[index_start:index_end],
+                drow_height,
+                time_str=str(res.get("postTime", "")) if index_start == 0 else "",
+                title=res.get("postTitle", "") if index_start == 0 else "",
             )
             index_start = index_end
             index_end = index + 1
@@ -301,7 +316,10 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
     else:
         if drow_height and index_end > index_start:
             img = await ann_batch_card(
-                post_content[index_start:index_end], drow_height, str(res.get("postTime", "")) if index_start == 0 else ""
+                post_content[index_start:index_end],
+                drow_height,
+                time_str=str(res.get("postTime", "")) if index_start == 0 else "",
+                title=res.get("postTitle", "") if index_start == 0 else "",
             )
             imgs.append(img)
 

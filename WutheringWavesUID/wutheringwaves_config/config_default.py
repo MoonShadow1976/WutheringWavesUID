@@ -24,6 +24,11 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         "公告推送总开关",
         True,
     ),
+    "WavesAnnSendLink": GsBoolConfig(
+        "公告详情附带原帖链接",
+        "开启后，查询公告详情时会在图片后追加原帖文字链接",
+        False,
+    ),
     "StaminaPush": GsBoolConfig("体力推送全局开关", "开启后当体力达到推送阈值将会推送", False),
     "StaminaPushInterval": GsIntConfig("体力推送检查间隔（分钟）", "体力推送检查间隔（分钟）,不会请求更新推送时间", 30, 60),
     "CrazyNotice": GsBoolConfig("催命模式", "开启后当达到推送阈值将会一直推送", False),

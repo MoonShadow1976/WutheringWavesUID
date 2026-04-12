@@ -26,12 +26,38 @@ async def ann_(bot: Bot, ev: Event):
         img = await ann_list_card()
         return await bot.send(img)
 
-    ann_id = ann_id.replace("#", "")
-    if not ann_id.isdigit():
+    ann_id_str = ann_id.replace("#", "")
+    if not ann_id_str.isdigit():
         raise Exception("公告ID不正确")
+    ann_id_int = int(ann_id_str)
 
-    img = await ann_detail_card(int(ann_id))
-    return await bot.send(img)  # type: ignore
+    img = await ann_detail_card(ann_id_int)
+
+    if isinstance(img, str):
+        return await bot.send(img)
+
+    link_text = ""
+    if WutheringWavesConfig.get_config("WavesAnnSendLink").data:
+        ann_list = await waves_api.get_ann_list()
+        content = [x for x in ann_list if x["id"] == ann_id_int]
+        if content:
+            post_id = content[0].get("postId", "")
+            if post_id:
+                link_text = f"https://www.kurobbs.com/mc/post/{post_id}?enter_source=2"
+
+    if isinstance(img, list):
+        if link_text:
+            for single_img in img[:-1]:
+                await bot.send(single_img)
+            await bot.send([img[-1], f"原帖链接：{link_text}"])
+        else:
+            for single_img in img:
+                await bot.send(single_img)
+    else:
+        if link_text:
+            await bot.send([img, f"原帖链接：{link_text}"])
+        else:
+            await bot.send(img)
 
 
 @sv_ann_sub.on_fullmatch("订阅公告")
@@ -127,8 +153,29 @@ async def check_waves_ann_state():
             img = await ann_detail_card(ann_id, is_check_time=True)
             if isinstance(img, str):
                 continue
+
+            link_text = ""
+            if WutheringWavesConfig.get_config("WavesAnnSendLink").data:
+                content = [x for x in new_ann_list if x["id"] == ann_id]
+                if content:
+                    post_id = content[0].get("postId", "")
+                    if post_id:
+                        link_text = f"https://www.kurobbs.com/mc/post/{post_id}?enter_source=2"
+
             for subscribe in datas:
-                await subscribe.send(img)  # type: ignore
+                if isinstance(img, list):
+                    if link_text:
+                        for single_img in img[:-1]:
+                            await subscribe.send(single_img)
+                        await subscribe.send([img[-1], f"原帖链接：{link_text}"])
+                    else:
+                        for single_img in img:
+                            await subscribe.send(single_img)
+                else:
+                    if link_text:
+                        await subscribe.send([img, f"原帖链接：{link_text}"])
+                    else:
+                        await subscribe.send(img)
                 await asyncio.sleep(random.uniform(1, 3))
         except Exception as e:
             logger.exception(e)

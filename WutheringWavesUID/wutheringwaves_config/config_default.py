@@ -158,6 +158,11 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         "国际服dc卡片声骸图标识别",
         False,
     ),
+    "WavesRankUrl": GsStrConfig(
+        "鸣潮全排行url",
+        "鸣潮全排行url",
+        "",
+    ),
     "WavesToken": GsStrConfig(
         "鸣潮全排行token",
         "鸣潮全排行token",

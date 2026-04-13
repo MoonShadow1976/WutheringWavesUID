@@ -2,9 +2,15 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-MAIN_URL = "https://rank.kokos.icu"
-# MAIN_URL = "https://wh.loping151.site" xw
-# MAIN_URL = "https://top.camellya.xyz" die
+
+def get_rank_url():
+    from ...wutheringwaves_config import WutheringWavesConfig
+
+    KuroUrlProxyUrl = WutheringWavesConfig.get_config("WavesRankUrl").data
+    return KuroUrlProxyUrl or "https://rank.kokos.icu"
+
+
+MAIN_URL = get_rank_url()
 # MAIN_URL = "http://127.0.0.1:9001"
 
 UPLOAD_URL = f"{MAIN_URL}/top/waves/upload"

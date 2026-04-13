@@ -233,7 +233,7 @@ async def save_gachalogs(
     is_need_backup = False
     for gacha_name, card_pool_type in gacha_type_meta_data.items():
         for log in range(len(gachalogs_history[gacha_name]) - 1, -1, -1):
-            pool_type = gachalogs_history[gacha_name][log]["cardPoolType"]
+            pool_type = gachalogs_history[gacha_name][log].get("cardPoolType")
             if pool_type == card_pool_type:
                 continue
             if card_pool_type == "武器精准调谐" and pool_type == "角色精准调谐-2":

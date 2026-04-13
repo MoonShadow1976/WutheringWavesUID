@@ -153,6 +153,7 @@ def convert_export_to_storage(export_data, uid):
             continue
         storage["data"].setdefault(pool_type, []).append(
             {
+                "cardPoolType": pool_type,
                 "resourceId": item.get("resourceId"),
                 "qualityLevel": item.get("qualityLevel"),
                 "resourceType": item.get("resourceType"),

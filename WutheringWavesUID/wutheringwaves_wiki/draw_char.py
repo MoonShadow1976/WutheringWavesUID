@@ -489,7 +489,7 @@ async def parse_char_skill_rate(skillLevels: dict[str, SkillLevel] | None):
             text_y = y0 + (cell_height - text_height) / 2
 
             # 绘制文本
-            wrapped_cell = textwrap.wrap(cell, width=18)
+            wrapped_cell = textwrap.wrap(cell, width=15)
             if len(wrapped_cell) > 1:
                 text_y_temp = text_y - font.size
                 for line in wrapped_cell:

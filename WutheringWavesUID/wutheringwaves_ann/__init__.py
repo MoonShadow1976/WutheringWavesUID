@@ -47,12 +47,8 @@ async def ann_(bot: Bot, ev: Event):
 
     if isinstance(img, list):
         if link_text:
-            for single_img in img[:-1]:
-                await bot.send(single_img)
-            await bot.send([img[-1], f"原帖链接：{link_text}"])
-        else:
-            for single_img in img:
-                await bot.send(single_img)
+            img.append(f"原帖链接：{link_text}")
+        await bot.send(img)
     else:
         if link_text:
             await bot.send([img, f"原帖链接：{link_text}"])
@@ -165,12 +161,8 @@ async def check_waves_ann_state():
             for subscribe in datas:
                 if isinstance(img, list):
                     if link_text:
-                        for single_img in img[:-1]:
-                            await subscribe.send(single_img)
-                        await subscribe.send([img[-1], f"原帖链接：{link_text}"])
-                    else:
-                        for single_img in img:
-                            await subscribe.send(single_img)
+                        img.append(f"原帖链接：{link_text}")
+                    await subscribe.send(img)
                 else:
                     if link_text:
                         await subscribe.send([img, f"原帖链接：{link_text}"])

@@ -45,15 +45,13 @@ async def ann_(bot: Bot, ev: Event):
             if post_id:
                 link_text = f"https://www.kurobbs.com/mc/post/{post_id}?enter_source=2"
 
-    if isinstance(img, list):
-        if link_text:
-            img.append(f"原帖链接：{link_text}")
-        await bot.send(img)
-    else:
-        if link_text:
-            await bot.send([img, f"原帖链接：{link_text}"])
+    if link_text:
+        if isinstance(img, list):
+            img.append(f"原帖链接：{link_text}")  # type: ignore
         else:
-            await bot.send(img)
+            img = [img, f"原帖链接：{link_text}"]
+
+    await bot.send(img)  # type: ignore
 
 
 @sv_ann_sub.on_fullmatch("订阅公告")
@@ -158,16 +156,14 @@ async def check_waves_ann_state():
                     if post_id:
                         link_text = f"https://www.kurobbs.com/mc/post/{post_id}?enter_source=2"
 
-            for subscribe in datas:
+            if link_text:
                 if isinstance(img, list):
-                    if link_text:
-                        img.append(f"原帖链接：{link_text}")
-                    await subscribe.send(img)
+                    img.append(f"原帖链接：{link_text}")  # type: ignore
                 else:
-                    if link_text:
-                        await subscribe.send([img, f"原帖链接：{link_text}"])
-                    else:
-                        await subscribe.send(img)
+                    img = [img, f"原帖链接：{link_text}"]
+
+            for subscribe in datas:
+                await subscribe.send(img)  # type: ignore
                 await asyncio.sleep(random.uniform(1, 3))
         except Exception as e:
             logger.exception(e)

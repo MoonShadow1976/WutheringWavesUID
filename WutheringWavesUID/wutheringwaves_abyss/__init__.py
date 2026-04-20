@@ -14,6 +14,7 @@ from .draw_abyss_card import draw_abyss_img
 from .draw_abyss_info import draw_abyss_info_img
 from .draw_challenge_card import draw_challenge_img
 from .draw_matrix_card import draw_matrix_img
+from .draw_matrix_info import draw_matrix_info_img
 from .draw_slash_card import draw_slash_img
 from .draw_slash_info import draw_slash_info_img
 
@@ -25,6 +26,7 @@ sv_waves_matrix = SV("waves查询矩阵")
 
 sv_waves_tower_info = SV("waves深塔信息", priority=4)
 sv_waves_slash_info = SV("waves海墟信息", priority=4)
+sv_waves_matrix_info = SV("waves矩阵信息", priority=4)
 
 
 @sv_waves_abyss.on_command(
@@ -137,6 +139,7 @@ async def send_waves_slash_info(bot: Bot, ev: Event):
     (
         "无尽总排行",
         "冥海总排行",
+        "海墟总排行",
     ),
     block=True,
 )
@@ -163,6 +166,15 @@ async def send_slash_schedule_info(bot: Bot, ev: Event):
     await bot.logger.info(f"开始执行[查询海墟信息] 参数: {param}")
 
     im = await draw_slash_info_img(param)
+    await bot.send(im)
+
+
+@sv_waves_matrix_info.on_command(("矩阵信息", "矩阵查询"), block=True)
+async def send_matrix_schedule_info(bot: Bot, ev: Event):
+    param = ev.text.strip()
+    await bot.logger.info(f"开始执行[查询矩阵信息] 参数: {param}")
+
+    im = await draw_matrix_info_img(param)
     await bot.send(im)
 
 

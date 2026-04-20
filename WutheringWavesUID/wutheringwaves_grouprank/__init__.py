@@ -7,35 +7,28 @@ from ..utils.database.models import WavesBind
 from .endless_group_rank import draw_group_rank_card
 from .models import GroupRankRecord
 
-sv_endless_group_rank = SV("ww群排行", priority=4)
+sv_endless_group_rank = SV("ww冥海排行", priority=4)
 
 
 @sv_endless_group_rank.on_regex(
-    (
-        "无尽排行",
-        "无尽排名",
-        "无尽群排行",
-        "无尽群排名",
-        "冥海排行",
-        "冥海排名",
-        "冥海群排行",
-        "冥海群排名",
-    ),
+    r"(无尽|冥海|海墟)(群|bot)?排(行|名)",
     block=True,
 )
 async def send_endless_rank_card(bot: Bot, ev: Event):
     """处理“无尽排行”命令，显示当前赛季的群内排行。"""
     index = 0  # 0 表示当前赛季, 1 表示上一个赛季
     param = ev.text.strip()
-    title = "海蚀无尽群排行"
+    title = "海墟无尽群排行"
     all_season_ids = await GroupRankRecord.get_all_season_ids(rank_type="endless")
     if not all_season_ids:
         return await bot.send("暂无任何赛季的排行数据")
+    if "bot" in param:
+        title = "海墟无尽bot排行"
     if "上期" in param:
         if len(all_season_ids) < 2:
             return await bot.send("暂无上期排行数据")
         index = 1
-        title = "海蚀无尽Bot排行"
+        title = "上期" + title
 
     all_season_ids.sort(reverse=True)
     current_season_id = all_season_ids[index]

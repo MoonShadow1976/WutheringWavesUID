@@ -369,7 +369,7 @@
       {
         "name": "终焉矩阵buff信息",
         "desc": "查询矩阵buff信息",
-        "eg": "矩阵信息(下期)",
+        "eg": "矩阵信息(下期/4)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false
@@ -502,7 +502,7 @@
       {
         "name": "无尽群排行",
         "desc": "无尽群排行",
-        "eg": "(群/bot)无尽排行(上期)",
+        "eg": "无尽(群/bot)排行(上期)",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

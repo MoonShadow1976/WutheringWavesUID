@@ -22,6 +22,7 @@ from ..utils.resource.RESOURCE_PATH import ANN_CARD_PATH
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import PREFIX
 
+WIDTH = 1080
 
 async def ann_list_card() -> bytes:
     ann_list = await waves_api.get_ann_list()
@@ -195,9 +196,9 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
     if title:
         drow_height += 50
     if time_str:
-        drow_height += 100
+        drow_height += 50
 
-    im = Image.new("RGB", (1080, int(drow_height)), "#f9f6f2")
+    im = Image.new("RGB", (WIDTH, int(drow_height)), "#f9f6f2")
     draw = ImageDraw.Draw(im)
     x, y = 0, 0
 
@@ -222,11 +223,8 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
         elif temp["contentType"] == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp", "gif")):
             img = await pic_download_from_url(ANN_CARD_PATH, temp["url"])
             img_x = 0
-            if img.width > im.width:
-                ratio = im.width / img.width
-                img = img.resize((int(img.width * ratio), int(img.height * ratio)))
-            else:
-                img_x = (im.width - img.width) // 2
+            ratio = im.width / img.width
+            img = img.resize((int(img.width * ratio), int(img.height * ratio)))
             easy_paste(im, img, (img_x, y))
             y += img.size[1] + 40
 
@@ -275,11 +273,9 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
     if not post_content:
         return "未找到该公告"
 
-    drow_height = 0
-    index_start = 0
-    index_end = 0
-    imgs = []
-    for index, temp in enumerate(post_content):
+    # 预先计算每个元素的高度
+    element_heights = []
+    for temp in post_content:
         content_type = temp["contentType"]
         if content_type == 1:
             # 文案
@@ -290,38 +286,55 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
                 x_drow_line_height,
                 x_drow_height,
             ) = split_text(content)
-            drow_height += x_drow_height + 30
+            height = x_drow_height + 30
         elif content_type == 2 and "url" in temp and temp["url"].endswith(("jpg", "png", "jpeg", "webp", "gif")):
             # 图片
-            _size = (temp["imgWidth"], temp["imgHeight"])
             img = await pic_download_from_url(ANN_CARD_PATH, temp["url"])
             img_height = img.size[1]
-            if img.width > 1080:
-                ratio = 1080 / img.width
-                img_height = int(img.height * ratio)
-            drow_height += img_height + 40
+            ratio = WIDTH / img.width
+            img_height = int(img.height * ratio)
+            height = img_height + 40
+        else:
+            height = 0
+        element_heights.append(height)
 
-        index_end = index + 1
-        if drow_height > 5000:
-            img = await ann_batch_card(
-                post_content[index_start:index_end],
-                drow_height,
-                time_str=str(res.get("postTime", "")) if index_start == 0 else "",
-                title=res.get("postTitle", "") if index_start == 0 else "",
-            )
-            index_start = index_end
-            index_end = index + 1
-            drow_height = 0
-            imgs.append(img)
-    else:
-        if drow_height and index_end > index_start:
-            img = await ann_batch_card(
-                post_content[index_start:index_end],
-                drow_height,
-                time_str=str(res.get("postTime", "")) if index_start == 0 else "",
-                title=res.get("postTitle", "") if index_start == 0 else "",
-            )
-            imgs.append(img)
+    # 分段逻辑
+    drow_height = 0
+    index_start = 0
+    imgs = []
+    total_elements = len(post_content)
+    # 计算后缀和，方便快速获取剩余高度
+    suffix_sum = [0] * (total_elements + 1)
+    for i in range(total_elements - 1, -1, -1):
+        suffix_sum[i] = suffix_sum[i + 1] + element_heights[i]
+
+    for index, temp in enumerate(post_content):
+        drow_height += element_heights[index]
+        # 如果当前累计高度超过 5000，并且不是最后一个元素，且剩余内容高度 > 1000 才切
+        if drow_height > 5000 and index < total_elements - 1:
+            remaining_h = suffix_sum[index + 1]  # 从下一个元素开始到末尾的总高度
+            if remaining_h > 1000:  # 阈值，可调
+                # 切分当前段 [index_start : index+1]
+                img = await ann_batch_card(
+                    post_content[index_start:index+1],
+                    drow_height,
+                    time_str=str(res.get("postTime", "")) if index_start == 0 else "",
+                    title=res.get("postTitle", "") if index_start == 0 else "",
+                )
+                imgs.append(img)
+                index_start = index + 1
+                drow_height = 0
+
+    # 处理最后一段
+    if index_start < total_elements:
+        last_height = sum(element_heights[index_start:])
+        img = await ann_batch_card(
+            post_content[index_start:],
+            last_height,
+            time_str=str(res.get("postTime", "")) if index_start == 0 else "",
+            title=res.get("postTitle", "") if index_start == 0 else "",
+        )
+        imgs.append(img)
 
     return imgs
 

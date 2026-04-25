@@ -25,6 +25,7 @@ from ..wutheringwaves_config import PREFIX
 
 WIDTH = 1080
 
+
 async def ann_list_card() -> bytes:
     ann_list = await waves_api.get_ann_list()
     if not ann_list:
@@ -327,7 +328,7 @@ async def ann_detail_card(ann_id: int, is_check_time=False, ev: Event | None = N
             if remaining_h > 1000:  # 阈值，可调
                 # 切分当前段 [index_start : index+1]
                 img = await ann_batch_card(
-                    post_content[index_start:index+1],
+                    post_content[index_start : index + 1],
                     drow_height,
                     time_str=str(res.get("postTime", "")) if index_start == 0 else "",
                     title=res.get("postTitle", "") if index_start == 0 else "",

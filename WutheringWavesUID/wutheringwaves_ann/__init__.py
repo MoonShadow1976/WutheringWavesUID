@@ -31,7 +31,7 @@ async def ann_(bot: Bot, ev: Event):
         raise Exception("公告ID不正确")
     ann_id_int = int(ann_id_str)
 
-    img = await ann_detail_card(ann_id_int)
+    img = await ann_detail_card(ann_id_int, ev=ev)
 
     if isinstance(img, str):
         return await bot.send(img)

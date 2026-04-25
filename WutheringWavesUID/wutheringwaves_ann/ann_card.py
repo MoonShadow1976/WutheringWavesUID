@@ -2,6 +2,7 @@ from datetime import datetime
 import time
 
 from gsuid_core.logger import logger
+from gsuid_core.models import Event
 from gsuid_core.utils.image.convert import convert_img
 from gsuid_core.utils.image.image_tools import (
     draw_text_by_line,
@@ -192,7 +193,7 @@ def wrap_text_smart(text, font, max_w):
     return lines or [""]
 
 
-async def ann_batch_card(post_content: list, drow_height: float, time_str: str = "", title: str = "") -> bytes:
+async def ann_batch_card(post_content: list, drow_height: float, time_str: str = "", title: str = "") -> list[bytes]:
     if title:
         drow_height += 50
     if time_str:
@@ -240,10 +241,17 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
     else:
         w, h = ww_font_26.getsize("囗")  # type: ignore
         padding = (w, h, w, h)
-    return await convert_img(ImageOps.expand(im, padding, "#f9f6f2"))
+
+    imgs = [im]
+    n = (im.height + 9000) // 10000  # 裁切过长图片
+    if n > 1:
+        part_height = im.height // n
+        imgs = [im.crop((0, i * part_height, im.width, (i + 1) * part_height if i != n - 1 else im.height)) for i in range(n)]
+
+    return [await convert_img(ImageOps.expand(im, padding, "#f9f6f2")) for im in imgs]
 
 
-async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | list[bytes]:
+async def ann_detail_card(ann_id: int, is_check_time=False, ev: Event | None = None) -> bytes | str | list[bytes]:
     ann_list = await waves_api.get_ann_list(True)
     if not ann_list:
         raise Exception("获取游戏公告失败,请检查接口是否正常")
@@ -272,6 +280,9 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
 
     if not post_content:
         return "未找到该公告"
+
+    if ev and ev.bot_id in ["qqgroup", "qq_official"]:
+        post_content = [post_content[0]]  # qq官bot只发封面
 
     # 预先计算每个元素的高度
     element_heights = []
@@ -321,7 +332,7 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
                     time_str=str(res.get("postTime", "")) if index_start == 0 else "",
                     title=res.get("postTitle", "") if index_start == 0 else "",
                 )
-                imgs.append(img)
+                imgs.extend(img)
                 index_start = index + 1
                 drow_height = 0
 
@@ -334,7 +345,7 @@ async def ann_detail_card(ann_id: int, is_check_time=False) -> bytes | str | lis
             time_str=str(res.get("postTime", "")) if index_start == 0 else "",
             title=res.get("postTitle", "") if index_start == 0 else "",
         )
-        imgs.append(img)
+        imgs.extend(img)
 
     return imgs
 

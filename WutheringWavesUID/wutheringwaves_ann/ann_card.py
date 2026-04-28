@@ -43,16 +43,28 @@ async def ann_list_card() -> bytes:
         data.sort(key=lambda x: x.get("publishTime", 0), reverse=True)
 
     # 配置
-    W, H_ITEM, H_SECTION, H_HEADER, H_FOOTER = 750, 100, 60, 80, 30
+    W, H_ITEM, H_SECTION, H_HEADER, H_FOOTER = 1200, 100, 60, 80, 30  # 加宽画布以适应三列
     CONFIGS = {1: ("活动", "#ff6b6b"), 2: ("资讯", "#45b7d1"), 3: ("公告", "#4ecdc4")}
+    PADDING = 20  # 左右边距
+    GAP = 20  # 列间距
+    COL_WIDTH = (W - 2 * PADDING - 2 * GAP) // 3  # 每列宽度
 
-    # 计算高度
-    total_items = sum(len(items) for items in grouped.values())
-    h = H_HEADER + 50 + len(grouped) * (H_SECTION + 30) + total_items * H_ITEM + H_FOOTER
+    # 计算每列内容高度（取最大值，保证三列底部对齐）
+    col_heights = []
+    for t in [1, 2, 3]:
+        items = grouped.get(t, [])
+        if not items:
+            # 空列展示一条“暂无公告”
+            height = H_SECTION + H_ITEM + 30
+        else:
+            height = H_SECTION + len(items) * H_ITEM + 30
+        col_heights.append(height)
+    max_col_height = max(col_heights)
+    total_h = H_HEADER + 50 + max_col_height + H_FOOTER
 
-    bg = Image.new("RGBA", (W, h), "#f8f9fa")
+    bg = Image.new("RGBA", (W, total_h), "#f8f9fa")
 
-    # 头部
+    # 绘制头部
     header = Image.new("RGBA", (W, H_HEADER), "#4a90e2")
     draw = ImageDraw.Draw(header)
     title = "库街区公告"
@@ -60,48 +72,63 @@ async def ann_list_card() -> bytes:
     draw.text(((W - tw) // 2, 25), title, "#ffffff", ww_font_26)
     bg = easy_alpha_composite(bg, header, (0, 0))
 
-    # 提示
+    # 提示行
+    draw = ImageDraw.Draw(bg)
     tip = f"查看详细内容，使用 {PREFIX}公告#ID 查看详情"
-    draw_text_by_line(bg, (30, H_HEADER + 10), tip, ww_font_18, "#8e8e93", W - 60)
+    tw = draw.textbbox((0, 0), tip, ww_font_18)[2]
+    draw.text(((W - tw) // 2, H_HEADER + 10), tip, "#8e8e93", ww_font_18)
 
-    y = H_HEADER + 50
+    y_start = H_HEADER + 50
 
-    # 各分类
-    for t in [1, 2, 3]:
-        if t not in grouped:
-            continue
-
+    # 绘制三列
+    for idx, t in enumerate([1, 2, 3]):
         name, color = CONFIGS[t]
-        data = grouped[t]
+        items = grouped.get(t, [])
+        x = PADDING + idx * (COL_WIDTH + GAP)
 
-        # 分类头
-        section = Image.new("RGBA", (W - 40, H_SECTION), "#ffffff")
-        title_bg = Image.new("RGBA", (W - 40, 40), color)
+        # 创建单列背景（白色圆角底）
+        col_bg = Image.new("RGBA", (COL_WIDTH, max_col_height), "#ffffff")
+        mask_col = Image.new("L", (COL_WIDTH, max_col_height), 0)
+        ImageDraw.Draw(mask_col).rounded_rectangle([0, 0, COL_WIDTH, max_col_height], 12, 255)
+        col_bg.putalpha(mask_col)
+
+        # 绘制分类头
+        section_bg = Image.new("RGBA", (COL_WIDTH, H_SECTION), "#ffffff")
+        title_bg = Image.new("RGBA", (COL_WIDTH, 40), color)
         title_draw = ImageDraw.Draw(title_bg)
         tw = title_draw.textbbox((0, 0), name, ww_font_24)[2]
-        title_draw.text(((W - 40 - tw) // 2, 8), name, "#ffffff", ww_font_24)
+        title_draw.text(((COL_WIDTH - tw) // 2, 8), name, "#ffffff", ww_font_24)
+        # 圆角矩形遮罩
+        mask_title = Image.new("L", (COL_WIDTH, 40), 0)
+        ImageDraw.Draw(mask_title).rounded_rectangle([0, 0, COL_WIDTH, 40], 12, 255)
+        title_bg.putalpha(mask_title)
+        easy_paste(section_bg, title_bg, (0, 10))
+        easy_paste(col_bg, section_bg, (0, 0))
 
-        mask = Image.new("L", (W - 40, 40), 0)
-        ImageDraw.Draw(mask).rounded_rectangle([0, 0, W - 40, 40], 12, 255)
-        title_bg.putalpha(mask)
-        easy_paste(section, title_bg, (0, 10))
+        y = H_SECTION
+        if not items:
+            # 空列显示“暂无公告”
+            empty_card = Image.new("RGBA", (COL_WIDTH, H_ITEM), "#ffffff")
+            draw_empty = ImageDraw.Draw(empty_card)
+            text = "暂无公告"
+            tw = draw_empty.textbbox((0, 0), text, ww_font_18)[2]
+            draw_empty.text(((COL_WIDTH - tw) // 2, H_ITEM // 2 - 9), text, "#999999", ww_font_18)
+            easy_paste(col_bg, empty_card, (0, y))
+        else:
+            for i, item in enumerate(items):
+                card = await create_item_card(COL_WIDTH, H_ITEM, item, color, i < len(items) - 1)
+                easy_paste(col_bg, card, (0, y))
+                y += H_ITEM
 
-        bg = easy_alpha_composite(bg, section, (20, y))
-        y += H_SECTION
-
-        # 条目
-        for i, item in enumerate(data):
-            card = await create_item_card(W, H_ITEM, item, color, i < len(data) - 1)
-            easy_paste(bg, card, (20, y))
-            y += H_ITEM
-        y += 30
+        # 将整个列合成到背景上
+        bg = easy_alpha_composite(bg, col_bg, (x, y_start))
 
     return await convert_img(add_footer(bg, 600, 20, color="black"))
 
 
 async def create_item_card(w, h, info, color, sep):
     """创建卡片"""
-    bg = Image.new("RGBA", (w - 40, h), "#ffffff")
+    bg = Image.new("RGBA", (w, h), "#ffffff")
     draw = ImageDraw.Draw(bg)
 
     # ID标签
@@ -113,12 +140,12 @@ async def create_item_card(w, h, info, color, sep):
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, id_w, 24], 12, 255)
     id_bg.putalpha(mask)
     ImageDraw.Draw(id_bg).text((id_w / 2, 12), id_str, "#ffffff", ww_font_18, anchor="mm")
-    easy_paste(bg, id_bg, (15, 15))
+    easy_paste(bg, id_bg, (15, 75))
 
     # 标题
     title = info.get("postTitle", "未知公告")
-    title_x = 25 + id_w
-    max_w = w - title_x - 200
+    title_x = id_w - 40
+    max_w = w - title_x - 150
     lines = wrap_text_smart(title, ww_font_20, max_w)
 
     for i, line in enumerate(lines[:2]):
@@ -128,7 +155,7 @@ async def create_item_card(w, h, info, color, sep):
 
     # 日期
     date = format_date(info.get("publishTime", 0))
-    draw_text_by_line(bg, (title_x, 75), date, ww_font_18, "#8e8e93", 100)
+    draw_text_by_line(bg, (id_w + 25, 75), date, ww_font_18, "#8e8e93", 150)
 
     # 图片
     await add_preview_image(bg, w, info, color)
@@ -136,7 +163,7 @@ async def create_item_card(w, h, info, color, sep):
     # 边框和分隔线
     if sep:
         draw.line([(20, h - 1), (w - 60, h - 1)], "#f0f0f0", 1)
-    draw.rectangle([0, 0, w - 41, h - 1], outline="#e5e5ea", width=1)
+    draw.rectangle([0, 0, w - 1, h - 1], outline="#e5e5ea", width=1)
 
     return bg
 
@@ -164,7 +191,7 @@ async def add_preview_image(bg, w, info, color):
             mask = Image.new("L", (100, 70), 0)
             ImageDraw.Draw(mask).rounded_rectangle([0, 0, 100, 70], 8, 255)
             img.putalpha(mask)
-            easy_paste(bg, img, (w - 160, 15))
+            easy_paste(bg, img, (w - 120, 15))
     except Exception as e:
         logger.debug(f"图片加载失败: {e}")
 

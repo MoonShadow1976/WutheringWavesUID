@@ -73,6 +73,7 @@ from .request_util import (
 class WavesApi:
     ssl_verify = True
     ann_map = {}
+    max_cache = 50  # 最大缓存数量
     ann_list_data = []
     event_type = {"2": "资讯", "3": "公告", "1": "活动"}
 
@@ -182,12 +183,12 @@ class WavesApi:
                 else:
                     await data.mark_cookie_invalid(uid, waves_user.cookie)
                 return ""
-        # else:
-        #     from .kuro_py_api import get_role_info_overseas
-        #     role_info = await get_role_info_overseas(waves_user.cookie, uid)
-        #     if not role_info:
-        #         await WavesUser.mark_cookie_invalid(uid, waves_user.cookie, "无效")
-        #         return ""
+        else:
+            from .kuro_py_api import get_role_info_overseas
+            role_info = await get_role_info_overseas(waves_user.cookie, uid)
+            if not role_info:
+                await WavesUser.mark_cookie_invalid(uid, waves_user.cookie, "无效")
+                return ""
 
         return waves_user.cookie
 
@@ -673,6 +674,9 @@ class WavesApi:
         res = await self._waves_request(ANN_CONTENT_URL, "POST", headers, data=data)
         if res.success:
             raw_data = res.model_dump()
+            if len(self.ann_map) >= self.max_cache:
+                oldest_key = next(iter(self.ann_map))
+                del self.ann_map[oldest_key]
             self.ann_map[post_id] = raw_data["data"]["postDetail"]
             return raw_data["data"]["postDetail"]
         return {}
@@ -684,7 +688,7 @@ class WavesApi:
 
         self.ann_list_data = []
         for _event in self.event_type.keys():
-            res = await self.get_ann_list_by_type(eventType=_event, pageSize=5)
+            res = await self.get_ann_list_by_type(eventType=_event, pageSize=10)
             if res.success:
                 raw_data = res.model_dump()
                 value = [{**x, "id": int(x["id"])} for x in raw_data["data"]["list"]]

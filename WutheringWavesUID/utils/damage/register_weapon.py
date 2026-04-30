@@ -2,6 +2,7 @@ from ..damage.abstract import WavesWeaponRegister, WeaponAbstract
 from .damage import DamageAttribute, calc_percent_expression
 from .utils import (
     CHAR_ATTR_CELESTIAL,
+    CHAR_ATTR_FREEZING,
     CHAR_ATTR_MOLTEN,
     CHAR_ATTR_SIERRA,
     Spectro_Frazzle_Role_Ids,
@@ -263,19 +264,19 @@ class Weapon_21010056(WeaponAbstract):
         func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
+        isSelf: bool = True,
     ):
         # 施放变奏技能或附加【异常效应】时才生效
         if not attr.is_env_abnormal() and attr.char_damage != cast_variation:
             return
-
-        if attr.char_damage == liberation_damage:
+        if attr.char_damage == liberation_damage and isSelf:
             title = self.get_title()
             dmg = f"{self.param(1)}*{self.param(2)}"
             msg = f"施放变奏技能或附加【异常效应】时，共鸣解放伤害加成提升{dmg}"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
-        # 千咲：满层时，附加异常效应时全属性伤害加成
-        if attr.role and attr.role.role.roleId == 1508:
+        # 三层满层时，附加异常效应时全属性伤害加成
+        if (attr.role and attr.role.role.roleId == 1508) or not isSelf:
             title = self.get_title()
             dmg2 = f"{self.param(4)}"
             msg = f"满层时附加【异常效应】，全属性伤害加成提升{dmg2}"
@@ -770,6 +771,40 @@ class Weapon_21020084(WeaponAbstract):
         msg = f"施放共鸣技能时，获得{self.param(0)}点共鸣能量，且攻击提升{dmg}"
         attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
         return True
+
+
+class Weapon_21020086(WeaponAbstract):
+    id = 21020086
+    type = 2
+    name = "灼霜"
+
+    # 自身附加霜渐效应时，冷凝伤害加深{1}，
+    # 且共鸣解放伤害无视目标{2}的防御，
+    # 且自身为登场角色时，一定范围内的目标受到霜渐效应伤害加深{3}
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if not attr.env_glacio_chafe:
+            return
+        if attr.char_attr == CHAR_ATTR_FREEZING:
+            title = self.get_title()
+            dmg = f"{self.param(1)}"
+            msg = f"自身附加霜渐效应时，冷凝伤害加深{dmg}"
+            attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+        if attr.char_damage == liberation_damage:
+            dmg = f"{self.param(2)}"
+            msg = f"自身附加霜渐效应时，共鸣解放伤害无视目标{dmg}的防御"
+            attr.add_defense_ignore(calc_percent_expression(dmg), title, msg)
+
+        if attr.env_glacio_chafe_deepen:
+            title = self.get_title()
+            dmg = f"{self.param(3)}"
+            msg = f"自身为登场角色附加霜渐效应时，目标受到霜渐效应伤害加深{dmg}"
+            attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21020094(WeaponAbstract):
@@ -1900,6 +1935,34 @@ class Weapon_21050074(WeaponAbstract):
         title = self.get_title()
         msg = f"施放共鸣解放时，自身攻击提升{dmg}"
         attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21050076(WeaponAbstract):
+    id = 21050076
+    type = 5
+    name = "赝作的矮星"
+
+    # 附加聚爆效应或集谐·偏移时，共鸣解放伤害加成提升{1}
+    # 该效果生效期间，队伍中的角色附加聚爆效应或集谐·偏移时，该角色攻击提升{3}
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+        isSelf: bool = True,
+    ):
+        if not attr.env_fusion_burst and not attr.env_tune_strain:
+            return
+        title = self.get_title()
+        if attr.char_damage == liberation_damage and isSelf:
+            dmg = f"{self.param(1)}"
+            msg = f"附加聚爆效应或集谐·偏移时，共鸣解放伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+        if attr.char_template == temp_atk:
+            dmg = f"{self.param(3)}"
+            msg = f"附加聚爆效应或集谐·偏移时，该角色攻击提升{dmg}"
+            attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21050084(WeaponAbstract):

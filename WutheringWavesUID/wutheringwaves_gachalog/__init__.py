@@ -85,6 +85,9 @@ async def send_gacha_log_card_info(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)  # 影响后面总排行上传
     if not uid:
         return await bot.send(ERROR_CODE[WAVES_CODE_103])
+    # 自动关联群组
+    if ev.group_id:
+        await WavesBind.insert_waves_uid(user_id=ev.user_id, bot_id=ev.bot_id, uid=uid, group_id=ev.group_id)
 
     im = await draw_card(uid, ev)
     await bot.send(im)

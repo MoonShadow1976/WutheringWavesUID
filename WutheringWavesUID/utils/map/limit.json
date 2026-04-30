@@ -1278,6 +1278,20 @@
             "name": "西格莉卡",
             "weaponId": 21040066,
             "sonataLibId": 29
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1108,
+            "name": "绯雪",
+            "weaponId": 21020086,
+            "sonataLibId": 7
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1211,
+            "name": "达妮娅",
+            "weaponId": 21050076,
+            "sonataLibId": 28
         }
     ]
 }

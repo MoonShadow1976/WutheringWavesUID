@@ -114,6 +114,25 @@ class Char_1107(CharAbstract):
     starLevel = 5
 
 
+class Char_1108(CharAbstract):
+    id = 1108
+    name = "绯雪"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 角色为敌人添加【霜渐效应】时，冷凝伤害提升10%，持续15秒。自身获得【落雪】效果
+        # 拥有【落雪】效果时：
+        # \n·角色造成共鸣解放伤害时，将清除【落雪】效果，使自身暴击提升25%，持续6秒。
+        # \n·角色施放延奏技能时，将清除【落雪】效果，使下一个变奏技能登场的角色冷凝伤害提升25%
+        return
+
+
 class Char_1202(CharAbstract):
     id = 1202
     name = "炽霞"
@@ -391,6 +410,31 @@ class Char_1210(CharAbstract):
             title = "爱弥斯-四链"
             msg = "队伍中的角色全属性伤害加成提升20%"
             attr.add_dmg_bonus(0.2, title, msg)
+
+
+class Char_1211(CharAbstract):
+    id = 1211
+    name = "达妮娅"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        title = "达妮娅-延奏技能666"
+        msg = "队伍中的角色全伤害加深25%"
+        attr.add_dmg_deepen(0.25, title, msg)
+
+        # 赝作的矮星
+        weapon_clz = WavesWeaponRegister.find_class(21050076)
+        if weapon_clz:
+            w = weapon_clz(21050076, 90, 6, resonLevel)
+            method = getattr(w, "do_action", None)
+            if callable(method):
+                method(attr, isGroup, isSelf=False)
 
 
 class Char_1301(CharAbstract):
@@ -947,7 +991,7 @@ class Char_1508(CharAbstract):
             w = weapon_clz(21010056, 90, 6, resonLevel)
             method = getattr(w, "do_action", None)
             if callable(method):
-                method([cast_variation], attr, isGroup)
+                method([cast_variation], attr, isGroup, isSelf=False)
 
 
 class Char_1509(CharAbstract):

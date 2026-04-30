@@ -1074,6 +1074,30 @@ class Echo_6000197(EchoAbstract):
     name = "影烁者"
 
 
+class Echo_6000198(EchoAbstract):
+    id = 6000198
+    name = "迷胧幻蛾"
+
+    # 使用该声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色攻击提升12.00%，持续15秒
+
+
+class Echo_6000199(EchoAbstract):
+    id = 6000199
+    name = "共鸣回响·鸣式·虚造神型"
+
+    # 在首位装配该声骸技能时，自身冷凝伤害加成提升12.00%，共鸣解放伤害加成提升12.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"冷凝伤害加成": "12%", "共鸣解放伤害加成": "12%"}
+
+
+class Echo_6000200(EchoAbstract):
+    id = 6000200
+    name = "共鸣回响·达妮娅"
+
+    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色热熔伤害加成提升12.00%，持续15秒。
+
+
 def register_echo():
     # 自动注册所有以 Echo_ 开头的类
     for name, obj in globals().items():

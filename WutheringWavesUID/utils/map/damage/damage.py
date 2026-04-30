@@ -34,6 +34,8 @@ from ...damage.utils import (
     SONATA_TIDEBREAKING,
     SONATA_TRAILBLAZE,
     SONATA_TRUENAME,
+    SONATA_SNOWFALL,
+    SONATA_DREAMCLIP,
     SONATA_VOID,
     SONATA_WELKIN,
     Havoc_Bane_Role_Ids,
@@ -413,3 +415,28 @@ def phase_damage(
             if attr.char_attr == CHAR_ATTR_SIERRA:
                 msg = "角色造成声骸技能伤害时，自身气动伤害提升15%"
                 attr.add_dmg_bonus(0.15, title, msg)
+
+        # 雪落无声之愿
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_SNOWFALL):
+            # 角色为敌人添加【霜渐效应】时，冷凝伤害提升10%，持续15秒。自身获得【落雪】效果
+            # 拥有【落雪】效果时：
+            # \n·角色造成共鸣解放伤害时，将清除【落雪】效果，使自身暴击提升25%，持续6秒。
+            # \n·角色施放延奏技能时，将清除【落雪】效果，使下一个变奏技能登场的角色冷凝伤害提升25%
+            if not attr.env_glacio_chafe:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            if attr.char_attr == CHAR_ATTR_FREEZING:
+                msg = "添加【霜渐效应】时，冷凝伤害提升10%,自身获得【落雪】效果"
+                attr.add_dmg_bonus(0.1, title, msg)
+            if attr.char_damage == liberation_damage:
+                msg = "拥有【落雪】效果时,造成共鸣解放伤害时，使自身暴击提升25%"
+                attr.add_crit_rate(0.25, title, msg)
+
+        # 剪心辑梦之影
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_DREAMCLIP):
+            # 角色为敌人添加【震谐·偏移】或【集谐·偏移】时，队伍中角色谐度破坏增幅提升20点
+            if not attr.is_env_shifting():
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "添加【偏移】时，队伍中角色谐度破坏增幅提升20点"
+            attr.add_tune_break_boost(20, title, msg)

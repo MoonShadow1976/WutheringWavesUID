@@ -2560,6 +2560,439 @@
   {
     "chainList": [
       {
+        "description": "<color=Highlight>普攻·预求身</color>、<color=Highlight>重击·预求身</color>、<color=Highlight>空中攻击·预求身</color>、<color=Highlight>闪避反击·预求身</color>的伤害倍率提升120%。\n\n<color=Highlight>普攻·预求身第3段</color>的攻击范围提升，且会将攻击范围内的敌人向中心进行牵引。施放<color=Highlight>普攻·预求身第4、5段</color>期间免疫打断。\n\n施放<color=Highlight>预求我身·见心</color>时，使下一次<color=Highlight>普攻·预求身第1段</color>和下一次<color=Highlight>普攻·预求身第2段</color>命中目标时获得强化，为目标附加1次<color=Highlight>【霜渐效应】</color>。",
+        "iconUrl": "",
+        "name": "不见春",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>普攻·居合</color>的伤害倍率提升125%。\n\n固有技能<color=Highlight>无常世</color>替换为以下效果：\n绯雪每次脱离战斗状态或恢复意识后，处于非战斗状态达到4秒时，回复3点<color=Highlight>【锻雪·归刃】</color>。\n\n绯雪每次脱离战斗状态或恢复意识后，处于非战斗状态达到4秒时，触发一次以下效果：\n·处于<color=Highlight>预求身</color>状态时，<color=Highlight>【武霜·居合】</color>回复3点。\n·重置2次<color=Highlight>霜罚·白玉切</color>的冷却时间。\n·后续2次施放<color=Highlight>霜罚·白玉切</color>或<color=Highlight>霜罚·落华</color>期间，额外回复50点<color=Highlight>【寒意】</color>。",
+        "iconUrl": "",
+        "name": "于无声处冰冷燃烧",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "固有技能<color=Highlight>细雪</color>获得额外效果：当角色编入队伍或绯雪恢复意识，2秒后绯雪获得1层<color=Highlight>【雪锈】</color>，最多通过该方式获取1层<color=Highlight>【雪锈】</color>。\n\n<color=Highlight>重击·寒簇·常世身</color>和<color=Highlight>重击·枯霜·预求身</color>的伤害倍率提升160%。\n\n持有2层<color=Highlight>【雪锈】</color>时，自身为队伍中登场角色时，每次自身附加<color=Highlight>【霜渐效应】</color>时，额外附加的异常倍率提升488%。",
+        "iconUrl": "",
+        "name": "我身无我亦无穷",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "施放<color=Highlight>共鸣技能·常世身</color>、<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>时，使附近队伍中所有角色造成的伤害提升20%，持续30秒。\n\n每次施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>时，回复自身生命上限18%的生命值。",
+        "iconUrl": "",
+        "name": "有如苇草浮沉",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣技能·常世身</color>、<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>的伤害倍率提升80%。",
+        "iconUrl": "",
+        "name": "千祈万愿尽求我身",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>预求我身·见心</color>、<color=Highlight>预求我身·归刃</color>暴击伤害提升500%。\n\n持有2层<color=Highlight>【雪锈】</color>时，“自身为队伍中登场角色时，每次自身附加<color=Highlight>【霜渐效应】</color>时，额外附加异常倍率”改为“自身为队伍中登场角色时，每次队伍中的角色附加<color=Highlight>【霜渐效应】</color>时，额外附加异常倍率”。\n持有2层<color=Highlight>【雪锈】</color>时，绯雪的暴击伤害提升40%。\n持有3层<color=Highlight>【雪锈】</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜冻效应】</color>的最终伤害提升25%。",
+        "iconUrl": "",
+        "name": "纵使前路永夜无终",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凌冽决断之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "异构武装",
+            "phantomId": 6000083,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凌冽决断之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "毒冠贵族",
+            "phantomId": 6000076,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凌冽决断之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "凝水贵族",
+            "phantomId": 6000078,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凌冽决断之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "浮灵偶·蕾弗",
+            "phantomId": 6000065,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "凌冽决断之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "浮灵偶·莱特",
+            "phantomId": 6000066,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1108,
+      "roleName": "绯雪",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 2,
+      "weaponTypeName": "迅刀",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·常世身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>。\n<color=Highlight>普攻·常世身第3段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>重击·寒簇·常世身</color>\n<color=Highlight>【心念】</color>满300点时，解锁<color=Highlight>重击·寒簇·常世身</color>。\n长按<color=Highlight>普攻</color>，消耗耐力施放，期间免疫伤害和受击。绯雪依次射出三支箭矢，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n射出最后一支箭矢时，消耗300点<color=Highlight>【心念】</color>，解锁<color=Highlight>预求我身·见心</color>，该箭矢命中目标时，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>空中攻击·常世身</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>闪避反击·常世身</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n\n<color=Title>普攻·预求身</color>\n<color=Highlight>预求身</color>期间，<color=Highlight>普攻·常世身</color>替换为<color=Highlight>普攻·预求身</color>。\n进行最多5段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n<color=Highlight>普攻·预求身第3、4、5段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>重击·预求身</color>\n<color=Highlight>预求身</color>期间，按住<color=Highlight>普攻</color>，将消耗耐力，进入<color=Highlight>【沉息】</color>，<color=Highlight>【沉息】</color>期间持续消耗耐力。松开<color=Highlight>普攻</color>或耐力耗尽时，绯雪退出<color=Highlight>【沉息】</color>，挥刃向前突进，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第2段</color>。\n若挥刃向前突进的一定时间内受到敌方目标攻击，免疫此次伤害并停滞周围敌人，随后一定时间内免疫打断且受到的伤害降低100%，一定时间内短按<color=Highlight>普攻</color>改为衔接<color=Highlight>普攻·预求身第4段</color>。\n\n<color=Title>重击·枯霜·预求身</color>\n<color=Highlight>【淬寒·枯霜】</color>满时，<color=Highlight>重击·预求身</color>替换为<color=Highlight>重击·枯霜·预求身</color>。\n长按<color=Highlight>普攻</color>，消耗耐力，施放期间消耗3层<color=Highlight>【淬寒·枯霜】</color>，获得1点<color=Highlight>【锻雪·归刃】</color>，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n<color=Highlight>重击·枯霜·预求身</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n绯雪处于空中时，若施放该技能，绯雪会先回到地面。\n\n<color=Title>空中攻击·预求身</color>\n<color=Highlight>预求身</color>期间，<color=Highlight>空中攻击·常世身</color>替换为<color=Highlight>空中攻击·预求身</color>。\n消耗耐力，在空中进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害，第3段为空中下落攻击。\n<color=Highlight>空中攻击·预求身第2、3段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n施放<color=Highlight>空中攻击·预求身</color>一定时间后，在空中施放除<color=Highlight>普攻·居合</color>以外的技能时，<color=Highlight>空中攻击·预求身</color>的连击段数不会被重置。\n在空中时，长按<color=Highlight>普攻</color>，消耗耐力施放空中下落攻击。\n\n<color=Title>闪避反击·预求身</color>\n<color=Highlight>预求身</color>期间，<color=Highlight>闪避反击·常世身</color>替换为<color=Highlight>闪避反击·预求身</color>。\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "灼樱刀术",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·常世身</color>\n造成<color=Ice>冷凝伤害</color>。\n施放时，使下一次<color=Highlight>普攻·常世身第3段</color>获得强化：施放时额外回复100点<color=Highlight>【心念】</color>，若切换至其他角色则失去该效果。\n施放该技能后在一定时间内短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n\n<color=Highlight>预求身</color>期间，<color=Highlight>共鸣技能·常世身</color>替换为<color=Highlight>霜罚·白玉切</color>和<color=Highlight>霜罚·落华</color>：\n\n<color=Title>霜罚·白玉切</color>\n处于地面时，短按<color=Highlight>共鸣技能</color>，牵引周围的目标，造成<color=Ice>冷凝伤害</color>，并移除命中目标的<color=Highlight>【霜结】</color>状态。\n该技能与<color=Highlight>霜罚·落华</color>共享冷却时间。\n\n<color=Title>霜罚·落华</color>\n处于空中时，短按<color=Highlight>共鸣技能</color>，牵引周围的目标，造成<color=Ice>冷凝伤害</color>，并移除命中目标的<color=Highlight>【霜结】</color>状态。\n该技能与<color=Highlight>霜罚·白玉切</color>共享冷却时间。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "霜罚",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>预求我身·见心</color>\n施放<color=Highlight>重击·寒簇·常世身</color>后，解锁<color=Highlight>预求我身·见心</color>。\n<color=Highlight>常世身</color>期间，短按<color=Highlight>共鸣解放</color>施放。造成<color=Ice>冷凝伤害</color>。施放时获得3点<color=Highlight>【武霜·居合】</color>，清除300点<color=Highlight>【心念】</color>和<color=Highlight>【寒意】</color>，随后进入<color=Highlight>预求身</color>并回复50点<color=Highlight>【寒意】</color>。\n<color=Highlight>预求我身·见心</color>会为命中的目标附加4次<color=Highlight>【霜渐效应】</color>。\n施放<color=Highlight>预求我身·见心</color>不消耗共鸣能量。\n\n<color=Title>预求我身·归刃</color>\n<color=Highlight>预求身</color>期间，可通过以下两种方式施放<color=Highlight>预求我身·归刃</color>：\n·短按<color=Highlight>共鸣解放</color>松开时施放<color=Highlight>预求我身·归刃</color>。若当前拥有3点<color=Highlight>【锻雪·归刃】</color>，则消耗所有<color=Highlight>【锻雪·归刃】</color>，否则不消耗。\n·按住<color=Highlight>共鸣解放</color>，绯雪进入蓄力状态，每隔一定时间消耗1点<color=Highlight>【锻雪·归刃】</color>，松开<color=Highlight>共鸣解放</color>时，施放<color=Highlight>预求我身·归刃</color>。若松开<color=Highlight>共鸣解放</color>时未消耗<color=Highlight>【锻雪·归刃】</color>，则将会继续蓄力一定时间后自动施放。<color=Highlight>【锻雪·归刃】</color>归零后，会自动施放<color=Highlight>预求我身·归刃</color>。\n绯雪造成<color=Ice>冷凝伤害</color>，每消耗1点<color=Highlight>【锻雪·归刃】</color>会使该次攻击的伤害倍率增加。\n施放时清除300点<color=Highlight>【心念】</color>和<color=Highlight>【寒意】</color>，并退出<color=Highlight>预求身</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "预求我身",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n如果处于<color=Highlight>常世身</color>，施放时回复200点<color=Highlight>【心念】</color>，且施放该技能后在一定时间内短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n如果处于<color=Highlight>预求身</color>，施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "霜锋",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>霜冻效应</color>\n·绯雪处于编队时，附近队伍的角色对目标附加<color=Highlight>【霜渐效应】</color>时，改为附加<color=Highlight>【霜冻效应】</color>。<color=Highlight>【霜冻效应】</color>被附加在目标上时，会按照目标当前<color=Highlight>【霜冻效应】</color>上限层数结算一次<color=Highlight>【霜冻效应】</color>伤害，且目标被<color=Highlight>冰冻</color>期间，可以继续为目标附加<color=Highlight>【霜冻效应】</color>。<color=Highlight>【霜冻效应】</color>可同时视为<color=Highlight>【霜渐效应】</color>。<color=Highlight>【霜冻效应】</color>伤害可同时视为<color=Highlight>【霜渐效应】</color>伤害。\n·<color=Highlight>预求我身·见心</color>和<color=Highlight>普攻·居合</color>命中目标时，若目标<color=Highlight>【霜冻效应】</color>层数不低于10层，会消耗目标10层<color=Highlight>【霜冻效应】</color>，并造成一次<color=Highlight>【霜结】</color>。\n·绯雪进入编队时，会清空所有目标的<color=Highlight>【霜渐效应】</color>层数。绯雪离开编队时，如果编队中没有其他能将<color=Highlight>【霜渐效应】</color>转变为<color=Highlight>【霜冻效应】</color>的角色，会清空目标的<color=Highlight>【霜冻效应】</color>层数。\n\n<color=Title>常世身</color>\n绯雪初始处于<color=Highlight>常世身</color>，<color=Highlight>常世身</color>期间，可通过特定技能回复<color=Highlight>【心念】</color>。\n\n<color=Title>预求身</color>\n绯雪施放<color=Highlight>预求我身·见心</color>时，进入<color=Highlight>预求身</color>。<color=Highlight>预求身</color>期间，解锁全新的战斗形态，可通过特定技能回复<color=Highlight>【寒意】</color>。\n\n<color=Title>居合架势</color>\n若<color=Highlight>【寒意】</color>不低于100点时进行以下操作，绯雪会消耗耐力向后瞬身，进入<color=Highlight>【居合架势】</color>：\n·施放除<color=Highlight>重击·枯霜·预求身</color>以外的<color=Highlight>常态攻击·预求身</color>、<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>、<color=Highlight>普攻·居合</color>、<color=Highlight>变奏技能·霜锋</color>后短按<color=Highlight>闪避</color>。\n·施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>后一定时间内长按<color=Highlight>共鸣技能</color>。\n进行上述操作时，若按住向前方向，且技能目标在一定范围内，绯雪会消耗耐力瞬身至敌人身后，进入<color=Highlight>【居合架势】</color>。\n绯雪在空中时可以进入<color=Highlight>【居合架势】</color>。进入<color=Highlight>【居合架势】</color>时，重置空中闪避次数。<color=Highlight>【居合架势】</color>期间，若切换至其他角色则提前退出。\n\n<color=Title>普攻·居合</color>\n施放<color=Highlight>【居合架势】</color>后一定时间内，短按<color=Highlight>普攻</color>可以消耗100点<color=Highlight>【寒意】</color>，施放<color=Highlight>普攻·居合</color>，造成<color=Ice>冷凝伤害</color>，此次伤害为共鸣解放伤害。\n若施放后<color=Highlight>【寒意】</color>仍不低于100点，一定时间内可以短按<color=Highlight>普攻</color>再次施放<color=Highlight>普攻·居合</color>。\n若施放<color=Highlight>普攻·居合</color>的一定时间内受到敌方目标攻击，免疫此次伤害，随后一定时间内免疫打断且受到的伤害降低100%。\n每次施放<color=Highlight>普攻·居合</color>期间，若拥有<color=Highlight>【武霜·居合】</color>，绯雪会消耗1点<color=Highlight>【武霜·居合】</color>，使本次<color=Highlight>普攻·居合</color>为命中的目标附加3次<color=Highlight>【霜渐效应】</color>，同时绯雪获得1层<color=Highlight>【淬寒·枯霜】</color>。\n\n<color=Title>心念</color>\n<color=Highlight>【心念】</color>上限300点。\n<color=Highlight>常世身</color>期间，可通过以下方式回复<color=Highlight>【心念】</color>：\n·施放<color=Highlight>普攻·常世身第3段</color>时，回复100点<color=Highlight>【心念】</color>。\n·施放<color=Highlight>变奏技能·霜锋</color>时，回复200点<color=Highlight>【心念】</color>。\n·施放<color=Highlight>共鸣技能·常世身</color>时，使下一次<color=Highlight>普攻·常世身第3段</color>获得强化：施放时额外回复100点<color=Highlight>【心念】</color>，若切换至其他角色则失去该效果。\n\n<color=Title>寒意</color>\n<color=Highlight>【寒意】</color>上限300点。\n施放<color=Highlight>霜罚·白玉切</color>、<color=Highlight>霜罚·落华</color>期间，或是除<color=Highlight>重击·枯霜·预求身</color>以外的<color=Highlight>常态攻击·预求身</color>命中目标时，回复<color=Highlight>【寒意】</color>。\n\n<color=Title>武霜·居合</color>\n<color=Highlight>【武霜·居合】</color>上限3点。\n施放<color=Highlight>预求我身·见心</color>时获得3点<color=Highlight>【武霜·居合】</color>。\n\n<color=Title>淬寒·枯霜</color>\n<color=Highlight>【淬寒·枯霜】</color>上限3层。\n每次通过施放<color=Highlight>普攻·居合</color>消耗<color=Highlight>【武霜·居合】</color>时，获得1层<color=Highlight>【淬寒·枯霜】</color>。\n\n<color=Title>锻雪·归刃</color>\n<color=Highlight>【锻雪·归刃】</color>上限3点。\n每次施放<color=Highlight>重击·枯霜·预求身</color>期间，获得1点<color=Highlight>【锻雪·归刃】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "万世霜天",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "附近队伍中除绯雪以外的角色对拥有<color=Highlight>【霜渐效应】</color>的敌人造成的冷凝伤害加深20%，持续20秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "挽雪照身",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。\n\n<color=Highlight>常世身</color>期间，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·常世身第3段</color>。\n<color=Highlight>预求身</color>期间，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·预求身第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·迅刀",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。自身附加霜渐效应后，冷凝伤害加深56%，且共鸣解放伤害无视目标20%的防御，且自身为队伍中登场角色时，一定范围内的目标受到霜渐效应伤害加深40%，持续6秒，每0.1秒可触发1次。同名效果之间取最高值。",
+        "weaponIcon": "",
+        "weaponId": 21020086,
+        "weaponName": "灼霜",
+        "weaponStarLevel": 5,
+        "weaponType": 2
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "施放共鸣技能<color=Highlight>轰轰</color>时，必定暴击。",
         "iconUrl": "",
         "name": "剧院的英雄戏",
@@ -6451,6 +6884,439 @@
         "weaponName": "永远的启明星",
         "weaponStarLevel": 5,
         "weaponType": 2
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "暴击伤害提升30%。\n\n施放共鸣技能<color=Highlight>拟态泡泡·布景之形</color>、共鸣技能<color=Highlight>放逐·幻灭之形</color>、<color=Highlight>普攻·幻灭之形第3段</color>、<color=Highlight>普攻·幻灭之形第4段</color>、<color=Highlight>空中攻击·幻灭之形第3段</color>、<color=Highlight>空中攻击·幻灭之形第4段</color>期间，免疫打断。\n\n处于<color=Highlight>布景之形</color>进入战斗时，获得<color=Highlight>熵变强化·布景之形</color>，持续30秒。\n处于<color=Highlight>幻灭之形</color>进入战斗时，获得<color=Highlight>熵变强化·幻灭之形</color>，持续12秒。",
+        "iconUrl": "",
+        "name": "天空一无所有",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "处于<color=Highlight>共鸣模态·聚爆</color>，队伍中的角色施加<color=Highlight>【聚爆效应】</color>后，该角色热熔伤害加成提升50%，持续15秒。登场角色附近的敌人触发<color=Highlight>【聚爆效应】</color>引爆后，达妮娅获得1层<color=Highlight>简并虚质</color>，持续15秒，上限10层。每层<color=Highlight>简并虚质</color>使达妮娅造成伤害无视目标1%热熔伤害抗性。\n达妮娅切换模态时，该效果提前结束。\n\n处于<color=Highlight>共鸣模态·集谐</color>，<color=Highlight>共鸣回路</color>效果提升：队伍中的角色施加<color=Highlight>【集谐·偏移】</color>后，该角色谐度破坏增幅提升20点，持续15秒，目标将积累偏谐值上限100%的<color=Highlight>【偏谐值】</color>，积累<color=Highlight>【偏谐值】</color>效果对同一目标300秒内只能触发1次。\n达妮娅切换模态时，该效果提前结束。\n\n共鸣技能<color=Highlight>放逐·幻灭之形</color>伤害倍率提升40%。",
+        "iconUrl": "",
+        "name": "为何给我安慰",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>伤害倍率提升80%。\n\n<color=Highlight>【黯核】</color>上限提升至5枚，处于<color=Highlight>熵变强化</color>时，<color=Highlight>【黯核】</color>的获取间隔缩短至6秒。\n<color=Highlight>熵变强化·布景之形</color>效果获得强化：每秒获得<color=Highlight>【虚质粒子】</color>提升至4点。\n<color=Highlight>熵变强化·幻灭之形</color>效果获得强化：施放共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>时，额外回复30点协奏能量。\n\n固有技能<color=Highlight>伪物弥留</color>效果强化：\n进入战斗时，<color=Highlight>【黯核】</color>与<color=Highlight>【虚质粒子】</color>回复至上限。该效果每12秒可触发1次。\n\n<color=Highlight>【黯核】</color>数量达到上限时，施放<color=Highlight>普攻·布景之形第4段</color>、共鸣技能<color=Highlight>拟态泡泡·布景之形</color>消耗所有<color=Highlight>【黯核】</color>，使本次技能伤害倍率增加1200%，本次伤害为<color=Highlight>共鸣解放伤害</color>。",
+        "iconUrl": "",
+        "name": "黑夜与风中奔驰着赤杨",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>蚀域</color>攻击间隔缩短至3秒。",
+        "iconUrl": "",
+        "name": "从远方，回到远方",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "共鸣解放<color=Highlight>帷幕终景·布景之形</color>造成的伤害提升100%。",
+        "iconUrl": "",
+        "name": "若能以谎言缝补心脏",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "处于<color=Highlight>熵变强化</color>时，攻击提升60%，热熔伤害加成提升60%。\n\n处于<color=Highlight>共鸣模态·聚爆</color>时，<color=Highlight>蚀域</color>对目标造成伤害后，根据<color=Highlight>【聚爆效应】</color>层数上限引爆<color=Highlight>【聚爆效应】</color>，本次引爆对<color=Highlight>【聚爆效应】</color>主目标的伤害倍率提升200%，且不移除<color=Highlight>【聚爆效应】</color>层数。同一目标最多可受到1次该效果，目标受到共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>的伤害后，重置该次数，重置效果对同一目标2秒内只能触发1次。\n\n处于<color=Highlight>共鸣模态·集谐</color>时，队伍中的角色对拥有<color=Highlight>【集谐·偏移】</color>的<color=Highlight>【失谐】</color>目标造成<color=Highlight>谐度破坏伤害</color>时，将额外附加1层<color=Highlight>【集谐·干涉】</color>，该效果对同一目标3秒内只能触发1次。",
+        "iconUrl": "",
+        "name": "祝愿你于静默中，得到太阳",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "长路启航之星",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "辛吉勒姆",
+            "phantomId": 6000191,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "长路启航之星",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "冠顶械隼",
+            "phantomId": 6000193,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "长路启航之星",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "热熔伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "格洛犸图",
+            "phantomId": 6000195,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "长路启航之星",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "冰盈舞者",
+            "phantomId": 6000196,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "长路启航之星",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "影烁者",
+            "phantomId": 6000197,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 2,
+      "attributeName": "热熔",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1211,
+      "roleName": "达妮娅",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 5,
+      "weaponTypeName": "音感仪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·布景之形</color>\n进行最多4段的连续攻击，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>普攻·幻灭之形</color>\n进行最多4段的连续攻击，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>重击·布景之形</color>\n消耗耐力，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>重击·幻灭之形</color>\n消耗耐力，牵引周围的目标，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>空中攻击·布景之形</color>\n消耗耐力进行空中下落攻击，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>空中攻击·幻灭之形</color>\n消耗耐力，在空中进行最多4段的连续攻击，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>空中重击·幻灭之形</color>\n在空中长按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>闪避反击·布景之形</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·布景之形第4段</color>。\n\n<color=Title>闪避反击·幻灭之形</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n可在空中施放。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·幻灭之形第4段</color>/<color=Highlight>空中攻击·幻灭之形第4段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "织梦的飨宴",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>拟态泡泡·布景之形</color>\n牵引周围的目标，造成<color=Fire>热熔伤害</color>。\n\n<color=Title>轻唤·幻灭之形</color>\n牵引周围的目标，造成<color=Fire>热熔伤害</color>。\n该技能与<color=Highlight>放逐·幻灭之形</color>共享冷却时间。\n可在空中施放。\n\n<color=Title>放逐·幻灭之形</color>\n拥有<color=Highlight>【黯核】</color>时，<color=Highlight>轻唤·幻灭之形</color>替换为<color=Highlight>放逐·幻灭之形</color>。\n施放<color=Highlight>放逐·幻灭之形第1段</color>，牵引周围目标，造成<color=Fire>热熔伤害</color>，施放后一定时间内短按<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>，可施放<color=Highlight>放逐·幻灭之形第2段</color>。\n<color=Highlight>放逐·幻灭之形第2段</color>将消耗所有<color=Highlight>【黯核】</color>，造成<color=Fire>热熔伤害</color>，本次攻击每消耗1枚<color=Highlight>【黯核】</color>，伤害倍率提升150%。\n该技能伤害为共鸣解放伤害。\n该技能与<color=Highlight>轻唤·幻灭之形</color>共享冷却时间。\n可在空中施放。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "泡沫蜜饵",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>帷幕终景·布景之形</color>\n造成<color=Fire>热熔伤害</color>。\n施放该技能时，获得<color=Highlight>熵变强化·幻灭之形</color>，持续12秒。随后切换至<color=Highlight>幻灭之形</color>。\n\n<color=Title>帷幕终景·幻灭之形</color>\n<color=Highlight>【共形能量】</color>满时，可消耗所有<color=Highlight>【共形能量】</color>与<color=Highlight>【虚质粒子】</color>施放该技能。\n造成<color=Fire>热熔伤害</color>。\n施放该技能后，获得<color=Highlight>熵变强化·布景之形</color>，持续30秒。随后切换至<color=Highlight>布景之形</color>。\n可在空中施放。\n\n<color=Title>熵变强化·幻灭之形</color>\n攻击提升30%。\n获得该效果时，移除<color=Highlight>熵变强化·布景之形</color>。\n\n<color=Title>熵变强化·布景之形</color>\n每秒获得1点<color=Highlight>【虚质粒子】</color>。\n获得该效果时，移除<color=Highlight>熵变强化·幻灭之形</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "帷幕终景",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>久疏问候！</color>\n处于<color=Highlight>布景之形</color>时可施放该技能，造成<color=Fire>热熔伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·布景之形第4段</color>。\n\n<color=Title>轻叩门扉</color>\n处于<color=Highlight>幻灭之形</color>时可施放该技能，造成<color=Fire>热熔伤害</color>。\n施放该技能时，获得<color=Highlight>熵变强化·幻灭之形</color>，持续12秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谨此致访",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>蚀域</color>\n施放共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>后，生成<color=Highlight>蚀域</color>，持续30秒。自身生成的<color=Highlight>蚀域</color>同时最多存在一个。\n<color=Highlight>蚀域</color>每4秒发动1次攻击，牵引周围的目标，对目标造成<color=Fire>热熔伤害</color>。该技能伤害为<color=Highlight>共鸣解放伤害</color>。\n\n<color=Title>【虚质粒子】</color>\n处于<color=Highlight>幻灭之形</color>且<color=Highlight>【虚质粒子】</color>大于0时，<color=Highlight>常态攻击</color>命中目标，消耗<color=Highlight>【虚质粒子】</color>，使本次技能获得以下效果：\n·伤害为<color=Highlight>共鸣解放伤害</color>，且伤害倍率提升50%。\n·<color=Highlight>【共形能量】</color>获取效率提升100%。\n\n<color=Title>共鸣模态·聚爆</color>\n处于<color=Highlight>共鸣模态·聚爆</color>时，获得以下效果：\n·以下技能造成伤害时，可为目标附加2次<color=Highlight>【聚爆效应】</color>，同一技能对同一目标2秒内只能触发1次。\n变奏技能<color=Highlight>久疏问候！</color>、变奏技能<color=Highlight>轻叩门扉</color>、共鸣解放<color=Highlight>帷幕终景·布景之形</color>、共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>、<color=Highlight>蚀域</color>。\n·以下技能造成伤害时，可为目标附加<color=Highlight>【聚爆效应】</color>，同一技能对同一目标2秒内只能触发1次。\n<color=Highlight>普攻·布景之形第3段</color>、<color=Highlight>普攻·布景之形第4段</color>、<color=Highlight>普攻·幻灭之形第3段</color>、<color=Highlight>普攻·幻灭之形第4段</color>、<color=Highlight>空中攻击·幻灭之形第3段</color>、<color=Highlight>空中攻击·幻灭之形第4段</color>。\n·达妮娅处于编队时，敌人被<color=Highlight>【聚爆效应】</color>的伤害击败，本次击败将视为距离其最近的登场角色造成。\n\n<color=Title>共鸣模态·集谐</color>\n处于<color=Highlight>共鸣模态·集谐</color>时，获得以下效果：\n·以下技能造成伤害时，可为目标附加<color=Highlight>【集谐·偏移】</color>，刷新目标<color=Highlight>【集谐·干涉】</color>的持续时间，同一技能对同一目标2秒内只能触发1次。\n变奏技能<color=Highlight>久疏问候！</color>、变奏技能<color=Highlight>轻叩门扉</color>、共鸣解放<color=Highlight>帷幕终景·布景之形</color>、共鸣解放<color=Highlight>帷幕终景·幻灭之形</color>、<color=Highlight>蚀域</color>、<color=Highlight>普攻·布景之形第3段</color>、<color=Highlight>普攻·布景之形第4段</color>、<color=Highlight>普攻·幻灭之形第3段</color>、<color=Highlight>普攻·幻灭之形第4段</color>、<color=Highlight>空中攻击·幻灭之形第3段</color>、<color=Highlight>空中攻击·幻灭之形第4段</color>。\n·队伍中的角色附加<color=Highlight>【集谐·偏移】</color>时，目标将积累偏谐值上限50%的<color=Highlight>【偏谐值】</color>，该效果对同一目标300秒内只能触发1次。\n\n<color=Title>【黯核】获取规则</color>\n<color=Highlight>【黯核】</color>上限3枚。\n处于<color=Highlight>熵变强化</color>时，每12秒获得1枚<color=Highlight>【黯核】</color>。\n施放变奏技能<color=Highlight>久疏问候！</color>、变奏技能<color=Highlight>轻叩门扉</color>获得1枚<color=Highlight>【黯核】</color>。\n\n<color=Title>【虚质粒子】获取规则</color>\n<color=Highlight>【虚质粒子】</color>上限100点。\n处于<color=Highlight>布景之形</color>，<color=Highlight>常态攻击</color>造成伤害时，获得<color=Highlight>【虚质粒子】</color>。\n施放变奏技能<color=Highlight>久疏问候！</color>、变奏技能<color=Highlight>轻叩门扉</color>、共鸣技能<color=Highlight>拟态泡泡·布景之形</color>获得25点<color=Highlight>【虚质粒子】</color>。\n\n<color=Title>【共形能量】获取规则</color>\n<color=Highlight>【共形能量】</color>上限100点。\n处于<color=Highlight>幻灭之形</color>，<color=Highlight>常态攻击</color>、共鸣技能<color=Highlight>轻唤·幻灭之形</color>造成伤害时，获得<color=Highlight>【共形能量】</color>。\n施放共鸣技能<color=Highlight>放逐·幻灭之形第2段</color>获得40点<color=Highlight>【共形能量】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "“天衣无缝”",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "处于<color=Highlight>共鸣模态·聚爆</color>时，队伍中登场角色周围的目标受到聚爆效应伤害加深60%，持续30秒。\n达妮娅切换模态时，该效果提前结束。\n\n处于<color=Highlight>共鸣模态·集谐</color>时，下一个登场的角色全伤害加深15%，持续16秒。\n效果持续期间，该角色附加<color=Highlight>【集谐·偏移】</color>后，该全伤害加深效果提升至40%。\n切换至其他角色或达妮娅切换模态时，该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "未竟的谎言",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，达妮娅可对其施放<color=Highlight>【谐度破坏】</color>。\n\n处于<color=Highlight>共鸣模态·集谐</color>时，获得以下效果：\n·达妮娅拥有为目标附加<color=Highlight>【集谐·偏移】</color>的能力。\n·达妮娅拥有响应<color=Highlight>【集谐·干涉】</color>的能力。\n响应<color=Highlight>【集谐·干涉】</color>：目标每有一层<color=Highlight>【集谐·干涉】</color>效果，达妮娅自身的每点谐度破坏增幅会使自身对该目标造成的最终伤害提升0.12%。达妮娅在编队中时，目标的<color=Highlight>【集谐·干涉】</color>效果的层数上限增加1层。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "计时的溃灭",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。附加聚爆效应或集谐·偏移后，共鸣解放伤害加成提升72%，持续5秒。该效果生效期间，队伍中的角色附加聚爆效应或集谐·偏移后，该角色攻击提升48%，持续15秒，同名效果之间不可叠加。",
+        "weaponIcon": "",
+        "weaponId": 21050076,
+        "weaponName": "赝作的矮星",
+        "weaponStarLevel": 5,
+        "weaponType": 5
       }
     }
   },

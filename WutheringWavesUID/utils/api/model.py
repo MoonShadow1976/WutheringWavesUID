@@ -159,10 +159,10 @@ class PhantomProp(BaseModel):
 class FetterDetail(BaseModel):
     groupId: int
     name: str
-    iconUrl: str | None
+    iconUrl: str | None = None
     num: int
-    firstDescription: str | None
-    secondDescription: str | None
+    firstDescription: str | None = None
+    secondDescription: str | None = None
 
 
 class Props(BaseModel):

@@ -103,6 +103,9 @@ Havoc_Bane_Role_Ids = [1508]
 # 聚爆效应 need update
 Fusion_Burst_Role_Ids = [1210]
 
+# 霜渐效应
+Glacio_Chafe_Role_Ids = [1108]
+
 # 震谐伤害
 Tune_Rupture_Role_Ids = [1209, 1210, 1509]
 

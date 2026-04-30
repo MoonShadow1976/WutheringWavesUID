@@ -2612,15 +2612,15 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "凌冽决断之心",
+            "name": "雪落无声之愿",
             "num": 5,
             "secondDescription": ""
           },
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "暴击伤害",
-              "attributeValue": "44%",
+              "attributeName": "攻击",
+              "attributeValue": "33%",
               "iconUrl": ""
             },
             {
@@ -2654,8 +2654,8 @@
           "phantomProp": {
             "cost": 4,
             "iconUrl": "",
-            "name": "异构武装",
-            "phantomId": 6000083,
+            "name": "共鸣回响·鸣式·虚造神型",
+            "phantomId": 6000199,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -2668,63 +2668,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "凌冽决断之心",
-            "num": 5,
-            "secondDescription": ""
-          },
-          "level": 25,
-          "mainProps": [
-            {
-              "attributeName": "攻击",
-              "attributeValue": "30%",
-              "iconUrl": ""
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "100",
-              "iconUrl": ""
-            }
-          ],
-          "subProps": [
-            {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
-            },
-            {
-              "attributeName": "暴击伤害",
-              "attributeValue": "21.0%"
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "11.6%"
-            },
-            {
-              "attributeName": "攻击",
-              "attributeValue": "60"
-            },
-            {
-              "attributeName": "共鸣解放伤害加成",
-              "attributeValue": "11.6%"
-            }
-          ],
-          "phantomProp": {
-            "cost": 3,
-            "iconUrl": "",
-            "name": "毒冠贵族",
-            "phantomId": 6000076,
-            "phantomPropId": 0,
-            "quality": 5,
-            "skillDescription": ""
-          },
-          "quality": 5
-        },
-        {
-          "cost": 3,
-          "fetterDetail": {
-            "firstDescription": "",
-            "groupId": 0,
-            "iconUrl": "",
-            "name": "凌冽决断之心",
+            "name": "雪落无声之愿",
             "num": 5,
             "secondDescription": ""
           },
@@ -2766,8 +2710,64 @@
           "phantomProp": {
             "cost": 3,
             "iconUrl": "",
-            "name": "凝水贵族",
-            "phantomId": 6000078,
+            "name": "格洛犸图",
+            "phantomId": 6000195,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "雪落无声之愿",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "冷凝伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣解放伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "风鳞蜃甲",
+            "phantomId": 6000188,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -2780,7 +2780,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "凌冽决断之心",
+            "name": "雪落无声之愿",
             "num": 5,
             "secondDescription": ""
           },
@@ -2822,8 +2822,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "浮灵偶·蕾弗",
-            "phantomId": 6000065,
+            "name": "冰盈舞者",
+            "phantomId": 6000196,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""
@@ -2836,7 +2836,7 @@
             "firstDescription": "",
             "groupId": 0,
             "iconUrl": "",
-            "name": "凌冽决断之心",
+            "name": "雪落无声之愿",
             "num": 5,
             "secondDescription": ""
           },
@@ -2878,8 +2878,8 @@
           "phantomProp": {
             "cost": 1,
             "iconUrl": "",
-            "name": "浮灵偶·莱特",
-            "phantomId": 6000066,
+            "name": "颤栗战士",
+            "phantomId": 6000174,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""

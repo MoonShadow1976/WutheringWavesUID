@@ -933,6 +933,37 @@
                     ]
                 }
             ]
+        },
+        {
+            "libId": 30,
+            "fetterList": [
+                {
+                    "fetterDetailName": "雪落无声之愿",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000199,
+                            "mainPropName": "攻击%",
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000195,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000188,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000196,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000174,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "charList": [
@@ -1284,7 +1315,7 @@
             "charId": 1108,
             "name": "绯雪",
             "weaponId": 21020086,
-            "sonataLibId": 7
+            "sonataLibId": 30
         },
         {
             "calcFile": "calc.json",

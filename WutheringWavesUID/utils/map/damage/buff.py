@@ -167,3 +167,19 @@ def cantarella_buff(attr, chain, resonLevel, isGroup):
     if char_clz:
         s = char_clz()
         s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def chisa_buff(attr, chain, resonLevel, isGroup):
+    # 千咲buff
+    char_clz = WavesCharRegister.find_class(1508)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def denia_buff(attr, chain, resonLevel, isGroup):
+    # 达妮娅buff
+    char_clz = WavesCharRegister.find_class(1211)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)

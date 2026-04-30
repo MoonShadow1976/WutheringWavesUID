@@ -1025,14 +1025,14 @@ async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, wave
         if not account_info:
             avatar, role_detail = await get_role_need(ev, char_id, ck, "1", char_name)
             account_info = AccountBaseInfo.model_validate(
-            {
-                "name": "库洛交个朋友",
-                "id": uid,
-                "level": 100,
-                "worldLevel": 10,
-                "creatTime": 1739375719,
-            }
-        )
+                {
+                    "name": "库洛交个朋友",
+                    "id": uid,
+                    "level": 100,
+                    "worldLevel": 10,
+                    "creatTime": 1739375719,
+                }
+            )
     if isinstance(role_detail, str):
         return role_detail
 

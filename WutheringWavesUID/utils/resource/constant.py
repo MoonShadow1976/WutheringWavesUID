@@ -184,7 +184,7 @@ CHAR_DETAIL = {
     "1510": {"name": "陆·赫斯", "needId": 6000179, "fetterDetail": "流金溯真之式"},
     "1210": {"name": "爱弥斯", "fetterDetail": "长路启航之星"},
     "1412": {"name": "西格莉卡", "fetterDetail": "听唤语义之愿"},
-    "1018": {"name": "绯雪", "fetterDetail": "雪落无声之愿"},
+    "1108": {"name": "绯雪", "fetterDetail": "雪落无声之愿"},
     "1211": {"name": "达妮娅", "fetterDetail": "斑驳粉饰之沫"},
 }
 

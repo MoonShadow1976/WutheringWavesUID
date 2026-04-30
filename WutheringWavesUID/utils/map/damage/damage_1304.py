@@ -13,7 +13,7 @@ from .buff import dengdeng_buff, shouanren_buff, weilinai_buff, zhezhi_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     惊龙破空·炳星
     """
@@ -90,7 +90,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     移岁诛邪
     """
@@ -152,7 +152,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     """
     0维/0折枝/惊龙破空·炳星
     """
@@ -168,7 +168,7 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     """
     0+1守/0折枝/惊龙破空·炳星
     """
@@ -184,7 +184,7 @@ def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     return calc_damage_1(attr, role, isGroup)
 
 
-def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     """
     6+5守/6灯灯/惊龙破空·炳星
     """

@@ -12,7 +12,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     damage_func = [cast_skill]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_life")
@@ -52,7 +52,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return None, crit_damage
 
 
-def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     damage_func = [cast_skill]
     attr.set_char_damage(heal_bonus)
     attr.set_char_template("temp_life")
@@ -92,7 +92,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return None, crit_damage
 
 
-def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_life")
 

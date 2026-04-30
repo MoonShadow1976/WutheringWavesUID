@@ -19,7 +19,7 @@ from .buff import shouanren_buff, zhezhi_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     title = "默认手法"
     if isGroup:
         msg = "变奏入场 ee aa aaa z qr aaaaa"
@@ -53,7 +53,7 @@ def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = Fal
     return crit_damage, expected_damage
 
 
-def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -131,7 +131,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -214,7 +214,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, trigger_times=1) -> (str, str):
+def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, trigger_times=1) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -297,7 +297,7 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_33(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, trigger_times=1) -> (str, str):
+def calc_damage_33(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False, trigger_times=1) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -405,7 +405,7 @@ def calc_damage_33(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     return crit_damage, expected_damage
 
 
-def calc_damage_r(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_r(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -483,7 +483,7 @@ def calc_damage_r(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     """
     0+1守/0折枝/致死以终伤害
     """
@@ -499,7 +499,7 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     return calc_damage_2(attr, role, isGroup)
 
 
-def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     """
     6+5守/6折/致死以终伤害
     """

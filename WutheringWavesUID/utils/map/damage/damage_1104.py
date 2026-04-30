@@ -20,7 +20,7 @@ from ...damage.utils import (
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     attr1 = copy.deepcopy(attr)
     crit_damage1, expected_damage1 = calc_damage_1(attr1, role, isGroup)
 
@@ -51,7 +51,7 @@ def calc_damage(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = Fal
     return crit_damage, expected_damage
 
 
-def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -109,7 +109,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_a(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_a(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -169,7 +169,7 @@ def calc_damage_a(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_ea(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_ea(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -241,7 +241,7 @@ def calc_damage_ea(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     return crit_damage, expected_damage
 
 
-def calc_damage_e(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_e(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"

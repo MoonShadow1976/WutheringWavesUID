@@ -15,7 +15,7 @@ from .buff import luokeke_buff, sanhua_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
-def calc_damage_0(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_0(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     一日花
     """
@@ -86,7 +86,7 @@ def calc_damage_0(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> (str, str):
+def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = False) -> tuple[str, str]:
     """
     芳华绽烬
     """
@@ -154,7 +154,7 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     return crit_damage, expected_damage
 
 
-def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
@@ -167,7 +167,7 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
@@ -180,7 +180,7 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     return calc_damage_0(attr, role, isGroup)
 
 
-def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> (str, str):
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 

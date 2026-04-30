@@ -22,7 +22,7 @@ def calc_damage_1(
     role: RoleDetailData,
     isGroup: bool = False,
     isHitCounterattack: bool = False,
-) -> (str, str):
+) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -106,7 +106,7 @@ def calc_damage_2(
     role: RoleDetailData,
     isGroup: bool = False,
     isHitCounterattack: bool = False,
-) -> (str, str):
+) -> tuple[str, str]:
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
@@ -177,7 +177,7 @@ def calc_damage_3(
     role: RoleDetailData,
     isGroup: bool = False,
     isHitCounterattack: bool = False,
-) -> (str, str):
+) -> tuple[str, str]:
     damage_func = [cast_attack, cast_skill, cast_hit]
     attr.set_char_damage("")
     attr.set_char_template("temp_def")

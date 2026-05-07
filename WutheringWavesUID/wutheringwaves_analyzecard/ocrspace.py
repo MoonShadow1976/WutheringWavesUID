@@ -113,7 +113,7 @@ async def ocrspace(
         return "[鸣潮] OCRspace API密钥未配置，请检查控制台。\n"
 
     # 检查可用引擎
-    engine_num = await check_ocr_engine_accessible()
+    engine_num = 2#await check_ocr_engine_accessible()
     logger.info(f"[鸣潮]OCR.space服务engine：{engine_num}")
     # 初始化密钥和引擎
     API_KEY = None

@@ -337,11 +337,7 @@ async def draw_bot_rank_img(bot: Bot, ev: Event, char: str, rank_type: str) -> s
 
     if not rankId:
         rankId, rankInfo = next(
-            (
-                (rankId, rankInfo)
-                for rankId, rankInfo in enumerate(rankInfoList, start=1)
-                if rankInfo.uid == self_uid
-            ),
+            ((rankId, rankInfo) for rankId, rankInfo in enumerate(rankInfoList, start=1) if rankInfo.uid == self_uid),
             (None, None),
         )
 

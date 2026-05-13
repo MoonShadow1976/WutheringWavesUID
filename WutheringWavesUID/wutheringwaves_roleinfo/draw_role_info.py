@@ -282,7 +282,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
             info_block_draw.text((5, 15), f"{temp.get_chain_name()}", "white", waves_font_26, "lm")
             char_bg.paste(info_block, (18, 158), info_block)
 
-        char_bg = char_bg.resize((168, 160)) # 一行五列
+        char_bg = char_bg.resize((168, 160))  # 一行五列
         card_img.paste(char_bg, (_x, _y), char_bg)
 
     # 角色信息

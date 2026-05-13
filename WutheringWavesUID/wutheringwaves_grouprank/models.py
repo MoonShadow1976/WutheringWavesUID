@@ -2,7 +2,7 @@ from typing import Optional
 
 from gsuid_core.utils.database.base_models import with_session
 from gsuid_core.utils.database.startup import exec_list
-from sqlalchemy import delete, tuple_
+from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 from sqlalchemy.sql import text

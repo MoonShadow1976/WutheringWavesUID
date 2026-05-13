@@ -204,13 +204,13 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
         )
         else len(role_info.roleList)
     )
-    xset = 50
-    yset = 470
+    xset = 66
+    yset = 320
     if account_info.is_full:
         yset += bs.size[1]
 
     w = 1000
-    h = 100 + yset + 200 * int(roleTotalNum / 4 + (1 if roleTotalNum % 4 else 0))
+    h = 100 + yset + 160 * int(roleTotalNum / 5 + (1 if roleTotalNum % 5 else 0))
     card_img = get_waves_bg(w, h)
 
     def calc_info_block(_x: int, _y: int, key: str, value: str, color_path: str = ""):
@@ -282,12 +282,13 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
             info_block_draw.text((5, 15), f"{temp.get_chain_name()}", "white", waves_font_26, "lm")
             char_bg.paste(info_block, (18, 158), info_block)
 
+        char_bg = char_bg.resize((168, 160)) # 一行五列
         card_img.paste(char_bg, (_x, _y), char_bg)
 
     # 角色信息
     for index, role in enumerate(role_info.roleList):
-        _x = xset + 210 * int(index % 4)
-        _y = yset + 200 * int(index / 4)
+        _x = xset + 168 * int(index % 5)
+        _y = yset + 160 * int(index / 5)
         await calc_role_info(_x, _y, role)
 
     # 基础信息 名字 特征码
@@ -295,12 +296,12 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     base_info_draw = ImageDraw.Draw(base_info_bg)
     base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
     base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
-    card_img.paste(base_info_bg, (35, 170), base_info_bg)
+    card_img.paste(base_info_bg, (35, 20), base_info_bg)
 
     # 头像 头像环
     avatar, avatar_ring = await draw_pic_with_ring(ev)
-    card_img.paste(avatar, (45, 220), avatar)
-    card_img.paste(avatar_ring, (55, 230), avatar_ring)
+    card_img.paste(avatar, (45, 70), avatar)
+    card_img.paste(avatar_ring, (55, 80), avatar_ring)
 
     # 右侧装饰
     char = Image.open(TEXT_PATH / "char.png")
@@ -319,14 +320,14 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
 
         title_bar_draw.text((810, 125), "世界等级", GREY, waves_font_26, "mm")
         title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
-        card_img.paste(line, (0, yset - bs.size[1] - 70), line)
+        card_img.paste(line, (15, yset - bs.size[1] - 70), line)
         card_img.paste(bs, (-10, yset - bs.size[1] - 70), bs)
-        card_img.paste(title_bar, (0, 220), title_bar)
+        card_img.paste(title_bar, (0, 70), title_bar)
 
     line2 = Image.open(TEXT_PATH / "line.png")
     line2_draw = ImageDraw.Draw(line2)
     line2_draw.text((475, 30), "角色信息", "white", waves_font_30, "mm")
-    card_img.paste(line2, (0, yset - 70), line2)
+    card_img.paste(line2, (15, yset - 70), line2)
 
     card_img = add_footer(card_img, 600, 20)
     card_img = await convert_img(card_img)

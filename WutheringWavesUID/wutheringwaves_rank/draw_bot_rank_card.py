@@ -174,48 +174,34 @@ async def find_role_detail(uid: str, char_id: int | str | list[str] | list[int])
     return next((role for role in role_details if str(role.role.roleId) in char_id_list), None)
 
 
-async def get_rank_info_for_user(
-    user: WavesBind,
+async def get_rank_info_for_uid(
+    user_id: str,
+    uid: str,
     char_id,
     find_char_id,
     rankDetail,
     tokenLimitFlag,
     wavesTokenUsersMap,
 ):
-    rankInfoList = []
-    if not user.uid:
-        return rankInfoList
+    """
+    获取单个用户的单个 UID 的排行信息
+    """
+    if tokenLimitFlag and (user_id, uid) not in wavesTokenUsersMap:
+        return None
 
-    tasks = [find_role_detail(uid, find_char_id) for uid in user.uid.split("_")]
-    role_details = await asyncio.gather(*tasks)
+    role_detail = await find_role_detail(uid, find_char_id)
+    if not role_detail:
+        return None
+    if not role_detail.phantomData or not role_detail.phantomData.equipPhantomList:
+        return None
 
-    for uid, role_detail in zip(user.uid.split("_"), role_details):
-        if (
-            tokenLimitFlag
-            and (
-                user.user_id,
-                uid,
-            )
-            not in wavesTokenUsersMap
-        ):
-            continue
-        if not role_detail:
-            continue
-        if not role_detail.phantomData or not role_detail.phantomData.equipPhantomList:
-            continue
-
-        rankInfo = None
-        try:
-            rankInfo = await get_one_rank_info(user.user_id, uid, role_detail, rankDetail)
-        except Exception as e:
-            logger.warning(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
-            await send_master_info(f"获取用户{user.user_id} id{uid} 的排行数据,错误: {e}")
-
-        if not rankInfo:
-            continue
-        rankInfoList.append(rankInfo)
-
-    return rankInfoList
+    try:
+        rankInfo = await get_one_rank_info(user_id, uid, role_detail, rankDetail)
+        return rankInfo
+    except Exception as e:
+        logger.warning(f"获取用户{user_id} id{uid} 的排行数据,错误: {e}")
+        await send_master_info(f"获取用户{user_id} id{uid} 的排行数据,错误: {e}")
+        return None
 
 
 async def get_all_rank_info(
@@ -226,12 +212,24 @@ async def get_all_rank_info(
     tokenLimitFlag,
     wavesTokenUsersMap,
 ):
+    # 构建 UID -> user_id 的唯一映射，跳过重复 UID
+    uid_to_user_id = {}
+    for user in users:
+        if not user.uid:
+            continue
+        for uid in user.uid.split("_"):
+            if uid not in uid_to_user_id:
+                uid_to_user_id[uid] = user.user_id
+            # 重复 UID 自动忽略，不覆盖原有映射
+
+    # 并发控制
     semaphore = asyncio.Semaphore(50)
 
-    async def process_user(user):
+    async def process_uid(uid, user_id):
         async with semaphore:
-            return await get_rank_info_for_user(
-                user,
+            return await get_rank_info_for_uid(
+                user_id,
+                uid,
                 char_id,
                 find_char_id,
                 rankDetail,
@@ -239,11 +237,12 @@ async def get_all_rank_info(
                 wavesTokenUsersMap,
             )
 
-    tasks = [process_user(user) for user in users]
+    # 创建所有 UID 任务
+    tasks = [process_uid(uid, user_id) for uid, user_id in uid_to_user_id.items()]
     results = await asyncio.gather(*tasks)
 
-    # Flatten the results list
-    rankInfoList = [rank_info for result in results for rank_info in result]
+    # 过滤掉 None 结果
+    rankInfoList = [rank_info for rank_info in results if rank_info is not None]
     return rankInfoList
 
 
@@ -341,7 +340,7 @@ async def draw_bot_rank_img(bot: Bot, ev: Event, char: str, rank_type: str) -> s
             (
                 (rankId, rankInfo)
                 for rankId, rankInfo in enumerate(rankInfoList, start=1)
-                if rankInfo.uid == self_uid and ev.user_id == rankInfo.qid
+                if rankInfo.uid == self_uid
             ),
             (None, None),
         )

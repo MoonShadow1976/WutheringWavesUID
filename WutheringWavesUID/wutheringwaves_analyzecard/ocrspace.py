@@ -2,6 +2,7 @@
 import asyncio
 import base64
 from io import BytesIO
+import re
 import ssl
 
 import aiohttp
@@ -54,45 +55,100 @@ async def check_ocr_link_accessible(key="helloworld") -> bool:
         return False
 
 
-async def check_ocr_engine_accessible() -> int:
-    """
-    检查OcrEngine_2状态（通过解析HTML表格）
-    返回1表示UP，0表示DOWN或其他错误
-    """
-    from bs4 import BeautifulSoup
-
-    url = "https://status.ocr.space"
+async def _get_status_page_id_by_custom_domain() -> int | None:
+    """通过自定义域名获取 Checkly Status Page ID"""
+    metadata_url = "https://api.checklyhq.com/v1/status-page/status.ocr.space/metadata?type=customDomain"
     try:
         session = await get_global_session()
-        async with session.get(url, timeout=ClientTimeout(total=10)) as response:
-            html = await response.text()
-            soup = BeautifulSoup(html, "html.parser")
-
-            # 定位目标表格
-            target_table = soup.find("h4", string="API Access Points").find_next("table")
-
-            # 查找包含"Free OCR API"的行
-            for row in target_table.find_all("tr"):
-                cells = row.find_all("td")
-                if len(cells) >= 4 and "Free OCR API" in cells[0].text:
-                    status_1 = cells[2].text.strip().upper()
-                    status_2 = cells[3].text.strip().upper()
-                    logger.info(f"[鸣潮] OcrEngine_1:{status_1}, OcrEngine_2:{status_2}")
-                    if status_2 == "UP":
-                        return 2
-                    elif status_1 == "UP":
-                        return 1
-                    else:
-                        return 0
-
-            logger.warning("[鸣潮] 未找到状态行")
-            return 1
-
-    except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-        logger.warning(f"[鸣潮] 网络错误: {e}")
-        return -1
+        async with session.get(metadata_url, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+            if resp.status != 200:
+                logger.warning(f"[鸣潮][OCRspace Checkly] 获取元数据失败，HTTP {resp.status}")
+                return None
+            data = await resp.json()
+            return data.get("id")
     except Exception as e:
-        logger.warning(f"[鸣潮] 解析异常: {e}")
+        logger.warning(f"[鸣潮][OCRspace Checkly] 获取 Status Page ID 异常: {e}")
+        return None
+
+
+async def check_ocr_engine_accessible(plan: str) -> int:
+    """
+    通过 Checkly API 检查指定套餐（FREE 或 PRO）的 OCR 引擎健康状况。
+    优先返回可用引擎：2 > 1 > 其他引擎
+
+    参数:
+        plan: "FREE" 或 "PRO"
+
+    返回:
+        正数: 可用引擎编号（2/1/3...）
+        0: 无可用引擎
+        -1: 网络请求失败或解析异常
+    """
+    # 动态获取 Status Page ID
+    status_page_id = await _get_status_page_id_by_custom_domain()
+    if status_page_id is None:
+        logger.warning("[鸣潮][OCRspace Checkly] 无法获取 Status Page ID，使用备用 ID（746345）")
+        status_page_id = 746345  # 备用 ID
+
+    url = f"https://api.checklyhq.com/v1/status-page/{status_page_id}/statuses?page=1&limit=15"
+
+    try:
+        session = await get_global_session()
+        async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+            if resp.status != 200:
+                logger.warning(f"[鸣潮][OCRspace Checkly] API 返回非 200: {resp.status}")
+                return -1
+            data = await resp.json()
+            results = data.get("results", [])
+
+            # 根据套餐匹配检查项名称
+            plan_upper = plan.upper()
+            if plan_upper == "FREE":
+                pattern = re.compile(r"Free - Engine(\d+)", re.IGNORECASE)
+            elif plan_upper == "PRO":
+                pattern = re.compile(r"PRO\d?\s*\-?\s*Engine(\d+)", re.IGNORECASE)
+            else:
+                logger.warning(f"[鸣潮][OCRspace Checkly] 不支持的套餐类型: {plan}")
+                return -1
+
+            engine_status = []
+            for item in results:
+                name = item.get("name", "")
+                if not item.get("activated", True):
+                    continue
+                match = pattern.search(name)
+                if match:
+                    engine_num = int(match.group(1))
+                    has_failures = item.get("status", {}).get("hasFailures", True)
+                    is_up = not has_failures
+                    engine_status.append((engine_num, is_up))
+
+            if not engine_status:
+                logger.warning(f"[鸣潮][OCRspace Checkly] 未找到 {plan} 套餐的任何引擎")
+                return 0
+
+            # 优先级：引擎2 > 引擎1 > 其他引擎
+            def priority(engine_num: int) -> int:
+                if engine_num == 2:
+                    return 0
+                elif engine_num == 1:
+                    return 1
+                else:
+                    return 2 + engine_num
+
+            engine_status.sort(key=lambda x: priority(x[0]))
+
+            logger.info(f"[鸣潮][OCRspace Checkly] {plan} 套餐引擎状态: {engine_status}")
+            for engine_num, is_up in engine_status:
+                if is_up:
+                    logger.info(f"[鸣潮]使用OCR.space服务engine：{engine_num}")
+                    return engine_num
+
+            logger.warning(f"[鸣潮][OCRspace Checkly] {plan} 套餐所有引擎均不可用")
+            return 0
+
+    except Exception as e:
+        logger.warning(f"[鸣潮][OCRspace Checkly] 请求异常: {e}")
         return -1
 
 
@@ -112,9 +168,6 @@ async def ocrspace(
         logger.warning("[鸣潮] OCRspace API密钥为空！请检查控制台。")
         return "[鸣潮] OCRspace API密钥未配置，请检查控制台。\n"
 
-    # 检查可用引擎
-    engine_num = 2  # await check_ocr_engine_accessible()
-    logger.info(f"[鸣潮]OCR.space服务engine：{engine_num}")
     # 初始化密钥和引擎
     API_KEY = None
     NEGINE_NUM = None
@@ -126,9 +179,12 @@ async def ocrspace(
             continue
 
         API_KEY = key
-        NEGINE_NUM = engine_num
+
+        # 检查可用引擎
         if key[0] != "K":
-            NEGINE_NUM = 3  # 激活PRO计划
+            NEGINE_NUM = await check_ocr_engine_accessible("PRO")  # 激活PRO计划
+        else:
+            NEGINE_NUM = await check_ocr_engine_accessible("FREE")
 
         if NEGINE_NUM == 1 and API_KEY == api_key_list[0]:
             await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，可能会导致识别失败，请考虑稍后使用。\n", at_sender)
@@ -175,12 +231,11 @@ async def images_ocrspace(api_key, engine_num, cropped_images, language="cht", i
     API_KEY = api_key
     FREE_URL = "https://api.ocr.space/parse/image"
     PRO_URL = "https://apipro2.ocr.space/parse/image"
-    if engine_num == 3:
+    if API_KEY[0] != "K":
         API_URL = PRO_URL
-        ENGINE_NUM = 2
     else:
         API_URL = FREE_URL
-        ENGINE_NUM = engine_num
+    ENGINE_NUM = engine_num
     logger.info(f"[鸣潮]使用 {API_URL} 识别图片")
 
     session = await get_global_session()  # 复用全局会话

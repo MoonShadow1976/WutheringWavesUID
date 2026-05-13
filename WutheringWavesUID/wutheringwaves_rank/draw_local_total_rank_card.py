@@ -117,7 +117,7 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> list[BotTotalRan
     if not users:
         return []
 
-    user_uid_pairs = []
+    user_uid_pairs = set()
     tokenLimitFlag, wavesTokenUsersMap = await get_waves_token_condition(ev)
 
     for user in users:
@@ -127,10 +127,10 @@ async def get_bot_total_rank_data(ev: Event, bot_bool: bool) -> list[BotTotalRan
         for uid in user.uid.split("_"):
             if tokenLimitFlag and (user.user_id, uid) not in wavesTokenUsersMap:
                 continue
-            user_uid_pairs.append((user.user_id, uid))
+            user_uid_pairs.add(uid)
 
     # 从数据库中获取用户的练度记录
-    db_records = await GroupRankRecord.get_train_records(user_uid_pairs=user_uid_pairs)
+    db_records = await GroupRankRecord.get_train_records(uid_lists=list(user_uid_pairs))
     if not db_records:
         return []
 

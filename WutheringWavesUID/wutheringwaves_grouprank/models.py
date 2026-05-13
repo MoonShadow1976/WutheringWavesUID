@@ -159,20 +159,20 @@ class GroupRankRecord(SQLModel, table=True):
     async def get_group_records(
         cls,
         session: AsyncSession,
-        user_uid_pairs: list[tuple[str, str]],
+        uid_lists: list[str],
         rank_type: str,
         season_id: int,
         challenge_id: int,
     ) -> list["GroupRankRecord"]:
         """获取指定群组、赛季和挑战的排行记录"""
-        if not user_uid_pairs:
+        if not uid_lists:
             return []
 
         results = []
         # 分批查询，避免 SQLite 参数过多或表达式树过深
         batch_size = 500
-        for i in range(0, len(user_uid_pairs), batch_size):
-            batch_pairs = user_uid_pairs[i : i + batch_size]
+        for i in range(0, len(uid_lists), batch_size):
+            batch_pairs = uid_lists[i : i + batch_size]
 
             # 构建总查询条件
             conditions = [
@@ -180,7 +180,7 @@ class GroupRankRecord(SQLModel, table=True):
                 cls.season_id == season_id,
                 cls.challenge_id == challenge_id,
                 cls.score > 0,  # 只查询有分数的记录
-                tuple_(cls.user_id, cls.waves_id).in_(batch_pairs),
+                cls.waves_id.in_(batch_pairs),
             ]
 
             statement = (
@@ -315,26 +315,26 @@ class GroupRankRecord(SQLModel, table=True):
     async def get_train_records(
         cls,
         session: AsyncSession,
-        user_uid_pairs: list[tuple[str, str]],
+        uid_lists: list[str],
     ) -> list["GroupRankRecord"]:
         """
         获取指定用户的练度排行记录
 
         Args:
-            user_uid_pairs: 用户ID和游戏UID的元组列表
+            uid_lists: 游戏UID的列表
         """
-        if not user_uid_pairs:
+        if not uid_lists:
             return []
 
         results = []
         batch_size = 500
-        for i in range(0, len(user_uid_pairs), batch_size):
-            batch_pairs = user_uid_pairs[i : i + batch_size]
+        for i in range(0, len(uid_lists), batch_size):
+            batch_pairs = uid_lists[i : i + batch_size]
 
             conditions = [
                 cls.rank_type == "train",
                 cls.train_score > 0,
-                tuple_(cls.user_id, cls.waves_id).in_(batch_pairs),
+                cls.waves_id.in_(batch_pairs),
             ]
 
             statement = select(cls).where(*conditions).options(selectinload(cls.train_roles))

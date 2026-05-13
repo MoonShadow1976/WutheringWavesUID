@@ -76,20 +76,21 @@ async def _handle_rank_request(bot: Bot, ev: Event, rank_type: str, season_id: i
             return await bot.send("[鸣潮] " + "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 3. 准备数据库查询所需的用户ID和游戏UID对
-        user_uid_pairs = []
+        uid_lists = set()
         for user in users:
             if user.uid:
                 # 支持一个用户绑定多个游戏UID
                 uids = user.uid.split("_")
                 for uid in uids:
-                    user_uid_pairs.append((user.user_id, uid))
+                    # 无重复的添加uid
+                    uid_lists.add(uid)
 
-        if not user_uid_pairs:
+        if not uid_lists:
             return await bot.send("[鸣潮] " + "Bot" if "bot" in param else f"群【{ev.group_id}】" + "暂无用户。")
 
         # 4. 从数据库获取排行记录
         records = await GroupRankRecord.get_group_records(
-            user_uid_pairs=user_uid_pairs,
+            uid_lists=list(uid_lists),
             rank_type=rank_type,
             season_id=season_id,
             challenge_id=challenge_id,

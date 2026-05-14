@@ -19,9 +19,10 @@ from ..utils.fonts.waves_fonts import (
     waves_font_26,
     waves_font_30,
     waves_font_42,
+    waves_font_58,
 )
 from ..utils.hint import error_reply
-from ..utils.image import GOLD, GREY, add_footer, get_random_share_bg, pic_download_from_url
+from ..utils.image import GOLD, GREY, add_footer, draw_text_with_shadow, get_random_share_bg, pic_download_from_url
 from ..utils.imagetool import draw_pic_with_ring, get_square_avatar
 from ..utils.queues.const import QUEUE_MATRIX_RECORD
 from ..utils.queues.queues import push_item
@@ -101,6 +102,7 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     card_img = await get_random_share_bg()  # 已返回 2560 x 1440 图像
     img = Image.new("RGBA", (2560, 1440), (30, 45, 65, 70))  # 遮罩
     card_img = Image.alpha_composite(card_img, img)
+    card_img_draw = ImageDraw.Draw(card_img)
 
     # 基础信息
     base_info_bg = Image.new("RGBA", (2560, 1440), (0, 0, 0, 0))
@@ -208,16 +210,28 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             except Exception:
                 pass
 
-        # 分数显示在图右侧
-        mode_draw.text((mode_bg.width // 2, mode_bg.height - 40), f"{mode.score}", score_color, waves_font_42, "mm")
-
         fix_y = 100
         if len(modeIds) > 1 and mode_index > 0 and not mode.teams:
             fix_y = -360
-            bug_draw = ImageDraw.Draw(card_img)
-            bug_draw.text((100, 400), "请登录查询完整数据", GREY, waves_font_42, "lm")
+            card_img_draw.text((100, 400), "请登录查询完整数据", GREY, waves_font_42, "lm")
 
         card_img.paste(mode_bg, (2560 - mode_bg.width, y_offset - fix_y), mode_bg)
+
+        # 分数显示在图右侧（往下挪、放大字体、加黑色轮廓）
+        # 直接在 card_img 上绘制，避免被 mode_bg 边界截断
+        mode_bg_x = 2560 - mode_bg.width
+        mode_bg_y = y_offset - fix_y
+        draw_text_with_shadow(
+            card_img_draw,
+            f"{mode.score}",
+            mode_bg_x + mode_bg.width // 2,
+            mode_bg_y + mode_bg.height - 10,
+            waves_font_58,
+            fill_color=score_color,
+            shadow_color="black",
+            offset=(2, 2),
+            anchor="mm",
+        )
 
         if mode.teams:
             team_count = len(mode.teams)

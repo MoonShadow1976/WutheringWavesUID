@@ -75,11 +75,12 @@ async def send_card(
     waves_char_rank: list[WavesCharRank] | None = None
 
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
+    if not is_self_ck or not WavesToken:
+        return
 
-    if WavesToken:
-        waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
+    waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
-    if is_self_ck and token and waves_char_rank and WavesToken and waves_data and user_id:
+    if token and waves_char_rank and waves_data and user_id:
         if waves_api.is_net(uid):
             from ..utils.api.kuro_py_api import get_base_info_overseas
 

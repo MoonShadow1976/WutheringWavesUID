@@ -77,11 +77,6 @@ async def send_card(
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
 
     if WavesToken:
-        if waves_api.is_net(uid):  # 国际服用户同时上传完整角色数据
-            clear_descriptions(waves_data)
-            player_role_detail = {"waves_id": uid, "data": waves_data}
-            push_item(QUEUE_ROLE_DETAIL, player_role_detail)
-
         waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
     if is_self_ck and token and waves_char_rank and WavesToken and waves_data and user_id:
@@ -100,6 +95,16 @@ async def send_card(
         if len(waves_data) != 1 and account_info.roleNum != len(waves_data):
             logger.warning(f"角色数量不一致，role_info.roleNum:{account_info.roleNum} != waves_char_rank:{len(waves_data)}")
             return
+
+        if waves_api.is_net(uid):  # 国际服用户同时上传完整角色数据
+            import copy
+
+            upload_data = copy.deepcopy(waves_char_rank)
+            clear_descriptions(upload_data)
+            player_role_detail = {"waves_id": uid, "data": upload_data}
+            push_item(QUEUE_ROLE_DETAIL, player_role_detail)
+            logger.debug(f"[总排行上传] 国际服用户同时上传完整角色数据，uid:{uid}，role_num:{len(upload_data)}")
+
         metadata = {
             "user_id": user_id,
             "waves_id": f"{account_info.id}",
@@ -110,6 +115,7 @@ async def send_card(
             "single_refresh": 1 if len(waves_data) == 1 else 0,
         }
         push_item(QUEUE_SCORE_RANK, metadata)
+        logger.debug(f"[总排行上传] 发送排行数据，uid:{uid}，role_num:{len(waves_char_rank)}")
 
 
 async def save_card_info(

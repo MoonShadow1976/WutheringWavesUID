@@ -27,6 +27,7 @@ from ..utils.image import (
     get_waves_bg,
 )
 from ..utils.resource.constant import SKILL_TREE_MAP
+from ..utils.resource.download_file import get_chain_img
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -176,7 +177,7 @@ async def draw_char_chain(char_id: str):
     char_stats = await parse_char_stats(max_stats)
 
     # 命座
-    char_chain = await parse_char_chain(char_model.chains)
+    char_chain = await parse_char_chain(char_id, char_model.chains)
 
     card_img = get_waves_bg(1000, char_bg.size[1] + char_chain.size[1] + 50, "bg6")
 
@@ -230,7 +231,7 @@ async def parse_char_stats(max_stats: Stats):
     return image
 
 
-async def parse_char_chain(data: dict[int, Chain]):
+async def parse_char_chain(char_id: str, data: dict[int, Chain]):
     y_padding = 20  # 初始位移
     x_padding = 20  # 初始位移
     line_spacing = 10  # 行间距
@@ -271,6 +272,7 @@ async def parse_char_chain(data: dict[int, Chain]):
             (image_width, total_text_height),
             color=(255, 255, 255, 0),
         )
+
         draw = ImageDraw.Draw(img)
         draw.rectangle(
             [
@@ -282,12 +284,18 @@ async def parse_char_chain(data: dict[int, Chain]):
             fill=(0, 0, 0, int(0.3 * 255)),
         )
 
-        # 绘制标题文本
         y_offset = y_padding + shadow_radius
         x_offset = x_padding + shadow_radius
+
+        # 绘制图标
+        chain = await get_chain_img(char_id, chain_num, "")
+        chain = chain.resize((shadow_radius * 4, shadow_radius * 4))
+        img.paste(chain, (x_offset, shadow_radius), chain)
+
+        # 绘制标题文本
         for line in lines_title:
             draw.text(
-                (x_offset, y_offset),
+                (x_offset + shadow_radius * 5, y_offset),
                 line,
                 font=title_font,
                 fill=title_color,

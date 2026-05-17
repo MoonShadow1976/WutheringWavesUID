@@ -684,6 +684,15 @@
         "echo": 0,
         "name": "残星·餮餍袖匠"
     },
+    "310000870": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "敬请期待"
+    },
     "320000010": {
         "rarity": 2,
         "attributeId": 0,
@@ -1536,5 +1545,23 @@
         ],
         "echo": 6000200,
         "name": "达妮娅"
+    },
+    "340000290": {
+        "rarity": 3,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "敬请期待"
+    },
+    "350000400": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6010195,
+        "name": "敬请期待"
     }
 }

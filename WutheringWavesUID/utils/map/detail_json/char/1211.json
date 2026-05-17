@@ -2762,7 +2762,7 @@
   },
   "chains": {
     "1": {
-      "name": "天空一无所有",
+      "name": "薄明梦中的寂静光辉",
       "desc": "暴击伤害提升{0}。\n\n施放共鸣技能<color=Highlight>拟态泡泡·布景之形</color>、共鸣技能<color=Highlight>放逐·幻灭之形</color>、<color=Highlight>普攻·幻灭之形第3段</color>、<color=Highlight>普攻·幻灭之形第4段</color>、<color=Highlight>空中攻击·幻灭之形第3段</color>、<color=Highlight>空中攻击·幻灭之形第4段</color>期间，免疫打断。\n\n处于<color=Highlight>布景之形</color>进入战斗时，获得<color=Highlight>熵变强化·布景之形</color>，持续{1}秒。\n处于<color=Highlight>幻灭之形</color>进入战斗时，获得<color=Highlight>熵变强化·幻灭之形</color>，持续{2}秒。",
       "param": [
         "30%",
@@ -2771,7 +2771,7 @@
       ]
     },
     "2": {
-      "name": "为何给我安慰",
+      "name": "坠入此世一片潮水",
       "desc": "处于<color=Highlight>共鸣模态·聚爆</color>，队伍中的角色施加<color=Highlight>【聚爆效应】</color>后，该角色热熔伤害加成提升{0}，持续{1}秒。登场角色附近的敌人触发<color=Highlight>【聚爆效应】</color>引爆后，达妮娅获得{2}层<color=Highlight>简并虚质</color>，持续{3}秒，上限{4}层。每层<color=Highlight>简并虚质</color>使达妮娅造成伤害无视目标{5}热熔伤害抗性。\n达妮娅切换模态时，该效果提前结束。\n\n处于<color=Highlight>共鸣模态·集谐</color>，<color=Highlight>共鸣回路</color>效果提升：队伍中的角色施加<color=Highlight>【集谐·偏移】</color>后，该角色谐度破坏增幅提升{6}点，持续{7}秒，目标将积累偏谐值上限{8}的<color=Highlight>【偏谐值】</color>，积累<color=Highlight>【偏谐值】</color>效果对同一目标{9}秒内只能触发1次。\n达妮娅切换模态时，该效果提前结束。\n\n共鸣技能<color=Highlight>放逐·幻灭之形</color>伤害倍率提升{10}。",
       "param": [
         "50%",

@@ -18,8 +18,7 @@ def register_damage():
     from .damage_1208 import damage_detail as damage_1208
     from .damage_1209 import damage_detail as damage_1209
     from .damage_1210 import damage_detail as damage_1210
-
-    # from .damage_1211 import damage_detail as damage_1211
+    from .damage_1211 import damage_detail as damage_1211
     from .damage_1301 import damage_detail as damage_1301
     from .damage_1302 import damage_detail as damage_1302
     from .damage_1303 import damage_detail as damage_1303
@@ -88,7 +87,7 @@ def register_damage():
     # 爱弥斯
     DamageDetailRegister.register_class("1210", damage_1210)
     # 达妮娅
-    # DamageDetailRegister.register_class("1211", damage_1211)
+    DamageDetailRegister.register_class("1211", damage_1211)
 
     # 卡卡罗
     DamageDetailRegister.register_class("1301", damage_1301)
@@ -184,8 +183,7 @@ def register_rank():
     from .damage_1208 import rank as rank_1208
     from .damage_1209 import rank as rank_1209
     from .damage_1210 import rank as rank_1210
-
-    # from .damage_1211 import rank as rank_1211
+    from .damage_1211 import rank as rank_1211
     from .damage_1301 import rank as rank_1301
     from .damage_1302 import rank as rank_1302
     from .damage_1303 import rank as rank_1303
@@ -254,7 +252,7 @@ def register_rank():
     # 爱弥斯
     DamageRankRegister.register_class("1210", rank_1210)
     # 达妮娅
-    # DamageRankRegister.register_class("1211", rank_1211)
+    DamageRankRegister.register_class("1211", rank_1211)
 
     # 卡卡罗
     DamageRankRegister.register_class("1301", rank_1301)

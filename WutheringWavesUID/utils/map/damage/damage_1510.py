@@ -13,7 +13,7 @@ from ...damage.utils import (
     cast_skill,
     skill_damage_calc,
 )
-from .buff import lynae_buff, mornye_buff
+from .buff import denia_buff, lynae_buff, mornye_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -490,6 +490,46 @@ def calc_damage_11(
     return calc_damage_4(attr, role, isGroup, Interfered)
 
 
+def calc_damage_12(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True, Interfered: bool = False
+) -> tuple[str, str]:
+    # 设置角色伤害类型
+    attr.set_char_damage(attack_damage)
+    attr.set_char_template("temp_atk")
+
+    title = "·陆赫斯-常态"
+    msg = "特定攻击为命中目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
+
+    # 莫宁buff
+    mornye_buff(attr, 0, 1, isGroup)
+
+    # 达妮娅buff
+    denia_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_2(attr, role, isGroup, Interfered)
+
+
+def calc_damage_13(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True, Interfered: bool = False
+) -> tuple[str, str]:
+    # 设置角色伤害类型
+    attr.set_char_damage(attack_damage)
+    attr.set_char_template("temp_atk")
+
+    title = "·陆赫斯-常态"
+    msg = "特定攻击为命中目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
+
+    # 莫宁buff
+    mornye_buff(attr, 0, 1, isGroup)
+
+    # 达妮娅buff
+    denia_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_4(attr, role, isGroup, Interfered)
+
+
 damage_detail = [
     {
         "title": "普攻·流金贯行",
@@ -522,6 +562,14 @@ damage_detail = [
     {
         "title": "01莫/01琳/响应·于永冻中释义",
         "func": lambda attr, role: calc_damage_11(attr, role, Interfered=True),
+    },
+    {
+        "title": "01莫/01达/响应·斩杀日冕·曜",
+        "func": lambda attr, role: calc_damage_12(attr, role, Interfered=True),
+    },
+    {
+        "title": "01莫/01达/响应·于永冻中释义",
+        "func": lambda attr, role: calc_damage_13(attr, role, Interfered=True),
     },
 ]
 

@@ -15,7 +15,7 @@ from ...damage.utils import (
     liberation_damage,
     skill_damage_calc,
 )
-from .buff import mornye_buff
+from .buff import denia_buff, mornye_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -252,28 +252,34 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
+    title = "琳奈-共鸣模态"
+    msg = "光致变染为目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
+    attr.add_effect(title, msg)
+
     # 莫宁buff
     mornye_buff(attr, 0, 1, isGroup)
 
-    return calc_damage_2(attr, role, isGroup)
+    # 达妮娅buff
+    denia_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_2(attr, role, isGroup, Interfered=True)
 
 
 def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     attr.set_char_damage(attack_damage)
     attr.set_char_template("temp_atk")
 
-    # 莫宁buff
-    mornye_buff(attr, 0, 1, isGroup)
-
-    return calc_damage_2(attr, role, isGroup, Interfered=True)
-
-
-def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
-    attr.set_char_damage(attack_damage)
-    attr.set_char_template("temp_atk")
+    title = "琳奈-共鸣模态"
+    msg = "光致变染为目标附加【集谐·偏移】"
+    attr.set_env_tune_strain()
+    attr.add_effect(title, msg)
 
     # 莫宁buff
     mornye_buff(attr, 2, 5, isGroup)
+
+    # 达妮娅buff
+    denia_buff(attr, 2, 5, isGroup)
 
     return calc_damage_2(attr, role, isGroup, Interfered=True)
 
@@ -296,16 +302,12 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_2(attr, role, Interfered=True),
     },
     {
-        "title": "0+1莫宁/普攻·视觉冲击",
+        "title": "01莫/01达/响应集谐··视觉冲击",
         "func": lambda attr, role: calc_damage_10(attr, role),
     },
     {
-        "title": "0+1莫宁/响应集谐··视觉冲击",
+        "title": "25莫/25达/响应集谐··视觉冲击",
         "func": lambda attr, role: calc_damage_11(attr, role),
-    },
-    {
-        "title": "2+5莫宁/响应集谐··视觉冲击",
-        "func": lambda attr, role: calc_damage_12(attr, role),
     },
 ]
 

@@ -424,9 +424,45 @@ class Char_1211(CharAbstract):
         resonLevel: int = 1,
         isGroup: bool = True,
     ):
-        title = "达妮娅-延奏技能666"
-        msg = "队伍中的角色全伤害加深25%"
-        attr.add_dmg_deepen(0.25, title, msg)
+        if attr.env_tune_strain:
+            title = "达妮娅-固有技能·蚀刻繁彩"
+            msg = "共鸣模态·集谐:谐度破坏增幅提升10点"
+            attr.add_tune_break_boost(10, title, msg)
+
+            dmg = min(40, (attr.off_tune_buildup_rate - 1) * 100 // 10 * 8)
+            msg = f"共鸣模态·集谐:偏累超100%每10%谐破提升8点,上限40点,当前{dmg:,.0f}点"
+            attr.add_tune_break_boost(dmg, title, msg)
+
+            title = "达妮娅-计时的溃灭"
+            msg = "达妮娅于编队中时，目标集谐·干涉层数上限增加1层"
+            attr.add_tune_strain_stack(1, title, msg)
+
+            if chain >= 2 and attr.env_tune_strain:
+                title = "达妮娅-二链"
+                msg = "施加【震谐·偏移】后，该角色谐度破坏增幅提升20点"
+                attr.add_tune_break_boost(20, title, msg)
+
+            title = "达妮娅-延奏技能"
+            dmg = 0.15
+            if attr.env_tune_strain:
+                dmg = 0.4
+            msg = f"下一个登场的角色全伤害加深{dmg * 100:.0f}%"
+            attr.add_dmg_deepen(dmg, title, msg)
+
+        if attr.env_fusion_burst:
+            title = "达妮娅-固有技能·蚀刻繁彩"
+            msg = "共鸣模态·聚爆:热熔伤害加成提升30%"
+            attr.add_dmg_bonus(0.3, title, msg)
+
+            if chain >= 2 and attr.env_fusion_burst:
+                title = "达妮娅-二链"
+                msg = "施加【聚爆效应】后，该角色热熔伤害加成提升50%"
+                attr.add_dmg_bonus(0.5, title, msg)
+
+            if attr.env_fusion_burst_deepen:
+                title = "达妮娅-延奏技能"
+                msg = "队伍中登场角色周围目标受到聚爆效应伤害加深60%"
+                attr.add_dmg_deepen(0.6, title, msg)
 
         # 赝作的矮星
         weapon_clz = WavesWeaponRegister.find_class(21050076)
@@ -434,7 +470,7 @@ class Char_1211(CharAbstract):
             w = weapon_clz(21050076, 90, 6, resonLevel)
             method = getattr(w, "do_action", None)
             if callable(method):
-                method(attr, isGroup, isSelf=False)
+                method([cast_variation], attr, isGroup, isSelf=False)
 
 
 class Char_1301(CharAbstract):

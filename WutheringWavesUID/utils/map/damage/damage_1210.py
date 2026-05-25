@@ -16,7 +16,7 @@ from ...damage.utils import (
     liberation_damage,
     skill_damage_calc,
 )
-from .buff import lynae_buff, mornye_buff
+from .buff import chisa_buff, denia_buff, lynae_buff, mornye_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -277,6 +277,30 @@ def calc_damage_10(
     return calc_damage_2(attr, role, isGroup, False, Mode, HeavenfallEdict)
 
 
+def calc_damage_11(
+    attr: DamageAttribute,
+    role: RoleDetailData,
+    isGroup: bool = True,
+    Mode: Literal["tune_rupture", "fusion_burst"] = "fusion_burst",
+    HeavenfallEdict: Literal["Overdrive", "Finale"] = "Overdrive",
+) -> tuple[str, str]:
+    attr.set_char_damage(liberation_damage)
+    attr.set_char_template("temp_atk")
+
+    if Mode == "fusion_burst":
+        title = "共鸣模态·聚爆"
+        msg = "特定攻击为命中目标附加【聚爆效应】"
+        attr.set_env_fusion_burst()
+
+    # 千咲buff
+    chisa_buff(attr, 0, 1, isGroup)
+
+    # 达妮娅buff
+    denia_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_2(attr, role, isGroup, False, Mode, HeavenfallEdict)
+
+
 damage_detail = [
     {
         "title": "光翼共奏·登台(震谐)",
@@ -301,6 +325,10 @@ damage_detail = [
     {
         "title": "01莫/01琳/星辉破界而来·终结",
         "func": lambda attr, role: calc_damage_10(attr, role, HeavenfallEdict="Finale"),
+    },
+    {
+        "title": "01千/01达/星辉破界而来·终结",
+        "func": lambda attr, role: calc_damage_11(attr, role, HeavenfallEdict="Finale"),
     },
 ]
 

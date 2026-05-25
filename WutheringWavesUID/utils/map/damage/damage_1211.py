@@ -82,7 +82,7 @@ def calc_damage_1(
             attr.add_effect(title, msg)
 
             msg = f"放逐·幻灭之形第2段消耗所有【黯核】，伤害倍率提升 {DarkCoreNum}*150%"
-            skill_multi_final = f"{skill_multi_1}+({skill_multi_2})*{DarkCoreNum}*150%"
+            skill_multi_final = f"{skill_multi_1}+({skill_multi_2})*(1+{DarkCoreNum}*150%)"
             attr.add_skill_multi(skill_multi_final, title, msg)
 
     if Mode == "tune_strain":
@@ -101,7 +101,7 @@ def calc_damage_1(
 
     # 设置角色固有技能
     role_breach = role.role.breach
-    if role_breach and role_breach >= 4 and r == "r_open":
+    if role_breach and role_breach >= 4:
         if Mode == "tune_strain":
             title = "固有技能·蚀刻繁彩-熵变强化时"
             msg = "共鸣模态·集谐:谐度破坏增幅提升10点"
@@ -161,7 +161,7 @@ def calc_damage_1(
             msg = "共鸣技能放逐·幻灭之形伤害倍率提升40%"
             attr.add_skill_ratio(0.4, title, msg)
 
-    if chain_num >= 6 and r == "r_open":
+    if chain_num >= 6:
         title = f"{role_name}-六链"
         msg = "处于熵变强化时，攻击提升60%"
         attr.add_atk_percent(0.6, title, msg)
@@ -366,8 +366,20 @@ def calc_damage_3(
     attr.set_character_level(role.role.level)
 
     # 设置角色固有技能
-    # role_breach = role.role.breach
-    # if role_breach and role_breach >= 4:
+    role_breach = role.role.breach
+    if role_breach and role_breach >= 4:
+        if Mode == "tune_strain":
+            title = "固有技能·蚀刻繁彩"
+            msg = "共鸣模态·集谐:谐度破坏增幅提升10点"
+            attr.add_tune_break_boost(10, title, msg)
+
+            dmg = min(40, (attr.off_tune_buildup_rate - 1) * 100 // 10 * 8)
+            msg = f"共鸣模态·集谐:偏累超100%每10%谐破提升8点,上限40点,当前{dmg:,.0f}点"
+            attr.add_tune_break_boost(dmg, title, msg)
+        else:
+            title = "固有技能·蚀刻繁彩"
+            msg = "共鸣模态·聚爆:热熔伤害加成提升30%"
+            attr.add_dmg_bonus(0.3, title, msg)
 
     # 设置角色谐度破坏
     if Interfered and Mode == "tune_strain":
@@ -404,6 +416,13 @@ def calc_damage_3(
 
             msg = "10层简并虚质使达妮娅造成伤害无视目标10%热熔伤害抗性"
             attr.add_enemy_resistance(-0.1, title, msg)
+
+    if chain_num >= 6:
+        title = f"{role_name}-六链"
+        msg = "处于熵变强化时，攻击提升60%"
+        attr.add_atk_percent(0.6, title, msg)
+        msg = "处于熵变强化时，热熔伤害加成提升60%"
+        attr.add_dmg_bonus(0.6, title, msg)
 
     # 设置角色施放技能
     damage_func = [cast_skill, cast_damage, cast_liberation]

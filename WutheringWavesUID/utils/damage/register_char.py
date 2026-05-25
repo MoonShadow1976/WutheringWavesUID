@@ -449,6 +449,22 @@ class Char_1211(CharAbstract):
             msg = f"下一个登场的角色全伤害加深{dmg * 100:.0f}%"
             attr.add_dmg_deepen(dmg, title, msg)
 
+            title = "达妮娅-声骸技能-海维夏"
+            msg = "使用后15秒内，使下一个变奏技能登场的角色全属性伤害加成提升10%"
+            attr.add_dmg_bonus(0.1, title, msg)
+
+            # 角色施放延奏技能后，下一个变奏技能登场的角色攻击提升15%，其每点谐度破坏增幅还会使攻击额外提升0.3%，上限15%，持续15秒，若切换至其他角色则该效果提前结束。
+            if attr.char_template == "temp_atk":
+                title = "达妮娅-合鸣效果-逆光跃彩之约"
+                msg = "角色施放延奏技能后，下一个变奏技能登场的角色攻击提升15%"
+                attr.add_atk_percent(0.15, title, msg)
+
+                # dmg = min(0.15, attr.tune_break_boost * 0.003) # 其 是指变奏的角色
+                # msg = f"其每点谐度破坏增幅使攻击额外提升0.3%,上限15%(当前提升{dmg * 100:.2f}%)"
+                # attr.add_atk_percent(dmg, title, msg)
+                msg = "其谐度破坏增幅使攻击额外提升15%"  # 其 是指戴套的角色
+                attr.add_atk_percent(0.15, title, msg)
+
         if attr.env_fusion_burst:
             title = "达妮娅-固有技能·蚀刻繁彩"
             msg = "共鸣模态·聚爆:热熔伤害加成提升30%"
@@ -463,6 +479,14 @@ class Char_1211(CharAbstract):
                 title = "达妮娅-延奏技能"
                 msg = "队伍中登场角色周围目标受到聚爆效应伤害加深60%"
                 attr.add_dmg_deepen(0.6, title, msg)
+
+            title = "达妮娅-合鸣效果-斑驳粉饰之沫"
+            msg = "使用延奏技能后，下一个登场的角色热熔伤害提升25%"
+            attr.add_dmg_bonus(0.25, title, msg)
+
+            title = "达妮娅-声骸技能-达妮娅"
+            msg = "施放延奏技能，使下一个变奏登场的角色热熔伤害加成提升12%"
+            attr.add_dmg_bonus(0.12, title, msg)
 
         # 赝作的矮星
         weapon_clz = WavesWeaponRegister.find_class(21050076)
@@ -1004,6 +1028,11 @@ class Char_1508(CharAbstract):
         msg = "使目标层数上限增加3层"
         attr.add_effect(title, msg)
         # 注：这个记得单独写，是几层就是几层
+
+        # 虚湮效应（6层）
+        title = "虚湮效应"
+        msg = "虚湮效应持续时，目标防御每层降低2%，目前降低6*2%"
+        attr.add_defense_reduction(0.12, title, msg)
 
         # 二链效果
         if chain >= 2:

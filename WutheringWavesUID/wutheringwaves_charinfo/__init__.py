@@ -163,9 +163,7 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
         if isinstance(msg, str):
             is_refresh = -1
 
-        im = await draw_char_detail_img(
-            ev, uid, char, user_id, is_refresh=is_refresh
-        )
+        im = await draw_char_detail_img(ev, uid, char, user_id, is_refresh=is_refresh)
         if isinstance(im, bytes):
             return await bot.send(im)
 

@@ -137,7 +137,8 @@ async def auto_delete_all_invalid_cookie():
     block=True,
 )
 async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
-    uid = ev.text.strip().replace("uid", "").replace("UID", "")
+    uid = ev.text.strip().lower().replace("uid", "").replace("特征码", "").replace(" ", "")
+    uid = ''.join(ch for ch in uid if ch.isdigit())
     qid = ev.user_id
     if ev.bot_id in ["discord", "qqgroup", "qq_official"]:
         await sync_non_onebot_user_avatar(ev)
@@ -146,7 +147,7 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
 
     if "绑定" in ev.command:
         if not uid:
-            return await bot.send(f"该命令需要带上正确的uid!\n{PREFIX}绑定uid\n", at_sender)
+            return await bot.send(f"该命令需要带上正确的uid!参考示例:\n{PREFIX}绑定uid\n{PREFIX}绑定1234\n", at_sender)
         if uid == "999999999":
             return await bot.send(f"[鸣潮] 特征码[{uid}]为极限面板特征码，无法绑定！\n", at_sender)
         uid_list = await WavesBind.get_uid_list_by_game(qid, ev.bot_id)

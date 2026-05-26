@@ -109,13 +109,13 @@ CONFIG_DEFAULT: dict[str, GSC] = {
     "RefreshIntervalOne": GsIntConfig(
         "刷新单角色面板间隔，重启生效（单位秒）",
         "刷新单角色面板间隔，重启生效（单位秒）",
-        0,
+        300,
         600,
     ),
     "RefreshIntervalAll": GsIntConfig(
         "刷新面板间隔，重启生效（单位秒）",
         "刷新面板间隔，重启生效（单位秒）",
-        300,
+        1800,
         3600,
     ),
     "RefreshIntervalNotify": GsStrConfig(

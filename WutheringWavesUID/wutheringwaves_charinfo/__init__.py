@@ -83,8 +83,6 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
         "面板刷新",
         "面包刷新",
         "面板更新",
-        "面板",
-        "面包",
     ),
     block=True,
 )
@@ -96,7 +94,7 @@ async def send_card_info(bot: Bot, ev: Event):
 
     if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
         return await bot.send(
-            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n"
+            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"
         )
 
     # 檢查是否有 pcap 數據
@@ -144,10 +142,9 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
 
+    need_boolean = False
     if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send(
-            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板信息！\n注：\n  登录会自动刷新全部角色面板\n  声骸评分右上角✦表示刷新成功，左上角✖表示登录失效\n"
-        )
+        need_boolean = True  # 刷新直出
 
     # 檢查是否有 pcap 數據
     from ..wutheringwaves_pcap import exist_pcap_data
@@ -159,7 +156,19 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 
     buttons = []
-    msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons, refresh_type)
+    msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons, refresh_type, need_boolean)
+    if need_boolean:
+        if isinstance(msg, bool):
+            is_refresh = 1 if msg else 0
+        if isinstance(msg, str):
+            is_refresh = -1
+
+        im = await draw_char_detail_img(
+            ev, uid, char, user_id, is_refresh=is_refresh
+        )
+        if isinstance(im, bytes):
+            return await bot.send(im)
+
     if isinstance(msg, str) or isinstance(msg, bytes):
         return await bot.send_option(msg, buttons)
 
@@ -310,7 +319,7 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
         if isinstance(im, bytes):
             return await bot.send(im)
         if isinstance(im, str) and isinstance(msg, str):
-            return await bot.send(msg + im, at_sender)
+            return await bot.send(msg + "\n" + im, at_sender)
 
 
 @waves_new_char_detail.on_regex(r"^(\d+)?[\u4e00-\u9fa5]+(?:权重)$", block=True)

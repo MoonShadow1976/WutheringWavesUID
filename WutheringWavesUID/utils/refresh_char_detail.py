@@ -300,7 +300,7 @@ async def refresh_char(
         if refresh_type == "all":
             return error_reply(WAVES_CODE_101)
         else:
-            return error_reply(code=-110, msg="库街区暂未查询到角色数据")
+            return error_reply(code=-110, msg="库街区暂未查询到角色数据，或请对外展示该角色")
 
     return waves_datas
 

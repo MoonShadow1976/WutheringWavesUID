@@ -138,7 +138,7 @@ async def auto_delete_all_invalid_cookie():
 )
 async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
     uid = ev.text.strip().lower().replace("uid", "").replace("特征码", "").replace(" ", "")
-    uid = ''.join(ch for ch in uid if ch.isdigit())
+    uid = "".join(ch for ch in uid if ch.isdigit())
     qid = ev.user_id
     if ev.bot_id in ["discord", "qqgroup", "qq_official"]:
         await sync_non_onebot_user_avatar(ev)

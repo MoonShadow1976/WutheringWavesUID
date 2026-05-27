@@ -163,71 +163,64 @@ async def draw_refresh_char_detail_img(
     buttons: list[WavesButton],
     refresh_type: str | list[str] = "all",
     need_boolean: bool = False,
+    need_refresh: bool = True,
 ):
     if ev.bot_id in ["discord", "qqgroup", "qq_official"]:
         await sync_non_onebot_user_avatar(ev)
 
-    if waves_api.is_net(uid):
-        # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
-        from ..wutheringwaves_pcap import load_pcap_data
+    if need_refresh:
+        if waves_api.is_net(uid):
+            # 檢查是否有 pcap 數據，如果有則允許國際服用戶使用
+            from ..wutheringwaves_pcap import load_pcap_data
 
-        pcap_data = await load_pcap_data(uid)
-        if not pcap_data:
-            return "国际服用户请上传 pcap 文件后再刷新面板！\n"
+            pcap_data = await load_pcap_data(uid)
+            if not pcap_data:
+                return "国际服用户请上传 pcap 文件后再刷新面板！\n"
 
-        # 使用 pcap 數據刷新
-        waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
-        waves_datas = await refresh_char_from_pcap(
-            ev,
-            uid,
-            user_id,
-            pcap_data,
-            waves_map=waves_map,
-            refresh_type=refresh_type,
-        )
-        if isinstance(waves_datas, str):
-            return waves_datas
-
-        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
-
-        account_info = await get_user_detail_info(uid)
-
-        # pcap 模式下設置為已登錄狀態
-        ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
-        self_ck = True if ck else False
-    else:
-        time_stamp = can_refresh_card(user_id, uid, refresh_type)
-        if time_stamp > 0:
-            return get_refresh_interval_notify(time_stamp)
-        self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-        if not ck:
-            return error_reply(WAVES_CODE_102)
-        # 账户数据
-        account_info = await waves_api.get_base_info(uid, ck)
-        if not account_info.success:
-            return account_info.throw_msg()
-        if not account_info.data:
-            from gsuid_core.logger import logger
+            # 使用 pcap 數據刷新
+            waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
+            waves_datas = await refresh_char_from_pcap(
+                ev,
+                uid,
+                user_id,
+                pcap_data,
+                waves_map=waves_map,
+                refresh_type=refresh_type,
+            )
+            if isinstance(waves_datas, str):
+                return waves_datas
 
             from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 
-            logger.warning("账号信息为空，或请检查登录状态")
             account_info = await get_user_detail_info(uid)
-        else:
-            account_info = AccountBaseInfo.model_validate(account_info.data)
-        # 更新group id
-        await WavesBind.insert_waves_uid(user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9)
 
-        waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
-        if ev.command == "面板":
-            all_waves_datas = await get_all_role_detail_info_list(uid)
-            if not all_waves_datas:
-                return "暂无面板数据"
-            waves_map = {
-                "refresh_update": {},
-                "refresh_unchanged": {i.role.roleId: i.model_dump() for i in all_waves_datas},
-            }
+            # pcap 模式下設置為已登錄狀態
+            ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
+            self_ck = True if ck else False
         else:
+            time_stamp = can_refresh_card(user_id, uid, refresh_type)
+            if time_stamp > 0:
+                return get_refresh_interval_notify(time_stamp)
+            self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
+            if not ck:
+                return error_reply(WAVES_CODE_102)
+            # 账户数据
+            account_info = await waves_api.get_base_info(uid, ck)
+            if not account_info.success:
+                return account_info.throw_msg()
+            if not account_info.data:
+                from gsuid_core.logger import logger
+
+                from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+
+                logger.warning("账号信息为空，或请检查登录状态")
+                account_info = await get_user_detail_info(uid)
+            else:
+                account_info = AccountBaseInfo.model_validate(account_info.data)
+            # 更新group id
+            await WavesBind.insert_waves_uid(user_id, ev.bot_id, uid, ev.group_id, lenth_limit=9)
+
+            waves_map = {"refresh_update": {}, "refresh_unchanged": {}}
             waves_datas = await refresh_char(
                 ev,
                 uid,
@@ -240,29 +233,48 @@ async def draw_refresh_char_detail_img(
             if isinstance(waves_datas, str):
                 return waves_datas
 
-    # 保存用户信息
-    from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
+        # 保存用户信息
+        from ..wutheringwaves_analyzecard.user_info_utils import save_user_info
 
-    if account_info.is_full:
-        await save_user_info(str(account_info.id), account_info.name[:7], account_info.level, account_info.worldLevel)
+        if account_info.is_full:
+            await save_user_info(str(account_info.id), account_info.name[:7], account_info.level, account_info.worldLevel)
+        else:
+            await save_user_info(str(account_info.id), account_info.name[:7])
     else:
-        await save_user_info(str(account_info.id), account_info.name[:7])
+        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+
+        account_info = await get_user_detail_info(uid)
+        all_waves_datas = await get_all_role_detail_info_list(uid)
+        if not all_waves_datas:
+            return "暂无面板数据"
+        waves_map = {
+            "refresh_update": {},
+            "refresh_unchanged": {i.role.roleId: i.model_dump() for i in all_waves_datas},
+        }
+
+        ck = await waves_api.get_self_waves_ck(uid, user_id, ev.bot_id)
+        self_ck = True if ck else False
 
     role_detail_list = [RoleDetailData(**r) for key in ["refresh_update", "refresh_unchanged"] for r in waves_map[key].values()]
 
     # 总角色个数
     role_len = len(role_detail_list)
     # 刷新个数
-    role_update = len(waves_map["refresh_update"])
-    shadow_title = "刷新成功!"
-    shadow_color = GOLD
-    if role_update == 0:
-        shadow_title = "数据未更新"
-        shadow_color = RED
+    if need_refresh:
+        role_update = len(waves_map["refresh_update"])
+        shadow_title = "刷新成功!"
+        shadow_color = GOLD
+        if role_update == 0:
+            shadow_title = "数据未更新"
+            shadow_color = RED
 
-    # 刷新直出 -> bool (只刷单角色)
-    if need_boolean:
-        return True if role_update > 0 else False
+        # 刷新直出 -> bool (只刷单角色)
+        if need_boolean:
+            return True if role_update > 0 else False
+    else:
+        shadow_title = "面  板"
+        shadow_color = GREY
+
 
     role_high = role_len // 6 + (0 if role_len % 6 == 0 else 1)
     height = 470 + 50 + role_high * 330
@@ -272,24 +284,23 @@ async def draw_refresh_char_detail_img(
     img.alpha_composite(await get_refresh_role_img(width, height), (0, 0))
 
     # 提示文案
-    title = f"共刷新{role_update}个角色，可以使用"
+    title = f"共刷新{role_update}个角色，可以使用" if need_refresh else "可以使用"
     name = role_detail_list[0].role.roleName
     name = NAME_ALIAS.get(name, name)
     title2 = f"{PREFIX}{name}面板"
     title3 = "来查询该角色的具体面板"
-    info_block = Image.new("RGBA", (980, 50), color=(255, 255, 255, 0))
-    info_block_draw = ImageDraw.Draw(info_block)
-    info_block_draw.rounded_rectangle([0, 0, 980, 50], radius=15, fill=(128, 128, 128, int(0.3 * 255)))
-    info_block_draw.text((50, 24), f"{title}", GREY, waves_font_30, "lm")
-    info_block_draw.text((50 + len(title) * 28 + 20, 24), f"{title2}", (255, 180, 0), waves_font_30, "lm")
-    info_block_draw.text(
-        (50 + len(title) * 28 + 20 + len(title2) * 28 + 10, 24),
-        f"{title3}",
-        GREY,
-        waves_font_30,
-        "lm",
-    )
-    img.alpha_composite(info_block, (500, 400))
+    spacing, pad = 12, 20  # 间隔和左右内边距
+    temp = Image.new("RGBA", (1,1))
+    d = ImageDraw.Draw(temp)
+    w1, w2, w3 = (d.textbbox((0,0), t, font=waves_font_30)[2] for t in (title, title2, title3))
+    total_w = int(w1 + spacing + w2 + spacing + w3 + 2 * pad)
+    info_block = Image.new("RGBA", (total_w, 50), (0,0,0,0))
+    draw = ImageDraw.Draw(info_block)
+    draw.rounded_rectangle([0,0,total_w,50], radius=15, fill=(128,128,128,int(0.3*255)))
+    draw.text((pad, 24), title, GREY, waves_font_30, anchor="lm")
+    draw.text((pad + w1 + spacing, 24), title2, (255,180,0), waves_font_30, anchor="lm")
+    draw.text((pad + w1 + spacing + w2 + spacing, 24), title3, GREY, waves_font_30, anchor="lm")
+    img.alpha_composite(info_block, ((width - total_w) // 2, 400))
 
     waves_char_rank = await get_waves_char_rank(uid, role_detail_list)
 

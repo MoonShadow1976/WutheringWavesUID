@@ -83,6 +83,8 @@ async def send_delete_char_detail_msg(bot: Bot, ev: Event):
         "面板刷新",
         "面包刷新",
         "面板更新",
+        "面板",
+        "面包",
     ),
     block=True,
 )
@@ -92,10 +94,14 @@ async def send_card_info(bot: Bot, ev: Event):
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
 
-    if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
-        return await bot.send(
-            "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"
-        )
+    if ev.command == "面板" or ev.command == "面包":
+        need_refresh = False
+    else:
+        need_refresh = True
+        if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
+            return await bot.send(
+                "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"
+            )
 
     # 檢查是否有 pcap 數據
     from ..wutheringwaves_pcap import exist_pcap_data
@@ -107,7 +113,7 @@ async def send_card_info(bot: Bot, ev: Event):
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 
     buttons = []
-    msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons)
+    msg = await draw_refresh_char_detail_img(bot, ev, user_id, uid, buttons, need_refresh=need_refresh)
     if isinstance(msg, str) or isinstance(msg, bytes):
         return await bot.send_option(msg, buttons)
 

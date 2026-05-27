@@ -275,7 +275,6 @@ async def draw_refresh_char_detail_img(
         shadow_title = "面  板"
         shadow_color = GREY
 
-
     role_high = role_len // 6 + (0 if role_len % 6 == 0 else 1)
     height = 470 + 50 + role_high * 330
     width = 2000
@@ -290,15 +289,15 @@ async def draw_refresh_char_detail_img(
     title2 = f"{PREFIX}{name}面板"
     title3 = "来查询该角色的具体面板"
     spacing, pad = 12, 20  # 间隔和左右内边距
-    temp = Image.new("RGBA", (1,1))
+    temp = Image.new("RGBA", (1, 1))
     d = ImageDraw.Draw(temp)
-    w1, w2, w3 = (d.textbbox((0,0), t, font=waves_font_30)[2] for t in (title, title2, title3))
+    w1, w2, w3 = (d.textbbox((0, 0), t, font=waves_font_30)[2] for t in (title, title2, title3))
     total_w = int(w1 + spacing + w2 + spacing + w3 + 2 * pad)
-    info_block = Image.new("RGBA", (total_w, 50), (0,0,0,0))
+    info_block = Image.new("RGBA", (total_w, 50), (0, 0, 0, 0))
     draw = ImageDraw.Draw(info_block)
-    draw.rounded_rectangle([0,0,total_w,50], radius=15, fill=(128,128,128,int(0.3*255)))
+    draw.rounded_rectangle([0, 0, total_w, 50], radius=15, fill=(128, 128, 128, int(0.3 * 255)))
     draw.text((pad, 24), title, GREY, waves_font_30, anchor="lm")
-    draw.text((pad + w1 + spacing, 24), title2, (255,180,0), waves_font_30, anchor="lm")
+    draw.text((pad + w1 + spacing, 24), title2, (255, 180, 0), waves_font_30, anchor="lm")
     draw.text((pad + w1 + spacing + w2 + spacing, 24), title3, GREY, waves_font_30, anchor="lm")
     img.alpha_composite(info_block, ((width - total_w) // 2, 400))
 

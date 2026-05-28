@@ -12,7 +12,7 @@ from ..utils.button import WavesButton
 from ..utils.cache import TimedCache
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_102
+from ..utils.error_reply import WAVES_CODE_097, WAVES_CODE_102
 from ..utils.expression_ctx import WavesCharRank, get_waves_char_rank
 from ..utils.fonts.waves_fonts import (
     waves_font_25,
@@ -175,7 +175,8 @@ async def draw_refresh_char_detail_img(
 
             pcap_data = await load_pcap_data(uid)
             if not pcap_data:
-                return "国际服用户请上传 pcap 文件后再刷新面板！\n"
+                return error_reply(WAVES_CODE_097)
+                # return "国际服用户请上传 pcap 文件后再刷新面板！\n"
 
             # 使用 pcap 數據刷新
             waves_map = {"refresh_update": {}, "refresh_unchanged": {}}

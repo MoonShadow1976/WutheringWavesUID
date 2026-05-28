@@ -9,7 +9,7 @@ from PIL import Image
 
 from ..utils.at_help import is_valid_at, ruser_id
 from ..utils.database.models import WavesBind
-from ..utils.error_reply import WAVES_CODE_097, WAVES_CODE_103
+from ..utils.error_reply import WAVES_CODE_103
 from ..utils.hint import error_reply
 from ..utils.name_convert import char_name_to_char_id
 from ..utils.resource.constant import SPECIAL_CHAR
@@ -103,13 +103,6 @@ async def send_card_info(bot: Bot, ev: Event):
                 "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"
             )
 
-    # 檢查是否有 pcap 數據
-    from ..wutheringwaves_pcap import exist_pcap_data
-
-    pcap_bool = await exist_pcap_data(uid)
-    if not pcap_bool and waves_api.is_net(uid):
-        return await bot.send(error_reply(WAVES_CODE_097))
-
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 
     buttons = []
@@ -151,13 +144,6 @@ async def send_one_char_detail_msg(bot: Bot, ev: Event):
     need_boolean = False
     if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("CharCardRefresh").data:
         need_boolean = True  # 刷新直出
-
-    # 檢查是否有 pcap 數據
-    from ..wutheringwaves_pcap import exist_pcap_data
-
-    pcap_bool = await exist_pcap_data(uid)
-    if not pcap_bool and waves_api.is_net(uid):
-        return await bot.send(error_reply(WAVES_CODE_097))
 
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 

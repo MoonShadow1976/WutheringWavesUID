@@ -192,6 +192,18 @@ def get_version():
     return WutheringWavesUID_version
 
 
+def get_start_time():
+    from ..version import version_start_datetime
+
+    return version_start_datetime
+
+
+def get_end_time():
+    from ..version import version_end_datetime
+
+    return version_end_datetime
+
+
 filter_msg = [
     "角色查询失败，请重新选择角色",
 ]

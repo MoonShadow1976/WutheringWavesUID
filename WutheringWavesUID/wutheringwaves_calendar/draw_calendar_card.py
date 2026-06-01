@@ -20,6 +20,7 @@ from ..utils.image import (
     pic_download_from_url,
 )
 from ..utils.resource.RESOURCE_PATH import CALENDAR_PATH
+from ..utils.util import get_end_time, get_start_time
 from ..utils.waves_api import waves_api
 from .calendar_model import ImageItem, SpecialImages, VersionActivity
 
@@ -75,19 +76,13 @@ def shenhai_node(now: datetime):
     }
 
 
-def matrix_node(now: datetime):
-    start_time = datetime(2026, 3, 26, 4, 0)
-    date_range = 86400 * 34  # 34天为一周期（秒）
-    # 将秒数转为 timedelta 对象
-    date_range_td = timedelta(seconds=date_range)
+def matrix_node():
+    start_dt = datetime.strptime(get_start_time(), "%Y-%m-%d %H:%M:%S")
+    end_dt = datetime.strptime(get_end_time(), "%Y-%m-%d %H:%M:%S")
 
-    # 计算周期编号
-    elapsed_time = (now - start_time).total_seconds()  # 当前时间与开始时间的差值（秒）
-    period_index = int(elapsed_time // date_range)  # 周期编号（从 0 开始）
-
-    # 当前周期的起始和结束时间
-    period_start = start_time + period_index * date_range_td
-    period_end = period_start + date_range_td
+    # 起始时间 = 版本开始时间 + 7天
+    period_start = start_dt + timedelta(days=7)
+    period_end = end_dt  # 终止时间 = 版本结束时间
 
     start_date_str = period_start.strftime("%Y-%m-%d %H:%M")
     end_date_str = period_end.strftime("%Y-%m-%d %H:%M")
@@ -123,7 +118,7 @@ async def draw_calendar_img(ev: Event, uid: str):
             side_module["content"] = [activity for activity in side_module["content"] if activity.get("title") != "终焉矩阵"]
 
             # 插入本地节点
-            side_module["content"].insert(0, matrix_node(now))
+            side_module["content"].insert(0, matrix_node())
             side_module["content"].insert(1, tower_node(now))
             side_module["content"].insert(2, shenhai_node(now))
 

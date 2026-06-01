@@ -46,7 +46,7 @@ from ..utils.image import (
     pic_download_from_url,
 )
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
-from ..utils.util import get_version
+from ..utils.util import get_end_time, get_version
 from ..wutheringwaves_config import WutheringWavesConfig
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -194,22 +194,15 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     title_bg_draw.text((220, 290), title_text, "white", waves_font_58, "lm")
 
     # 计算距离刷新的剩余时间
+    end_time = datetime.strptime(get_end_time(), "%Y-%m-%d %H:%M:%S")
     now = datetime.now()
-    # 起始时间：2026年3月26日凌晨4:00
-    start_time = datetime(2026, 3, 26, 4, 0, 0)
-    # 每34天刷新一次
-    cycle_days = 34
 
-    # 计算已经过了多少个周期
-    elapsed = now - start_time
-    elapsed_days = elapsed.total_seconds() / 86400
-    current_cycle = int(elapsed_days / cycle_days)
+    # 如果当前时间已经超过了结束时间，剩余时间设为 0（或显示已结束）
+    if now >= end_time:
+        remaining = timedelta(0)
+    else:
+        remaining = end_time - now
 
-    # 计算下次刷新时间
-    next_refresh = start_time + timedelta(days=(current_cycle + 1) * cycle_days)
-
-    # 计算剩余时间
-    remaining = next_refresh - now
     remaining_days = remaining.days
     remaining_hours = remaining.seconds // 3600
     remaining_minutes = (remaining.seconds % 3600) // 60

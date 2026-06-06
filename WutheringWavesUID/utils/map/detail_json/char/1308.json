@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "混搭战术",
-        "desc": "<color=Title>普攻·猎手</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·猎手</color>\n<color=Highlight>长按普攻</color>，可持续对敌人进行射击，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n·若在长按过程中<color=Highlight>松开普攻</color>，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以施放<color=Highlight>重击·吃枪子吧！·猎手</color>。\n\n<color=Title>重击·吃枪子吧！·猎手</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中突袭！·猎手</color>\n从空中空翻落地。\n施放该技能后保持长按攻击可施放<color=Highlight>重击·猎手</color>。\n\n<color=Title>空中攻击·猎手</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·猎手</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·猎手</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放：\n·进行<color=Highlight>普攻·猎手</color>期间。\n·进行<color=Highlight>重击·猎手</color>期间。\n·施放<color=Highlight>空中突袭！·猎手</color>期间。\n·施放<color=Highlight>战术闪避·猎手</color>期间。\n·施放<color=Highlight>共鸣技能·有本事来抓我！</color>期间。\n·施放<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>期间。\n使用<color=Highlight>战术闪避·猎手</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。\n\n<color=Title>普攻·铁胆</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·铁胆</color>\n消耗耐力攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·铁胆</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·铁胆</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·铁胆</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放：\n·进行<color=Highlight>普攻·铁胆</color>期间。\n·施放<color=Highlight>战术闪避·铁胆</color>期间。\n·施放<color=Highlight>共鸣技能·来发大的！</color>期间。\n·施放<color=Highlight>变奏技能·呜呼，来发大的！</color>期间。\n使用<color=Highlight>战术闪避·铁胆</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。",
+        "desc": "<color=Title>普攻·猎手</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·猎手</color>\n<color=Highlight>长按普攻</color>，消耗耐力并持续对敌人进行射击，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n·若在长按过程中<color=Highlight>松开普攻</color>，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以施放<color=Highlight>重击·吃枪子吧！·猎手</color>。\n\n<color=Title>重击·吃枪子吧！·猎手</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中突袭！·猎手</color>\n从空中空翻落地。\n施放该技能后保持<color=Highlight>长按普攻</color>可施放<color=Highlight>重击·猎手</color>，且不需要消耗耐力。\n\n<color=Title>空中攻击·猎手</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·猎手</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·猎手</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放（需在地面时）：\n·进行<color=Highlight>普攻·猎手</color>期间。\n·进行<color=Highlight>重击·猎手</color>期间。\n·进行<color=Highlight>重击·吃枪子吧！·猎手</color>期间。\n·施放<color=Highlight>空中突袭！·猎手</color>期间。\n·施放<color=Highlight>战术闪避·猎手</color>期间。\n·施放<color=Highlight>共鸣技能</color>期间。\n·施放<color=Highlight>变奏技能</color>期间。\n使用<color=Highlight>战术闪避·猎手</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。\n施放该技能后保持<color=Highlight>长按普攻</color>可施放<color=Highlight>重击·猎手</color>，且不需要消耗耐力。\n\n<color=Title>普攻·铁胆</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>战术闪避·铁胆</color>一定时间内不会重置<color=Highlight>普攻·铁胆</color>连击段数。\n\n<color=Title>重击·铁胆</color>\n消耗耐力攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·铁胆</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·铁胆</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·铁胆</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放（需在地面时）：\n·进行<color=Highlight>普攻·铁胆</color>期间。\n·施放<color=Highlight>战术闪避·铁胆</color>期间。\n·施放<color=Highlight>共鸣技能</color>期间。\n·施放<color=Highlight>变奏技能</color>期间。\n使用<color=Highlight>战术闪避·铁胆</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -616,7 +616,7 @@
             ]
           },
           "5": {
-            "name": "重击·吃枪子吧！·猎手",
+            "name": "重击·吃枪子吧！·猎手伤害",
             "param": [
               [
                 "30.60%+30.60%",
@@ -673,26 +673,26 @@
             "name": "闪避反击·猎手伤害",
             "param": [
               [
-                "12.75%*4",
-                "13.80%*4",
-                "14.85%*4",
-                "16.31%*4",
-                "17.36%*4",
-                "18.56%*4",
-                "20.23%*4",
-                "21.90%*4",
-                "23.58%*4",
-                "25.35%*4",
-                "27.44%*4",
-                "29.54%*4",
-                "31.63%*4",
-                "33.72%*4",
-                "35.81%*4",
-                "37.90%*4",
-                "39.99%*4",
-                "42.08%*4",
-                "44.17%*4",
-                "46.26%*4"
+                "106.25%",
+                "114.97%",
+                "123.68%",
+                "135.88%",
+                "144.59%",
+                "154.61%",
+                "168.55%",
+                "182.49%",
+                "196.43%",
+                "211.24%",
+                "228.67%",
+                "246.09%",
+                "263.52%",
+                "280.94%",
+                "298.37%",
+                "315.79%",
+                "333.22%",
+                "350.64%",
+                "368.07%",
+                "385.49%"
               ]
             ]
           },
@@ -700,26 +700,26 @@
             "name": "战术闪避·猎手伤害",
             "param": [
               [
-                "8.50%+8.50%",
-                "9.20%+9.20%",
-                "9.90%+9.90%",
-                "10.87%+10.87%",
-                "11.57%+11.57%",
-                "12.37%+12.37%",
-                "13.49%+13.49%",
-                "14.60%+14.60%",
-                "15.72%+15.72%",
-                "16.90%+16.90%",
-                "18.30%+18.30%",
-                "19.69%+19.69%",
-                "21.09%+21.09%",
-                "22.48%+22.48%",
-                "23.87%+23.87%",
-                "25.27%+25.27%",
-                "26.66%+26.66%",
-                "28.06%+28.06%",
-                "29.45%+29.45%",
-                "30.84%+30.84%"
+                "8.50%*4+8.50%",
+                "9.20%*4+9.20%",
+                "9.90%*4+9.90%",
+                "10.87%*4+10.87%",
+                "11.57%*4+11.57%",
+                "12.37%*4+12.37%",
+                "13.49%*4+13.49%",
+                "14.60%*4+14.60%",
+                "15.72%*4+15.72%",
+                "16.90%*4+16.90%",
+                "18.30%*4+18.30%",
+                "19.69%*4+19.69%",
+                "21.09%*4+21.09%",
+                "22.48%*4+22.48%",
+                "23.87%*4+23.87%",
+                "25.27%*4+25.27%",
+                "26.66%*4+26.66%",
+                "28.06%*4+28.06%",
+                "29.45%*4+29.45%",
+                "30.84%*4+30.84%"
               ]
             ]
           },
@@ -889,6 +889,33 @@
             "name": "闪避反击·铁胆伤害",
             "param": [
               [
+                "130.05%",
+                "140.72%",
+                "151.38%",
+                "166.31%",
+                "176.98%",
+                "189.24%",
+                "206.30%",
+                "223.37%",
+                "240.43%",
+                "258.56%",
+                "279.89%",
+                "301.21%",
+                "322.54%",
+                "343.87%",
+                "365.20%",
+                "386.53%",
+                "407.85%",
+                "429.18%",
+                "450.51%",
+                "471.84%"
+              ]
+            ]
+          },
+          "16": {
+            "name": "战术闪避·铁胆伤害",
+            "param": [
+              [
                 "51.00%",
                 "55.19%",
                 "59.37%",
@@ -909,33 +936,6 @@
                 "168.31%",
                 "176.67%",
                 "185.04%"
-              ]
-            ]
-          },
-          "16": {
-            "name": "战术闪避·铁胆伤害",
-            "param": [
-              [
-                "31.03%",
-                "33.57%",
-                "36.12%",
-                "39.68%",
-                "42.22%",
-                "45.15%",
-                "49.22%",
-                "53.29%",
-                "57.36%",
-                "61.69%",
-                "66.77%",
-                "71.86%",
-                "76.95%",
-                "82.04%",
-                "87.13%",
-                "92.21%",
-                "97.30%",
-                "102.39%",
-                "107.48%",
-                "112.57%"
               ]
             ]
           },
@@ -1279,7 +1279,7 @@
     "2": {
       "skill": {
         "name": "战术性调整",
-        "desc": "<color=Title>共鸣技能·来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，<color=Highlight>短按共鸣技能</color>，可接近敌人快速扫射，同时切换模式为<color=Highlight>【铁胆】</color>，并使用<color=Highlight>【铁胆】</color>轰击目标，造成<color=Thunder>导电伤害</color>。\n施放此技能后，一定时间内<color=Highlight>短按普攻</color>，可施放<color=Highlight>普攻·铁胆</color>第二段。\n\n<color=Title>共鸣技能·有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，<color=Highlight>短按共鸣技能</color>，用<color=Highlight>【铁胆】</color>快速扫击敌人，然后对地射击利用后坐力接近敌人，同时切换模式为<color=Highlight>【猎手】</color>，并使用<color=Highlight>【猎手】</color>快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
+        "desc": "<color=Title>共鸣技能·来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，<color=Highlight>短按共鸣技能</color>，可接近敌人然后使用<color=Highlight>【猎手】</color>快速扫射，同时切换模式为<color=Highlight>【铁胆】</color>，并使用<color=Highlight>【铁胆】</color>轰击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>共鸣技能·有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，<color=Highlight>短按共鸣技能</color>，用<color=Highlight>【铁胆】</color>快速扫击敌人，然后对地射击利用后坐力接近敌人，同时切换模式为<color=Highlight>【猎手】</color>，并使用<color=Highlight>【猎手】</color>快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时间内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
         "param": [],
         "type": "共鸣技能",
         "level": {
@@ -1307,33 +1307,6 @@
                 "39.28%+39.28%+39.28%+39.28%+58.91%+58.91%+58.91%+58.91%",
                 "41.23%+41.23%+41.23%+41.23%+61.84%+61.84%+61.84%+61.84%",
                 "43.18%+43.18%+43.18%+43.18%+64.77%+64.77%+64.77%+64.77%"
-              ]
-            ]
-          },
-          "1-2": {
-            "name": "骇破响应·熔触伤害",
-            "param": [
-              [
-                "1186.50%",
-                "1283.80%",
-                "1381.09%",
-                "1517.30%",
-                "1614.59%",
-                "1726.48%",
-                "1882.15%",
-                "2037.82%",
-                "2193.49%",
-                "2358.89%",
-                "2553.47%",
-                "2748.06%",
-                "2942.64%",
-                "3137.23%",
-                "3331.82%",
-                "3526.40%",
-                "3720.99%",
-                "3915.57%",
-                "4110.16%",
-                "4304.75%"
               ]
             ]
           },
@@ -1569,10 +1542,10 @@
     "3": {
       "skill": {
         "name": "狂欢时间！",
-        "desc": "切换为<color=Highlight>【{0}型重机枪】</color>模式，生成停滞领域，{1}秒内：\n丽贝卡使用<color=Highlight>【{2}型重机枪】</color>自动射击，造成<color=Thunder>导电伤害</color>，并持续获得<color=Highlight>【过载】</color>。射击期间，一定时间后<color=Highlight>短按普攻</color>或<color=Highlight>共鸣解放</color>，可提升<color=Highlight>【{3}型重机枪】</color>威力，并更快的获得<color=Highlight>【过载】</color>，至多可触发2次。\n·机枪会自动锁定屏幕中央瞄准框内距离准星最近的敌人，不会攻击瞄准框外的敌人。\n·丽贝卡使用<color=Highlight>【{4}型重机枪】</color>期间无法移动，但获得{5}减伤和免疫打断。\n\n<color=Title>【过载】获取规则</color>\n<color=Highlight>【过载】</color>上限为{6}点。\n<color=Highlight>【{7}型重机枪】</color>未提升威力时：命中获得{8}点。\n<color=Highlight>【{9}型重机枪】</color>威力提升1次后：命中获得{10}点。\n<color=Highlight>【{11}型重机枪】</color>威力提升2次后：命中获得{12}点。\n\n<color=Title>大烟花！</color>\n<color=Highlight>【{13}型重机枪】</color>模式持续时间结束时或<color=Highlight>【过载】</color>达到上限时，自动施放<color=Highlight>大烟花！</color>，造成<color=Thunder>导电伤害</color>。施放<color=Highlight>大烟花！</color>时，会结束机枪状态。\n·<color=Highlight>【{14}型重机枪】</color>模式下<color=Highlight>长按共鸣解放</color>，可提前施放<color=Highlight>大烟花！</color>。",
+        "desc": "切换为<color=Highlight>【{0}型重机枪】</color>模式，生成停滞领域，{1}秒内：\n丽贝卡使用<color=Highlight>【{2}型重机枪】</color>自动射击，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害，并持续获得<color=Highlight>【过载】</color>。射击期间，每隔一定时间后<color=Highlight>短按或长按普攻</color>、<color=Highlight>短按共鸣解放</color>，可提升<color=Highlight>【{3}型重机枪】</color>威力，并更快的获得<color=Highlight>【过载】</color>，至多可触发2次。\n·机枪会自动锁定屏幕中央瞄准框内距离准星最近的敌人，不会攻击瞄准框外的敌人。\n·丽贝卡使用<color=Highlight>【{4}型重机枪】</color>期间无法移动，但受到的伤害降低{5}且免疫打断。\n\n<color=Title>【过载】获取规则</color>\n<color=Highlight>【过载】</color>上限为{6}点。\n<color=Highlight>【{7}型重机枪】</color>未提升威力时：命中获得{8}点。\n<color=Highlight>【{9}型重机枪】</color>威力提升1次后：命中获得{10}点。\n<color=Highlight>【{11}型重机枪】</color>威力提升2次后：命中获得{12}点。\n\n<color=Title>大烟花！</color>\n<color=Highlight>【{13}型重机枪】</color>模式持续时间结束时或<color=Highlight>【过载】</color>达到上限时，自动施放<color=Highlight>大烟花！</color>，造成<color=Thunder>导电伤害</color>。施放<color=Highlight>大烟花！</color>时，会退出<color=Highlight>【{14}型重机枪】</color>模式。\n·<color=Highlight>【{15}型重机枪】</color>模式下<color=Highlight>长按共鸣解放</color>，可提前施放<color=Highlight>大烟花！</color>。\n·退出<color=Highlight>【{14}型重机枪】</color>模式时，会清除所有<color=Highlight>【过载】</color>。",
         "param": [
           "31",
-          "9",
+          "9.5",
           "31",
           "31",
           "31",
@@ -1585,11 +1558,93 @@
           "31",
           "6",
           "31",
+          "31",
           "31"
         ],
         "type": "共鸣解放",
         "level": {
           "1": {
+            "name": "【31型重机枪】伤害",
+            "param": [
+              [
+                "12.23%",
+                "13.23%",
+                "14.23%",
+                "15.63%",
+                "16.64%",
+                "17.79%",
+                "19.39%",
+                "21.00%",
+                "22.60%",
+                "24.30%",
+                "26.31%",
+                "28.31%",
+                "30.32%",
+                "32.32%",
+                "34.33%",
+                "36.33%",
+                "38.34%",
+                "40.34%",
+                "42.34%",
+                "44.35%"
+              ]
+            ]
+          },
+          "2": {
+            "name": "【31型重机枪】威力提升1次伤害",
+            "param": [
+              [
+                "24.45%",
+                "26.45%",
+                "28.46%",
+                "31.26%",
+                "33.27%",
+                "35.57%",
+                "38.78%",
+                "41.99%",
+                "45.20%",
+                "48.60%",
+                "52.61%",
+                "56.62%",
+                "60.63%",
+                "64.64%",
+                "68.65%",
+                "72.66%",
+                "76.67%",
+                "80.67%",
+                "84.68%",
+                "88.69%"
+              ]
+            ]
+          },
+          "3": {
+            "name": "【31型重机枪】威力提升2次伤害",
+            "param": [
+              [
+                "36.67%",
+                "39.68%",
+                "42.68%",
+                "46.89%",
+                "49.90%",
+                "53.36%",
+                "58.17%",
+                "62.98%",
+                "67.79%",
+                "72.90%",
+                "78.92%",
+                "84.93%",
+                "90.94%",
+                "96.96%",
+                "102.97%",
+                "108.98%",
+                "115.00%",
+                "121.01%",
+                "127.02%",
+                "133.04%"
+              ]
+            ]
+          },
+          "4": {
             "name": "大烟花！伤害",
             "param": [
               [
@@ -1616,7 +1671,7 @@
               ]
             ]
           },
-          "2": {
+          "5": {
             "name": "冷却时间",
             "param": [
               [
@@ -1643,34 +1698,7 @@
               ]
             ]
           },
-          "3": {
-            "name": "【31型重机枪】伤害",
-            "param": [
-              [
-                "13.34%*5",
-                "14.43%*5",
-                "15.52%*5",
-                "17.06%*5",
-                "18.15%*5",
-                "19.41%*5",
-                "21.16%*5",
-                "22.90%*5",
-                "24.65%*5",
-                "26.51%*5",
-                "28.70%*5",
-                "30.89%*5",
-                "33.07%*5",
-                "35.26%*5",
-                "37.45%*5",
-                "39.63%*5",
-                "41.82%*5",
-                "44.01%*5",
-                "46.19%*5",
-                "48.38%*5"
-              ]
-            ]
-          },
-          "3-2": {
+          "6": {
             "name": "消耗共鸣能量",
             "param": [
               [
@@ -1697,7 +1725,7 @@
               ]
             ]
           },
-          "4": {
+          "7": {
             "name": "回复协奏能量",
             "param": [
               [
@@ -1875,7 +1903,7 @@
     "4": {
       "skill": {
         "name": "该你了！",
-        "desc": "每次获得<color=Highlight>小孩子才做选择！</color>效果或者施放<color=Highlight>共鸣解放·狂欢时间！</color>时，攻击提升{0}，持续{1}秒，可叠加{2}层。队伍中角色的附加<color=Highlight>【骇破·偏移】</color>时，谐度破坏增幅提升{3}点，持续{4}秒。",
+        "desc": "每次获得<color=Highlight>小孩子才做选择！</color>效果或者施放<color=Highlight>重击·哒哒哒！·猎手</color>和<color=Highlight>重击·砰砰砰！·铁胆</color>时，攻击提升{0}，持续{1}秒，可叠加{2}层。\n队伍中的角色附加<color=Highlight>【骇破·偏移】</color>时，谐度破坏增幅提升{3}点，持续{4}秒。",
         "param": [
           "10%",
           "12",
@@ -1910,7 +1938,7 @@
     "5": {
       "skill": {
         "name": "有破绽！",
-        "desc": "<color=Highlight>哒哒哒！·猎手</color>和<color=Highlight>砰砰砰！·铁胆</color>抗打断能力提升。\n瑞贝卡施放<color=Highlight>共鸣解放·狂欢时间！</color>时，附近队伍中所有角色攻击提升{0}，持续{1}秒。",
+        "desc": "<color=Highlight>重击·哒哒哒！·猎手</color>和<color=Highlight>重击·砰砰砰！·铁胆</color>抗打断能力提升。\n丽贝卡施放<color=Highlight>共鸣解放·狂欢时间！</color>时，附近队伍中所有角色攻击提升{0}，持续{1}秒。",
         "param": [
           "20%",
           "30"
@@ -1942,7 +1970,7 @@
     "6": {
       "skill": {
         "name": "到我了！",
-        "desc": "<color=Title>呜呼，来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，变奏入场，接近敌人快速扫射，同时切换为<color=Highlight>【铁胆】</color>模式轰击目标，造成<color=Thunder>导电伤害</color>。\n施放此技能后，一定时间内<color=Highlight>短按普攻</color>，可施放<color=Highlight>普攻·铁胆</color>第二段。\n\n<color=Title>蠢货，有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，变奏入场，对地射击利用后坐力接近敌人，同时切换为<color=Highlight>【猎手】</color>模式快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时间内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
+        "desc": "<color=Title>呜呼，来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，变奏入场，接近敌人并使用<color=Highlight>【猎手】</color>快速扫射，同时切换为<color=Highlight>【铁胆】</color>模式轰击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>蠢货，有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，变奏入场，使用<color=Highlight>【铁胆】</color>对地射击并利用后坐力接近敌人，同时切换为<color=Highlight>【猎手】</color>模式快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时间内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
         "param": [],
         "type": "变奏技能",
         "level": {
@@ -2205,17 +2233,18 @@
     "7": {
       "skill": {
         "name": "我要认真了！",
-        "desc": "<color=Title>该用这个了！</color>\n丽贝卡施放<color=Highlight>共鸣技能</color>或<color=Highlight>变奏技能</color>可以在<color=Highlight>【猎手】</color>、<color=Highlight>【铁胆】</color>模式之间切换：\n·处于<color=Highlight>【猎手】</color>模式时，丽贝卡暴击伤害提升{0}。\n·处于<color=Highlight>【铁胆】</color>模式时，丽贝卡攻击无视目标{1}防御。\n·丽贝卡初始处于<color=Highlight>【猎手】</color>模式。\n\n<color=Title>骇破·偏移</color>\n瑞贝卡施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>、<color=Highlight>哒哒哒！·猎手</color>、<color=Highlight>砰砰砰！·铁胆</color>、<color=Highlight>共鸣解放·大烟花！</color>造成伤害时会对目标附加<color=Highlight>【骇破·偏移】</color>，上述效果均每3秒可触发1次。\n\n<color=Title>骇破响应·熔触</color>\n丽贝卡对范围内处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Thunder>导电伤害</color>，此次伤害为骇破伤害。\n\n<color=Title>哒哒哒！·猎手</color>\n<color=Highlight>【狂热】</color>达到{2}点时，<color=Highlight>重击·猎手</color>替换为哒哒哒·猎手。<color=Highlight>长按普攻</color>施放<color=Highlight>哒哒哒！·猎手</color>，消耗所有的<color=Highlight>【狂热】</color>，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n在施放<color=Highlight>重击·猎手</color>期间，若<color=Highlight>【狂热】</color>达到{3}点，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以通过<color=Highlight>松开普攻</color>施放<color=Highlight>哒哒哒！·猎手</color>。\n\n<color=Title>砰砰砰！·铁胆</color>\n<color=Highlight>【狂热】</color>达到{4}点时，<color=Highlight>重击·铁胆</color>替换为砰砰砰！·猎手。<color=Highlight>长按普攻</color>施放<color=Highlight>砰砰砰！·铁胆</color>，消耗所有的<color=Highlight>【狂热】</color>，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n\n<color=Title>【狂热】获取规则</color>\n<color=Highlight>【狂热】</color>上限{5}点。\n<color=Highlight>常态攻击</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n<color=Highlight>共鸣技能</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>时，回复{6}点狂热。\n\n<color=Title>【手感火热】获取规则</color>\n<color=Highlight>【手感火热】</color>上限{7}点。\n随时间持续获得，每秒获得{8}点。\n施放<color=Highlight>哒哒哒！·猎手</color>或<color=Highlight>砰砰砰！·铁胆</color>时回复{9}点。\n\n<color=Title>小孩子才做选择！</color>\n<color=Highlight>【手感火热】</color>达到{10}点时，施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color><color=Highlight>共鸣技能·来发大的！</color>或<color=Highlight>共鸣技能·有本事来抓我！</color>时，获得额外效果，{11}秒内：\n无论处于哪种模式，瑞贝卡同时获得<color=Highlight>【猎手】</color>和<color=Highlight>【铁胆】</color>模式的属性加成效果。\n此期间无法回复<color=Highlight>【手感火热】</color>，并且每秒消耗{12}点<color=Highlight>【手感火热】</color>。",
+        "desc": "<color=Title>该用这个了！</color>\n丽贝卡施放<color=Highlight>共鸣技能</color>或<color=Highlight>变奏技能</color>可以在<color=Highlight>【猎手】</color>、<color=Highlight>【铁胆】</color>模式之间切换：\n·处于<color=Highlight>【猎手】</color>模式时，丽贝卡暴击伤害提升{0}。\n·处于<color=Highlight>【铁胆】</color>模式时，丽贝卡造成伤害无视目标{1}防御。\n·丽贝卡初始处于<color=Highlight>【猎手】</color>模式。\n\n<color=Title>骇破·偏移</color>\n丽贝卡施放以下技能造成伤害时会对目标附加<color=Highlight>【骇破·偏移】</color>，同一技能对同一目标{2}秒内只能触发1次。\n<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>、<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>、<color=Highlight>共鸣解放·大烟花！</color>。\n\n<color=Title>骇破响应·熔触</color>\n丽贝卡对范围内处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Thunder>导电伤害</color>，此次伤害为骇破伤害。\n\n<color=Title>重击·哒哒哒！·猎手</color>\n<color=Highlight>【狂热】</color>达到{3}点时，<color=Highlight>重击·猎手</color>替换为<color=Highlight>重击·哒哒哒！·猎手</color>。<color=Highlight>长按普攻</color>施放<color=Highlight>重击·哒哒哒！·猎手</color>，消耗所有的<color=Highlight>【狂热】</color>，牵引周围的目标，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n在施放<color=Highlight>重击·猎手</color>期间，若<color=Highlight>【狂热】</color>达到{4}点，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以通过<color=Highlight>松开普攻</color>施放<color=Highlight>重击·哒哒哒！·猎手</color>。\n\n<color=Title>重击·砰砰砰！·铁胆</color>\n<color=Highlight>【狂热】</color>达到{5}点时，<color=Highlight>重击·铁胆</color>替换为<color=Highlight>重击·砰砰砰！·铁胆</color>。<color=Highlight>长按普攻</color>施放<color=Highlight>重击·砰砰砰！·铁胆</color>，消耗所有的<color=Highlight>【狂热】</color>，牵引周围的目标，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n\n<color=Title>【狂热】获取规则</color>\n<color=Highlight>【狂热】</color>上限{6}点。\n<color=Highlight>常态攻击</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n<color=Highlight>共鸣技能</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>并获得<color=Highlight>小孩子才做选择！</color>时，回复{7}点。\n\n<color=Title>【手感火热】获取规则</color>\n<color=Highlight>【手感火热】</color>上限{8}点。\n随时间持续获得，每秒获得{9}点。\n施放<color=Highlight>重击·哒哒哒！·猎手</color>或<color=Highlight>重击·砰砰砰！·铁胆</color>时回复{10}点。\n\n<color=Title>小孩子才做选择！</color>\n<color=Highlight>【手感火热】</color>达到{11}点时，施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>、<color=Highlight>共鸣技能·来发大的！</color>或<color=Highlight>共鸣技能·有本事来抓我！</color>时，获得额外效果，{12}秒内：\n无论处于哪种模式，丽贝卡同时获得<color=Highlight>【猎手】</color>和<color=Highlight>【铁胆】</color>模式的属性加成效果。\n此期间无法回复<color=Highlight>【手感火热】</color>，并且每秒消耗{13}点<color=Highlight>【手感火热】</color>。",
         "param": [
           "30%",
           "15%",
+          "3",
           "120",
           "120",
           "120",
           "120",
           "50",
           "120",
-          "5",
+          "10",
           "40",
           "120",
           "12",
@@ -2223,6 +2252,33 @@
         ],
         "type": "共鸣回路",
         "level": {
+          "1": {
+            "name": "骇破响应·熔触伤害",
+            "param": [
+              [
+                "1186.50%",
+                "1283.80%",
+                "1381.09%",
+                "1517.30%",
+                "1614.59%",
+                "1726.48%",
+                "1882.15%",
+                "2037.82%",
+                "2193.49%",
+                "2358.89%",
+                "2553.47%",
+                "2748.06%",
+                "2942.64%",
+                "3137.23%",
+                "3331.82%",
+                "3526.40%",
+                "3720.99%",
+                "3915.57%",
+                "4110.16%",
+                "4304.75%"
+              ]
+            ]
+          },
           "2": {
             "name": "哒哒哒！·猎手伤害",
             "param": [
@@ -2274,60 +2330,6 @@
                 "462.02%",
                 "484.98%",
                 "507.94%"
-              ]
-            ]
-          },
-          "4": {
-            "name": "【31型重机枪】威力提升1次伤害",
-            "param": [
-              [
-                "26.67%*5",
-                "28.86%*5",
-                "31.04%*5",
-                "34.11%*5",
-                "36.29%*5",
-                "38.81%*5",
-                "42.31%*5",
-                "45.80%*5",
-                "49.30%*5",
-                "53.02%*5",
-                "57.39%*5",
-                "61.77%*5",
-                "66.14%*5",
-                "70.51%*5",
-                "74.89%*5",
-                "79.26%*5",
-                "83.63%*5",
-                "88.01%*5",
-                "92.38%*5",
-                "96.75%*5"
-              ]
-            ]
-          },
-          "5": {
-            "name": "【31型重机枪】威力提升2次伤害",
-            "param": [
-              [
-                "40.00%*10",
-                "43.28%*10",
-                "46.56%*10",
-                "51.16%*10",
-                "54.44%*10",
-                "58.21%*10",
-                "63.46%*10",
-                "68.70%*10",
-                "73.95%*10",
-                "79.53%*10",
-                "86.09%*10",
-                "92.65%*10",
-                "99.21%*10",
-                "105.77%*10",
-                "112.33%*10",
-                "118.89%*10",
-                "125.45%*10",
-                "132.01%*10",
-                "138.57%*10",
-                "145.13%*10"
               ]
             ]
           }
@@ -2482,16 +2484,18 @@
     "8": {
       "skill": {
         "name": "好搭档",
-        "desc": "召唤机枪塔持续攻击敌人，持续{0}秒，造成<color=Thunder>导电伤害</color>。\n下一位登场角色获得<color=Highlight>浪客羁绊</color>，全伤害加深{1}，持续{2}秒。机枪每次攻击时，持有<color=Highlight>浪客羁绊</color>的角色会获得{3}层<color=Highlight>超限</color>，造成重击伤害加深{4}（若是露西持有<color=Highlight>浪客羁绊</color>，则直接获得满层），可叠加{5}层。若切换至其他角色则提前结束<color=Highlight>浪客羁绊</color>和<color=Highlight>超限</color>。\n机枪塔可被露西强化，伤害倍率提升{6}，但持续时间变为{7}秒。",
+        "desc": "召唤机枪塔持续攻击敌人，持续{0}秒，每次攻击造成{9}的<color=Thunder>导电伤害</color>。\n下一位登场角色获得<color=Highlight>浪客羁绊</color>，全伤害加深{1}，持续{2}秒。持有<color=Highlight>浪客羁绊</color>的角色每{8}秒会获得{3}层<color=Highlight>超限</color>，造成重击伤害加深{4}（若是露西持有<color=Highlight>浪客羁绊</color>，则直接获得满层），上限为{5}。若切换至其他角色则提前结束<color=Highlight>浪客羁绊</color>和<color=Highlight>超限</color>。\n机枪塔可被露西强化，伤害倍率提升{6}，但持续时间变为{7}秒。",
         "param": [
           "14",
           "15%",
           "14",
           "1",
           "0.5%",
-          "70",
+          "35%",
           "250%",
-          "4"
+          "4",
+          "0.2",
+          "2.5%"
         ],
         "type": "延奏技能",
         "level": {},
@@ -2719,7 +2723,7 @@
     "17": {
       "skill": {
         "name": "骇破·熔触",
-        "desc": "丽贝卡拥有为目标附加<color=Highlight>【骇破·偏移】</color>以及响应<color=Highlight>【骇破·干涉】</color>的能力。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，丽贝卡将施放【骇破·熔触】，同一目标每{0}秒仅可受到1次该伤害。",
+        "desc": "目标<color=Highlight>【偏谐值】</color>满时，丽贝卡可对其施放<color=Highlight>【谐度破坏】</color>。\n\n丽贝卡拥有为目标附加<color=Highlight>【骇破·偏移】</color>以及响应<color=Highlight>【骇破·干涉】</color>的能力。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，丽贝卡将触发<color=Highlight>骇破响应·熔触</color>效果，同一目标每{0}秒仅可受到1次该伤害。",
         "param": [
           "8"
         ],
@@ -2734,7 +2738,7 @@
   "chains": {
     "1": {
       "name": "请多指教咯~",
-      "desc": "丽贝卡手枪<color=Highlight>重击</color>和霰弹<color=Highlight>普攻</color>倍率提升{0}\n丽贝卡获得<color=Highlight>小孩子才做选择！</color>效果后，额外获得{1}层街头直觉，持续{2}秒。施放<color=Highlight>战术闪避·猎手</color>、<color=Highlight>战术闪避·铁胆</color>时，若拥有街头直觉则消耗{3}层街头直觉，回复{4}点耐力。\n丽贝卡大招终结免疫打断。",
+      "desc": "丽贝卡以下技能伤害倍率提升{0}：\n·<color=Highlight>普攻·猎手</color>、<color=Highlight>重击·猎手</color>、<color=Highlight>战术闪避·猎手</color>、<color=Highlight>闪避反击·猎手</color>。\n·<color=Highlight>普攻·铁胆</color>、<color=Highlight>战术闪避·铁胆</color>、<color=Highlight>闪避反击·铁胆</color>。\n丽贝卡获得<color=Highlight>小孩子才做选择！</color>效果时，额外获得{1}层街头直觉，持续{2}秒。施放<color=Highlight>战术闪避·猎手</color>、<color=Highlight>战术闪避·铁胆</color>时，若拥有街头直觉则消耗{3}层街头直觉，回复{4}点耐力。\n共鸣解放<color=Highlight>大烟花！</color>免疫打断。",
       "param": [
         "50%",
         "3",
@@ -2745,7 +2749,7 @@
     },
     "2": {
       "name": "哦，原来是你啊！",
-      "desc": "施放<color=Highlight>变奏技能</color><color=Highlight>呜呼，来发大的！</color>、<color=Highlight>变奏技能</color><color=Highlight>蠢货，有本事来抓我！</color>或<color=Highlight>共鸣解放</color>狂欢时间！时，队伍中的角色全属性伤害加成提升{0}，持续{1}秒。\n队伍中的角色附加<color=Highlight>【骇破·偏移】</color>时，全伤害加深{2}，持续{3}秒。\n处于非战斗状态时，<color=Highlight>【手感火热】</color>回复速度翻倍。",
+      "desc": "施放变奏技能<color=Highlight>呜呼，来发大的！</color>、变奏技能<color=Highlight>蠢货，有本事来抓我！</color>或共鸣解放<color=Highlight>狂欢时间！</color>时，队伍中的角色全属性伤害加成提升{0}，持续{1}秒。\n队伍中的角色附加<color=Highlight>【骇破·偏移】</color>时，全伤害加深{2}，持续{3}秒。\n处于非战斗状态时，<color=Highlight>【手感火热】</color>回复速度翻倍。",
       "param": [
         "20%",
         "30",
@@ -2755,22 +2759,23 @@
     },
     "3": {
       "name": "背后就交给我吧！",
-      "desc": "丽贝卡<color=Highlight>共鸣解放</color>狂欢时间！、<color=Highlight>共鸣解放</color><color=Highlight>大烟花！</color>伤害倍率提升{0}。\n丽贝卡<color=Highlight>共鸣解放</color>狂欢时间！爆炸范围提高。\n施放<color=Highlight>变奏技能</color><color=Highlight>呜呼，来发大的！</color>、<color=Highlight>变奏技能</color><color=Highlight>蠢货，有本事来抓我！</color>时，获得{1}点<color=Highlight>【手感火热】</color>。",
+      "desc": "丽贝卡共鸣解放<color=Highlight>狂欢时间！</color>、共鸣解放<color=Highlight>大烟花！</color>伤害倍率提升{0}。\n丽贝卡共鸣解放<color=Highlight>狂欢时间！</color>爆炸范围增加{1}。\n施放变奏技能<color=Highlight>呜呼，来发大的！</color>、变奏技能<color=Highlight>蠢货，有本事来抓我！</color>时，获得{2}点<color=Highlight>【手感火热】</color>。",
       "param": [
         "60%",
+        "30%",
         "120"
       ]
     },
     "4": {
       "name": "我会保护你的！",
-      "desc": "丽贝卡<color=Highlight>共鸣回路</color><color=Highlight>小孩子才做选择！</color>属性提升效果额外增加{0}。",
+      "desc": "丽贝卡<color=Highlight>小孩子才做选择！</color>属性加成效果额外提升{0}。",
       "param": [
         "60%"
       ]
     },
     "5": {
       "name": "边缘幻梦",
-      "desc": "丽贝卡施加<color=Highlight>骇破·偏移</color>时，自身普攻伤害加成提升{0}，持续{1}秒。",
+      "desc": "丽贝卡附加<color=Highlight>【骇破·偏移】</color>时，自身普攻伤害加成提升{0}，持续{1}秒。",
       "param": [
         "20%",
         "8"
@@ -2778,11 +2783,14 @@
     },
     "6": {
       "name": "也许……",
-      "desc": "丽贝卡从所有来源中获得的普攻伤害加成数值提升{0}。\n丽贝卡施放<color=Highlight>共鸣回路</color><color=Highlight>哒哒哒！·猎手</color>、<color=Highlight>共鸣回路</color><color=Highlight>砰砰砰！·铁胆</color>时，额外造成一次{1}的普攻伤害。\n丽贝卡<color=Highlight>共鸣回路</color><color=Highlight>哒哒哒！·猎手</color>、<color=Highlight>共鸣回路</color><color=Highlight>砰砰砰！·铁胆</color>时，额外回复{2}点<color=Highlight>【手感火热】</color>。\n处于非战斗状态大于{3}秒时，丽贝卡回复{4}点<color=Highlight>【狂热】</color>，每{5}秒只生效1次。",
+      "desc": "丽贝卡从所有来源中获得的普攻伤害加成数值提升{0}。\n丽贝卡施放<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>期间，额外造成一次{1}的<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n丽贝卡施放<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>时，额外回复{2}点<color=Highlight>【手感火热】</color>。\n受到致死伤害时，此次伤害不会使丽贝卡倒下，并且立即回复{4}次{3}点固定生命值，该效果每{5}分钟可触发1次。\n处于非战斗状态大于{6}秒时，丽贝卡回复{7}点<color=Highlight>【狂热】</color>，每{8}秒只生效1次。",
       "param": [
-        "50%",
+        "40%",
         "900%",
         "20",
+        "2077",
+        "5",
+        "10",
         "4",
         "120",
         "4"

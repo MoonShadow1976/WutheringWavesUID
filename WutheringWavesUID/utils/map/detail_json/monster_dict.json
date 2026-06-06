@@ -691,7 +691,25 @@
             0
         ],
         "echo": 0,
-        "name": "敬请期待"
+        "name": "梦魇·武装公司狗"
+    },
+    "310000880": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "梦魇·安保公司狗"
+    },
+    "310000890": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 0,
+        "name": "梦魇·突击公司狗"
     },
     "320000010": {
         "rarity": 2,
@@ -1553,15 +1571,6 @@
             0
         ],
         "echo": 0,
-        "name": "敬请期待"
-    },
-    "350000400": {
-        "rarity": 2,
-        "attributeId": 1,
-        "elementResistance": [
-            1
-        ],
-        "echo": 6010195,
-        "name": "敬请期待"
+        "name": "梦魇亚当·重锤"
     }
 }

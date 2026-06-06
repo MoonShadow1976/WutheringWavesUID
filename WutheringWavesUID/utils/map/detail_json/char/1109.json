@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "抓拍",
-        "desc": "<color=Title>普攻</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>。\n施放<color=Highlight>普攻第3段</color>时，按住<color=Highlight>普攻</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时松开普攻，洛瑟菈将施放<color=Highlight>普攻第3段·乏善可陈</color>。\n·若指针在<color=Highlight>完美焦距</color>时松开普攻，洛瑟菈则将施放<color=Highlight>普攻第3段·可圈可点</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n长按<color=Highlight>普攻</color>时，可依次施放<color=Highlight>普攻第1、2、3段</color>，且施放<color=Highlight>普攻第3段</color>时将展开<color=Highlight>聚焦环</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第3段</color>。",
+        "desc": "<color=Title>普攻</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>。\n施放<color=Highlight>普攻第3段</color>时，长按<color=Highlight>普攻</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时抬起<color=Highlight>普攻</color>，洛瑟菈将施放<color=Highlight>普攻第3段·乏善可陈</color>，造成<color=Ice>冷凝伤害</color>并回复<color=Highlight>【印象】</color>。\n·若指针在<color=Highlight>完美焦距</color>时抬起<color=Highlight>普攻</color>，洛瑟菈则将施放<color=Highlight>普攻第3段·可圈可点</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n若施放<color=Highlight>普攻第2段</color>后一定时间内短按<color=Highlight>普攻</color>，则不会展开<color=Highlight>聚焦环</color>，并直接施放<color=Highlight>普攻第3段·乏善可陈</color>。\n展开<color=Highlight>聚焦环</color>期间，<color=Highlight>完美焦距</color>区域将逐渐扩大。<color=Highlight>完美焦距</color>区域填满<color=Highlight>聚焦环</color>后则自动收起，洛瑟菈将直接施放<color=Highlight>普攻第3段·可圈可点</color>。\n长按<color=Highlight>普攻</color>时，可依次施放<color=Highlight>普攻第1、2、3段</color>，且施放<color=Highlight>普攻第3段</color>时将展开<color=Highlight>聚焦环</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第3段</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -847,9 +847,9 @@
     "2": {
       "skill": {
         "name": "幻象定帧",
-        "desc": "牵引周围的目标并造成<color=Ice>冷凝伤害</color>。\n施放时，按住<color=Highlight>共鸣技能</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时松开<color=Highlight>共鸣技能</color>，洛瑟菈将施放<color=Highlight>补光</color>。\n·若指针在<color=Highlight>完美焦距</color>时松开<color=Highlight>共鸣技能</color>，洛瑟菈则将施放<color=Highlight>追光</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n\n<color=Title>补光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，并减少<color=Highlight>共鸣技能</color>{0}的剩余冷却时间。\n一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>追光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，切换至其他角色则提前退出。\n施放<color=Highlight>追光</color>期间，洛瑟菈额外回复自身{1}点协奏能量，且洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>时将会为命中目标附加{2}层<color=Highlight>【霜渐效应】</color>。\n一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。",
+        "desc": "牵引周围的目标，造成<color=Ice>冷凝伤害</color>。\n施放时，长按<color=Highlight>共鸣技能</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时抬起<color=Highlight>共鸣技能</color>，洛瑟菈将施放<color=Highlight>补光</color>，造成<color=Ice>冷凝伤害</color>并回复<color=Highlight>【印象】</color>。\n·若指针在<color=Highlight>完美焦距</color>时抬起<color=Highlight>共鸣技能</color>，洛瑟菈则将施放<color=Highlight>追光</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n若施放时未长按<color=Highlight>共鸣技能</color>且洛瑟菈为登场角色时，则不会展开<color=Highlight>聚焦环</color>，并直接施放<color=Highlight>补光</color>。\n\n<color=Title>补光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，并使<color=Highlight>共鸣技能</color>的冷却时间减少{0}秒。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>追光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放<color=Highlight>追光</color>期间，洛瑟菈额外回复自身{1}点协奏能量，且洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>时将会为命中目标附加{2}层<color=Highlight>【霜渐效应】</color>。\n<color=Highlight>追光</color>免疫打断，施放<color=Highlight>追光</color>期间切换至其他角色则提前退出。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。",
         "param": [
-          "50%",
+          "8",
           "20",
           "1"
         ],
@@ -859,26 +859,26 @@
             "name": "幻象定帧伤害",
             "param": [
               [
-                "7.11%*3",
-                "7.69%*3",
-                "8.28%*3",
-                "9.09%*3",
-                "9.68%*3",
-                "10.35%*3",
-                "11.28%*3",
-                "12.21%*3",
-                "13.14%*3",
-                "14.13%*3",
-                "15.30%*3",
-                "16.46%*3",
+                "6.67%*3",
+                "7.22%*3",
+                "7.76%*3",
+                "8.53%*3",
+                "9.08%*3",
+                "9.71%*3",
+                "10.58%*3",
+                "11.45%*3",
+                "12.33%*3",
+                "13.26%*3",
+                "14.35%*3",
+                "15.45%*3",
+                "16.54%*3",
                 "17.63%*3",
-                "18.80%*3",
-                "19.96%*3",
-                "21.13%*3",
-                "22.29%*3",
-                "23.46%*3",
-                "24.62%*3",
-                "25.79%*3"
+                "18.73%*3",
+                "19.82%*3",
+                "20.91%*3",
+                "22.01%*3",
+                "23.10%*3",
+                "24.19%*3"
               ]
             ]
           },
@@ -960,33 +960,6 @@
                 "16",
                 "16",
                 "16"
-              ]
-            ]
-          },
-          "12": {
-            "name": "追光期间回复协奏能量",
-            "param": [
-              [
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20"
               ]
             ]
           }
@@ -1141,15 +1114,16 @@
     "3": {
       "skill": {
         "name": "历历在目",
-        "desc": "造成<color=Ice>冷凝伤害</color>并进入<color=Highlight>追忆状态</color>：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>。施放该技能时洛瑟菈的普攻伤害加成提升{0}，持续{1}秒。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。施放该技能时洛瑟菈的声骸技能伤害加成提升{0}，持续{1}秒。\n<color=Highlight>追忆状态</color>持续期间，洛瑟菈的抗打断能力提升，无法施放<color=Highlight>共鸣技能</color>，<color=Highlight>普攻</color>、<color=Highlight>闪避反击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能·剪辑</color>替换为<color=Highlight>普攻·溯念留形</color>、<color=Highlight>闪避反击·追忆</color>、<color=Highlight>空中攻击·追忆</color>、<color=Highlight>变奏技能·剪辑·硬切</color>。\n可在空中施放。\n\n<color=Title>普攻·溯念留形</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放<color=Highlight>普攻·溯念留形第3段</color>时，按住<color=Highlight>普攻</color>，可持续攻击目标。\n施放<color=Highlight>普攻·溯念留形第3段</color>时松开<color=Highlight>普攻</color>，或<color=Highlight>普攻·溯念留形第3段</color>结束后，将会自动施放<color=Highlight>断舍离</color>。\n\n<color=Title>断舍离</color>\n洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>/<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>普攻伤害</color>/<color=Highlight>声骸技能伤害</color>。\n<color=Highlight>断舍离</color>免疫打断，期间不能切换角色。\n施放<color=Highlight>断舍离</color>后，退出<color=Highlight>追忆状态</color>。\n\n<color=Title>空中攻击·追忆</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第2段</color>。\n\n<color=Title>闪避反击·追忆</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第3段</color>。",
+        "desc": "洛瑟菈共鸣能量上限为0，<color=Highlight>历历在目</color>不消耗共鸣能量。\n拥有全部3张<color=Highlight>【照片】</color>时，解锁<color=Highlight>历历在目</color>。\n\n<color=Title>历历在目</color>\n造成<color=Ice>冷凝伤害</color>并进入<color=Highlight>追忆状态</color>：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>。施放该技能时洛瑟菈的普攻伤害加成提升{0}，持续{1}秒。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。施放该技能时洛瑟菈的声骸技能伤害加成提升{0}，持续{1}秒。\n<color=Highlight>追忆状态</color>持续期间，洛瑟菈的抗打断能力提升，无法施放<color=Highlight>共鸣技能</color>、<color=Highlight>共鸣解放</color>，<color=Highlight>普攻</color>、<color=Highlight>闪避反击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能·剪辑</color>替换为<color=Highlight>普攻·溯念留形</color>、<color=Highlight>闪避反击·追忆</color>、<color=Highlight>空中攻击·追忆</color>、<color=Highlight>变奏技能·剪辑·硬切</color>。\n可在低空中施放。\n\n<color=Title>普攻·溯念留形</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n长按<color=Highlight>普攻</color>时，可依次施放<color=Highlight>普攻·溯念留形第1、2、3段</color>。\n施放<color=Highlight>普攻·溯念留形第3段</color>时，连续短按或长按<color=Highlight>普攻</color>，可持续攻击目标。\n施放<color=Highlight>普攻·溯念留形第3段</color>时抬起<color=Highlight>普攻</color>，或<color=Highlight>普攻·溯念留形第3段</color>结束后，将会自动施放<color=Highlight>断舍离</color>。\n\n<color=Title>断舍离</color>\n对范围内的目标造成<color=Ice>冷凝伤害</color>，洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>/<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>普攻伤害</color>/<color=Highlight>声骸技能伤害</color>。\n<color=Highlight>断舍离</color>免疫伤害和受击，期间不能切换角色。\n施放<color=Highlight>断舍离</color>期间，洛瑟菈额外回复自身{2}点协奏能量。\n施放<color=Highlight>断舍离</color>后，退出<color=Highlight>追忆状态</color>。\n\n<color=Title>空中攻击·追忆</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第2段</color>。\n\n<color=Title>闪避反击·追忆</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第3段</color>。",
         "param": [
           "30%",
-          "10"
+          "10",
+          "20"
         ],
         "type": "共鸣解放",
         "level": {
           "13": {
-            "name": "技能伤害",
+            "name": "历历在目伤害",
             "param": [
               [
                 "71.80%",
@@ -1233,26 +1207,26 @@
             "name": "普攻·溯念留形第三段伤害",
             "param": [
               [
-                "24.08%*8",
-                "26.05%*8",
-                "28.03%*8",
-                "30.79%*8",
-                "32.77%*8",
-                "35.04%*8",
-                "38.20%*8",
-                "41.35%*8",
-                "44.51%*8",
-                "47.87%*8",
-                "51.82%*8",
-                "55.77%*8",
-                "59.71%*8",
-                "63.66%*8",
-                "67.61%*8",
-                "71.56%*8",
-                "75.51%*8",
-                "79.45%*8",
-                "83.40%*8",
-                "87.35%*8"
+                "26.22%*8",
+                "28.37%*8",
+                "30.52%*8",
+                "33.53%*8",
+                "35.67%*8",
+                "38.15%*8",
+                "41.59%*8",
+                "45.02%*8",
+                "48.46%*8",
+                "52.12%*8",
+                "56.42%*8",
+                "60.72%*8",
+                "65.01%*8",
+                "69.31%*8",
+                "73.61%*8",
+                "77.91%*8",
+                "82.21%*8",
+                "86.51%*8",
+                "90.81%*8",
+                "95.11%*8"
               ]
             ]
           },
@@ -1388,33 +1362,6 @@
                 "25",
                 "25",
                 "25"
-              ]
-            ]
-          },
-          "22": {
-            "name": "消耗共鸣能量",
-            "param": [
-              [
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125",
-                "125"
               ]
             ]
           },
@@ -1596,7 +1543,7 @@
     "4": {
       "skill": {
         "name": "慢镜头",
-        "desc": "洛瑟菈展开<color=Highlight>聚焦环</color>期间，减缓拍摄范围内目标的时间流速。\n施放<color=Highlight>共鸣技能·幻象定帧</color>展开<color=Highlight>聚焦环</color>期间，若指针在<color=Highlight>完美焦距</color>时松开<color=Highlight>共鸣技能</color>，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供不同的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色周围的目标冷凝抗性降低{0}，持续{1}秒。期间敌人被<color=Highlight>【霜渐效应】</color>的伤害击败，本次击败将视为距离其最近的登场角色造成。\n·处于<color=Highlight>共鸣模态·声骸</color>时，队伍中的角色声骸技能伤害加成提升{2}，持续{3}秒。",
+        "desc": "洛瑟菈展开<color=Highlight>聚焦环</color>期间，减缓拍摄范围内目标的时间流速。\n施放<color=Highlight>共鸣技能·追光</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供不同的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色一定范围内的目标冷凝抗性降低{0}，持续{1}秒。期间敌人被<color=Highlight>【霜渐效应】</color>的伤害击败，本次击败将视为距离其最近的登场角色造成。\n·处于<color=Highlight>共鸣模态·声骸</color>时，队伍中的角色声骸技能伤害加成提升{2}，持续{3}秒。\n洛瑟菈切换模态时，上述效果提前结束。",
         "param": [
           "8%",
           "30",
@@ -1664,36 +1611,36 @@
     "6": {
       "skill": {
         "name": "剪辑",
-        "desc": "攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加{0}层<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>剪辑·硬切</color>\n<color=Highlight>追忆状态</color>持续期间，<color=Highlight>变奏技能</color>替换为<color=Highlight>剪辑·硬切</color>。\n攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加{0}层<color=Highlight>【霜渐效应】</color>。",
+        "desc": "<color=Title>剪辑</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加{0}层<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>剪辑·硬切</color>\n<color=Highlight>追忆状态</color>持续期间，<color=Highlight>变奏技能</color>替换为<color=Highlight>剪辑·硬切</color>。\n攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加{0}层<color=Highlight>【霜渐效应】</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第3段</color>。",
         "param": [
           "1"
         ],
         "type": "变奏技能",
         "level": {
           "24": {
-            "name": "技能伤害",
+            "name": "剪辑伤害",
             "param": [
               [
-                "53.20%",
-                "57.57%",
-                "61.93%",
-                "68.04%",
-                "72.40%",
-                "77.42%",
-                "84.40%",
-                "91.38%",
-                "98.36%",
-                "105.77%",
-                "114.50%",
-                "123.22%",
-                "131.95%",
-                "140.67%",
-                "149.40%",
-                "158.12%",
-                "166.85%",
-                "175.57%",
-                "184.30%",
-                "193.02%"
+                "49.00%",
+                "53.02%",
+                "57.04%",
+                "62.67%",
+                "66.68%",
+                "71.30%",
+                "77.73%",
+                "84.16%",
+                "90.59%",
+                "97.42%",
+                "105.46%",
+                "113.49%",
+                "121.53%",
+                "129.57%",
+                "137.60%",
+                "145.64%",
+                "153.67%",
+                "161.71%",
+                "169.75%",
+                "177.78%"
               ]
             ]
           },
@@ -1701,31 +1648,58 @@
             "name": "剪辑·硬切伤害",
             "param": [
               [
-                "22.55%+52.61%",
-                "24.40%+56.92%",
-                "26.25%+61.24%",
-                "28.84%+67.28%",
-                "30.68%+71.59%",
-                "32.81%+76.55%",
-                "35.77%+83.45%",
-                "38.73%+90.35%",
-                "41.68%+97.26%",
-                "44.83%+104.59%",
-                "48.52%+113.22%",
-                "52.22%+121.84%",
-                "55.92%+130.47%",
-                "59.62%+139.10%",
-                "63.31%+147.73%",
-                "67.01%+156.35%",
-                "70.71%+164.98%",
-                "74.41%+173.61%",
-                "78.10%+182.23%",
-                "81.80%+190.86%"
+                "75.15%",
+                "81.32%",
+                "87.48%",
+                "96.11%",
+                "102.27%",
+                "109.36%",
+                "119.22%",
+                "129.08%",
+                "138.93%",
+                "149.41%",
+                "161.74%",
+                "174.06%",
+                "186.38%",
+                "198.71%",
+                "211.03%",
+                "223.36%",
+                "235.68%",
+                "248.01%",
+                "260.33%",
+                "272.66%"
               ]
             ]
           },
           "26": {
-            "name": "回复协奏能量",
+            "name": "剪辑回复协奏能量",
+            "param": [
+              [
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10"
+              ]
+            ]
+          },
+          "26-2": {
+            "name": "剪辑·硬切回复协奏能量",
             "param": [
               [
                 "10",
@@ -1902,14 +1876,14 @@
     "7": {
       "skill": {
         "name": "记忆宫殿",
-        "desc": "<color=Title>既视感</color>\n施放<color=Highlight>共鸣解放·历历在目</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供不同的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，获得{0}层<color=Highlight>胶卷</color>，持续{1}秒，可叠加{2}层，持续时间结束清除全部层数。\n·处于<color=Highlight>共鸣模态·声骸</color>时，获得{6}层<color=Highlight>变焦</color>，持续{7}秒，可叠加{8}层，持续时间结束清除全部层数。\n\n<color=Title>胶卷</color>\n队伍中除洛瑟菈以外的登场角色为目标附加<color=Highlight>【霜渐效应】</color>时，洛瑟菈将消耗{3}层<color=Highlight>胶卷</color>，为目标附加{4}次<color=Highlight>【霜渐效应】</color>，每{5}秒可触发1次。\n\n<color=Title>变焦</color>\n每层<color=Highlight>变焦</color>使队伍中登场角色造成声骸技能伤害的暴击伤害提升{9}。\n\n<color=Title>遗忘</color>\n施放<color=Highlight>普攻·溯念留形第3段</color>时，洛瑟菈将消耗<color=Highlight>【照片】</color>。每次消耗<color=Highlight>【照片】</color>将回复{10}点协奏能量，并施放一次<color=Highlight>遗忘</color>造成<color=Ice>冷凝伤害</color>:\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>，并为命中目标附加{11}层<color=Highlight>【霜渐效应】</color>。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。<color=Highlight>追忆状态</color>持续期间施放第1、2、3次<color=Highlight>遗忘</color>时，视为施放不同名的声骸技能。\n\n<color=Title>走马观花</color>\n短按瞄准键，洛瑟菈进入摄影状态。摄影状态下，洛瑟菈将标记一定镜头范围内出现过的残响、环境采集物和部分收集品。按下快门时，洛瑟菈将拍摄当下值得纪念的瞬间，并收集上述内容。\n\n<color=Title>【印象】获取规则</color>\n<color=Highlight>【印象】</color>上限{12}点。\n施放<color=Highlight>变奏技能·剪辑</color>时，回复{13}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·追光</color>期间，回复{14}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>普攻第3段·可圈可点</color>时，回复{14}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·补光</color>或<color=Highlight>普攻第3段·乏善可陈</color>时，回复{15}点<color=Highlight>【印象】</color>。\n\n<color=Title>【照片】获取规则</color>\n<color=Highlight>【照片】</color>上限{16}张。\n每回复{17}点<color=Highlight>【印象】</color>，将自动冲洗为1张<color=Highlight>【照片】</color>。",
+        "desc": "<color=Title>既视感</color>\n施放<color=Highlight>共鸣解放·历历在目</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供不同的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，获得{0}层<color=Highlight>胶卷</color>，持续{1}秒，可叠加{2}层，持续时间结束清除全部层数。\n·处于<color=Highlight>共鸣模态·声骸</color>时，获得{6}层<color=Highlight>变焦</color>，持续{7}秒，可叠加{8}层，持续时间结束清除全部层数。\n洛瑟菈切换模态时，上述效果提前结束。\n\n<color=Title>胶卷</color>\n队伍中除洛瑟菈以外的登场角色为目标附加<color=Highlight>【霜渐效应】</color>时，洛瑟菈将消耗{3}层<color=Highlight>胶卷</color>，为周围的目标附加{4}次<color=Highlight>【霜渐效应】</color>，每{5}秒可触发1次。\n\n<color=Title>变焦</color>\n每层<color=Highlight>变焦</color>使队伍中登场角色造成声骸技能伤害的暴击伤害提升{9}。\n\n<color=Title>遗忘</color>\n施放<color=Highlight>普攻·溯念留形第3段</color>期间，洛瑟菈每隔一段时间将消耗1张<color=Highlight>【照片】</color>施放<color=Highlight>遗忘</color>造成1次<color=Ice>冷凝伤害</color>:\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>，并为命中目标附加{11}层<color=Highlight>【霜渐效应】</color>。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。每次施放<color=Highlight>遗忘</color>时，视为施放不同名的声骸技能。\n\n<color=Title>走马观花</color>\n短按瞄准键，洛瑟菈进入摄影状态。摄影状态下，洛瑟菈将标记镜头范围内的残响、环境采集物和部分收集品。按下快门时，洛瑟菈将拍摄当下值得纪念的瞬间，并收集上述内容。\n\n<color=Title>【印象】获取规则</color>\n<color=Highlight>【印象】</color>上限{12}点。\n施放<color=Highlight>变奏技能·剪辑</color>期间，回复{13}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·追光</color>期间，回复{14}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>普攻第3段·可圈可点</color>期间，回复{14}点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·补光</color>或<color=Highlight>普攻第3段·乏善可陈</color>期间，回复{15}点<color=Highlight>【印象】</color>。\n\n<color=Title>【照片】获取规则</color>\n<color=Highlight>【照片】</color>上限{16}张。\n每回复{17}点<color=Highlight>【印象】</color>，将自动冲洗为1张<color=Highlight>【照片】</color>。",
         "param": [
           "4",
           "30",
           "4",
           "1",
           "2",
-          "0.2",
+          "0.5",
           "1",
           "30",
           "1",
@@ -1949,33 +1923,6 @@
                 "473.87%",
                 "497.42%",
                 "520.96%"
-              ]
-            ]
-          },
-          "28": {
-            "name": "遗忘回复协奏能量",
-            "param": [
-              [
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5",
-                "5"
               ]
             ]
           }
@@ -2130,7 +2077,7 @@
     "8": {
       "skill": {
         "name": "蒙太奇",
-        "desc": "处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色周围的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深{0}，持续{1}秒。\n处于<color=Highlight>共鸣模态·声骸</color>时，下一个登场角色声骸技能伤害加深{2}，持续{3}秒，若切换至其他角色则该效果提前结束。",
+        "desc": "处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深{0}，持续{1}秒。\n洛瑟菈切换模态时，该效果提前结束。\n\n处于<color=Highlight>共鸣模态·声骸</color>时，下一个登场角色声骸技能伤害加深{2}，持续{3}秒。\n切换至其他角色或洛瑟菈切换模态时，该效果提前结束。",
         "param": [
           "60%",
           "30",
@@ -2376,7 +2323,7 @@
   "chains": {
     "1": {
       "name": "遥远的晌午",
-      "desc": "施放<color=Highlight>共鸣技能·幻象定帧</color>展开<color=Highlight>聚焦环</color>期间，指针首次进入<color=Highlight>完美焦距</color>时将立即使<color=Highlight>完美焦距</color>充满<color=Highlight>聚焦环</color>。指针在<color=Highlight>完美焦距</color>时松开<color=Highlight>共鸣技能</color>，洛瑟菈的暴击提升{0}，持续{1}秒。\n施放<color=Highlight>共鸣技能·幻象定帧</color>展开<color=Highlight>聚焦环</color>期间免疫打断。\n<color=Highlight>共鸣技能·追光</color>、<color=Highlight>普攻·溯念留形第3段</color>免疫打断。",
+      "desc": "施放<color=Highlight>共鸣技能·幻象定帧</color>展开<color=Highlight>聚焦环</color>期间，指针首次进入<color=Highlight>完美焦距</color>时将立即使<color=Highlight>完美焦距</color>充满<color=Highlight>聚焦环</color>。\n施放<color=Highlight>共鸣技能·追光</color>时，洛瑟菈的暴击提升{0}，持续{1}秒。\n<color=Highlight>共鸣技能·幻象定帧</color>、<color=Highlight>普攻·溯念留形第3段</color>免疫打断。",
       "param": [
         "20%",
         "10"
@@ -2384,12 +2331,11 @@
     },
     "2": {
       "name": "酣睡的月光",
-      "desc": "<color=Highlight>延奏技能·蒙太奇</color>强化为：\n处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色周围的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深{0}，持续{1}秒。\n处于<color=Highlight>共鸣模态·声骸</color>时，下一个登场角色声骸技能伤害加深{2}，持续{3}秒，若切换至其他角色则该效果提前结束。",
+      "desc": "施放<color=Highlight>共鸣解放·历历在目</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供额外的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深{0}。\n·处于<color=Highlight>共鸣模态·声骸</color>时，队伍中角色的声骸技能伤害加成提升{1}。\n<color=Highlight>追忆状态</color>持续期间，上述效果持续存在。退出<color=Highlight>追忆状态</color>后，上述效果保留{2}秒。\n洛瑟菈切换模态时，上述效果提前结束。",
       "param": [
-        "120%",
-        "30",
         "80%",
-        "14"
+        "40%",
+        "30"
       ]
     },
     "3": {
@@ -2418,13 +2364,14 @@
     },
     "6": {
       "name": "在如烟的时间里张望",
-      "desc": "<color=Highlight>追忆状态</color>持续期间，洛瑟菈每次消耗<color=Highlight>【照片】</color>将获得{0}层<color=Highlight>铭记</color>，可叠加{1}层。每层<color=Highlight>铭记</color>使目标受到<color=Highlight>断舍离</color>的伤害提升{2}。施放<color=Highlight>断舍离</color>后清除全部的<color=Highlight>铭记</color>层数。\n若<color=Highlight>断舍离</color>击败了任意目标，洛瑟菈将获得<color=Highlight>怀恋</color>：处于非战斗状态时，消耗<color=Highlight>怀恋</color>，洛瑟菈回复{3}的共鸣能量，并回复{4}点<color=Highlight>【印象】</color>。",
+      "desc": "<color=Highlight>追忆状态</color>持续期间，洛瑟菈每次消耗<color=Highlight>【照片】</color>将获得{0}层<color=Highlight>铭记</color>，可叠加{1}层。每层<color=Highlight>铭记</color>使<color=Highlight>断舍离</color>造成的伤害提升{2}，至多提升{5}。施放<color=Highlight>断舍离</color>后清除全部的<color=Highlight>铭记</color>层数。\n若洛瑟菈在<color=Highlight>追忆状态</color>持续期间击败了任意目标，将获得<color=Highlight>怀恋</color>：退出<color=Highlight>追忆状态</color>且处于非战斗状态时，消耗<color=Highlight>怀恋</color>，洛瑟菈回复{4}点<color=Highlight>【印象】</color>。",
       "param": [
         "1",
         "3",
-        "30%",
+        "200%",
         "100%",
-        "150"
+        "150",
+        "600%"
       ]
     }
   },

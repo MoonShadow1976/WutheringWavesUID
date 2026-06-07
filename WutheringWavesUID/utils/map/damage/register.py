@@ -1,331 +1,64 @@
+import importlib
+import os
+
 from ....utils.damage.abstract import DamageDetailRegister, DamageRankRegister
+
+CUR_PACKAGE = __package__
+
+CURRENT_DIR = os.path.dirname(__file__)
+
+# 特例映射：注册ID -> 实际使用的模块后缀（即 damage_ 后面的部分）
+SPECIAL_ID_TO_MODULE = {
+    "1408": "1406",  # 风主女 使用 风主男 的数据
+    "1501": "1502",  # 光主男 使用 光主女 的数据
+    "1605": "1604",  # 暗主男 使用 暗主女 的数据
+}
+
+
+def _register_attr(attr_name, register_method):
+    """
+    自动扫描当前目录下所有 damage_*.py 模块，
+    通过 importlib.import_module 导入（保持包上下文），
+    提取指定属性（如 damage_detail 或 rank），
+    并根据特例映射注册到对应的角色ID上。
+    """
+    for filename in os.listdir(CURRENT_DIR):
+        if not filename.startswith("damage_") or not filename.endswith(".py"):
+            continue
+
+        # 模块名（不带 .py 后缀），例如 "damage_1102"
+        module_name = filename[:-3]
+        # 相对于当前包的导入路径，例如 ".damage_1102"
+        relative_name = f".{module_name}"
+        try:
+            # 使用相对导入，保持包上下文，这样模块内部的相对导入（如 from ...api）就能正常工作
+            module = importlib.import_module(relative_name, package=CUR_PACKAGE)
+        except ImportError as e:
+            raise ImportError(f"导入模块 {module_name} 失败: {e}") from e
+
+        attr_value = getattr(module, attr_name, None)
+        if attr_value is None:
+            continue
+
+        # 提取模块后缀（角色ID），如 "1102"
+        module_suffix = module_name[7:]  # 去掉 "damage_"
+        default_id = module_suffix
+
+        # 收集所有需要注册到此模块数据的ID（默认ID + 指向该模块的特例ID）
+        ids_to_register = {default_id}
+        for reg_id, mod_suffix in SPECIAL_ID_TO_MODULE.items():
+            if mod_suffix == default_id:
+                ids_to_register.add(reg_id)
+
+        for rid in ids_to_register:
+            register_method(rid, attr_value)
 
 
 def register_damage():
-    from .damage_1102 import damage_detail as damage_1102
-    from .damage_1103 import damage_detail as damage_1103
-    from .damage_1104 import damage_detail as damage_1104
-    from .damage_1105 import damage_detail as damage_1105
-    from .damage_1106 import damage_detail as damage_1106
-    from .damage_1107 import damage_detail as damage_1107
-    from .damage_1108 import damage_detail as damage_1108
-    from .damage_1202 import damage_detail as damage_1202
-    from .damage_1203 import damage_detail as damage_1203
-    from .damage_1204 import damage_detail as damage_1204
-    from .damage_1205 import damage_detail as damage_1205
-    from .damage_1206 import damage_detail as damage_1206
-    from .damage_1207 import damage_detail as damage_1207
-    from .damage_1208 import damage_detail as damage_1208
-    from .damage_1209 import damage_detail as damage_1209
-    from .damage_1210 import damage_detail as damage_1210
-    from .damage_1211 import damage_detail as damage_1211
-    from .damage_1301 import damage_detail as damage_1301
-    from .damage_1302 import damage_detail as damage_1302
-    from .damage_1303 import damage_detail as damage_1303
-    from .damage_1304 import damage_detail as damage_1304
-    from .damage_1305 import damage_detail as damage_1305
-    from .damage_1306 import damage_detail as damage_1306
-    from .damage_1307 import damage_detail as damage_1307
-    from .damage_1402 import damage_detail as damage_1402
-    from .damage_1403 import damage_detail as damage_1403
-    from .damage_1404 import damage_detail as damage_1404
-    from .damage_1405 import damage_detail as damage_1405
-    from .damage_1406 import damage_detail as damage_1406
-    from .damage_1407 import damage_detail as damage_1407
-    from .damage_1409 import damage_detail as damage_1409
-    from .damage_1410 import damage_detail as damage_1410
-    from .damage_1411 import damage_detail as damage_1411
-    from .damage_1412 import damage_detail as damage_1412
-    from .damage_1502 import damage_detail as damage_1502
-    from .damage_1503 import damage_detail as damage_1503
-    from .damage_1504 import damage_detail as damage_1504
-    from .damage_1505 import damage_detail as damage_1505
-    from .damage_1506 import damage_detail as damage_1506
-    from .damage_1507 import damage_detail as damage_1507
-    from .damage_1508 import damage_detail as damage_1508
-    from .damage_1509 import damage_detail as damage_1509
-    from .damage_1510 import damage_detail as damage_1510
-    from .damage_1601 import damage_detail as damage_1601
-    from .damage_1602 import damage_detail as damage_1602
-    from .damage_1603 import damage_detail as damage_1603
-    from .damage_1604 import damage_detail as damage_1604
-    from .damage_1606 import damage_detail as damage_1606
-    from .damage_1607 import damage_detail as damage_1607
-    from .damage_1608 import damage_detail as damage_1608
-
-    # 散华
-    DamageDetailRegister.register_class("1102", damage_1102)
-    # 白芷
-    DamageDetailRegister.register_class("1103", damage_1103)
-    # 凌阳
-    DamageDetailRegister.register_class("1104", damage_1104)
-    # 折枝
-    DamageDetailRegister.register_class("1105", damage_1105)
-    # 釉瑚
-    DamageDetailRegister.register_class("1106", damage_1106)
-    # 珂莱塔
-    DamageDetailRegister.register_class("1107", damage_1107)
-    # 绯雪
-    DamageDetailRegister.register_class("1108", damage_1108)
-
-    # 炽霞
-    DamageDetailRegister.register_class("1202", damage_1202)
-    # 安可
-    DamageDetailRegister.register_class("1203", damage_1203)
-    # 莫特斐
-    DamageDetailRegister.register_class("1204", damage_1204)
-    # 长离
-    DamageDetailRegister.register_class("1205", damage_1205)
-    # 布兰特
-    DamageDetailRegister.register_class("1206", damage_1206)
-    # 露帕
-    DamageDetailRegister.register_class("1207", damage_1207)
-    # 嘉贝莉娜
-    DamageDetailRegister.register_class("1208", damage_1208)
-    # 莫宁
-    DamageDetailRegister.register_class("1209", damage_1209)
-    # 爱弥斯
-    DamageDetailRegister.register_class("1210", damage_1210)
-    # 达妮娅
-    DamageDetailRegister.register_class("1211", damage_1211)
-
-    # 卡卡罗
-    DamageDetailRegister.register_class("1301", damage_1301)
-    # 吟霖
-    DamageDetailRegister.register_class("1302", damage_1302)
-    # 渊武
-    DamageDetailRegister.register_class("1303", damage_1303)
-    # 今汐
-    DamageDetailRegister.register_class("1304", damage_1304)
-    # 相里要
-    DamageDetailRegister.register_class("1305", damage_1305)
-    # 奥古斯塔
-    DamageDetailRegister.register_class("1306", damage_1306)
-    # 卜灵
-    DamageDetailRegister.register_class("1307", damage_1307)
-
-    # 秧秧
-    DamageDetailRegister.register_class("1402", damage_1402)
-    # 秋水
-    DamageDetailRegister.register_class("1403", damage_1403)
-    # 忌炎
-    DamageDetailRegister.register_class("1404", damage_1404)
-    # 鉴心
-    DamageDetailRegister.register_class("1405", damage_1405)
-    # 风主男
-    DamageDetailRegister.register_class("1406", damage_1406)
-    # 夏空
-    DamageDetailRegister.register_class("1407", damage_1407)
-    # 风主女
-    DamageDetailRegister.register_class("1408", damage_1406)
-    # 卡提希娅
-    DamageDetailRegister.register_class("1409", damage_1409)
-    # 尤诺
-    DamageDetailRegister.register_class("1410", damage_1410)
-    # 仇远
-    DamageDetailRegister.register_class("1411", damage_1411)
-    # 西格莉卡
-    DamageDetailRegister.register_class("1412", damage_1412)
-
-    # 光主男
-    DamageDetailRegister.register_class("1501", damage_1502)
-    # 光主女
-    DamageDetailRegister.register_class("1502", damage_1502)
-    # 维里奈
-    DamageDetailRegister.register_class("1503", damage_1503)
-    # 灯灯
-    DamageDetailRegister.register_class("1504", damage_1504)
-    # 守岸人
-    DamageDetailRegister.register_class("1505", damage_1505)
-    # 菲比
-    DamageDetailRegister.register_class("1506", damage_1506)
-    # 赞妮
-    DamageDetailRegister.register_class("1507", damage_1507)
-    # 千咲
-    DamageDetailRegister.register_class("1508", damage_1508)
-    # 琳奈
-    DamageDetailRegister.register_class("1509", damage_1509)
-    # 陆·赫斯
-    DamageDetailRegister.register_class("1510", damage_1510)
-
-    # 桃祈
-    DamageDetailRegister.register_class("1601", damage_1601)
-    # 丹瑾
-    DamageDetailRegister.register_class("1602", damage_1602)
-    # 椿
-    DamageDetailRegister.register_class("1603", damage_1603)
-    # 暗主女
-    DamageDetailRegister.register_class("1604", damage_1604)
-    # 暗主男
-    DamageDetailRegister.register_class("1605", damage_1604)
-    # 洛可可
-    DamageDetailRegister.register_class("1606", damage_1606)
-    # 坎特蕾拉
-    DamageDetailRegister.register_class("1607", damage_1607)
-    # 弗洛洛
-    DamageDetailRegister.register_class("1608", damage_1608)
+    """注册所有角色的伤害详情数据（damage_detail）"""
+    _register_attr("damage_detail", DamageDetailRegister.register_class)
 
 
 def register_rank():
-    from .damage_1102 import rank as rank_1102
-    from .damage_1103 import rank as rank_1103
-    from .damage_1104 import rank as rank_1104
-    from .damage_1105 import rank as rank_1105
-    from .damage_1106 import rank as rank_1106
-    from .damage_1107 import rank as rank_1107
-    from .damage_1108 import rank as rank_1108
-    from .damage_1202 import rank as rank_1202
-    from .damage_1203 import rank as rank_1203
-    from .damage_1204 import rank as rank_1204
-    from .damage_1205 import rank as rank_1205
-    from .damage_1206 import rank as rank_1206
-    from .damage_1207 import rank as rank_1207
-    from .damage_1208 import rank as rank_1208
-    from .damage_1209 import rank as rank_1209
-    from .damage_1210 import rank as rank_1210
-    from .damage_1211 import rank as rank_1211
-    from .damage_1301 import rank as rank_1301
-    from .damage_1302 import rank as rank_1302
-    from .damage_1303 import rank as rank_1303
-    from .damage_1304 import rank as rank_1304
-    from .damage_1305 import rank as rank_1305
-    from .damage_1306 import rank as rank_1306
-    from .damage_1307 import rank as rank_1307
-    from .damage_1402 import rank as rank_1402
-    from .damage_1403 import rank as rank_1403
-    from .damage_1404 import rank as rank_1404
-    from .damage_1405 import rank as rank_1405
-    from .damage_1406 import rank as rank_1406
-    from .damage_1407 import rank as rank_1407
-    from .damage_1409 import rank as rank_1409
-    from .damage_1410 import rank as rank_1410
-    from .damage_1411 import rank as rank_1411
-    from .damage_1412 import rank as rank_1412
-    from .damage_1502 import rank as rank_1502
-    from .damage_1503 import rank as rank_1503
-    from .damage_1504 import rank as rank_1504
-    from .damage_1505 import rank as rank_1505
-    from .damage_1506 import rank as rank_1506
-    from .damage_1507 import rank as rank_1507
-    from .damage_1508 import rank as rank_1508
-    from .damage_1509 import rank as rank_1509
-    from .damage_1510 import rank as rank_1510
-    from .damage_1601 import rank as rank_1601
-    from .damage_1602 import rank as rank_1602
-    from .damage_1603 import rank as rank_1603
-    from .damage_1604 import rank as rank_1604
-    from .damage_1606 import rank as rank_1606
-    from .damage_1607 import rank as rank_1607
-    from .damage_1608 import rank as rank_1608
-
-    # 散华
-    DamageRankRegister.register_class("1102", rank_1102)
-    # 白芷
-    DamageRankRegister.register_class("1103", rank_1103)
-    # 凌阳
-    DamageRankRegister.register_class("1104", rank_1104)
-    # 折枝
-    DamageRankRegister.register_class("1105", rank_1105)
-    # 釉瑚
-    DamageRankRegister.register_class("1106", rank_1106)
-    # 珂莱塔
-    DamageRankRegister.register_class("1107", rank_1107)
-    # 绯雪
-    DamageRankRegister.register_class("1108", rank_1108)
-
-    # 炽霞
-    DamageRankRegister.register_class("1202", rank_1202)
-    # 安可
-    DamageRankRegister.register_class("1203", rank_1203)
-    # 莫特斐
-    DamageRankRegister.register_class("1204", rank_1204)
-    # 长离
-    DamageRankRegister.register_class("1205", rank_1205)
-    # 布兰特
-    DamageRankRegister.register_class("1206", rank_1206)
-    # 露帕
-    DamageRankRegister.register_class("1207", rank_1207)
-    # 嘉贝莉娜
-    DamageRankRegister.register_class("1208", rank_1208)
-    # 莫宁
-    DamageRankRegister.register_class("1209", rank_1209)
-    # 爱弥斯
-    DamageRankRegister.register_class("1210", rank_1210)
-    # 达妮娅
-    DamageRankRegister.register_class("1211", rank_1211)
-
-    # 卡卡罗
-    DamageRankRegister.register_class("1301", rank_1301)
-    # 吟霖
-    DamageRankRegister.register_class("1302", rank_1302)
-    # 渊武
-    DamageRankRegister.register_class("1303", rank_1303)
-    # 今汐
-    DamageRankRegister.register_class("1304", rank_1304)
-    # 相里要
-    DamageRankRegister.register_class("1305", rank_1305)
-    # 奥古斯塔
-    DamageRankRegister.register_class("1306", rank_1306)
-    # 卜灵
-    DamageRankRegister.register_class("1307", rank_1307)
-
-    # 秧秧
-    DamageRankRegister.register_class("1402", rank_1402)
-    # 秋水
-    DamageRankRegister.register_class("1403", rank_1403)
-    # 忌炎
-    DamageRankRegister.register_class("1404", rank_1404)
-    # 鉴心
-    DamageRankRegister.register_class("1405", rank_1405)
-    # 风主男
-    DamageRankRegister.register_class("1406", rank_1406)
-    # 夏空
-    DamageRankRegister.register_class("1407", rank_1407)
-    # 风主女
-    DamageRankRegister.register_class("1408", rank_1406)
-    # 卡提希娅
-    DamageRankRegister.register_class("1409", rank_1409)
-    # 尤诺
-    DamageRankRegister.register_class("1410", rank_1410)
-    # 仇远
-    DamageRankRegister.register_class("1411", rank_1411)
-    # 西格莉卡
-    DamageRankRegister.register_class("1412", rank_1412)
-
-    # 光主男
-    DamageRankRegister.register_class("1501", rank_1502)
-    # 光主女
-    DamageRankRegister.register_class("1502", rank_1502)
-    # 维里奈
-    DamageRankRegister.register_class("1503", rank_1503)
-    # 灯灯
-    DamageRankRegister.register_class("1504", rank_1504)
-    # 守岸人
-    DamageRankRegister.register_class("1505", rank_1505)
-    # 菲比
-    DamageRankRegister.register_class("1506", rank_1506)
-    # 赞妮
-    DamageRankRegister.register_class("1507", rank_1507)
-    # 千咲
-    DamageRankRegister.register_class("1508", rank_1508)
-    # 琳奈
-    DamageRankRegister.register_class("1509", rank_1509)
-    # 陆·赫斯
-    DamageRankRegister.register_class("1510", rank_1510)
-
-    # 桃祈
-    DamageRankRegister.register_class("1601", rank_1601)
-    # 丹瑾
-    DamageRankRegister.register_class("1602", rank_1602)
-    # 椿
-    DamageRankRegister.register_class("1603", rank_1603)
-    # 暗主女
-    DamageRankRegister.register_class("1604", rank_1604)
-    # 暗主男
-    DamageRankRegister.register_class("1605", rank_1604)
-    # 洛可可
-    DamageRankRegister.register_class("1606", rank_1606)
-    # 坎特蕾拉
-    DamageRankRegister.register_class("1607", rank_1607)
-    # 弗洛洛
-    DamageRankRegister.register_class("1608", rank_1608)
+    """注册所有角色的命座/排行数据（rank）"""
+    _register_attr("rank", DamageRankRegister.register_class)

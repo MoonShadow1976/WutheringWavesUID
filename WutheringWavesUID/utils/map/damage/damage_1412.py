@@ -15,7 +15,7 @@ from ...damage.utils import (
     phantom_damage,
     skill_damage_calc,
 )
-from .buff import cantarella_buff, qiuyuan_buff, shouanren_buff
+from .buff import cantarella_buff, lucilla_buff, qiuyuan_buff, shouanren_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -333,6 +333,25 @@ def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     return calc_damage_2(attr, role, isGroup)
 
 
+def calc_damage_13(
+    attr: DamageAttribute,
+    role: RoleDetailData,
+    isGroup: bool = True,
+    actionType: Literal["z", "z1", "z2", "z3", "ez"] = "ez",
+    rounds: int = 1,  # 轮数
+) -> tuple[str, str]:
+    attr.set_char_damage(phantom_damage)
+    attr.set_char_template("temp_atk")
+
+    # 守岸人buff
+    shouanren_buff(attr, 0, 1, isGroup)
+
+    # 洛瑟菈buff
+    lucilla_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_1(attr, role, isGroup, actionType, rounds)
+
+
 damage_detail = [
     {
         "title": "符语日灵",
@@ -365,6 +384,10 @@ damage_detail = [
     {
         "title": "01守/01仇/(2轮)回路·我即语义",
         "func": lambda attr, role: calc_damage_10(attr, role, actionType="ez", rounds=2),
+    },
+    {
+        "title": "01守/01洛/(2轮)回路·我即语义",
+        "func": lambda attr, role: calc_damage_13(attr, role, actionType="ez", rounds=2),
     },
 ]
 

@@ -2993,6 +2993,439 @@
   {
     "chainList": [
       {
+        "description": "施放<color=Highlight>共鸣技能·幻象定帧</color>展开<color=Highlight>聚焦环</color>期间，指针首次进入<color=Highlight>完美焦距</color>时将立即使<color=Highlight>完美焦距</color>充满<color=Highlight>聚焦环</color>。\n施放<color=Highlight>共鸣技能·追光</color>时，洛瑟菈的暴击提升20%，持续10秒。\n<color=Highlight>共鸣技能·幻象定帧</color>、<color=Highlight>普攻·溯念留形第3段</color>免疫打断。",
+        "iconUrl": "",
+        "name": "遥远的晌午",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放<color=Highlight>共鸣解放·历历在目</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供额外的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深80%。\n·处于<color=Highlight>共鸣模态·声骸</color>时，队伍中角色的声骸技能伤害加成提升40%。\n<color=Highlight>追忆状态</color>持续期间，上述效果持续存在。退出<color=Highlight>追忆状态</color>后，上述效果保留30秒。\n洛瑟菈切换模态时，上述效果提前结束。",
+        "iconUrl": "",
+        "name": "酣睡的月光",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>断舍离</color>的伤害倍率提升100%。",
+        "iconUrl": "",
+        "name": "时间自无声处消逝",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>遗忘</color>命中将牵引周围的目标。施放<color=Highlight>遗忘</color>时，洛瑟菈的攻击提升10%，可叠加3层，持续6秒，持续时间结束清除全部层数。\n施放<color=Highlight>普攻·溯念留形第3段</color>时，洛瑟菈受到的伤害降低30%。",
+        "iconUrl": "",
+        "name": "过去悄然沉默",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>遗忘</color>的伤害倍率提升50%。",
+        "iconUrl": "",
+        "name": "岁月如溪水",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>追忆状态</color>持续期间，洛瑟菈每次消耗<color=Highlight>【照片】</color>将获得1层<color=Highlight>铭记</color>，可叠加3层。每层<color=Highlight>铭记</color>使<color=Highlight>断舍离</color>造成的伤害提升200%，至多提升600%。施放<color=Highlight>断舍离</color>后清除全部的<color=Highlight>铭记</color>层数。\n若洛瑟菈在<color=Highlight>追忆状态</color>持续期间击败了任意目标，将获得<color=Highlight>怀恋</color>：退出<color=Highlight>追忆状态</color>且处于非战斗状态时，消耗<color=Highlight>怀恋</color>，洛瑟菈回复150点<color=Highlight>【印象】</color>。",
+        "iconUrl": "",
+        "name": "在如烟的时间里张望",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "失序彼岸之梦",
+            "num": 3,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "梦魇·赫卡忒",
+            "phantomId": 6000115,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "失序彼岸之梦",
+            "num": 3,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "梦魇·破霜猎手",
+            "phantomId": 6000118,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "失序彼岸之梦",
+            "num": 3,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "梦魇·审判战士",
+            "phantomId": 6000117,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "剪心辑梦之影",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "冰盈舞者",
+            "phantomId": 6000196,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "剪心辑梦之影",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "莳植熊蜂",
+            "phantomId": 6000175,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 1,
+      "attributeName": "冷凝",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1109,
+      "roleName": "洛瑟菈",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 5,
+      "weaponTypeName": "音感仪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>。\n施放<color=Highlight>普攻第3段</color>时，长按<color=Highlight>普攻</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时抬起<color=Highlight>普攻</color>，洛瑟菈将施放<color=Highlight>普攻第3段·乏善可陈</color>，造成<color=Ice>冷凝伤害</color>并回复<color=Highlight>【印象】</color>。\n·若指针在<color=Highlight>完美焦距</color>时抬起<color=Highlight>普攻</color>，洛瑟菈则将施放<color=Highlight>普攻第3段·可圈可点</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n若施放<color=Highlight>普攻第2段</color>后一定时间内短按<color=Highlight>普攻</color>，则不会展开<color=Highlight>聚焦环</color>，并直接施放<color=Highlight>普攻第3段·乏善可陈</color>。\n展开<color=Highlight>聚焦环</color>期间，<color=Highlight>完美焦距</color>区域将逐渐扩大。<color=Highlight>完美焦距</color>区域填满<color=Highlight>聚焦环</color>后则自动收起，洛瑟菈将直接施放<color=Highlight>普攻第3段·可圈可点</color>。\n长按<color=Highlight>普攻</color>时，可依次施放<color=Highlight>普攻第1、2、3段</color>，且施放<color=Highlight>普攻第3段</color>时将展开<color=Highlight>聚焦环</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "抓拍",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "牵引周围的目标，造成<color=Ice>冷凝伤害</color>。\n施放时，长按<color=Highlight>共鸣技能</color>，展开<color=Highlight>聚焦环</color>，指针将在<color=Highlight>聚焦环</color>上移动。\n·若指针不在<color=Highlight>完美焦距</color>时抬起<color=Highlight>共鸣技能</color>，洛瑟菈将施放<color=Highlight>补光</color>，造成<color=Ice>冷凝伤害</color>并回复<color=Highlight>【印象】</color>。\n·若指针在<color=Highlight>完美焦距</color>时抬起<color=Highlight>共鸣技能</color>，洛瑟菈则将施放<color=Highlight>追光</color>，造成更高的<color=Ice>冷凝伤害</color>并回复更多的<color=Highlight>【印象】</color>。\n若施放时未长按<color=Highlight>共鸣技能</color>且洛瑟菈为登场角色时，则不会展开<color=Highlight>聚焦环</color>，并直接施放<color=Highlight>补光</color>。\n\n<color=Title>补光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，并使<color=Highlight>共鸣技能</color>的冷却时间减少8秒。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。\n\n<color=Title>追光</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>。\n施放<color=Highlight>追光</color>期间，洛瑟菈额外回复自身20点协奏能量，且洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>时将会为命中目标附加1层<color=Highlight>【霜渐效应】</color>。\n<color=Highlight>追光</color>免疫打断，施放<color=Highlight>追光</color>期间切换至其他角色则提前退出。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "幻象定帧",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "洛瑟菈共鸣能量上限为0，<color=Highlight>历历在目</color>不消耗共鸣能量。\n拥有全部3张<color=Highlight>【照片】</color>时，解锁<color=Highlight>历历在目</color>。\n\n<color=Title>历历在目</color>\n造成<color=Ice>冷凝伤害</color>并进入<color=Highlight>追忆状态</color>：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>。施放该技能时洛瑟菈的普攻伤害加成提升30%，持续10秒。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。施放该技能时洛瑟菈的声骸技能伤害加成提升30%，持续10秒。\n<color=Highlight>追忆状态</color>持续期间，洛瑟菈的抗打断能力提升，无法施放<color=Highlight>共鸣技能</color>、<color=Highlight>共鸣解放</color>，<color=Highlight>普攻</color>、<color=Highlight>闪避反击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能·剪辑</color>替换为<color=Highlight>普攻·溯念留形</color>、<color=Highlight>闪避反击·追忆</color>、<color=Highlight>空中攻击·追忆</color>、<color=Highlight>变奏技能·剪辑·硬切</color>。\n可在低空中施放。\n\n<color=Title>普攻·溯念留形</color>\n进行最多3段的连续攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n长按<color=Highlight>普攻</color>时，可依次施放<color=Highlight>普攻·溯念留形第1、2、3段</color>。\n施放<color=Highlight>普攻·溯念留形第3段</color>时，连续短按或长按<color=Highlight>普攻</color>，可持续攻击目标。\n施放<color=Highlight>普攻·溯念留形第3段</color>时抬起<color=Highlight>普攻</color>，或<color=Highlight>普攻·溯念留形第3段</color>结束后，将会自动施放<color=Highlight>断舍离</color>。\n\n<color=Title>断舍离</color>\n对范围内的目标造成<color=Ice>冷凝伤害</color>，洛瑟菈处于<color=Highlight>共鸣模态·霜渐</color>/<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>普攻伤害</color>/<color=Highlight>声骸技能伤害</color>。\n<color=Highlight>断舍离</color>免疫伤害和受击，期间不能切换角色。\n施放<color=Highlight>断舍离</color>期间，洛瑟菈额外回复自身20点协奏能量。\n施放<color=Highlight>断舍离</color>后，退出<color=Highlight>追忆状态</color>。\n\n<color=Title>空中攻击·追忆</color>\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第2段</color>。\n\n<color=Title>闪避反击·追忆</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Ice>冷凝伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "历历在目",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>剪辑</color>\n攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加1层<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>剪辑·硬切</color>\n<color=Highlight>追忆状态</color>持续期间，<color=Highlight>变奏技能</color>替换为<color=Highlight>剪辑·硬切</color>。\n攻击目标，造成<color=Ice>冷凝伤害</color>，为目标附加1层<color=Highlight>【霜渐效应】</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·溯念留形第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "剪辑",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>既视感</color>\n施放<color=Highlight>共鸣解放·历历在目</color>时，洛瑟菈将根据<color=Highlight>共鸣模态</color>提供不同的强化效果：\n·处于<color=Highlight>共鸣模态·霜渐</color>时，获得4层<color=Highlight>胶卷</color>，持续30秒，可叠加4层，持续时间结束清除全部层数。\n·处于<color=Highlight>共鸣模态·声骸</color>时，获得1层<color=Highlight>变焦</color>，持续30秒，可叠加1层，持续时间结束清除全部层数。\n洛瑟菈切换模态时，上述效果提前结束。\n\n<color=Title>胶卷</color>\n队伍中除洛瑟菈以外的登场角色为目标附加<color=Highlight>【霜渐效应】</color>时，洛瑟菈将消耗1层<color=Highlight>胶卷</color>，为周围的目标附加2次<color=Highlight>【霜渐效应】</color>，每0.5秒可触发1次。\n\n<color=Title>变焦</color>\n每层<color=Highlight>变焦</color>使队伍中登场角色造成声骸技能伤害的暴击伤害提升10%。\n\n<color=Title>遗忘</color>\n施放<color=Highlight>普攻·溯念留形第3段</color>期间，洛瑟菈每隔一段时间将消耗1张<color=Highlight>【照片】</color>施放<color=Highlight>遗忘</color>造成1次<color=Ice>冷凝伤害</color>:\n·处于<color=Highlight>共鸣模态·霜渐</color>时，此次伤害为<color=Highlight>普攻伤害</color>，并为命中目标附加1层<color=Highlight>【霜渐效应】</color>。\n·处于<color=Highlight>共鸣模态·声骸</color>时，此次伤害为<color=Highlight>声骸技能伤害</color>。每次施放<color=Highlight>遗忘</color>时，视为施放不同名的声骸技能。\n\n<color=Title>走马观花</color>\n短按瞄准键，洛瑟菈进入摄影状态。摄影状态下，洛瑟菈将标记镜头范围内的残响、环境采集物和部分收集品。按下快门时，洛瑟菈将拍摄当下值得纪念的瞬间，并收集上述内容。\n\n<color=Title>【印象】获取规则</color>\n<color=Highlight>【印象】</color>上限150点。\n施放<color=Highlight>变奏技能·剪辑</color>期间，回复100点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·追光</color>期间，回复50点<color=Highlight>【印象】</color>。\n施放<color=Highlight>普攻第3段·可圈可点</color>期间，回复50点<color=Highlight>【印象】</color>。\n施放<color=Highlight>共鸣技能·补光</color>或<color=Highlight>普攻第3段·乏善可陈</color>期间，回复25点<color=Highlight>【印象】</color>。\n\n<color=Title>【照片】获取规则</color>\n<color=Highlight>【照片】</color>上限3张。\n每回复50点<color=Highlight>【印象】</color>，将自动冲洗为1张<color=Highlight>【照片】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "记忆宫殿",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "处于<color=Highlight>共鸣模态·霜渐</color>时，队伍中登场角色一定范围内的目标受到<color=Highlight>【霜渐效应】</color>的伤害加深60%，持续30秒。\n洛瑟菈切换模态时，该效果提前结束。\n\n处于<color=Highlight>共鸣模态·声骸</color>时，下一个登场角色声骸技能伤害加深50%，持续14秒。\n切换至其他角色或洛瑟菈切换模态时，该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "蒙太奇",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·音感仪",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。附加霜渐效应时，自身冷凝伤害加成提升60%，持续12秒；队伍中的角色攻击提升48%，持续30秒，同名效果之间不可叠加。",
+        "weaponIcon": "",
+        "weaponId": 21050086,
+        "weaponName": "存帧",
+        "weaponStarLevel": 5,
+        "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "施放共鸣技能<color=Highlight>轰轰</color>时，必定暴击。",
         "iconUrl": "",
         "name": "剧院的英雄戏",
@@ -10308,6 +10741,439 @@
         "weaponName": "奇幻变奏",
         "weaponStarLevel": 4,
         "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "丽贝卡以下技能伤害倍率提升50%：\n·<color=Highlight>普攻·猎手</color>、<color=Highlight>重击·猎手</color>、<color=Highlight>战术闪避·猎手</color>、<color=Highlight>闪避反击·猎手</color>。\n·<color=Highlight>普攻·铁胆</color>、<color=Highlight>战术闪避·铁胆</color>、<color=Highlight>闪避反击·铁胆</color>。\n丽贝卡获得<color=Highlight>小孩子才做选择！</color>效果时，额外获得3层街头直觉，持续12秒。施放<color=Highlight>战术闪避·猎手</color>、<color=Highlight>战术闪避·铁胆</color>时，若拥有街头直觉则消耗1层街头直觉，回复20点耐力。\n共鸣解放<color=Highlight>大烟花！</color>免疫打断。",
+        "iconUrl": "",
+        "name": "请多指教咯~",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放变奏技能<color=Highlight>呜呼，来发大的！</color>、变奏技能<color=Highlight>蠢货，有本事来抓我！</color>或共鸣解放<color=Highlight>狂欢时间！</color>时，队伍中的角色全属性伤害加成提升20%，持续30秒。\n队伍中的角色附加<color=Highlight>【骇破·偏移】</color>时，全伤害加深15%，持续30秒。\n处于非战斗状态时，<color=Highlight>【手感火热】</color>回复速度翻倍。",
+        "iconUrl": "",
+        "name": "哦，原来是你啊！",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "丽贝卡共鸣解放<color=Highlight>狂欢时间！</color>、共鸣解放<color=Highlight>大烟花！</color>伤害倍率提升60%。\n丽贝卡共鸣解放<color=Highlight>狂欢时间！</color>爆炸范围增加30%。\n施放变奏技能<color=Highlight>呜呼，来发大的！</color>、变奏技能<color=Highlight>蠢货，有本事来抓我！</color>时，获得120点<color=Highlight>【手感火热】</color>。",
+        "iconUrl": "",
+        "name": "背后就交给我吧！",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "丽贝卡<color=Highlight>小孩子才做选择！</color>属性加成效果额外提升60%。",
+        "iconUrl": "",
+        "name": "我会保护你的！",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "丽贝卡附加<color=Highlight>【骇破·偏移】</color>时，自身普攻伤害加成提升20%，持续8秒。",
+        "iconUrl": "",
+        "name": "边缘幻梦",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "丽贝卡从所有来源中获得的普攻伤害加成数值提升40%。\n丽贝卡施放<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>期间，额外造成一次900%的<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n丽贝卡施放<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>时，额外回复20点<color=Highlight>【手感火热】</color>。\n受到致死伤害时，此次伤害不会使丽贝卡倒下，并且立即回复5次2077点固定生命值，该效果每10分钟可触发1次。\n处于非战斗状态大于4秒时，丽贝卡回复120点<color=Highlight>【狂热】</color>，每4秒只生效1次。",
+        "iconUrl": "",
+        "name": "也许……",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "碎梦亡鬼之魇",
+            "num": 1,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "共鸣回响·梦魇亚当·重锤",
+            "phantomId": 6000201,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "不绝余音",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "奏谕乐师",
+            "phantomId": 390077022,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "不绝余音",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "融火虫",
+            "phantomId": 6000054,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "剪心辑梦之影",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "迷胧幻蛾",
+            "phantomId": 6000198,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "剪心辑梦之影",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "莳植熊蜂",
+            "phantomId": 6000175,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 3,
+      "attributeName": "导电",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1308,
+      "roleName": "丽贝卡",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 3,
+      "weaponTypeName": "佩枪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·猎手</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·猎手</color>\n<color=Highlight>长按普攻</color>，消耗耐力并持续对敌人进行射击，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n·若在长按过程中<color=Highlight>松开普攻</color>，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以施放<color=Highlight>重击·吃枪子吧！·猎手</color>。\n\n<color=Title>重击·吃枪子吧！·猎手</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中突袭！·猎手</color>\n从空中空翻落地。\n施放该技能后保持<color=Highlight>长按普攻</color>可施放<color=Highlight>重击·猎手</color>，且不需要消耗耐力。\n\n<color=Title>空中攻击·猎手</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·猎手</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·猎手</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放（需在地面时）：\n·进行<color=Highlight>普攻·猎手</color>期间。\n·进行<color=Highlight>重击·猎手</color>期间。\n·进行<color=Highlight>重击·吃枪子吧！·猎手</color>期间。\n·施放<color=Highlight>空中突袭！·猎手</color>期间。\n·施放<color=Highlight>战术闪避·猎手</color>期间。\n·施放<color=Highlight>共鸣技能</color>期间。\n·施放<color=Highlight>变奏技能</color>期间。\n使用<color=Highlight>战术闪避·猎手</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。\n施放该技能后保持<color=Highlight>长按普攻</color>可施放<color=Highlight>重击·猎手</color>，且不需要消耗耐力。\n\n<color=Title>普攻·铁胆</color>\n进行最多3段的攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>战术闪避·铁胆</color>一定时间内不会重置<color=Highlight>普攻·铁胆</color>连击段数。\n\n<color=Title>重击·铁胆</color>\n消耗耐力攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·铁胆</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·铁胆</color>\n成功闪避后一定时间内<color=Highlight>短按普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>战术闪避·铁胆</color>\n<color=Highlight>短按闪避</color>，闪避期间会攻击目标，造成<color=Thunder>导电伤害</color>。\n可以在进行以下操作时施放（需在地面时）：\n·进行<color=Highlight>普攻·铁胆</color>期间。\n·施放<color=Highlight>战术闪避·铁胆</color>期间。\n·施放<color=Highlight>共鸣技能</color>期间。\n·施放<color=Highlight>变奏技能</color>期间。\n使用<color=Highlight>战术闪避·铁胆</color>成功闪避时，额外造成<color=Thunder>导电伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "混搭战术",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，<color=Highlight>短按共鸣技能</color>，可接近敌人然后使用<color=Highlight>【猎手】</color>快速扫射，同时切换模式为<color=Highlight>【铁胆】</color>，并使用<color=Highlight>【铁胆】</color>轰击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>共鸣技能·有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，<color=Highlight>短按共鸣技能</color>，用<color=Highlight>【铁胆】</color>快速扫击敌人，然后对地射击利用后坐力接近敌人，同时切换模式为<color=Highlight>【猎手】</color>，并使用<color=Highlight>【猎手】</color>快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时间内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "战术性调整",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "切换为<color=Highlight>【31型重机枪】</color>模式，生成停滞领域，9.5秒内：\n丽贝卡使用<color=Highlight>【31型重机枪】</color>自动射击，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害，并持续获得<color=Highlight>【过载】</color>。射击期间，每隔一定时间后<color=Highlight>短按或长按普攻</color>、<color=Highlight>短按共鸣解放</color>，可提升<color=Highlight>【31型重机枪】</color>威力，并更快的获得<color=Highlight>【过载】</color>，至多可触发2次。\n·机枪会自动锁定屏幕中央瞄准框内距离准星最近的敌人，不会攻击瞄准框外的敌人。\n·丽贝卡使用<color=Highlight>【31型重机枪】</color>期间无法移动，但受到的伤害降低50%且免疫打断。\n\n<color=Title>【过载】获取规则</color>\n<color=Highlight>【过载】</color>上限为90点。\n<color=Highlight>【31型重机枪】</color>未提升威力时：命中获得2点。\n<color=Highlight>【31型重机枪】</color>威力提升1次后：命中获得4点。\n<color=Highlight>【31型重机枪】</color>威力提升2次后：命中获得6点。\n\n<color=Title>大烟花！</color>\n<color=Highlight>【31型重机枪】</color>模式持续时间结束时或<color=Highlight>【过载】</color>达到上限时，自动施放<color=Highlight>大烟花！</color>，造成<color=Thunder>导电伤害</color>。施放<color=Highlight>大烟花！</color>时，会退出<color=Highlight>【31型重机枪】</color>模式。\n·<color=Highlight>【31型重机枪】</color>模式下<color=Highlight>长按共鸣解放</color>，可提前施放<color=Highlight>大烟花！</color>。\n·退出<color=Highlight>【31型重机枪】</color>模式时，会清除所有<color=Highlight>【过载】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "狂欢时间！",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>呜呼，来发大的！</color>\n处于<color=Highlight>【猎手】</color>模式时，变奏入场，接近敌人并使用<color=Highlight>【猎手】</color>快速扫射，同时切换为<color=Highlight>【铁胆】</color>模式轰击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>蠢货，有本事来抓我！</color>\n处于<color=Highlight>【铁胆】</color>模式时，变奏入场，使用<color=Highlight>【铁胆】</color>对地射击并利用后坐力接近敌人，同时切换为<color=Highlight>【猎手】</color>模式快速扫射，造成<color=Thunder>导电伤害</color>。\n施放该技能后，若处于低空，一定时间内<color=Highlight>短按或长按普攻</color>可施放<color=Highlight>空中突袭！·猎手</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "到我了！",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>该用这个了！</color>\n丽贝卡施放<color=Highlight>共鸣技能</color>或<color=Highlight>变奏技能</color>可以在<color=Highlight>【猎手】</color>、<color=Highlight>【铁胆】</color>模式之间切换：\n·处于<color=Highlight>【猎手】</color>模式时，丽贝卡暴击伤害提升30%。\n·处于<color=Highlight>【铁胆】</color>模式时，丽贝卡造成伤害无视目标15%防御。\n·丽贝卡初始处于<color=Highlight>【猎手】</color>模式。\n\n<color=Title>骇破·偏移</color>\n丽贝卡施放以下技能造成伤害时会对目标附加<color=Highlight>【骇破·偏移】</color>，同一技能对同一目标3秒内只能触发1次。\n<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>、<color=Highlight>重击·哒哒哒！·猎手</color>、<color=Highlight>重击·砰砰砰！·铁胆</color>、<color=Highlight>共鸣解放·大烟花！</color>。\n\n<color=Title>骇破响应·熔触</color>\n丽贝卡对范围内处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Thunder>导电伤害</color>，此次伤害为骇破伤害。\n\n<color=Title>重击·哒哒哒！·猎手</color>\n<color=Highlight>【狂热】</color>达到120点时，<color=Highlight>重击·猎手</color>替换为<color=Highlight>重击·哒哒哒！·猎手</color>。<color=Highlight>长按普攻</color>施放<color=Highlight>重击·哒哒哒！·猎手</color>，消耗所有的<color=Highlight>【狂热】</color>，牵引周围的目标，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n在施放<color=Highlight>重击·猎手</color>期间，若<color=Highlight>【狂热】</color>达到120点，且此时不处于施放<color=Highlight>战术闪避·猎手</color>期间，可以通过<color=Highlight>松开普攻</color>施放<color=Highlight>重击·哒哒哒！·猎手</color>。\n\n<color=Title>重击·砰砰砰！·铁胆</color>\n<color=Highlight>【狂热】</color>达到120点时，<color=Highlight>重击·铁胆</color>替换为<color=Highlight>重击·砰砰砰！·铁胆</color>。<color=Highlight>长按普攻</color>施放<color=Highlight>重击·砰砰砰！·铁胆</color>，消耗所有的<color=Highlight>【狂热】</color>，牵引周围的目标，造成<color=Thunder>导电伤害</color>，此次伤害为普攻伤害。\n\n<color=Title>【狂热】获取规则</color>\n<color=Highlight>【狂热】</color>上限120点。\n<color=Highlight>常态攻击</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n<color=Highlight>共鸣技能</color>造成伤害时，回复<color=Highlight>【狂热】</color>。\n施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>并获得<color=Highlight>小孩子才做选择！</color>时，回复50点。\n\n<color=Title>【手感火热】获取规则</color>\n<color=Highlight>【手感火热】</color>上限120点。\n随时间持续获得，每秒获得10点。\n施放<color=Highlight>重击·哒哒哒！·猎手</color>或<color=Highlight>重击·砰砰砰！·铁胆</color>时回复40点。\n\n<color=Title>小孩子才做选择！</color>\n<color=Highlight>【手感火热】</color>达到120点时，施放<color=Highlight>变奏技能·呜呼，来发大的！</color>、<color=Highlight>变奏技能·蠢货，有本事来抓我！</color>、<color=Highlight>共鸣技能·来发大的！</color>或<color=Highlight>共鸣技能·有本事来抓我！</color>时，获得额外效果，12秒内：\n无论处于哪种模式，丽贝卡同时获得<color=Highlight>【猎手】</color>和<color=Highlight>【铁胆】</color>模式的属性加成效果。\n此期间无法回复<color=Highlight>【手感火热】</color>，并且每秒消耗10点<color=Highlight>【手感火热】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "我要认真了！",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "召唤机枪塔持续攻击敌人，持续14秒，每次攻击造成2.5%的<color=Thunder>导电伤害</color>。\n下一位登场角色获得<color=Highlight>浪客羁绊</color>，全伤害加深15%，持续14秒。持有<color=Highlight>浪客羁绊</color>的角色每0.2秒会获得1层<color=Highlight>超限</color>，造成重击伤害加深0.5%（若是露西持有<color=Highlight>浪客羁绊</color>，则直接获得满层），上限为35%。若切换至其他角色则提前结束<color=Highlight>浪客羁绊</color>和<color=Highlight>超限</color>。\n机枪塔可被露西强化，伤害倍率提升250%，但持续时间变为4秒。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "好搭档",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，丽贝卡可对其施放<color=Highlight>【谐度破坏】</color>。\n\n丽贝卡拥有为目标附加<color=Highlight>【骇破·偏移】</color>以及响应<color=Highlight>【骇破·干涉】</color>的能力。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，丽贝卡将触发<color=Highlight>骇破响应·熔触</color>效果，同一目标每8秒仅可受到1次该伤害。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "骇破·熔触",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放变奏技能时，自身普攻伤害加成提升48%，持续14秒。附加【骇破·偏移】时，自身普攻伤害加成提升24%，持续14秒，队伍中的角色攻击提升48%，持续30秒，同名效果之间不可叠加。",
+        "weaponIcon": "",
+        "weaponId": 21030066,
+        "weaponName": "碎骨",
+        "weaponStarLevel": 5,
+        "weaponType": 3
       }
     }
   },
@@ -18062,6 +18928,439 @@
         "weaponName": "白昼之脊",
         "weaponStarLevel": 5,
         "weaponType": 4
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "<color=Highlight>共鸣技能·有效载荷</color>、<color=Highlight>共鸣技能·脉冲干扰</color>、<color=Highlight>重击·双线程</color>和<color=Highlight>重击·多线程</color>免疫打断。\n施放<color=Highlight>变奏技能·过时幻觉</color>时攻击提升20%，持续14秒。\n队伍中的角色直接造成的伤害击败带有<color=Highlight>欺骗程式</color>效果的目标时，露西记录该效果并激活对应的<color=Highlight>快捷响应</color>，持续6秒。露西失去意识时，记录效果失效。\n<color=Highlight>快捷响应</color>：生效期间，对队伍中登场角色周围一定范围内的所有目标附加记录的<color=Highlight>欺骗程式</color>效果，对范围内每名目标仅生效一次。\n可被记录的<color=Highlight>欺骗程式</color>效果：<color=Highlight>欺骗程式·义体故障</color>、<color=Highlight>欺骗程式·突破协议</color>、<color=Highlight>欺骗程式·运动失能</color>、<color=Highlight>欺骗程式·武装故障</color>、<color=Highlight>欺骗程式·赛博精神病</color>。通过<color=Highlight>快捷响应</color>附加<color=Highlight>欺骗程式</color>效果时，仅附加可持续生效的状态效果。",
+        "iconUrl": "",
+        "name": "月球、船票与梦想",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "施放<color=Highlight>共鸣解放·网络行者</color>和<color=Highlight>共鸣解放·暗网深潜</color>时，初始的Ram点数提升至32点。\n施放<color=Highlight>共鸣技能·脉冲干扰</color>后额外造成1次450%的<color=Light>衍射伤害</color>，该次伤害为重击伤害。\n该次伤害命中目标时，为目标额外附加以下<color=Highlight>欺骗程式</color>效果：<color=Highlight>欺骗程式·义体故障</color>、<color=Highlight>欺骗程式·突破协议</color>、<color=Highlight>欺骗程式·运动失能</color>、<color=Highlight>欺骗程式·武装故障</color>、<color=Highlight>欺骗程式·赛博精神病</color>。通过该方式附加<color=Highlight>欺骗程式</color>效果时，仅附加可持续生效的状态效果。\n<color=Highlight>共鸣回路·黑墙深度</color>效果中：施放<color=Highlight>重击·多线程</color>时，若自身持有<color=Highlight>SQL</color>，伤害倍率提升效果由270%提升至560%。",
+        "iconUrl": "",
+        "name": "黑墙、过去与逃离",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣解放·网络行者</color>和<color=Highlight>共鸣解放·暗网深潜</color>的覆写篡改的伤害倍率提升50%、暴击伤害提升100%。\n<color=Highlight>欺骗程式·运动失能</color>的伤害倍率提升65%。\n<color=Highlight>骇破响应·数据崩解</color>的伤害倍率提升65%。",
+        "iconUrl": "",
+        "name": "赛博朋克",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中角色附加<color=Highlight>【骇破·偏移】</color>后，使队伍中角色全属性伤害加成提升20%，持续20秒。",
+        "iconUrl": "",
+        "name": "夜之城没有活着的传奇",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>固有技能·幽灵义体</color>中获取的<color=Highlight>光学欺骗</color>层数上限提升至2层。\n<color=Highlight>固有技能·幽灵义体</color>获得强化：生命值低于50%时，自身受到攻击后获得1层<color=Highlight>光学欺骗</color>，该效果有180秒的冷却时间。触发<color=Highlight>光学欺骗</color>效果时，获得基于露西自身攻击力150%的护盾，持续10秒。",
+        "iconUrl": "",
+        "name": "前往地狱的断路",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "拥有<color=Highlight>【骇破·偏移】</color>效果或处于<color=Highlight>【骇破·干涉】</color>状态的目标受到露西的重击伤害提升40%。\n拥有<color=Highlight>【骇破·偏移】</color>效果或处于<color=Highlight>【骇破·干涉】</color>状态的目标受到露西的骇破伤害提升60%。\n<color=Highlight>骇破响应·数据崩解</color>触发的停滞效果延长至1.5秒。",
+        "iconUrl": "",
+        "name": "I Really Want to Stay At Your House",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "碎梦亡鬼之魇",
+            "num": 1,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "共鸣回响·梦魇亚当·重锤",
+            "phantomId": 6000201,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "浮星祛暗",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "青羽鹭",
+            "phantomId": 390077005,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "浮星祛暗",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "叮咚咚",
+            "phantomId": 6000051,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "流金溯真之式",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "双极·渊陨重锋",
+            "phantomId": 6000180,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "流金溯真之式",
+            "num": 2,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "莳植熊蜂",
+            "phantomId": 6000175,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 5,
+      "attributeName": "衍射",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1511,
+      "roleName": "露西",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 3,
+      "weaponTypeName": "佩枪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻</color>\n进行最多4段的连续攻击，造成<color=Light>衍射伤害</color>。\n施放<color=Highlight>普攻</color>第1段后，长按<color=Highlight>普攻</color>，将会持续攻击目标，造成<color=Light>衍射伤害</color>。持续长按一定时间后将会施放<color=Highlight>重击</color>第1段。\n<color=Highlight>普攻</color>第3段命中目标且在施放后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第2段。\n\n<color=Title>重击</color>\n消耗耐力，甩出分子线造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第1段命中目标且持续长按<color=Highlight>普攻</color>，将会施放<color=Highlight>重击</color>第2段，造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第1段施放后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第3段。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第2段。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第4段。\n该技能命中目标后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第2段。\n\n<color=Title>普攻·线程撕裂</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>。\n进行最多4段的连续攻击，造成<color=Light>衍射伤害</color>，本次伤害为重击伤害。\n\n<color=Title>重击·单线程</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>空中攻击·算法压缩</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n\n<color=Title>重击·双线程</color>\n处于<color=Highlight>算法压缩</color>状态时且<color=Highlight>【根权限】</color>达到100点时<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。\n消耗耐力和所有<color=Highlight>【根权限】</color>攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>重击·多线程</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n\n<color=Title>重击·多线程</color>\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>并附加<color=Highlight>【骇破·偏移】</color>。施放时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升270%并移除<color=Highlight>SQL</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n\n<color=Title>空中攻击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，空中攻击替换为<color=Highlight>空中攻击·算法压缩</color>。\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n\n<color=Title>闪避反击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>闪避</color>反击替换为<color=Highlight>闪避反击·算法压缩</color>。\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第3段。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "靶定线程",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·有效载荷</color>\n施放<color=Highlight>共鸣技能·有效载荷</color>向前方突进造成<color=Light>衍射伤害</color>并附加<color=Highlight>【骇破·偏移】</color>。命中目标时将自动施放追加攻击，造成<color=Light>衍射伤害</color>，同时激活<color=Highlight>共鸣技能·脉冲干扰</color>。若突进攻击没有命中目标，则减少70%的冷却时间。若突进攻击施放过程中被打断或未施放完成，则不会减少冷却时间。\n施放追加攻击后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第2段。\n追加攻击命中目标后一段时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第2段。\n\n<color=Title>共鸣技能·脉冲干扰</color>\n施放<color=Highlight>共鸣技能·脉冲干扰</color>穿越目标造成<color=Light>衍射伤害</color>并短暂停滞敌方目标。施放该技能后为露西附加<color=Highlight>非正式握手</color>。\n<color=Highlight>非正式握手</color>：露西未处于<color=Highlight>算法压缩</color>状态且为队伍中登场角色时，每秒持续获得<color=Highlight>【传输协议】</color>，当<color=Highlight>【传输协议】</color>达到100点、施放<color=Highlight>共鸣解放·网络行者</color>或<color=Highlight>共鸣解放·暗网深潜</color>后移除该效果。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第2段。\n\n<color=Title>共鸣技能·死锁</color>\n当<color=Highlight>【传输协议】</color>达到100点或露西处于<color=Highlight>算法压缩</color>状态下时，<color=Highlight>共鸣技能·有效载荷</color>和<color=Highlight>共鸣技能·脉冲干扰</color>替换为<color=Highlight>共鸣技能·死锁</color>。\n施放<color=Highlight>共鸣技能·死锁</color>对目标造成<color=Light>衍射伤害</color>同时附加<color=Highlight>【骇破·偏移】</color>，此次伤害为重击伤害。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n施放<color=Highlight>共鸣解放·网络行者</color>或<color=Highlight>共鸣解放·暗网深潜</color>后，将重置<color=Highlight>共鸣技能·死锁</color>的冷却时间。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "协议突破",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣解放·网络行者</color>\n露西深潜赛博空间并展开协议界面，持续10秒。协议界面开启期间可选择共计7种不同的<color=Highlight>欺骗程式</color>，每种<color=Highlight>欺骗程式</color>消耗的Ram点数不同，初始露西拥有24点Ram点数。\n处于协议界面时，露西会依次标记视野中一定范围内的目标，被标记的目标将会受到后续所有<color=Highlight>欺骗程式</color>的效果。可通过调整露西的视角来标记更多目标。当视野中一定范围内无目标时，将无法施放任何<color=Highlight>欺骗程式</color>。\n处于协议界面时，当协议界面的持续时间结束或长按<color=Highlight>普攻</color>，将对所有标记目标发起<color=Highlight>覆写篡改</color>，造成<color=Light>衍射伤害</color>并退出协议界面，此次伤害为重击伤害。当所有Ram点数消耗完毕或剩余Ram点数无法再施放任何<color=Highlight>欺骗程式</color>时，点按<color=Highlight>普攻</color>将对所有标记目标发起<color=Highlight>覆写篡改</color>。\n该技能可在低空施放。\n\n<color=Highlight>欺骗程式·集群入侵</color>\n消耗2点Ram。拓展标记视角，施放效果后无需调整视野，直接标记露西周围一定范围内的所有目标，同时对周围的标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·义体故障</color>\n消耗4点Ram。使所有标记目标受到伤害提升5%，持续30秒。\n<color=Highlight>欺骗程式·突破协议</color>\n消耗4点Ram。使所有标记目标降低5%的防御，持续30秒。\n<color=Highlight>欺骗程式·突触熔融</color>\n消耗5点Ram。对一定范围内的所有标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·运动失能</color>\n消耗6点Ram。对所有标记目标造成骇破伤害并降低5%的攻击，持续30秒。\n<color=Highlight>欺骗程式·武装故障</color>\n消耗5点Ram。使所有标记目标的攻击有一定概率无法造成伤害，持续30秒。\n<color=Highlight>欺骗程式·赛博精神病</color>\n消耗6点Ram。干扰所有标记目标使其变为中立阵营，并削减共振度。转变阵营的效果只对轻波级敌人生效。\n\n<color=Title>共鸣解放·暗网深潜</color>\n露西处于<color=Highlight>算法压缩</color>状态且施放<color=Highlight>重击·多线程</color>后，<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。拥有<color=Highlight>共鸣解放·网络行者</color>的所有效果，并使<color=Highlight>覆写篡改</color>伤害倍率大幅提升。\n施放<color=Highlight>共鸣解放·暗网深潜</color>后或露西退出<color=Highlight>算法压缩</color>状态，<color=Highlight>共鸣解放·暗网深潜</color>替换为<color=Highlight>共鸣解放·网络行者</color>。\n该技能可在低空施放。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "网络行者",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成<color=Light>衍射伤害</color>同时赋予队伍中角色<color=Highlight>非自愿共享</color>效果，使其能看到障碍物后的目标，持续25秒。丽贝卡获得<color=Highlight>非自愿共享</color>效果时效果增强，可以锁定障碍物后的目标。若场上存在丽贝卡的机枪塔则激活过载效果，使其造成的伤害提升，持续4秒。\n施放该技能后，若露西未处于<color=Highlight>算法压缩</color>状态，则一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第2段。\n施放该技能后，若露西处于<color=Highlight>算法压缩</color>状态，则一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第2段。\n施放该技能后，下一次施放<color=Highlight>共鸣技能·脉冲干扰</color>时额外获得20点<color=Highlight>【传输协议】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "过时幻觉",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>云端接口</color>\n露西未处于<color=Highlight>算法压缩</color>状态下时，攻击命中目标会获得<color=Highlight>【传输协议】</color>。当<color=Highlight>【传输协议】</color>达到100点时，<color=Highlight>共鸣技能·有效载荷</color>和<color=Highlight>共鸣技能·脉冲干扰</color>替换为<color=Highlight>共鸣技能·死锁</color>。\n施放<color=Highlight>共鸣解放·网络行者</color>或<color=Highlight>共鸣解放·暗网深潜</color>后会清空<color=Highlight>【传输协议】</color>进度。\n\n<color=Title>算法压缩</color>\n施放<color=Highlight>共鸣技能·死锁</color>后露西进入<color=Highlight>算法压缩</color>状态，并获得1层<color=Highlight>SQL</color>。<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。自身<color=Light>衍射伤害</color>加成提升65%，持续8秒。\n<color=Highlight>算法压缩</color>状态下，再次施放<color=Highlight>共鸣技能·死锁</color>不会重复获得<color=Highlight>SQL</color>和衍射伤害加成效果。\n<color=Highlight>算法压缩</color>状态下，<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>等攻击命中目标时可获得<color=Highlight>【根权限】</color>。当<color=Highlight>【根权限】</color>达到100点时，<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。施放<color=Highlight>重击·双线程</color>后短时间内点按<color=Highlight>普攻</color>或长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击·多线程</color>。\n施放<color=Highlight>重击·多线程</color>时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升270%并移除<color=Highlight>SQL</color>。\n施放<color=Highlight>重击·多线程</color>时若自身未持有<color=Highlight>SQL</color>，则损失20%的当前生命值；当露西生命值低于1%时，不消耗生命值。\n施放<color=Highlight>重击·多线程</color>后<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。\n施放<color=Highlight>共鸣解放</color>后，或施放<color=Highlight>重击·多线程</color>后8秒内不进行攻击，将会退出<color=Highlight>算法压缩</color>状态。\n\n<color=Title>骇破响应·数据崩解</color>\n露西对处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Light>衍射伤害</color>并附加<color=Highlight>数据崩解</color>效果。此次伤害为骇破伤害。\n<color=Highlight>数据崩解</color>：当目标攻击造成伤害后触发，停滞目标0.5秒。\n\n<color=Title>【传输协议】获取规则</color>\n<color=Highlight>【传输协议】</color>上限100点。\n<color=Highlight>普攻</color>、<color=Highlight>重击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>闪避反击</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n<color=Highlight>共鸣技能·有效载荷</color>、<color=Highlight>共鸣技能·脉冲干扰</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n施放<color=Highlight>变奏技能·过时幻觉</color>后，下一次施放<color=Highlight>共鸣技能·脉冲干扰</color>时额外获得20点<color=Highlight>【传输协议】</color>。\n\n<color=Title>【根权限】获取规则</color>\n<color=Highlight>【根权限】</color>上限100点。\n<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>、<color=Highlight>重击·双线程</color>、<color=Highlight>重击·多线程</color>、<color=Highlight>空中攻击·算法压缩</color>、<color=Highlight>闪避反击·算法压缩</color>造成伤害时，获得<color=Highlight>【根权限】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "黑墙深度",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "下一名登场角色普攻伤害加深25%，持续14秒，若切换至其他角色则该效果提前结束。\n队伍中的角色获得<color=Highlight>反制程序</color>效果，持续25秒。\n效果持续期间，队伍中除露西以外的登场角色附加<color=Highlight>【骇破·偏移】</color>时，该角色全伤害加深20%。\n效果持续期间，队伍中除露西以外的角色受到伤害后，为其附加受到伤害降低30%的效果，持续3秒，并为攻击方附加短暂的停滞效果，持续1秒。该效果在<color=Highlight>反制程序</color>持续时间内仅生效1次。重复获取<color=Highlight>反制程序</color>效果时重置生效次数。\n全伤害加深效果激活后，若切换至其他角色则<color=Highlight>反制程序</color>效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "反制程序",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，露西可对其施放<color=Highlight>【谐度破坏】</color>。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，露西将触发<color=Highlight>骇破响应·数据崩解</color>效果，同一目标每8秒仅可收到1次该效果。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "数据崩解",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。施放共鸣技能时，自身衍射伤害加成提升40%，最多叠加2层，持续14秒。每次为敌方怪物附加【骇破·偏移】后，重击伤害加深60%，且重击伤害能无视目标20%防御，持续14秒。",
+        "weaponIcon": "",
+        "weaponId": 21030056,
+        "weaponName": "蜃影",
+        "weaponStarLevel": 5,
+        "weaponType": 3
       }
     }
   },

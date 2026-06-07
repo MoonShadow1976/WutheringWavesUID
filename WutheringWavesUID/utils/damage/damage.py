@@ -282,6 +282,8 @@ class DamageAttribute:
         self.env_tune_rupture = False
         # 集谐·干涉
         self.env_tune_strain = False
+        # 骇破·干涉
+        self.env_hack = False
         # 偏谐值累积效率 (初始100%)
         self.off_tune_buildup_rate = off_tune_buildup_rate
         # 谐度破坏增幅 (初始10点)
@@ -711,7 +713,7 @@ class DamageAttribute:
 
     def is_env_shifting(self):
         """是否处于干涉状态"""
-        return any([self.env_tune_rupture, self.env_tune_strain])
+        return any([self.env_tune_rupture, self.env_tune_strain, self.env_hack])
 
     def set_env_tune_rupture(self):
         """震谐·干涉"""
@@ -723,6 +725,11 @@ class DamageAttribute:
         """集谐·干涉"""
         self.env_tune_strain = True
         self.env_tune_rupture = False
+        return self
+
+    def set_env_hack(self):
+        """骇破·干涉"""
+        self.env_hack = True
         return self
 
     def add_off_tune_buildup_rate(self, off_tune_buildup_rate: float, title="", msg=""):

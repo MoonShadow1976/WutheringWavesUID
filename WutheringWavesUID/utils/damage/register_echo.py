@@ -1098,6 +1098,18 @@ class Echo_6000200(EchoAbstract):
     # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色热熔伤害加成提升12.00%，持续15秒。
 
 
+class Echo_6000201(EchoAbstract):
+    id = 6000201
+    name = "共鸣回响·梦魇亚当·重锤"
+
+    # 在首位装配该声骸技能时，若装配角色为露西或丽贝卡，则自身暴击提升15%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        if role_id in [1308, 1511]:
+            return {"暴击": "15%"}
+        return {}
+
+
 def register_echo():
     # 自动注册所有以 Echo_ 开头的类
     for name, obj in globals().items():

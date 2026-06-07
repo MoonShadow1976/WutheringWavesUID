@@ -183,3 +183,27 @@ def denia_buff(attr, chain, resonLevel, isGroup):
     if char_clz:
         s = char_clz()
         s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def lucilla_buff(attr, chain, resonLevel, isGroup):
+    # 洛瑟菈buff
+    char_clz = WavesCharRegister.find_class(1109)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def rebecca_buff(attr, chain, resonLevel, isGroup):
+    # 丽贝卡buff
+    char_clz = WavesCharRegister.find_class(1308)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def lucy_buff(attr, chain, resonLevel, isGroup):
+    # 露西buff
+    char_clz = WavesCharRegister.find_class(1511)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)

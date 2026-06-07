@@ -133,6 +133,77 @@ class Char_1108(CharAbstract):
         return
 
 
+class Char_1109(CharAbstract):
+    id = 1109
+    name = "洛瑟菈"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        if attr.env_glacio_chafe:
+            if attr.env_glacio_chafe_deepen:
+                if chain >= 2:
+                    title = f"{self.name}-二链-霜渐模态"
+                    msg = "目标受到【霜渐效应】的伤害加深80%"
+                    attr.add_dmg_deepen(0.8, title, msg)
+
+                title = f"{self.name}-延奏技能"
+                msg = "目标受到【霜渐效应】的伤害加深60%"
+                attr.add_dmg_deepen(0.6, title, msg)
+
+            if attr.char_attr == CHAR_ATTR_FREEZING:
+                title = f"{self.name}-合鸣效果-雪落无声之愿"
+                msg = "使用延奏技能后，下一个登场的角色冷凝伤害提升25%"
+                attr.add_atk_percent(0.225, title, msg)
+
+            # 迷胧幻蛾
+            if attr.char_template == temp_atk:
+                title = f"{self.name}-声骸技能-迷胧幻蛾"
+                msg = "施放延奏技能，则可使下一个变奏登场的角色攻击提升12%"
+                attr.add_atk_percent(0.12, title, msg)
+
+        if phantom_damage == attr.char_damage:
+            title = "固有技能-声骸模态"
+            msg = "队伍中的角色声骸技能伤害加成提升25%"
+            attr.add_dmg_bonus(0.25, title, msg)
+
+            if chain >= 2:
+                title = f"{self.name}-二链-声骸模态"
+                msg = "队伍中角色的声骸技能伤害加成提升40%"
+                attr.add_dmg_bonus(0.4, title, msg)
+
+            title = "共鸣回路-变焦"
+            msg = "4层变焦使角色声骸技能伤害的暴击伤害提升40%"
+            attr.add_crit_dmg(0.4, title, msg)
+
+            title = f"{self.name}-延奏技能"
+            msg = "下一位登场角色声骸技能伤害加深50%"
+            attr.add_dmg_deepen(0.5, title, msg)
+
+            if attr.char_template == temp_atk:
+                title = f"{self.name}-合鸣效果-轻云出月"
+                msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+                attr.add_atk_percent(0.225, title, msg)
+
+            # 无常凶鹭
+            title = f"{self.name}-声骸技能-无常凶鹭"
+            msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+            attr.add_dmg_bonus(0.12, title, msg)
+
+        # 存帧
+        weapon_clz = WavesWeaponRegister.find_class(21050086)
+        if weapon_clz:
+            w = weapon_clz(21050086, 90, 6, resonLevel)
+            method = getattr(w, "do_action", None)
+            if callable(method):
+                method([cast_variation], attr, isGroup, isSelf=False)
+
+
 class Char_1202(CharAbstract):
     id = 1202
     name = "炽霞"
@@ -602,6 +673,60 @@ class Char_1306(CharAbstract):
             title = "卜灵-声骸技能-无归的谬误"
             msg = "全队角色攻击提升10%"
             attr.add_atk_percent(0.1, title, msg)
+
+
+class Char_1308(CharAbstract):
+    id = 1308
+    name = "丽贝卡"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        if chain >= 2:
+            title = f"{self.name}-二链"
+            msg = "队伍中的角色全属性伤害加成提升20%"
+            attr.add_dmg_bonus(0.2, title, msg)
+
+        title = f"{self.name}-延奏技能"
+        msg = "下一位登场角色全伤害加深15%"
+        attr.add_dmg_deepen(0.15, title, msg)
+        if hit_damage == attr.char_damage:
+            # 持有浪客羁绊的角色每0.2秒会获得1层超限，造成重击伤害加深0.5%（若是露西持有浪客羁绊，则直接获得满层），上限为35%
+            dmg = 0.35 if 1511 in attr.teammate_char_ids else 0.2
+            msg = f"持有浪客羁绊的角色重击伤害加深{dmg * 100:,.0f}%"
+            attr.add_dmg_deepen(dmg, title, msg)
+
+        if attr.env_hack:
+            title = f"{self.name}-固有技能"
+            msg = "附加【骇破·偏移】时，谐度破坏增幅提升30点"
+            attr.add_tune_break_boost(30, title, msg)
+
+        if attr.char_template == temp_atk:
+            title = f"{self.name}-固有技能"
+            msg = "施放共鸣解放后附近队伍中角色攻击提升20%"
+            attr.add_atk_percent(0.2, title, msg)
+
+            title = f"{self.name}-合鸣效果-轻云出月"
+            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+            attr.add_atk_percent(0.225, title, msg)
+
+        # 无常凶鹭
+        title = f"{self.name}-声骸技能-无常凶鹭"
+        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        # 碎骨
+        weapon_clz = WavesWeaponRegister.find_class(21030066)
+        if weapon_clz:
+            w = weapon_clz(21030066, 90, 6, resonLevel)
+            method = getattr(w, "do_action", None)
+            if callable(method):
+                method([cast_variation], attr, isGroup, isSelf=False)
 
 
 class Char_1402(CharAbstract):
@@ -1132,6 +1257,64 @@ class Char_1510(CharAbstract):
     id = 1510
     name = "陆·赫斯"
     starLevel = 5
+
+
+class Char_1511(CharAbstract):
+    id = 1511
+    name = "露西"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        if attack_damage == attr.char_damage:
+            title = f"{self.name}-延奏技能"
+            msg = "下一名登场角色普攻伤害加深25%"
+            attr.add_dmg_deepen(0.15, title, msg)
+
+        if attr.env_hack:
+            title = f"{self.name}-延奏技能"
+            msg = "附加【骇破·偏移】时，该角色全伤害加深20%"
+            attr.add_dmg_deepen(0.2, title, msg)
+
+            if chain >= 4:
+                title = f"{self.name}-四链"
+                msg = "附加【骇破·偏移】后角色全属性伤害加成提升20%"
+                attr.add_dmg_bonus(0.2, title, msg)
+
+        if 1308 in attr.teammate_char_ids:
+            title = f"{self.name}-固有技能-网络后门"
+            msg = "全伤害加深25%"
+            attr.add_dmg_deepen(0.25, title, msg)
+
+        # 共鸣解放
+        title = "欺骗程式·义体故障"
+        msg = "使所有标记目标受到伤害提升5%"
+        attr.add_dmg_bonus(0.05, title, msg)
+
+        title = "欺骗程式·突破协议"
+        msg = "使所有标记目标降低5%的防御"
+        attr.add_defense_reduction(0.05, title, msg)
+
+        if attr.char_template == temp_atk:
+            title = f"{self.name}-合鸣效果-轻云出月"
+            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+            attr.add_atk_percent(0.225, title, msg)
+
+        # 无常凶鹭
+        title = f"{self.name}-声骸技能-无常凶鹭"
+        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        # 停驻之烟
+        weapon_clz = WavesWeaponRegister.find_class(21030015)
+        if weapon_clz:
+            w = weapon_clz(21030015, 90, 6, resonLevel)
+            w.do_action("buff", attr, isGroup)
 
 
 class Char_1601(CharAbstract):

@@ -32,6 +32,8 @@ SONATA_FOAM = "斑驳粉饰之沫"
 SONATA_TRUENAME = "听唤语义之愿"
 SONATA_SNOWFALL = "雪落无声之愿"
 SONATA_DREAMCLIP = "剪心辑梦之影"
+SONATA_SHATTERDREAM = "碎梦亡鬼之魇"
+
 
 CHAR_ATTR_FREEZING = "冷凝"
 CHAR_ATTR_CELESTIAL = "衍射"
@@ -104,16 +106,16 @@ Havoc_Bane_Role_Ids = [1508]
 Fusion_Burst_Role_Ids = [1210]
 
 # 霜渐效应
-Glacio_Chafe_Role_Ids = [1108]
+Glacio_Chafe_Role_Ids = [1108, 1109]
 
 # 震谐伤害
 Tune_Rupture_Role_Ids = [1209, 1210, 1509]
 
 # 失序彼岸之梦 套装
-Ancient_Role_Ids = [1608]
+Ancient_Role_Ids = [1608, 1109]
 
 # 释放声骸技能
-Phantom_Role_Dict = {1411: 3, 1607: 3, 1606: 1, 1608: 1}
+Phantom_Role_Dict = {1411: 3, 1607: 3, 1606: 1, 1608: 1, 1109: 3}
 
 # 异常效应
 AbnormalType = Literal[

@@ -1051,6 +1051,32 @@ class Weapon_21030053(WeaponAbstract):
     name = "戍关佩枪·平云"
 
 
+class Weapon_21030056(WeaponAbstract):
+    id = 21030056
+    type = 3
+    name = "蜃影"
+
+    # 施放共鸣技能时，自身衍射伤害加成提升{1}，最多叠加{2}层
+    # 每次为敌方怪物附加【骇破·偏移】后，重击伤害加深{4}，且重击伤害能无视目标{5}%防御
+    def cast_skill(self, attr: DamageAttribute, isGroup: bool = False):
+        if attr.char_attr == CHAR_ATTR_CELESTIAL:
+            dmg = f"{self.param(1)} * {self.param(2)}"
+            title = self.get_title()
+            msg = f"施放共鸣技能时，自身衍射伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+        if attr.env_hack and attr.char_damage == hit_damage:
+            dmg = f"{self.param(4)}"
+            title = self.get_title()
+            msg = f"附加【骇破·偏移】后，重击伤害加深{dmg}"
+            attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+            dmg = f"{self.param(5)}%"
+            title = self.get_title()
+            msg = f"附加【骇破·偏移】后，重击伤害无视目标{dmg}防御"
+            attr.add_defense_ignore(calc_percent_expression(dmg), title, msg)
+
+
 class Weapon_21030064(WeaponAbstract):
     id = 21030064
     type = 3
@@ -1070,6 +1096,40 @@ class Weapon_21030064(WeaponAbstract):
         title = self.get_title()
         msg = f"角色冲刺或闪避时，攻击提升{dmg}"
         attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21030066(WeaponAbstract):
+    id = 21030066
+    type = 3
+    name = "碎骨"
+
+    # 施放变奏技能时，自身普攻伤害加成提升{1}
+    # 附加【骇破·偏移】时，自身普攻伤害加成提升{3}，持续{4}秒，队伍中的角色攻击提升{5}
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+        isSelf: bool = True,
+    ):
+        if attr.char_damage == attack_damage and isSelf:
+            dmg = f"{self.param(1)}"
+            title = self.get_title()
+            msg = f"施放变奏技能时，自身普攻伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+        if attr.env_hack:
+            if attr.char_damage == attack_damage and isSelf:
+                dmg = f"{self.param(3)}"
+                title = self.get_title()
+                msg = f"附加【骇破·偏移】时，自身普攻伤害加成提升{dmg}"
+                attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+            if attr.char_template == temp_atk:
+                dmg = f"{self.param(5)}"
+                title = self.get_title()
+                msg = f"附加【骇破·偏移】时，队伍中的角色攻击提升{dmg}"
+                attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21030074(WeaponAbstract):
@@ -1980,6 +2040,33 @@ class Weapon_21050084(WeaponAbstract):
         msg = f"施放共鸣技能时，获得{self.param(0)}点共鸣能量，且攻击提升{dmg}"
         attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
         return True
+
+
+class Weapon_21050086(WeaponAbstract):
+    id = 21050086
+    type = 5
+    name = "存帧"
+
+    # 附加霜渐效应时，自身冷凝伤害加成提升{1}
+    # 队伍中的角色攻击提升{3}
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+        isSelf: bool = True,
+    ):
+        if attr.env_glacio_chafe and attr.char_attr == CHAR_ATTR_FREEZING and isSelf:
+            dmg = f"{self.param(1)}"
+            title = self.get_title()
+            msg = f"附加霜渐效应时，自身冷凝伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+        if attr.char_template == temp_atk:
+            dmg = f"{self.param(3)}"
+            title = self.get_title()
+            msg = f"队伍中的角色攻击提升{dmg}"
+            attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21050094(WeaponAbstract):

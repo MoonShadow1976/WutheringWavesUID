@@ -28,6 +28,7 @@ from ...damage.utils import (
     SONATA_PRISMATIC,
     SONATA_REJUVENATING,
     SONATA_SCISSOR,
+    SONATA_SHATTERDREAM,
     SONATA_SIDEREAL,
     SONATA_SIERRA,
     SONATA_SINKING,
@@ -84,6 +85,10 @@ def check_if_ph_5(ph_name: str, ph_num: int, check_name: str):
 
 def check_if_ph_3(ph_name: str, ph_num: int, check_name: str):
     return ph_name == check_name and ph_num == 3
+
+
+def check_if_ph_1(ph_name: str, ph_num: int, check_name: str):
+    return ph_name == check_name and ph_num == 1
 
 
 def phase_damage(
@@ -440,3 +445,16 @@ def phase_damage(
             title = f"{phase_name}-{ph_detail.ph_name}"
             msg = "添加【偏移】时，队伍中角色谐度破坏增幅提升20点"
             attr.add_tune_break_boost(20, title, msg)
+
+        # 碎梦亡鬼之魇
+        elif check_if_ph_1(ph_detail.ph_name, ph_detail.ph_num, SONATA_SHATTERDREAM):
+            # 角色为敌人添加【骇破·偏移】时，自身普攻伤害加成和重击伤害加成提升35%，持续15秒
+            if not attr.env_hack:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            if attr.char_damage == hit_damage:
+                msg = "添加【骇破·偏移】，自身重击伤害加成提升35%"
+                attr.add_dmg_bonus(0.35, title, msg)
+            if attr.char_damage == attack_damage:
+                msg = "添加【骇破·偏移】，自身普攻伤害加成提升35%"
+                attr.add_dmg_bonus(0.35, title, msg)

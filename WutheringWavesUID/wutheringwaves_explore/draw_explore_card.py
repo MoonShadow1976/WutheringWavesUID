@@ -10,9 +10,6 @@ from PIL import Image, ImageDraw
 from ..utils import hint
 from ..utils.api.model import (
     AccountBaseInfo,
-    AreaInfo,
-    ExploreArea,
-    ExploreItem,
     ExploreList,
 )
 from ..utils.error_reply import WAVES_CODE_102
@@ -77,6 +74,7 @@ def get_progress_color(progress):
             result = color
     return result
 
+
 async def draw_explore_img(ev: Event, uid: str, user_id: str):
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
@@ -97,14 +95,14 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
         return hint.error_reply(msg="探索数据为空")
 
     # ==================== 布局常量 ====================
-    base_info_h = 250          # 头部基础信息区高度
-    footer_h = 150             # 底部页脚高度
-    explore_title_h = 200      # 每个大区域标题区高度
-    explore_frame_h = 500      # 每个小区域框高度（每行3个）
-    W = 1900                   # 每个大区域所占宽度（含内部左右边距）
-    left_margin = 100          # 图片左边缘到第一列内容左边缘的距离
-    right_margin = 100         # 最后一列内容右边缘到图片右边缘的距离
-    column_gap = 50            # 列间距
+    base_info_h = 250  # 头部基础信息区高度
+    footer_h = 150  # 底部页脚高度
+    explore_title_h = 200  # 每个大区域标题区高度
+    explore_frame_h = 500  # 每个小区域框高度（每行3个）
+    W = 1900  # 每个大区域所占宽度（含内部左右边距）
+    left_margin = 100  # 图片左边缘到第一列内容左边缘的距离
+    right_margin = 100  # 最后一列内容右边缘到图片右边缘的距离
+    column_gap = 50  # 列间距
 
     # 计算每个大区域的高度（标题 + 小区域行数 * 每行高度）
     explore_heights = []
@@ -132,7 +130,7 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
         return columns, col_heights, total_h, total_w
 
     best_k = 1
-    best_score = float('inf')
+    best_score = float("inf")
     max_allowed_width = 4200  # 最大宽度限制（避免图片过宽）
     for k in range(1, min(4, len(explore_heights) + 1)):
         _, _, total_h, total_w = calc_layout(k)
@@ -180,7 +178,7 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
     explore_title_template = Image.open(TEXT_PATH / "explore_title.png")
     explore_frame_template = Image.open(TEXT_PATH / "explore_frame.png")
     explore_bar_template = Image.open(TEXT_PATH / "explore_bar.png")
-    tag_yes_img = tag_yes   # 外部已定义的100%标签
+    tag_yes_img = tag_yes  # 外部已定义的100%标签
     tag_no_img = tag_no
 
     for col_idx, col_indices in enumerate(columns):
@@ -211,7 +209,7 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
             for ni, _subArea in enumerate(area_list):
                 row = ni // 3
                 col_in_region = ni % 3
-                frame_x = col_x + 100 + 600 * col_in_region   # 内部偏移 100+600*列
+                frame_x = col_x + 100 + 600 * col_in_region  # 内部偏移 100+600*列
                 frame_y = y_offset + explore_title_h + row * explore_frame_h
 
                 # 复制并定制单个小区域框

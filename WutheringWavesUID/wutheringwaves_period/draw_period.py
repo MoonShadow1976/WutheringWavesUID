@@ -185,10 +185,7 @@ async def draw_period_img(bot: Bot, ev: Event):
             return MSG_TOKEN.format(PREFIX)
 
         # 并行绘制每个 UID 的简报图片
-        draw_tasks = [
-            _draw_all_period_img(ev, valid, idx)
-            for idx, valid in enumerate(valid_period_list)
-        ]
+        draw_tasks = [_draw_all_period_img(ev, valid, idx) for idx, valid in enumerate(valid_period_list)]
         period_images = await asyncio.gather(*draw_tasks)
         period_images = [img.convert("RGBA") for img in period_images]
 
@@ -198,7 +195,7 @@ async def draw_period_img(bot: Bot, ev: Event):
         count = len(period_images)
 
         # 自动计算最佳列数（使整体宽高比接近1）
-        gap = 1                     # 图片间距
+        gap = 1  # 图片间距
         best_cols = 1
         best_ratio = float("inf")
         for cols in range(1, count + 1):
@@ -218,7 +215,7 @@ async def draw_period_img(bot: Bot, ev: Event):
         rows_group = []
         row_heights = []
         for i in range(0, count, cols):
-            row_imgs = period_images[i:i + cols]
+            row_imgs = period_images[i : i + cols]
             max_h = max(img.height for img in row_imgs)
             rows_group.append(row_imgs)
             row_heights.append(max_h)

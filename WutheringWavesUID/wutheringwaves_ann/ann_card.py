@@ -225,7 +225,7 @@ async def ann_batch_card(post_content: list, drow_height: float, time_str: str =
     if title:
         drow_height += 50
     if time_str:
-        drow_height += 50
+        drow_height += 100
 
     im = Image.new("RGB", (WIDTH, int(drow_height)), "#f9f6f2")
     draw = ImageDraw.Draw(im)

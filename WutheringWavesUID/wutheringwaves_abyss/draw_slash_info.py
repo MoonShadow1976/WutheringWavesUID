@@ -7,7 +7,7 @@ import re
 import aiohttp
 from gsuid_core.utils.image.convert import convert_img
 from PIL import Image, ImageDraw
-from pydantic import BaseModel, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 from ..utils.ascension.monster import get_all_monster_models
 from ..utils.fonts.waves_fonts import (
@@ -56,6 +56,7 @@ COLOR_MAP = {
 
 
 class SlashSchedule(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Season: int
     Name: str
     start: str | None = None
@@ -68,6 +69,7 @@ class SlashScheduleList(RootModel):
 
 
 class MonsterElement(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     Name: str
     Color: str
@@ -75,6 +77,7 @@ class MonsterElement(BaseModel):
 
 
 class Monster(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     Name: str
     Icon: str
@@ -82,6 +85,7 @@ class Monster(BaseModel):
 
 
 class Buff(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     Name: str
     Desc: str
@@ -90,6 +94,7 @@ class Buff(BaseModel):
 
 
 class Stage(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     InstId: int
     StageInfoId: int
     DungeonDesc: str
@@ -98,6 +103,7 @@ class Stage(BaseModel):
 
 
 class Level(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     Season: int
     InstIds: list[int]
@@ -114,6 +120,7 @@ class Level(BaseModel):
 
 
 class Item(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Name: str
     Icon: str
     IconMiddle: str
@@ -122,6 +129,7 @@ class Item(BaseModel):
 
 
 class BuffItem(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     ItemId: int
     OrderIndex: int
@@ -130,6 +138,7 @@ class BuffItem(BaseModel):
 
 
 class SlashDetailResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Season: int
     Name: str
     StageGroups: list
@@ -138,6 +147,7 @@ class SlashDetailResponse(BaseModel):
 
 
 class ItemDetail(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, alias_generator=lambda s: s[0].lower() + s[1:])
     Id: int
     AttributesDescription: str = ""
 

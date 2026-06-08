@@ -169,46 +169,80 @@ async def draw_period_img(bot: Bot, ev: Event):
     logger.info(f"[鸣潮][资源简报]绘图开始: {period_param}")
     try:
         uid_list = await WavesBind.get_uid_list_by_game(ev.user_id, ev.bot_id)
-
         if uid_list is None:
             return MSG_TOKEN.format(PREFIX)
 
-        # 进行校验UID是否绑定CK
+        # 并行获取数据
         tasks = [process_uid(uid, ev, period_param) for uid in uid_list]
         results = await asyncio.gather(*tasks)
 
-        # 过滤掉 None 值
+        # 过滤有效数据
         valid_period_list = [res for res in results if isinstance(res, dict)]
-
-        if len(valid_period_list) == 0:
+        if not valid_period_list:
             msg = [res for res in results if isinstance(res, str)]
             if msg:
                 return "\n".join(msg)
             return MSG_TOKEN.format(PREFIX)
 
-        # 开始绘图任务
-        tasks = []
+        # 并行绘制每个 UID 的简报图片
+        draw_tasks = [
+            _draw_all_period_img(ev, valid, idx)
+            for idx, valid in enumerate(valid_period_list)
+        ]
+        period_images = await asyncio.gather(*draw_tasks)
+        period_images = [img.convert("RGBA") for img in period_images]
 
-        for uid_index, valid in enumerate(valid_period_list):
-            tasks.append(_draw_all_period_img(ev, valid, uid_index))
+        # 每张图片固定宽度 based_w，高度可能不同
+        w = based_w
+        heights = [img.height for img in period_images]
+        count = len(period_images)
 
-        # 收集所有生成的图片
-        images = await asyncio.gather(*tasks)
+        # 自动计算最佳列数（使整体宽高比接近1）
+        gap = 1                     # 图片间距
+        best_cols = 1
+        best_ratio = float("inf")
+        for cols in range(1, count + 1):
+            rows = (count + cols - 1) // cols
+            # 估算总高度：平均高度 * 行数（快速评估）
+            avg_h = sum(heights) / count
+            total_w = cols * w + (cols - 1) * gap
+            total_h = rows * avg_h + (rows - 1) * gap
+            ratio = max(total_w, total_h) / min(total_w, total_h)
+            if ratio < best_ratio:
+                best_ratio = ratio
+                best_cols = cols
 
-        # 计算总高度
-        total_height = sum(img.height for img in images)
+        cols = best_cols
 
-        # 创建最终的画布
-        final_img = Image.new("RGBA", (based_w, total_height), (0, 0, 0, 0))
+        # 根据最终列数进行实际布局（每行高度由该行图片最大高度决定）
+        rows_group = []
+        row_heights = []
+        for i in range(0, count, cols):
+            row_imgs = period_images[i:i + cols]
+            max_h = max(img.height for img in row_imgs)
+            rows_group.append(row_imgs)
+            row_heights.append(max_h)
 
-        # 拼接图片
-        current_y = 0
-        for img in images:
-            final_img.paste(img, (0, current_y))
-            current_y += img.height
+        total_w = cols * w + (cols - 1) * gap
+        total_h = sum(row_heights) + (len(row_heights) - 1) * gap
+
+        # 加载并缩放背景图片
+        bg_img = Image.open(TEXT_PATH / "home-mask-black.png").convert("RGB")
+        bg_img = bg_img.resize((total_w, total_h), Image.Resampling.LANCZOS)
+        final_img = bg_img.copy()
+
+        # 逐行粘贴图片
+        y_offset = 0
+        for row_idx, (row_imgs, row_h) in enumerate(zip(rows_group, row_heights)):
+            x_offset = 0
+            for img in row_imgs:
+                final_img.paste(img, (x_offset, y_offset), img)
+                x_offset += w + gap
+            y_offset += row_h + gap
 
         res = await convert_img(final_img)
-    except TypeError:
+        logger.info("[鸣潮][资源简报]绘图已完成（方形布局）,等待发送!")
+    except Exception:
         logger.exception("[鸣潮][资源简报]绘图失败!")
         res = "你绑定过的UID中可能存在过期CK~请重新绑定一下噢~"
 

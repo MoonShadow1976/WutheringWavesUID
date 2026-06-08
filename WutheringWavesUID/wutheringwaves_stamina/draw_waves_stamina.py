@@ -97,35 +97,65 @@ async def draw_stamina_img(bot: Bot, ev: Event):
         logger.info(f"[鸣潮][每日信息]UID: {uid_list}")
         if uid_list is None:
             return ERROR_CODE[WAVES_CODE_103]
-        # 进行校验UID是否绑定CK
+
+        # 并行生成所有 UID 对应的体力图片
         tasks = [process_uid(uid, ev) for uid in uid_list]
         results = await asyncio.gather(*tasks)
 
         # 过滤掉 None 值
         valid_daily_list = [res for res in results if res is not None]
-
-        if len(valid_daily_list) == 0:
+        if not valid_daily_list:
             return ERROR_CODE[WAVES_CODE_102]
 
-        # 开始绘图任务
-        task = []
-        img = Image.new("RGBA", (based_w, based_h * len(valid_daily_list)), (0, 0, 0, 0))
-        for uid_index, valid in enumerate(valid_daily_list):
-            task.append(_draw_all_stamina_img(ev, img, valid, uid_index))
-        await asyncio.gather(*task)
-        res = await convert_img(img)
-        logger.info("[鸣潮][每日信息]绘图已完成,等待发送!")
+        # 并行绘制每个 UID 的体力图片（保持原 _draw_stamina_img 逻辑不变）
+        stamina_images = []
+        for valid in valid_daily_list:
+            img_single = await _draw_stamina_img(ev, valid)
+            stamina_images.append(img_single.convert("RGBA"))
+
+        # 每个单图尺寸（固定）
+        w, h = based_w, based_h
+        count = len(stamina_images)
+
+        # 自动计算最佳列数（使最终画布宽高比接近 1）
+        gap = 1  # 网格间距（像素），可调整
+        best_cols = 1
+        best_ratio = float("inf")
+        for cols in range(1, count + 1):
+            rows = (count + cols - 1) // cols
+            total_w = cols * w + (cols - 1) * gap
+            total_h = rows * h + (rows - 1) * gap
+            ratio = max(total_w, total_h) / min(total_w, total_h)
+            if ratio < best_ratio:
+                best_ratio = ratio
+                best_cols = cols
+
+        cols = best_cols
+        rows = (count + cols - 1) // cols
+        total_w = cols * w + (cols - 1) * gap
+        total_h = rows * h + (rows - 1) * gap
+
+        # 加载并缩放背景图片
+        bg_img = Image.open(TEXT_PATH / "bg.jpg").convert("RGB")
+        bg_img = bg_img.resize((total_w, total_h), Image.Resampling.LANCZOS)
+        final_img = bg_img.copy()  # 使用背景作为底图
+
+        # 按网格粘贴
+        for idx, img_single in enumerate(stamina_images):
+            row = idx // cols
+            col = idx % cols
+            x = col * (w + gap)
+            y = row * (h + gap)
+            final_img.paste(img_single, (x, y), img_single)
+
+        # 转换为最终返回格式（保持原返回类型）
+        res = await convert_img(final_img)
+        logger.info("[鸣潮][每日信息]绘图已完成（方形布局）,等待发送!")
     except TypeError:
         logger.exception("[鸣潮][每日信息]绘图失败!")
         res = "你绑定过的UID中可能存在过期CK~请重新绑定一下噢~"
 
     return res
-
-
-async def _draw_all_stamina_img(ev: Event, img: Image.Image, valid: dict, index: int):
-    stamina_img = await _draw_stamina_img(ev, valid)
-    stamina_img = stamina_img.convert("RGBA")
-    img.paste(stamina_img, (0, based_h * index), stamina_img)
 
 
 async def _draw_stamina_img(ev: Event, valid: dict) -> Image.Image:

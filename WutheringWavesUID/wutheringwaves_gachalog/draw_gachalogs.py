@@ -49,6 +49,8 @@ gacha_type_meta_rename = {
     "新手自选唤取（感恩定向唤取）": "感恩定向唤取",
     "角色新旅唤取": "角色新旅唤取",
     "武器新旅唤取": "武器新旅唤取",
+    "角色联动唤取": "角色联动唤取",
+    "武器联动唤取": "武器联动唤取",
 }
 
 
@@ -130,11 +132,22 @@ async def draw_card(uid: str, ev: Event):
     # 获取数据
     gacha_log_path = PLAYER_PATH / str(uid) / "gacha_logs.json"
     if not gacha_log_path.exists():
-        return f"[鸣潮] 你还没有抽卡记录噢!\n 请发送 {PREFIX}导入抽卡链接 后重试!"
+        return (
+            f"[鸣潮] 你还没有抽卡记录噢!\n请发送 {PREFIX}导入抽卡链接 后重试!\n抽卡链接的获取方式请使用\n{PREFIX}抽卡帮助 查看！"
+        )
     async with aiofiles.open(gacha_log_path, encoding="UTF-8") as f:
         raw_data: dict = json.loads(await f.read())
 
     gachalogs = raw_data["data"]
+    # 强制排序：角色精准 -> 角色联动 -> 武器精准 -> 武器联动，其余保持原有顺序
+    preferred_order = [
+        "角色精准调谐",
+        "角色联动唤取",
+        "武器精准调谐",
+        "武器联动唤取",
+    ]
+    ordered_keys = [k for k in preferred_order if k in gachalogs] + [k for k in gachalogs if k not in preferred_order]
+    gachalogs = {k: gachalogs[k] for k in ordered_keys}
     title_num = len([1 for i in gachalogs.keys() if "新手" not in i])
 
     total_data = {}
@@ -202,8 +215,8 @@ async def draw_card(uid: str, ev: Event):
         else:
             _u = sum(current_data["r_num"]) / len(current_data["up_list"])
             current_data["avg_up"] = float(f"{_u:.2f}")
-        # 计算不歪率（仅角色精准调谐）
-        if gacha_name == "角色精准调谐" and len(current_data["rank_s_list"]) > 0:
+        # 计算不歪率（角色精准调谐 / 角色联动唤取）
+        if gacha_name in ["角色精准调谐", "角色联动唤取"] and len(current_data["rank_s_list"]) > 0:
             # 计算小保底不歪率：UP五星之后依然是UP五星的概率（排除大保底UP）
             up_after_up_count = 0  # 小保底不歪的次数
             total_small_guarantee = 0  # 小保底总次数
@@ -243,7 +256,7 @@ async def draw_card(uid: str, ev: Event):
         if current_data["avg_up"] == "-" and current_data["avg"] == "-":
             current_data["level"] = 2
         else:
-            if gacha_name == "角色精准调谐":
+            if gacha_name in ["角色精准调谐", "角色联动唤取"]:
                 if current_data["avg_up"] != "-":
                     current_data["level"] = get_level_from_list(current_data["avg_up"], [65, 80, 85, 113, 128])
                 elif current_data["avg"] != "-":
@@ -333,8 +346,8 @@ async def draw_card(uid: str, ev: Event):
         if "新手" in gacha_name:
             continue
         gacha_data = total_data[gacha_name]
-        # 角色精准调谐使用bar_up.png，其他使用bar.png
-        if gacha_name == "角色精准调谐":
+        # 角色精准调谐/角色联动唤取使用bar_up.png，其他使用bar.png
+        if gacha_name in ["角色精准调谐", "角色联动唤取"]:
             title = Image.open(TEXT_PATH / "bar_up.png")
         else:
             title = Image.open(TEXT_PATH / "bar.png")
@@ -365,8 +378,8 @@ async def draw_card(uid: str, ev: Event):
         level_icon = level_icon.resize((140, 140)).convert("RGBA")
         tag = HOMO_TAG[level]
 
-        # 显示不歪率和最大连歪（仅角色精准调谐）
-        if gacha_name == "角色精准调谐":
+        # 显示不歪率和最大连歪（仅角色精准调谐&角色联动唤取）
+        if gacha_name in ["角色精准调谐", "角色联动唤取"]:
             # 缩小20%的字体和间隔
             title_draw.text((150, 178), avg_s, "white", waves_font_25, "mm")
             title_draw.text((150, 205), "平均出金", "white", waves_font_18, "mm")

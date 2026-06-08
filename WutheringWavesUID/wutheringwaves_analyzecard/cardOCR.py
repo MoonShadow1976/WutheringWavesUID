@@ -9,7 +9,7 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 import numpy as np
 from opencc import OpenCC
-from PIL import Image
+from PIL import Image, ImageFilter
 
 from ..utils.cache import TimedCache
 from ..utils.resource.constant import CHAR_DETAIL
@@ -346,16 +346,46 @@ def analyze_chain_num(image: Image.Image) -> int:
     return chain_num
 
 
-def sharpen_color(img: Image.Image, k: float = 2.5) -> Image.Image:
-    """图像锐化"""
-    arr = np.array(img).astype(np.float32)                     # (H, W, 3)
-    # 拉普拉斯算子（同时作用于三个通道）
-    lap = -4 * arr[1:-1, 1:-1, :] + arr[:-2, 1:-1, :] + arr[2:, 1:-1, :] + arr[1:-1, :-2, :] + arr[1:-1, 2:, :]
-    sharp = arr[1:-1, 1:-1, :] - k * lap
-    sharp = np.clip(sharp, 0, 255).astype(np.uint8)
-    result = arr.copy().astype(np.uint8)
-    result[1:-1, 1:-1, :] = sharp
+def extract_digits_clean(
+    image: Image.Image, white_thresh=(200, 200, 200), orange_range=((120, 80, 0), (255, 255, 150))
+) -> Image.Image:
+    """
+    根据颜色阈值提取白色和黄橙色像素，其余置黑。
+    用于分离数字区域，降低后续锐化的背景噪声。
+    """
+    img = np.array(image.convert("RGB"))
+    r, g, b = img[..., 0], img[..., 1], img[..., 2]
+
+    # 白色掩膜
+    w_mask = (r >= white_thresh[0]) & (g >= white_thresh[1]) & (b >= white_thresh[2])
+    # 橙色掩膜
+    (r1, g1, b1), (r2, g2, b2) = orange_range  # min, max
+    o_mask = (r >= r1) & (r <= r2) & (g >= g1) & (g <= g2) & (b >= b1) & (b <= b2)
+
+    mask = w_mask | o_mask
+    result = np.zeros_like(img)
+    result[mask] = img[mask]
     return Image.fromarray(result)
+
+
+def sharpen_and_clean(img: Image.Image, k: float = 5, median_size: int = 3, resize: int = 2) -> Image.Image:
+    """
+    锐化 + 中值滤波降噪（背景干净、边缘平滑）
+    - k: 锐化强度（默认5，稍强以突出数字边缘）
+    - median_size: 中值滤波半径，推荐3或5（奇数）
+    - resize: 放大倍数，提高识别精度
+    """
+    img = img.resize((img.width * resize, img.height * resize), Image.Resampling.LANCZOS)
+    arr = np.array(img).astype(np.float32)
+
+    # 拉普拉斯锐化（边界填充采用原值）
+    lap = -4 * arr[1:-1, 1:-1] + arr[:-2, 1:-1] + arr[2:, 1:-1] + arr[1:-1, :-2] + arr[1:-1, 2:]
+    sharp = arr[1:-1, 1:-1] - k * lap
+    sharp = np.clip(sharp, 0, 255).astype(np.uint8)
+
+    result = arr.copy().astype(np.uint8)
+    result[1:-1, 1:-1] = sharp
+    return Image.fromarray(result).filter(ImageFilter.MedianFilter(size=median_size))
 
 
 async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Image.Image]]:
@@ -393,10 +423,11 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
         echo_values_head = cut_image_need_data([echo_values[0], echo_values[1]], direction="right")  # 左右拼接主词条
         cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])  # 上下拼接主副词条
 
-    # 处理 丽贝卡 背景遮蔽uid的情况
-    cropped_images[0] = sharpen_color(cropped_images[0], k=2.5)   # 可调整k值 2.5最优
+    # 处理 丽贝卡 背景遮蔽uid的情况: 先按颜色分离，再进行锐化+中值滤波
+    cropped_images[0] = extract_digits_clean(cropped_images[0])
+    # cropped_images[0] = sharpen_and_clean(cropped_images[0])  # 可调整k值 不放大时2.5最优
 
-    # from pathlib import Path # 保存裁切图片用于调试
+    # from pathlib import Path  # 保存裁切图片用于调试
     # SRC_PATH = Path(__file__).parent / "src"
     # for i, image in enumerate(cropped_images):
     #     image.save(f"{SRC_PATH}/_{i}.png")

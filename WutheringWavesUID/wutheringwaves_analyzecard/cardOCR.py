@@ -348,7 +348,7 @@ def analyze_chain_num(image: Image.Image) -> int:
 
 def sharpen_color(img: Image.Image, k: float = 2.5) -> Image.Image:
     """图像锐化"""
-    arr = np.array(img).astype(np.float32)                     # (H, W, 3)
+    arr = np.array(img).astype(np.float32)  # (H, W, 3)
     # 拉普拉斯算子（同时作用于三个通道）
     lap = -4 * arr[1:-1, 1:-1, :] + arr[:-2, 1:-1, :] + arr[2:, 1:-1, :] + arr[1:-1, :-2, :] + arr[1:-1, 2:, :]
     sharp = arr[1:-1, 1:-1, :] - k * lap
@@ -394,7 +394,7 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
         cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])  # 上下拼接主副词条
 
     # 处理 丽贝卡 背景遮蔽uid的情况
-    cropped_images[0] = sharpen_color(cropped_images[0], k=2.5)   # 可调整k值 2.5最优
+    cropped_images[0] = sharpen_color(cropped_images[0], k=2.5)  # 可调整k值 2.5最优
 
     # from pathlib import Path # 保存裁切图片用于调试
     # SRC_PATH = Path(__file__).parent / "src"

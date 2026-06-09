@@ -425,7 +425,7 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
 
     # 处理 丽贝卡 背景遮蔽uid的情况: 先按颜色分离，再进行锐化+中值滤波
     cropped_images[0] = extract_digits_clean(cropped_images[0])
-    # cropped_images[0] = sharpen_and_clean(cropped_images[0])  # 可调整k值 不放大时2.5最优
+    cropped_images[0] = sharpen_and_clean(cropped_images[0])  # 可调整k值 不放大时2.5最优
 
     # from pathlib import Path  # 保存裁切图片用于调试
     # SRC_PATH = Path(__file__).parent / "src"

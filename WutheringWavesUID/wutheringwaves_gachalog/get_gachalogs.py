@@ -84,90 +84,47 @@ def find_longest_suffix_in_old(old: list[GachaLog], new: list[GachaLog]) -> tupl
     return (best_old_end - max_len + 1, best_old_end), (best_new_end - max_len + 1, best_new_end)
 
 
-# # 找到两个数组中最长公共子串的下标
-# def find_longest_common_subarray_indices(a: list[GachaLog], b: list[GachaLog]) -> tuple[tuple[int, int], tuple[int, int]] | None:
-#     n, m = len(a), len(b)
-#     dp = [[0] * (m + 1) for _ in range(n + 1)]
-#     length = 0
-#     a_end = b_end = 0
+# 找到两个数组中最长公共子串的下标
+def find_longest_common_subarray_indices(a: list[GachaLog], b: list[GachaLog]) -> tuple[tuple[int, int], tuple[int, int]] | None:
+    n, m = len(a), len(b)
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    length = 0
+    a_end = b_end = 0
 
-#     for i in range(n - 1, -1, -1):
-#         for j in range(m - 1, -1, -1):
-#             if a[i] == b[j]:
-#                 dp[i][j] = dp[i + 1][j + 1] + 1
-#                 if dp[i][j] > length:
-#                     length = dp[i][j]
-#                     a_end = i + length - 1
-#                     b_end = j + length - 1
-#             else:
-#                 dp[i][j] = 0
+    for i in range(n - 1, -1, -1):
+        for j in range(m - 1, -1, -1):
+            if a[i] == b[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+                if dp[i][j] > length:
+                    length = dp[i][j]
+                    a_end = i + length - 1
+                    b_end = j + length - 1
+            else:
+                dp[i][j] = 0
 
-#     if length == 0:
-#         return None
+    if length == 0:
+        return None
 
-#     return (a_end - length + 1, a_end), (b_end - length + 1, b_end)
-
-
-# # 根据最长公共子串递归合并两个GachaLog列表，不去重，按time排序
-# def merge_gacha_logs_by_common_subarray(a: list[GachaLog], b: list[GachaLog]) -> list[GachaLog]:
-#     common_indices = find_longest_common_subarray_indices(a, b)
-#     if not common_indices:
-#         return sorted(
-#             a + b,
-#             key=lambda log: datetime.strptime(log.time, "%Y-%m-%d %H:%M:%S"),
-#             reverse=True,
-#         )
-
-#     (a_start, a_end), (b_start, b_end) = common_indices
-
-#     prefix = merge_gacha_logs_by_common_subarray(a[:a_start], b[:b_start])
-#     common_subarray = a[a_start : a_end + 1]
-#     suffix = merge_gacha_logs_by_common_subarray(a[a_end + 1 :], b[b_end + 1 :])
-
-#     return prefix + common_subarray + suffix
+    return (a_end - length + 1, a_end), (b_end - length + 1, b_end)
 
 
+# 根据最长公共子串递归合并两个GachaLog列表，不去重，按time排序
 def merge_gacha_logs_by_common_subarray(a: list[GachaLog], b: list[GachaLog]) -> list[GachaLog]:
-    """
-    合并两个抽卡记录列表，按时间倒序（新→旧）排序，并去除完全相同的记录。
-    假设 a 和 b 内部各自已经是按时间倒序排列（通常 API 返回如此）。
-    使用归并+去重算法，时间复杂度 O(n+m)，额外空间 O(n+m)。
-    """
+    common_indices = find_longest_common_subarray_indices(a, b)
+    if not common_indices:
+        return sorted(
+            a + b,
+            key=lambda log: datetime.strptime(log.time, "%Y-%m-%d %H:%M:%S"),
+            reverse=True,
+        )
 
-    # 定义如何判断两个记录是否相等（全部字段都相等）
-    def record_key(log: GachaLog) -> tuple:
-        # 根据实际 GachaLog 字段调整，这里假设包含 time, name, cardPoolType, count, id 等
-        # 如果没有唯一 id，使用所有字段的字典项元组
-        return tuple(log.dict().items())  # 注意：dict() 在 Pydantic v2 中可能被 model_dump() 替代，根据实际调整
+    (a_start, a_end), (b_start, b_end) = common_indices
 
-    # 辅助去重：在归并过程中检查相邻重复
-    result = []
-    i, j = 0, 0
-    while i < len(a) and j < len(b):
-        # 比较时间（倒序：越新的越靠前）
-        time_a = datetime.strptime(a[i].time, "%Y-%m-%d %H:%M:%S")
-        time_b = datetime.strptime(b[j].time, "%Y-%m-%d %H:%M:%S")
+    prefix = merge_gacha_logs_by_common_subarray(a[:a_start], b[:b_start])
+    common_subarray = a[a_start : a_end + 1]
+    suffix = merge_gacha_logs_by_common_subarray(a[a_end + 1 :], b[b_end + 1 :])
 
-        if time_a >= time_b:
-            candidate = a[i]
-            i += 1
-        else:
-            candidate = b[j]
-            j += 1
-
-        # 去重：如果候选记录与结果中最后一条相同，则跳过
-        if result and record_key(result[-1]) == record_key(candidate):
-            continue
-        result.append(candidate)
-
-    # 处理剩余部分（同时去重）
-    for remaining in (a[i:], b[j:]):
-        for log in remaining:
-            if result and record_key(result[-1]) == record_key(log):
-                continue
-            result.append(log)
-
-    return result
+    return prefix + common_subarray + suffix
 
 
 async def get_new_gachalog(

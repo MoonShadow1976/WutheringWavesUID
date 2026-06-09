@@ -278,13 +278,13 @@ async def draw_card(uid: str, ev: Event):
 
     def calc_dynamic_params(total_items, total_width=820, base_w=145, base_gap=2, base_h=150):
         """返回 (cols, rows, w, gap, step, row_height)
-           row_height = 缩放后的图片高度，作为行间距
+        row_height = 缩放后的图片高度，作为行间距
         """
         if total_items == 0:
             return 6, 0, 0, 0, 0, 0
         # 选择列数（6~10），使 行数/列数 最接近 2
         best_cols = 6
-        best_diff = float('inf')
+        best_diff = float("inf")
         for cols in range(6, 11):
             rows = (total_items + cols - 1) // cols
             ratio = rows / cols

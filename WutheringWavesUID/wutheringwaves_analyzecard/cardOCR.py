@@ -347,7 +347,7 @@ def analyze_chain_num(image: Image.Image) -> int:
 
 
 def extract_digits_clean(
-    image: Image.Image, white_thresh=(200, 200, 200), orange_range=((120, 80, 0), (255, 255, 150))
+    image: Image.Image, white_thresh=(200, 200, 200), orange_range=((100, 60, 0), (255, 255, 150))
 ) -> Image.Image:
     """
     根据颜色阈值提取白色和黄橙色像素，其余置黑。

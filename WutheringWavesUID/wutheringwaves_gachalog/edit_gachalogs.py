@@ -22,6 +22,7 @@ from ..utils.resource.constant import NORMAL_LIST
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH, waves_templates
 from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_gachalogs import gacha_type_meta_rename
+from .get_gachalogs import gacha_type_meta_data_reverse
 
 # 编辑缓存，有效期30分钟
 TIMEOUT = 1800
@@ -127,6 +128,8 @@ def convert_storage_to_export(storage_data):
     }
     data = storage_data.get("data", {})
     for pool_type, records in data.items():
+        if pool_type in gacha_type_meta_data_reverse:  # 数字转换为汉字
+            pool_type = gacha_type_meta_data_reverse[pool_type]
         for item in records:
             export["list"].append(
                 {
@@ -151,6 +154,8 @@ def convert_export_to_storage(export_data, uid):
         pool_type = item.get("cardPoolType")
         if not pool_type:
             continue
+        if pool_type in gacha_type_meta_data_reverse:  # 数字转换为汉字
+            pool_type = gacha_type_meta_data_reverse[pool_type]
         storage["data"].setdefault(pool_type, []).append(
             {
                 "cardPoolType": pool_type,

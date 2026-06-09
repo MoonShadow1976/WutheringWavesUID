@@ -274,21 +274,54 @@ async def draw_card(uid: str, ev: Event):
                     current_data["level"] = get_level_from_list(current_data["avg"], [10, 20, 30, 40, 45])
 
     oset = 280
-    bset = 150
+    # bset = 150
 
+    def calc_dynamic_params(total_items, total_width=820, base_w=145, base_gap=2, base_h=150):
+        """返回 (cols, rows, w, gap, step, row_height)
+           row_height = 缩放后的图片高度，作为行间距
+        """
+        if total_items == 0:
+            return 6, 0, 0, 0, 0, 0
+        # 选择列数（6~10），使 行数/列数 最接近 2
+        best_cols = 6
+        best_diff = float('inf')
+        for cols in range(6, 11):
+            rows = (total_items + cols - 1) // cols
+            ratio = rows / cols
+            diff = abs(ratio - 2)
+            if diff < best_diff:
+                best_diff = diff
+                best_cols = cols
+        cols = best_cols
+        rows = (total_items + cols - 1) // cols
+
+        # 间隙比例（基准间隙10px / 基准宽度145）
+        gap_ratio = base_gap / base_w
+        denominator = cols + (cols - 1) * gap_ratio
+        w_float = total_width / denominator
+        w = int(w_float)  # 图片宽度取整
+        if cols > 1:
+            gap = (total_width - cols * w) / (cols - 1)  # 浮点型
+        else:
+            gap = 0
+        step = w + gap  # 浮点型，后续取整
+        row_height = int(base_h * w / base_w)  # 缩放后图片高度，作为行间距
+        return cols, rows, w, gap, step, row_height
+
+    # ---------- 高度预计算（使用动态行高）----------
     _numlen = 0
     newbie_flag = False
     for name in total_data:
-        _num = len(total_data[name]["rank_s_list"])
+        s_list = total_data[name]["rank_s_list"]
         if "新手" in name:
-            if _num > 0:
+            if s_list:
                 newbie_flag = True
         else:
-            _num = len(total_data[name]["rank_s_list"])
-            if _num == 0:
+            if len(s_list) == 0:
                 _numlen += 50
             else:
-                _numlen += bset * get_num_h(_num, 6)
+                _, rows, _, _, _, row_height = calc_dynamic_params(len(s_list))
+                _numlen += rows * row_height
 
     _newbielen = 395 if newbie_flag else 0
     _header = 380
@@ -411,19 +444,22 @@ async def draw_card(uid: str, ev: Event):
         gindex += 1
         s_list = gacha_data["rank_s_list"]
         s_list.reverse()
-        for index, item in enumerate(s_list):
-            item_bg = await draw_pic(item)
+        if s_list:
+            cols, rows, w_item, _, step, row_height = calc_dynamic_params(len(s_list))
+            left_x = 90  # 固定起始x（总宽度 820，居中起始位置 = (1000-820)/2 = 90）
+            for index, item in enumerate(s_list):
+                item_bg = await draw_pic(item)
+                new_h = int(item_bg.height * w_item / item_bg.width)
+                item_bg = item_bg.resize((w_item, new_h))
 
-            # 6列居中：总宽度 = 6*145 + 5*(-10间距) = 820，居中起始位置 = (1000-820)/2 = 90
-            _x = 90 + 135 * (index % 6)
-            _y = _header + bset * (index // 6) + y + gindex * oset
+                col = index % cols
+                row = index // cols
+                _x = int(left_x + col * step)
+                _y = int(_header + row_height * row + y + gindex * oset)
+                card_img.paste(item_bg, (_x, _y), item_bg)
 
-            card_img.paste(
-                item_bg,
-                (_x, _y),
-                item_bg,
-            )
-        if not s_list:
+            y += rows * row_height  # 累加该卡池占用高度
+        else:
             card_draw.text(
                 (475, _header + y + gindex * oset + 25),
                 "当前该卡池暂未有5星数据噢!",
@@ -432,8 +468,6 @@ async def draw_card(uid: str, ev: Event):
                 "mm",
             )
             y += 50
-        else:
-            y += get_num_h(len(s_list), 6) * bset
 
     newbie_bg = Image.open(TEXT_PATH / "newbie.png")
     nindex = 0

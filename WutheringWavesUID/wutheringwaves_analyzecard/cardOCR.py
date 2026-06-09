@@ -27,7 +27,7 @@ REF_HEIGHT = 602
 # 技能树扫描顺序：普攻、共鸣技能、共鸣解放、变奏技能、共鸣回路(json_skillList顺序)
 # 有可能出现空声骸，故放最后
 crop_ratios = [
-    (0 / REF_WIDTH, 0 / REF_HEIGHT, 420 / REF_WIDTH, 350 / REF_HEIGHT),  # 角色
+    (0 / REF_WIDTH, 0 / REF_HEIGHT, 420 / REF_WIDTH, 320 / REF_HEIGHT),  # 角色
     (890 / REF_WIDTH, 240 / REF_HEIGHT, 1020 / REF_WIDTH, 310 / REF_HEIGHT),  # 武器
     (583 / REF_WIDTH, 30 / REF_HEIGHT, 653 / REF_WIDTH, 130 / REF_HEIGHT),  # 普攻
     (456 / REF_WIDTH, 115 / REF_HEIGHT, 526 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣技能

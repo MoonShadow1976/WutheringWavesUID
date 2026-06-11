@@ -474,7 +474,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
     if ocr_results:
         first_result = ocr_results[0]
         if first_result["text"] is not None:
-            lines = first_result["text"].split("\n")
+            lines = first_result["text"].split("\t")
             for line in lines:
                 # 玩家名称
                 player_match = patterns["player_info"].search(line)

@@ -27,7 +27,7 @@ REF_HEIGHT = 602
 # 技能树扫描顺序：普攻、共鸣技能、共鸣解放、变奏技能、共鸣回路(json_skillList顺序)
 # 有可能出现空声骸，故放最后
 crop_ratios = [
-    (0 / REF_WIDTH, 0 / REF_HEIGHT, 420 / REF_WIDTH, 322 / REF_HEIGHT),  # 角色
+    (0 / REF_WIDTH, 0 / REF_HEIGHT, 420 / REF_WIDTH, 350 / REF_HEIGHT),  # 角色
     (890 / REF_WIDTH, 240 / REF_HEIGHT, 1020 / REF_WIDTH, 310 / REF_HEIGHT),  # 武器
     (583 / REF_WIDTH, 30 / REF_HEIGHT, 653 / REF_WIDTH, 130 / REF_HEIGHT),  # 普攻
     (456 / REF_WIDTH, 115 / REF_HEIGHT, 526 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣技能
@@ -400,9 +400,13 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
     # 裁切卡片，分割识别范围
     cropped_images = cut_image(image, crop_ratios)
 
-    # 进一步裁切角色图
-    image_char = cropped_images[0]
-    cropped_images[0] = cut_image_need_data(image_char, char_crop_ratios)
+    # 进一步处理角色头图
+    image_char = cut_image(cropped_images[0], char_crop_ratios)
+    # 处理 丽贝卡 背景遮蔽uid的情况: 先按颜色分离，再进行锐化+中值滤波
+    image_char[1] = extract_digits_clean(image_char[1])
+    image_char[1] = sharpen_and_clean(image_char[1])  # 可调整k值 不放大时2.5最优
+    # 把image_char[0]和image_char[1]拼接成角色头图
+    cropped_images[0] = cut_image_need_data(image_char)
 
     # 进一步处理声骸图：裁切数值、图像匹配
     analyze_echoes_results = []
@@ -422,10 +426,6 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
         echo_values[1] = crop_icon_smart(echo_values[1])  # 裁切属性标
         echo_values_head = cut_image_need_data([echo_values[0], echo_values[1]], direction="right")  # 左右拼接主词条
         cropped_images[i] = cut_image_need_data([echo_values_head, echo_values[2]])  # 上下拼接主副词条
-
-    # 处理 丽贝卡 背景遮蔽uid的情况: 先按颜色分离，再进行锐化+中值滤波
-    cropped_images[0] = extract_digits_clean(cropped_images[0])
-    cropped_images[0] = sharpen_and_clean(cropped_images[0])  # 可调整k值 不放大时2.5最优
 
     # from pathlib import Path  # 保存裁切图片用于调试
     # SRC_PATH = Path(__file__).parent / "src"
@@ -459,10 +459,10 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
         "name": re.compile(
             r"^([A-Za-z\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7A3\u00C0-\u00FF]+)"
         ),  # 支持英文、中文、日文、韩文，以及西班牙文、德文和法文中的扩展拉丁字符，为后续逻辑判断用
-        "level": re.compile(r"(?i)^(?:.*?V)?\s*?(\d+)$"),  # 兼容纯数字
+        "level": re.compile(r"(?i)^(?:.*?[LV]?)?\s*?(\d+)$"),  # 兼容 "666", "L.9", "L1", "v8", "v.99", "L.V.2"
         "skill_level": re.compile(r"(\d+)\s*[/ ]\s*\d*"),  # 兼容 L.10/10、LV.10/1、4 10、4/ 等格式
-        "player_info": re.compile(r"玩家名(?:稱)?\s*[:：]?\s*(.*)$"),
-        "uid_info": re.compile(r".[馬碼]\s*[:：]?\s*(\d+)"),
+        "player_info": re.compile(r"玩.名(?:稱)?\s*[:：]?\s*(.*)$"),
+        "uid_info": re.compile(r"(?:特|徵|碼)[^\d]*(\d+)"),
         "echo_cut": re.compile(r"([\u4e00-\u9fa5]+)\s*\D*([\d.]+%?)"),  # 分割各个词条与对应数值
         "echo_value": re.compile(
             r"([\u4e00-\u9fa5]+)\s*(?:\d+\s+)?\D*?([\d.]+%?)"
@@ -474,12 +474,12 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
     if ocr_results:
         first_result = ocr_results[0]
         if first_result["text"] is not None:
-            lines = first_result["text"].split("\t")  # 支持"◎\t洛可可\tLV.90\t"
+            lines = first_result["text"].split("\n")
             for line in lines:
                 # 玩家名称
                 player_match = patterns["player_info"].search(line)
                 if player_match:
-                    final_result["用户信息"]["玩家名称"] = player_match.group(1)
+                    final_result["用户信息"]["玩家名称"] = player_match.group(1).strip()
                     continue  # 避免玩家名称在前被识别为角色名
 
                 # 文本预处理：删除非数字中英文的符号及多余空白

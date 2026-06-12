@@ -368,7 +368,7 @@ def extract_digits_clean(
     return Image.fromarray(result)
 
 
-def sharpen_and_clean(img: Image.Image, k: float = 5, median_size: int = 3, resize: int = 2) -> Image.Image:
+def sharpen_and_clean(img: Image.Image, k: float = 10, median_size: int = 5, resize: int = 3) -> Image.Image:
     """
     锐化 + 中值滤波降噪（背景干净、边缘平滑）
     - k: 锐化强度（默认5，稍强以突出数字边缘）

@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "靶定线程",
-        "desc": "<color=Title>普攻</color>\n进行最多{0}段的连续攻击，造成<color=Light>衍射伤害</color>。\n施放<color=Highlight>普攻</color>第{1}段后，长按<color=Highlight>普攻</color>，将会持续攻击目标，造成<color=Light>衍射伤害</color>。持续长按一定时间后将会施放<color=Highlight>重击</color>第{2}段。\n<color=Highlight>普攻</color>第{3}段命中目标且在施放后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第{4}段。\n\n<color=Title>重击</color>\n消耗耐力，甩出分子线造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第{5}段命中目标且持续长按<color=Highlight>普攻</color>，将会施放<color=Highlight>重击</color>第{6}段，造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第{7}段施放后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{8}段。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{9}段。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{10}段。\n该技能命中目标后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第{11}段。\n\n<color=Title>普攻·线程撕裂</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>。\n进行最多{12}段的连续攻击，造成<color=Light>衍射伤害</color>，本次伤害为重击伤害。\n\n<color=Title>重击·单线程</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>空中攻击·算法压缩</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第{13}段。\n\n<color=Title>重击·双线程</color>\n处于<color=Highlight>算法压缩</color>状态时且<color=Highlight>【根权限】</color>达到{14}点时<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。\n消耗耐力和所有<color=Highlight>【根权限】</color>攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>重击·多线程</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第{15}段。\n\n<color=Title>重击·多线程</color>\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>并附加<color=Highlight>【骇破·偏移】</color>。施放时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升{16}%并移除<color=Highlight>SQL</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{17}段。\n\n<color=Title>空中攻击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，空中攻击替换为<color=Highlight>空中攻击·算法压缩</color>。\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{18}段。\n\n<color=Title>闪避反击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>闪避</color>反击替换为<color=Highlight>闪避反击·算法压缩</color>。\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{19}段。",
+        "desc": "<color=Title>普攻</color>\n进行最多{0}段的连续攻击，造成<color=Light>衍射伤害</color>。\n施放<color=Highlight>普攻</color>第{1}段后，长按<color=Highlight>普攻</color>，将会持续攻击目标，造成<color=Light>衍射伤害</color>。持续长按一定时间后将会施放<color=Highlight>重击</color>第{2}段。\n<color=Highlight>普攻</color>第{3}段命中目标且在施放后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第{4}段。\n\n<color=Title>重击</color>\n消耗耐力，甩出分子线造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第{5}段命中目标且持续长按<color=Highlight>普攻</color>，将会施放<color=Highlight>重击</color>第{6}段，造成<color=Light>衍射伤害</color>。\n<color=Highlight>重击</color>第{7}段施放后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{8}段。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{9}段。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻</color>第{10}段。\n该技能命中目标后一定时间内长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击</color>第{11}段。\n\n<color=Title>普攻·线程撕裂</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>。\n进行最多{12}段的连续攻击，造成<color=Light>衍射伤害</color>，本次伤害为重击伤害。\n\n<color=Title>重击·单线程</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>空中攻击·算法压缩</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第{13}段。\n\n<color=Title>重击·双线程</color>\n处于<color=Highlight>算法压缩</color>状态时且<color=Highlight>【根权限】</color>达到{14}点时<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。\n消耗耐力和所有<color=Highlight>【根权限】</color>攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内长按或短按<color=Highlight>普攻</color>且自身处于空中时，将会施放<color=Highlight>重击·多线程</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>且自身处于地面时，将会施放<color=Highlight>普攻·线程撕裂</color>第{15}段。\n\n<color=Title>重击·多线程</color>\n消耗耐力攻击目标，造成<color=Light>衍射伤害</color>并附加<color=Highlight>【骇破·偏移】</color>。施放时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升{16}%并移除<color=Highlight>SQL</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{17}段。\n\n<color=Title>空中攻击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，空中攻击替换为<color=Highlight>空中攻击·算法压缩</color>。\n消耗耐力进行空中下落攻击，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{18}段。\n\n<color=Title>闪避反击·算法压缩</color>\n处于<color=Highlight>算法压缩</color>状态时，<color=Highlight>闪避</color>反击替换为<color=Highlight>闪避反击·算法压缩</color>。\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Light>衍射伤害</color>。\n施放该技能后一定时间内短按<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·线程撕裂</color>第{19}段。",
         "param": [
           "4",
           "1",
@@ -532,26 +532,26 @@
             "name": "普攻第一段伤害",
             "param": [
               [
-                "6.11%+24.44%",
-                "6.62%+26.45%",
-                "7.12%+28.45%",
-                "7.82%+31.26%",
-                "8.32%+33.26%",
-                "8.90%+35.57%",
-                "9.70%+38.77%",
-                "10.50%+41.98%",
-                "11.30%+45.19%",
-                "12.15%+48.59%",
-                "13.15%+52.60%",
-                "14.16%+56.61%",
-                "15.16%+60.62%",
-                "16.16%+64.63%",
-                "17.16%+68.63%",
-                "18.16%+72.64%",
-                "19.17%+76.65%",
-                "20.17%+80.66%",
-                "21.17%+84.67%",
-                "22.17%+88.68%"
+                "6.11%*6+24.44%",
+                "6.62%*6+26.45%",
+                "7.12%*6+28.45%",
+                "7.82%*6+31.26%",
+                "8.32%*6+33.26%",
+                "8.90%*6+35.57%",
+                "9.70%*6+38.77%",
+                "10.50%*6+41.98%",
+                "11.30%*6+45.19%",
+                "12.15%*6+48.59%",
+                "13.15%*6+52.60%",
+                "14.16%*6+56.61%",
+                "15.16%*6+60.62%",
+                "16.16%*6+64.63%",
+                "17.16%*6+68.63%",
+                "18.16%*6+72.64%",
+                "19.17%*6+76.65%",
+                "20.17%*6+80.66%",
+                "21.17%*6+84.67%",
+                "22.17%*6+88.68%"
               ]
             ]
           },
@@ -745,7 +745,7 @@
             ]
           },
           "9": {
-            "name": "空中攻击·算法压缩",
+            "name": "空中攻击·算法压缩伤害",
             "param": [
               [
                 "31.50%+31.50%",
@@ -772,7 +772,7 @@
             ]
           },
           "10": {
-            "name": "闪避反击·算法压缩",
+            "name": "闪避反击·算法压缩伤害",
             "param": [
               [
                 "19.60%+19.60%+19.60%+19.60%+19.60%",
@@ -989,6 +989,33 @@
           },
           "18": {
             "name": "空中攻击耐力消耗",
+            "param": [
+              [
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30"
+              ]
+            ]
+          },
+          "18-2": {
+            "name": "空中攻击·算法压缩耐力消耗",
             "param": [
               [
                 "30",
@@ -1527,6 +1554,60 @@
                 "14"
               ]
             ]
+          },
+          "24": {
+            "name": "共鸣技能·脉冲干扰回复协奏能量",
+            "param": [
+              [
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8"
+              ]
+            ]
+          },
+          "25": {
+            "name": "共鸣技能·死锁回复协奏能量",
+            "param": [
+              [
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8",
+                "8"
+              ]
+            ]
           }
         },
         "consume": {
@@ -1679,7 +1760,7 @@
     "3": {
       "skill": {
         "name": "网络行者",
-        "desc": "<color=Title>共鸣解放·网络行者</color>\n露西深潜赛博空间并展开协议界面，持续{0}秒。协议界面开启期间可选择共计{1}种不同的<color=Highlight>欺骗程式</color>，每种<color=Highlight>欺骗程式</color>消耗的Ram点数不同，初始露西拥有{2}点Ram点数。\n处于协议界面时，露西会依次标记视野中一定范围内的目标，被标记的目标将会受到后续所有<color=Highlight>欺骗程式</color>的效果。可通过调整露西的视角来标记更多目标。当视野中一定范围内无目标时，将无法施放任何<color=Highlight>欺骗程式</color>。\n处于协议界面时，当协议界面的持续时间结束或长按<color=Highlight>普攻</color>，将对所有标记目标发起<color=Highlight>覆写篡改</color>，造成<color=Light>衍射伤害</color>并退出协议界面，此次伤害为重击伤害。当所有Ram点数消耗完毕或剩余Ram点数无法再施放任何<color=Highlight>欺骗程式</color>时，点按<color=Highlight>普攻</color>将对所有标记目标发起<color=Highlight>覆写篡改</color>。\n该技能可在低空施放。\n\n<color=Highlight>欺骗程式·集群入侵</color>\n消耗{3}点Ram。拓展标记视角，施放效果后无需调整视野，直接标记露西周围一定范围内的所有目标，同时对周围的标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·义体故障</color>\n消耗{4}点Ram。使所有标记目标受到伤害提升{5}%，持续{6}秒。\n<color=Highlight>欺骗程式·突破协议</color>\n消耗{7}点Ram。使所有标记目标降低{8}%的防御，持续{9}秒。\n<color=Highlight>欺骗程式·突触熔融</color>\n消耗{10}点Ram。对一定范围内的所有标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·运动失能</color>\n消耗{11}点Ram。对所有标记目标造成骇破伤害并降低{12}%的攻击，持续{13}秒。\n<color=Highlight>欺骗程式·武装故障</color>\n消耗{14}点Ram。使所有标记目标的攻击有一定概率无法造成伤害，持续{15}秒。\n<color=Highlight>欺骗程式·赛博精神病</color>\n消耗{16}点Ram。干扰所有标记目标使其变为中立阵营，并削减共振度。转变阵营的效果只对轻波级敌人生效。\n\n<color=Title>共鸣解放·暗网深潜</color>\n露西处于<color=Highlight>算法压缩</color>状态且施放<color=Highlight>重击·多线程</color>后，<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。拥有<color=Highlight>共鸣解放·网络行者</color>的所有效果，并使<color=Highlight>覆写篡改</color>伤害倍率大幅提升。\n施放<color=Highlight>共鸣解放·暗网深潜</color>后或露西退出<color=Highlight>算法压缩</color>状态，<color=Highlight>共鸣解放·暗网深潜</color>替换为<color=Highlight>共鸣解放·网络行者</color>。\n该技能可在低空施放。",
+        "desc": "<color=Title>共鸣解放·网络行者</color>\n露西深潜赛博空间并展开协议界面，持续{0}秒。协议界面开启期间可选择共计{1}种不同的<color=Highlight>欺骗程式</color>，每种<color=Highlight>欺骗程式</color>消耗的Ram点数不同，初始露西拥有{2}点Ram点数。\n处于协议界面时，露西会依次标记视野中一定范围内的目标，被标记的目标将会受到后续所有<color=Highlight>欺骗程式</color>的效果。可通过调整露西的视角来标记更多目标。当视野中一定范围内无目标时，将无法施放任何<color=Highlight>欺骗程式</color>。\n处于协议界面时，当协议界面的持续时间结束或长按<color=Highlight>普攻</color>，将对所有标记目标发起<color=Highlight>覆写篡改</color>，造成<color=Light>衍射伤害</color>并退出协议界面，此次伤害为重击伤害。当所有Ram点数消耗完毕或剩余Ram点数无法再施放任何<color=Highlight>欺骗程式</color>时，点按<color=Highlight>普攻</color>将对所有标记目标发起<color=Highlight>覆写篡改</color>。\n该技能可在低空施放。\n\n<color=Highlight>欺骗程式·集群入侵</color>\n消耗{3}点Ram。拓展标记视角，施放效果后无需调整视野，直接标记露西周围一定范围内的所有目标，同时对周围的标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·义体故障</color>\n消耗{4}点Ram。使所有标记目标受到伤害提升{5}%，持续{6}秒。\n<color=Highlight>欺骗程式·突破协议</color>\n消耗{7}点Ram。使所有标记目标降低{8}%的防御，持续{9}秒。\n<color=Highlight>欺骗程式·突触熔融</color>\n消耗{10}点Ram。对一定范围内的所有标记目标造成<color=Light>衍射伤害</color>，此次伤害为重击伤害。\n<color=Highlight>欺骗程式·运动失能</color>\n消耗{11}点Ram。对所有标记目标造成骇破伤害并降低{12}%的攻击，持续{13}秒。\n<color=Highlight>欺骗程式·武装故障</color>\n消耗{14}点Ram。使所有标记目标造成伤害时攻击有一定概率降低{15}%，持续{16}秒。\n<color=Highlight>欺骗程式·赛博精神病</color>\n消耗{17}点Ram。干扰所有标记目标使其变为中立阵营，并削减共振度。转变阵营的效果只对轻波级敌人生效。\n\n<color=Title>共鸣解放·暗网深潜</color>\n露西处于<color=Highlight>算法压缩</color>状态且施放<color=Highlight>重击·多线程</color>后，<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。拥有<color=Highlight>共鸣解放·网络行者</color>的所有效果，并使<color=Highlight>覆写篡改</color>伤害倍率大幅提升。\n施放<color=Highlight>共鸣解放·暗网深潜</color>后或露西退出<color=Highlight>算法压缩</color>状态，<color=Highlight>共鸣解放·暗网深潜</color>替换为<color=Highlight>共鸣解放·网络行者</color>。\n该技能可在低空施放。",
         "param": [
           "10",
           "7",
@@ -1696,6 +1777,7 @@
           "5",
           "30",
           "5",
+          "100",
           "30",
           "6"
         ],
@@ -2068,12 +2150,14 @@
     "4": {
       "skill": {
         "name": "幽灵义体",
-        "desc": "露西为队伍中登场角色且{0}秒内不受到任何伤害时，为自身添加{1}层<color=Highlight>光学欺骗</color>效果，该效果初始上限为{2}层。\n<color=Highlight>光学欺骗</color>：受到攻击时使该次伤害降低{3}%，若该次攻击使自身处于受击或被击飞状态，将会立即自动脱离受击状态或被击飞状态，若此时处于地面则触发成功<color=Highlight>闪避</color>效果，效果触发后移除{4}层<color=Highlight>光学欺骗</color>。",
+        "desc": "露西为队伍中登场角色且{0}秒内不受到任何伤害时，为自身添加{1}层<color=Highlight>光学欺骗</color>效果，该效果初始上限为{2}层。\n<color=Highlight>光学欺骗</color>：受到攻击时使该次伤害降低{3}%，若该次攻击使自身处于受击或被击飞状态，将会立即自动脱离受击状态或被击飞状态，若此时处于地面则触发成功<color=Highlight>闪避</color>效果，效果触发后移除{4}层<color=Highlight>光学欺骗</color>。该效果{5}秒内只能触发{6}次。",
         "param": [
           "8",
           "1",
           "1",
           "100",
+          "1",
+          "0.5",
           "1"
         ],
         "type": "固有技能",
@@ -2152,7 +2236,7 @@
         "type": "变奏技能",
         "level": {
           "1": {
-            "name": "变奏技能·过时幻觉",
+            "name": "变奏技能·过时幻觉伤害",
             "param": [
               [
                 "34.78%+34.78%",
@@ -2356,7 +2440,7 @@
     "7": {
       "skill": {
         "name": "黑墙深度",
-        "desc": "<color=Title>云端接口</color>\n露西未处于<color=Highlight>算法压缩</color>状态下时，攻击命中目标会获得<color=Highlight>【传输协议】</color>。当<color=Highlight>【传输协议】</color>达到{0}点时，<color=Highlight>共鸣技能·有效载荷</color>和<color=Highlight>共鸣技能·脉冲干扰</color>替换为<color=Highlight>共鸣技能·死锁</color>。\n施放<color=Highlight>共鸣解放·网络行者</color>或<color=Highlight>共鸣解放·暗网深潜</color>后会清空<color=Highlight>【传输协议】</color>进度。\n\n<color=Title>算法压缩</color>\n施放<color=Highlight>共鸣技能·死锁</color>后露西进入<color=Highlight>算法压缩</color>状态，并获得{1}层<color=Highlight>SQL</color>。<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。自身<color=Light>衍射伤害</color>加成提升{2}%，持续{3}秒。\n<color=Highlight>算法压缩</color>状态下，再次施放<color=Highlight>共鸣技能·死锁</color>不会重复获得<color=Highlight>SQL</color>和衍射伤害加成效果。\n<color=Highlight>算法压缩</color>状态下，<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>等攻击命中目标时可获得<color=Highlight>【根权限】</color>。当<color=Highlight>【根权限】</color>达到{4}点时，<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。施放<color=Highlight>重击·双线程</color>后短时间内点按<color=Highlight>普攻</color>或长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击·多线程</color>。\n施放<color=Highlight>重击·多线程</color>时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升{5}%并移除<color=Highlight>SQL</color>。\n施放<color=Highlight>重击·多线程</color>时若自身未持有<color=Highlight>SQL</color>，则损失{6}%的当前生命值；当露西生命值低于{7}%时，不消耗生命值。\n施放<color=Highlight>重击·多线程</color>后<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。\n施放<color=Highlight>共鸣解放</color>后，或施放<color=Highlight>重击·多线程</color>后{8}秒内不进行攻击，将会退出<color=Highlight>算法压缩</color>状态。\n\n<color=Title>骇破响应·数据崩解</color>\n露西对处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Light>衍射伤害</color>并附加<color=Highlight>数据崩解</color>效果。此次伤害为骇破伤害。\n<color=Highlight>数据崩解</color>：当目标攻击造成伤害后触发，停滞目标{9}秒。\n\n<color=Title>【传输协议】获取规则</color>\n<color=Highlight>【传输协议】</color>上限{10}点。\n<color=Highlight>普攻</color>、<color=Highlight>重击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>闪避反击</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n<color=Highlight>共鸣技能·有效载荷</color>、<color=Highlight>共鸣技能·脉冲干扰</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n施放<color=Highlight>变奏技能·过时幻觉</color>后，下一次施放<color=Highlight>共鸣技能·脉冲干扰</color>时额外获得{11}点<color=Highlight>【传输协议】</color>。\n\n<color=Title>【根权限】获取规则</color>\n<color=Highlight>【根权限】</color>上限{12}点。\n<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>、<color=Highlight>重击·双线程</color>、<color=Highlight>重击·多线程</color>、<color=Highlight>空中攻击·算法压缩</color>、<color=Highlight>闪避反击·算法压缩</color>造成伤害时，获得<color=Highlight>【根权限】</color>。",
+        "desc": "<color=Title>云端接口</color>\n露西未处于<color=Highlight>算法压缩</color>状态下时，攻击命中目标会获得<color=Highlight>【传输协议】</color>。当<color=Highlight>【传输协议】</color>达到{0}点时，<color=Highlight>共鸣技能·有效载荷</color>和<color=Highlight>共鸣技能·脉冲干扰</color>替换为<color=Highlight>共鸣技能·死锁</color>。\n施放<color=Highlight>共鸣解放·网络行者</color>或<color=Highlight>共鸣解放·暗网深潜</color>后会清空<color=Highlight>【传输协议】</color>进度。\n\n<color=Title>算法压缩</color>\n施放<color=Highlight>共鸣技能·死锁</color>后露西进入<color=Highlight>算法压缩</color>状态，并获得{1}层<color=Highlight>SQL</color>。<color=Highlight>普攻</color>替换为<color=Highlight>普攻·线程撕裂</color>，<color=Highlight>重击</color>替换为<color=Highlight>重击·单线程</color>。自身<color=Light>衍射伤害</color>加成提升{2}%，持续{3}秒。\n<color=Highlight>算法压缩</color>状态下，再次施放<color=Highlight>共鸣技能·死锁</color>不会重复获得<color=Highlight>SQL</color>和衍射伤害加成效果。\n<color=Highlight>算法压缩</color>状态下，<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>等攻击命中目标时可获得<color=Highlight>【根权限】</color>。当<color=Highlight>【根权限】</color>达到{4}点时，<color=Highlight>重击·单线程</color>替换为<color=Highlight>重击·双线程</color>。施放<color=Highlight>重击·双线程</color>后短时间内点按<color=Highlight>普攻</color>或长按<color=Highlight>普攻</color>将会施放<color=Highlight>重击·多线程</color>。\n施放<color=Highlight>重击·多线程</color>时若自身持有<color=Highlight>SQL</color>，则使本次伤害倍率提升{5}%并移除<color=Highlight>SQL</color>。\n施放<color=Highlight>重击·多线程</color>时若自身未持有<color=Highlight>SQL</color>，则损失{6}%的当前生命值；当露西生命值低于{7}%时，不消耗生命值。\n施放<color=Highlight>重击·多线程</color>后<color=Highlight>共鸣解放·网络行者</color>替换为<color=Highlight>共鸣解放·暗网深潜</color>。\n施放<color=Highlight>共鸣解放·网络行者</color>、<color=Highlight>共鸣解放·暗网深潜</color>后，或施放<color=Highlight>重击·多线程</color>后{8}秒内不施放指定技能，将会退出<color=Highlight>算法压缩</color>状态。指定技能包括：<color=Highlight>常态攻击·靶定线程</color>、<color=Highlight>共鸣技能·协议突破</color>、<color=Highlight>变奏技能·过时幻觉</color>、<color=Highlight>谐度破坏·数据崩解</color>。\n\n<color=Title>骇破响应·数据崩解</color>\n露西对处于<color=Highlight>【骇破·干涉】</color>状态的目标造成<color=Light>衍射伤害</color>并附加<color=Highlight>数据崩解</color>效果。此次伤害为骇破伤害。\n<color=Highlight>数据崩解</color>：当目标攻击造成伤害后触发，停滞目标{9}秒。效果触发后移除数据崩解。\n\n<color=Title>【传输协议】获取规则</color>\n<color=Highlight>【传输协议】</color>上限{10}点。\n<color=Highlight>普攻</color>、<color=Highlight>重击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>闪避反击</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n<color=Highlight>共鸣技能·有效载荷</color>、<color=Highlight>共鸣技能·脉冲干扰</color>造成伤害时，获得<color=Highlight>【传输协议】</color>。\n施放<color=Highlight>变奏技能·过时幻觉</color>后，下一次施放<color=Highlight>共鸣技能·脉冲干扰</color>时额外获得{11}点<color=Highlight>【传输协议】</color>。\n\n<color=Title>【根权限】获取规则</color>\n<color=Highlight>【根权限】</color>上限{12}点。\n<color=Highlight>普攻·线程撕裂</color>、<color=Highlight>重击·单线程</color>、<color=Highlight>空中攻击·算法压缩</color>、<color=Highlight>闪避反击·算法压缩</color>造成伤害时，获得<color=Highlight>【根权限】</color>。",
         "param": [
           "100",
           "1",
@@ -2375,7 +2459,7 @@
         "type": "共鸣回路",
         "level": {
           "1": {
-            "name": "骇破响应·数据崩解",
+            "name": "骇破响应·数据崩解伤害",
             "param": [
               [
                 "550.37%+34.40%*4",
@@ -2835,7 +2919,7 @@
     },
     "4": {
       "name": "夜之城没有活着的传奇",
-      "desc": "队伍中角色附加<color=Highlight>【骇破·偏移】</color>后，使队伍中角色全属性伤害加成提升{0}%，持续{1}秒。",
+      "desc": "队伍中的角色附加<color=Highlight>【骇破·偏移】</color>后，使队伍中的角色全属性伤害加成提升{0}%，持续{1}秒。",
       "param": [
         "20",
         "20"

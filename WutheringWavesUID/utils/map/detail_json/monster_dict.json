@@ -711,6 +711,123 @@
         "echo": 0,
         "name": "梦魇·突击公司狗"
     },
+    "310000900": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000202,
+        "name": "敬请期待"
+    },
+    "310000910": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000203,
+        "name": "敬请期待"
+    },
+    "310000920": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000204,
+        "name": "敬请期待"
+    },
+    "310000930": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000205,
+        "name": "敬请期待"
+    },
+    "310000940": {
+        "rarity": 1,
+        "attributeId": 0,
+        "elementResistance": [
+            0
+        ],
+        "echo": 6000206,
+        "name": "敬请期待"
+    },
+    "310000950": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000207,
+        "name": "敬请期待"
+    },
+    "310000960": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000208,
+        "name": "敬请期待"
+    },
+    "310000970": {
+        "rarity": 1,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000209,
+        "name": "敬请期待"
+    },
+    "310000980": {
+        "rarity": 1,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000210,
+        "name": "敬请期待"
+    },
+    "310000990": {
+        "rarity": 1,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000211,
+        "name": "敬请期待"
+    },
+    "310001000": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000212,
+        "name": "敬请期待"
+    },
+    "310001010": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000213,
+        "name": "敬请期待"
+    },
+    "310001020": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000214,
+        "name": "敬请期待"
+    },
     "320000010": {
         "rarity": 2,
         "attributeId": 0,
@@ -1261,6 +1378,24 @@
         "echo": 6000198,
         "name": "迷胧幻蛾"
     },
+    "320000670": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000215,
+        "name": "敬请期待"
+    },
+    "320000680": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000216,
+        "name": "敬请期待"
+    },
     "330000010": {
         "rarity": 3,
         "attributeId": 3,
@@ -1572,5 +1707,41 @@
         ],
         "echo": 0,
         "name": "梦魇亚当·重锤"
+    },
+    "340000300": {
+        "rarity": 3,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000217,
+        "name": "敬请期待"
+    },
+    "340000310": {
+        "rarity": 4,
+        "attributeId": 6,
+        "elementResistance": [
+            6
+        ],
+        "echo": 6000218,
+        "name": "敬请期待"
+    },
+    "350000410": {
+        "rarity": 2,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6010216,
+        "name": "敬请期待"
+    },
+    "350000420": {
+        "rarity": 1,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6010205,
+        "name": "敬请期待"
     }
 }

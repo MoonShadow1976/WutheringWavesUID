@@ -77,7 +77,7 @@ async def clean_pool_data():
 
         total_seconds = int((now - end_time).total_seconds())
 
-        if pool.pool_type == "角色活动唤取":
+        if "角色" in pool.pool_type:
             if char_up_end_time is not None and total_seconds != char_up_end_time:
                 continue
 

@@ -110,7 +110,7 @@ async def process_uid(uid, ev, period_param: int | str | None) -> dict[str, Any]
 
     period_list = await waves_api.get_period_list(uid, ck)
     if not period_list.success or not period_list.data:
-        return None
+        return f"uid{uid}:{period_list.throw_msg()}"
 
     period_list = PeriodList.model_validate(period_list.data)
 
@@ -149,12 +149,12 @@ async def process_uid(uid, ev, period_param: int | str | None) -> dict[str, Any]
 
     period_detail = await waves_api.get_period_detail(period_type, period_node.index, uid, ck)
     if not period_detail.success or not period_detail.data:
-        return None
+        return f"uid{uid}:{period_detail.throw_msg()}"
     period_detail = PeriodDetail.model_validate(period_detail.data)
 
     account_info = await waves_api.get_base_info(uid, ck)
     if not account_info.success or not account_info.data:
-        return None
+        return f"uid{uid}:{account_info.throw_msg()}"
     account_info = AccountBaseInfo.model_validate(account_info.data)
 
     return {

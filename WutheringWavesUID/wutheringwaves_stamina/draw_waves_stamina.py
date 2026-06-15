@@ -70,11 +70,13 @@ async def process_uid(uid, ev):
         )
 
         (daily_info_res, account_info_res) = results
-        if not isinstance(daily_info_res, KuroApiResp) or not daily_info_res.success:
+        if not isinstance(daily_info_res, KuroApiResp) or not isinstance(account_info_res, KuroApiResp):
             return None
 
-        if not isinstance(account_info_res, KuroApiResp) or not account_info_res.success:
-            return None
+        if not daily_info_res.success:
+            return f"uid{uid}:{daily_info_res.throw_msg()}"
+        if not account_info_res.success:
+            return f"uid{uid}:{account_info_res.throw_msg()}"
 
         daily_info = DailyData.model_validate(daily_info_res.data)
         account_info = AccountBaseInfo.model_validate(account_info_res.data)
@@ -103,8 +105,11 @@ async def draw_stamina_img(bot: Bot, ev: Event):
         results = await asyncio.gather(*tasks)
 
         # 过滤掉 None 值
-        valid_daily_list = [res for res in results if res is not None]
+        valid_daily_list = [res for res in results if isinstance(res, dict)]
         if not valid_daily_list:
+            error_msgs = [res for res in results if isinstance(res, str)]
+            if error_msgs:
+                return "\n".join(error_msgs)
             return ERROR_CODE[WAVES_CODE_102]
 
         # 并行绘制每个 UID 的体力图片（保持原 _draw_stamina_img 逻辑不变）
@@ -243,12 +248,15 @@ async def _draw_stamina_img(ev: Event, valid: dict) -> Image.Image:
 
     # logo_img = get_small_logo(2)
     # title_bar.alpha_composite(logo_img, dest=(760, 60))
-    menFei = "千道门扉的异想" if not waves_api.is_net(daily_info.roleId) else "国际服暂无数据"
-    color = RED if account_info.rougeScore != account_info.rougeScoreLimit else GREEN
+
+    weekly_frame_cur = daily_info.weeklyFrameData.cur if daily_info.weeklyFrameData else 0
+    weekly_frame_total = daily_info.weeklyFrameData.total if daily_info.weeklyFrameData else 0
+    menFei = "周度游历" if not waves_api.is_net(daily_info.roleId) else "国际服暂无数据"
+    color = RED if weekly_frame_cur != weekly_frame_total else GREEN
     title_bar_draw.text((810, 125), menFei, GREY, waves_font_26, "mm")
     title_bar_draw.text(
         (810, 78),
-        f"{account_info.rougeScore}/{account_info.rougeScoreLimit}",
+        f"{weekly_frame_cur}/{weekly_frame_total}",
         color,
         waves_font_32,
         "mm",

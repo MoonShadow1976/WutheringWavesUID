@@ -206,6 +206,7 @@ def get_end_time():
 
 filter_msg = [
     "角色查询失败，请重新选择角色",
+    "操作频繁",
 ]
 
 

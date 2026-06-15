@@ -1,7 +1,5 @@
 from datetime import datetime
 import json
-import re
-import time
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -13,56 +11,92 @@ sv_waves_code = SV("鸣潮兑换码")
 
 invalid_code_list = ("MINGCHAO",)
 
-url = "https://newsimg.5054399.com/comm/mlcxqcommon/static/wap/js/data_102.js?{}&callback=?&_={}"
+url = "https://huodong2.4399.com/n/comm/tool/api.php?path=dhmCode/index&tool_id=10"
+
+
+def is_code_expired(etime: str) -> bool:
+    """检查国服兑换码是否已过期"""
+    if not etime:
+        return False
+
+    try:
+        # 新接口的etime格式: "2026-06-01 00:00:00"
+        expire_date = datetime.strptime(etime, "%Y-%m-%d %H:%M:%S")
+        now = datetime.now()
+        return now > expire_date
+    except Exception:
+        return False
 
 
 @sv_waves_code.on_fullmatch(("code", "兑换码"))
 async def get_sign_func(bot: Bot, ev: Event):
     # 分别获取结果
-    list1 = await get_code_list()  # 可能返回列表或None
-    list2 = await get_oversea_code_list()  # 可能返回列表或None
-
-    # 安全合并
-    code_list = []
-    if list1 is not None:
-        code_list.extend(list1)
-    if list2 is not None:
-        code_list.extend(list2)
-    if not code_list:
-        return await bot.send("[获取兑换码失败] 请稍后再试")
+    list1 = await get_code_list()  # 国服
+    list2 = await get_oversea_code_list()  # 国际服
 
     msgs = []
-    msgs.append("国际服只能使用已标注的兑换码（前瞻兑换码互通都可使用）")
-    for code in code_list:
-        is_fail = code.get("is_fail", "0")
-        if is_fail == "1":
-            continue
-        order = code.get("order", "")
-        if order in invalid_code_list or not order:
-            continue
-        reward = code.get("reward", "")
-        label = code.get("label", "")
+    msgs.append("（前瞻兑换码互通都可使用）")
 
-        if order == "MINGCHAO666":
-            label += "国服专属长期兑换码"
+    # 处理国服兑换码
+    if list1 is not None:
+        for code in list1:
+            order = code.get("code", "")
+            if order in invalid_code_list or not order:
+                continue
+            reward = code.get("content", "")
+            label = code.get("description", "")
+            etime = code.get("etime", "")
+            if is_code_expired(etime):
+                continue
 
-        msg = [f"兑换码: {order}", f"奖励: {reward}", label]
-        msgs.append("\n".join(msg))
+            if order == "MINGCHAO666":
+                label += "国服专属长期兑换码"
+
+            msg = [f"兑换码: {order}", f"奖励: {reward}", label]
+            msgs.append("\n".join(msg))
+
+    # 处理国际服兑换码
+    if list2 is not None:
+        for code in list2:
+            is_fail = code.get("is_fail", "0")
+            if is_fail == "1":
+                continue
+            order = code.get("order", "")
+            if order in invalid_code_list or not order:
+                continue
+            reward = code.get("reward", "")
+            label = code.get("label", "")
+            etime = code.get("over_time", "")
+            if is_code_expired(etime):
+                continue
+
+            msg = [f"兑换码: {order}", f"奖励: {reward}", label]
+            msgs.append("\n".join(msg))
+
+    if len(msgs) <= 1:  # 只有开头提示，没有有效兑换码
+        return await bot.send("[获取兑换码失败] 没有找到有效的兑换码或均已过期")
 
     await bot.send("\n\n".join(msgs))
 
 
 async def get_code_list():
     try:
-        now = datetime.now()
-        time_string = f"{now.year - 1900}{now.month - 1}{now.day}{now.hour}{now.minute}"
-        now_time = int(time.time() * 1000)
-        new_url = url.format(time_string, now_time)
+        params = {
+            "child_id": "11",
+            "keyword": "",
+            "status": "",
+            "currentPage": "1",
+            "pageSize": "20",
+            "scookie": "",
+            "device": "",
+        }
         async with httpx.AsyncClient(timeout=None) as client:
-            res = await client.get(new_url, timeout=10)
-            json_data = res.text.split("=", 1)[1].strip().rstrip(";")
-            logger.debug(f"[获取兑换码] url:{new_url}, codeList:{json_data}")
-            return json.loads(json_data)
+            res = await client.post(url, data=params, timeout=10)
+            json_data = res.json()
+            logger.debug(f"[获取兑换码] url:{url}, codeList:{json_data}")
+            if json_data.get("success"):
+                return json_data.get("list", [])
+            return []
 
     except Exception as e:
         logger.exception("[获取兑换码失败] ", e)
@@ -96,50 +130,4 @@ async def get_oversea_code_list():
             logger.error(f"[获取兑换码-国际服] 请求失败 {url}: {str(e)}")
 
     logger.error("[获取兑换码-国际服] 所有镜像源均失败")
-    return [{"order": "国际服兑换码获取失败,请检查服务器网络"}]
-
-
-def is_code_expired(label: str) -> bool:
-    if not label:
-        return False
-
-    # 使用正则提取月份和日期
-    pattern = r"(\d{1,2})月(\d{1,2})日(\d{1,2})点"
-    match = re.search(pattern, label)
-    if not match:
-        return False
-
-    expire_month = int(match.group(1))
-    expire_day = int(match.group(2))
-    expire_hour = int(match.group(2))
-
-    now = datetime.now()
-    current_month = now.month
-
-    expire_year = now.year
-    # 处理跨年的情况
-    if current_month < expire_month:
-        # 当前月份小于截止月份，说明截止日期是去年的
-        expire_year -= 1
-    elif current_month == expire_month:
-        # 当前月份等于截止月份，需要比较日期
-        if now.day > expire_day:
-            # 当前日期已经过了截止日期，说明是明年的
-            expire_year += 1
-    else:
-        # 当前月份大于截止月份，使用当前年份
-        pass
-
-    if expire_hour == 24:
-        expire_hour = 23
-        expire_min = 59
-        expire_sec = 59
-    else:
-        expire_min = 0
-        expire_sec = 0
-
-    # 构建截止时间
-    expire_date = datetime(expire_year, expire_month, expire_day, expire_hour, expire_min, expire_sec)
-
-    # 比较时间
-    return now > expire_date
+    return

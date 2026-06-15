@@ -56,6 +56,7 @@ class DailyData(BaseModel):
     energyData: EnergyData
     livenessData: LivenessData
     battlePassData: list[BattlePassData]
+    weeklyFrameData: BattlePassData | None = None
 
 
 class Role(BaseModel):

@@ -88,6 +88,11 @@ NOT_SEND_MASTER_INFO_CODES = (
     RespCode.CAPTCHA_EXPIRED.value,
     RespCode.ROLE_QUERY_FAILED.value,
 )
+# 不发送主人信息的消息关键词
+NOT_SEND_MASTER_INFO_MSGS = (
+    "操作频繁",
+    "系统繁忙",
+)
 
 
 def check_send_master_info(code: int, msg: str, data: T | None = None) -> bool:
@@ -95,6 +100,9 @@ def check_send_master_info(code: int, msg: str, data: T | None = None) -> bool:
         return True
 
     if code in NOT_SEND_MASTER_INFO_CODES:
+        return False
+
+    if isinstance(msg, str) and any(kw in msg for kw in NOT_SEND_MASTER_INFO_MSGS):
         return False
 
     import inspect
@@ -158,9 +166,9 @@ class KuroApiResp(BaseModel, Generic[T]):
         await WavesUser.mark_cookie_invalid(uid, cookie, "无效")
 
     def throw_msg(self) -> str:
-        if isinstance(self.msg, str):
-            return self.msg
-        return ThrowMsg.SYSTEM_BUSY
+        if isinstance(self.msg, str) and self.msg:
+            return f"❌{self.msg}"
+        return f"❌{ThrowMsg.SYSTEM_BUSY}"
 
 
 if __name__ == "__main__":

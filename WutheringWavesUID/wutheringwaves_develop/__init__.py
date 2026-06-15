@@ -5,19 +5,20 @@ from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
+from ..utils.name_convert import CHAR_NAME_PATTERN, get_event_command_text
 from ..wutheringwaves_develop.develop import calc_develop_cost, mock_calc_develop_cost
 
 role_develop = SV("waves角色培养")
 
 
 @role_develop.on_regex(
-    r"(?P<develop_list>([\u4e00-\u9fa5]+)(\s+[\u4e00-\u9fa5]+)*?)\s*(材料|养成|培养|培养成本)",
+    rf"(?P<develop_list>({CHAR_NAME_PATTERN})(\s+{CHAR_NAME_PATTERN})*?)\s*(材料|养成|培养|培养成本)",
     block=True,
 )
 async def calc_develop(bot: Bot, ev: Event):
     match = re.search(
-        r"(?P<develop_list>([\u4e00-\u9fa5]+)(\s+[\u4e00-\u9fa5]+)*?)\s*(材料|养成|培养|培养成本)",
-        ev.raw_text,
+        rf"(?P<develop_list>({CHAR_NAME_PATTERN})(\s+{CHAR_NAME_PATTERN})*?)\s*(材料|养成|培养|培养成本)",
+        get_event_command_text(ev),
     )
     if not match:
         return

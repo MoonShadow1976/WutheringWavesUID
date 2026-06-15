@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from gsuid_core.logger import logger
+from gsuid_core.sv import get_plugin_force_prefixs, get_plugin_prefixs
 from msgspec import json as msgjson
 
 from ..utils.resource.RESOURCE_PATH import (
@@ -22,6 +23,20 @@ char_alias_data: dict[str, list[str]] = {}
 weapon_alias_data: dict[str, list[str]] = {}
 sonata_alias_data: dict[str, list[str]] = {}
 echo_alias_data: dict[str, list[str]] = {}
+
+CHAR_NAME_PATTERN = r"[\w\u4e00-\u9fa5·]+"
+
+
+def get_event_command_text(ev) -> str:
+    PREFIX_LIST = get_plugin_prefixs("WutheringWavesUID") + get_plugin_force_prefixs("WutheringWavesUID")
+    logger.debug(f"[鸣潮] prefix list: {PREFIX_LIST}")
+    raw_text = getattr(ev, "raw_text", "").strip()
+    # 优先匹配较长的前缀，避免短前缀误匹配（如 "ww" 匹配了 "wwx" 的开头）
+    for prefix in sorted(PREFIX_LIST, key=len, reverse=True):
+        if raw_text.casefold().startswith(prefix.casefold()):
+            logger.debug(f"[鸣潮] 前缀清除匹配成功: {prefix}，原文本: {raw_text}")
+            return raw_text[len(prefix) :].strip()
+    return raw_text
 
 
 def add_dictionaries(dict1, dict2):

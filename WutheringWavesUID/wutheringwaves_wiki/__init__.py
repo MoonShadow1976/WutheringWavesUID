@@ -4,7 +4,7 @@ from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
-from ..utils.name_convert import char_name_to_char_id
+from ..utils.name_convert import CHAR_NAME_PATTERN, char_name_to_char_id, get_event_command_text
 from .draw_char import draw_char_wiki
 from .draw_echo import draw_wiki_echo
 from .draw_list import draw_echo_list, draw_sonata_list, draw_weapon_list
@@ -16,11 +16,11 @@ sv_waves_guide = SV("鸣潮攻略")
 sv_waves_wiki = SV("鸣潮wiki")
 
 
-@sv_waves_guide.on_regex(r"^[\u4e00-\u9fa5]+(?:共鸣链|命座|天赋|技能|图鉴|wiki|介绍)$", block=True)
+@sv_waves_guide.on_regex(rf"^{CHAR_NAME_PATTERN}(?:共鸣链|命座|天赋|技能|图鉴|wiki|介绍)$", block=True)
 async def send_waves_wiki(bot: Bot, ev: Event):
     match = re.search(
-        r"(?P<wiki_name>[\u4e00-\u9fa5]+)(?P<wiki_type>共鸣链|命座|天赋|技能|图鉴|wiki|介绍)",
-        ev.raw_text,
+        rf"(?P<wiki_name>{CHAR_NAME_PATTERN})(?P<wiki_type>共鸣链|命座|天赋|技能|图鉴|wiki|介绍)",
+        get_event_command_text(ev),
     )
     if not match:
         return
@@ -56,9 +56,9 @@ async def send_waves_wiki(bot: Bot, ev: Event):
         await bot.send(img)
 
 
-@sv_waves_guide.on_regex(r"[\u4e00-\u9fa5]+攻略$", block=True)
+@sv_waves_guide.on_regex(rf"{CHAR_NAME_PATTERN}攻略$", block=True)
 async def send_role_guide_pic(bot: Bot, ev: Event):
-    match = re.search(r"(?P<char>[\u4e00-\u9fa5]+)攻略", ev.raw_text)
+    match = re.search(rf"(?P<char>{CHAR_NAME_PATTERN})攻略", get_event_command_text(ev))
     if not match:
         return
     ev.regex_dict = match.groupdict()

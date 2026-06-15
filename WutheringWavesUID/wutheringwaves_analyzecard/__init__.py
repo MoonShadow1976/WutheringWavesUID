@@ -4,13 +4,14 @@ from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
+from ..utils.name_convert import CHAR_NAME_PATTERN, get_event_command_text
 from .cardOCR import async_ocr
 from .changeEcho import change_echo, change_weapon_resonLevel
 from .ScoreQuery import phantom_score_ocr
 
 waves_discord_bot_card_analyze = SV("waves分析discord_bot卡片")
-waves_change_sonata_and_first_echo = SV("waves修改首位声骸与套装")
 waves_change_weapon_reson_level = SV("waves修改武器精炼", priority=5, pm=1)
+waves_change_sonata_and_first_echo = SV("waves修改首位声骸与套装")
 waves_phantom_score_ocr_query = SV("waves声骸ocr查分")
 
 
@@ -37,10 +38,10 @@ async def analyze_card(bot: Bot, ev: Event):
     await async_ocr(bot, ev)
 
 
-@waves_phantom_score_ocr_query.on_regex(r"[\u4e00-\u9fa5]+\s*\d\s*[cC]", block=True)
+@waves_phantom_score_ocr_query.on_regex(rf"{CHAR_NAME_PATTERN}\s*\d\s*[cC]", block=True)
 async def phantom_score_ocr_query(bot: Bot, ev: Event):
     """声骸OCR查分"""
-    match = re.search(r"([\u4e00-\u9fa5]+)\s*(\d)\s*[cC]", ev.raw_text)
+    match = re.search(rf"({CHAR_NAME_PATTERN})\s*(\d)\s*[cC]", get_event_command_text(ev))
     if not match:
         return
 
@@ -51,14 +52,14 @@ async def phantom_score_ocr_query(bot: Bot, ev: Event):
 
 
 @waves_change_sonata_and_first_echo.on_regex(
-    r"^改(?P<char>[\u4e00-\u9fa5]+?)(套装(?P<sonata>[0-9\u4e00-\u9fa5]+?)?)?(?P<echo>声骸.*)?$",
+    rf"^改(?P<char>{CHAR_NAME_PATTERN}?)(套装(?P<sonata>[0-9\u4e00-\u9fa5]+?)?)?(?P<echo>声骸.*)?$",
     block=False,
 )
 async def change_sonata_and_first_echo(bot: Bot, ev: Event):
     """处理国际服本地识别结果的声骸相关"""
     match = re.search(
-        r"^.*改(?P<char>[\u4e00-\u9fa5]+?)(套装(?P<sonata>[0-9\u4e00-\u9fa5]+?)?)?(?P<echo>声骸.*)?$",
-        ev.raw_text,
+        rf"^.*改(?P<char>{CHAR_NAME_PATTERN}?)(套装(?P<sonata>[0-9\u4e00-\u9fa5]+?)?)?(?P<echo>声骸.*)?$",
+        get_event_command_text(ev),
     )
 
     if not match:
@@ -69,14 +70,14 @@ async def change_sonata_and_first_echo(bot: Bot, ev: Event):
 
 
 @waves_change_weapon_reson_level.on_regex(
-    r"^改(\d+)([\u4e00-\u9fa5]+)?武器(\d+)$",
-    block=False,
+    rf"^改(\d+)({CHAR_NAME_PATTERN})?武器(\d+)$",
+    block=True,
 )
 async def change_weapon_reson_level(bot: Bot, ev: Event):
     """处理国际服本地识别结果的武器精炼相关"""
     match = re.search(
-        r"^.*改(?P<waves_id>\d+)(?P<char>[\u4e00-\u9fa5]+)?武器(?P<reson_level>(\d+))$",
-        ev.raw_text,
+        rf"^.*改(?P<waves_id>\d+)(?P<char>{CHAR_NAME_PATTERN})?武器(?P<reson_level>(\d+))$",
+        get_event_command_text(ev),
     )
     if not match:
         return

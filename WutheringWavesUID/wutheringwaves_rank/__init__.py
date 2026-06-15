@@ -4,6 +4,7 @@ from gsuid_core.bot import Bot
 from gsuid_core.models import Event
 from gsuid_core.sv import SV
 
+from ..utils.name_convert import CHAR_NAME_PATTERN, get_event_command_text
 from ..wutheringwaves_config import WutheringWavesConfig
 from .darw_rank_card import draw_rank_img
 from .draw_all_rank_card import draw_all_rank_card
@@ -21,10 +22,10 @@ sv_waves_matrix_rank = SV("ww矩阵群排行", priority=-1)
 sv_waves_matrix_rank_all = SV("ww矩阵总排行", priority=-1)
 
 
-@sv_waves_rank_list.on_regex("^[\u4e00-\u9fa5]+?(?:(群|bot)?排(行|名))$", block=True)
+@sv_waves_rank_list.on_regex(f"^{CHAR_NAME_PATTERN}?(?:(群|bot)?排(行|名))$", block=True)
 async def send_rank_card(bot: Bot, ev: Event):
     # 正则表达式
-    match = re.search(r"(?P<char>[\u4e00-\u9fa5]+?)(?:(群|bot)?排(行|名))", ev.raw_text)
+    match = re.search(rf"(?P<char>{CHAR_NAME_PATTERN}?)(?:(群|bot)?排(行|名))", get_event_command_text(ev))
     if not match:
         return
     ev.regex_dict = match.groupdict()
@@ -63,12 +64,12 @@ async def send_rank_card(bot: Bot, ev: Event):
         await bot.send(im)
 
 
-@sv_waves_rank_all_list.on_regex("^[\u4e00-\u9fa5]+(?:总排行|总排名)(\\d+)?$", block=True)
+@sv_waves_rank_all_list.on_regex(f"^{CHAR_NAME_PATTERN}(?:总排行|总排名)(\\d+)?$", block=True)
 async def send_all_rank_card(bot: Bot, ev: Event):
     # 正则表达式
     match = re.search(
-        r"(?P<char>[\u4e00-\u9fa5]+)(?:总排行|总排名)(?P<pages>(\d+))?",
-        ev.raw_text,
+        rf"(?P<char>{CHAR_NAME_PATTERN})(?:总排行|总排名)(?P<pages>(\d+))?",
+        get_event_command_text(ev),
     )
     if not match:
         return

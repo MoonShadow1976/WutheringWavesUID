@@ -9,6 +9,7 @@ from ..utils.ascension.sonata import WavesSonataResult, get_sonata_detail
 from ..utils.ascension.weapon import WavesWeaponResult, get_weapon_detail
 from ..utils.char_info_utils import get_all_role_detail_info_list
 from ..utils.name_convert import (
+    CHAR_NAME_PATTERN,
     alias_to_sonata_name,
     alias_to_weapon_name,
     char_name_to_char_id,
@@ -313,7 +314,7 @@ def parse_phantom_position(
     content: str,
 ) -> list[PhantomInfo]:
     # 修改正则表达式，使位置转换部分变为可选
-    position_pattern = r"(?:(\d+))?([\u4e00-\u9fa5]+)(?:\s*(\d)到(\d))*"
+    position_pattern = rf"(?:(\d+))?({CHAR_NAME_PATTERN}?)(?=\s*\d到|\s*$)(?:\s*(\d)到(\d))*"
     position_matches = re.finditer(position_pattern, content)
     results = []
 

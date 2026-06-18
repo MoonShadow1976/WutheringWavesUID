@@ -480,7 +480,11 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
             if player_match:
                 final_result["用户信息"]["玩家名称"] = player_match.group(1).strip()
                 # continue  # 避免玩家名称在前被识别为角色名，不使用分割改用剔除
-                line = line.replace(player_match.group(0), "")
+                del_text = player_match.group(0)
+                uid_save = patterns["uid_info"].search(del_text)
+                if uid_save:  # 保留意外识别的UID - 玩家名称为空时
+                    del_text = del_text.replace(uid_save.group(0), "")
+                line = line.replace(del_text, "")
 
             # 文本预处理：删除非数字中英文的符号及多余空白
             line_clean = re.sub(

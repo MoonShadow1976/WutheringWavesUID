@@ -50,8 +50,8 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: dict):
         wepon_level = result_dict["武器信息"]["等级"]
 
     except Exception as e:
-        logger.error(f" [鸣潮][dc卡片识别] 识别结果结构错误：{e}")
-        await bot.send(f"[鸣潮]识别结果结构错误：{e}\n", at_sender)
+        logger.error(f" [鸣潮][dc卡片识别] 识别结果缺失结构：{e}")
+        await bot.send(f"[鸣潮]识别结果缺失结构：{e}\n", at_sender)
         return
 
     # 存储用户昵称

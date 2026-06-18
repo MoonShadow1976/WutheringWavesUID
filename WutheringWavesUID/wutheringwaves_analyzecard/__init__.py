@@ -38,7 +38,7 @@ async def analyze_card(bot: Bot, ev: Event):
     await async_ocr(bot, ev)
 
 
-@waves_phantom_score_ocr_query.on_regex(rf"{CHAR_NAME_PATTERN}\s*\d\s*[cC]", block=True)
+@waves_phantom_score_ocr_query.on_regex(rf"^{CHAR_NAME_PATTERN}\s*\d\s*[cC]", block=True)
 async def phantom_score_ocr_query(bot: Bot, ev: Event):
     """声骸OCR查分"""
     match = re.search(rf"({CHAR_NAME_PATTERN})\s*(\d)\s*[cC]", get_event_command_text(ev))

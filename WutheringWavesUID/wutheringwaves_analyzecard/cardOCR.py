@@ -487,42 +487,43 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                 line = line.replace(del_text, "")
 
             # 文本预处理：删除非数字中英文的符号及多余空白
-            line_clean = re.sub(
+            line_clean_text = re.sub(
                 r"[^\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7A3\u00C0-\u00FFA-Za-z0-9\s]", "", line
             )  # 先删除特殊符号, 匹配“漂泊者·湮灭”
-            line_clean = re.sub(r"\s+", " ", line_clean).strip()  # 再合并多余空白
+            line_clean_text = re.sub(r"\s+", " ", line_clean_text).strip()  # 再合并多余空白
 
-            # UID提取
-            uid_match = patterns["uid_info"].search(line_clean)
-            if uid_match:
-                final_result["用户信息"]["UID"] = uid_match.group(1)
-                line_clean = line_clean.replace(uid_match.group(0), "")
+            for line_clean in line_clean_text.split(" "):
+                # UID提取
+                uid_match = patterns["uid_info"].search(line_clean)
+                if uid_match:
+                    final_result["用户信息"]["UID"] = uid_match.group(1)
+                    line_clean = line_clean.replace(uid_match.group(0), "")
 
-            # 等级提取
-            line_num = re.sub(r"[oOQ○◌θ]", "0", line_clean)  # 处理0的错误识别
-            line_num = re.sub(r"[^0-9\s]", "", line_num)
-            level_match = patterns["level"].search(line_num)
-            if level_match and not final_result["角色信息"].get("等级"):
-                final_result["角色信息"]["等级"] = min(int(level_match.group(1)), 90)  # 最大等级为90
+                # 等级提取
+                line_num = re.sub(r"[oOQ○◌θ]", "0", line_clean)  # 处理0的错误识别
+                line_num = re.sub(r"[^0-9\s]", "", line_num)
+                level_match = patterns["level"].search(line_num)
+                if level_match and not final_result["角色信息"].get("等级"):
+                    final_result["角色信息"]["等级"] = min(int(level_match.group(1)), 90)  # 最大等级为90
 
-            # 角色名提取
-            if not final_result["角色信息"].get("角色名"):
-                name_match = patterns["name"].search(line_clean)
-                if name_match:
-                    name = name_match.group()
-                    REPLACE_MAP = {
-                        "吟槑": "吟霖",
-                        "鑒几": "鉴心",
-                        "千唉": "千咲",
-                        "千眹": "千咲",
-                        "蕾貝卡": "丽贝卡",
-                    }
-                    for old, new in REPLACE_MAP.items():
-                        name = name.replace(old, new)
-                    if not re.match(r"^[\u4e00-\u9fa5]+$", name):
-                        logger.warning(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
-                        return False, final_result
-                    final_result["角色信息"]["角色名"] = cc.convert(name)
+                # 角色名提取
+                if not final_result["角色信息"].get("角色名"):
+                    name_match = patterns["name"].search(line_clean)
+                    if name_match:
+                        name = name_match.group()
+                        REPLACE_MAP = {
+                            "吟槑": "吟霖",
+                            "鑒几": "鉴心",
+                            "千唉": "千咲",
+                            "千眹": "千咲",
+                            "蕾貝卡": "丽贝卡",
+                        }
+                        for old, new in REPLACE_MAP.items():
+                            name = name.replace(old, new)
+                        if not re.match(r"^[\u4e00-\u9fa5]+$", name):
+                            logger.warning(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
+                            return False, final_result
+                        final_result["角色信息"]["角色名"] = cc.convert(name)
 
     # 处理武器信息（第二个结果）1
     if len(ocr_results) > 1 and ocr_results[1]["text"] is not None:

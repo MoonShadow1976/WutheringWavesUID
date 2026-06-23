@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/moonshadow1976/WutheringWavesUID"><img src="https://s2.loli.net/2024/10/08/ku3pLJBPoGjfQWq.png" width="256" height="256" alt="WutheringWavesUID"></a>
-<h1 align = "center">WutheringWavesUID 2.0</h1>
+<h1 align = "center">WutheringWavesUID 3.0</h1>
 <h4 align = "center">🚧支持OneBot(QQ)、QQ频道、微信、开黑啦、Telegram的全功能鸣潮Bot插件🚧</h4>
 <div align = "center">
         <a href="https://docs.sayu-bot.com/" target="_blank">安装文档</a>   ·  
@@ -16,12 +16,12 @@
 > 具体安装方式可参考[[快速开始](https://docs.sayu-bot.com/Started/InstallCore.html)]**
 >
 > **使用方式：**
-> 如果已经是最新版本的 `gsuid_core`, 需在 `plugins`文件夹 `clone`本项目
+> 如果已经是最新版本的 `gsuid_core`, ➡️在 `plugins`文件夹 **`git clone`本仓库**⬅️
 > 后续可以直接对bot发送 `core全部更新`直接更新插件
 > 如使用命令缺失素材可尝试使用命令 `ww下载全部资源`
 >
-> 由于国际服缺少库街区
-> 国际服用户可以基于 `Discord 图片识别`或 `PCAP文件抓包`使用 `WutheringWavesUID`
+> 支持国际服用户查询角色排行，由于国际服缺少库街区
+> 国际服用户需基于 `Discord 图片识别`或 `PCAP文件抓包`使用 `WutheringWavesUID`
 > 国际服用户使用 `ww分析`命令进行 `Discord 图片识别`前请先于控制台 `修改插件设定`处填充 [OCRspace API Key](https://ocr.space/OCRAPI)
 >
 > 支持NoneBot2 & HoshinoBot & ZeroBot & YunzaiBot的鸣潮Bot插件
@@ -32,15 +32,14 @@
 >
 > 🔥如有侵权请联系删除🔥
 
-#### 丨反馈渠道
+#### 丨说明
 
-   🕯️🕯️🕯️
-
-#### 丨选择直接使用
-
-- QQ群：[1037977938](https://qm.qq.com/cgi-bin/qm/qr?authKey=slEX2BdUTZLlDcIxQ6X%2FfK20955frbHuysDHtZpRzaiOyKg6i4BlimWCyNFMYOpC&k=LoFWlKzrv-nrd1dfBPfjo2GZ256octsB&noverify=0&group_code=1037977938)
-- ~~Lark Group: [wuwa](https://applink.larksuite.com/client/chat/chatter/add_by_link?link_token=00bld93f-427b-45c8-b104-c6be61ougc7m)~~ --`对wwuid的支持并不完整，可以的话请加QQ群使用`
-- ~~Discord Group: [共鸣基地](https://discord.gg/bp9ygDCBS7)~~ --`解释权归`[YashajinAlice](https://github.com/YashajinAlice) `所有`
+   🕯️🕯️本仓库fork自[echo/WutheringWavesUID](https://github.com/tyql688/WutheringWavesUID)🕯️🕯️
+   >继承并保持原有基础功能结构: 全功能开源，部分数据收集与展示对接私库服务器，除这部分外使用本仓库无需额外申请资格。
+   >
+   >本仓库继echo放弃维护后由xinxiuzhu、lniuua、moonShadow1976维护
+   >
+   >联系请使用[issue](https://github.com/MoonShadow1976/WutheringWavesUID/issues/new)，谢谢
 
 ## 丨其他
 

@@ -487,6 +487,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                 line = line.replace(del_text, "")
 
             # 文本预处理：删除非数字中英文的符号及多余空白
+            line = re.sub(r" ", "", line)
             line_clean_text = re.sub(
                 r"[^\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7A3\u00C0-\u00FFA-Za-z0-9\s]", "", line
             )  # 先删除特殊符号, 匹配“漂泊者·湮灭”

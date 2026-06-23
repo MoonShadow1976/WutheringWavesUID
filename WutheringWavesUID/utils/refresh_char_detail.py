@@ -73,7 +73,6 @@ async def send_card(
     token: str | None = "",
 ):
     waves_char_rank: list[WavesCharRank] | None = None
-    user_id = ev.user_id
 
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
     if not is_self_ck or not WavesToken:
@@ -81,11 +80,11 @@ async def send_card(
 
     waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
-    if token and waves_char_rank and waves_data and user_id:
+    if token and waves_char_rank and waves_data and ev:
         if waves_api.is_net(uid):
             from ..utils.api.kuro_py_api import get_base_info_overseas
 
-            account_info, _ = await get_base_info_overseas(ev.bot_id, user_id, uid)
+            account_info, _ = await get_base_info_overseas(ev.bot_id, ev.user_id, uid)
             if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
                 logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")
                 return "[总排行上传] 国际服账号基础信息获取失败\n"
@@ -108,7 +107,7 @@ async def send_card(
             logger.debug(f"[总排行上传] 国际服用户同时上传完整角色数据，uid:{uid}，role_num:{len(upload_data)}")
 
         metadata = {
-            "user_id": user_id,
+            "user_id": ev.user_id,
             "waves_id": f"{account_info.id}",
             "kuro_name": account_info.name,
             "version": get_version(),

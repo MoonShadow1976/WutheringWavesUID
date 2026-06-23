@@ -67,12 +67,13 @@ def clear_descriptions(obj):
 
 async def send_card(
     uid: str,
-    user_id: str,
+    ev: Event,
     waves_data: list,
     is_self_ck: bool = False,
     token: str | None = "",
 ):
     waves_char_rank: list[WavesCharRank] | None = None
+    user_id = ev.user_id
 
     WavesToken = WutheringWavesConfig.get_config("WavesToken").data
     if not is_self_ck or not WavesToken:
@@ -84,7 +85,7 @@ async def send_card(
         if waves_api.is_net(uid):
             from ..utils.api.kuro_py_api import get_base_info_overseas
 
-            account_info, _ = await get_base_info_overseas(token, uid)
+            account_info, _ = await get_base_info_overseas(ev.bot_id, user_id, uid)
             if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
                 logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")
                 return "[总排行上传] 国际服账号基础信息获取失败\n"
@@ -123,7 +124,7 @@ async def save_card_info(
     uid: str,
     waves_data: list,
     waves_map: dict | None = None,
-    user_id: str = "",
+    ev: Event | None = None,
     is_self_ck: bool = False,
     token: str = "",
 ):
@@ -169,7 +170,7 @@ async def save_card_info(
     save_data = list(old_data.values())
 
     # 上传总排行，国际服支持需pcap&登录
-    await send_card(uid, user_id, waves_data, is_self_ck, token)
+    await send_card(uid, ev, waves_data, is_self_ck, token)
 
     try:
         async with aiofiles.open(path, "w", encoding="utf-8") as file:
@@ -291,7 +292,7 @@ async def refresh_char(
         uid,
         waves_datas,
         waves_map,
-        user_id,
+        ev,
         is_self_ck=is_self_ck,
         token=ck,
     )
@@ -370,7 +371,7 @@ async def refresh_char_from_pcap(
             uid,
             waves_data,
             waves_map,
-            user_id,
+            ev,
             is_self_ck=True,  # PCAP 模式視為自登錄
             token=ck,
         )

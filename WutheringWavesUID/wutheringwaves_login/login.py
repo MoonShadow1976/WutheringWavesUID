@@ -269,6 +269,8 @@ async def add_cookie(ev, token, did) -> WavesUser | str | None:
 async def add_oversea_user(bot: Bot, ev: Event, data: dict):
     player_infos = data.get("player_infos", {})
     token = data.get("token", "")
+    bat = data.get("bat", "")
+    did = data.get("did", "")
 
     for region, player_info in player_infos.items():
         logger.debug(f"角色區域: {region}, 角色信息: {player_info}")
@@ -293,6 +295,8 @@ async def add_oversea_user(bot: Bot, ev: Event, data: dict):
                 update_data={
                     "cookie": token,
                     "platform": region,
+                    "bat": bat,
+                    "did": did,
                     "status": "",
                 },
             )  # 更新現有用戶
@@ -304,6 +308,8 @@ async def add_oversea_user(bot: Bot, ev: Event, data: dict):
                 cookie=token,
                 uid=uid,
                 platform=region,
+                bat=bat,
+                did=did,
                 status="",
             )  # 創建新用戶
             logger.info(f"WavesUser 創建成功: UID {uid}")

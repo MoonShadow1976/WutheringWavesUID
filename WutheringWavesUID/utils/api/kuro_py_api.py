@@ -7,6 +7,7 @@ import kuro
 from kuro.errors import GeetestTriggeredError, KuroError
 from kuro.models.game import BasicRoleInfo, BattlePassRoleInfo, RoleInfo
 from kuro.types import Region
+from kuro.utility.auth import generate_uuid_uppercase
 
 from ...wutheringwaves_analyzecard.user_info_utils import save_user_info
 from ...wutheringwaves_config import PREFIX
@@ -57,6 +58,7 @@ async def login_overseas(email: str, password: str, geetest_data: str | None = N
     try:
         # 创建 kuro 客户端
         client = kuro.Client(region=Region.OVERSEAS)
+        device_id = generate_uuid_uppercase()
 
         # 如果有 Geetest 数据，使用 kuro.py 的内建方法
         if geetest_data:
@@ -70,7 +72,7 @@ async def login_overseas(email: str, password: str, geetest_data: str | None = N
                 mmt_result = kuro.models.MMTResult(**geetest_json)  # 创建 MMTResult 对象
                 logger.debug(f"创建 MMTResult 成功: {mmt_result}")
 
-                login_result = await client.game_login(email, password, mmt_result=mmt_result)
+                login_result = await client.game_login(email, password, device_id=device_id, mmt_result=mmt_result)
 
             except GeetestTriggeredError as e:
                 logger.error(f"Geetest 验证触发: {e}")
@@ -116,7 +118,7 @@ async def login_overseas(email: str, password: str, geetest_data: str | None = N
         else:
             # 正常登录
             try:
-                login_result = await client.game_login(email, password)
+                login_result = await client.game_login(email, password, device_id=device_id)
             except GeetestTriggeredError as e:
                 logger.info(f"触发 Geetest 验证: {e}")
                 return {
@@ -211,23 +213,30 @@ async def login_overseas(email: str, password: str, geetest_data: str | None = N
     return {
         "success": True,
         "msg": f"[鸣潮] 国际服登录成功!\n现在可以使用：\n [{PREFIX}查看]查看您登录的所有UID\n [{PREFIX}切换]在您登录的UID之间切换\n [{PREFIX}删除uid]删除不用的账号(uid为对应特征码)\n [{PREFIX}卡片]查看当前UID的详细信息\n [{PREFIX}帮助]查看所有指令列表，同时支持“个人服务”栏功能\n",
-        "data": {"player_infos": player_infos, "token": token_result.access_token},
+        "data": {
+            "player_infos": player_infos,
+            "token": token_result.access_token,
+            "bat": login_result.auto_token,
+            "did": device_id,
+        },
     }
 
 
-async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
+async def get_role_info_overseas(bot_id: str, user_id: str, uid: str) -> RoleInfo | None:
     """获取国际服角色信息"""
     client = kuro.Client(region=Region.OVERSEAS)
 
-    waves_user = await WavesUser.select_data_by_cookie_and_uid(cookie=ck, uid=uid)
+    waves_user = await WavesUser.select_waves_user(uid, user_id, bot_id)
     if not waves_user:
         return None
-
+    ck = waves_user.cookie
     try:
         oauth_code = await client.generate_oauth_code(ck)
 
         role_info = await client.get_player_role(oauth_code, int(uid), waves_user.platform)
         if not role_info.basic or not role_info.battle_pass:
+            logger.warning(f"[鸣潮] 获取国际服用户({uid})信息为空: {role_info}")
+            await WavesUser.mark_cookie_invalid(uid, ck, "无效")
             return None
     except Exception as e:
         logger.error(f"[鸣潮] 获取国际服用户({uid})信息失败: {e}")
@@ -236,7 +245,48 @@ async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
             logger.error("[鸣潮][retry] 返回假数据，提示用户稍后重试")
             return fake_role_info
 
-        return None
+        logger.warning("[鸣潮][刷新国际服登录] 使用auto_token刷新ck")
+        try:
+            auto_token, device_id = waves_user.bat, waves_user.did
+            login_result = await client.game_auto_login(auto_token=auto_token, device_id=device_id)
+            token_result = await client.get_game_token(login_result.code)
+            oauth_code = await client.generate_oauth_code(token_result.access_token)
+
+            player_infos = await client.get_player_info(oauth_code)
+            for region, player_info in player_infos.items():
+                if not player_info:
+                    continue
+                # 檢查是否已存在用戶
+                existing_user_list = await WavesUser.select_data_list_by_uid(uid=str(player_info.uid))
+                for existing_user in existing_user_list:
+                    await WavesUser.update_data_by_data(
+                        select_data={
+                            "user_id": existing_user.user_id,
+                            "bot_id": existing_user.bot_id,
+                            "uid": existing_user.uid,
+                        },
+                        update_data={
+                            "cookie": token_result.access_token,
+                            "platform": region,
+                            "bat": login_result.auto_token,
+                            "did": device_id,
+                            "status": "",
+                        },
+                    )
+                    await WavesUser.mark_cookie_invalid(uid, ck, "")  # 标记为有效
+                    logger.info(
+                        f"[鸣潮][刷新国际服登录] 更新成功: UID {existing_user.uid}, bot_id {existing_user.bot_id}, user_id {existing_user.user_id}"
+                    )
+
+            role_info = await client.get_player_role(oauth_code, int(uid), waves_user.platform)
+            if not role_info.basic or not role_info.battle_pass:
+                logger.warning(f"[鸣潮] 获取国际服用户({uid})信息为空: {role_info}")
+                await WavesUser.mark_cookie_invalid(uid, token_result.access_token, "无效")
+                return None
+        except Exception as e:
+            logger.error(f"[鸣潮][刷新国际服登录] 刷新国际服用户({uid})ck失败: {e}")
+            await WavesUser.mark_cookie_invalid(uid, ck, "无效")
+            return None
 
     # 保存用户信息到本地
     await save_user_info(uid, role_info.basic.name, level=role_info.basic.level, worldLevel=role_info.basic.world_level)
@@ -244,9 +294,9 @@ async def get_role_info_overseas(ck: str, uid: str) -> RoleInfo | None:
     return role_info
 
 
-async def get_base_info_overseas(ck: str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
+async def get_base_info_overseas(bot_id: str, user_id: str, uid: str) -> tuple[None, None] | tuple[AccountBaseInfo, DailyData]:
     """获取国际服账户基础信息"""
-    role_info = await get_role_info_overseas(ck, uid)
+    role_info = await get_role_info_overseas(bot_id, user_id, uid)
     if not role_info:
         return None, None
 

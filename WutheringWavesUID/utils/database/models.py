@@ -235,6 +235,14 @@ class WavesUser(User, table=True):
         return data[0] if data else None
 
     @classmethod
+    @with_session
+    async def select_data_list_by_uid(cls: type[T_WavesUser], session: AsyncSession, uid: str) -> list[T_WavesUser]:
+        sql = select(cls).where(cls.uid == uid)
+        result = await session.execute(sql)
+        data = result.scalars().all()
+        return list(data) if data else []
+
+    @classmethod
     async def get_user_by_attr(
         cls: type[T_WavesUser],
         user_id: str,

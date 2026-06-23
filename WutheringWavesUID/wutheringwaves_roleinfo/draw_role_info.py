@@ -65,7 +65,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     if waves_api.is_net(uid):
         from ..utils.api.kuro_py_api import get_base_info_overseas
 
-        account_info, _ = await get_base_info_overseas(ck, uid)
+        account_info, _ = await get_base_info_overseas(ev.bot_id, ev.user_id, uid)
         base_info = await get_user_detail_info(uid)
         if account_info:
             account_info.creatTime = base_info.creatTime  # 满足if_full

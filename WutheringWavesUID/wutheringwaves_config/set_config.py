@@ -60,9 +60,11 @@ async def set_push_value(ev: Event, func: str, uid: str, value: int, ck: str):
     if await WavesPush.update_data_by_uid(uid=uid, bot_id=ev.bot_id, **{f"{status}_value": value}) == 0:
         from ..wutheringwaves_stamina.notice_stamina import get_next_refresh_time
 
-        refreshTimeStamp = await get_next_refresh_time(uid, ck)
-        if refreshTimeStamp:
-            await set_push_time(ev.bot_id, uid, refreshTimeStamp)
+        user = await WavesUser.select_waves_user(uid, ev.user_id, ev.bot_id)
+        if user:
+            refreshTimeStamp = await get_next_refresh_time(user)
+            if refreshTimeStamp:
+                await set_push_time(ev.bot_id, uid, refreshTimeStamp)
 
         return f"设置成功!\nUID:{uid}\n当前{func}推送阈值:{value}\n"
     else:

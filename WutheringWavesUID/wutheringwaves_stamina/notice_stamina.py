@@ -40,7 +40,6 @@ async def all_check(push_data: dict, msg_dict: dict[str, dict[str, dict]], user:
 
     bot_id = user.bot_id
     uid = user.uid
-    token = user.cookie
 
     # 当前时间
     time_now = int(time.time())
@@ -57,7 +56,7 @@ async def all_check(push_data: dict, msg_dict: dict[str, dict[str, dict]], user:
         if WutheringWavesConfig.get_config("CrazyNotice").data:
             await WavesPush.update_data_by_uid(uid=uid, bot_id=bot_id, **{f"{mode}_is_push": "off"})
             if _push:
-                refreshTimeStamp = await get_next_refresh_time(uid, token)
+                refreshTimeStamp = await get_next_refresh_time(user)
                 if refreshTimeStamp:
                     time_refresh = int(refreshTimeStamp - (240 - push_data[f"{mode}_value"]) * 6 * 60)
                 else:
@@ -101,15 +100,15 @@ async def check(
         return False
 
 
-async def get_next_refresh_time(uid: str, token: str) -> int:
+async def get_next_refresh_time(user: WavesUser) -> int:
     """获取下次体力刷新时间戳"""
-    if not waves_api.is_net(uid):
-        daily_info_res = await waves_api.get_daily_info(uid, token)
+    if not waves_api.is_net(user.uid):
+        daily_info_res = await waves_api.get_daily_info(user.uid, user.cookie)
         if daily_info_res.success:
             daily_info = DailyData.model_validate(daily_info_res.data)
             return daily_info.energyData.refreshTimeStamp
     else:
-        _, daily_info = await get_base_info_overseas(token, uid)
+        _, daily_info = await get_base_info_overseas(user.bot_id, user.user_id, user.uid)
         if daily_info:
             return daily_info.energyData.refreshTimeStamp
 

@@ -83,7 +83,7 @@ async def process_uid(uid, ev):
     else:
         from ..utils.api.kuro_py_api import get_base_info_overseas
 
-        account_info, daily_info = await get_base_info_overseas(ck, uid)
+        account_info, daily_info = await get_base_info_overseas(ev.bot_id, ev.user_id, uid)
         if not daily_info or not account_info:
             return None
 

@@ -28,5 +28,5 @@ async def send_role_info(bot: Bot, ev: Event):
         await bot.send(error_reply(WAVES_CODE_102))
         return
 
-    im = await draw_role_img(uid, ck, ev)
+    im = await draw_role_img(uid, ck, user_id, ev)
     await bot.send(im)  # type: ignore

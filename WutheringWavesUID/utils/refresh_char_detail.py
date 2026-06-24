@@ -67,8 +67,9 @@ def clear_descriptions(obj):
 
 async def send_card(
     uid: str,
-    ev: Event,
     waves_data: list,
+    bot_id: str = "",
+    user_id: str = "",
     is_self_ck: bool = False,
     token: str | None = "",
 ):
@@ -80,11 +81,11 @@ async def send_card(
 
     waves_char_rank = await get_waves_char_rank(uid, waves_data, True)
 
-    if token and waves_char_rank and waves_data and ev:
+    if token and waves_char_rank and waves_data and bot_id and user_id:
         if waves_api.is_net(uid):
             from ..utils.api.kuro_py_api import get_base_info_overseas
 
-            account_info, _ = await get_base_info_overseas(ev.bot_id, ev.user_id, uid)
+            account_info, _ = await get_base_info_overseas(bot_id, user_id, uid)
             if not account_info or ("!请稍后重试!" in account_info.name and account_info.activeDays == 0):
                 logger.warning(f"[总排行上传] 国际服账号获取基础信息失败，uid:{uid}")
                 return "[总排行上传] 国际服账号基础信息获取失败\n"
@@ -100,14 +101,14 @@ async def send_card(
         if waves_api.is_net(uid):  # 国际服用户同时上传完整角色数据
             import copy
 
-            upload_data = copy.deepcopy(waves_char_rank)
+            upload_data = copy.deepcopy(waves_data)
             clear_descriptions(upload_data)
             player_role_detail = {"waves_id": uid, "data": upload_data}
             push_item(QUEUE_ROLE_DETAIL, player_role_detail)
             logger.debug(f"[总排行上传] 国际服用户同时上传完整角色数据，uid:{uid}，role_num:{len(upload_data)}")
 
         metadata = {
-            "user_id": ev.user_id,
+            "user_id": user_id,
             "waves_id": f"{account_info.id}",
             "kuro_name": account_info.name,
             "version": get_version(),
@@ -123,7 +124,8 @@ async def save_card_info(
     uid: str,
     waves_data: list,
     waves_map: dict | None = None,
-    ev: Event | None = None,
+    bot_id: str = "",
+    user_id: str = "",
     is_self_ck: bool = False,
     token: str = "",
 ):
@@ -169,7 +171,7 @@ async def save_card_info(
     save_data = list(old_data.values())
 
     # 上传总排行，国际服支持需pcap&登录
-    await send_card(uid, ev, waves_data, is_self_ck, token)
+    await send_card(uid, waves_data, bot_id, user_id, is_self_ck, token)
 
     try:
         async with aiofiles.open(path, "w", encoding="utf-8") as file:
@@ -291,7 +293,8 @@ async def refresh_char(
         uid,
         waves_datas,
         waves_map,
-        ev,
+        ev.bot_id,
+        user_id,
         is_self_ck=is_self_ck,
         token=ck,
     )
@@ -370,7 +373,8 @@ async def refresh_char_from_pcap(
             uid,
             waves_data,
             waves_map,
-            ev,
+            ev.bot_id,
+            user_id,
             is_self_ck=True,  # PCAP 模式視為自登錄
             token=ck,
         )

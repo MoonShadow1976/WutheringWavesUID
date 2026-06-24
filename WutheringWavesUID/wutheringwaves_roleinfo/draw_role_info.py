@@ -37,7 +37,7 @@ from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
 
-async def draw_role_img(uid: str, ck: str, ev: Event):
+async def draw_role_img(uid: str, ck: str, user_id: str, ev: Event):
     # succ, game_info = await waves_api.get_game_role_info(ck)
     # if not succ:
     #     return game_info
@@ -65,7 +65,7 @@ async def draw_role_img(uid: str, ck: str, ev: Event):
     if waves_api.is_net(uid):
         from ..utils.api.kuro_py_api import get_base_info_overseas
 
-        account_info, _ = await get_base_info_overseas(ev.bot_id, ev.user_id, uid)
+        account_info, _ = await get_base_info_overseas(ev.bot_id, user_id, uid)
         base_info = await get_user_detail_info(uid)
         if account_info:
             account_info.creatTime = base_info.creatTime  # 满足if_full

@@ -46,6 +46,7 @@ BUFF_PADDING = 15
 DESC_LINE_SPACING = 20
 
 URL = "https://api-v2.encore.moe/api/zh-Hans/dpmatrix"
+QUERY = "v=Beta"
 
 
 # ---------- 数据模型 ----------
@@ -260,7 +261,7 @@ def draw_rounded_rect(img: Image.Image, xy, radius, color):
 async def get_matrix_schedule() -> list[int]:
     """获取矩阵所有赛季ID列表"""
     async with aiohttp.ClientSession() as session:
-        async with session.get(URL) as resp:
+        async with session.get(URL + f"?{QUERY}") as resp:
             if resp.status != 200:
                 return []
             data = await resp.json()
@@ -270,7 +271,7 @@ async def get_matrix_schedule() -> list[int]:
 
 async def get_matrix_detail(season_id: str) -> MatrixDetailResponse | None:
     """获取单期矩阵详情"""
-    url = f"{URL}/{season_id}"
+    url = f"{URL}/{season_id}?{QUERY}"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             if resp.status != 200:

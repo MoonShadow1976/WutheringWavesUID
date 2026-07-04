@@ -154,6 +154,7 @@ class ItemDetail(BaseModel):
 
 SLASH_URL = "https://api-v2.encore.moe/api/zh-Hans/whiwa"
 ITEM_URL = "https://api-v2.encore.moe/api/zh-Hans/item"
+QUERY = "v=Beta"
 
 
 async def fetch_json(url: str) -> dict:
@@ -166,7 +167,7 @@ async def fetch_json(url: str) -> dict:
 
 async def get_slash_schedule() -> dict:
     """获取排期数据，返回 { season_id: {"begin": start, "end": finish} }"""
-    data = await fetch_json(SLASH_URL)
+    data = await fetch_json(SLASH_URL + f"?{QUERY}")
     seasons = SlashScheduleList.model_validate(data).root
     schedule = {}
     for s in seasons:
@@ -177,7 +178,7 @@ async def get_slash_schedule() -> dict:
 
 async def get_whiwa_detail(season_id: str) -> SlashDetailResponse | None:
     """获取单期活动详情，返回完整详情对象"""
-    data = await fetch_json(f"{SLASH_URL}/{season_id}")
+    data = await fetch_json(f"{SLASH_URL}/{season_id}?{QUERY}")
     if not data:
         return None
     return SlashDetailResponse.model_validate(data)
@@ -185,7 +186,7 @@ async def get_whiwa_detail(season_id: str) -> SlashDetailResponse | None:
 
 async def get_item_detail(item_id: int) -> ItemDetail:
     """获取信物详情"""
-    url = f"{ITEM_URL}/{item_id}"
+    url = f"{ITEM_URL}/{item_id}?{QUERY}"
     data = await fetch_json(url)
     return ItemDetail.model_validate(data)
 

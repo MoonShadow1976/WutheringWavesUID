@@ -156,6 +156,7 @@ class AreaDetail(BaseModel):
 
 
 TOWER_URL = "https://api-v2.encore.moe/api/zh-Hans/toa"
+QUERY = "v=Beta"
 
 
 async def fetch_json(url: str) -> dict:
@@ -172,7 +173,7 @@ async def get_tower_schedule() -> dict:
     从新 API 获取排期数据，转换为格式：
     { season_id: {"begin": start, "end": finish} }
     """
-    data = await fetch_json(TOWER_URL)
+    data = await fetch_json(TOWER_URL + f"?{QUERY}")
 
     resp = TowerScheduleList.model_validate(data)
 
@@ -181,7 +182,7 @@ async def get_tower_schedule() -> dict:
 
 async def get_tower_detail(season_id: str) -> dict[str, dict[str, AreaDetail]] | None:
     """从新 API 获取单期深塔详情"""
-    data = await fetch_json(f"{TOWER_URL}/{season_id}")
+    data = await fetch_json(f"{TOWER_URL}/{season_id}?{QUERY}")
 
     # 直接验证赛季数据部分（data.get(season_id, {})）
     season_data = TowerDetailResponse.model_validate(data.get(season_id, {}))

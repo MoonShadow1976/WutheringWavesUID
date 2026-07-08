@@ -467,7 +467,9 @@ async def mock_calc_develop_cost(ev: Event, develop_list: list[str]):
 
         # 武器养成材料
         if weapon:
-            weapon_up_level_exp = WeaponExp.get_level_up_exp(weapon.starLevel, template["weaponStartLevel"], template["weaponEndLevel"])
+            weapon_up_level_exp = WeaponExp.get_level_up_exp(
+                weapon.starLevel, template["weaponStartLevel"], template["weaponEndLevel"]
+            )
             weapon_up_level_cost = WeaponExp.get_cost_from_exp(weapon_up_level_exp)
             for cost in weapon_up_level_cost:
                 id, num = cost["id"], cost["num"]

@@ -17,9 +17,9 @@ from ..utils.api.model import (
     RoleCultivateStatusList,
     RoleDetailData,
 )
-from ..utils.ascension.char import get_char_model
+from ..utils.ascension.char import CharExp, get_char_model
 from ..utils.ascension.material import get_material_model
-from ..utils.ascension.weapon import get_weapon_model
+from ..utils.ascension.weapon import WeaponExp, get_weapon_model
 from ..utils.at_help import ruser_id
 from ..utils.char_info_utils import get_all_role_detail_info_list, get_all_roleid_detail_info, get_roleid_detail_online
 from ..utils.database.models import WavesBind
@@ -390,6 +390,26 @@ async def mock_calc_develop_cost(ev: Event, develop_list: list[str]):
         mock_weapon_costs: dict[str, CultivateCost] = {}
 
         # 角色养成材料
+        char_up_level_exp = CharExp.get_level_up_exp(template["roleStartLevel"], template["roleEndLevel"])
+        char_up_level_cost = CharExp.get_cost_from_exp(char_up_level_exp)
+        for cost in char_up_level_cost:
+            id, num = cost["id"], cost["num"]
+            material = get_material_model(id)
+            if material:
+                m_cost = CultivateCost(
+                    id=str(id),
+                    name=material.name,
+                    iconUrl="",
+                    num=int(num or 0),
+                    type=material.type,
+                    quality=material.rarity,
+                    isPreview=False,
+                )
+                if str(id) in mock_role_costs:
+                    mock_role_costs[str(id)].num += m_cost.num
+                else:
+                    mock_role_costs[str(id)] = m_cost
+
         role_breach = get_breach(template["roleStartLevel"])
         for b, ascensions in role.ascensions.items():
             if role_breach >= int(b):
@@ -447,6 +467,26 @@ async def mock_calc_develop_cost(ev: Event, develop_list: list[str]):
 
         # 武器养成材料
         if weapon:
+            weapon_up_level_exp = WeaponExp.get_level_up_exp(weapon.starLevel, template["weaponStartLevel"], template["weaponEndLevel"])
+            weapon_up_level_cost = WeaponExp.get_cost_from_exp(weapon_up_level_exp)
+            for cost in weapon_up_level_cost:
+                id, num = cost["id"], cost["num"]
+                material = get_material_model(id)
+                if material:
+                    m_cost = CultivateCost(
+                        id=str(id),
+                        name=material.name,
+                        iconUrl="",
+                        num=int(num or 0),
+                        type=material.type,
+                        quality=material.rarity,
+                        isPreview=False,
+                    )
+                    if str(id) in mock_weapon_costs:
+                        mock_weapon_costs[str(id)].num += m_cost.num
+                    else:
+                        mock_weapon_costs[str(id)] = m_cost
+
             weapon_breach = get_breach(template["weaponStartLevel"])
             for b, ascensions in weapon.ascensions.items():
                 if weapon_breach >= int(b) + 1 or int(b) + 1 == len(

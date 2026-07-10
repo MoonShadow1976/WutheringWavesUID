@@ -225,29 +225,36 @@ def calc_sub_max_score(_temp, sub_props, jineng: list | None = None, skill_weigh
         score += sub_props[i] * _phantom_value * ratio
 
     # return round(score, 2)
-    return math.floor(score * 1000) / 1000
+    return math.floor(score * 10000) / 10000
 
 
-def calc_main_max_score(_temp, main_props):
+def calc_main_max_score(_temp, main_props, sub_score):
     score = []
     for k, v in _temp.items():
         cost = int(k.split(".")[0])
-        if cost == 4:
-            index = 2
-        elif cost == 3:
-            index = 1
-        else:
-            index = 0
+        index = 2 if cost == 4 else (1 if cost == 3 else 0)
+        ratio_key = 9.0 / 41 if cost == 4 else (7.5 / 42.5 if cost == 3 else 5.0 / 45)
+        need_score = sub_score * ratio_key
+
         _score = 0
+        props = main_props[str(cost)]
         for i in v:
             _phantom_value = phantom_main_value_map[i][index]
-            if "%" in _phantom_value:
-                _phantom_value = _phantom_value.replace("%", "")
-            _phantom_value = float(_phantom_value)
-            _score += main_props.get(str(cost)).get(i, 0) * _phantom_value
+            _phantom_value = float(_phantom_value.replace("%", ""))
+            if i in props:
+                _score += props[i] * _phantom_value
+
+        scale = 1
+        if _score != 0:
+            low = need_score / _score
+            high = (need_score + 0.0001) / _score
+            scale = (low + high) / 2.0  # 取中值（浮点误差留有余量）
+
+            for i in props:
+                props[i] = math.floor(props[i] * scale * 100000) / 100000
 
         # score.append(round(_score, 2))
-        score.append(math.floor(_score * 1000) / 1000)
+        score.append(math.floor(_score * scale * 10000) / 10000)
 
     return score
 
@@ -264,9 +271,9 @@ def read_calc_json_files(directory):
                 skill_weight = data["skill_weight"]
                 jineng = max(skill_weight)
                 sub_max = calc_sub_max_score(data["max_sub_props"], data["sub_props"], jineng, skill_weight)
-                main_max = calc_main_max_score(data["max_main_props"], data["main_props"])
+                main_max = calc_main_max_score(data["max_main_props"], data["main_props"], sub_max)
                 # score_max = [round(sub_max + i, @) for i in main_max]
-                score_max = [math.floor((sub_max + i) * 1000) / 1000 for i in main_max]
+                score_max = [math.floor((sub_max + i) * 10000) / 10000 for i in main_max]
 
                 print(
                     f"{file.parents[0].name}/{file.name} - 技能分: {jineng} - "

@@ -15,6 +15,8 @@ from ...damage.utils import (
     SONATA_DREAMCLIP,
     SONATA_EMPYREAN,
     SONATA_ETERNAL,
+    SONATA_EVIL_PURGE,
+    SONATA_FEATHERED_TRACE,
     SONATA_FIREWALL,
     SONATA_FOAM,
     SONATA_FREEZING,
@@ -24,6 +26,7 @@ from ...damage.utils import (
     SONATA_MIDNIGHT,
     SONATA_MOLTEN,
     SONATA_MOONLIT,
+    SONATA_NETHER_ROAD,
     SONATA_PILGRIMAGE,
     SONATA_PRISMATIC,
     SONATA_REJUVENATING,
@@ -458,3 +461,46 @@ def phase_damage(
             if attr.char_damage == attack_damage:
                 msg = "添加【骇破·偏移】，自身普攻伤害加成提升35%"
                 attr.add_dmg_bonus(0.35, title, msg)
+
+        # 羽落空尘之歌
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_FEATHERED_TRACE):
+            # 角色为敌人添加【虚湮效应】时，获得【玄翎之羽】：自身暴击提升20%，重击伤害加成提升35%，持续15秒。
+            if attr.env_havoc_bane:
+                title = f"{phase_name}-{ph_detail.ph_name}"
+                msg = "玄翎之羽：自身暴击提升20%"
+                attr.add_crit_rate(0.2, title, msg)
+                if attr.char_damage == hit_damage:
+                    msg = "玄翎之羽：重击伤害加成提升35%"
+                    attr.add_dmg_bonus(0.35, title, msg)
+                return
+            # 角色为敌人添加【霜渐效应】时，获得【重明之羽】：自身每1%的共鸣效率使队伍中角色攻击提升0.1%，上限25%，持续10秒。
+            if attr.env_glacio_chafe:
+                title = f"{phase_name}-{ph_detail.ph_name}"
+                value = min(0.001 * (attr.energy_regen * 100 // 1), 0.25)
+                msg = f"重明之羽：每1%共效使角色攻击提升0.1%,上限25%,当前{value * 100:.1f}%"
+                attr.add_atk_percent(value, title, msg)
+                return
+
+        # 清邪荡煞之心
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_EVIL_PURGE):
+            # 角色为敌人添加【集谐·偏移】时，自身暴击伤害提升20%，气动伤害提升30%，持续15秒。
+            if not attr.env_tune_strain:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "添加【集谐·偏移】，自身暴击伤害提升20%"
+            attr.add_crit_rate(0.2, title, msg)
+            if attr.char_attr == CHAR_ATTR_SIERRA:
+                msg = "添加【集谐·偏移】，气动伤害提升30%"
+                attr.add_dmg_bonus(0.3, title, msg)
+
+        # 冥途夜行之灯
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_NETHER_ROAD):
+            # 角色获得护盾时，自身暴击提升5%，该效果可叠加4层，持续5秒，每0.5秒可触发一次。叠至满层时，自身造成的热熔伤害提升15%。
+            if not attr.trigger_shield:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "添加4层【护盾】，自身暴击提升5%*4"
+            attr.add_crit_rate(0.2, title, msg)
+            if attr.char_attr == CHAR_ATTR_MOLTEN:
+                msg = "添加4层【护盾】，自身造成的热熔伤害提升15%"
+                attr.add_dmg_bonus(0.15, title, msg)

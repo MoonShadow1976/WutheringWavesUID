@@ -727,7 +727,7 @@
             ]
           },
           "9": {
-            "name": "空中攻击·羽剑式伤害",
+            "name": "空中攻击·苍剑式伤害",
             "param": [
               [
                 "49.60%",
@@ -754,6 +754,33 @@
             ]
           },
           "10": {
+            "name": "空中攻击·羽剑式伤害",
+            "param": [
+              [
+                "49.60%",
+                "53.67%",
+                "57.74%",
+                "63.43%",
+                "67.50%",
+                "72.18%",
+                "78.69%",
+                "85.19%",
+                "91.70%",
+                "98.61%",
+                "106.75%",
+                "114.88%",
+                "123.02%",
+                "131.15%",
+                "139.29%",
+                "147.42%",
+                "155.56%",
+                "163.69%",
+                "171.82%",
+                "179.96%"
+              ]
+            ]
+          },
+          "11": {
             "name": "闪避反击·苍剑式伤害",
             "param": [
               [
@@ -780,7 +807,7 @@
               ]
             ]
           },
-          "11": {
+          "12": {
             "name": "闪避反击·羽剑式伤害",
             "param": [
               [
@@ -807,7 +834,34 @@
               ]
             ]
           },
-          "12": {
+          "13": {
+            "name": "空中攻击·苍剑式耐力消耗",
+            "param": [
+              [
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30"
+              ]
+            ]
+          },
+          "14": {
             "name": "空中攻击·羽剑式耐力消耗",
             "param": [
               [
@@ -985,14 +1039,14 @@
     "2": {
       "skill": {
         "name": "羽拭苍锋",
-        "desc": "<color=Title>剑式切换</color>\n处于<color=Highlight>苍剑式</color>时，短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>普攻·羽剑式</color>第1段，造成<color=Dark>湮灭伤害</color>。\n\n处于<color=Highlight>羽剑式</color>时，短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>普攻·苍剑式</color>第1段，造成<color=Dark>湮灭伤害</color>。\n\n<color=Title>剑式切换·苍</color>\n施放<color=Highlight>普攻·羽剑式</color>后的一定时间内短按<color=Highlight>共鸣技能</color>，施放<color=Highlight>剑式切换·苍</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{0}点<color=Highlight>【流响】</color>。\n施放该技能后，一定时间内将不会重置普攻连段。\n\n<color=Title>剑式切换·羽</color>\n施放<color=Highlight>普攻·苍剑式</color>后的一定时间内短按<color=Highlight>共鸣技能</color>，施放<color=Highlight>剑式切换·羽</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{1}点<color=Highlight>【流响】</color>。\n施放该技能后，一定时间内将不会重置普攻连段。",
+        "desc": "<color=Title>剑式切换</color>\n处于<color=Highlight>苍剑式</color>时，短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>普攻·羽剑式</color>第1段，造成<color=Dark>湮灭伤害</color>。\n\n处于<color=Highlight>羽剑式</color>时，短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>普攻·苍剑式</color>第1段，造成<color=Dark>湮灭伤害</color>。\n\n<color=Title>剑式切换·苍</color>\n施放<color=Highlight>普攻·羽剑式</color>后的一定时间内短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>剑式切换·苍</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{0}点<color=Highlight>【流响】</color>。\n施放该技能后，一定时间内将不会重置普攻连段。\n\n<color=Title>剑式切换·羽</color>\n施放<color=Highlight>普攻·苍剑式</color>后的一定时间内短按<color=Highlight>共鸣技能</color>，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>剑式切换·羽</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{1}点<color=Highlight>【流响】</color>。\n施放该技能后，一定时间内将不会重置普攻连段。",
         "param": [
           "50",
           "50"
         ],
         "type": "共鸣技能",
         "level": {
-          "13": {
+          "1": {
             "name": "剑式切换·苍伤害",
             "param": [
               [
@@ -1019,7 +1073,7 @@
               ]
             ]
           },
-          "14": {
+          "2": {
             "name": "剑式切换·羽伤害",
             "param": [
               [
@@ -1197,14 +1251,14 @@
     "3": {
       "skill": {
         "name": "裁羽寂万音",
-        "desc": "<color=Title>裁羽寂万音</color>\n消耗所有<color=Highlight>【流响】</color>，造成<color=Dark>湮灭伤害</color>，并回复{0}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n\n施放该技能时，获得<color=Highlight>声声流转</color>状态，施放<color=Highlight>共鸣技能·剑式流转·苍</color>或<color=Highlight>共鸣技能·剑式流转·羽</color>时，召唤<color=Highlight>玄翎之影</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>声声流转</color>状态不可叠加，<color=Highlight>玄翎之影</color>召唤成功后移除<color=Highlight>声声流转</color>状态。",
+        "desc": "<color=Title>裁羽寂万音</color>\n消耗所有<color=Highlight>【流响】</color>，造成<color=Dark>湮灭伤害</color>，并回复{0}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n\n施放该技能时，获得<color=Highlight>声声流转</color>状态，施放<color=Highlight>共鸣技能·剑式流转·苍</color>或<color=Highlight>共鸣技能·剑式流转·羽</color>时，召唤<color=Highlight>玄翎之影</color>攻击目标，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>声声流转</color>状态不可叠加，召唤<color=Highlight>玄翎之影</color>后移除<color=Highlight>声声流转</color>状态。",
         "param": [
           "1",
           "25"
         ],
         "type": "共鸣解放",
         "level": {
-          "29": {
+          "1": {
             "name": "裁羽寂万音伤害",
             "param": [
               [
@@ -1231,7 +1285,7 @@
               ]
             ]
           },
-          "30": {
+          "2": {
             "name": "玄翎之影伤害",
             "param": [
               [
@@ -1258,7 +1312,7 @@
               ]
             ]
           },
-          "31": {
+          "3": {
             "name": "裁羽寂万音消耗共鸣能量",
             "param": [
               [
@@ -1285,7 +1339,7 @@
               ]
             ]
           },
-          "32": {
+          "4": {
             "name": "裁羽寂万音回复协奏能量",
             "param": [
               [
@@ -1312,7 +1366,7 @@
               ]
             ]
           },
-          "33": {
+          "5": {
             "name": "裁羽寂万音冷却时间",
             "param": [
               [
@@ -1524,7 +1578,7 @@
     "5": {
       "skill": {
         "name": "一生一器",
-        "desc": "秧秧·玄翎施放共鸣解放<color=Highlight>裁羽寂万音</color>命中目标时，附加<color=Highlight>【虚湮效应】</color>至目标可附加层数的上限。\n\n附近队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>风息相依</color>，<color=Highlight>风息相依</color>获得间隔1秒，最多叠加{0}层。\n\n<color=Highlight>风息相依</color>叠加至{1}层时，秧秧·玄翎移除全部<color=Highlight>风息相依</color>，并获得<color=Highlight>风我同频</color>。\n拥有<color=Highlight>风我同频</color>时，秧秧·玄翎施放<color=Highlight>共鸣技能·剑式流转·苍</color>或<color=Highlight>共鸣技能·剑式流转·羽</color>时，召唤<color=Highlight>释羽·玄翎</color>，为目标附加{2}层<color=Highlight>【虚湮效应】</color>。\n\n召唤<color=Highlight>释羽·玄翎</color>后，移除<color=Highlight>风我同频</color>状态。",
+        "desc": "秧秧·玄翎施放共鸣解放<color=Highlight>裁羽寂万音</color>命中目标时，附加<color=Highlight>【虚湮效应】</color>至目标可附加层数的上限。\n\n附近队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>风息相依</color>，<color=Highlight>风息相依</color>获得间隔1秒，最多叠加{0}层。\n\n<color=Highlight>风息相依</color>叠加至{1}层时，秧秧·玄翎移除全部<color=Highlight>风息相依</color>，并获得<color=Highlight>风我同频</color>。\n拥有<color=Highlight>风我同频</color>时，秧秧·玄翎施放<color=Highlight>共鸣技能·剑式流转·苍</color>或<color=Highlight>共鸣技能·剑式流转·羽</color>时，召唤<color=Highlight>释羽·玄翎</color>，为目标附加{2}层<color=Highlight>【虚湮效应】</color>。\n拥有<color=Highlight>风我同频</color>时，无法获得<color=Highlight>风息相依</color>。\n\n召唤<color=Highlight>释羽·玄翎</color>后，移除<color=Highlight>风我同频</color>状态。",
         "param": [
           "6",
           "6",
@@ -1564,7 +1618,7 @@
         ],
         "type": "变奏技能",
         "level": {
-          "34": {
+          "1": {
             "name": "羽挟苍空伤害",
             "param": [
               [
@@ -1591,7 +1645,7 @@
               ]
             ]
           },
-          "35": {
+          "2": {
             "name": "羽挟苍空回复协奏能量",
             "param": [
               [
@@ -1769,7 +1823,7 @@
     "7": {
       "skill": {
         "name": "万声浮道",
-        "desc": "<color=Title>共鸣技能·剑式流转·苍</color>\n秧秧·玄翎默认处于<color=Highlight>苍剑式</color>，<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>羽剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·苍</color>。\n短按共鸣技能，施放<color=Highlight>共鸣技能·剑式流转·苍</color>，造成<color=Dark>湮灭伤害</color>，回复{0}点<color=Highlight>【流响】</color>和{1}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·苍</color>命中目标时，消耗目标{2}层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·苍</color>打断<color=Highlight>普攻·羽剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避效果，触发成功闪避效果时消耗{3}点<color=Highlight>【流响】</color>。\n\n<color=Title>共鸣技能·剑式流转·羽</color>\n<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>苍剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·羽</color>。\n短按共鸣技能，施放<color=Highlight>共鸣技能·剑式流转·羽</color>，会切换至<color=Highlight>羽剑式</color>，造成<color=Dark>湮灭伤害</color>，回复{4}点<color=Highlight>【流响】</color>和{5}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·羽</color>命中目标时，消耗目标{6}层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·羽</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·羽</color>打断<color=Highlight>普攻·苍剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避效果，触发成功闪避效果时消耗{7}点<color=Highlight>【流响】</color>。\n\n<color=Title>重击·苍剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>苍剑式</color>，长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力施放<color=Highlight>重击·苍剑式</color>，生成巨大气旋攻击前方，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放<color=Highlight>重击·苍剑式</color>时，获得<color=Highlight>绝息</color>，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·苍剑式</color>暴击伤害提升{9}；<color=Highlight>重击·苍剑式</color>结束时移除<color=Highlight>绝息</color>，每{10}秒仅可获得1次<color=Highlight>绝息</color>。\n<color=Highlight>重击·苍剑式</color>会为命中的目标附加{11}层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>重击·羽剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>且不处于<color=Highlight>普攻·湮象风华</color>连段，并且处于地面时，长按普攻消耗耐力施放<color=Highlight>重击·羽剑式</color>，造成<color=Dark>湮灭伤害</color>，命中目标后将自动施放<color=Highlight>空中攻击·释羽风落</color>。\n施放<color=Highlight>重击·羽剑式</color>时，获得<color=Highlight>流岚</color>，<color=Highlight>流岚</color>持续{12}秒，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>暴击伤害提升{13}；<color=Highlight>普攻·湮象风华</color>第3段或<color=Highlight>闪避反击·湮象风华</color>第3段结束时移除<color=Highlight>流岚</color>，每{14}秒仅可获得1次<color=Highlight>流岚</color>。\n<color=Highlight>重击·羽剑式</color>会为命中的目标附加{15}层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>空中攻击·释羽风落</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>并且处于空中时，<color=Highlight>空中攻击·羽剑式</color>替换为<color=Highlight>空中攻击·释羽风落</color>，切换至其他角色时，将自动施放<color=Highlight>空中攻击·释羽风落</color>。\n短按普攻或长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力并施放<color=Highlight>空中攻击·释羽风落</color>，造成<color=Dark>湮灭伤害</color>。施放<color=Highlight>空中攻击·释羽风落</color>时，进入<color=Highlight>聆风祀声</color>，持续{16}秒。\n\n<color=Title>聆风祀声</color>\n处于<color=Highlight>羽剑式</color>时，<color=Highlight>普攻·羽剑式</color>替换为<color=Highlight>普攻·湮象风华</color>，消耗耐力进行最多3段攻击，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>普攻·湮象风华</color>第2、3段可在低空施放，施放第3段后退出<color=Highlight>普攻·湮象风华</color>，该连击段数不会被重置。\n<color=Highlight>聆风祀声</color>期间，施放闪避反击，视为施放<color=Highlight>普攻·湮象风华</color>连段。\n\n<color=Title>羽誓</color>\n队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>羽誓</color>，持续{17}秒，<color=Highlight>羽誓</color>获得间隔{18}秒，最多叠加{19}层，秧秧·玄翎为登场角色时，每层使<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>的暴击伤害提升{20}，至多提升{21}。\n\n<color=Title>迭音</color>\n秧秧·玄翎的<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>命中目标前，记录一定范围内的目标被附加的<color=Highlight>【虚湮效应】</color>最高层数，一定时间后复制到范围内的所有目标身上。\n\n<color=Title>【流响】获取规则</color>\n<color=Highlight>【流响】</color>上限{22}点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时回复{23}点<color=Highlight>【流响】</color>。\n施放共鸣解放<color=Highlight>裁羽寂万音</color>消耗所有<color=Highlight>【流响】</color>。\n施放<color=Highlight>常态攻击</color>造成伤害，并消耗<color=Highlight>【流响】</color>。\n\n<color=Title>【苍翎】获取规则</color>\n<color=Highlight>【苍翎】</color>上限{24}点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>、<color=Highlight>变奏技能·羽挟苍空</color>时回复{25}点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>消耗所有<color=Highlight>【苍翎】</color>。",
+        "desc": "<color=Title>共鸣技能·剑式流转·苍</color>\n秧秧·玄翎默认处于<color=Highlight>苍剑式</color>，<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>羽剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·苍</color>。\n短按共鸣技能，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·苍</color>，造成<color=Dark>湮灭伤害</color>，回复{0}点<color=Highlight>【流响】</color>和{1}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·苍</color>命中目标时，消耗目标{2}层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·苍</color>打断<color=Highlight>普攻·羽剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{3}点<color=Highlight>【流响】</color>。\n\n<color=Title>共鸣技能·剑式流转·羽</color>\n<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>苍剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·羽</color>。\n短按共鸣技能，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·羽</color>，造成<color=Dark>湮灭伤害</color>，回复{4}点<color=Highlight>【流响】</color>和{5}点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·羽</color>命中目标时，消耗目标{6}层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·羽</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·羽</color>打断<color=Highlight>普攻·苍剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗{7}点<color=Highlight>【流响】</color>。\n\n<color=Title>重击·苍剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>苍剑式</color>，长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力施放<color=Highlight>重击·苍剑式</color>，生成巨大气旋攻击前方，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放<color=Highlight>重击·苍剑式</color>时，获得<color=Highlight>【绝息】</color>，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·苍剑式</color>暴击伤害提升{9}；<color=Highlight>重击·苍剑式</color>结束时移除<color=Highlight>【绝息】</color>，每{10}秒仅可获得1次<color=Highlight>【绝息】</color>。\n<color=Highlight>重击·苍剑式</color>会为命中的目标附加{11}层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>重击·羽剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>且不处于<color=Highlight>普攻·湮象风华</color>连段，并且处于地面时，长按普攻消耗耐力施放<color=Highlight>重击·羽剑式</color>，造成<color=Dark>湮灭伤害</color>，命中目标后将自动施放<color=Highlight>空中攻击·释羽风落</color>。\n施放<color=Highlight>重击·羽剑式</color>时，获得<color=Highlight>【流岚】</color>，<color=Highlight>【流岚】</color>持续{12}秒，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>暴击伤害提升{13}；<color=Highlight>普攻·湮象风华</color>第3段或<color=Highlight>闪避反击·湮象风华</color>第3段结束时移除<color=Highlight>【流岚】</color>，每{14}秒仅可获得1次<color=Highlight>【流岚】</color>。\n<color=Highlight>重击·羽剑式</color>会为命中的目标附加{15}层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>空中攻击·释羽风落</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>并且处于空中时，<color=Highlight>空中攻击·羽剑式</color>替换为<color=Highlight>空中攻击·释羽风落</color>。\n短按普攻或长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力并施放<color=Highlight>空中攻击·释羽风落</color>，造成<color=Dark>湮灭伤害</color>。施放<color=Highlight>空中攻击·释羽风落</color>时，进入<color=Highlight>聆风祀声</color>，持续{16}秒。\n\n<color=Title>聆风祀声</color>\n处于<color=Highlight>羽剑式</color>时，<color=Highlight>普攻·羽剑式</color>替换为<color=Highlight>普攻·湮象风华</color>，进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>普攻·湮象风华</color>第2、3段可在低空施放，施放第3段后退出<color=Highlight>普攻·湮象风华</color>，该连击段数不会被重置。\n<color=Highlight>聆风祀声</color>期间，施放闪避反击，视为施放<color=Highlight>普攻·湮象风华</color>连段。\n\n<color=Title>羽誓</color>\n附近队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>羽誓</color>，持续{17}秒，<color=Highlight>羽誓</color>获得间隔{18}秒，最多叠加{19}层，秧秧·玄翎为队伍中登场角色时，每层使<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>的暴击伤害提升{20}，至多提升{21}。\n\n<color=Title>迭音</color>\n秧秧·玄翎的<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>命中目标前，记录一定范围内的目标被附加的<color=Highlight>【虚湮效应】</color>最高层数，一定时间后复制到范围内的所有目标身上。\n\n<color=Title>【流响】获取规则</color>\n<color=Highlight>【流响】</color>上限{22}点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时回复{23}点<color=Highlight>【流响】</color>。\n施放共鸣解放<color=Highlight>裁羽寂万音</color>消耗所有<color=Highlight>【流响】</color>。\n施放<color=Highlight>常态攻击</color>造成伤害，并消耗<color=Highlight>【流响】</color>。\n施放<color=Highlight>共鸣技能·剑式切换·苍</color>、<color=Highlight>共鸣技能·剑式切换·羽</color>、<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>一定时间内可以触发成功闪避，触发成功闪避时消耗{24}点<color=Highlight>【流响】</color>。\n\n<color=Title>【苍翎】获取规则</color>\n<color=Highlight>【苍翎】</color>上限{25}点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>、<color=Highlight>变奏技能·羽挟苍空</color>时回复{26}点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>共鸣解放·裁羽寂万音</color>时回复{27}点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>重击·苍剑式</color>、<color=Highlight>空中攻击·释羽风落</color>消耗所有<color=Highlight>【苍翎】</color>。",
         "param": [
           "100",
           "1",
@@ -1795,12 +1849,14 @@
           "150%",
           "100",
           "100",
+          "50",
           "2",
+          "1",
           "1"
         ],
         "type": "共鸣回路",
         "level": {
-          "15": {
+          "1": {
             "name": "共鸣技能·剑式流转·苍伤害",
             "param": [
               [
@@ -1827,7 +1883,7 @@
               ]
             ]
           },
-          "16": {
+          "2": {
             "name": "共鸣技能·剑式流转·羽伤害",
             "param": [
               [
@@ -1854,7 +1910,7 @@
               ]
             ]
           },
-          "17": {
+          "3": {
             "name": "重击·苍剑式伤害",
             "param": [
               [
@@ -1881,7 +1937,7 @@
               ]
             ]
           },
-          "18": {
+          "4": {
             "name": "重击·羽剑式伤害",
             "param": [
               [
@@ -1908,7 +1964,7 @@
               ]
             ]
           },
-          "19": {
+          "5": {
             "name": "空中攻击·释羽风落伤害",
             "param": [
               [
@@ -1935,7 +1991,7 @@
               ]
             ]
           },
-          "20": {
+          "6": {
             "name": "普攻·湮象风华第一段伤害",
             "param": [
               [
@@ -1962,7 +2018,7 @@
               ]
             ]
           },
-          "21": {
+          "7": {
             "name": "普攻·湮象风华第二段伤害",
             "param": [
               [
@@ -1989,7 +2045,7 @@
               ]
             ]
           },
-          "22": {
+          "8": {
             "name": "普攻·湮象风华第三段伤害",
             "param": [
               [
@@ -2016,7 +2072,7 @@
               ]
             ]
           },
-          "23": {
+          "9": {
             "name": "闪避反击·湮象风华第一段伤害",
             "param": [
               [
@@ -2043,7 +2099,7 @@
               ]
             ]
           },
-          "24": {
+          "10": {
             "name": "闪避反击·湮象风华第二段伤害",
             "param": [
               [
@@ -2070,7 +2126,7 @@
               ]
             ]
           },
-          "25": {
+          "11": {
             "name": "闪避反击·湮象风华第三段伤害",
             "param": [
               [
@@ -2097,34 +2153,7 @@
               ]
             ]
           },
-          "26": {
-            "name": "重击·苍剑式耐力消耗",
-            "param": [
-              [
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20"
-              ]
-            ]
-          },
-          "26-2": {
+          "12": {
             "name": "声之幻身伤害",
             "param": [
               [
@@ -2151,34 +2180,61 @@
               ]
             ]
           },
-          "27": {
-            "name": "重击·羽剑式耐力消耗",
+          "13": {
+            "name": "重击·苍剑式耐力消耗",
             "param": [
               [
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20",
-                "20"
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10"
               ]
             ]
           },
-          "28": {
+          "14": {
+            "name": "重击·羽剑式耐力消耗",
+            "param": [
+              [
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10",
+                "10"
+              ]
+            ]
+          },
+          "15": {
             "name": "空中攻击·释羽风落耐力消耗",
             "param": [
               [
@@ -2356,12 +2412,11 @@
     "8": {
       "skill": {
         "name": "且随风引",
-        "desc": "攻击目标，造成秧秧·玄翎{3}攻击的<color=Dark>湮灭伤害</color>。\n队伍中除秧秧·玄翎以外的角色，{2}秒内为目标附加<color=Highlight>【虚湮效应】</color>时，该角色湮灭伤害加深{0}，持续{1}秒。",
+        "desc": "攻击目标，造成秧秧·玄翎{0}攻击的<color=Dark>湮灭伤害</color>。\n队伍中除秧秧·玄翎以外的角色，获得<color=Highlight>移宫换羽</color>状态，持续{1}秒，<color=Highlight>移宫换羽</color>持续期间为目标附加<color=Highlight>【虚湮效应】</color>后，该角色湮灭伤害加深{2}。\n施放该技能时，重置该技能效果。",
         "param": [
-          "20%",
+          "300%",
           "20",
-          "20",
-          "300%"
+          "20%"
         ],
         "type": "延奏技能",
         "level": {},
@@ -2602,7 +2657,7 @@
   "chains": {
     "1": {
       "name": "禾雀随风初绽",
-      "desc": "施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>期间，停滞周围敌人，并对命中的目标召唤<color=Highlight>玄翎之影·抗坠</color>，造成秧秧·玄翎攻击{0}的<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n\n<color=Highlight>重击·苍剑式</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>免疫打断。",
+      "desc": "施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时，召唤<color=Highlight>玄翎之影·抗坠</color>，造成秧秧·玄翎攻击{0}的<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>期间，停滞周围目标。\n\n<color=Highlight>重击·苍剑式</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>免疫打断。",
       "param": [
         "337.98%",
         "30"
@@ -2610,7 +2665,7 @@
     },
     "2": {
       "name": "戛剑棹歌而远",
-      "desc": "<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>造成的伤害提升{0}。\n\n秧秧·玄翎每次脱离战斗状态或恢复意识后，处于非战斗状态达到4秒时，触发一次以下效果：\n·获得<color=Highlight>贯珠</color>，上限1层，施放<color=Highlight>普攻·苍剑式</color>、<color=Highlight>普攻·羽剑式</color>时，召唤<color=Highlight>玄翎之影·贯珠</color>攻击目标，造成秧秧·玄翎攻击{1}的<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。召唤<color=Highlight>玄翎之影·贯珠</color>后移除<color=Highlight>贯珠</color>。\n·回复2点<color=Highlight>【苍翎】</color>。\n·重置<color=Highlight>绝息</color>、<color=Highlight>流岚</color>的获取冷却时间。",
+      "desc": "<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>造成的伤害提升{0}。\n\n秧秧·玄翎每次脱离战斗状态或恢复意识后，处于非战斗状态达到4秒时，触发一次以下效果：\n·获得<color=Highlight>贯珠</color>，上限1层，施放<color=Highlight>普攻·苍剑式</color>、<color=Highlight>普攻·羽剑式</color>时，召唤<color=Highlight>玄翎之影·贯珠</color>攻击目标，造成秧秧·玄翎攻击{1}的<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。召唤<color=Highlight>玄翎之影·贯珠</color>后移除<color=Highlight>贯珠</color>。\n·回复2点<color=Highlight>【苍翎】</color>。\n·重置<color=Highlight>【绝息】</color>、<color=Highlight>【流岚】</color>的获取冷却时间。",
       "param": [
         "100%",
         "337.98%"
@@ -2618,7 +2673,7 @@
     },
     "3": {
       "name": "追念暨云陵",
-      "desc": "共鸣解放<color=Highlight>裁羽寂万音</color>造成的伤害加深{0}。\n\n施放<color=Highlight>变奏技能·羽挟苍空</color>、<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>后，使自身一定范围内的目标<color=Highlight>【虚湮效应】</color>层数上限提升{1}层，持续{2}秒。\n\n<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>额外为目标附加1层<color=Highlight>【虚湮效应】</color>。",
+      "desc": "共鸣解放<color=Highlight>裁羽寂万音</color>造成的伤害加深{0}。\n\n施放<color=Highlight>变奏技能·羽挟苍空</color>、<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时，使自身一定范围内的目标<color=Highlight>【虚湮效应】</color>层数上限增加{1}层，持续{2}秒，该效果无法叠加。\n\n<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>额外为目标附加1层<color=Highlight>【虚湮效应】</color>。",
       "param": [
         "175%",
         "3",
@@ -2644,7 +2699,7 @@
     },
     "6": {
       "name": "所愿苍琅长睆",
-      "desc": "秧秧·玄翎为目标附加<color=Highlight>【虚湮效应】</color>时，获得<color=Highlight>万声皆流</color>，持续{0}秒。<color=Highlight>万声皆流</color>持续期间，目标受到秧秧·玄翎的重击伤害提升{1}。\n\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时，获得<color=Highlight>止如槁木</color>，持续{2}秒。<color=Highlight>止如槁木</color>持续期间，若秧秧·玄翎为队伍中登场角色，则附近队伍中的角色为目标附加<color=Highlight>【霜渐效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【电磁效应】</color>、<color=Highlight>【风蚀效应】</color>、<color=Highlight>【光噪效应】</color>、<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎召唤<color=Highlight>玄翎之影·止如槁木</color>攻击目标，造成秧秧·玄翎攻击{3}的<color=Dark>湮灭伤害</color>。<color=Highlight>玄翎之影·止如槁木</color>的伤害为<color=Highlight>重击伤害</color>，且必定暴击。\n\n<color=Highlight>玄翎之影·止如槁木</color>召唤间隔{4}秒，召唤{5}次后移除<color=Highlight>止如槁木</color>，<color=Highlight>止如槁木</color>的获取冷却时间{6}秒。",
+      "desc": "秧秧·玄翎为目标附加<color=Highlight>【虚湮效应】</color>后，获得<color=Highlight>万声皆流</color>，持续{0}秒。<color=Highlight>万声皆流</color>持续期间，目标受到秧秧·玄翎的重击伤害提升{1}。\n\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时，获得<color=Highlight>止如槁木</color>，持续{2}秒。<color=Highlight>止如槁木</color>持续期间，若秧秧·玄翎为队伍中登场角色，则附近队伍中的角色为目标附加<color=Highlight>【霜渐效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【电磁效应】</color>、<color=Highlight>【风蚀效应】</color>、<color=Highlight>【光噪效应】</color>、<color=Highlight>【虚湮效应】</color>后，秧秧·玄翎召唤<color=Highlight>玄翎之影·止如槁木</color>攻击目标，造成秧秧·玄翎攻击{3}的<color=Dark>湮灭伤害</color>。<color=Highlight>玄翎之影·止如槁木</color>的伤害为<color=Highlight>重击伤害</color>，且必定暴击。\n\n<color=Highlight>玄翎之影·止如槁木</color>召唤间隔{4}秒，召唤{5}次后移除<color=Highlight>止如槁木</color>，<color=Highlight>止如槁木</color>持续时间结束或被移除后，重置<color=Highlight>玄翎之影·止如槁木</color>的召唤次数，<color=Highlight>止如槁木</color>的获取冷却时间{6}秒。",
       "param": [
         "30",
         "40%",

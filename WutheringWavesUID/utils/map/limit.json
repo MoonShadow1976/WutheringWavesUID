@@ -1079,6 +1079,74 @@
                     ]
                 }
             ]
+        },
+        {
+            "libId": 34,
+            "fetterList": [
+                {
+                    "fetterDetailName": "羽落空尘之歌",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000202,
+                            "cost": 1
+                        }
+                    ]
+                },{
+                    "fetterDetailName": "凝夜白霜",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000051,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 390070076,
+                            "cost": 1
+                        }
+                    ]
+                },{
+                    "fetterDetailName": "雪落无声之愿",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000197,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000196,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "libId": 35,
+            "fetterList": [
+                {
+                    "fetterDetailName": "羽落空尘之歌",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000218,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000215,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000216,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000213,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000214,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "charList": [
@@ -1459,6 +1527,27 @@
             "name": "露西",
             "weaponId": 21030056,
             "sonataLibId": 33
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1310,
+            "name": "漂泊者·导电",
+            "weaponId": 21020016,
+            "sonataLibId": 12
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1110,
+            "name": "穗穗",
+            "weaponId": 21050096,
+            "sonataLibId": 34
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1610,
+            "name": "秧秧·玄翎",
+            "weaponId": 21020096,
+            "sonataLibId": 35
         }
     ]
 }

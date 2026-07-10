@@ -116,11 +116,15 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     # 设置角色等级
     attr.set_character_level(role_level)
 
-    title = "守岸人-共鸣解放"
-    msg = "暴击提升12.5%+暴击伤害提升25%"
-    attr.add_crit_rate(0.125)
-    attr.add_crit_dmg(0.25)
-    attr.add_effect(title, msg)
+    title = "守岸人-共鸣解放-深潜星域"
+    value = min(0.0001 * (attr.energy_regen * 1000 // 2), 0.125)
+    msg = f"每0.2%共鸣效率提升0.01%暴击,上限12.5%,当前{value * 100:.2f}%"
+    attr.add_crit_rate(value, title, msg)
+
+    title = "守岸人-共鸣解放-解限星域"
+    value = min(0.0001 * (attr.energy_regen * 1000 // 1), 0.25)
+    msg = f"每0.1%共鸣效率提升0.01%暴击伤害,上限25%,当前{value * 100:.2f}%"
+    attr.add_crit_dmg(value, title, msg)
 
     title = "守岸人-延奏技能"
     msg = "队伍中的角色全伤害加深15%"

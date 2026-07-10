@@ -619,26 +619,26 @@
             "name": "空中攻击·浣尘时伤害",
             "param": [
               [
-                "45.65%",
-                "49.40%",
-                "53.14%",
-                "58.38%",
-                "62.12%",
-                "66.43%",
-                "72.42%",
-                "78.41%",
-                "84.39%",
-                "90.76%",
-                "98.24%",
-                "105.73%",
-                "113.22%",
-                "120.70%",
-                "128.19%",
-                "135.68%",
-                "143.16%",
-                "150.65%",
-                "158.13%",
-                "165.62%"
+                "35.57%",
+                "38.49%",
+                "41.41%",
+                "45.49%",
+                "48.41%",
+                "51.76%",
+                "56.43%",
+                "61.09%",
+                "65.76%",
+                "70.72%",
+                "76.55%",
+                "82.38%",
+                "88.22%",
+                "94.05%",
+                "99.88%",
+                "105.72%",
+                "111.55%",
+                "117.38%",
+                "123.22%",
+                "129.05%"
               ]
             ]
           },
@@ -847,7 +847,7 @@
     "2": {
       "skill": {
         "name": "翠落画屏",
-        "desc": "<color=Title>共鸣技能·浣尘时</color>\n<color=Highlight>浣尘时</color>期间，<color=Highlight>【水云息】</color>没满时，短按<color=Highlight>共鸣技能</color>施放。穗穗向前突进，造成<color=Ice>冷凝伤害</color>。施放期间，若穗穗为队伍中登场角色，则回复<color=Highlight>【水云息】</color>。\n该技能与<color=Highlight>共鸣技能·濯雨时</color>共享冷却时间。\n\n<color=Title>醒春潮</color>\n<color=Highlight>浣尘时</color>期间，<color=Highlight>【水云息】</color>满时，<color=Highlight>共鸣技能·浣尘时</color>替换为<color=Highlight>醒春潮</color>。施放时，消耗所有<color=Highlight>【水云息】</color>，牵引周围的目标，进入<color=Highlight>濯雨时</color>，造成<color=Ice>冷凝伤害</color>，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n施放<color=Highlight>醒春潮</color>时，使附近队伍中所有角色获得1层<color=Highlight>润物</color>，每25秒最多触发1次。角色登场时，会消耗<color=Highlight>润物</color>，使穗穗为其回复生命值。\n\n<color=Title>共鸣技能·濯雨时</color>\n<color=Highlight>濯雨时</color>期间，<color=Highlight>共鸣技能·浣尘时</color>替换为<color=Highlight>共鸣技能·濯雨时</color>。\n短按<color=Highlight>共鸣技能</color>施放。穗穗向前突进，造成<color=Ice>冷凝伤害</color>。施放期间，若穗穗为队伍中登场角色，则回复<color=Highlight>【芳菲信】</color>。\n该技能与<color=Highlight>共鸣技能·浣尘时</color>共享冷却时间。",
+        "desc": "<color=Title>共鸣技能·浣尘时</color>\n<color=Highlight>浣尘时</color>期间，<color=Highlight>【水云息】</color>没满时，短按<color=Highlight>共鸣技能</color>施放。穗穗向前突进，造成<color=Ice>冷凝伤害</color>。施放期间，若穗穗为队伍中登场角色，则回复<color=Highlight>【水云息】</color>。\n可在低空中施放。\n该技能与<color=Highlight>共鸣技能·濯雨时</color>共享冷却时间。\n\n<color=Title>醒春潮</color>\n<color=Highlight>浣尘时</color>期间，<color=Highlight>【水云息】</color>满时，<color=Highlight>共鸣技能·浣尘时</color>替换为<color=Highlight>醒春潮</color>。施放时，消耗所有<color=Highlight>【水云息】</color>，牵引周围的目标，进入<color=Highlight>濯雨时</color>，造成<color=Ice>冷凝伤害</color>，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>润物</color>\n施放<color=Highlight>醒春潮</color>和<color=Highlight>变奏技能·泠泠漱玉声</color>时，使附近队伍中所有角色获得1层<color=Highlight>润物</color>，每25秒最多触发1次。角色登场时，会消耗<color=Highlight>润物</color>，使穗穗为其回复生命值。\n\n<color=Title>共鸣技能·濯雨时</color>\n<color=Highlight>濯雨时</color>期间，<color=Highlight>共鸣技能·浣尘时</color>替换为<color=Highlight>共鸣技能·濯雨时</color>。\n短按<color=Highlight>共鸣技能</color>施放。穗穗向前突进，造成<color=Ice>冷凝伤害</color>。施放期间，若穗穗为队伍中登场角色，则回复<color=Highlight>【芳菲信】</color>。\n可在低空中施放。\n该技能与<color=Highlight>共鸣技能·浣尘时</color>共享冷却时间。",
         "param": [],
         "type": "共鸣技能",
         "level": {
@@ -1164,7 +1164,7 @@
     "3": {
       "skill": {
         "name": "康衢之谣",
-        "desc": "施放时，在场上展开<color=Highlight>山河水境</color>，持续25秒。<color=Highlight>山河水境</color>存在期间，穗穗施放<color=Highlight>延奏技能·渌水盈盈</color>时，会进入<color=Highlight>仙游碧落</color>状态。\n<color=Highlight>山河水境</color>内附近队伍中所有角色获得以下效果：\n·为目标附加<color=Highlight>【光噪效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【霜渐效应】</color>、<color=Highlight>【风蚀效应】</color>，或造成对应异常效应伤害时，使目标对应的<color=Highlight>【异常效应】</color>层数上限增加3层，持续{0}秒，该效果无法叠加。\n·为目标附加<color=Highlight>【电磁效应】</color>，或造成对应异常效应伤害时，使目标<color=Highlight>【电磁效应】</color>和<color=Highlight>【电磁爆发】</color>的层数上限增加3层，持续{1}秒，该效果无法叠加。\n·通过技能命中消耗目标<color=Highlight>【虚湮效应】</color>层数时，使自身造成的湮灭伤害无视目标{2}防御，且无视目标{3}湮灭抗性，持续{4}秒，该效果无法叠加。",
+        "desc": "施放时，在场上展开<color=Highlight>山河水境</color>，持续30秒。<color=Highlight>山河水境</color>存在期间，穗穗施放<color=Highlight>延奏技能·渌水盈盈</color>时，会进入<color=Highlight>仙游碧落</color>状态。\n<color=Highlight>山河水境</color>内附近队伍中所有角色获得以下效果：\n·为目标附加<color=Highlight>【光噪效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【霜渐效应】</color>、<color=Highlight>【风蚀效应】</color>，或造成对应异常效应伤害后，使目标对应的<color=Highlight>【异常效应】</color>层数上限增加3层，持续{0}秒，该效果无法叠加。\n·为目标附加<color=Highlight>【电磁效应】</color>，或造成对应异常效应伤害后，使目标<color=Highlight>【电磁效应】</color>和<color=Highlight>【电磁爆发】</color>的层数上限增加3层，持续{1}秒，该效果无法叠加。\n·消耗目标<color=Highlight>【虚湮效应】</color>层数后，使自身造成的湮灭伤害无视目标{2}防御，且无视目标{3}湮灭抗性，持续{4}秒，该效果无法叠加。\n可在低空中施放。",
         "param": [
           "15",
           "15",
@@ -1505,7 +1505,7 @@
     "6": {
       "skill": {
         "name": "泠泠漱玉声",
-        "desc": "攻击目标，造成<color=Ice>冷凝伤害</color>，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n施放时，消耗所有<color=Highlight>【水云息】</color>，牵引周围的目标，进入<color=Highlight>濯雨时</color>，并使附近队伍中所有角色获得<color=Highlight>润物</color>。",
+        "desc": "攻击目标，造成<color=Ice>冷凝伤害</color>，为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n施放时，消耗所有<color=Highlight>【水云息】</color>，牵引周围的目标，进入<color=Highlight>濯雨时</color>。",
         "param": [],
         "type": "变奏技能",
         "level": {
@@ -1714,7 +1714,7 @@
     "7": {
       "skill": {
         "name": "穗摇金",
-        "desc": "<color=Title>浣尘时</color>\n穗穗初始处于<color=Highlight>浣尘时</color>，<color=Highlight>浣尘时</color>期间，可通过特定技能回复<color=Highlight>【水云息】</color>。\n\n<color=Title>濯雨时</color>\n进入<color=Highlight>濯雨时</color>时，清除所有<color=Highlight>【芳菲信】</color>。\n<color=Highlight>濯雨时</color>期间，解锁全新的战斗形态，可通过特定技能回复<color=Highlight>【芳菲信】</color>。\n<color=Highlight>濯雨时</color>期间，穗穗的抗打断提升。\n进入<color=Highlight>濯雨时</color>15秒后，退出<color=Highlight>濯雨时</color>，退出时，清除所有<color=Highlight>【芳菲信】</color>。\n\n<color=Title>闪避·拨云雾见</color>\n特定攻击动作期间，短按<color=Highlight>闪避</color>，会消耗耐力，施放<color=Highlight>闪避·拨云雾见</color>。\n<color=Highlight>浣尘时</color>期间，施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复<color=Highlight>【水云息】</color>，且一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>闪避反击·浣尘时</color>。\n<color=Highlight>濯雨时</color>期间，施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复<color=Highlight>【芳菲信】</color>，且一定时间内不会重置<color=Highlight>普攻·濯雨时</color>连段。\n\n<color=Title>普攻·濯雨时</color>\n<color=Highlight>濯雨时</color>期间，<color=Highlight>普攻·浣尘时</color>替换为<color=Highlight>普攻·濯雨时</color>。\n连续短按<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Ice>冷凝伤害</color>，命中目标时，回复<color=Highlight>【芳菲信】</color>。\n施放<color=Highlight>普攻·濯雨时第3段</color>期间，持续牵引周围的目标。\n<color=Highlight>普攻·濯雨时第4段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>重击·濯雨时</color>\n消耗耐力，造成<color=Ice>冷凝伤害</color>，命中目标时，回复<color=Highlight>【芳菲信】</color>。\n\n<color=Title>重明枕露</color>\n<color=Highlight>濯雨时</color>期间，施放<color=Highlight>重击·濯雨时</color>后的一定时间内，短按<color=Highlight>普攻</color>施放。\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>飞燕裁风</color>\n<color=Highlight>濯雨时</color>期间，可通过以下方式施放：\n·施放<color=Highlight>重击·濯雨时</color>期间，松开<color=Highlight>普攻</color>施放。\n·穗穗处于空中时，短按<color=Highlight>普攻</color>施放。\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>【水云息】获取规则</color>\n上限{0}点。\n<color=Highlight>浣尘时</color>期间：\n·<color=Highlight>普攻·浣尘时</color>、<color=Highlight>闪避反击·浣尘时</color>命中目标时，回复<color=Highlight>【水云息】</color>。\n·施放<color=Highlight>共鸣技能·浣尘时</color>期间为队伍中登场角色时，回复{1}点<color=Highlight>【水云息】</color>。\n·施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复{2}点<color=Highlight>【水云息】</color>。\n\n<color=Title>【芳菲信】获取规则</color>\n上限{3}点。\n<color=Highlight>濯雨时</color>期间：\n·<color=Highlight>普攻·濯雨时</color>、<color=Highlight>重击·濯雨时</color>命中目标时，回复<color=Highlight>【芳菲信】</color>。\n·施放<color=Highlight>共鸣技能·濯雨时</color>期间为队伍中登场角色时，回复{4}点<color=Highlight>【芳菲信】</color>。\n·施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复{5}点<color=Highlight>【芳菲信】</color>。",
+        "desc": "<color=Title>浣尘时</color>\n穗穗初始处于<color=Highlight>浣尘时</color>，<color=Highlight>浣尘时</color>期间，可通过特定技能回复<color=Highlight>【水云息】</color>。\n\n<color=Title>濯雨时</color>\n进入<color=Highlight>濯雨时</color>时，清除所有<color=Highlight>【芳菲信】</color>。\n<color=Highlight>濯雨时</color>期间：\n·解锁全新的战斗形态，可通过特定技能回复<color=Highlight>【芳菲信】</color>。\n·穗穗的抗打断提升。\n·穗穗施放<color=Highlight>闪避技能</color>触发成功闪避后的一定时间内，短按<color=Highlight>普攻</color>，会施放<color=Highlight>普攻·濯雨时第一段</color>。\n进入<color=Highlight>濯雨时</color>15秒后，退出<color=Highlight>濯雨时</color>，退出时，清除所有<color=Highlight>【芳菲信】</color>。\n\n<color=Title>闪避·拨云雾见</color>\n地面攻击动作期间，短按<color=Highlight>闪避</color>，会消耗耐力，施放<color=Highlight>闪避·拨云雾见</color>。\n<color=Highlight>浣尘时</color>期间，施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复<color=Highlight>【水云息】</color>，且一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>闪避反击·浣尘时</color>。\n<color=Highlight>濯雨时</color>期间，施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复<color=Highlight>【芳菲信】</color>，且一定时间内不会重置<color=Highlight>普攻·濯雨时</color>连段。\n\n<color=Title>普攻·濯雨时</color>\n<color=Highlight>濯雨时</color>期间，<color=Highlight>普攻·浣尘时</color>替换为<color=Highlight>普攻·濯雨时</color>。\n连续短按<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Ice>冷凝伤害</color>，命中目标时，回复<color=Highlight>【芳菲信】</color>。\n施放<color=Highlight>普攻·濯雨时第3段</color>期间，持续牵引周围的目标。\n<color=Highlight>普攻·濯雨时第4段</color>会为命中的目标附加1次<color=Highlight>【霜渐效应】</color>。\n\n<color=Title>重击·濯雨时</color>\n消耗耐力，造成<color=Ice>冷凝伤害</color>，命中目标时，回复<color=Highlight>【芳菲信】</color>。\n\n<color=Title>重明枕露</color>\n<color=Highlight>濯雨时</color>期间，施放<color=Highlight>重击·濯雨时</color>后，保持按住<color=Highlight>普攻</color>施放。\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>飞燕裁风</color>\n<color=Highlight>濯雨时</color>期间，可通过以下方式施放：\n·施放<color=Highlight>重击·濯雨时</color>期间，松开<color=Highlight>普攻</color>施放。\n·穗穗处于空中时，短按<color=Highlight>普攻</color>施放。\n消耗耐力进行空中下落攻击，造成<color=Ice>冷凝伤害</color>。\n\n<color=Title>【水云息】获取规则</color>\n上限{0}点。\n<color=Highlight>浣尘时</color>期间：\n·<color=Highlight>普攻·浣尘时</color>、<color=Highlight>闪避反击·浣尘时</color>命中目标时，回复<color=Highlight>【水云息】</color>。\n·施放<color=Highlight>共鸣技能·浣尘时</color>期间为队伍中登场角色时，回复{1}点<color=Highlight>【水云息】</color>。\n·施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复{2}点<color=Highlight>【水云息】</color>。\n\n<color=Title>【芳菲信】获取规则</color>\n上限{3}点。\n<color=Highlight>濯雨时</color>期间：\n·<color=Highlight>普攻·濯雨时</color>、<color=Highlight>重击·濯雨时</color>命中目标时，回复<color=Highlight>【芳菲信】</color>。\n·施放<color=Highlight>共鸣技能·濯雨时</color>期间为队伍中登场角色时，回复{4}点<color=Highlight>【芳菲信】</color>。\n·施放<color=Highlight>闪避·拨云雾见</color>触发成功闪避时，回复{5}点<color=Highlight>【芳菲信】</color>。",
         "param": [
           "120",
           "40",
@@ -1756,26 +1756,26 @@
             "name": "普攻·濯雨时第二段伤害",
             "param": [
               [
-                "30.68%+30.68%",
-                "33.20%+33.20%",
-                "35.72%+35.72%",
-                "39.24%+39.24%",
-                "41.75%+41.75%",
-                "44.65%+44.65%",
-                "48.67%+48.67%",
-                "52.70%+52.70%",
-                "56.72%+56.72%",
-                "61.00%+61.00%",
-                "66.03%+66.03%",
-                "71.06%+71.06%",
-                "76.09%+76.09%",
-                "81.13%+81.13%",
-                "86.16%+86.16%",
-                "91.19%+91.19%",
-                "96.22%+96.22%",
-                "101.25%+101.25%",
-                "106.28%+106.28%",
-                "111.32%+111.32%"
+                "16.00%+8.00%*2+8.00%*2+16.00%+16.00%",
+                "17.32%+8.66%*2+8.66%*2+17.32%+17.32%",
+                "18.63%+9.32%*2+9.32%*2+18.63%+18.63%",
+                "20.47%+10.24%*2+10.24%*2+20.47%+20.47%",
+                "21.78%+10.89%*2+10.89%*2+21.78%+21.78%",
+                "23.29%+11.65%*2+11.65%*2+23.29%+23.29%",
+                "25.39%+12.70%*2+12.70%*2+25.39%+25.39%",
+                "27.48%+13.74%*2+13.74%*2+27.48%+27.48%",
+                "29.58%+14.79%*2+14.79%*2+29.58%+29.58%",
+                "31.81%+15.91%*2+15.91%*2+31.81%+31.81%",
+                "34.44%+17.22%*2+17.22%*2+34.44%+34.44%",
+                "37.06%+18.53%*2+18.53%*2+37.06%+37.06%",
+                "39.69%+19.85%*2+19.85%*2+39.69%+39.69%",
+                "42.31%+21.16%*2+21.16%*2+42.31%+42.31%",
+                "44.93%+22.47%*2+22.47%*2+44.93%+44.93%",
+                "47.56%+23.78%*2+23.78%*2+47.56%+47.56%",
+                "50.18%+25.09%*2+25.09%*2+50.18%+50.18%",
+                "52.81%+26.41%*2+26.41%*2+52.81%+52.81%",
+                "55.43%+27.72%*2+27.72%*2+55.43%+55.43%",
+                "58.05%+29.03%*2+29.03%*2+58.05%+58.05%"
               ]
             ]
           },
@@ -1783,26 +1783,26 @@
             "name": "普攻·濯雨时第三段伤害",
             "param": [
               [
-                "21.03%+21.03%+28.04%",
-                "22.75%+22.75%+30.34%",
-                "24.48%+24.48%+32.63%",
-                "26.89%+26.89%+35.85%",
-                "28.61%+28.61%+38.15%",
-                "30.60%+30.60%+40.79%",
-                "33.36%+33.36%+44.47%",
-                "36.11%+36.11%+48.15%",
-                "38.87%+38.87%+51.83%",
-                "41.80%+41.80%+55.74%",
-                "45.25%+45.25%+60.33%",
-                "48.70%+48.70%+64.93%",
-                "52.15%+52.15%+69.53%",
-                "55.59%+55.59%+74.12%",
-                "59.04%+59.04%+78.72%",
-                "62.49%+62.49%+83.32%",
-                "65.94%+65.94%+87.92%",
-                "69.39%+69.39%+92.51%",
-                "72.83%+72.83%+97.11%",
-                "76.28%+76.28%+101.71%"
+                "6.92%*3+6.92%*3+6.92%*3+6.92%*3",
+                "7.49%*3+7.49%*3+7.49%*3+7.49%*3",
+                "8.06%*3+8.06%*3+8.06%*3+8.06%*3",
+                "8.85%*3+8.85%*3+8.85%*3+8.85%*3",
+                "9.42%*3+9.42%*3+9.42%*3+9.42%*3",
+                "10.07%*3+10.07%*3+10.07%*3+10.07%*3",
+                "10.98%*3+10.98%*3+10.98%*3+10.98%*3",
+                "11.89%*3+11.89%*3+11.89%*3+11.89%*3",
+                "12.80%*3+12.80%*3+12.80%*3+12.80%*3",
+                "13.76%*3+13.76%*3+13.76%*3+13.76%*3",
+                "14.90%*3+14.90%*3+14.90%*3+14.90%*3",
+                "16.03%*3+16.03%*3+16.03%*3+16.03%*3",
+                "17.17%*3+17.17%*3+17.17%*3+17.17%*3",
+                "18.30%*3+18.30%*3+18.30%*3+18.30%*3",
+                "19.44%*3+19.44%*3+19.44%*3+19.44%*3",
+                "20.57%*3+20.57%*3+20.57%*3+20.57%*3",
+                "21.71%*3+21.71%*3+21.71%*3+21.71%*3",
+                "22.84%*3+22.84%*3+22.84%*3+22.84%*3",
+                "23.98%*3+23.98%*3+23.98%*3+23.98%*3",
+                "25.11%*3+25.11%*3+25.11%*3+25.11%*3"
               ]
             ]
           },
@@ -1810,26 +1810,26 @@
             "name": "普攻·濯雨时第四段伤害",
             "param": [
               [
-                "40.00%+8.00%*5",
-                "43.28%+8.66%*5",
-                "46.56%+9.32%*5",
-                "51.16%+10.24%*5",
-                "54.44%+10.89%*5",
-                "58.21%+11.65%*5",
-                "63.46%+12.70%*5",
-                "68.70%+13.74%*5",
-                "73.95%+14.79%*5",
-                "79.53%+15.91%*5",
-                "86.09%+17.22%*5",
-                "92.65%+18.53%*5",
-                "99.21%+19.85%*5",
-                "105.77%+21.16%*5",
-                "112.33%+22.47%*5",
-                "118.89%+23.78%*5",
-                "125.45%+25.09%*5",
-                "132.01%+26.41%*5",
-                "138.57%+27.72%*5",
-                "145.13%+29.03%*5"
+                "80.00%",
+                "86.56%",
+                "93.12%",
+                "102.31%",
+                "108.87%",
+                "116.41%",
+                "126.91%",
+                "137.40%",
+                "147.90%",
+                "159.05%",
+                "172.17%",
+                "185.29%",
+                "198.41%",
+                "211.53%",
+                "224.65%",
+                "237.77%",
+                "250.89%",
+                "264.01%",
+                "277.13%",
+                "290.25%"
               ]
             ]
           },
@@ -2173,7 +2173,7 @@
     "8": {
       "skill": {
         "name": "渌水盈盈",
-        "desc": "队伍中的角色全伤害加深{0}，持续30秒。\n\n退出<color=Highlight>濯雨时</color>，并消耗所有<color=Highlight>【芳菲信】</color>，若当前场上存在<color=Highlight>山河水境</color>，则穗穗进入<color=Highlight>仙游碧落</color>状态，且根据消耗的<color=Highlight>【芳菲信】</color>解锁以下效果：\n\n消耗至少0点<color=Highlight>【芳菲信】</color>：\n·附近队伍中所有角色获得6秒的<color=Highlight>重明照影</color>。持有<color=Highlight>重明照影</color>的角色抗打断提升。\n\n消耗至少200点<color=Highlight>【芳菲信】</color>：\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>至第6秒时可以进行第1次<color=Highlight>翾舞</color>。\n\n消耗至少400点<color=Highlight>【芳菲信】</color>：\n·<color=Highlight>山河水境</color>内登场角色获得额外效果：若持有<color=Highlight>重明照影</color>，则造成的伤害提升：穗穗自身共鸣效率大于{1}时，每超过{2}的共鸣效率计算为{3}的伤害提升，上限{4}。\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>至第12秒时可以进行第2次<color=Highlight>翾舞</color>。\n\n消耗至少600点<color=Highlight>【芳菲信】</color>：\n·第1次<color=Highlight>翾舞</color>时，<color=Highlight>山河水境</color>内附近队伍中登场角色获得额外效果：施放延奏技能时，使下一个角色获得效果：自身通过技能命中消耗敌方异常层数时，攻击提升：穗穗自身共鸣效率大于{5}时，每超过{6}的共鸣效率计算为{7}的攻击提升，上限{8}，持续{9}秒，该角色登场14秒时移除所有效果，若切换至其他角色则该效果提前结束。\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>至第18秒时可以进行第3次<color=Highlight>翾舞</color>。\n\n<color=Title>翾舞</color>\n每次进行<color=Highlight>翾舞</color>时，使附近队伍中所有角色获得6秒的<color=Highlight>重明照影</color>，为<color=Highlight>山河水境</color>内敌方目标附加一层<color=Highlight>【霜渐效应】</color>，为<color=Highlight>山河水境</color>内附近队伍中登场角色回复生命值。",
+        "desc": "队伍中的角色全伤害加深{0}，持续30秒。\n\n施放时，若当前场上存在<color=Highlight>山河水境</color>，则穗穗进入<color=Highlight>仙游碧落</color>状态。\n施放时，退出<color=Highlight>濯雨时</color>，并消耗所有<color=Highlight>【芳菲信】</color>，且根据消耗的<color=Highlight>【芳菲信】</color>解锁以下效果：\n\n消耗至少0点<color=Highlight>【芳菲信】</color>：\n·附近队伍中所有角色获得6秒的<color=Highlight>重明照影</color>。持有<color=Highlight>重明照影</color>的角色抗打断提升。\n\n消耗至少200点<color=Highlight>【芳菲信】</color>：\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>状态下，飞仙演舞一定时间后会进行第1次<color=Highlight>翾舞</color>。\n\n消耗至少400点<color=Highlight>【芳菲信】</color>：\n·本次<color=Highlight>仙游碧落</color>状态期间，<color=Highlight>山河水境</color>内登场角色获得额外效果：若持有<color=Highlight>重明照影</color>，则造成的伤害提升：穗穗自身共鸣效率大于{1}时，每超过{2}的共鸣效率计算为{3}的伤害提升，上限{4}。\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>状态下，飞仙演舞一定时间后会进行第2次<color=Highlight>翾舞</color>。\n\n消耗至少600点<color=Highlight>【芳菲信】</color>：\n·第1次<color=Highlight>翾舞</color>时，<color=Highlight>山河水境</color>内附近队伍中登场角色在穗穗本次<color=Highlight>仙游碧落</color>期间获得额外效果：下一次施放延奏技能时，穗穗使下一个登场角色获得<color=Highlight>烟岚</color>，持续14秒。持有<color=Highlight>烟岚</color>的角色消耗目标<color=Highlight>【异常效应】</color>或<color=Highlight>【电磁爆发】</color>层数后，攻击提升：穗穗自身共鸣效率大于{5}时，每超过{6}的共鸣效率计算为{7}的攻击提升，上限{8}，持续{9}秒，<color=Highlight>烟岚</color>被移除时移除攻击提升效果，若切换至其他角色则提前移除<color=Highlight>烟岚</color>。\n·<color=Highlight>山河水境</color>存在时，<color=Highlight>仙游碧落</color>状态下，飞仙演舞一定时间后会进行第3次<color=Highlight>翾舞</color>。\n\n<color=Title>仙游碧落</color>\n持续{10}秒。\n<color=Highlight>仙游碧落</color>状态期间，穗穗不是队伍中登场角色时，会依附于<color=Highlight>山河水境</color>之上进行飞仙演舞，并根据施放<color=Highlight>延奏技能·渌水盈盈</color>时消耗的<color=Highlight>【芳菲信】</color>，每隔一定时间进行一次<color=Highlight>翾舞</color>。\n穗穗为队伍中登场角色时，暂停飞仙演舞。\n<color=Highlight>山河水境</color>不存在时，退出<color=Highlight>仙游碧落</color>状态。\n\n<color=Title>翾舞</color>\n每次进行<color=Highlight>翾舞</color>时，使附近队伍中所有角色获得6秒的<color=Highlight>重明照影</color>，为<color=Highlight>山河水境</color>内敌方目标附加一层<color=Highlight>【霜渐效应】</color>，为<color=Highlight>山河水境</color>内附近队伍中登场角色回复生命值。",
         "param": [
           "25%",
           "200%",
@@ -2184,7 +2184,8 @@
           "0.12%",
           "0.1%",
           "50%",
-          "6"
+          "6",
+          "30"
         ],
         "type": "延奏技能",
         "level": {},
@@ -2411,7 +2412,7 @@
     },
     "17": {
       "skill": {
-        "name": "谐度破坏·臂铠",
+        "name": "谐度破坏·音感仪",
         "desc": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
         "param": [],
         "type": "谐度破坏",
@@ -2425,7 +2426,7 @@
   "chains": {
     "1": {
       "name": "雨洗千山皆入画",
-      "desc": "<color=Highlight>延奏技能·渌水盈盈</color>中至少消耗600点<color=Highlight>【芳菲信】</color>获得的攻击提升效果，附加<color=Highlight>【异常效应】</color>或造成<color=Highlight>异常效应伤害</color>时也可以触发。\n<color=Highlight>山河水境</color>的时间延长至{0}秒，第3次<color=Highlight>翾舞</color>的时候获得的<color=Highlight>重明照影</color>的时间提升{1}。\n<color=Highlight>普攻·濯雨时</color>、<color=Highlight>重击·濯雨时</color>和<color=Highlight>【强化下落攻击·强化形态】</color>免疫打断。",
+      "desc": "持有<color=Highlight>烟岚</color>的角色为目标附加<color=Highlight>【异常效应】</color>或造成<color=Highlight>异常效应伤害</color>后，也可以触发攻击提升效果。\n第3次<color=Highlight>翾舞</color>的时候获得的<color=Highlight>重明照影</color>的时间提升{1}。\n<color=Highlight>普攻·濯雨时</color>、<color=Highlight>重击·濯雨时</color>、<color=Highlight>下落攻击·重明枕露</color>和<color=Highlight>下落攻击·飞燕裁风</color>免疫打断。",
       "param": [
         "30",
         "100%"
@@ -2433,7 +2434,7 @@
     },
     "2": {
       "name": "霞铺万顷欲流金",
-      "desc": "<color=Highlight>山河水境</color>内附近队伍中所有角色触发以下效果时，使触发效果的角色暴击伤害提升{0}，持续30秒：\n·为目标附加<color=Highlight>【光噪效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【霜渐效应】</color>、<color=Highlight>【风蚀效应】</color>、<color=Highlight>【电磁效应】</color>，或造成对应异常效应伤害。\n·通过技能命中消耗目标<color=Highlight>【虚湮效应】</color>层数。\n队伍中登场角色不处于<color=Highlight>山河水境</color>内时，该暴击伤害提升效果暂时失效。",
+      "desc": "<color=Highlight>山河水境</color>内附近队伍中所有角色触发以下效果后，使触发效果的角色暴击伤害提升{0}，持续30秒：\n·为目标附加<color=Highlight>【光噪效应】</color>、<color=Highlight>【聚爆效应】</color>、<color=Highlight>【霜渐效应】</color>、<color=Highlight>【风蚀效应】</color>、<color=Highlight>【电磁效应】</color>，或造成对应异常效应伤害。\n·消耗目标<color=Highlight>【虚湮效应】</color>层数。\n队伍中登场角色不处于<color=Highlight>山河水境</color>内时，该暴击伤害提升效果暂时失效。",
       "param": [
         "50%"
       ]

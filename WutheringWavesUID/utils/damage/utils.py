@@ -33,6 +33,9 @@ SONATA_TRUENAME = "听唤语义之愿"
 SONATA_SNOWFALL = "雪落无声之愿"
 SONATA_DREAMCLIP = "剪心辑梦之影"
 SONATA_SHATTERDREAM = "碎梦亡鬼之魇"
+SONATA_FEATHERED_TRACE = "羽落空尘之歌"
+SONATA_NETHER_ROAD = "冥途夜行之灯"
+SONATA_EVIL_PURGE = "清邪荡煞之心"
 
 
 CHAR_ATTR_FREEZING = "冷凝"
@@ -50,6 +53,8 @@ hit_damage = "hit_damage"
 skill_damage = "skill_damage"
 # 共鸣解放伤害加成
 liberation_damage = "liberation_damage"
+# 变奏技能伤害加成
+intro_skill_damage = "intro_skill_damage"
 # 声骸技能伤害加成
 phantom_damage = "phantom_damage"
 # 治疗效果加成
@@ -100,13 +105,16 @@ SkillTreeMap = {
 Spectro_Frazzle_Role_Ids = [1501, 1502, 1506, 1507]
 
 # 虚湮效应
-Havoc_Bane_Role_Ids = [1508]
+Havoc_Bane_Role_Ids = [1508, 1610]
 
 # 聚爆效应 need update
-Fusion_Burst_Role_Ids = [1210]
+Fusion_Burst_Role_Ids = [1210, 1211]
 
 # 霜渐效应
-Glacio_Chafe_Role_Ids = [1108, 1109]
+Glacio_Chafe_Role_Ids = [1108, 1109, 1110]
+
+# 电磁效应
+Electro_Flare_Role_Ids = [1307, 1309, 1310]
 
 # 震谐伤害
 Tune_Rupture_Role_Ids = [1209, 1210, 1509]
@@ -116,6 +124,9 @@ Ancient_Role_Ids = [1608, 1109]
 
 # 释放声骸技能
 Phantom_Role_Dict = {1411: 3, 1607: 3, 1606: 1, 1608: 1, 1109: 3}
+
+# 效应层数增加(风主排除)
+Abnormal_Level_Dict = {1508: 3, 1110: 3}
 
 # 异常效应
 AbnormalType = Literal[
@@ -131,6 +142,7 @@ AbnormalType = Literal[
 ShiftingType = [
     "TuneRupture",  # 震谐·偏移
     "TuneStrain",  # 集谐·偏移
+    "Hack",  # 骇破·偏移
 ]
 
 

@@ -207,3 +207,19 @@ def lucy_buff(attr, chain, resonLevel, isGroup):
     if char_clz:
         s = char_clz()
         s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def suisui_buff(attr, chain, resonLevel, isGroup):
+    # 穗穗buff
+    char_clz = WavesCharRegister.find_class(1110)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)
+
+
+def leizhu_buff(attr, chain, resonLevel, isGroup):
+    # 雷主buff
+    char_clz = WavesCharRegister.find_class(1310)
+    if char_clz:
+        s = char_clz()
+        s.do_buff(attr, chain=chain, resonLevel=resonLevel, isGroup=isGroup)

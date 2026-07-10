@@ -1110,6 +1110,106 @@ class Echo_6000201(EchoAbstract):
         return {}
 
 
+class Echo_6000202(EchoAbstract):
+    id = 6000202
+    name = "融躯战士"
+
+
+class Echo_6000203(EchoAbstract):
+    id = 6000203
+    name = "瓷庭候"
+
+
+class Echo_6000204(EchoAbstract):
+    id = 6000204
+    name = "石庭候"
+
+
+class Echo_6000205(EchoAbstract):
+    id = 6000205
+    name = "金庭候"
+
+
+class Echo_6000206(EchoAbstract):
+    id = 6000206
+    name = "心傀·喜"
+
+
+class Echo_6000207(EchoAbstract):
+    id = 6000207
+    name = "心傀·怒"
+
+
+class Echo_6000208(EchoAbstract):
+    id = 6000208
+    name = "心傀·忧"
+
+
+class Echo_6000209(EchoAbstract):
+    id = 6000209
+    name = "心傀·思"
+
+
+class Echo_6000210(EchoAbstract):
+    id = 6000210
+    name = "心傀·悲"
+
+
+class Echo_6000211(EchoAbstract):
+    id = 6000211
+    name = "心傀·恐"
+
+
+class Echo_6000212(EchoAbstract):
+    id = 6000212
+    name = "霁息兽尊·身"
+
+
+class Echo_6000213(EchoAbstract):
+    id = 6000213
+    name = "霁息兽尊·首"
+
+
+class Echo_6000214(EchoAbstract):
+    id = 6000214
+    name = "不熄猎手"
+
+
+class Echo_6000215(EchoAbstract):
+    id = 6000215
+    name = "霁息兽尊"
+
+
+class Echo_6000216(EchoAbstract):
+    id = 6000216
+    name = "封庭械囿"
+
+    # 在首位装配该声骸技能时，自身治疗效果加成提升10.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"治疗效果加成": "10%"}
+
+
+class Echo_6000217(EchoAbstract):
+    id = 6000217
+    name = "万囮牢·朽躯"
+
+    # 在首位装配该声骸技能时，自身热熔伤害加成提升12.00%，重击伤害加成提升12.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"热熔伤害加成": "12%", "重击伤害加成": "12%"}
+
+
+class Echo_6000218(EchoAbstract):
+    id = 6000218
+    name = "千傀重楼"
+
+    # 在首位装配该声骸技能时，自身湮灭伤害加成提升12.00%，重击伤害加成提升12.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"湮灭伤害加成": "12%", "重击伤害加成": "12%"}
+
+
 def register_echo():
     # 自动注册所有以 Echo_ 开头的类
     for name, obj in globals().items():

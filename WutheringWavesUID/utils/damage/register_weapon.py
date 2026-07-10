@@ -828,6 +828,33 @@ class Weapon_21020094(WeaponAbstract):
             attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 
+class Weapon_21020096(WeaponAbstract):
+    id = 21020096
+    type = 2
+    name = "天之苍苍"
+
+    # 附加虚湮效应后，重击伤害加深{1}，重击伤害无视目标{2}防御
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if not attr.env_havoc_bane:
+            return
+        if attr.char_damage != hit_damage:
+            return
+        title = self.get_title()
+        dmg = f"{self.param(1)}"
+        msg = f"附加虚湮效应后，重击伤害加深{dmg}"
+        attr.add_dmg_deepen(calc_percent_expression(dmg), title, msg)
+
+        title = self.get_title()
+        dmg = f"{self.param(2)}"
+        msg = f"附加虚湮效应后，重击伤害无视目标{dmg}防御"
+        attr.add_defense_ignore(calc_percent_expression(dmg), title, msg)
+
+
 class Weapon_21020104(WeaponAbstract):
     id = 21020104
     type = 2
@@ -2085,6 +2112,25 @@ class Weapon_21050094(WeaponAbstract):
             dmg = f"{self.param(0)}*{self.param(2)}"
             title = self.get_title()
             msg = f"对带有【异常效应】的怪物造成伤害时，自身攻击提升{dmg}"
+            attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21050096(WeaponAbstract):
+    id = 21050096
+    type = 5
+    name = "栖霞饮露"
+
+    # 附近队伍中所有角色攻击提升{2}
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        if attr.char_template == temp_atk and 1110 in attr.teammate_char_ids:
+            dmg = f"{self.param(2)}"
+            title = self.get_title()
+            msg = f"附近队伍中所有角色攻击提升{dmg}"
             attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
 
 

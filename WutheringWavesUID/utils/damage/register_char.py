@@ -204,6 +204,59 @@ class Char_1109(CharAbstract):
                 method([cast_variation], attr, isGroup, isSelf=False)
 
 
+class Char_1110(CharAbstract):
+    id = 1110
+    name = "穗穗"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 共鸣解放 消耗目标【虚湮效应】层数后，使自身造成的湮灭伤害无视目标6%防御，且无视目标12%湮灭抗性，持续30秒，该效果无法叠加。
+        if attr.role is not None and attr.role.role.roleId == 1610:  # 先指定 sp秧秧
+            title = "穗穗-共鸣解放-康衢之谣"
+            msg = "消耗目标【虚湮效应】层数后，湮灭伤害无视目标6%防御"
+            attr.add_defense_ignore(0.06, title, msg)
+            msg = "消耗目标【虚湮效应】层数后，无视目标12%湮灭抗性"
+            attr.add_enemy_resistance(-0.12, title, msg)
+
+        title = "穗穗-延奏技能"
+        msg = "队伍中的角色全伤害加深25%"
+        attr.add_dmg_deepen(0.25, title, msg)
+
+        title = "穗穗-延奏-400芳菲信"
+        msg = "共鸣效率超200%每1%时提升0.2%伤害,上限12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        if attr.char_template == temp_atk:
+            # 角色消耗目标【异常效应】或【电磁爆发】层数时
+            # 1链后 角色为目标附加【异常效应】或造成异常效应伤害后，也可以触发
+            title = "穗穗-延奏-600芳菲信"
+            msg = "共鸣效率超200%每0.12%时提升0.1%攻击,上限50%"
+            attr.add_atk_percent(0.5, title, msg)
+
+            title = "穗穗-合鸣效果-羽落空尘之歌"
+            msg = "获得【重明之羽】：每1%共鸣效率使队中角色攻击提升0.1%,上限25%"
+            attr.add_atk_percent(0.25, title, msg)
+
+        if chain >= 2 and attr.is_env_abnormal():
+            title = "穗穗-二链"
+            msg = "山河水境内触发效果的角色暴击伤害提升50%"
+            attr.add_crit_dmg(0.5, title, msg)
+
+        # 栖霞饮露
+        weapon_clz = WavesWeaponRegister.find_class(21050096)
+        if weapon_clz:
+            w = weapon_clz(21050096, 90, 6, resonLevel)
+            method = getattr(w, "do_action", None)
+            if callable(method):
+                method("buff", attr, isGroup)
+
+
 class Char_1202(CharAbstract):
     id = 1202
     name = "炽霞"
@@ -727,6 +780,42 @@ class Char_1308(CharAbstract):
             method = getattr(w, "do_action", None)
             if callable(method):
                 method([cast_variation], attr, isGroup, isSelf=False)
+
+
+class Char_1310(CharAbstract):
+    id = 1310
+    name = "漂泊者·导电"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        title = "雷主-固有技能-解明"
+        msg = "共鸣技能超负荷对目标造成伤害后附加电磁效应"
+        attr.set_env_electro_flare()
+        attr.add_effect(title, msg)
+
+        if attr.char_template == temp_atk:
+            title = "雷主-共鸣回路-超负荷"
+            msg = "短按施放超负荷，队伍中的角色获得10%攻击加成"
+            attr.add_atk_percent(0.1, title, msg)
+
+            title = "雷主-合鸣效果-轻云出月"
+            msg = "使用延奏技能后，下一个登场的共鸣者攻击提升22.5%"
+            attr.add_atk_percent(0.225, title, msg)
+
+        # 无常凶鹭
+        title = "雷主-声骸技能-无常凶鹭"
+        msg = "施放延奏技能，则可使下一个变奏登场的角色伤害提升12%"
+        attr.add_dmg_bonus(0.12, title, msg)
+
+        title = "雷主-延奏技能"
+        msg = "持有电髓的角色附加异常效应时，全伤害加深25%"
+        attr.add_dmg_deepen(0.25, title, msg)
 
 
 class Char_1402(CharAbstract):
@@ -1444,6 +1533,22 @@ class Char_1607(CharAbstract):
             title = "坎特蕾拉-延奏技能"
             msg = "下一位登场角色共鸣技能伤害加深25%"
             attr.add_dmg_deepen(0.25, title, msg)
+
+
+class Char_1610(CharAbstract):
+    id = 1610
+    name = "秧秧·玄翎"
+    starLevel = 5
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+    ):
+        # 队伍中除秧秧·玄翎以外的角色，获得移宫换羽状态，持续20秒，移宫换羽持续期间为目标附加【虚湮效应】后，该角色湮灭伤害加深20%
+        return
 
 
 def register_char():

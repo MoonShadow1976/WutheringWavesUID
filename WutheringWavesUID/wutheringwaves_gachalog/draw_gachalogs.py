@@ -51,6 +51,8 @@ gacha_type_meta_rename = {
     "武器新旅唤取": "武器新旅唤取",
     "角色联动唤取": "角色联动唤取",
     "武器联动唤取": "武器联动唤取",
+    "角色忆旅唤取": "角色忆旅唤取",
+    "武器忆旅唤取": "武器忆旅唤取",
 }
 
 
@@ -215,8 +217,11 @@ async def draw_card(uid: str, ev: Event):
         else:
             _u = sum(current_data["r_num"]) / len(current_data["up_list"])
             current_data["avg_up"] = float(f"{_u:.2f}")
-        # 计算不歪率（角色精准调谐 / 角色联动唤取）
-        if gacha_name in ["角色精准调谐", "角色联动唤取"] and len(current_data["rank_s_list"]) > 0:
+        # 计算不歪率
+        if (
+            gacha_name in ["角色精准调谐", "角色联动唤取", "角色忆旅唤取", "角色新旅唤取"]
+            and len(current_data["rank_s_list"]) > 0
+        ):
             # 计算小保底不歪率：UP五星之后依然是UP五星的概率（排除大保底UP）
             up_after_up_count = 0  # 小保底不歪的次数
             total_small_guarantee = 0  # 小保底总次数
@@ -256,7 +261,7 @@ async def draw_card(uid: str, ev: Event):
         if current_data["avg_up"] == "-" and current_data["avg"] == "-":
             current_data["level"] = 2
         else:
-            if gacha_name in ["角色精准调谐", "角色联动唤取"]:
+            if gacha_name in ["角色精准调谐", "角色联动唤取", "角色忆旅唤取", "角色新旅唤取"]:
                 if current_data["avg_up"] != "-":
                     current_data["level"] = get_level_from_list(current_data["avg_up"], [65, 80, 85, 113, 128])
                 elif current_data["avg"] != "-":
@@ -379,8 +384,8 @@ async def draw_card(uid: str, ev: Event):
         if "新手" in gacha_name:
             continue
         gacha_data = total_data[gacha_name]
-        # 角色精准调谐/角色联动唤取使用bar_up.png，其他使用bar.png
-        if gacha_name in ["角色精准调谐", "角色联动唤取"]:
+        # 会歪的唤取使用bar_up.png，其他使用bar.png
+        if gacha_name in ["角色精准调谐", "角色联动唤取", "角色忆旅唤取", "角色新旅唤取"]:
             title = Image.open(TEXT_PATH / "bar_up.png")
         else:
             title = Image.open(TEXT_PATH / "bar.png")
@@ -411,8 +416,8 @@ async def draw_card(uid: str, ev: Event):
         level_icon = level_icon.resize((140, 140)).convert("RGBA")
         tag = HOMO_TAG[level]
 
-        # 显示不歪率和最大连歪（仅角色精准调谐&角色联动唤取）
-        if gacha_name in ["角色精准调谐", "角色联动唤取"]:
+        # 显示不歪率和最大连歪
+        if gacha_name in ["角色精准调谐", "角色联动唤取", "角色忆旅唤取", "角色新旅唤取"]:
             # 缩小20%的字体和间隔
             title_draw.text((150, 178), avg_s, "white", waves_font_25, "mm")
             title_draw.text((150, 205), "平均出金", "white", waves_font_18, "mm")

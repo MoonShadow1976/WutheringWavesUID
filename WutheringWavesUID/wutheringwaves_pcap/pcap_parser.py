@@ -19,63 +19,74 @@ TEXT_PATH = Path(__file__).parent
 def _normalize_attribute_key(key) -> int | None:
     if key is None:
         return None
-    if isinstance(key, int):
+    if isinstance(key, int) and not isinstance(key, bool):
         return key
-    if isinstance(key, str) and key.isdigit():
+    if isinstance(key, str) and key.lstrip("-").isdigit():
         return int(key)
     return None
 
 
 def _get_value_type(attribute: dict[str, Any]) -> int | None:
     if "value_type" in attribute:
-        return int(attribute["value_type"])
+        try:
+            return int(attribute["value_type"])
+        except (ValueError, TypeError):
+            pass
     if "valueType" in attribute:
-        return int(attribute["valueType"])
+        try:
+            return int(attribute["valueType"])
+        except (ValueError, TypeError):
+            pass
     return None
 
 
-def _get_attribute_int32(attribute: dict[str, Any]) -> int:
-    for field in ("int32_value", "int32Value", "Int32Value"):
-        if field in attribute:
-            return int(attribute[field])
+def _get_attribute_int32(attribute: dict[str, Any]) -> int | None:
+    for candidate in ("int32_value", "int32Value", "Int32Value", "int32"):
+        if candidate in attribute:
+            try:
+                return int(attribute[candidate])
+            except (ValueError, TypeError):
+                pass
 
     nested = attribute.get("value")
     if isinstance(nested, dict):
-        for field in ("int32_value", "int32Value", "Int32Value", "int32"):
-            if field in nested:
-                return int(nested[field])
+        for candidate in ("int32_value", "int32Value", "Int32Value", "int32"):
+            if candidate in nested:
+                try:
+                    return int(nested[candidate])
+                except (ValueError, TypeError):
+                    pass
 
-    value_type = _get_value_type(attribute)
     val = attribute.get("value")
     if val is not None and not isinstance(val, (dict, list, bool)):
-        if value_type in (None, 0):
-            if isinstance(val, str) and val.lstrip("-").isdigit():
-                return int(val)
-            if not isinstance(val, str):
-                return int(val)
-    return 0
+        try:
+            return int(val)
+        except (ValueError, TypeError):
+            pass
+
+    return None
 
 
-def _get_attribute_string(attribute: dict[str, Any]) -> str:
-    for field in ("string_value", "stringValue", "StringValue"):
-        if field in attribute:
-            val = attribute[field]
-            if val:
+def _get_attribute_string(attribute: dict[str, Any]) -> str | None:
+    for candidate in ("string_value", "stringValue", "StringValue", "string"):
+        if candidate in attribute:
+            val = attribute[candidate]
+            if val is not None:
                 return str(val)
 
     nested = attribute.get("value")
     if isinstance(nested, dict):
-        for field in ("string_value", "stringValue", "StringValue", "string"):
-            if field in nested:
-                val = nested[field]
-                if val:
+        for candidate in ("string_value", "stringValue", "StringValue", "string"):
+            if candidate in nested:
+                val = nested[candidate]
+                if val is not None:
                     return str(val)
 
-    value_type = _get_value_type(attribute)
     val = attribute.get("value")
-    if isinstance(val, str) and val and value_type in (None, 1):
+    if isinstance(val, str):
         return val
-    return ""
+
+    return None
 
 
 def _find_attribute_by_key(attributes: list, key: int) -> dict[str, Any] | None:
@@ -388,13 +399,17 @@ class PcapDataParser:
                     continue
                 key = _normalize_attribute_key(attribute.get("key"))
                 if key == 0:  # level
-                    level = _get_attribute_int32(attribute)
+                    val = _get_attribute_int32(attribute)
+                    if val is not None:
+                        level = val
                 elif key == 7:  # name
-                    name_val = _get_attribute_string(attribute)
-                    if name_val:
-                        name = name_val
+                    val = _get_attribute_string(attribute)
+                    if val is not None:
+                        name = val
                 elif key == 11:  # worldLevel
-                    world_level = _get_attribute_int32(attribute)
+                    val = _get_attribute_int32(attribute)
+                    if val is not None:
+                        world_level = val
 
             parse_incomplete = name == "获取失败" or (level == 0 and world_level == 0)
             if not attributes:
@@ -409,8 +424,8 @@ class PcapDataParser:
                     f"key0/7/11样本={key_samples}"
                 )
 
-            if not attributes or parse_incomplete:
-                self._save_basic_info_debug(uid, base_info)
+            # if not attributes or parse_incomplete:
+            #     self._save_basic_info_debug(uid, base_info)
 
             self.account_info = BaseInfo(id=uid, name=name, level=level, worldLevel=world_level)
 

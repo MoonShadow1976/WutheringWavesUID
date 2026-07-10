@@ -398,20 +398,10 @@ class PcapDataParser:
 
             parse_incomplete = name == "获取失败" or (level == 0 and world_level == 0)
             if not attributes:
-                logger.warning(
-                    f"BasicInfoNotify.attributes 为空，uid={uid}，"
-                    f"可用键：{list(base_info.keys())}"
-                )
+                logger.warning(f"BasicInfoNotify.attributes 为空，uid={uid}，可用键：{list(base_info.keys())}")
             elif parse_incomplete:
-                attr_keys = [
-                    _normalize_attribute_key(a.get("key"))
-                    for a in attributes
-                    if isinstance(a, dict)
-                ]
-                key_samples = {
-                    key: _find_attribute_by_key(attributes, key)
-                    for key in (0, 7, 11)
-                }
+                attr_keys = [_normalize_attribute_key(a.get("key")) for a in attributes if isinstance(a, dict)]
+                key_samples = {key: _find_attribute_by_key(attributes, key) for key in (0, 7, 11)}
                 logger.warning(
                     f"BasicInfoNotify 属性解析不完整，uid={uid}，"
                     f"解析结果 name={name!r} level={level} worldLevel={world_level}，"

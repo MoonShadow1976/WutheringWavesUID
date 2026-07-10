@@ -16,6 +16,75 @@ from .detail_json import m_id2monsterId_strange, main_first_props, main_second_p
 TEXT_PATH = Path(__file__).parent
 
 
+def _normalize_attribute_key(key) -> int | None:
+    if key is None:
+        return None
+    if isinstance(key, int):
+        return key
+    if isinstance(key, str) and key.isdigit():
+        return int(key)
+    return None
+
+
+def _get_value_type(attribute: dict[str, Any]) -> int | None:
+    if "value_type" in attribute:
+        return int(attribute["value_type"])
+    if "valueType" in attribute:
+        return int(attribute["valueType"])
+    return None
+
+
+def _get_attribute_int32(attribute: dict[str, Any]) -> int:
+    for field in ("int32_value", "int32Value", "Int32Value"):
+        if field in attribute:
+            return int(attribute[field])
+
+    nested = attribute.get("value")
+    if isinstance(nested, dict):
+        for field in ("int32_value", "int32Value", "Int32Value", "int32"):
+            if field in nested:
+                return int(nested[field])
+
+    value_type = _get_value_type(attribute)
+    val = attribute.get("value")
+    if val is not None and not isinstance(val, (dict, list, bool)):
+        if value_type in (None, 0):
+            if isinstance(val, str) and val.lstrip("-").isdigit():
+                return int(val)
+            if not isinstance(val, str):
+                return int(val)
+    return 0
+
+
+def _get_attribute_string(attribute: dict[str, Any]) -> str:
+    for field in ("string_value", "stringValue", "StringValue"):
+        if field in attribute:
+            val = attribute[field]
+            if val:
+                return str(val)
+
+    nested = attribute.get("value")
+    if isinstance(nested, dict):
+        for field in ("string_value", "stringValue", "StringValue", "string"):
+            if field in nested:
+                val = nested[field]
+                if val:
+                    return str(val)
+
+    value_type = _get_value_type(attribute)
+    val = attribute.get("value")
+    if isinstance(val, str) and val and value_type in (None, 1):
+        return val
+    return ""
+
+
+def _find_attribute_by_key(attributes: list, key: int) -> dict[str, Any] | None:
+    for attribute in attributes:
+        if isinstance(attribute, dict) and _normalize_attribute_key(attribute.get("key")) == key:
+            return attribute
+    return None
+
+
 @dataclass
 class RoleInfo:
     """角色信息"""
@@ -285,6 +354,18 @@ class PcapDataParser:
             logger.exception("PCAP 數據解析失敗", e)
             return []
 
+    def _save_basic_info_debug(self, uid: int, base_info: dict[str, Any]):
+        """保存 BasicInfoNotify 原始数据，便于排查 attributes 解析问题"""
+        try:
+            user_data_dir = Path("data/pcap_data") / str(uid)
+            user_data_dir.mkdir(parents=True, exist_ok=True)
+            debug_file = user_data_dir / "debug_basic_info.json"
+            with open(debug_file, "w", encoding="utf-8") as f:
+                json.dump(base_info, f, ensure_ascii=False, indent=2)
+            logger.warning(f"BasicInfoNotify 解析不完整，已保存原始数据到：{debug_file}")
+        except Exception as e:
+            logger.error(f"保存 BasicInfoNotify 调试数据失败: {e}")
+
     def _extract_base_info_data_from_wuthery(self, base_info: dict[str, Any]):
         """從 Wuthery API 格式提取用户基本數據"""
         try:
@@ -298,16 +379,48 @@ class PcapDataParser:
             name = "获取失败"
             world_level = 0
 
-            # 遍历属性列表提取所需值
-            attributes = base_info.get("attributes", [])
+            attributes = base_info.get("attributes") or base_info.get("Attributes") or []
+            if not isinstance(attributes, list):
+                attributes = []
+
             for attribute in attributes:
-                key = attribute.get("key")
+                if not isinstance(attribute, dict):
+                    continue
+                key = _normalize_attribute_key(attribute.get("key"))
                 if key == 0:  # level
-                    level = attribute.get("int32_value", 0)
+                    level = _get_attribute_int32(attribute)
                 elif key == 7:  # name
-                    name = attribute.get("string_value", "获取失败")
+                    name_val = _get_attribute_string(attribute)
+                    if name_val:
+                        name = name_val
                 elif key == 11:  # worldLevel
-                    world_level = attribute.get("int32_value", 0)
+                    world_level = _get_attribute_int32(attribute)
+
+            parse_incomplete = name == "获取失败" or (level == 0 and world_level == 0)
+            if not attributes:
+                logger.warning(
+                    f"BasicInfoNotify.attributes 为空，uid={uid}，"
+                    f"可用键：{list(base_info.keys())}"
+                )
+            elif parse_incomplete:
+                attr_keys = [
+                    _normalize_attribute_key(a.get("key"))
+                    for a in attributes
+                    if isinstance(a, dict)
+                ]
+                key_samples = {
+                    key: _find_attribute_by_key(attributes, key)
+                    for key in (0, 7, 11)
+                }
+                logger.warning(
+                    f"BasicInfoNotify 属性解析不完整，uid={uid}，"
+                    f"解析结果 name={name!r} level={level} worldLevel={world_level}，"
+                    f"attributes 共 {len(attributes)} 项，keys={attr_keys}，"
+                    f"key0/7/11样本={key_samples}"
+                )
+
+            if not attributes or parse_incomplete:
+                self._save_basic_info_debug(uid, base_info)
 
             self.account_info = BaseInfo(id=uid, name=name, level=level, worldLevel=world_level)
 

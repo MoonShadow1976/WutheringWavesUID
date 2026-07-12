@@ -67,9 +67,6 @@ async def clean_pool_data():
     if not pools:
         return None, None
 
-    char_up_end_time = None
-    weapon_up_end_time = None
-
     for temp_pool in pools:
         pool = WavesPool.model_validate(temp_pool)
 
@@ -78,9 +75,6 @@ async def clean_pool_data():
         total_seconds = int((now - end_time).total_seconds())
 
         if "角色" in pool.pool_type:
-            if char_up_end_time is not None and total_seconds != char_up_end_time:
-                continue
-
             for five_star in pool.five_star_ids:
                 result_char["five2num"][five_star] += 1
                 result_char["five2endtime"][five_star] = total_seconds
@@ -93,14 +87,7 @@ async def clean_pool_data():
                 result_char["four2endtime"][four_star] = total_seconds
 
             fixed_four_repeat.add(f"{pool.end_time}_{pool.pool_type}")
-
-            # is up
-            if total_seconds < 0 and char_up_end_time is None:
-                char_up_end_time = total_seconds
         else:
-            if weapon_up_end_time is not None and total_seconds != weapon_up_end_time:
-                continue
-
             for five_star in pool.five_star_ids:
                 result_weapon["five2num"][five_star] += 1
                 result_weapon["five2endtime"][five_star] = total_seconds
@@ -113,10 +100,6 @@ async def clean_pool_data():
                 result_weapon["four2endtime"][four_star] = total_seconds
 
             fixed_four_repeat.add(f"{pool.end_time}_{pool.pool_type}")
-
-            # is up
-            if total_seconds < 0 and weapon_up_end_time is None:
-                weapon_up_end_time = total_seconds
 
     return result_char, result_weapon
 

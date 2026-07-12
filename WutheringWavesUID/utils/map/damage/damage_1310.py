@@ -57,7 +57,7 @@ def calc_damage_1(
         for i, skill in enumerate(skillParamId):
             skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skill, skillLevel)
             msg = f"技能倍率{skill_multi}"
-            attr.add_skill_multi(skill_multi, title + f"第{i}段", msg)
+            attr.add_skill_multi(skill_multi, title + f"第{i + 1}段", msg)
     elif FC == "ThrumHavoc":
         title = "千声翻涌·湮灭"
         attr.set_char_attr("湮灭")
@@ -65,7 +65,7 @@ def calc_damage_1(
         for i, skill in enumerate(skillParamId):
             skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skill, skillLevel)
             msg = f"技能倍率{skill_multi}"
-            attr.add_skill_multi(skill_multi, title + f"第{i}段", msg)
+            attr.add_skill_multi(skill_multi, title + f"第{i + 1}段", msg)
     elif FC == "ThrumAeroSword":
         title = "千声翻涌·剑止万律"
         attr.set_char_attr("气动")
@@ -81,7 +81,7 @@ def calc_damage_1(
         for i, skill in enumerate(skillParamId):
             skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skill, skillLevel)
             msg = f"技能倍率{skill_multi}"
-            attr.add_skill_multi(skill_multi, title + f"第{i}段", msg)
+            attr.add_skill_multi(skill_multi, title + f"第{i + 1}段", msg)
     elif FC == "ThrumAeroMid-air":
         title = "千声翻涌·气动空中"
         attr.set_char_attr("气动")
@@ -89,7 +89,7 @@ def calc_damage_1(
         for i, skill in enumerate(skillParamId):
             skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skill, skillLevel)
             msg = f"技能倍率{skill_multi}"
-            attr.add_skill_multi(skill_multi, title + f"第{i}段", msg)
+            attr.add_skill_multi(skill_multi, title + f"第{i + 1}段", msg)
 
         title = "千声翻涌·气动下落攻击"
         skillParamId = "16"
@@ -114,10 +114,10 @@ def calc_damage_1(
             msg = "长按施放超负荷后，自身共鸣技能伤害加成提升20%"
             attr.add_dmg_bonus(0.2, title, msg)
 
-    # 共鸣回路
-    title = "共鸣回路-超负荷"
-    msg = "短按施放超负荷，队伍中的角色获得10%攻击加成"
-    attr.add_atk_percent(0.1, title, msg)
+    # # 共鸣回路
+    # title = "共鸣回路-超负荷"
+    # msg = "短按施放超负荷，队伍中的角色获得10%攻击加成"
+    # attr.add_atk_percent(0.1, title, msg)
 
     # 设置角色谐度破坏
 
@@ -193,7 +193,7 @@ def calc_damage_2(
 
     # 默认手法
     title = "默认手法"
-    msg = "点按超负荷-打满电涌-长按超负荷-大招-千声翻涌"
+    msg = "点按超负荷-大招"
     attr.add_effect(title, msg)
 
     # 设置角色固有技能

@@ -10,6 +10,7 @@ from ...damage.utils import (
     SkillTreeMap,
     SkillType,
     cast_damage,
+    cast_hit,
     cast_liberation,
     cast_skill,
     cast_variation,
@@ -118,7 +119,7 @@ def calc_damage_1(
         attr.add_easy_damage(0.4, title, msg)
 
     # 设置角色施放技能
-    damage_func = [cast_variation, cast_skill, cast_damage, cast_liberation]
+    damage_func = [cast_variation, cast_skill, cast_hit, cast_damage, cast_liberation]
     phase_damage(attr, role, damage_func, isGroup)
 
     # 声骸
@@ -165,7 +166,7 @@ def calc_damage_2(
         for i, skill in enumerate(skillParamId):
             skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], skill, skillLevel)
             msg = f"技能倍率{skill_multi}"
-            attr.add_skill_multi(skill_multi, title + f"第{i}段", msg)
+            attr.add_skill_multi(skill_multi, title + f"第{i + 1}段", msg)
 
     # 设置角色等级
     attr.set_character_level(role.role.level)
@@ -234,7 +235,7 @@ def calc_damage_2(
         attr.add_easy_damage(0.4, title, msg)
 
     # 设置角色施放技能
-    damage_func = [cast_variation, cast_skill, cast_damage, cast_liberation]
+    damage_func = [cast_variation, cast_skill, cast_hit, cast_damage, cast_liberation]
     phase_damage(attr, role, damage_func, isGroup)
 
     # 声骸
@@ -308,7 +309,7 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_2(attr, role, FC="HavocinBloomStage"),
     },
     {
-        "title": "01穗/65莫/重击·苍剑式",
+        "title": "01穗/65莫/裁羽寂万音",
         "func": lambda attr, role: calc_damage_10(attr, role, d="r"),
     },
     {
@@ -316,7 +317,7 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_10(attr, role, d="a"),
     },
     {
-        "title": "01穗/01千/重击·苍剑式",
+        "title": "01穗/01千/裁羽寂万音",
         "func": lambda attr, role: calc_damage_11(attr, role, d="r"),
     },
     {

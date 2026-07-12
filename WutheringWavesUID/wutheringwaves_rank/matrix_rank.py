@@ -14,9 +14,11 @@ from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import (
     GET_MATRIX_RANK_URL,
+    MatrixCharDetail,
     MatrixRank,
     MatrixRankItem,
     MatrixRankRes,
+    MatrixTeamDetail,
 )
 from ..utils.ascension.char import get_char_model
 from ..utils.cache import TimedCache
@@ -48,6 +50,7 @@ from ..utils.image import (
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
 from ..utils.util import get_end_time, get_version
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -110,6 +113,81 @@ async def get_rank(item: MatrixRankItem) -> MatrixRankRes | None:
             logger.exception(f"获取矩阵排行失败: {e}")
 
 
+def _merge_rank_data(
+    local_records: list[GroupRankRecord],
+    api_rank_list: list[MatrixRank],
+    waves_id_list: list[str],
+    page_num: int,
+    self_uid: str | None = None,
+) -> list[MatrixRank]:
+    """
+    合并本地DB数据和API返回结果，按照uid去重，本地数据为主，API做补充。
+    """
+    merged_list: list[MatrixRank] = []
+    local_uids: set[str] = set()
+
+    for rec in local_records:
+        # 矩阵仅有一个队伍（最高分队伍），取第一个
+        team = rec.teams[0] if rec.teams else None
+        if not team:
+            # 如果没有队伍，跳过（数据不完整）
+            continue
+
+        # 从队伍的角色列表中构建 MatrixCharDetail
+        char_details = []
+        for role in team.roles:
+            char_details.append(
+                MatrixCharDetail(
+                    char_id=role.role_id,
+                    chain=role.chain,
+                )
+            )
+
+        team_detail = MatrixTeamDetail(
+            buff_icon=team.buff_icon or "",
+            char_detail=char_details,
+            score=team.team_score,  # 队伍得分
+        )
+
+        rank_item = MatrixRank(
+            team=team_detail,
+            total_score=rec.score,  # 总得分
+            team_count=rec.team_count,
+            rank=0,
+            user_id=rec.user_id or "",
+            waves_id=rec.waves_id,
+            kuro_name=rec.name or rec.waves_id,
+            alias_name="",
+        )
+        merged_list.append(rank_item)
+        local_uids.add(rec.waves_id)
+
+    # 从API结果中补充本地没有的uid
+    for api_rank in api_rank_list:
+        if api_rank.waves_id not in local_uids:
+            if not waves_id_list or api_rank.waves_id in waves_id_list:
+                merged_list.append(api_rank)
+
+    # 按总分从高到低排序
+    merged_list.sort(key=lambda x: x.total_score, reverse=True)
+
+    # 重新计算排名
+    for i, item in enumerate(merged_list):
+        item.rank = i + 1
+
+    # 取前 page_num 条
+    rank_list = merged_list[:page_num]
+
+    # 如果有self_uid的数据，且不在前 page_num 条，则追加到最后
+    if self_uid and self_uid not in [item.waves_id for item in rank_list]:
+        for item in merged_list:
+            if item.waves_id == self_uid:
+                rank_list.append(item)
+                break
+
+    return rank_list
+
+
 async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     waves_id = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     match = re.search(r"(\d+)", ev.raw_text)
@@ -143,30 +221,60 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
         if not waves_id_list:
             return "本群暂无矩阵排行数据"
 
-    item = MatrixRankItem(
-        page=pages,
-        page_num=page_num,
-        waves_id=waves_id or "",
-        version=get_version(),
-        waves_id_list=waves_id_list,
-    )
+    # 确定查询版本（本期/上期）
+    version = get_version()
+    current_version = ".".join(version.split(".")[:2])
+    db_versions = await GroupRankRecord.get_all_matrix_versions()
 
-    rankInfoList = await get_rank(item)
-    if not rankInfoList:
-        return "获取矩阵排行失败"
+    # 合并、去重、降序排序（保证 current_version 在内）
+    all_versions_sorted = sorted(set(db_versions + [current_version]), reverse=True)
 
-    if rankInfoList.message and not rankInfoList.data:
-        return rankInfoList.message
+    api_rank_list: list[MatrixRank] = []  # Step A: 从API获取数据（用于补充本地没有的uid）
+    local_records: list[GroupRankRecord] = []  # Step B: 从本地数据库获取记录
 
-    if not rankInfoList.data:
-        return "获取矩阵排行失败"
+    if "上期" in ev.raw_text:
+        idx = all_versions_sorted.index(current_version)
+        if idx + 1 < len(all_versions_sorted):  # 存在更旧版本
+            target_version = all_versions_sorted[idx + 1]
+            title = "上期" + title
+        else:
+            return "暂无上期排行数据"
+    else:
+        target_version = current_version  # 本期永远用当前版本
+
+        api_item = MatrixRankItem(
+            page=pages,
+            page_num=page_num,
+            waves_id=waves_id or "",
+            version=version,
+            waves_id_list=waves_id_list,
+        )
+
+    if waves_id_list:
+        local_records = await GroupRankRecord.get_matrix_records(
+            waves_ids=waves_id_list,
+            version=target_version,
+        )
+
+    rankInfoList = await get_rank(api_item)
+    if rankInfoList and rankInfoList.data:
+        api_rank_list = rankInfoList.data.rank_list
+
+    # 合并去重
+    if "总" in ev.raw_text:  # 仅有API数据
+        display_list = api_rank_list
+    else:  # 合并
+        display_list = _merge_rank_data(local_records, api_rank_list, waves_id_list or [], page_num, waves_id)
+
+    if not display_list:
+        return "暂无矩阵排行数据" if "上期" not in ev.raw_text else "暂无上期排行数据"
 
     # 设置图像尺寸
     width = 1300
     item_spacing = 120
     header_height = 510
     footer_height = 50
-    char_list_len = len(rankInfoList.data.rank_list)
+    char_list_len = len(display_list)
 
     # 计算所需的总高度
     total_height = header_height + item_spacing * char_list_len + footer_height
@@ -221,15 +329,14 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
 
     card_img.paste(char_mask_temp, (0, 0), char_mask_temp)
 
-    rank_list = rankInfoList.data.rank_list
-    tasks = [get_avatar(rank.user_id) for rank in rank_list]
+    tasks = [get_avatar(rank.user_id) for rank in display_list]
     results = await asyncio.gather(*tasks)
 
     # 获取角色信息
     bot_color_map = {}
     bot_color = copy.deepcopy(BOT_COLOR)
 
-    for rank_temp_index, temp in enumerate(zip(rank_list, results)):
+    for rank_temp_index, temp in enumerate(zip(display_list, results)):
         rank_temp: MatrixRank = temp[0]
         role_avatar: Image.Image = temp[1]
         role_bg = Image.open(TEXT_PATH / "bar1.png")
@@ -265,7 +372,7 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
 
         # uid
         uid_color = "white"
-        if rank_temp.waves_id == item.waves_id:
+        if rank_temp.waves_id == waves_id:
             uid_color = RED
         role_bg_draw.text((350, 40), f"特征码: {rank_temp.waves_id}", uid_color, waves_font_20, "lm")
 
@@ -321,9 +428,10 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
         )
 
         # 队伍数量（显示在头像前面）
+        team_count = rank_temp.team_count if rank_temp.team_count else 0
         role_bg_draw.text(
             (570, 55),
-            f"队伍数量: {rank_temp.team_count}",
+            f"队伍数量: {team_count}",
             (255, 255, 255),
             waves_font_20,
             "lm",

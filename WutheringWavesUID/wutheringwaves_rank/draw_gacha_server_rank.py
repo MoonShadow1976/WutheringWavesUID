@@ -1,5 +1,6 @@
 import asyncio
 import copy
+import json
 from pathlib import Path
 
 from gsuid_core.bot import Bot
@@ -11,6 +12,8 @@ from PIL import Image, ImageDraw
 
 from ..utils.api.wwapi import (
     GET_GACHA_RANK_URL,
+    GachaRankData,
+    GachaRankDetail,
     GachaRankItem,
     GachaRankRes,
 )
@@ -47,6 +50,7 @@ from ..utils.image import (
 from ..utils.util import get_version
 from ..wutheringwaves_analyzecard.user_info_utils import get_region_for_rank
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
@@ -126,6 +130,131 @@ async def get_gacha_rank(
             return None
 
 
+def _merge_gacha_rank_data(
+    local_records: list[GroupRankRecord],
+    api_rank_list: list[GachaRankDetail],
+    waves_id_list: list[str],
+    page_num: int,
+    rank_type: str,  # API中的rank_type，如 'character_event'
+    self_uid: str | None = None,
+) -> GachaRankRes:
+    """
+    合并本地和API的抽卡排行数据，返回排序后的列表（前page_num条，可能追加self_uid）
+    """
+    # 1. 将本地记录转换为 GachaRankDetail
+    local_map: dict[str, GachaRankDetail] = {}
+    for rec in local_records:
+        try:
+            stats = json.loads(rec.gacha_data)
+        except Exception:
+            continue
+
+        # 根据 rank_type 提取对应的池子统计数据
+        pool_key = None
+        if rank_type in ("character_event", "character_event_rate", "lucky_rank", "unlucky_rank"):
+            pool_key = "character_event"
+        elif rank_type in ("weapon_event", "weapon_event_rate"):
+            pool_key = "weapon_event"
+        else:
+            continue
+
+        pool_stats = stats.get(pool_key, {})
+        total_pulls = pool_stats.get("total_pulls", 0)
+        avg_gold = pool_stats.get("avg_gold")  # 可能为 None
+        avg_up = pool_stats.get("avg_up")
+        max_up = pool_stats.get("max_consecutive_up", 0)
+        max_non_up = pool_stats.get("max_consecutive_non_up", 0)
+
+        # 确定排序值（value）
+        if rank_type == "character_event":
+            value = avg_up if avg_up is not None else float("inf")
+        elif rank_type == "weapon_event":
+            value = avg_gold if avg_gold is not None else float("inf")
+        elif rank_type == "lucky_rank":
+            value = max_up
+        elif rank_type == "unlucky_rank":
+            value = max_non_up
+        elif rank_type == "character_event_rate":
+            value = avg_up if avg_up is not None else -1.0
+        elif rank_type == "weapon_event_rate":
+            value = avg_gold if avg_gold is not None else -1.0
+        else:
+            continue
+
+        # 构造 GachaRankDetail
+        detail = GachaRankDetail(
+            rank=0,
+            waves_id=rec.waves_id,
+            user_id=rec.user_id or "",
+            kuro_name=rec.name or rec.waves_id,
+            alias_name="LOCAL",  # 本地无主人别名
+            value=value,
+            total_pulls=total_pulls,
+            avg_gold=avg_gold if avg_gold is not None else 0.0,
+            avg_up=avg_up if avg_up is not None else 0.0,
+            max_consecutive_up=max_up,
+            max_consecutive_non_up=max_non_up,
+        )
+        local_map[rec.waves_id] = detail
+
+    # 2. 合并列表
+    merged: list[GachaRankDetail] = []
+    local_uids = set(local_map.keys())
+
+    # 先添加本地记录
+    for _uid, detail in local_map.items():
+        merged.append(detail)
+
+    # 从API结果中补充本地没有的uid（并且该uid在 waves_id_list 中，如果指定了）
+    for api_detail in api_rank_list:
+        if api_detail.waves_id not in local_uids:
+            if not waves_id_list or api_detail.waves_id in waves_id_list:
+                merged.append(api_detail)
+
+    # 3. 排序
+    sort_config = {
+        "character_event": {"key": lambda x: x.avg_up if x.avg_up is not None else float("inf"), "reverse": False},
+        "weapon_event": {"key": lambda x: x.avg_gold if x.avg_gold is not None else float("inf"), "reverse": False},
+        "lucky_rank": {"key": lambda x: x.max_consecutive_up, "reverse": True},
+        "unlucky_rank": {"key": lambda x: x.max_consecutive_non_up, "reverse": True},
+        "character_event_rate": {"key": lambda x: x.avg_up if x.avg_up is not None else -1.0, "reverse": True},
+        "weapon_event_rate": {"key": lambda x: x.avg_gold if x.avg_gold is not None else -1.0, "reverse": True},
+    }
+    config = sort_config.get(rank_type)
+    if config:
+        merged.sort(key=config["key"], reverse=config["reverse"])
+    else:
+        # fallback
+        merged.sort(key=lambda x: x.value, reverse=True)
+
+    # 4. 重新计算排名
+    for i, item in enumerate(merged):
+        item.rank = i + 1
+
+    # 5. 取前 page_num 条
+    rank_list = merged[:page_num]
+
+    # 6. 如果 self_uid 不在前 page_num 条，则追加到最后
+    user_rank = None
+    if self_uid and self_uid not in [item.waves_id for item in rank_list]:
+        for item in merged:
+            if item.waves_id == self_uid:
+                user_rank = item
+                break
+
+    result = GachaRankRes(
+        code=0,
+        message="",
+        data=GachaRankData(
+            rank_list=rank_list,
+            total_page=1,
+            user_rank=user_rank,
+        ),
+    )
+
+    return result
+
+
 async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages: int = 1, user_type: str = "") -> str | bytes:
     """
     绘制抽卡排行榜图片
@@ -158,43 +287,72 @@ async def draw_gacha_server_rank_img(bot: Bot, ev: Event, rank_type: str, pages:
 
     pages = max(min(pages, 10), 1)  # 大于1小于10
 
-    # 获取用户的waves_id（如果有绑定）
+    # 获取当前用户的waves_id
     from ..utils.database.models import WavesBind
 
-    waves_id = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
-    if not waves_id:
-        waves_id = ""
+    waves_id = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id) or ""
 
-    # 获取请求用户特征码列表
-    users = []
-    if user_type == "bot":
-        users = await WavesBind.get_all_data()
-    elif user_type == "group":
-        if not ev.group_id:
-            return "请在群聊中使用"
-        users = await WavesBind.get_group_all_uid(ev.group_id)
+    # 判断是否为“总”排行
+    if not user_type:
+        # 只有API数据
+        rank_data = await get_gacha_rank(
+            rank_type=api_rank_type,
+            page=pages,
+            page_num=20,
+            waves_id=waves_id,
+            waves_id_list=[],
+        )
+        if not rank_data or not rank_data.data:
+            return f"获取{rank_type}排行失败"
+    else:
+        # 群或bot：获取uid列表
+        if user_type == "bot":
+            binds = await WavesBind.get_all_data()
+        elif user_type == "group":
+            if not ev.group_id:
+                return "请在群聊中使用"
+            binds = await WavesBind.get_group_all_uid(ev.group_id)
+        else:
+            binds = []
 
-    waves_id_list = []
-    if users:
-        # 集合推导式，自动去重，然后转换为列表
-        waves_id_list = list({uid for user in users if user.uid for uid in user.uid.split("_")})
+        if not binds:
+            return f"{user_type}内暂无用户"
+
+        # 提取所有uid
+        uid_set = set()
+        for bind in binds:
+            if bind.uid:
+                uids = bind.uid.split("_")
+                uid_set.update([uid for uid in uids if uid])
+        waves_id_list = list(uid_set) if uid_set else []
         if not waves_id_list:
             return f"{user_type}内暂无用户"
 
-    # 获取排行数据
-    rank_data = await get_gacha_rank(
-        rank_type=api_rank_type,
-        page=pages,
-        page_num=20,
-        waves_id=waves_id,
-        waves_id_list=waves_id_list,
-    )
+        # 调用API获取排行（使用相同的page和page_num，但仅作为补充）
+        api_data = await get_gacha_rank(
+            rank_type=api_rank_type,
+            page=pages,
+            page_num=20,
+            waves_id=waves_id,
+            waves_id_list=waves_id_list,
+        )
+        api_rank_list = api_data.data.rank_list if api_data and api_data.data else []
 
-    if not rank_data:
-        return f"获取{rank_type_clean}排行失败"
+        # 从本地获取抽卡记录
+        local_records = await GroupRankRecord.get_gacha_records_by_waves_ids(waves_id_list)
 
-    if not rank_data.data or not rank_data.data.rank_list:
-        return f"{rank_type_clean}暂无数据"
+        # 合并
+        rank_data = _merge_gacha_rank_data(
+            local_records=local_records,
+            api_rank_list=api_rank_list,
+            waves_id_list=waves_id_list,
+            page_num=20,
+            rank_type=api_rank_type,
+            self_uid=waves_id,
+        )
+
+        if not rank_data:
+            return f"{rank_type}暂无数据"
 
     # 绘制排行榜
     return await draw_rank_card(ev, rank_data, rank_type_clean, waves_id, user_type)

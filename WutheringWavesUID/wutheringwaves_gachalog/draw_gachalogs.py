@@ -623,6 +623,11 @@ async def upload_gacha_to_server(uid: str, total_data: dict, ev: Event):
         }
         push_item(QUEUE_SCORE_RANK, metadata)
 
+        # 保存到本地数据库
+        from ..wutheringwaves_grouprank.models import GroupRankRecord
+
+        await GroupRankRecord.save_gacha_record(user_id=ev.user_id, waves_id=uid, name=base_info.name, gacha_stats=gacha_stats)
+
     except Exception as e:
         # 记录错误但不影响主要功能
         logger.error(f"上传抽卡记录时出错: {e}")

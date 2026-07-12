@@ -27,8 +27,10 @@ from ..utils.imagetool import draw_pic_with_ring, get_square_avatar
 from ..utils.queues.const import QUEUE_MATRIX_RECORD
 from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
+from ..utils.util import get_version
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
@@ -367,12 +369,131 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     # 上传矩阵数据到排行榜
     await upload_matrix_record(uid, matrix_data, role_info, role_detail_info_map)
 
+    # 保存矩阵数据到本地群排行
+    await save_matrix_to_group_rank(user_id, uid, account_info.name, matrix_data, role_info, role_detail_info_map)
+
     # 裁剪画布到实际使用的高度，并添加页脚
     final_height = max(y_offset, 1440)
     card_img = card_img.crop((0, 0, 2560, final_height))
     card_img = add_footer(card_img, 600, 20, color="black")
     card_img = await convert_img(card_img)
     return card_img
+
+
+async def save_matrix_to_group_rank(
+    user_id: str,
+    waves_id: str,
+    name: str,
+    matrix_data: MatrixData,
+    role_info: RoleList,
+    role_detail_info_map: dict | None = None,
+) -> bool:
+    """
+    保存矩阵数据到本地群排行数据库（仅本地存储，不涉及上传队列）
+
+    Args:
+        user_id: GSUID 用户ID
+        waves_id: 鸣潮游戏UID
+        name: 玩家昵称
+        matrix_data: 矩阵数据对象
+        role_info: 角色列表（用于匹配角色ID与图标）
+        role_detail_info_map: 角色详细信息映射（用于获取链度）
+
+    Returns:
+        bool: 保存成功返回 True，否则 False
+    """
+    try:
+        # 1. 提取奇点扩张模式 (modeId=1)
+        if not matrix_data.modeDetails:
+            logger.info("[矩阵本地保存] 跳过: 无模式数据")
+            return False
+
+        singularity_mode = next(
+            (mode for mode in matrix_data.modeDetails if mode.modeId == 1),
+            None,
+        )
+        if not singularity_mode:
+            logger.info("[矩阵本地保存] 跳过: 未找到奇点扩张模式")
+            return False
+
+        if not singularity_mode.hasRecord:
+            logger.info("[矩阵本地保存] 跳过: 奇点扩张无记录")
+            return False
+
+        if not singularity_mode.teams:
+            logger.info("[矩阵本地保存] 跳过: 奇点扩张无队伍数据")
+            return False
+
+        # 2. 找到分数最高的队伍
+        highest_team = max(singularity_mode.teams, key=lambda t: t.score)
+
+        # 3. 通过角色图标匹配角色并获取链度（与绘制卡片逻辑一致）
+        if not highest_team.roleIcons:
+            logger.info("[矩阵本地保存] 跳过: 最高分队伍无角色图标")
+            return False
+
+        char_scores = []
+        for icon_url in highest_team.roleIcons:
+            role = next(
+                (r for r in role_info.roleList if r.roleIconUrl == icon_url),
+                None,
+            )
+            if not role:
+                continue
+
+            chain = None
+            if role_detail_info_map:
+                role_detail = role_detail_info_map.get(str(role.roleId))
+                chain = role_detail.get_chain_num() if role_detail else None
+
+            if chain is None:
+                logger.warning(f"[矩阵本地保存] 无法匹配链度 (roleId={role.roleId}, name={role.roleName})")
+                return False
+
+            char_scores.append(
+                {
+                    "role_id": role.roleId,
+                    "chain": chain,
+                }
+            )
+
+        if not char_scores:
+            logger.info(f"[矩阵本地保存] 跳过: 无法匹配角色信息 (roleIcons数量={len(highest_team.roleIcons)})")
+            return False
+
+        # 4. 提取增益图标
+        buff_icon = ""
+        if highest_team.buffs and len(highest_team.buffs) > 0:
+            buff_icon = highest_team.buffs[0].buffIcon
+
+        # 5. 获取当前版本
+        current_version = ".".join(get_version().split(".")[:2])
+
+        # 6. 保存到数据库
+        await GroupRankRecord.save_matrix_record(
+            user_id=user_id,
+            waves_id=waves_id,
+            name=name,
+            version=current_version,
+            total_score=singularity_mode.score,
+            team_count=len(singularity_mode.teams),
+            team_score=highest_team.score,
+            buff_icon=buff_icon,
+            char_scores=char_scores,
+        )
+
+        logger.info(
+            f"[矩阵本地保存] 成功 user_id={user_id}, waves_id={waves_id}, "
+            f"version={current_version}, total_score={singularity_mode.score}"
+        )
+
+        # 清理旧版本数据（仅保留最近两个版本）
+        await GroupRankRecord.clean_old_matrix_versions()
+        return True
+
+    except Exception as e:
+        logger.exception(f"[矩阵本地保存] 保存失败: {e}")
+        return False
 
 
 async def upload_matrix_record(

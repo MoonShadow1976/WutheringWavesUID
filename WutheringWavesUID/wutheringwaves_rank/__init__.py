@@ -140,7 +140,7 @@ async def send_gacha_server_rank_card(bot: Bot, ev: Event):
 
 
 @sv_waves_matrix_rank_all.on_regex(
-    r"^矩阵(群|总|bot)?排行(\d+)?$",
+    r"矩阵(群|总|bot)?排行(\d+)?",
     block=True,
 )
 async def send_matrix_rank_all_card(bot: Bot, ev: Event):

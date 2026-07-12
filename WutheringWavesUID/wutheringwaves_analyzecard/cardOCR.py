@@ -481,7 +481,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                 final_result["用户信息"]["玩家名称"] = player_match.group(1).strip()
                 # continue  # 避免玩家名称在前被识别为角色名，不使用分割改用剔除
                 del_text = player_match.group(0)
-                uid_save = patterns["uid_info"].search(del_text)
+                uid_save = re.compile(r"(?:特|徵|碼).*").search(del_text)
                 if uid_save:  # 保留意外识别的UID - 玩家名称为空时
                     del_text = del_text.replace(uid_save.group(0), "")
                 line = line.replace(del_text, "")
@@ -493,13 +493,13 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
             )  # 先删除特殊符号, 匹配“漂泊者·湮灭”
             line_clean_text = re.sub(r"\s+", " ", line_clean_text).strip()  # 再合并多余空白
 
-            for line_clean in line_clean_text.split(" "):
-                # UID提取
-                uid_match = patterns["uid_info"].search(line_clean)
-                if uid_match:
-                    final_result["用户信息"]["UID"] = uid_match.group(1)
-                    line_clean = line_clean.replace(uid_match.group(0), "")
+            # UID提取
+            uid_match = patterns["uid_info"].search(line_clean_text)
+            if uid_match:
+                final_result["用户信息"]["UID"] = uid_match.group(1)
+                line_clean_text = line_clean_text.replace(uid_match.group(0), "")
 
+            for line_clean in line_clean_text.split(" "):
                 # 等级提取
                 line_num = re.sub(r"[oOQ○◌θ]", "0", line_clean)  # 处理0的错误识别
                 line_num = re.sub(r"[^0-9\s]", "", line_num)

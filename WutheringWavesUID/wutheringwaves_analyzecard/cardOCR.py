@@ -462,7 +462,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
         "level": re.compile(r"(?i)(?:.*?[LV]?)?\s*?(\d+)"),  # 兼容 "666", "L.9", "L1", "v8", "v.99", "L.V.2"
         "skill_level": re.compile(r"(\d+)\s*[/ ]\s*\d*"),  # 兼容 L.10/10、LV.10/1、4 10、4/ 等格式
         "player_info": re.compile(r"玩.名(?:稱)?\s*[:：]?\s*([^\t\r\n]+)"),
-        "uid_info": re.compile(r"(?:特|徵|碼)[^\d]*(\d+)"),
+        "uid_info": re.compile(r"(?:特|徵|碼)[^\d]*(\d{9})"),
         "echo_cut": re.compile(r"([\u4e00-\u9fa5]+)\s*\D*([\d.]+%?)"),  # 分割各个词条与对应数值
         "echo_value": re.compile(
             r"([\u4e00-\u9fa5]+)\s*(?:\d+\s+)?\D*?([\d.]+%?)"

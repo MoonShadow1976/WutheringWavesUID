@@ -29,7 +29,7 @@ def get_havoc_bane_level(
     """
     count = 3  # 初始3
     for char_id in attr.teammate_char_ids:
-        if int(char_id) in Abnormal_Level_Dict.keys():
+        if int(char_id) in Abnormal_Level_Dict.keys() and 1110 != int(char_id):  # 穗穗不给
             count += Abnormal_Level_Dict[int(char_id)]  # 角色额外增加的层数
     return count
 
@@ -295,6 +295,28 @@ def calc_damage_11(
         return calc_damage_2(attr, role, isGroup, FC="HavocinBloomStage")
 
 
+def calc_damage_12(
+    attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True, d: Literal["r", "a"] = "r"
+) -> tuple[str, str]:
+    attr.set_char_damage(hit_damage)
+    attr.set_char_template("temp_atk")
+
+    title = "秧秧·玄翎-常态"
+    msg = "特定攻击为命中目标附加【虚湮效应】"
+    attr.set_env_havoc_bane()
+
+    # 千咲buff
+    chisa_buff(attr, 0, 1, isGroup)
+
+    # 莫特斐buff
+    motefei_buff(attr, 6, 5, isGroup)
+
+    if d == "r":
+        return calc_damage_1(attr, role, isGroup)
+    else:
+        return calc_damage_2(attr, role, isGroup, FC="HavocinBloomStage")
+
+
 damage_detail = [
     {
         "title": "裁羽寂万音",
@@ -309,12 +331,12 @@ damage_detail = [
         "func": lambda attr, role: calc_damage_2(attr, role, FC="HavocinBloomStage"),
     },
     {
-        "title": "01穗/65莫/裁羽寂万音",
-        "func": lambda attr, role: calc_damage_10(attr, role, d="r"),
+        "title": "01千/65莫/裁羽寂万音",
+        "func": lambda attr, role: calc_damage_12(attr, role, d="r"),
     },
     {
-        "title": "01穗/65莫/湮象风华总伤",
-        "func": lambda attr, role: calc_damage_10(attr, role, d="a"),
+        "title": "01穗/65莫/裁羽寂万音",
+        "func": lambda attr, role: calc_damage_10(attr, role, d="r"),
     },
     {
         "title": "01穗/01千/裁羽寂万音",

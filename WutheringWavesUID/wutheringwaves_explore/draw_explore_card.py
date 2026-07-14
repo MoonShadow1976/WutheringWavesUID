@@ -79,7 +79,6 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
         return hint.error_reply(WAVES_CODE_102)
-    # 账户数据
     account_info = await waves_api.get_base_info(uid, ck)
     if not account_info.success:
         return account_info.throw_msg()
@@ -95,21 +94,37 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
         return hint.error_reply(msg="探索数据为空")
 
     # ==================== 布局常量 ====================
-    base_info_h = 250  # 头部基础信息区高度
-    footer_h = 150  # 底部页脚高度
-    explore_title_h = 200  # 每个大区域标题区高度
-    explore_frame_h = 500  # 每个小区域框高度（每行3个）
-    W = 1900  # 每个大区域所占宽度（含内部左右边距）
-    left_margin = 100  # 图片左边缘到第一列内容左边缘的距离
-    right_margin = 100  # 最后一列内容右边缘到图片右边缘的距离
-    column_gap = 50  # 列间距
+    base_info_h = 250
+    footer_h = 150
+    explore_title_h = 200
+    W = 1900
+    left_margin = 100
+    right_margin = 100
+    column_gap = 50
 
-    # 计算每个大区域的高度（标题 + 小区域行数 * 每行高度）
+    # 全100小卡片尺寸 & 非100标准尺寸
+    FULL_FRAME_W = 300
+    FULL_FRAME_H = 83
+    PARTIAL_FRAME_W = 600
+    PARTIAL_FRAME_H = 500
+
+    # ==================== 预处理：分类并计算每个大区域高度 ====================
+    # 存储每个大区域的分类结果及行数
+    explore_classified = []  # 元素: (full_areas, partial_areas, full_rows, partial_rows)
     explore_heights = []
+
     for _explore in explore_data.exploreList:
-        area_count = len(_explore.areaInfoList or [])
-        rows = math.ceil(area_count / 3)
-        height = explore_title_h + rows * explore_frame_h
+        area_list = _explore.areaInfoList or []
+        # 全100区域：所有子项进度均为100（空列表视为全100）
+        full_areas = [a for a in area_list if all(item.progress == 100 for item in a.itemList)]
+        # 非全100区域：至少有一个子项进度不为100
+        partial_areas = [a for a in area_list if any(item.progress != 100 for item in a.itemList)]
+
+        full_rows = math.ceil(len(full_areas) / 6) if full_areas else 0
+        partial_rows = math.ceil(len(partial_areas) / 3) if partial_areas else 0
+
+        explore_classified.append((full_areas, partial_areas, full_rows, partial_rows))
+        height = explore_title_h + full_rows * FULL_FRAME_H + partial_rows * PARTIAL_FRAME_H
         explore_heights.append(height)
 
     if not explore_heights:
@@ -117,7 +132,6 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
 
     # ==================== 自动选择最佳列数 ====================
     def calc_layout(k):
-        # 贪心将大区域分配到各列（高度大的优先放入当前最矮的列）
         columns = [[] for _ in range(k)]
         col_heights = [0] * k
         sorted_idx = sorted(range(len(explore_heights)), key=lambda i: explore_heights[i], reverse=True)
@@ -131,39 +145,34 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
 
     best_k = 1
     best_score = float("inf")
-    max_allowed_width = 4200  # 最大宽度限制（避免图片过宽）
+    max_allowed_width = 4200
     for k in range(1, min(4, len(explore_heights) + 1)):
         _, _, total_h, total_w = calc_layout(k)
-        # 综合评分：宽高比接近1（方形） + 惩罚过大尺寸
         ratio = max(total_w, total_h) / min(total_w, total_h)
-        size_penalty = max(total_w, total_h) / 2000  # 基准2000，越大惩罚越高
+        size_penalty = max(total_w, total_h) / 2000
         score = ratio + size_penalty
         if total_w > max_allowed_width:
-            score += 10  # 超过宽度限制严重惩罚
+            score += 10
         if score < best_score:
             best_score = score
             best_k = k
 
-    # 使用最佳列数重新布局
     columns, col_heights, total_height, total_width = calc_layout(best_k)
 
     # ==================== 创建背景图片 ====================
     img = get_waves_bg(total_width, total_height, "bg3")
 
-    # ==================== 绘制头部固定区域 ====================
-    # 头像部分
+    # ==================== 绘制头部固定区域（不变） ====================
     avatar, avatar_ring = await draw_pic_with_ring(ev)
     img.paste(avatar, (85, 70), avatar)
     img.paste(avatar_ring, (95, 80), avatar_ring)
 
-    # 基础信息（名字、特征码）
     base_info_bg = Image.open(TEXT_PATH / "base_info_bg.png")
     base_info_draw = ImageDraw.Draw(base_info_bg)
     base_info_draw.text((275, 120), f"{account_info.name[:7]}", "white", waves_font_30, "lm")
     base_info_draw.text((226, 173), f"特征码:  {account_info.id}", GOLD, waves_font_25, "lm")
     img.paste(base_info_bg, (75, 20), base_info_bg)
 
-    # 账号等级 / 世界等级（如果有）
     if account_info.is_full:
         title_bar = Image.open(TEXT_PATH / "title_bar.png")
         title_bar_draw = ImageDraw.Draw(title_bar)
@@ -173,67 +182,90 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
         title_bar_draw.text((810, 78), f"Lv.{account_info.worldLevel}", "white", waves_font_42, "mm")
         img.paste(title_bar, (40, 70), title_bar)
 
-    # ==================== 绘制各列中的大区域 ====================
-    # 预加载可复用的图片模板
+    # ==================== 预加载模板 ====================
     explore_title_template = Image.open(TEXT_PATH / "explore_title.png")
     explore_frame_template = Image.open(TEXT_PATH / "explore_frame.png")
     explore_bar_template = Image.open(TEXT_PATH / "explore_bar.png")
-    tag_yes_img = tag_yes  # 外部已定义的100%标签
+    tag_yes_img = tag_yes
     tag_no_img = tag_no
 
+    # ==================== 绘制各列中的大区域 ====================
     for col_idx, col_indices in enumerate(columns):
         col_x = left_margin + col_idx * (W + column_gap)
         y_offset = base_info_h
 
         for region_idx in col_indices:
             _explore = explore_data.exploreList[region_idx]
+            full_areas, partial_areas, full_rows, partial_rows = explore_classified[region_idx]
 
             # ----- 1. 绘制大区域标题 -----
             _explore_title = explore_title_template.copy()
             _explore_title = await change_color(_explore_title, country_color_map.get(_explore.country.countryName, YELLOW))
-            # 国家图标
             icon_data = await sget(_explore.country.homePageIcon)
             content_img = Image.open(BytesIO(icon_data.content)).convert("RGBA")
             _explore_title.alpha_composite(content_img, (150, 30))
-            # 文字
             _explore_title_draw = ImageDraw.Draw(_explore_title)
             _explore_title_draw.text((370, 100), f"{_explore.country.countryName}", "white", waves_font_42, "lm")
             _explore_title_draw.text((370, 150), f"探索度: {_explore.countryProgress}%", "white", waves_font_42, "lm")
             tag = tag_yes_img if float(_explore.countryProgress) == 100 else tag_no_img
             _explore_title.alpha_composite(tag, (1740, 60))
-            # 粘贴标题
             img.alpha_composite(_explore_title, (col_x, y_offset))
 
-            # ----- 2. 绘制小区域（每行3个）-----
-            area_list = _explore.areaInfoList or []
-            for ni, _subArea in enumerate(area_list):
+            # ----- 2. 绘制全100区域（小卡片，每行6个） -----
+            y_offset_full = y_offset + explore_title_h
+            for ni, area in enumerate(full_areas):
+                row = ni // 6
+                col_in_region = ni % 6
+                frame_x = col_x + 100 + FULL_FRAME_W * col_in_region
+                frame_y = y_offset_full + row * FULL_FRAME_H
+
+                progress_color = get_progress_color(area.areaProgress)
+
+                # 辅助函数：绘制全100小卡片
+                small_frame = Image.new("RGBA", (FULL_FRAME_W, FULL_FRAME_H), (0, 0, 0, 0))
+                draw = ImageDraw.Draw(small_frame)
+                # 绘制圆角背景
+                draw.rounded_rectangle((20, 20, FULL_FRAME_W - 15, FULL_FRAME_H), radius=15, fill=progress_color)
+                # 区域名称
+                draw.text((30, 50), f"{area.areaName[:6]}", "white", waves_font_36, "lm")
+                # 进度百分比
+                draw.text((FULL_FRAME_W - 15, 50), "√", "white", waves_font_36, "rm")
+                # 已完成标签（缩放）
+                tag = tag_yes_img.copy().resize((70, 30), Image.Resampling.LANCZOS)
+                small_frame.alpha_composite(tag, (FULL_FRAME_W - 80, 8))
+
+                img.alpha_composite(small_frame, (frame_x, frame_y))
+
+            # ----- 3. 绘制非全100区域（标准框，每行3个，只显示前5个子项） -----
+            y_offset_partial = y_offset_full + full_rows * FULL_FRAME_H
+            for ni, area in enumerate(partial_areas):
                 row = ni // 3
                 col_in_region = ni % 3
-                frame_x = col_x + 100 + 600 * col_in_region  # 内部偏移 100+600*列
-                frame_y = y_offset + explore_title_h + row * explore_frame_h
+                frame_x = col_x + 100 + PARTIAL_FRAME_W * col_in_region
+                frame_y = y_offset_partial + row * PARTIAL_FRAME_H
 
-                # 复制并定制单个小区域框
+                # 复制标准框模板
                 _explore_frame = explore_frame_template.copy()
-                _explore_frame = await change_color(_explore_frame, get_progress_color(_subArea.areaProgress), h=83)
+                _explore_frame = await change_color(_explore_frame, get_progress_color(area.areaProgress), h=83)
                 _explore_frame_draw = ImageDraw.Draw(_explore_frame)
 
                 # 区域名称和总进度
-                _explore_frame_draw.text((30, 50), f"{_subArea.areaName}", "white", waves_font_36, "lm")
-                _explore_frame_draw.text((570, 50), f"{_subArea.areaProgress}%", "white", waves_font_36, "rm")
+                _explore_frame_draw.text((30, 50), f"{area.areaName}", "white", waves_font_36, "lm")
+                _explore_frame_draw.text((570, 50), f"{area.areaProgress}%", "white", waves_font_36, "rm")
 
-                # 子项目列表（每个子项目一个进度条）
+                # 只取前5个子项
+                sub_items = [a for a in area.itemList if a.progress != 100][:5]
                 max_len = 357
-                for bi, _item in enumerate(_subArea.itemList):
+                for bi, _item in enumerate(sub_items):
                     _explore_bar = explore_bar_template.copy()
                     _explore_frame.alpha_composite(_explore_bar, (20, 90 + 70 * bi))
                     ratio = _item.progress * 0.01
-                    # 进度条填充
                     _explore_frame_draw.rounded_rectangle(
                         (131, 113 + 70 * bi, int(131 + ratio * max_len), 126 + 70 * bi),
                         radius=10,
                         fill=get_progress_color(_item.progress),
                     )
-                    # 子项名称（折行处理）
+                    # 子项名称折行
                     if len(_item.name) >= 4:
                         s = len(_item.name) // 2
                         _explore_frame_draw.text((68, 95 + 70 * bi), f"{_item.name[:s]}", "white", waves_font_24, "mm")
@@ -242,15 +274,13 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
                         _explore_frame_draw.text((68, 120 + 70 * bi), f"{_item.name}", "white", waves_font_30, "mm")
                     _explore_frame_draw.text((580, 120 + 70 * bi), f"{_item.progress}%", "white", waves_font_30, "rm")
 
-                # 粘贴小区域框
                 img.alpha_composite(_explore_frame, (frame_x, frame_y))
 
-            # 更新该列的垂直偏移
-            rows_count = math.ceil(len(area_list) / 3)
-            y_offset += explore_title_h + rows_count * explore_frame_h
+            # 更新该列垂直偏移
+            y_offset = y_offset_partial + partial_rows * PARTIAL_FRAME_H
 
     # ==================== 添加页脚 ====================
     img = add_footer(img, total_width // 2)
-    img = img.resize((img.width // 2, img.height // 2), Image.Resampling.LANCZOS)
+    # img = img.resize((img.width // 2, img.height // 2), Image.Resampling.LANCZOS)
     img = await convert_img(img)
     return img

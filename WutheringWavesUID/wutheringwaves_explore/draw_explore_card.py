@@ -98,7 +98,7 @@ async def draw_explore_img(ev: Event, uid: str, user_id: str):
     footer_h = 150
     explore_title_h = 200
     W = 1900
-    left_margin = 100
+    left_margin = 0
     right_margin = 100
     column_gap = 50
 

@@ -157,7 +157,7 @@ def _merge_rank_data(
             user_id=rec.user_id or "",
             waves_id=rec.waves_id,
             kuro_name=rec.name or rec.waves_id,
-            alias_name="",
+            alias_name="LOCAL",  # 本地无主人别名
         )
         merged_list.append(rank_item)
         local_uids.add(rec.waves_id)

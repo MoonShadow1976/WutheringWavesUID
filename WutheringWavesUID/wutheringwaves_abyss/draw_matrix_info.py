@@ -366,7 +366,6 @@ async def draw_buff_section(
 
 
 async def draw_wave_card(
-    monster_id: int,
     waves: list[Wave],
     width: int,
 ) -> Image.Image | None:
@@ -374,16 +373,22 @@ async def draw_wave_card(
         return None
 
     template = waves[0]
+    min_level = min(w.MonsterLevel for w in waves)
     max_level = max(w.MonsterLevel for w in waves)
 
-    # 下载所有需要的图片资源（异步并行）
-    bg_icon = await pic_download_from_url(MATRIX_PATH, template.Icon)
+    # 1. 背景图：优先使用 MonsterPortrait
+    bg_url = template.MonsterPortrait
+    if not bg_url.startswith("http"):
+        bg_url = template.Icon.split(bg_url[:5])[0] + bg_url.split(".")[0] + "." + template.Icon.split(".")[-1]
+    bg_icon = await pic_download_from_url(MATRIX_PATH, bg_url)
     bg_icon = bg_icon.convert("RGBA")
-    icon_width = width - 2 * CARD_PADDING
-    bg_icon = bg_icon.resize((icon_width, int(icon_width * bg_icon.height / bg_icon.width)), Image.Resampling.LANCZOS)
-    bg_icon_height = bg_icon.height
 
-    # 收集唯一描述和 Buff
+    # 强制缩放为指定宽高比 (592:232)
+    icon_width = width - 2 * CARD_PADDING
+    bg_icon_height = int(icon_width * 232 / 592)
+    bg_icon = bg_icon.resize((icon_width, bg_icon_height * 2), Image.Resampling.LANCZOS)
+
+    # 收集描述和 Buff
     unique_descs = []
     seen_desc = set()
     for w in waves:
@@ -399,105 +404,120 @@ async def draw_wave_card(
 
     recommend_features = template.RecommendTeamFeature
 
-    # 预下载所有技能图标和角色图标
+    # 下载图标
     skill_icons = {}
     for buff in unique_buffs.values():
         icon = await pic_download_from_url(MATRIX_PATH, buff.SkillIcon)
         skill_icons[buff.Id] = icon.resize((32, 32), Image.Resampling.LANCZOS)
 
     role_icons = {}
-    icon_size = 50
+    icon_size = 40
     for recom in recommend_features:
         icon = await pic_download_from_url(MATRIX_PATH, recom.Icon)
         role_icons[recom.Id] = icon.resize((icon_size, icon_size), Image.Resampling.LANCZOS)
 
-    # 辅助函数：测量文本块的总高度（像素）
+    # 辅助：测量文本块高度
     def measure_text_block(lines: list[list[tuple[str, str]]], font, line_spacing=20) -> int:
-        # 每行高度为 line_spacing，不考虑字体实际高度（保持简单）
         return len(lines) * line_spacing
 
-    # 收集所有文本行
-    desc_lines_list = []
-    for desc in unique_descs:
-        lines = parse_and_wrap_text(desc, max_chars_per_line=34)
-        desc_lines_list.append(lines)
-
+    # 准备所有文本行
+    desc_lines_list = [parse_and_wrap_text(desc, max_chars_per_line=34) for desc in unique_descs]
     buff_lines_list = []
     for buff in unique_buffs.values():
-        title_lines = [[(buff.SkillTitle, parse_color(buff.BuffColor))]]  # 标题作为一行（带颜色）
+        title_lines = [[(buff.SkillTitle, parse_color(buff.BuffColor))]]
         desc_lines = parse_and_wrap_text(buff.SkillDesc, max_chars_per_line=32)
         buff_lines_list.append((title_lines, desc_lines))
 
     # 计算高度
     name_height = 30
     tag_height = 30 if template.Tags else 0
-    # 背景图标下方开始内容
     content_start_y = CARD_PADDING + bg_icon_height
-
     curr_y = content_start_y
-    # 描述
+
     for lines in desc_lines_list:
-        curr_y += measure_text_block(lines, FONT_DESC) + BUFF_LINE_SPACING  # + 空行间距
-    # Buff
+        curr_y += measure_text_block(lines, FONT_DESC) + BUFF_LINE_SPACING
     for title_lines, desc_lines in buff_lines_list:
         curr_y += measure_text_block(title_lines, FONT_BUFF) + BUFF_LINE_SPACING
         curr_y += measure_text_block(desc_lines, FONT_DESC) + BUFF_LINE_SPACING
 
-    # ========== 动态计算推荐体系布局 ==========
+    # ========== 动态计算推荐体系布局（修复宽度计算） ==========
     icon_text_gap = 5
     available_width = width - 2 * CARD_PADDING
-    if recommend_features:
-        # 计算每个条目的宽度（图标 + 间隙 + 文本宽度）
-        item_widths = []
-        for recom in recommend_features:
-            text_width = FONT_ITEM_NAME.getlength(recom.Name)
-            item_width = icon_size + icon_text_gap + text_width
-            item_widths.append(item_width)
+    ITEM_LINE_SPACING = 20  # 每行文本高度（与 draw_colored_lines 一致）
 
-        # 动态换行：计算每行放哪些条目
+    if recommend_features:
+        item_data = []
+        for recom in recommend_features:
+            name_lines = parse_and_wrap_text(recom.Name, max_chars_per_line=32)
+            # 计算所有行的最大宽度（每行内所有片段宽度之和）
+            max_line_width = 0
+            for line in name_lines:
+                line_width = sum(FONT_ITEM_NAME.getlength(text) for text, _ in line)
+                if line_width > max_line_width:
+                    max_line_width = line_width
+            item_width = icon_size + icon_text_gap + max_line_width
+            item_height = max(icon_size, len(name_lines) * ITEM_LINE_SPACING)
+            item_data.append(
+                {
+                    "recom": recom,
+                    "name_lines": name_lines,
+                    "width": item_width,
+                    "height": item_height,
+                }
+            )
+
+        # 按宽度换行排列
         rows = []
+        row_heights = []
         current_row = []
         current_row_width = 0
-        for idx, w in enumerate(item_widths):
-            needed = w + (0 if not current_row else BUFF_LINE_SPACING)
+        current_row_max_height = 0
+
+        for idx, data in enumerate(item_data):
+            needed = data["width"] + (0 if not current_row else BUFF_LINE_SPACING)
             if current_row_width + needed <= available_width:
                 current_row.append(idx)
                 current_row_width += needed
+                current_row_max_height = max(current_row_max_height, data["height"])
             else:
                 if current_row:
                     rows.append(current_row)
+                    row_heights.append(current_row_max_height)
                 current_row = [idx]
-                current_row_width = w
+                current_row_width = data["width"]
+                current_row_max_height = data["height"]
         if current_row:
             rows.append(current_row)
+            row_heights.append(current_row_max_height)
 
-        num_rows = len(rows)
-        recommend_height = num_rows * (icon_size + BUFF_LINE_SPACING // 2) + BUFF_LINE_SPACING // 2
+        recommend_height = sum(row_heights) + (len(rows) - 1) * BUFF_LINE_SPACING // 2
         curr_y += recommend_height
     else:
         recommend_height = 0
+        rows = []
+        row_heights = []
+        item_data = []
 
-    total_height = curr_y + CARD_PADDING
+    total_height = curr_y + CARD_PADDING + BUFF_LINE_SPACING
 
     # 创建最终图像
     img = Image.new("RGBA", (width, total_height), (0, 0, 0, 100))
     draw_rounded_rect_on_image(img, (0, 0, width, total_height), CORNER_RADIUS, BG_COLOR)
 
-    # 背景半透明叠加
     bg_layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    bg_layer.paste(bg_icon, (CARD_PADDING, CARD_PADDING), bg_icon)
+    bg_layer.paste(bg_icon, (CARD_PADDING * 7, 0), bg_icon)
     img.alpha_composite(bg_layer, (0, 0))
 
     draw = ImageDraw.Draw(img)
 
-    # 名称和等级
-    name_text = f"{template.Name}  Lv.{max_level}"
-    draw.text((CARD_PADDING, CARD_PADDING + 20), name_text, fill="white", font=FONT_MONSTER_NAME)
+    # 名称和等级（最低-最高）
+    name_text = f"{template.Name}  Lv.{min_level}-{max_level}"
+    draw.text((CARD_PADDING * 2, CARD_PADDING * 2), name_text, fill="white", font=FONT_MONSTER_NAME)
 
     # Tags
     if template.Tags:
-        tag_x = CARD_PADDING
-        tag_y = CARD_PADDING + 20 + name_height
+        tag_x = CARD_PADDING * 2
+        tag_y = CARD_PADDING * 2 + name_height
         for tag in template.Tags:
             color = parse_color(tag.Color)
             draw.text((tag_x, tag_y), tag.Name, fill=color, font=FONT_ITEM_NAME)
@@ -513,11 +533,8 @@ async def draw_wave_card(
     # 绘制 Buff
     icon_small = 32
     for buff, (title_lines, desc_lines) in zip(unique_buffs.values(), buff_lines_list):
-        # 技能图标
         skill_icon = skill_icons[buff.Id]
         img.paste(skill_icon, (CARD_PADDING, curr_y), skill_icon)
-        # 标题
-        title_color = parse_color(buff.BuffColor)
         title_x = CARD_PADDING + icon_small + 10
         for line in title_lines:
             draw_colored_lines(draw, [line], title_x, curr_y, FONT_BUFF)
@@ -528,21 +545,23 @@ async def draw_wave_card(
             curr_y += BUFF_LINE_SPACING
         curr_y += BUFF_LINE_SPACING
 
-    # ========== 绘制推荐体系（动态布局） ==========
+    # ========== 绘制推荐体系（使用 draw_colored_lines） ==========
     if recommend_features:
         role_start_y = curr_y + BUFF_LINE_SPACING
         for row_idx, row_indices in enumerate(rows):
-            row_y = role_start_y + row_idx * (icon_size + BUFF_LINE_SPACING // 2)
+            row_y = role_start_y + sum(row_heights[:row_idx]) + row_idx * BUFF_LINE_SPACING // 2
             x_offset = CARD_PADDING
             for idx in row_indices:
-                recom = recommend_features[idx]
+                data = item_data[idx]
+                recom = data["recom"]
+                name_lines = data["name_lines"]
+                # 绘制图标
                 role_icon = role_icons[recom.Id]
                 img.paste(role_icon, (x_offset, row_y), role_icon)
-                text_y = row_y + icon_size // 4  # 保持与原逻辑一致的垂直偏移
-                draw.text((x_offset + icon_size + icon_text_gap, text_y), recom.Name, fill="white", font=FONT_ITEM_NAME)
-                # 计算当前条目实际宽度用于下一个x偏移
-                item_width = icon_size + icon_text_gap + FONT_ITEM_NAME.getlength(recom.Name)
-                x_offset += int(item_width) + BUFF_LINE_SPACING
+                # 绘制名称（多行，带颜色）
+                text_x = x_offset + icon_size + icon_text_gap
+                draw_colored_lines(draw, name_lines, text_x, row_y, FONT_ITEM_NAME)
+                x_offset += int(data["width"]) + BUFF_LINE_SPACING
 
     return img
 
@@ -557,7 +576,6 @@ async def draw_roles_section(
 
     # 先计算每个卡片的高度（动态）
     card_heights = []
-    card_widths = []  # 每个卡片宽度（固定）
     role_card_width = (width - 100) // 4  # 4列
     role_icon_size = 80
 
@@ -572,55 +590,60 @@ async def draw_roles_section(
         h = max(role_icon_size + 20, desc_height) + 20
         card_heights.append(h)
 
-    # 布局：每行4个，行高取本行最大卡片高度
-    rows = []
-    for i in range(0, len(roles), 4):
-        row_roles = roles[i : i + 4]
-        row_heights = card_heights[i : i + 4]
-        row_height = max(row_heights) + 20  # 行间距
-        rows.append((row_roles, row_height))
+    # 瀑布流布局：计算每个卡片的列索引和坐标
+    start_y = 60  # 标题区域底部
+    gap = 20  # 卡片之间的垂直间距
+    col_heights = [0] * 4  # 每列当前累计高度（从 start_y 起算）
+    positions = []  # 存储 (col, x, y, role_index)
 
-    total_height = sum(h for _, h in rows) + 60  # 标题区域高度
+    for i, role in enumerate(roles):
+        # 找到当前总高度最小的列
+        min_col = min(range(4), key=lambda c: col_heights[c])
+        x = 20 + min_col * (role_card_width + 20)
+        y = start_y + col_heights[min_col]
+        positions.append((min_col, x, y, i))
+        # 更新该列高度：卡片高度 + 间距
+        col_heights[min_col] += card_heights[i] + gap
 
-    # 创建关卡画布
+    # 总高度 = 起始偏移 + 最高列的总高度 - 最后一个间距 + 底部留白
+    max_col_height = max(col_heights)
+    total_height = start_y + max_col_height - gap + 20  # 底部留白20px
+
+    # ---------- 3. 创建画布并绘制背景 ----------
     img = Image.new("RGBA", (width, total_height), (0, 0, 0, 0))
     draw_rounded_rect_on_image(img, (0, 0, width, total_height), CORNER_RADIUS, BG_COLOR)
     draw = ImageDraw.Draw(img)
 
-    # 绘制标题（可选）
+    # 标题
     draw.text((20, 20), "助力角色", fill="white", font=FONT_TITLE)
 
-    curr_y = 60
-    for row_roles, row_height in rows:
-        row_start_y = curr_y
-        # 本行内每个卡片按自己的高度绘制
-        for col, role in enumerate(row_roles):
-            idx = (curr_y - 60) // (row_height) * 4 + col
-            card_h = card_heights[idx]
-            rx = 20 + col * (role_card_width + 20)
-            ry = row_start_y
-            # 绘制卡片背景
-            draw_rounded_rect_on_image(img, (rx, ry, rx + role_card_width, ry + card_h), CORNER_RADIUS, BG_COLOR)
+    # ---------- 4. 逐个绘制卡片 ----------
+    for col, x, y, idx in positions:
+        role = roles[idx]
+        card_h = card_heights[idx]
 
-            # 左侧图标（垂直居中）
-            icon_y = ry + (card_h - role_icon_size) // 4
-            role_icon = await get_square_avatar(role.Id)
-            role_icon = role_icon.resize((role_icon_size, role_icon_size), Image.Resampling.LANCZOS)
-            img.paste(role_icon, (rx + 10, icon_y), role_icon)
+        # 卡片背景
+        draw_rounded_rect_on_image(img, (x, y, x + role_card_width, y + card_h), CORNER_RADIUS, BG_COLOR)
 
-            # 右侧描述文本
-            text_x = rx + role_icon_size + 20
-            text_y = ry + 15
-            for desc in role.EnhanceSkillDesc:
-                lines = parse_and_wrap_text(desc.Value, max_chars_per_line=12)
-                for line in lines:
-                    draw_colored_lines(draw, [line], text_x, text_y, FONT_DESC)
-                    text_y += 20
-            # 角色名显示在图标下方或描述区？按需求放在图标下方居中
-            name_x = rx + role_icon_size // 2 + 10
-            name_y = icon_y + role_icon_size + 5
-            draw.text((name_x, name_y), role.RoleInfo.Name, fill="white", font=FONT_ITEM_NAME, anchor="ma")
-        curr_y += row_height
+        # 左侧图标（垂直居中）
+        icon_y = y + (card_h - role_icon_size) // 4
+        role_icon = await get_square_avatar(role.Id)
+        role_icon = role_icon.resize((role_icon_size, role_icon_size), Image.Resampling.LANCZOS)
+        img.paste(role_icon, (x + 10, icon_y), role_icon)
+
+        # 右侧描述文本
+        text_x = x + role_icon_size + 20
+        text_y = y + 15
+        for desc in role.EnhanceSkillDesc:
+            lines = parse_and_wrap_text(desc.Value, max_chars_per_line=12)
+            for line in lines:
+                draw_colored_lines(draw, [line], text_x, text_y, FONT_DESC)
+                text_y += 20
+
+        # 角色名（图标下方居中）
+        name_x = x + role_icon_size // 2 + 10
+        name_y = icon_y + role_icon_size + 5
+        draw.text((name_x, name_y), role.RoleInfo.Name, fill="white", font=FONT_ITEM_NAME, anchor="ma")
 
     return img
 
@@ -631,7 +654,7 @@ async def draw_level_card(level: LevelDetail, width: int) -> Image.Image:
     ordered_mids = []
     seen = set()
     for wave in level.Waves:
-        mid = wave.MonsterId
+        mid = wave.Name
         if mid not in seen:
             seen.add(mid)
             ordered_mids.append(mid)
@@ -643,7 +666,7 @@ async def draw_level_card(level: LevelDetail, width: int) -> Image.Image:
     monster_card_width = (width - 100 - MONSTER_GRID_SPACING) // 2
     monster_cards = []
     for mid in ordered_mids:
-        card_img = await draw_wave_card(mid, waves_by_monster[mid], monster_card_width)
+        card_img = await draw_wave_card(waves_by_monster[mid], monster_card_width)
         monster_cards.append(card_img)
 
     # 计算网格行布局（两列，动态行高）
@@ -651,8 +674,7 @@ async def draw_level_card(level: LevelDetail, width: int) -> Image.Image:
     for i in range(0, len(monster_cards), 2):
         left = monster_cards[i]
         right = monster_cards[i + 1] if i + 1 < len(monster_cards) else None
-        row_height = max(left.height, right.height if right else 0) + MONSTER_GRID_SPACING
-        rows.append((left, right, row_height))
+        rows.append((left, right, left.height + MONSTER_GRID_SPACING, right.height + MONSTER_GRID_SPACING if right else 0))
 
     # 生成 Buff 图像
     buff_img = await draw_buff_section(level.NewTowerBuffs, width - 100)
@@ -661,7 +683,7 @@ async def draw_level_card(level: LevelDetail, width: int) -> Image.Image:
     total_height = 60  # 标题区域
     if buff_img:
         total_height += buff_img.height + CARD_PADDING
-    total_height += sum(row[2] for row in rows) + 2 * CARD_PADDING
+    total_height += max(sum(row[2] for row in rows), sum(row[3] for row in rows)) + 2 * CARD_PADDING
 
     # 创建关卡画布
     img = Image.new("RGBA", (width, total_height), (0, 0, 0, 0))
@@ -677,12 +699,14 @@ async def draw_level_card(level: LevelDetail, width: int) -> Image.Image:
         curr_y += buff_img.height + CARD_PADDING
 
     # 粘贴怪物卡片
-    for left, right, row_height in rows:
+    left_y, right_y = curr_y, curr_y
+    for left, right, left_height, right_height in rows:
         if left:
-            img.paste(left, (50, curr_y), left)
+            img.paste(left, (50, left_y), left)
+            left_y += left_height
         if right:
-            img.paste(right, (50 + monster_card_width + MONSTER_GRID_SPACING, curr_y), right)
-        curr_y += row_height
+            img.paste(right, (50 + monster_card_width + MONSTER_GRID_SPACING, right_y), right)
+            right_y += right_height
 
     return img
 

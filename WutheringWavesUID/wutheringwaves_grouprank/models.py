@@ -440,7 +440,7 @@ class GroupRankRecord(SQLModel, table=True):
         if existing:
             existing.user_id = user_id
             existing.name = name
-            existing.total_score = total_score  # 注意：total_score 应映射到 score 字段
+            existing.score = total_score
             existing.team_count = team_count
             existing.team_score = team_score
             # 删除旧的队伍和角色（因为角色通过队伍级联删除）

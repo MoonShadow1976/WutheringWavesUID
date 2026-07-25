@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "止戈",
-        "desc": "<color=Title>普攻</color>\n进行最多{0}段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>格挡架势</color>\n长按<color=Highlight>普攻</color>，消耗耐力进入<color=Highlight>格挡架势</color>。\n<color=Highlight>格挡架势</color>下免疫打断，受到的伤害降低{1}%，持续消耗耐力；松开<color=Highlight>普攻</color>键时，结束<color=Highlight>格挡架势</color>，并施放<color=Highlight>普攻·逆转一击</color>，造成<color=Thunder>导电伤害</color>。\n若施放<color=Highlight>普攻·逆转一击</color>的一定时间内受到敌方目标攻击,免疫此次伤害并短暂停滞目标,随后会施放<color=Highlight>普攻·逆转一击·崩解</color>，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·逆转一击</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第{3}段。\n施放<color=Highlight>普攻·逆转一击·崩解</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>空中攻击·湮灭</color>。\n<color=Highlight>格挡架势</color>下可消耗耐力向对应方向进行<color=Highlight>闪避·瞬身</color>，施放该技能一定时间内可以触发成功<color=Highlight>闪避</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·湮灭</color>\n进行最多{4}段的连续攻击，造成<color=Dark>湮灭伤害</color>，施放该技能第{5}段后，在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第{6}段。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一段时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第{7}段。\n\n<color=Title>空中闪避反击</color>\n空中成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。",
+        "desc": "<color=Title>普攻</color>\n进行最多{0}段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>格挡架势</color>\n长按<color=Highlight>普攻</color>，消耗耐力进入<color=Highlight>格挡架势</color>。\n<color=Highlight>格挡架势</color>下免疫打断，受到的伤害降低{1}%，持续消耗耐力；松开<color=Highlight>普攻</color>键时，结束<color=Highlight>格挡架势</color>，并施放<color=Highlight>普攻·逆转一击</color>，造成<color=Thunder>导电伤害</color>。\n若施放<color=Highlight>普攻·逆转一击</color>的一定时间内受到敌方目标攻击,免疫此次伤害并短暂停滞目标,随后会施放<color=Highlight>普攻·逆转一击·崩解</color>，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·逆转一击</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第{3}段。\n施放<color=Highlight>普攻·逆转一击·崩解</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>空中攻击·湮灭</color>。\n<color=Highlight>格挡架势</color>下可消耗耐力向对应方向进行<color=Highlight>闪避·瞬身</color>，施放该技能一定时间内可以触发成功<color=Highlight>闪避</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·湮灭</color>\n进行最多{4}段的连续攻击，造成<color=Dark>湮灭伤害</color>，施放该技能第{5}段后，在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·克敌</color>。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一段时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第{6}段。\n\n<color=Title>空中闪避反击</color>\n空中成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。",
         "param": [
           "4",
           "60",
@@ -511,7 +511,6 @@
           "2",
           "3",
           "3",
-          "4",
           "3"
         ],
         "type": "常态攻击",

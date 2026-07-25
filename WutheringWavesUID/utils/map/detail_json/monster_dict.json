@@ -828,6 +828,15 @@
         "echo": 6000214,
         "name": "不熄猎手"
     },
+    "310001030": {
+        "rarity": 1,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000219,
+        "name": "玉冥蛇"
+    },
     "320000010": {
         "rarity": 2,
         "attributeId": 0,
@@ -1396,6 +1405,15 @@
         "echo": 6000216,
         "name": "封庭械囿"
     },
+    "320000690": {
+        "rarity": 2,
+        "attributeId": 2,
+        "elementResistance": [
+            2
+        ],
+        "echo": 6000220,
+        "name": "巡霄枪卫"
+    },
     "330000010": {
         "rarity": 3,
         "attributeId": 3,
@@ -1726,5 +1744,14 @@
         ],
         "echo": 6000218,
         "name": "千傀重楼"
+    },
+    "340000320": {
+        "rarity": 3,
+        "attributeId": 4,
+        "elementResistance": [
+            4
+        ],
+        "echo": 6000221,
+        "name": "天傀劫煞"
     }
 }

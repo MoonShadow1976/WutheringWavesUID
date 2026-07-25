@@ -506,6 +506,7 @@ async def pic_download_from_url(
         from gsuid_core.utils.download_resource.download_file import download
 
         await download(pic_url, path, name, tag="[鸣潮]")
+        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
     return Image.open(_path).convert("RGBA")
 

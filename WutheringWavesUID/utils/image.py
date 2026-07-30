@@ -1,7 +1,9 @@
+from functools import lru_cache
 from io import BytesIO
 import os
 from pathlib import Path
 import random
+import threading
 from typing import Literal
 
 from gsuid_core.logger import logger
@@ -102,6 +104,29 @@ WEAPON_RESONLEVEL_COLOR = {
 }
 
 
+_asset_copy_lock = threading.Lock()
+
+
+@lru_cache(maxsize=1024)
+def _load_asset_cached(path_str: str, mtime_ns: int, mode: str) -> Image.Image:
+    return Image.open(path_str).convert(mode)
+
+
+def load_asset(path, mode: str = "RGBA") -> Image.Image:
+    """读取素材并缓存解码结果, 返回副本(可安全修改)。文件变更(mtime)时自动失效。
+
+    仅用于小尺寸素材(图标/背景条/模板); 大图(角色立绘/分享背景)请勿使用, 避免内存膨胀。
+    """
+    path_str = str(path)
+    try:
+        mtime_ns = os.stat(path_str).st_mtime_ns
+    except OSError:
+        # 文件不存在时保持与 Image.open 一致的报错行为
+        return Image.open(path_str).convert(mode)
+    with _asset_copy_lock:
+        return _load_asset_cached(path_str, mtime_ns, mode).copy()
+
+
 def get_ICON():
     return Image.open(ICON)
 
@@ -124,21 +149,27 @@ async def get_random_waves_role_pile(char_id: str | None = None):
     return Image.open(f"{ROLE_PILE_PATH}/{path}").convert("RGBA")
 
 
-async def get_role_pile(resource_id: int | str, custom: bool = False) -> tuple[bool, Image.Image]:
+def get_role_pile_path(resource_id: int | str, custom: bool = False) -> tuple[bool, Path]:
     if custom:
-        custom_dir = f"{CUSTOM_CARD_PATH}/{resource_id}"
-        if os.path.isdir(custom_dir) and len(os.listdir(custom_dir)) > 0:
-            # logger.info(f'使用自定义角色头像: {resource_id}')
-            path = random.choice(os.listdir(custom_dir))
-            if path:
-                return True, Image.open(f"{custom_dir}/{path}").convert("RGBA")
+        custom_dir = Path(CUSTOM_CARD_PATH) / str(resource_id)
+        if custom_dir.is_dir():
+            paths = [path for path in custom_dir.iterdir() if path.is_file()]
+            if paths:
+                return True, random.choice(paths)
 
-    name = f"role_pile_{resource_id}.png"
-    path = ROLE_PILE_PATH / name
+    path = ROLE_PILE_PATH / f"role_pile_{resource_id}.png"
     if path.exists():
-        return False, Image.open(path).convert("RGBA")
-    else:
-        return False, Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
+        return False, path
+    return False, TEXT_PATH / "缺失.png"
+
+
+def get_role_pile_sync(resource_id: int | str, custom: bool = False) -> tuple[bool, Image.Image]:
+    is_custom, path = get_role_pile_path(resource_id, custom)
+    return is_custom, load_asset(path)
+
+
+async def get_role_pile(resource_id: int | str, custom: bool = False) -> tuple[bool, Image.Image]:
+    return get_role_pile_sync(resource_id, custom)
 
 
 async def get_role_pile_old(resource_id: int | str, custom: bool = False) -> Image.Image:
@@ -148,23 +179,23 @@ async def get_role_pile_old(resource_id: int | str, custom: bool = False) -> Ima
             # logger.info(f'使用自定义角色头像: {resource_id}')
             path = random.choice(os.listdir(custom_dir))
             if path:
-                return Image.open(f"{custom_dir}/{path}").convert("RGBA")
+                return load_asset(f"{custom_dir}/{path}")
 
     name = f"role_pile_{resource_id}.png"
     path = ROLE_PILE_PATH / name
     if path.exists():
-        return Image.open(path).convert("RGBA")
+        return load_asset(path)
     else:
-        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
+        return load_asset(TEXT_PATH / "缺失.png")
+
+
+def get_square_avatar_sync(resource_id: int | str) -> Image.Image:
+    path = AVATAR_PATH / f"role_head_{resource_id}.png"
+    return load_asset(path if path.exists() else TEXT_PATH / "缺失.png")
 
 
 async def get_square_avatar(resource_id: int | str) -> Image.Image:
-    name = f"role_head_{resource_id}.png"
-    path = AVATAR_PATH / name
-    if path.exists():
-        return Image.open(path).convert("RGBA")
-    else:
-        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
+    return get_square_avatar_sync(resource_id)
 
 
 async def cropped_square_avatar(item_icon: Image.Image, size: int) -> Image.Image:
@@ -191,45 +222,59 @@ async def cropped_square_avatar(item_icon: Image.Image, size: int) -> Image.Imag
     return resized_image
 
 
+def get_square_weapon_sync(resource_id: int | str) -> Image.Image:
+    path = WEAPON_PATH / f"weapon_{resource_id}.png"
+    return load_asset(path if path.exists() else TEXT_PATH / "缺失.png")
+
+
 async def get_square_weapon(resource_id: int | str) -> Image.Image:
-    name = f"weapon_{resource_id}.png"
-    path = WEAPON_PATH / name
-    if path.exists():
-        return Image.open(path).convert("RGBA")
-    else:
-        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
+    return get_square_weapon_sync(resource_id)
 
 
-async def get_attribute(name: str = "", is_simple: bool = False) -> Image.Image:
+def get_attribute_sync(name: str = "", is_simple: bool = False) -> Image.Image:
     if is_simple:
         name = f"attribute/attr_simple_{name}.png"
     else:
         name = f"attribute/attr_{name}.png"
-    return Image.open(TEXT_PATH / name).convert("RGBA")
+    return load_asset(TEXT_PATH / name)
+
+
+async def get_attribute(name: str = "", is_simple: bool = False) -> Image.Image:
+    return get_attribute_sync(name, is_simple)
+
+
+def get_attribute_prop_sync(name: str = "") -> Image.Image:
+    return load_asset(TEXT_PATH / f"attribute_prop/attr_prop_{name}.png")
 
 
 async def get_attribute_prop(name: str = "") -> Image.Image:
-    return Image.open(TEXT_PATH / f"attribute_prop/attr_prop_{name}.png").convert("RGBA")
+    return get_attribute_prop_sync(name)
+
+
+def get_attribute_effect_sync(name: str = "") -> Image.Image:
+    path = TEXT_PATH / f"attribute_effect/attr_{name}.png"
+    return load_asset(path if path.exists() else TEXT_PATH / "缺失.png")
 
 
 async def get_attribute_effect(name: str = "") -> Image.Image:
-    path = TEXT_PATH / f"attribute_effect/attr_{name}.png"
-    if path.exists():
-        return Image.open(path).convert("RGBA")
-    return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
+    return get_attribute_effect_sync(name)
+
+
+def get_weapon_type_sync(name: str = "") -> Image.Image:
+    return load_asset(TEXT_PATH / f"weapon_type/weapon_type_{name}.png")
 
 
 async def get_weapon_type(name: str = "") -> Image.Image:
-    return Image.open(TEXT_PATH / f"weapon_type/weapon_type_{name}.png").convert("RGBA")
+    return get_weapon_type_sync(name)
 
 
 def get_waves_bg(w: int, h: int, bg: str = "bg") -> Image.Image:
-    img = Image.open(TEXT_PATH / f"{bg}.jpg").convert("RGBA")
+    img = load_asset(TEXT_PATH / f"{bg}.jpg")
     return crop_center_img(img, w, h)
 
 
 def get_crop_waves_bg(w: int, h: int, bg: str = "bg") -> Image.Image:
-    img = Image.open(TEXT_PATH / f"{bg}.jpg").convert("RGBA")
+    img = load_asset(TEXT_PATH / f"{bg}.jpg")
 
     width, height = img.size
 
@@ -344,11 +389,11 @@ async def get_event_avatar(
 
 
 def get_small_logo(logo_num=1):
-    return Image.open(TEXT_PATH / f"logo_small_{logo_num}.png")
+    return load_asset(TEXT_PATH / f"logo_small_{logo_num}.png")
 
 
 def get_footer(color: Literal["white", "black", "encore"] = "white"):
-    return Image.open(TEXT_PATH / f"footer_{color}.png")
+    return load_asset(TEXT_PATH / f"footer_{color}.png")
 
 
 def add_footer(
@@ -380,14 +425,12 @@ def add_footer(
     return img
 
 
-async def change_color(
+def change_color_sync(
     chain,
     color: tuple = (255, 255, 255),
     w: int | None = None,
     h: int | None = None,
 ):
-    # 获取图像数据
-    pixels = chain.load()  # 加载像素数据
     if w is None:
         w = chain.size[0]
     if h is None:
@@ -396,13 +439,22 @@ async def change_color(
     if not isinstance(h, int) or not isinstance(w, int):
         return chain
 
-    # 遍历图像的每个像素
-    for y in range(h):  # 图像高度
-        for x in range(w):  # 图像宽度
-            r, g, b, a = pixels[x, y]
-            pixels[x, y] = color + (a,)
+    # 等价于逐像素将 RGB 替换为纯色并保留 alpha, C 层实现
+    region = chain.crop((0, 0, w, h))
+    solid = Image.new("RGBA", region.size, color + (0,))
+    solid.putalpha(region.getchannel("A"))
+    chain.paste(solid, (0, 0))
 
     return chain
+
+
+async def change_color(
+    chain,
+    color: tuple = (255, 255, 255),
+    w: int | None = None,
+    h: int | None = None,
+):
+    return change_color_sync(chain, color, w, h)
 
 
 def draw_text_with_shadow(
@@ -482,7 +534,7 @@ async def draw_avatar_with_star(
         img = Image.new("RGBA", (item_width, item_width), img_color)
 
     # 144*144
-    star_bg = Image.open(TEXT_PATH / f"star_{star_level}.png")
+    star_bg = load_asset(TEXT_PATH / f"star_{star_level}.png")
     avatar = avatar.resize((item_width, item_width))
 
     img.alpha_composite(avatar, (0, 0))
@@ -491,7 +543,7 @@ async def draw_avatar_with_star(
 
 
 async def get_star_bg(star_level: int = 5) -> Image.Image:
-    return Image.open(TEXT_PATH / f"star_{star_level}.png")
+    return load_asset(TEXT_PATH / f"star_{star_level}.png")
 
 
 async def pic_download_from_url(
@@ -506,6 +558,7 @@ async def pic_download_from_url(
         from gsuid_core.utils.download_resource.download_file import download
 
         await download(pic_url, path, name, tag="[鸣潮]")
+        return Image.open(TEXT_PATH / "缺失.png").convert("RGBA")
 
     return Image.open(_path).convert("RGBA")
 

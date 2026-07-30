@@ -1,6 +1,7 @@
 from gsuid_core.utils.download_resource.download_file import download
 from PIL import Image
 
+from ..image import load_asset
 from .RESOURCE_PATH import (
     FETTER_PATH,
     MATERIAL_PATH,
@@ -26,7 +27,7 @@ async def get_skill_img(char_id: str | int, skill_name: str, pic_url: str) -> Im
             # logger.warning(f"[鸣潮] 角色 {char_id} 的 {skill_name} 技能图片不存在，使用默认图片")
             _path = MISSING_IMG
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)
 
 
 async def get_chain_img(char_id: str | int, order_id: int, pic_url: str) -> Image.Image:
@@ -42,7 +43,7 @@ async def get_chain_img(char_id: str | int, order_id: int, pic_url: str) -> Imag
             # logger.warning(f"[鸣潮] 角色 {char_id} 的共鸣链图片不存在，使用默认图片")
             _path = MISSING_IMG
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)
 
 
 async def get_phantom_img(phantom_id: int, pic_url: str) -> Image.Image:
@@ -54,7 +55,7 @@ async def get_phantom_img(phantom_id: int, pic_url: str) -> Image.Image:
         else:
             _path = MISSING_IMG
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)
 
 
 async def get_monster_img(monster_id: int, need_echo_id: int = 0, pic_url: str = "") -> Image.Image:
@@ -67,7 +68,7 @@ async def get_monster_img(monster_id: int, need_echo_id: int = 0, pic_url: str =
         else:
             _path = MISSING_IMG
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)
 
 
 async def get_fetter_img(name: str, pic_url: str) -> Image.Image:
@@ -76,7 +77,7 @@ async def get_fetter_img(name: str, pic_url: str) -> Image.Image:
     if not _path.exists():
         await download(pic_url, FETTER_PATH, name, tag="[鸣潮]")
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)
 
 
 async def get_material_img(material_id: str | int) -> Image.Image:
@@ -85,4 +86,4 @@ async def get_material_img(material_id: str | int) -> Image.Image:
     if not _path.exists():
         _path = MISSING_IMG
 
-    return Image.open(_path).convert("RGBA")
+    return load_asset(_path)

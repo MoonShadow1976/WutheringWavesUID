@@ -150,7 +150,6 @@ async def draw_card(uid: str, ev: Event):
     ]
     ordered_keys = [k for k in preferred_order if k in gachalogs] + [k for k in gachalogs if k not in preferred_order]
     gachalogs = {k: gachalogs[k] for k in ordered_keys}
-    title_num = len([1 for i in gachalogs.keys() if "新手" not in i])
 
     total_data = {}
     for gacha_name in gachalogs:
@@ -316,6 +315,7 @@ async def draw_card(uid: str, ev: Event):
     # ---------- 高度预计算（使用动态行高）----------
     _numlen = 0
     newbie_flag = False
+    title_count = 0  # 仅统计实际显示的非新手卡池
     for name in total_data:
         s_list = total_data[name]["rank_s_list"]
         if "新手" in name:
@@ -323,15 +323,19 @@ async def draw_card(uid: str, ev: Event):
                 newbie_flag = True
         else:
             if len(s_list) == 0:
+                if total_data[name]["total"] == 0:
+                    continue  # 过滤无数据的卡池
+                title_count += 1
                 _numlen += 50
             else:
                 _, rows, _, _, _, row_height = calc_dynamic_params(len(s_list))
                 _numlen += rows * row_height
+                title_count += 1
 
     _newbielen = 395 if newbie_flag else 0
     _header = 380
     footer = 50
-    w, h = 1000, _header + title_num * oset + _numlen + _newbielen + footer
+    w, h = 1000, _header + title_count * oset + _numlen + _newbielen + footer
 
     card_img = get_waves_bg(w, h)
     card_draw = ImageDraw.Draw(card_img)
@@ -384,6 +388,8 @@ async def draw_card(uid: str, ev: Event):
         if "新手" in gacha_name:
             continue
         gacha_data = total_data[gacha_name]
+        if gacha_data["total"] == 0:
+            continue  # 总抽数为0，不绘制任何内容，包括标题栏
         # 会歪的唤取使用bar_up.png，其他使用bar.png
         if gacha_name in ["角色精准调谐", "角色联动唤取", "角色忆旅唤取", "角色新旅唤取"]:
             title = Image.open(TEXT_PATH / "bar_up.png")

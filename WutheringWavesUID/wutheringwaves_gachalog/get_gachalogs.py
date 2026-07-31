@@ -136,12 +136,13 @@ async def get_new_gachalog(
 ) -> tuple[str | None, dict[str, list[GachaLog]], dict[str, int]]:
     new = {}
     new_count = {}
-    for gacha_name, card_pool_type in gacha_type_meta_data.items():
+
+    async def fetch_gacha_log(gacha_name: str, card_pool_type: str):
         res = await waves_api.get_gacha_log(card_pool_type, record_id, uid)
         if not res.success or not res.data:
             # 抽卡记录获取失败
             if res.code == -1:  # type: ignore
-                return ERROR_MSG_INVALID_LINK, None, None  # type: ignore
+                return gacha_name, None, None, ERROR_MSG_INVALID_LINK  # type: ignore
 
         if res.data and isinstance(res.data, list):
             temp = res.data
@@ -168,9 +169,18 @@ async def get_new_gachalog(
                 logger.warning(
                     f"[鸣潮][抽卡记录] 本地数据卡池[{gacha_name}] 存在错误数据{old_start}个，与链接记录正确数据{old_end - old_start + 1}个，已忽略错误数据"
                 )
-        new[gacha_name] = _add + _old
-        new_count[gacha_name] = len(_add)
-        await asyncio.sleep(1)
+        return gacha_name, _add + _old, len(_add), None
+
+    tasks = [fetch_gacha_log(gacha_name, card_pool_type) for gacha_name, card_pool_type in gacha_type_meta_data.items()]
+    results = await asyncio.gather(*tasks)
+
+    for result in results:
+        gacha_name, gacha_data, count, error = result
+        if error:
+            return error, None, None  # type: ignore
+        if gacha_data is not None:
+            new[gacha_name] = gacha_data
+            new_count[gacha_name] = count
 
     return None, new, new_count
 
@@ -305,6 +315,8 @@ async def save_gachalogs(
     else:
         im.append(f"✅UID{uid}数据更新成功！")
         for k, v in gachalogs_count_add.items():
+            if v == 0:
+                continue
             im.append(f"[{k}]新增{v}个数据！")
     im.append(f"可以使用【{PREFIX}抽卡记录】获取全部抽卡数据")
     im = "\n".join(im)

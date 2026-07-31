@@ -24,8 +24,8 @@ from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_gachalogs import gacha_type_meta_rename
 from .get_gachalogs import gacha_type_meta_data_reverse
 
-# 编辑缓存，有效期30分钟
-TIMEOUT = 1800
+# 编辑缓存，有效期180分钟（3小时）
+TIMEOUT = 60 * 180
 edit_cache = TimedCache(timeout=TIMEOUT, maxsize=50)
 
 

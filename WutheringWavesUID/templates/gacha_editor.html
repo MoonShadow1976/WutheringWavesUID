@@ -954,16 +954,26 @@
             if (!box) return;
             box.style.display = 'block';
 
-            let x = window.innerWidth / 2 - 160;
-            let y = window.innerHeight / 2 - 50;
-            let vx = 4;
-            let vy = 3;
-            const boxWidth = 320;
+            // 移动端适配宽度
+            const isMobile = window.innerWidth <= 600;
+            const boxWidth = isMobile ? Math.min(280, window.innerWidth - 40) : 320;
             const boxHeight = 90;
+            if (isMobile) {
+                box.style.width = boxWidth + 'px';
+            }
+
+            let x = window.innerWidth / 2 - boxWidth / 2;
+            let y = window.innerHeight / 2 - 50;
+            let vx = isMobile ? 2.5 : 4;
+            let vy = isMobile ? 2 : 3;
             let paused = false;
 
+            // PC端：鼠标悬停暂停
             box.addEventListener('mouseenter', () => { paused = true; });
             box.addEventListener('mouseleave', () => { paused = false; });
+            // 移动端：触摸暂停
+            box.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+            box.addEventListener('touchend', () => { paused = false; }, { passive: true });
 
             function animate() {
                 if (!bouncingVisible) return;
@@ -2132,8 +2142,34 @@
             if (hasTimedOut || isLeaving) return;
             if (gachaData && gachaData.list && gachaData.list.length > 0) {
                 autoExportData();
-                // 设置标记，刷新后新页面读取并显示提示
                 sessionStorage.setItem('exportedOnUnload', 'true');
+            }
+        });
+
+        // pagehide：移动端兼容（iOS Safari 等 beforeunload 不可靠）
+        window.addEventListener('pagehide', function (e) {
+            if (hasTimedOut || isLeaving) return;
+            if (gachaData && gachaData.list && gachaData.list.length > 0) {
+                autoExportData();
+                sessionStorage.setItem('exportedOnUnload', 'true');
+            }
+        });
+
+        // 移动端：拦截返回按钮（通过 history API）
+        // 在页面加载时压入一个额外状态，用户点返回时触发 popstate
+        if (window.history && history.pushState) {
+            history.pushState('mobile-back-guard', null, location.href);
+        }
+        window.addEventListener('popstate', function (e) {
+            if (hasTimedOut) return;
+            // 移动端返回按钮被拦截
+            if (!isLeaving && gachaData && gachaData.list && gachaData.list.length > 0) {
+                // 重新压入，防止真正离开
+                history.pushState('mobile-back-guard', null, location.href);
+                showLeaveConfirmModal(() => {
+                    isLeaving = true;
+                    history.go(-2);
+                });
             }
         });
     </script>

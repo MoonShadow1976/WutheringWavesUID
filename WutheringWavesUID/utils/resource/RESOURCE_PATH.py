@@ -26,6 +26,12 @@ ROLE_DETAIL_SKILL_PATH = ROLE_DETAIL_PATH / "skill"
 ROLE_DETAIL_CHAINS_PATH = ROLE_DETAIL_PATH / "chains"
 SHARE_BG_PATH = RESOURCE_PATH / "share"
 MONSTER_PATH = RESOURCE_PATH / "monster"
+ALL_SKIN_PATH = RESOURCE_PATH / "skin"
+ROLE_SKIN_PATH = ALL_SKIN_PATH / "role"
+WEAPON_SKIN_PATH = ALL_SKIN_PATH / "weapon"
+FLY_SKIN_PATH = ALL_SKIN_PATH / "fly"
+CALABASH_SKIN_PATH = ALL_SKIN_PATH / "calabash"
+ORNAMENT_SKIN_PATH = ALL_SKIN_PATH / "ornament"
 
 # 攻略
 GUIDE_PATH = MAIN_PATH / "guide_new"
@@ -54,6 +60,7 @@ MATRIX_PATH = OTHER_PATH / "matrix"
 CHALLENGE_PATH = OTHER_PATH / "challenge"
 ANN_CARD_PATH = OTHER_PATH / "ann_card"
 POKER_PATH = OTHER_PATH / "poker"
+SKIN_PATH = OTHER_PATH / "skin"
 
 
 # 别名
@@ -94,6 +101,13 @@ def init_dir():
         ANN_CARD_PATH,
         ALIAS_PATH,
         CUSTOM_MR_CARD_PATH,
+        SKIN_PATH,
+        ALL_SKIN_PATH,
+        ROLE_SKIN_PATH,
+        WEAPON_SKIN_PATH,
+        FLY_SKIN_PATH,
+        CALABASH_SKIN_PATH,
+        ORNAMENT_SKIN_PATH,
     ]:
         i.mkdir(parents=True, exist_ok=True)
 

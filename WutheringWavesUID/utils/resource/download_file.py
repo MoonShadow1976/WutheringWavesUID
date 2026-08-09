@@ -3,6 +3,7 @@ from PIL import Image
 
 from ..image import load_asset
 from .RESOURCE_PATH import (
+    ALL_SKIN_PATH,
     FETTER_PATH,
     MATERIAL_PATH,
     MISSING_IMG,
@@ -85,5 +86,21 @@ async def get_material_img(material_id: str | int) -> Image.Image:
     _path = MATERIAL_PATH / name
     if not _path.exists():
         _path = MISSING_IMG
+
+    return load_asset(_path)
+
+
+async def get_skin_img(type: str, name: str, pic_url: str = "") -> Image.Image:
+    if type not in ["role", "weapon", "fly", "calabash", "ornament"]:
+        raise Exception(f"[鸣潮] 不存在的皮肤类型：{type}")
+
+    _dir = ALL_SKIN_PATH / type
+    name = f"{name}.png"
+    _path = _dir / name
+    if not _path.exists():
+        if pic_url:
+            await download(pic_url, _dir, name, tag="[鸣潮]")
+        else:
+            _path = MISSING_IMG
 
     return load_asset(_path)

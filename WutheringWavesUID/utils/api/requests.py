@@ -46,6 +46,7 @@ from .api import (
     ROLE_LIST_URL,
     SERVER_ID,
     SERVER_ID_NET,
+    SKIN_DATA_URL,
     SLASH_DETAIL_URL,
     SLASH_INDEX_URL,
     TOWER_DETAIL_URL,
@@ -476,6 +477,19 @@ class WavesApi:
             "roleId": roleId,
         }
         return await self._waves_request(MORE_ACTIVITY_URL, "POST", header, data=data)
+
+    async def get_skin_data(self, roleId: str, token: str, serverId: str | None = None):
+        """皮肤数据"""
+        header = await get_base_header()
+        used_headers = await self.get_used_headers(cookie=token, uid=roleId)
+        header.update(used_headers)
+
+        data = {
+            "gameId": GAME_ID,
+            "serverId": self.get_server_id(roleId, serverId),
+            "roleId": roleId,
+        }
+        return await self._waves_request(SKIN_DATA_URL, "POST", header, data=data)
 
     async def get_request_token(self, roleId: str, token: str, did: str, serverId: str | None = None) -> tuple[bool, str]:
         """请求token"""

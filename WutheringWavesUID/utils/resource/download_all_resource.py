@@ -3,6 +3,7 @@ from gsuid_core.logger import logger
 
 from .download_github import download_all_file
 from .RESOURCE_PATH import (
+    ALL_SKIN_PATH,
     AVATAR_PATH,
     GUIDE_PATH,
     MATERIAL_PATH,
@@ -32,6 +33,7 @@ async def download_all_resource():
             "resource/monster": MONSTER_PATH,
             "resource/material": MATERIAL_PATH,
             "resource/guide": GUIDE_PATH,
+            "resource/skin": ALL_SKIN_PATH,
         },
     )
 

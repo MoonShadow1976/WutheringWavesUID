@@ -797,3 +797,76 @@ class MatrixData(BaseModel):
     endTime: int = 0
     isUnlock: bool = False
     modeDetails: list[MatrixModeDetail] = []
+
+
+class CalabashSkin(BaseModel):
+    """声骸皮肤"""
+
+    quality: int
+    qualityIcon: str
+    skinIcon: str
+    skinId: int
+    skinName: str
+
+
+class EquipSkin(BaseModel):
+    """装备皮肤"""
+
+    quality: int
+    skinIcon: str
+    skinId: int
+    skinName: str
+    skinType: str
+    skinTypeIcon: str
+
+
+class RoleDecoration(BaseModel):
+    """角色装饰"""
+
+    icon: str
+    id: int
+    name: str
+    quality: int
+    skinOwners: list[int] | None = None
+
+
+class RoleSkin(BaseModel):
+    """共鸣者服饰"""
+
+    acronym: str
+    isAddition: bool
+    picUrl: str
+    priority: int
+    quality: int
+    qualityName: str
+    roleId: int
+    roleName: str
+    skinIcon: str
+    skinId: int
+    skinName: str
+
+
+class WeaponSkin(BaseModel):
+    """武器皮肤"""
+
+    isAddition: bool
+    priority: int
+    quality: int
+    qualityName: str
+    skinIcon: str
+    skinId: int
+    skinName: str
+    weaponTypeIcon: str
+    weaponTypeId: int
+    weaponTypeName: str
+
+
+class SkinData(BaseModel):
+    """皮肤数据"""
+
+    calabashSkinList: list[CalabashSkin] | None = None
+    equipSkinList: list[EquipSkin] | None = None
+    roleDecorationList: list[RoleDecoration] | None = None
+    roleSkinList: list[RoleSkin] | None = None
+    weaponSkinList: list[WeaponSkin] | None = None
+    showToGuest: bool | None = None

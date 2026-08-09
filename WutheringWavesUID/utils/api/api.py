@@ -60,7 +60,8 @@ WIKI_TREE_URL = f"{MAIN_URL}/wiki/core/catalogue/config/getTree"
 WIKI_HOME_URL = f"{MAIN_URL}/wiki/core/homepage/getPage"
 WIKI_DETAIL_URL = f"{MAIN_URL}/wiki/core/catalogue/item/getPage"
 WIKI_ENTRY_DETAIL_URL = f"{MAIN_URL}/wiki/core/catalogue/item/getEntryDetail"
-
+# 皮肤数据
+SKIN_DATA_URL = f"{MAIN_URL}/aki/roleBox/akiBox/skinData"
 
 # refresh
 CALCULATOR_REFRESH_DATA_URL = f"{MAIN_URL}/aki/calculator/refreshData"

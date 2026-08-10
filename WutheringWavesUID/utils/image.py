@@ -5,7 +5,7 @@ from pathlib import Path
 import random
 import threading
 from typing import Literal
-from ..wutheringwaves_config import WutheringWavesConfig
+
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -28,6 +28,7 @@ from ..utils.resource.RESOURCE_PATH import (
     SHARE_BG_PATH,
     WEAPON_PATH,
 )
+from ..wutheringwaves_config import WutheringWavesConfig
 
 ICON = Path(__file__).parent.parent.parent / "ICON.png"
 TEXT_PATH = Path(__file__).parent / "texture2d"

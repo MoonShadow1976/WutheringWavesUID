@@ -5,7 +5,7 @@ from pathlib import Path
 import random
 import threading
 from typing import Literal
-
+from ..wutheringwaves_config import WutheringWavesConfig
 from gsuid_core.logger import logger
 from gsuid_core.models import Event
 from gsuid_core.utils.image.image_tools import crop_center_img
@@ -123,8 +123,12 @@ def load_asset(path, mode: str = "RGBA") -> Image.Image:
     except OSError:
         # 文件不存在时保持与 Image.open 一致的报错行为
         return Image.open(path_str).convert(mode)
-    with _asset_copy_lock:
-        return _load_asset_cached(path_str, mtime_ns, mode).copy()
+
+    if WutheringWavesConfig.get_config("ResourceCache").data:
+        with _asset_copy_lock:
+            return _load_asset_cached(path_str, mtime_ns, mode).copy()
+    else:
+        return Image.open(path_str).convert(mode)
 
 
 def get_ICON():

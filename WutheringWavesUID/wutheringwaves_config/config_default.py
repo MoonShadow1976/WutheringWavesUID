@@ -95,6 +95,11 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         "排行榜qq头像缓存开关",
         False,
     ),
+    "ResourceCache": GsBoolConfig(
+        "图片资源缓存开关",
+        "图片资源缓存开关",
+        False,
+    ),
     "RankUseToken": GsBoolConfig(
         "有token才能进排行",
         "有token才能进排行",

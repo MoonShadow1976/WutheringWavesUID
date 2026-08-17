@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "化弦为剑",
-        "desc": "<color=Title>普攻·弦剑</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>普攻·弦剑第1段</color>、<color=Highlight>普攻·弦剑第4段</color>为<color=Highlight>藏剑式</color>。\n<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>为<color=Highlight>执剑式</color>。\n\n<color=Title>重击·弦剑</color>\n<color=Highlight>【琴心】</color>与<color=Highlight>【剑魄】</color>充满时，解锁<color=Highlight>重击·弦剑</color>。\n长按<color=Highlight>普攻</color>，消耗耐力施放，造成<color=Wind>气动伤害</color>。\n施放该技能期间，消耗所有<color=Highlight>【琴心】</color>、<color=Highlight>【剑魄】</color>，进入<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>空中攻击·弦剑</color>\n进行最多3段的连续攻击，造成<color=Wind>气动伤害</color>。\n施放<color=Highlight>空中攻击·弦剑第3段</color>落地后，在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。\n<color=Highlight>空中攻击·弦剑第1段</color>为<color=Highlight>藏剑式</color>。\n<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>空中攻击·弦剑第3段</color>为<color=Highlight>执剑式</color>。\n处于空中时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>空中攻击·弦剑第3段</color>。\n\n<color=Title>空中下落攻击</color>\n处于<color=Highlight>御剑飞行</color>状态时，<color=Highlight>跳跃</color>替换为<color=Highlight>空中下落攻击</color>。\n消耗耐力进行空中下落攻击，造成<color=Wind>气动伤害</color>。\n\n<color=Title>闪避反击·弦剑</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第4段</color>。\n\n<color=Title>御剑疾行</color>\n处于空中时，<color=Highlight>闪避</color>替换为<color=Highlight>御剑疾行</color>。\n造成<color=Wind>气动伤害</color>，本次伤害为普攻伤害。",
+        "desc": "<color=Title>普攻·弦剑</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>普攻·弦剑第1段</color>、<color=Highlight>普攻·弦剑第4段</color>为<color=Highlight>藏剑式</color>。\n<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>为<color=Highlight>执剑式</color>。\n\n<color=Title>重击·弦剑</color>\n<color=Highlight>【琴心】</color>与<color=Highlight>【剑韵】</color>充满时，解锁<color=Highlight>重击·弦剑</color>。\n长按<color=Highlight>普攻</color>，消耗耐力施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【琴心】</color>、<color=Highlight>【剑韵】</color>，进入<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>空中攻击·弦剑</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。\n施放<color=Highlight>空中攻击·弦剑第3段</color>落地后，在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。\n处于空中时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>空中攻击·弦剑第3段</color>。\n\n<color=Title>空中下落攻击</color>\n处于<color=Highlight>御剑飞行</color>状态时，<color=Highlight>跳跃</color>替换为<color=Highlight>空中下落攻击</color>。\n消耗耐力进行空中下落攻击，造成<color=Wind>气动伤害</color>。\n不处于<color=Highlight>昙体仙身</color>状态时，施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。\n\n<color=Title>闪避反击·弦剑</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。\n施放该技能后在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第4段</color>。\n\n<color=Title>御剑疾行</color>\n处于空中时，<color=Highlight>闪避</color>替换为<color=Highlight>御剑疾行</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -592,26 +592,26 @@
             "name": "普攻·弦剑第四段伤害",
             "param": [
               [
-                "32.72%+5.46%*4",
-                "35.41%+5.91%*4",
-                "38.09%+6.35%*4",
-                "41.84%+6.98%*4",
-                "44.53%+7.43%*4",
-                "47.61%+7.94%*4",
-                "51.91%+8.66%*4",
-                "56.20%+9.37%*4",
-                "60.49%+10.09%*4",
-                "65.05%+10.85%*4",
-                "70.42%+11.74%*4",
-                "75.78%+12.63%*4",
-                "81.15%+13.53%*4",
-                "86.51%+14.42%*4",
-                "91.88%+15.32%*4",
-                "97.25%+16.21%*4",
-                "102.61%+17.11%*4",
-                "107.98%+18.00%*4",
-                "113.34%+18.89%*4",
-                "118.71%+19.79%*4"
+                "43.63%+2.73%*4",
+                "47.21%+2.96%*4",
+                "50.78%+3.18%*4",
+                "55.79%+3.49%*4",
+                "59.37%+3.72%*4",
+                "63.48%+3.97%*4",
+                "69.21%+4.33%*4",
+                "74.93%+4.69%*4",
+                "80.65%+5.05%*4",
+                "86.73%+5.43%*4",
+                "93.89%+5.87%*4",
+                "101.04%+6.32%*4",
+                "108.20%+6.77%*4",
+                "115.35%+7.21%*4",
+                "122.51%+7.66%*4",
+                "129.66%+8.11%*4",
+                "136.81%+8.56%*4",
+                "143.97%+9.00%*4",
+                "151.12%+9.45%*4",
+                "158.28%+9.90%*4"
               ]
             ]
           },
@@ -774,33 +774,6 @@
                 "75.08%*4",
                 "78.81%*4",
                 "82.54%*4"
-              ]
-            ]
-          },
-          "11": {
-            "name": "御剑疾行伤害",
-            "param": [
-              [
-                "20.65%",
-                "22.35%",
-                "24.04%",
-                "26.41%",
-                "28.11%",
-                "30.05%",
-                "32.76%",
-                "35.47%",
-                "38.18%",
-                "41.06%",
-                "44.45%",
-                "47.83%",
-                "51.22%",
-                "54.61%",
-                "57.99%",
-                "61.38%",
-                "64.77%",
-                "68.15%",
-                "71.54%",
-                "74.93%"
               ]
             ]
           },
@@ -1036,9 +1009,9 @@
     "2": {
       "skill": {
         "name": "浮声一刹",
-        "desc": "<color=Title>浮声一刹·行罚</color>\n造成<color=Wind>气动伤害</color>，技能施放期间，获得{0}点<color=Highlight>【琴心】</color>。\n\n<color=Title>浮声一刹·凌霄</color>\n施放<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>期间，<color=Highlight>共鸣技能</color>替换为<color=Highlight>浮声一刹·凌霄</color>。\n造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。",
+        "desc": "<color=Title>浮声一刹·行罚</color>\n造成<color=Wind>气动伤害</color>，技能施放期间，获得{0}点<color=Highlight>【琴心】</color>。\n不处于<color=Highlight>昙体仙身</color>状态时，施放该技能后在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第4段</color>。\n\n<color=Title>浮声一刹·凌霄</color>\n施放<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>、<color=Highlight>闪避反击·弦剑</color>期间，<color=Highlight>共鸣技能</color>替换为<color=Highlight>浮声一刹·凌霄</color>。\n造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。",
         "param": [
-          "30"
+          "45"
         ],
         "type": "共鸣技能",
         "level": {
@@ -1046,26 +1019,26 @@
             "name": "浮声一刹·行罚伤害",
             "param": [
               [
-                "9.45%*2+44.10%",
-                "10.23%*2+47.72%",
-                "11.00%*2+51.34%",
-                "12.09%*2+56.40%",
-                "12.86%*2+60.02%",
-                "13.76%*2+64.17%",
-                "15.00%*2+69.96%",
-                "16.24%*2+75.75%",
-                "17.48%*2+81.53%",
-                "18.79%*2+87.68%",
-                "20.34%*2+94.91%",
-                "21.89%*2+102.15%",
-                "23.44%*2+109.38%",
-                "24.99%*2+116.61%",
-                "26.54%*2+123.84%",
-                "28.09%*2+131.07%",
-                "29.64%*2+138.31%",
-                "31.19%*2+145.54%",
-                "32.74%*2+152.77%",
-                "34.29%*2+160.00%"
+                "10.50%*2+49.00%",
+                "11.37%*2+53.02%",
+                "12.23%*2+57.04%",
+                "13.43%*2+62.67%",
+                "14.29%*2+66.68%",
+                "15.28%*2+71.30%",
+                "16.66%*2+77.73%",
+                "18.04%*2+84.16%",
+                "19.42%*2+90.59%",
+                "20.88%*2+97.42%",
+                "22.60%*2+105.46%",
+                "24.32%*2+113.49%",
+                "26.05%*2+121.53%",
+                "27.77%*2+129.57%",
+                "29.49%*2+137.60%",
+                "31.21%*2+145.64%",
+                "32.93%*2+153.67%",
+                "34.66%*2+161.71%",
+                "36.38%*2+169.75%",
+                "38.10%*2+177.78%"
               ]
             ]
           },
@@ -1282,26 +1255,26 @@
             "name": "技能伤害",
             "param": [
               [
-                "15.40%*10+616.00%",
-                "16.67%*10+666.52%",
-                "17.93%*10+717.03%",
-                "19.70%*10+787.75%",
-                "20.96%*10+838.26%",
-                "22.41%*10+896.35%",
-                "24.43%*10+977.17%",
-                "26.45%*10+1057.98%",
-                "28.47%*10+1138.80%",
-                "30.62%*10+1224.67%",
-                "33.15%*10+1325.70%",
-                "35.67%*10+1426.72%",
-                "38.20%*10+1527.75%",
-                "40.72%*10+1628.77%",
-                "43.25%*10+1729.79%",
-                "45.78%*10+1830.82%",
-                "48.30%*10+1931.84%",
-                "50.83%*10+2032.87%",
-                "53.35%*10+2133.89%",
-                "55.88%*10+2234.91%"
+                "16.80%*10+672.00%",
+                "18.18%*10+727.11%",
+                "19.56%*10+782.21%",
+                "21.49%*10+859.36%",
+                "22.87%*10+914.46%",
+                "24.45%*10+977.83%",
+                "26.65%*10+1066.00%",
+                "28.86%*10+1154.16%",
+                "31.06%*10+1242.33%",
+                "33.41%*10+1336.01%",
+                "36.16%*10+1446.22%",
+                "38.92%*10+1556.42%",
+                "41.67%*10+1666.63%",
+                "44.43%*10+1776.84%",
+                "47.18%*10+1887.05%",
+                "49.94%*10+1997.26%",
+                "52.69%*10+2107.46%",
+                "55.45%*10+2217.67%",
+                "58.20%*10+2327.88%",
+                "60.96%*10+2438.09%"
               ]
             ]
           },
@@ -1537,8 +1510,10 @@
     "4": {
       "skill": {
         "name": "识海浩渺，尘世万千",
-        "desc": "队伍中的角色直接造成的伤害击败带有<color=Highlight>心识锁定</color>效果的目标时：\n如果清宵没有<color=Highlight>【凝识】</color>效果，则获得<color=Highlight>【凝识】</color>效果，且层数与目标的<color=Highlight>心识锁定</color>层数相同。\n如果清宵已有<color=Highlight>【凝识】</color>效果，且目标的<color=Highlight>心识锁定</color>层数不小于清宵的<color=Highlight>【凝识】</color>层数，则使清宵的<color=Highlight>【凝识】</color>层数变为与目标的<color=Highlight>心识锁定</color>层数相同。\n\n<color=Title><color=Highlight>【凝识】</color></color>\n队伍中的角色对拥有<color=Highlight>【集谐·偏移】</color>的<color=Highlight>【失谐】</color>目标造成<color=Highlight>谐度破坏伤害</color>时，将额外附加等同清宵的<color=Highlight>【凝识】</color>层数的<color=Highlight>心识锁定</color>与{0}层<color=Highlight>【集谐·干涉】</color>，该效果对同一目标只能触发{1}次。\n清宵失去意识时，不会继续获得<color=Highlight>【凝识】</color>效果，同时已有的<color=Highlight>【凝识】</color>效果失效。\n<color=Highlight>【凝识】</color>层数上限为{2}，持续{3}秒。",
+        "desc": "进入战斗时，获得{0}层<color=Highlight>【凝识】</color>。\n\n队伍中的角色直接造成的伤害击败带有<color=Highlight>心识锁定</color>效果的目标后：\n如果清宵没有<color=Highlight>【凝识】</color>效果，则获得<color=Highlight>【凝识】</color>效果，且层数与目标的<color=Highlight>心识锁定</color>层数相同。\n如果清宵已有<color=Highlight>【凝识】</color>效果，且目标的<color=Highlight>心识锁定</color>层数不小于清宵的<color=Highlight>【凝识】</color>层数，则使清宵的<color=Highlight>【凝识】</color>层数变为与目标的<color=Highlight>心识锁定</color>层数相同。\n\n<color=Title><color=Highlight>【凝识】</color></color>\n队伍中的角色对目标造成伤害后，将附加等同清宵的<color=Highlight>【凝识】</color>层数的<color=Highlight>心识锁定</color>，该效果对同一目标只能触发{1}次。\n队伍中的角色施放<color=Highlight>【谐度破坏】</color>时，如果目标有<color=Highlight>【集谐·偏移】</color>效果，将额外附加{2}层<color=Highlight>【集谐·干涉】</color>，该效果对同一目标只能触发{3}次。\n清宵失去意识时，不会继续获得<color=Highlight>【凝识】</color>效果，同时已有的<color=Highlight>【凝识】</color>效果失效。\n<color=Highlight>【凝识】</color>层数上限为{4}，持续{5}秒。",
         "param": [
+          "1",
+          "1",
           "1",
           "1",
           "15",
@@ -1571,7 +1546,7 @@
     "5": {
       "skill": {
         "name": "通晓万物，指名破祟",
-        "desc": "清宵以下技能对拥有<color=Highlight>心识锁定</color>的目标造成伤害提升，每层提升{0}，前{1}层每层额外提升{2}。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n队伍中的角色对怒涛级或海啸级目标附加<color=Highlight>【集谐·干涉】</color>时，对目标额外附加{3}层<color=Highlight>心识锁定</color>。",
+        "desc": "清宵以下技能对拥有<color=Highlight>心识锁定</color>的目标造成伤害提升，每层提升{0}，前{1}层每层额外提升{2}。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n每次队伍中的角色对怒涛级或海啸级目标附加<color=Highlight>【集谐·干涉】</color>后，对目标额外附加{3}层<color=Highlight>心识锁定</color>。",
         "param": [
           "2%",
           "7",
@@ -1605,7 +1580,7 @@
     "6": {
       "skill": {
         "name": "改韵易调",
-        "desc": "造成<color=Wind>气动伤害</color>，施放时获得{0}点<color=Highlight>【剑魄】</color>，并获得<color=Highlight>金声玉振</color>。\n该技能为<color=Highlight>执剑式</color>。\n\n<color=Title>金声玉振</color>\n施放<color=Highlight>共鸣技能·浮声一刹·行罚</color>可获得{1}点<color=Highlight>【琴心】</color>并移除<color=Highlight>金声玉振</color>。",
+        "desc": "造成<color=Wind>气动伤害</color>，施放时获得{0}点<color=Highlight>【剑韵】</color>，并获得<color=Highlight>金声玉振</color>。\n\n<color=Title>金声玉振</color>\n施放<color=Highlight>共鸣技能·浮声一刹·行罚</color>时，可获得{1}点<color=Highlight>【琴心】</color>并移除<color=Highlight>金声玉振</color>。",
         "param": [
           "30",
           "30"
@@ -1817,7 +1792,7 @@
     "7": {
       "skill": {
         "name": "无相心剑",
-        "desc": "<color=Title>昙体仙身</color>\n清宵处于<color=Highlight>昙体仙身</color>状态时，解锁<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>。\n\n<color=Title>普攻·昙体仙身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升{0}。\n可在空中施放。\n\n<color=Title>闪避反击·昙体仙身</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升{0}。\n可在空中施放。\n\n<color=Title>重击·天钧荡煞·昙体仙身</color>\n<color=Highlight>【心剑意】</color>充满时，解锁<color=Highlight>重击·天钧荡煞·昙体仙身</color>，长按<color=Highlight>普攻</color>可施放，造成<color=Wind>气动伤害</color>。\n施放该技能期间，消耗所有<color=Highlight>【心剑意】</color>，退出<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>心识锁定</color>\n<color=Highlight>心识锁定</color>层数上限为{1}。\n队伍中的角色对目标附加<color=Highlight>【集谐·干涉】</color>时，对目标附加{2}层<color=Highlight>心识锁定</color>。\n目标每拥有1层<color=Highlight>心识锁定</color>，受到清宵以下技能伤害加深{3}，前{4}层每层额外加深{5}。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n<color=Title>天心空明</color>\n进入战斗或施放共鸣解放<color=Highlight>天光云影沧澜兴</color>时，获得<color=Highlight>天心空明</color>。\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加{6}层<color=Highlight>心识锁定</color>，自身下一次<color=Highlight>天钧荡煞·昙体仙身</color>伤害倍率提升{7}，切换至其他角色提前结束该伤害倍率提升效果。\n施放<color=Highlight>天钧荡煞·昙体仙身</color>后，移除<color=Highlight>天心空明</color>。\n\n<color=Title>护体剑光</color>\n施放<color=Highlight>变奏技能·改韵易调</color>或<color=Highlight>重击·弦剑</color>时，获得{8}层<color=Highlight>护体剑光</color>。\n<color=Highlight>护体剑光</color>上限为{9}层，受到敌方怪物攻击造成的伤害时，可消耗{10}层<color=Highlight>护体剑光</color>，使自身免疫打断且受到伤害降低{11}，持续{12}秒。该效果每秒可触发1次。\n\n<color=Title>御剑飞行</color>\n处于<color=Highlight>御剑飞行</color>状态时，将以特殊表现进行移动。\n<color=Highlight>御剑飞行</color>状态期间持续消耗<color=Highlight>【御剑气劲】</color>。\n·施放以下技能后，将进入<color=Highlight>御剑飞行</color>状态：\n<color=Highlight>御剑闪避</color>、<color=Highlight>重击·弦剑</color>、<color=Highlight>空中攻击·弦剑第1段</color>、<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>浮声一刹·凌霄</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>变奏技能·改韵易调</color>。\n·通过以下方式可退出<color=Highlight>御剑飞行</color>状态：\n1.施放<color=Highlight>空中攻击·弦剑第3段</color>、<color=Highlight>空中下落攻击</color>。\n2.触发特定场景交互或探索工具。\n3.回到地面。\n\n<color=Title>清绝剑遁</color>\n处于<color=Highlight>御剑飞行</color>状态时，长按<color=Highlight>跳跃</color>，可跃起并向前突进一段距离。\n<color=Highlight>清绝剑遁</color>期间持续消耗<color=Highlight>【御剑气劲】</color>。\n\n<color=Title>【琴心】获取规则</color>\n上限{13}点。\n<color=Highlight>藏剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【琴心】</color>。\n\n<color=Title>【剑魄】获取规则</color>\n上限{14}点。\n<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【剑魄】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【剑魄】</color>。\n\n<color=Title>【心剑意】获取规则</color>\n上限{15}点。\n<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>造成伤害时，获得<color=Highlight>【心剑意】</color>。",
+        "desc": "<color=Title>昙体仙身</color>\n清宵处于<color=Highlight>昙体仙身</color>状态时，解锁<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>。\n\n<color=Title>普攻·昙体仙身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升{0}。\n可在空中施放。\n\n<color=Title>闪避反击·昙体仙身</color>\n成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升{0}。\n可在空中施放。\n\n<color=Title>重击·天钧荡煞·昙体仙身</color>\n<color=Highlight>【心剑意】</color>充满时，解锁<color=Highlight>重击·天钧荡煞·昙体仙身</color>，长按<color=Highlight>普攻</color>可施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【心剑意】</color>，退出<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>心识锁定</color>\n<color=Highlight>心识锁定</color>层数上限为{1}。\n每次队伍中的角色对目标附加<color=Highlight>【集谐·干涉】</color>后，对目标附加{2}层<color=Highlight>心识锁定</color>。\n目标每拥有1层<color=Highlight>心识锁定</color>，受到清宵以下技能伤害加深{3}，前{4}层每层额外加深{5}。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n<color=Title>天心空明</color>\n进入战斗或施放共鸣解放<color=Highlight>天光云影沧澜兴</color>时，获得<color=Highlight>天心空明</color>。\n<color=Highlight>藏剑式</color>/<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>/<color=Highlight>【剑韵】</color>效率提升{16}。\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加{6}层<color=Highlight>心识锁定</color>，使自身下一次<color=Highlight>重击·天钧荡煞·昙体仙身</color>获得强化：伤害倍率提升{7}，对目标额外累积偏谐值。切换至其他角色提前结束<color=Highlight>重击·天钧荡煞·昙体仙身</color>强化效果。\n施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后，移除<color=Highlight>天心空明</color>。\n\n<color=Title>护体剑光</color>\n施放<color=Highlight>变奏技能·改韵易调</color>或<color=Highlight>重击·弦剑</color>时，获得{8}层<color=Highlight>护体剑光</color>。\n<color=Highlight>护体剑光</color>上限为{9}层，受到敌方怪物攻击造成的伤害时，可消耗{10}层<color=Highlight>护体剑光</color>，使自身免疫打断且受到伤害降低{11}，持续{12}秒。该效果每秒可触发1次。\n\n<color=Title>御剑飞行</color>\n处于<color=Highlight>御剑飞行</color>状态时，将以特殊表现进行移动。\n<color=Highlight>御剑飞行</color>移动期间持续消耗<color=Highlight>【御剑气劲】</color>。\n·施放以下技能后，将进入<color=Highlight>御剑飞行</color>状态：\n<color=Highlight>御剑闪避</color>、<color=Highlight>重击·弦剑</color>、<color=Highlight>空中攻击·弦剑第1段</color>、<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>浮声一刹·凌霄</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>变奏技能·改韵易调</color>。\n·通过以下方式可退出<color=Highlight>御剑飞行</color>状态：\n1.施放<color=Highlight>空中攻击·弦剑第3段</color>、<color=Highlight>空中下落攻击</color>。\n2.触发特定场景交互或探索工具。\n3.回到地面。\n4.切换至其他角色。\n5.<color=Highlight>【御剑气劲】</color>为空。\n\n<color=Title>清绝剑遁</color>\n处于<color=Highlight>御剑飞行</color>状态时，长按<color=Highlight>跳跃</color>，可跃起并向前突进一段距离。\n<color=Highlight>御剑飞行</color>期间仅可施放1次<color=Highlight>清绝剑遁</color>。\n\n<color=Title>【琴心】获取规则</color>\n上限{13}点。\n<color=Highlight>藏剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【琴心】</color>。\n\n<color=Title>【剑韵】获取规则</color>\n上限{14}点。\n<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【剑韵】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【剑韵】</color>。\n\n<color=Title>【心剑意】获取规则</color>\n上限{15}点。\n<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>造成伤害时，获得<color=Highlight>【心剑意】</color>。",
         "param": [
           "100%",
           "15",
@@ -1825,7 +1800,7 @@
           "2%",
           "7",
           "5%",
-          "2",
+          "3",
           "100%",
           "1",
           "1",
@@ -1834,7 +1809,8 @@
           "1",
           "100",
           "100",
-          "100"
+          "100",
+          "100%"
         ],
         "type": "共鸣回路",
         "level": {
@@ -2435,7 +2411,7 @@
     "17": {
       "skill": {
         "name": "引剑破万法",
-        "desc": "清宵造成伤害时，对目标附加<color=Highlight>【集谐·偏移】</color>，每次技能对同一目标只能触发1次。\n清宵拥有响应<color=Highlight>【集谐·干涉】</color>的能力。\n响应<color=Highlight>【集谐·干涉】</color>：目标每有一层<color=Highlight>【集谐·干涉】</color>效果，清宵自身的每点谐度破坏增幅会使自身对该目标造成的最终伤害提升{0}。清宵在编队中时，目标的<color=Highlight>【集谐·干涉】</color>效果的层数上限增加{1}层。\n此外，目标<color=Highlight>【偏谐值】</color>满时，清宵可对其施放<color=Highlight>【谐度破坏】</color>。处于地面且不处于<color=Highlight>昙体仙身</color>状态时，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。",
+        "desc": "清宵技能造成伤害后，对目标附加<color=Highlight>【集谐·偏移】</color>，每次技能对同一目标只能触发1次。\n清宵拥有响应<color=Highlight>【集谐·干涉】</color>的能力。\n响应<color=Highlight>【集谐·干涉】</color>：目标每有一层<color=Highlight>【集谐·干涉】</color>效果，清宵自身的每点谐度破坏增幅会使自身对该目标造成的最终伤害提升{0}。清宵在编队中时，目标的<color=Highlight>【集谐·干涉】</color>效果的层数上限增加{1}层。\n此外，目标<color=Highlight>【偏谐值】</color>满时，清宵可对其施放<color=Highlight>【谐度破坏】</color>。处于地面且不处于<color=Highlight>昙体仙身</color>状态时，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。",
         "param": [
           "0.12%",
           "1"
@@ -2451,37 +2427,40 @@
   "chains": {
     "1": {
       "name": "起若流云聚还散",
-      "desc": "暴击提升{0}。\n\n<color=Highlight>护体剑光</color>层数上限提升至{1}层，施放<color=Highlight>重击·弦剑</color>时，可额外获得{2}层<color=Highlight>护体剑光</color>。",
+      "desc": "暴击提升{0}。\n\n<color=Highlight>护体剑光</color>层数上限提升至{1}层，施放<color=Highlight>重击·弦剑</color>时，可额外获得{2}层<color=Highlight>护体剑光</color>。\n\n进入战斗后，获得{3}层的<color=Highlight>清邪剑诀</color>。\n<color=Highlight>普攻·弦剑</color>、<color=Highlight>空中攻击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>造成伤害后，若拥有<color=Highlight>清邪剑诀</color>，将移除<color=Highlight>清邪剑诀</color>，触发<color=Highlight>巨阙灭迹</color>，造成清宵攻击{4}的<color=Wind>气动伤害</color>，本次伤害为普攻伤害，该效果每秒最多触发1次。每移除一层<color=Highlight>清邪剑诀</color>，使目标受到<color=Highlight>巨阙灭迹</color>伤害提升{5}，该效果持续{6}秒。\n<color=Highlight>清邪剑诀</color>层数上限为{7}。",
       "param": [
         "16%",
         "2",
-        "1"
+        "1",
+        "25",
+        "400%",
+        "4%",
+        "1",
+        "25"
       ]
     },
     "2": {
       "name": "罢如素英落无声",
-      "desc": "<color=Highlight>重击·弦剑</color>伤害倍率提升{0}。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至{1}层。\n\n施放<color=Highlight>重击·弦剑</color>期间，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>万物和鸣</color>。\n<color=Highlight>万物和鸣</color>：每层使<color=Highlight>重击·天钧荡煞·昙体仙身</color>伤害倍率提升{2}。施放<color=Highlight>重击·弦剑</color>时或施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后移除<color=Highlight>万物和鸣</color>。",
+      "desc": "<color=Highlight>重击·弦剑</color>伤害倍率提升{0}。\n\n处于战斗状态，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至{1}。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至{2}。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至{3}层。",
       "param": [
         "40%",
-        "5",
-        "3%"
+        "25",
+        "25",
+        "6"
       ]
     },
     "3": {
       "name": "长梦无痕剑留影",
-      "desc": "<color=Highlight>共鸣解放·天光云影沧澜兴</color>暴击伤害提升{0}。\n\n附近敌人的<color=Highlight>心识锁定</color>层数上限提升至{1}。\n\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>效果强化为：\n队伍中的角色对拥有<color=Highlight>【集谐·偏移】</color>的<color=Highlight>【失谐】</color>目标造成<color=Highlight>谐度破坏伤害</color>时，将额外附加等同清宵的<color=Highlight>【凝识】</color>层数的<color=Highlight>心识锁定</color>与{2}层<color=Highlight>【集谐·干涉】</color>，该效果对同一目标只能触发{3}次。\n清宵失去意识时，不会继续获得<color=Highlight>【凝识】</color>效果，同时已有的<color=Highlight>【凝识】</color>效果失效。\n<color=Highlight>【凝识】</color>层数上限为{4}，持续{5}秒。",
+      "desc": "<color=Highlight>共鸣解放·天光云影沧澜兴</color>暴击伤害提升{0}。\n\n施放<color=Highlight>重击·弦剑</color>期间，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>万物和鸣</color>。\n<color=Highlight>万物和鸣</color>：每层使<color=Highlight>重击·天钧荡煞·昙体仙身</color>伤害倍率提升{1}。施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后移除<color=Highlight>万物和鸣</color>。\n\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>效果附加<color=Highlight>【集谐·干涉】</color>层数提升至{2}层。",
       "param": [
         "100%",
-        "25",
-        "2",
-        "1",
-        "25",
-        "30"
+        "3%",
+        "2"
       ]
     },
     "4": {
       "name": "红尘杳渺且偕行",
-      "desc": "队伍中的角色附加<color=Highlight>【集谐·偏移】</color>时，攻击提升{0}，持续{1}秒。",
+      "desc": "队伍中的角色附加<color=Highlight>【集谐·偏移】</color>后，该角色攻击提升{0}，持续{1}秒。",
       "param": [
         "20%",
         "8"
@@ -2497,16 +2476,16 @@
     },
     "6": {
       "name": "涤荡浊岁天地清",
-      "desc": "目标受到清宵的<color=Highlight>重击·弦剑</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>伤害提升{0}。\n\n清宵响应<color=Highlight>【集谐·干涉】</color>效果提升{1}。\n\n施放<color=Highlight>重击·弦剑</color>时，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>清邪剑诀</color>。施放<color=Highlight>普攻·弦剑</color>、<color=Highlight>空中攻击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>时，若<color=Highlight>清邪剑诀</color>达到{2}层，将触发<color=Highlight>巨阙灭迹</color>，造成清宵攻击{3}的<color=Wind>气动伤害</color>，本次伤害为普攻伤害，该效果每秒最多触发1次。\n<color=Highlight>清邪剑诀</color>层数上限为{4}，触发<color=Highlight>巨阙灭迹</color>后<color=Highlight>清邪剑诀</color>减少{5}层。\n\n进入战斗后，获得{6}层的<color=Highlight>清邪剑诀</color>，首次施放<color=Highlight>重击·弦剑</color>时，额外对附近的目标附加{7}层<color=Highlight>心识锁定</color>。",
+      "desc": "目标受到清宵的<color=Highlight>重击·弦剑</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>、<color=Highlight>巨阙灭迹</color>伤害提升{0}。\n\n施放<color=Highlight>重击·弦剑</color>期间，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>清邪剑诀</color>。\n\n目标每拥有1层<color=Highlight>心识锁定</color>，受到<color=Highlight>巨阙灭迹</color>伤害加深{2}，前{3}层每层额外加深{4}。\n\n解锁<color=Highlight>固有技能·通晓万物，指名破祟</color>后，<color=Highlight>巨阙灭迹</color>对拥有<color=Highlight>心识锁定</color>的目标造成伤害提升，每层提升{5}，前{6}层每层额外提升{7}。\n\n清宵响应<color=Highlight>【集谐·干涉】</color>效果提升{1}。",
       "param": [
-        "30%",
-        "60%",
-        "10",
-        "400%",
-        "50",
-        "10",
-        "50",
-        "7"
+        "40%",
+        "20%",
+        "2%",
+        "7",
+        "5%",
+        "2%",
+        "7",
+        "5%"
       ]
     }
   },

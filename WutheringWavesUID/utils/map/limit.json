@@ -1147,6 +1147,68 @@
                     ]
                 }
             ]
+        },
+        {
+            "libId": 36,
+            "fetterList": [
+                {
+                    "fetterDetailName": "冥途夜行之灯",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000217,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000221,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000203,
+                            "mainPropName": "攻击%",
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000204,
+                            "mainPropName": "攻击%",
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000210,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "libId": 37,
+            "fetterList": [
+                {
+                    "fetterDetailName": "清邪荡煞之心",
+                    "equipPhantomList": [
+                        {
+                            "phantomId": 6000221,
+                            "cost": 4
+                        },
+                        {
+                            "phantomId": 6000215,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000216,
+                            "cost": 3
+                        },
+                        {
+                            "phantomId": 6000207,
+                            "cost": 1
+                        },
+                        {
+                            "phantomId": 6000208,
+                            "cost": 1
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "charList": [
@@ -1548,6 +1610,20 @@
             "name": "秧秧·玄翎",
             "weaponId": 21020096,
             "sonataLibId": 35
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1212,
+            "name": "景燃",
+            "weaponId": 21010076,
+            "sonataLibId": 36
+        },
+        {
+            "calcFile": "calc.json",
+            "charId": 1413,
+            "name": "清宵",
+            "weaponId": 21020106,
+            "sonataLibId": 37
         }
     ]
 }

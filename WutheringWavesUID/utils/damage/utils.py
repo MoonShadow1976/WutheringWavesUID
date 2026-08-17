@@ -119,11 +119,17 @@ Electro_Flare_Role_Ids = [1307, 1309, 1310]
 # 震谐伤害
 Tune_Rupture_Role_Ids = [1209, 1210, 1509]
 
+# 集谐伤害
+Tune_Strain_Role_Ids = [1413, 1211, 1510, 1509]
+
 # 失序彼岸之梦 套装
 Ancient_Role_Ids = [1608, 1109]
 
 # 释放声骸技能
 Phantom_Role_Dict = {1411: 3, 1607: 3, 1606: 1, 1608: 1, 1109: 3}
+
+# 获得护盾
+Shield_Role_Dict = {1405: 1, 1601: 1, 1206: 1, 1212: 99, 1410: 99, 1306: 99}
 
 # 效应层数增加(风主排除)
 Abnormal_Level_Dict = {1508: 3, 1110: 3}

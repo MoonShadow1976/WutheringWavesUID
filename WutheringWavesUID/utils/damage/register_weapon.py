@@ -342,6 +342,40 @@ class Weapon_21010074(WeaponAbstract):
             return True
 
 
+class Weapon_21010076(WeaponAbstract):
+    id = 21010076
+    type = 1
+    name = "千般渡"
+
+    # 施放变奏技能或获得护盾时,获得【承天】和【载物】,可叠加{1}层
+    # 承天:暴击伤害提升{3},最多提升{4};达到{10}层时,重击伤害的暴击提升{11}
+    # 载物:施放重击时,消耗最多{5}层,每消耗{6}层,重击伤害无视目标{7}防御,最多无视{8}防御
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        title = self.get_title()
+
+        # 施放变奏技能或获得护盾时,获得【承天】,按满层计
+        if isGroup or "cast_variation" in func_list or attr.trigger_shield:
+            dmg = f"{self.param(3)}*{self.param(1)}"
+            msg = f"【承天】:暴击伤害提升{dmg}"
+            attr.add_crit_dmg(calc_percent_expression(dmg), title, msg)
+
+            if attr.char_damage == hit_damage:
+                dmg = f"{self.param(11)}"
+                msg = f"【承天】达到{self.param(10)}层时,重击伤害的暴击提升{dmg}"
+                attr.add_crit_rate(calc_percent_expression(dmg), title, msg)
+
+        # 施放重击时,消耗【载物】,重击伤害无视目标防御
+        if "cast_hit" in func_list and attr.char_damage == hit_damage:
+            dmg = f"{self.param(7)}*{self.param(5)}"
+            msg = f"施放重击时,消耗{self.param(5)}层【载物】,重击伤害无视目标{dmg}防御"
+            attr.add_defense_ignore(calc_percent_expression(dmg), title, msg)
+
+
 class Weapon_21010084(WeaponAbstract):
     id = 21010084
     type = 1
@@ -874,6 +908,34 @@ class Weapon_21020104(WeaponAbstract):
             title = self.get_title()
             msg = f"施放共鸣解放时，攻击提升{dmg}"
             attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+
+
+class Weapon_21020106(WeaponAbstract):
+    id = 21020106
+    type = 2
+    name = "云琅"
+
+    # 附加【集谐·偏移】后,获得气动伤害加成提升{1},持续{2}秒,最多叠加{3}层
+    # 达到上限后,该气动伤害加成提升效果持续时间延长至{5}秒,效果持续期间气动伤害无视目标{6}防御
+    def do_action(
+        self,
+        func_list: list[str] | str,
+        attr: DamageAttribute,
+        isGroup: bool = False,
+    ):
+        title = self.get_title()
+
+        # 附加【集谐·偏移】后,气动伤害加成提升{1},最多叠加{3}层,按满层计
+        if attr.env_tune_strain:
+            dmg = f"{self.param(1)}*{self.param(3)}"
+            msg = f"附加【集谐·偏移】后,气动伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+
+            # 达到上限后,气动伤害无视目标{6}防御
+            if attr.char_attr == CHAR_ATTR_SIERRA:
+                dmg = f"{self.param(6)}"
+                msg = f"叠层达到上限时，气动伤害无视目标{dmg}防御"
+                attr.add_defense_ignore(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21030011(WeaponAbstract):

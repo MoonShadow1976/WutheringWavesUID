@@ -132,75 +132,77 @@ def build_base_data(char_id, weapon_id, max_sub_props):
     """构建基准面板（空词条-精1-五星0链四星6链），用于计算基础伤害"""
     base_data = limit_role_id_list.get(int(char_id), {})
     base_phantom = None
-    if base_data:
-        # 五星0链
-        if base_data["role"]["starLevel"] == 5:
-            for i in base_data["chainList"]:
-                i["unlocked"] = False
-            print(f"{base_data['role']['roleName']} 共鸣链设置为 0链")
+    if not base_data:
+        return None, None
 
-        # 精1
-        base_data["weaponData"]["resonLevel"] = 1
-        print(f"{base_data['role']['roleName']} 武器设置为 精1")
+    # 五星0链
+    if base_data["role"]["starLevel"] == 5:
+        for i in base_data["chainList"]:
+            i["unlocked"] = False
+        print(f"{base_data['role']['roleName']} 共鸣链设置为 0链")
 
-        # 声骸词条
-        for i in base_data["phantomData"]["equipPhantomList"]:
-            for j in i["subProps"]:
-                j["attributeValue"] = phantom_sub_value_map[j["attributeName"]][0]
-        base_phantom = copy.deepcopy(base_data["phantomData"])
+    # 精1
+    base_data["weaponData"]["resonLevel"] = 1
+    print(f"{base_data['role']['roleName']} 武器设置为 精1")
 
-        use_crit = False
-        weapon = get_weapon_model(weapon_id)
-        if weapon:
-            for key in weapon.get_max_level_stat_tuple():
-                if key[0] == "暴击伤害":
-                    use_crit = True
-                    break
+    # 声骸词条
+    for i in base_data["phantomData"]["equipPhantomList"]:
+        for j in i["subProps"]:
+            j["attributeValue"] = phantom_sub_value_map[j["attributeName"]][0]
+    # base_phantom = copy.deepcopy(base_data["phantomData"])
 
-        for i, echo in enumerate(base_data["phantomData"]["equipPhantomList"]):
-            # echo["mainProps"] = []
-            if i == 0:
-                main_key_4 = "暴击" if use_crit else "暴击伤害"
-                echo["cost"] = 4
-                echo["mainProps"] = [
-                    {"attributeName": main_key_4, "attributeValue": phantom_main_value_map[main_key_4][2]},
-                    {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][2]},
-                ]
-            elif i == 1:
-                main_key_3_1 = f"{base_data['role']['attributeName']}伤害加成"
-                echo["cost"] = 3
-                echo["mainProps"] = [
-                    {"attributeName": main_key_3_1, "attributeValue": phantom_main_value_map["属性伤害加成"][1]},
-                    {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][1]},
-                ]
-            elif i == 2:
-                main_key_3_2 = "攻击%"
-                if "生命" in max_sub_props:
-                    main_key_3_2 = "生命%"
-                elif "防御" in max_sub_props:
-                    main_key_3_2 = "防御%"
-                elif "共鸣效率" in max_sub_props:
-                    main_key_3_2 = "共鸣效率"
-                echo["cost"] = 3
-                echo["mainProps"] = [
-                    {"attributeName": main_key_3_2, "attributeValue": phantom_main_value_map["属性伤害加成"][1]},
-                    {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][1]},
-                ]
-            elif i == 3 or i == 4:
-                main_key_1 = "攻击%"
-                if "生命" in max_sub_props:
-                    main_key_1 = "生命%"
-                elif "防御" in max_sub_props:
-                    main_key_1 = "防御%"
-                echo["cost"] = 1
-                echo["mainProps"] = [
-                    {"attributeName": main_key_1, "attributeValue": phantom_main_value_map[main_key_1][0]},
-                    {"attributeName": "生命", "attributeValue": phantom_main_value_map["生命"][0]},
-                ]
-            echo["subProps"] = []
-        print(
-            f"{base_data['role']['roleName']} 声骸副词条设置为 空，主词条设置为 4/3/3/1/1 {main_key_4} {main_key_3_1} {main_key_3_2} {main_key_1} {main_key_1}\n"
-        )
+    use_crit = False
+    weapon = get_weapon_model(weapon_id)
+    if weapon:
+        for key in weapon.get_max_level_stat_tuple():
+            if key[0] == "暴击伤害":
+                use_crit = True
+                break
+
+    for i, echo in enumerate(base_data["phantomData"]["equipPhantomList"]):
+        # echo["mainProps"] = []
+        if i == 0:
+            main_key_4 = "暴击" if use_crit else "暴击伤害"
+            echo["cost"] = 4
+            echo["mainProps"] = [
+                {"attributeName": main_key_4, "attributeValue": phantom_main_value_map[main_key_4][2]},
+                {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][2]},
+            ]
+        elif i == 1:
+            main_key_3_1 = f"{base_data['role']['attributeName']}伤害加成"
+            echo["cost"] = 3
+            echo["mainProps"] = [
+                {"attributeName": main_key_3_1, "attributeValue": phantom_main_value_map["属性伤害加成"][1]},
+                {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][1]},
+            ]
+        elif i == 2:
+            main_key_3_2 = "攻击%"
+            if "生命" in max_sub_props:
+                main_key_3_2 = "生命%"
+            elif "防御" in max_sub_props:
+                main_key_3_2 = "防御%"
+            elif "共鸣效率" in max_sub_props:
+                main_key_3_2 = "共鸣效率"
+            echo["cost"] = 3
+            echo["mainProps"] = [
+                {"attributeName": main_key_3_2, "attributeValue": phantom_main_value_map["属性伤害加成"][1]},
+                {"attributeName": "攻击", "attributeValue": phantom_main_value_map["攻击"][1]},
+            ]
+        elif i == 3 or i == 4:
+            main_key_1 = "攻击%"
+            if "生命" in max_sub_props:
+                main_key_1 = "生命%"
+            elif "防御" in max_sub_props:
+                main_key_1 = "防御%"
+            echo["cost"] = 1
+            echo["mainProps"] = [
+                {"attributeName": main_key_1, "attributeValue": phantom_main_value_map[main_key_1][0]},
+                {"attributeName": "生命", "attributeValue": phantom_main_value_map["生命"][0]},
+            ]
+        echo["subProps"] = []
+    print(
+        f"{base_data['role']['roleName']} 声骸副词条设置为 空，主词条设置为 4/3/3/1/1 {main_key_4} {main_key_3_1} {main_key_3_2} {main_key_1} {main_key_1}\n"
+    )
 
     return base_data, base_phantom
 
@@ -228,8 +230,8 @@ def update_calc_json_weights(char_name, char_id, calc_file, weapon_id):
     skill_weight = calc_data["skill_weight"]
 
     # 构建基准面板
-    base_data, base_phantom = build_base_data(char_id, weapon_id, max_sub_props)
-    if not base_data or not base_phantom:
+    base_data, _base_phantom = build_base_data(char_id, weapon_id, max_sub_props)
+    if not base_data:
         print(f"角色{char_name}({char_id})未适配极限面板，跳过更新权重")
         return
 
@@ -240,7 +242,7 @@ def update_calc_json_weights(char_name, char_id, calc_file, weapon_id):
         return
 
     # 辅助函数：计算伤害
-    def calc_damage(role_dict):
+    def calc_damage(role_dict, need_crit=False):
         role_obj = RoleDetailData(**role_dict)
         calc = WuWaCalc(role_obj)
         calc.phantom_pre = calc.prepare_phantom()
@@ -252,16 +254,19 @@ def update_calc_json_weights(char_name, char_id, calc_file, weapon_id):
         )
         calc.role_card = calc.enhance_summation_card_value(calc.phantom_card)
         attr = calc.card_sort_map_to_attribute(calc.role_card)
-        _crit_damage, expected_damage = rankDetail["func"](attr, role_obj)
+        crit_damage, expected_damage = rankDetail["func"](attr, role_obj)
         print(
             f"  角色面板 暴击：{attr.crit_rate} 爆伤：{attr.crit_dmg} 攻击：{attr.effect_attack} 防御：{attr.effect_def} 生命：{attr.effect_life} 加成：{attr.dmg_bonus} 共效：{attr.energy_regen}"
         )
+        if need_crit:
+            return int(crit_damage.replace(",", ""))
         return int(expected_damage.replace(",", ""))
 
-    base_damage = calc_damage(base_data)
+    base_crit_damage = calc_damage(base_data, True)
+    base_expected_damage = calc_damage(base_data)
 
     # print(f"基础词条：test {base_data['phantomData']['equipPhantomList'][0]}=> 空")
-    print(f"基础伤害：{base_damage}")
+    print(f"基础伤害 暴击：{base_crit_damage} 期望伤害：{base_expected_damage}\n")
     # print(f"测试词条：test {base_phantom['equipPhantomList'][0]}")
     # 对每个 max_sub_props 词条，在第一个声骸添加该词条（最大值），计算提升
     improvements = {}
@@ -290,11 +295,17 @@ def update_calc_json_weights(char_name, char_id, calc_file, weapon_id):
             }
         )
 
-        new_damage = calc_damage(test_data)
+        if "暴击" != sub_name.replace("%", ""):
+            need_crit = True
+            base_damage = base_crit_damage
+        else:
+            need_crit = False
+            base_damage = base_expected_damage
+        new_damage = calc_damage(test_data, need_crit)
         improvement = (new_damage - base_damage) / base_damage
         improvement = improvement / float(max_val_str.replace("%", ""))
         improvements[sub_name] = improvement
-        print(f"满值 {sub_name}({max_val_str}) 测试伤害：{new_damage} 每点词条数值提升：{improvement}")
+        print(f"满值 {sub_name}({max_val_str})\t 测试伤害：{new_damage}/{base_damage}\t 每点词条数值提升：{improvement}")
         # print(f"测试词条：test {test_data['phantomData']['equipPhantomList'][0]}")
 
     # ========== 使用 sub_max=65 归一化 ==========
@@ -340,7 +351,7 @@ if __name__ == "__main__":
 
     for char_limit in limit_data["charList"]:
         char_name = char_limit["name"]
-        for i in ["穗穗", "导电", "玄翎"]:
+        for i in ["景燃", "清宵"]:
             if i in char_name:
                 print(f"\n角色{char_name} 开始计算")
                 update_calc_json_weights(char_name, char_limit["charId"], char_limit["calcFile"], char_limit["weaponId"])

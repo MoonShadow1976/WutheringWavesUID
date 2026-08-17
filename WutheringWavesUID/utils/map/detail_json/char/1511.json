@@ -2873,7 +2873,7 @@
     "17": {
       "skill": {
         "name": "数据崩解",
-        "desc": "目标<color=Highlight>【偏谐值】</color>满时，露西可对其施放<color=Highlight>【谐度破坏】</color>。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，露西将触发<color=Highlight>骇破响应·数据崩解</color>效果，同一目标每{0}秒仅可收到{1}次该效果。",
+        "desc": "目标<color=Highlight>【偏谐值】</color>满时，露西可对其施放<color=Highlight>【谐度破坏】</color>。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，露西将触发<color=Highlight>骇破响应·数据崩解</color>效果，同一目标每{0}秒仅可受到{1}次该效果。",
         "param": [
           "8",
           "1"

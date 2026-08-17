@@ -8189,6 +8189,439 @@
   {
     "chainList": [
       {
+        "description": "<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>伤害倍率提升80%。\n<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>免疫打断。",
+        "iconUrl": "",
+        "name": "阴阳其和，终始其义",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率提升46%。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升46%。\n\n每次进入战斗时，景燃获得下述效果，每4秒可触发1次。\n·获得300点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限25%的共鸣能量且<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害加深180%，持续4秒。",
+        "iconUrl": "",
+        "name": "孤灯踩影，有迹山河",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得5点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得50点攻击，上限2500。",
+        "iconUrl": "",
+        "name": "乾道变化，各正性命",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中的角色获得护盾时，使队伍中的角色全属性伤害加成提升20%，持续30秒。",
+        "iconUrl": "",
+        "name": "虚实莫辨，人鬼无间",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "景燃受到致死伤害时，此次伤害不会使景燃倒下，并获得基于景燃生命上限50%的护盾，护盾持续15秒，该效果每10分钟可触发一次，该护盾在切换至其他角色时不会继承。",
+        "iconUrl": "",
+        "name": "原始反终，故知死生",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "目标受到景燃的重击伤害提升40%。\n\n<color=Highlight>魑魅魍魉</color>伤害倍率提升80%。\n\n进入<color=Highlight>荧惑</color>状态后，景燃获得<color=Highlight>万鬼同行</color>，持续15秒。<color=Highlight>万鬼同行</color>持续期间，若景燃为队伍中登场角色，景燃造成伤害时，召唤<color=Highlight>魑魅魍魉</color>攻击目标，对目标造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n\n此方式召唤<color=Highlight>魑魅魍魉</color>间隔为1秒，最多以此方式召唤8次，满足任一下述条件时，移除<color=Highlight>万鬼同行</color>并重置<color=Highlight>魑魅魍魉</color>的召唤次数。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时。\n·<color=Highlight>荧惑</color>持续时间结束或被移除时。",
+        "iconUrl": "",
+        "name": "恩仇了了，后文有期",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "冥途夜行之灯",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "万囮牢·朽躯",
+            "phantomId": 6000217,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "冥途夜行之灯",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "天傀劫煞",
+            "phantomId": 6000221,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "冥途夜行之灯",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "瓷庭候",
+            "phantomId": 6000203,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "冥途夜行之灯",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "石庭候",
+            "phantomId": 6000204,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "冥途夜行之灯",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "22.8%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "580"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "心傀·悲",
+            "phantomId": 6000210,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 2,
+      "attributeName": "热熔",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1212,
+      "roleName": "景燃",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 1,
+      "weaponTypeName": "长刃",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·摄召</color>\n若景燃处于<color=Highlight>负阴状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·摄召第3段</color>时可获得50点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·摄召第4段</color>时可获得50点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>普攻·灭煞</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·灭煞第3段</color>时可获得50点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·灭煞第4段</color>时可获得50点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Fire>热熔伤害</color>。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>闪避反击·探幽</color>\n若景燃处于<color=Highlight>负阴状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·探幽</color>时可获得100点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第4段</color>。\n\n<color=Title>闪避反击·守明</color>\n若景燃处于<color=Highlight>抱阳状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·守明</color>时可获得100点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第4段</color>。\n\n<color=Title>潜影</color>\n景燃处于战斗状态下，且在地面时，向前<color=Highlight>短按闪避</color>可施放<color=Highlight>潜影</color>，造成固定<color=Fire>热熔伤害</color>，此次伤害为普攻伤害，不受伤害加成影响，施放该技能一定时间内可以触发成功闪避。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "死生徘徊",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·阴蚀骨</color>\n若景燃处于<color=Highlight>负阴状态</color>，可施放<color=Highlight>共鸣技能·阴蚀骨</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阴蚀骨</color>可在空中施放。\n\n<color=Title>共鸣技能·阳焚身</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可施放<color=Highlight>共鸣技能·阳焚身</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阳焚身</color>可在空中施放。\n\n<color=Title>破秽</color>\n施放<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>时，获得<color=Highlight>破秽</color>，持续4秒，满足下述条件之一时，<color=Highlight>破秽</color>提前结束。\n·切换至其他角色。\n·切换至<color=Highlight>负阴状态</color>或<color=Highlight>抱阳状态</color>时。\n·施放<color=Highlight>共鸣技能·黄泉渡</color>或<color=Highlight>共鸣技能·往生送</color>时。\n\n<color=Title>共鸣技能·黄泉渡</color>\n若景燃处于<color=Highlight>负阴状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·黄泉渡</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·黄泉渡</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n\n<color=Title>共鸣技能·往生送</color>\n若景燃处于<color=Highlight>抱阳状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·往生送</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·往生送</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "撞煞",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得100点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的50%，将当前生命值降至生命上限的50%。\n·获得200点【<color=Highlight>炁</color>】。\n·获得3层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续15秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为3层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得200点【<color=Highlight>炁</color>】，并减少1层<color=Highlight>行途</color>，持续15秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>命中目标时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
+          "iconUrl": "",
+          "id": 0,
+          "name": "万鬼同葬",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成<color=Fire>热熔伤害</color>。消耗全部【<color=Highlight>鬼护</color>】，并转化为相同层数的<color=Highlight>祸兮福兮</color>。\n施放<color=Highlight>变奏技能·挑灯问冢</color>时可获得100点【<color=Highlight>炁</color>】。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>祸兮福兮</color>\n<color=Highlight>祸兮福兮</color>上限为50层，每层<color=Highlight>祸兮福兮</color>使得景燃基于生命上限获得额外热熔伤害加成提升：景燃每1000生命上限获得0.05%热熔伤害加成提升，每层最多以此方式使得景燃获得2.5%热熔伤害加成提升，持续15秒。\n若切换至其他角色则该效果提前结束。\n\n<color=Title>【鬼护】获取规则</color>\n·【<color=Highlight>鬼护</color>】上限为50点。\n·景燃获得护盾时，可获得1点【<color=Highlight>鬼护</color>】，每0.5秒可生效一次。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "挑灯问冢",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>炁机斡旋</color>\n景燃施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>可以在<color=Highlight>负阴状态</color>和<color=Highlight>抱阳状态</color>之间切换，景燃初始处于<color=Highlight>抱阳状态</color>。\n\n<color=Title>重击·劫魄</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>负阴状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·劫魄</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·劫魄</color>后切换至<color=Highlight>抱阳状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>重击·踏罡</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>抱阳状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·踏罡</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·踏罡</color>后切换至<color=Highlight>负阴状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n<color=Highlight>重击·踏罡</color>可在空中施放。\n\n<color=Title>【炁】获取规则</color>\n【<color=Highlight>炁</color>】上限300点。\n·施放<color=Highlight>普攻·摄召第3段</color>、<color=Highlight>普攻·摄召第4段</color>、<color=Highlight>普攻·灭煞第3段</color>或<color=Highlight>普攻·灭煞第4段</color>时，获得50点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>闪避反击·探幽</color>、<color=Highlight>闪避反击·守明</color>、<color=Highlight>共鸣技能·黄泉渡</color>、<color=Highlight>共鸣技能·往生送</color>或<color=Highlight>变奏技能·挑灯问冢</color>时，获得100点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>或持有<color=Highlight>行途</color>时施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>，获得200点【<color=Highlight>炁</color>】。\n\n<color=Title>【命火】获取规则</color>\n【<color=Highlight>命火</color>】上限100点。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时获得100点【<color=Highlight>命火</color>】。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n若景燃处于<color=Highlight>荧惑</color>状态且景燃持有的【<color=Highlight>命火</color>】不为0时，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时消耗25点【<color=Highlight>命火</color>】，并使本次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的伤害倍率基于景燃生命上限增加：景燃自身生命上限大于25000点时，每超过1000点生命上限增加<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率，最多计入25000点生命上限。\n\n<color=Title>幽而复明</color>\n·景燃的防御始终为0。\n·景燃基于生命上限提升受到的治疗效果：景燃每1000点生命上限提升6.2%受到的治疗效果，上限310%。\n·景燃基于生命上限获得热熔伤害加成提升：景燃每1000点生命上限获得1.5%热熔伤害加成提升，上限75%。\n\n<color=Title>阳变阴合</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得36点攻击，上限1800。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "逆渡三途",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "造成景燃795%攻击的<color=Fire>热熔伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "收山出煞",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·长刃",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "全属性伤害加成提升24%。施放变奏技能或获得护盾时，获得1层【承天】和1层【载物】，每0.5秒可通过获得护盾触发1次，可叠加6层，持续7秒。\n若切换至其他角色【承天】和【载物】提前结束。\n承天：暴击伤害提升8%，最多提升48%。【承天】达到6层时，重击伤害的暴击提升24%。\n载物：施放重击时，消耗最多2层【载物】，每消耗1层【载物】，重击伤害无视目标25%防御，最多无视目标50%防御，持续2秒。",
+        "weaponIcon": "",
+        "weaponId": 21010076,
+        "weaponName": "千般渡",
+        "weaponStarLevel": 5,
+        "weaponType": 1
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "共鸣技能<color=Highlight>灭杀指令</color>命中目标时，额外回复10点共鸣能量，每20秒可触发1次。",
         "iconUrl": "",
         "name": "隐秘谈判",
@@ -11961,7 +12394,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Title>普攻</color>\n进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>格挡架势</color>\n长按<color=Highlight>普攻</color>，消耗耐力进入<color=Highlight>格挡架势</color>。\n<color=Highlight>格挡架势</color>下免疫打断，受到的伤害降低60%，持续消耗耐力；松开<color=Highlight>普攻</color>键时，结束<color=Highlight>格挡架势</color>，并施放<color=Highlight>普攻·逆转一击</color>，造成<color=Thunder>导电伤害</color>。\n若施放<color=Highlight>普攻·逆转一击</color>的一定时间内受到敌方目标攻击,免疫此次伤害并短暂停滞目标,随后会施放<color=Highlight>普攻·逆转一击·崩解</color>，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·逆转一击</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第2段。\n施放<color=Highlight>普攻·逆转一击·崩解</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>空中攻击·湮灭</color>。\n<color=Highlight>格挡架势</color>下可消耗耐力向对应方向进行<color=Highlight>闪避·瞬身</color>，施放该技能一定时间内可以触发成功<color=Highlight>闪避</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·湮灭</color>\n进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>，施放该技能第3段后，在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第4段。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一段时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第3段。\n\n<color=Title>空中闪避反击</color>\n空中成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。",
+          "description": "<color=Title>普攻</color>\n进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>格挡架势</color>\n长按<color=Highlight>普攻</color>，消耗耐力进入<color=Highlight>格挡架势</color>。\n<color=Highlight>格挡架势</color>下免疫打断，受到的伤害降低60%，持续消耗耐力；松开<color=Highlight>普攻</color>键时，结束<color=Highlight>格挡架势</color>，并施放<color=Highlight>普攻·逆转一击</color>，造成<color=Thunder>导电伤害</color>。\n若施放<color=Highlight>普攻·逆转一击</color>的一定时间内受到敌方目标攻击,免疫此次伤害并短暂停滞目标,随后会施放<color=Highlight>普攻·逆转一击·崩解</color>，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·逆转一击</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第2段。\n施放<color=Highlight>普攻·逆转一击·崩解</color>后一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>空中攻击·湮灭</color>。\n<color=Highlight>格挡架势</color>下可消耗耐力向对应方向进行<color=Highlight>闪避·瞬身</color>，施放该技能一定时间内可以触发成功<color=Highlight>闪避</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·湮灭</color>\n进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>，施放该技能第3段后，在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·克敌</color>。\n\n<color=Title>闪避反击</color>\n成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一段时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻</color>第3段。\n\n<color=Title>空中闪避反击</color>\n空中成功<color=Highlight>闪避</color>后一定时间内短按<color=Highlight>普攻</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。",
           "iconUrl": "",
           "id": 0,
           "name": "止戈",
@@ -16376,6 +16809,439 @@
   {
     "chainList": [
       {
+        "description": "暴击提升16%。\n\n<color=Highlight>护体剑光</color>层数上限提升至2层，施放<color=Highlight>重击·弦剑</color>时，可额外获得1层<color=Highlight>护体剑光</color>。\n\n进入战斗后，获得25层的<color=Highlight>清邪剑诀</color>。\n<color=Highlight>普攻·弦剑</color>、<color=Highlight>空中攻击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>造成伤害后，若拥有<color=Highlight>清邪剑诀</color>，将移除<color=Highlight>清邪剑诀</color>，触发<color=Highlight>巨阙灭迹</color>，造成清宵攻击400%的<color=Wind>气动伤害</color>，本次伤害为普攻伤害，该效果每秒最多触发1次。每移除一层<color=Highlight>清邪剑诀</color>，使目标受到<color=Highlight>巨阙灭迹</color>伤害提升4%，该效果持续1秒。\n<color=Highlight>清邪剑诀</color>层数上限为25。",
+        "iconUrl": "",
+        "name": "起若流云聚还散",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>重击·弦剑</color>伤害倍率提升40%。\n\n处于战斗状态，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至25。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至25。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至6层。",
+        "iconUrl": "",
+        "name": "罢如素英落无声",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣解放·天光云影沧澜兴</color>暴击伤害提升100%。\n\n施放<color=Highlight>重击·弦剑</color>期间，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>万物和鸣</color>。\n<color=Highlight>万物和鸣</color>：每层使<color=Highlight>重击·天钧荡煞·昙体仙身</color>伤害倍率提升3%。施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后移除<color=Highlight>万物和鸣</color>。\n\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>效果附加<color=Highlight>【集谐·干涉】</color>层数提升至2层。",
+        "iconUrl": "",
+        "name": "长梦无痕剑留影",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中的角色附加<color=Highlight>【集谐·偏移】</color>后，该角色攻击提升20%，持续8秒。",
+        "iconUrl": "",
+        "name": "红尘杳渺且偕行",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣技能·浮声一刹·行罚</color>伤害倍率提升100%。\n\n<color=Highlight>御剑飞行</color>移动时，<color=Highlight>【御剑气劲】</color>消耗降低30%。",
+        "iconUrl": "",
+        "name": "寒芒愿暖凡间雪",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "目标受到清宵的<color=Highlight>重击·弦剑</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>、<color=Highlight>巨阙灭迹</color>伤害提升40%。\n\n施放<color=Highlight>重击·弦剑</color>期间，根据附近敌人<color=Highlight>心识锁定</color>的最高层数，获得同等层数的<color=Highlight>清邪剑诀</color>。\n\n目标每拥有1层<color=Highlight>心识锁定</color>，受到<color=Highlight>巨阙灭迹</color>伤害加深2%，前7层每层额外加深5%。\n\n解锁<color=Highlight>固有技能·通晓万物，指名破祟</color>后，<color=Highlight>巨阙灭迹</color>对拥有<color=Highlight>心识锁定</color>的目标造成伤害提升，每层提升2%，前7层每层额外提升5%。\n\n清宵响应<color=Highlight>【集谐·干涉】</color>效果提升20%。",
+        "iconUrl": "",
+        "name": "涤荡浊岁天地清",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "清邪荡煞之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "天傀劫煞",
+            "phantomId": 6000221,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "清邪荡煞之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "霁息兽尊",
+            "phantomId": 6000215,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "清邪荡煞之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "封庭械囿",
+            "phantomId": 6000216,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "清邪荡煞之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "心傀·怒",
+            "phantomId": 6000207,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "清邪荡煞之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "心傀·忧",
+            "phantomId": 6000208,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 4,
+      "attributeName": "气动",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1413,
+      "roleName": "清宵",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 2,
+      "weaponTypeName": "迅刀",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·弦剑</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>普攻·弦剑第1段</color>、<color=Highlight>普攻·弦剑第4段</color>为<color=Highlight>藏剑式</color>。\n<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>为<color=Highlight>执剑式</color>。\n\n<color=Title>重击·弦剑</color>\n<color=Highlight>【琴心】</color>与<color=Highlight>【剑韵】</color>充满时，解锁<color=Highlight>重击·弦剑</color>。\n长按<color=Highlight>普攻</color>，消耗耐力施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【琴心】</color>、<color=Highlight>【剑韵】</color>，进入<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>空中攻击·弦剑</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。\n施放<color=Highlight>空中攻击·弦剑第3段</color>落地后，在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。\n处于空中时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>空中攻击·弦剑第3段</color>。\n\n<color=Title>空中下落攻击</color>\n处于<color=Highlight>御剑飞行</color>状态时，<color=Highlight>跳跃</color>替换为<color=Highlight>空中下落攻击</color>。\n消耗耐力进行空中下落攻击，造成<color=Wind>气动伤害</color>。\n不处于<color=Highlight>昙体仙身</color>状态时，施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。\n\n<color=Title>闪避反击·弦剑</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。\n施放该技能后在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第4段</color>。\n\n<color=Title>御剑疾行</color>\n处于空中时，<color=Highlight>闪避</color>替换为<color=Highlight>御剑疾行</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "化弦为剑",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>浮声一刹·行罚</color>\n造成<color=Wind>气动伤害</color>，技能施放期间，获得45点<color=Highlight>【琴心】</color>。\n不处于<color=Highlight>昙体仙身</color>状态时，施放该技能后在一定时间内按下<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第4段</color>。\n\n<color=Title>浮声一刹·凌霄</color>\n施放<color=Highlight>普攻·弦剑第2段</color>、<color=Highlight>普攻·弦剑第3段</color>、<color=Highlight>闪避反击·弦剑</color>期间，<color=Highlight>共鸣技能</color>替换为<color=Highlight>浮声一刹·凌霄</color>。\n造成<color=Wind>气动伤害</color>。\n该技能为<color=Highlight>执剑式</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "浮声一刹",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成<color=Wind>气动伤害</color>。\n可在低空中施放。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "天光云影沧澜兴",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "造成<color=Wind>气动伤害</color>，施放时获得30点<color=Highlight>【剑韵】</color>，并获得<color=Highlight>金声玉振</color>。\n\n<color=Title>金声玉振</color>\n施放<color=Highlight>共鸣技能·浮声一刹·行罚</color>时，可获得30点<color=Highlight>【琴心】</color>并移除<color=Highlight>金声玉振</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "改韵易调",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>昙体仙身</color>\n清宵处于<color=Highlight>昙体仙身</color>状态时，解锁<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>。\n\n<color=Title>普攻·昙体仙身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>闪避反击·昙体仙身</color>\n成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>重击·天钧荡煞·昙体仙身</color>\n<color=Highlight>【心剑意】</color>充满时，解锁<color=Highlight>重击·天钧荡煞·昙体仙身</color>，长按<color=Highlight>普攻</color>可施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【心剑意】</color>，退出<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>心识锁定</color>\n<color=Highlight>心识锁定</color>层数上限为15。\n每次队伍中的角色对目标附加<color=Highlight>【集谐·干涉】</color>后，对目标附加1层<color=Highlight>心识锁定</color>。\n目标每拥有1层<color=Highlight>心识锁定</color>，受到清宵以下技能伤害加深2%，前7层每层额外加深5%。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n<color=Title>天心空明</color>\n进入战斗或施放共鸣解放<color=Highlight>天光云影沧澜兴</color>时，获得<color=Highlight>天心空明</color>。\n<color=Highlight>藏剑式</color>/<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>/<color=Highlight>【剑韵】</color>效率提升100%。\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加3层<color=Highlight>心识锁定</color>，使自身下一次<color=Highlight>重击·天钧荡煞·昙体仙身</color>获得强化：伤害倍率提升100%，对目标额外累积偏谐值。切换至其他角色提前结束<color=Highlight>重击·天钧荡煞·昙体仙身</color>强化效果。\n施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后，移除<color=Highlight>天心空明</color>。\n\n<color=Title>护体剑光</color>\n施放<color=Highlight>变奏技能·改韵易调</color>或<color=Highlight>重击·弦剑</color>时，获得1层<color=Highlight>护体剑光</color>。\n<color=Highlight>护体剑光</color>上限为1层，受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>护体剑光</color>，使自身免疫打断且受到伤害降低60%，持续1秒。该效果每秒可触发1次。\n\n<color=Title>御剑飞行</color>\n处于<color=Highlight>御剑飞行</color>状态时，将以特殊表现进行移动。\n<color=Highlight>御剑飞行</color>移动期间持续消耗<color=Highlight>【御剑气劲】</color>。\n·施放以下技能后，将进入<color=Highlight>御剑飞行</color>状态：\n<color=Highlight>御剑闪避</color>、<color=Highlight>重击·弦剑</color>、<color=Highlight>空中攻击·弦剑第1段</color>、<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>浮声一刹·凌霄</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>变奏技能·改韵易调</color>。\n·通过以下方式可退出<color=Highlight>御剑飞行</color>状态：\n1.施放<color=Highlight>空中攻击·弦剑第3段</color>、<color=Highlight>空中下落攻击</color>。\n2.触发特定场景交互或探索工具。\n3.回到地面。\n4.切换至其他角色。\n5.<color=Highlight>【御剑气劲】</color>为空。\n\n<color=Title>清绝剑遁</color>\n处于<color=Highlight>御剑飞行</color>状态时，长按<color=Highlight>跳跃</color>，可跃起并向前突进一段距离。\n<color=Highlight>御剑飞行</color>期间仅可施放1次<color=Highlight>清绝剑遁</color>。\n\n<color=Title>【琴心】获取规则</color>\n上限100点。\n<color=Highlight>藏剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【琴心】</color>。\n\n<color=Title>【剑韵】获取规则</color>\n上限100点。\n<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【剑韵】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【剑韵】</color>。\n\n<color=Title>【心剑意】获取规则</color>\n上限100点。\n<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>造成伤害时，获得<color=Highlight>【心剑意】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "无相心剑",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "造成清宵800%攻击的<color=Wind>气动伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "弦歌不绝",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "清宵技能造成伤害后，对目标附加<color=Highlight>【集谐·偏移】</color>，每次技能对同一目标只能触发1次。\n清宵拥有响应<color=Highlight>【集谐·干涉】</color>的能力。\n响应<color=Highlight>【集谐·干涉】</color>：目标每有一层<color=Highlight>【集谐·干涉】</color>效果，清宵自身的每点谐度破坏增幅会使自身对该目标造成的最终伤害提升0.12%。清宵在编队中时，目标的<color=Highlight>【集谐·干涉】</color>效果的层数上限增加1层。\n此外，目标<color=Highlight>【偏谐值】</color>满时，清宵可对其施放<color=Highlight>【谐度破坏】</color>。处于地面且不处于<color=Highlight>昙体仙身</color>状态时，施放<color=Highlight>【谐度破坏】</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·弦剑第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "引剑破万法",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。附加集谐偏移后，获得气动伤害加成提升22.4%，持续2秒，最多叠加5层，该效果每0.5秒可触发1次。达到上限后，获得下列效果：\n·该气动伤害加成提升效果持续时间延长至30秒。\n·效果持续期间，气动伤害无视目标20%的防御。",
+        "weaponIcon": "",
+        "weaponId": 21020106,
+        "weaponName": "云琅",
+        "weaponStarLevel": 5,
+        "weaponType": 2
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "施放延奏技能<color=Highlight>盛放</color>时，队伍中登场角色额外获得持续回复生命效果，每5秒回复维里奈20%攻击的生命值，持续30秒。",
         "iconUrl": "",
         "name": "萌芽的一瞬",
@@ -20208,7 +21074,7 @@
       {
         "level": 1,
         "skill": {
-          "description": "目标<color=Highlight>【偏谐值】</color>满时，露西可对其施放<color=Highlight>【谐度破坏】</color>。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，露西将触发<color=Highlight>骇破响应·数据崩解</color>效果，同一目标每8秒仅可收到1次该效果。",
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，露西可对其施放<color=Highlight>【谐度破坏】</color>。\n响应<color=Highlight>【骇破·干涉】</color>：队伍中的角色对目标造成<color=Highlight>【谐度破坏】</color>伤害并使其进入<color=Highlight>【骇破·干涉】</color>状态时，露西将触发<color=Highlight>骇破响应·数据崩解</color>效果，同一目标每8秒仅可受到1次该效果。",
           "iconUrl": "",
           "id": 0,
           "name": "数据崩解",
@@ -23652,7 +24518,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Title>共鸣技能·剑式流转·苍</color>\n秧秧·玄翎默认处于<color=Highlight>苍剑式</color>，<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>羽剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·苍</color>。\n短按共鸣技能，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·苍</color>，造成<color=Dark>湮灭伤害</color>，回复100点<color=Highlight>【流响】</color>和1点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·苍</color>命中目标时，消耗目标1层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·苍</color>打断<color=Highlight>普攻·羽剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>共鸣技能·剑式流转·羽</color>\n<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>苍剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·羽</color>。\n短按共鸣技能，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·羽</color>，造成<color=Dark>湮灭伤害</color>，回复100点<color=Highlight>【流响】</color>和1点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·羽</color>命中目标时，消耗目标1层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·羽</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·羽</color>打断<color=Highlight>普攻·苍剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>重击·苍剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>苍剑式</color>，长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力施放<color=Highlight>重击·苍剑式</color>，生成巨大气旋攻击前方，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放<color=Highlight>重击·苍剑式</color>时，获得<color=Highlight>【绝息】</color>，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·苍剑式</color>暴击伤害提升160%；<color=Highlight>重击·苍剑式</color>结束时移除<color=Highlight>【绝息】</color>，每25秒仅可获得1次<color=Highlight>【绝息】</color>。\n<color=Highlight>重击·苍剑式</color>会为命中的目标附加2层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>重击·羽剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>且不处于<color=Highlight>普攻·湮象风华</color>连段，并且处于地面时，长按普攻消耗耐力施放<color=Highlight>重击·羽剑式</color>，造成<color=Dark>湮灭伤害</color>，命中目标后将自动施放<color=Highlight>空中攻击·释羽风落</color>。\n施放<color=Highlight>重击·羽剑式</color>时，获得<color=Highlight>【流岚】</color>，<color=Highlight>【流岚】</color>持续15秒，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>暴击伤害提升160%；<color=Highlight>普攻·湮象风华</color>第3段或<color=Highlight>闪避反击·湮象风华</color>第3段结束时移除<color=Highlight>【流岚】</color>，每25秒仅可获得1次<color=Highlight>【流岚】</color>。\n<color=Highlight>重击·羽剑式</color>会为命中的目标附加2层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>空中攻击·释羽风落</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>并且处于空中时，<color=Highlight>空中攻击·羽剑式</color>替换为<color=Highlight>空中攻击·释羽风落</color>。\n短按普攻或长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力并施放<color=Highlight>空中攻击·释羽风落</color>，造成<color=Dark>湮灭伤害</color>。施放<color=Highlight>空中攻击·释羽风落</color>时，进入<color=Highlight>聆风祀声</color>，持续12秒。\n\n<color=Title>聆风祀声</color>\n处于<color=Highlight>羽剑式</color>时，<color=Highlight>普攻·羽剑式</color>替换为<color=Highlight>普攻·湮象风华</color>，进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>普攻·湮象风华</color>第2、3段可在低空施放，施放第3段后退出<color=Highlight>普攻·湮象风华</color>，该连击段数不会被重置。\n<color=Highlight>聆风祀声</color>期间，施放闪避反击，视为施放<color=Highlight>普攻·湮象风华</color>连段。\n\n<color=Title>羽誓</color>\n附近队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>羽誓</color>，持续4秒，<color=Highlight>羽誓</color>获得间隔1秒，最多叠加6层，秧秧·玄翎为队伍中登场角色时，每层使<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>的暴击伤害提升25%，至多提升150%。\n\n<color=Title>迭音</color>\n秧秧·玄翎的<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>命中目标前，记录一定范围内的目标被附加的<color=Highlight>【虚湮效应】</color>最高层数，一定时间后复制到范围内的所有目标身上。\n\n<color=Title>【流响】获取规则</color>\n<color=Highlight>【流响】</color>上限100点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时回复100点<color=Highlight>【流响】</color>。\n施放共鸣解放<color=Highlight>裁羽寂万音</color>消耗所有<color=Highlight>【流响】</color>。\n施放<color=Highlight>常态攻击</color>造成伤害，并消耗<color=Highlight>【流响】</color>。\n施放<color=Highlight>共鸣技能·剑式切换·苍</color>、<color=Highlight>共鸣技能·剑式切换·羽</color>、<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>【苍翎】获取规则</color>\n<color=Highlight>【苍翎】</color>上限2点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>、<color=Highlight>变奏技能·羽挟苍空</color>时回复1点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>共鸣解放·裁羽寂万音</color>时回复1点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>重击·苍剑式</color>、<color=Highlight>空中攻击·释羽风落</color>消耗所有<color=Highlight>【苍翎】</color>。",
+          "description": "<color=Title>共鸣技能·剑式流转·苍</color>\n秧秧·玄翎默认处于<color=Highlight>苍剑式</color>，<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>羽剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·苍</color>。\n短按共鸣技能，会切换至<color=Highlight>苍剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·苍</color>，造成<color=Dark>湮灭伤害</color>，回复100点<color=Highlight>【流响】</color>和1点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·苍</color>命中目标时，消耗目标1层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·苍</color>打断<color=Highlight>普攻·羽剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>共鸣技能·剑式流转·羽</color>\n<color=Highlight>【流响】</color>耗尽时，若处于<color=Highlight>苍剑式</color>，<color=Highlight>共鸣技能·羽拭苍锋</color>替换为<color=Highlight>共鸣技能·剑式流转·羽</color>。\n短按共鸣技能，会切换至<color=Highlight>羽剑式</color>，并施放<color=Highlight>共鸣技能·剑式流转·羽</color>，造成<color=Dark>湮灭伤害</color>，回复100点<color=Highlight>【流响】</color>和1点<color=Highlight>【苍翎】</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>共鸣技能·剑式流转·羽</color>命中目标时，消耗目标1层<color=Highlight>【虚湮效应】</color>。\n施放<color=Highlight>共鸣技能·剑式流转·羽</color>后，一定时间内将不会重置连段。若施放<color=Highlight>共鸣技能·剑式流转·羽</color>打断<color=Highlight>普攻·苍剑式</color>连段，则会召唤<color=Highlight>声之幻身</color>完成当前攻击，造成固定<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>普攻伤害</color>，该次攻击造成的伤害不受伤害加成影响，且无法对目标附加<color=Highlight>【虚湮效应】</color>。\n施放该技能一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>重击·苍剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>苍剑式</color>，长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力施放<color=Highlight>重击·苍剑式</color>，生成巨大气旋攻击前方，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n施放<color=Highlight>重击·苍剑式</color>时，获得<color=Highlight>【绝息】</color>，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·苍剑式</color>暴击伤害提升160%；<color=Highlight>重击·苍剑式</color>结束时移除<color=Highlight>【绝息】</color>，每25秒仅可获得1次<color=Highlight>【绝息】</color>。\n<color=Highlight>重击·苍剑式</color>会为命中的目标附加2层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>重击·羽剑式</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>且不处于<color=Highlight>普攻·湮象风华</color>连段，并且处于地面时，长按普攻消耗耐力施放<color=Highlight>重击·羽剑式</color>，造成<color=Dark>湮灭伤害</color>，命中目标后将自动施放<color=Highlight>空中攻击·释羽风落</color>。\n施放<color=Highlight>重击·羽剑式</color>时，获得<color=Highlight>【流岚】</color>，<color=Highlight>【流岚】</color>持续15秒，秧秧·玄翎为队伍中登场角色时，此次<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>暴击伤害提升160%；<color=Highlight>普攻·湮象风华</color>第3段或<color=Highlight>闪避反击·湮象风华</color>第3段结束时移除<color=Highlight>【流岚】</color>，每25秒仅可获得1次<color=Highlight>【流岚】</color>。\n<color=Highlight>重击·羽剑式</color>会为命中的目标附加2层<color=Highlight>【虚湮效应】</color>。\n\n<color=Title>空中攻击·释羽风落</color>\n<color=Highlight>【苍翎】</color>回复至上限时，若处于<color=Highlight>羽剑式</color>并且处于空中时，<color=Highlight>空中攻击·羽剑式</color>替换为<color=Highlight>空中攻击·释羽风落</color>。\n短按普攻或长按普攻消耗所有<color=Highlight>【苍翎】</color>，消耗耐力并施放<color=Highlight>空中攻击·释羽风落</color>，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。施放<color=Highlight>空中攻击·释羽风落</color>时，进入<color=Highlight>聆风祀声</color>，持续12秒。\n\n<color=Title>聆风祀声</color>\n处于<color=Highlight>羽剑式</color>时，<color=Highlight>普攻·羽剑式</color>替换为<color=Highlight>普攻·湮象风华</color>，进行最多3段的连续攻击，造成<color=Dark>湮灭伤害</color>，此次伤害为<color=Highlight>重击伤害</color>。\n<color=Highlight>普攻·湮象风华</color>第2、3段可在低空施放，施放第3段后退出<color=Highlight>普攻·湮象风华</color>，该连击段数不会被重置。\n<color=Highlight>聆风祀声</color>期间，施放闪避反击，视为施放<color=Highlight>普攻·湮象风华</color>连段。\n\n<color=Title>羽誓</color>\n附近队伍中的角色对目标附加<color=Highlight>【虚湮效应】</color>时，秧秧·玄翎获得1层<color=Highlight>羽誓</color>，持续4秒，<color=Highlight>羽誓</color>获得间隔1秒，最多叠加6层，秧秧·玄翎为队伍中登场角色时，每层使<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>、<color=Highlight>空中攻击·释羽风落</color>、<color=Highlight>普攻·湮象风华</color>、<color=Highlight>闪避反击·湮象风华</color>的暴击伤害提升25%，至多提升150%。\n\n<color=Title>迭音</color>\n秧秧·玄翎的<color=Highlight>普攻·苍剑式</color>第4段、<color=Highlight>普攻·羽剑式</color>第4段、<color=Highlight>重击·苍剑式</color>、<color=Highlight>重击·羽剑式</color>命中目标前，记录一定范围内的目标被附加的<color=Highlight>【虚湮效应】</color>最高层数，一定时间后复制到范围内的所有目标身上。\n\n<color=Title>【流响】获取规则</color>\n<color=Highlight>【流响】</color>上限100点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>时回复100点<color=Highlight>【流响】</color>。\n施放共鸣解放<color=Highlight>裁羽寂万音</color>消耗所有<color=Highlight>【流响】</color>。\n施放<color=Highlight>常态攻击</color>造成伤害，并消耗<color=Highlight>【流响】</color>。\n施放<color=Highlight>共鸣技能·剑式切换·苍</color>、<color=Highlight>共鸣技能·剑式切换·羽</color>、<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>一定时间内可以触发成功闪避，触发成功闪避时消耗50点<color=Highlight>【流响】</color>。\n\n<color=Title>【苍翎】获取规则</color>\n<color=Highlight>【苍翎】</color>上限2点。\n施放<color=Highlight>共鸣技能·剑式流转·苍</color>、<color=Highlight>共鸣技能·剑式流转·羽</color>、<color=Highlight>变奏技能·羽挟苍空</color>时回复1点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>共鸣解放·裁羽寂万音</color>时回复1点<color=Highlight>【苍翎】</color>。\n施放<color=Highlight>重击·苍剑式</color>、<color=Highlight>空中攻击·释羽风落</color>消耗所有<color=Highlight>【苍翎】</color>。",
           "iconUrl": "",
           "id": 0,
           "name": "万声浮道",

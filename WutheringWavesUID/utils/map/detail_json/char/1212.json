@@ -6,495 +6,495 @@
   "stats": {
     "0": {
       "1": {
-        "life": 932.0,
-        "atk": 33.0,
+        "life": 1230.0,
+        "atk": 25.0,
         "def": 0.0
       },
       "2": {
-        "life": 1010.4744,
-        "atk": 35.7786,
+        "life": 1333.566,
+        "atk": 27.105,
         "def": 0.0
       },
       "3": {
-        "life": 1089.042,
-        "atk": 38.5605,
+        "life": 1437.255,
+        "atk": 29.2125,
         "def": 0.0
       },
       "4": {
-        "life": 1167.6096,
-        "atk": 41.3424,
+        "life": 1540.944,
+        "atk": 31.32,
         "def": 0.0
       },
       "5": {
-        "life": 1246.084,
-        "atk": 44.121,
+        "life": 1644.51,
+        "atk": 33.425,
         "def": 0.0
       },
       "6": {
-        "life": 1324.6516,
-        "atk": 46.9029,
+        "life": 1748.199,
+        "atk": 35.5325,
         "def": 0.0
       },
       "7": {
-        "life": 1403.2192,
-        "atk": 49.6848,
+        "life": 1851.888,
+        "atk": 37.64,
         "def": 0.0
       },
       "8": {
-        "life": 1481.6936,
-        "atk": 52.4634,
+        "life": 1955.454,
+        "atk": 39.745,
         "def": 0.0
       },
       "9": {
-        "life": 1560.2612,
-        "atk": 55.2453,
+        "life": 2059.143,
+        "atk": 41.8525,
         "def": 0.0
       },
       "10": {
-        "life": 1638.8288,
-        "atk": 58.0272,
+        "life": 2162.832,
+        "atk": 43.96,
         "def": 0.0
       },
       "11": {
-        "life": 1717.3032,
-        "atk": 60.8058,
+        "life": 2266.398,
+        "atk": 46.065,
         "def": 0.0
       },
       "12": {
-        "life": 1795.8708,
-        "atk": 63.5877,
+        "life": 2370.087,
+        "atk": 48.1725,
         "def": 0.0
       },
       "13": {
-        "life": 1874.4384,
-        "atk": 66.3696,
+        "life": 2473.776,
+        "atk": 50.28,
         "def": 0.0
       },
       "14": {
-        "life": 1953.006,
-        "atk": 69.1515,
+        "life": 2577.465,
+        "atk": 52.3875,
         "def": 0.0
       },
       "15": {
-        "life": 2031.4804,
-        "atk": 71.9301,
+        "life": 2681.031,
+        "atk": 54.4925,
         "def": 0.0
       },
       "16": {
-        "life": 2110.048,
-        "atk": 74.712,
+        "life": 2784.72,
+        "atk": 56.6,
         "def": 0.0
       },
       "17": {
-        "life": 2188.6156,
-        "atk": 77.4939,
+        "life": 2888.409,
+        "atk": 58.7075,
         "def": 0.0
       },
       "18": {
-        "life": 2267.09,
-        "atk": 80.2725,
+        "life": 2991.975,
+        "atk": 60.8125,
         "def": 0.0
       },
       "19": {
-        "life": 2345.6576,
-        "atk": 83.0544,
+        "life": 3095.664,
+        "atk": 62.92,
         "def": 0.0
       },
       "20": {
-        "life": 2424.2252,
-        "atk": 85.8363,
+        "life": 3199.353,
+        "atk": 65.0275,
         "def": 0.0
       }
     },
     "1": {
       "20": {
-        "life": 3045.4964,
-        "atk": 110.5863,
+        "life": 4019.271,
+        "atk": 83.7775,
         "def": 0.0
       },
       "21": {
-        "life": 3124.064,
-        "atk": 113.3649,
+        "life": 4122.96,
+        "atk": 85.8825,
         "def": 0.0
       },
       "22": {
-        "life": 3202.6316,
-        "atk": 116.1468,
+        "life": 4226.649,
+        "atk": 87.99,
         "def": 0.0
       },
       "23": {
-        "life": 3281.106,
-        "atk": 118.9287,
+        "life": 4330.215,
+        "atk": 90.0975,
         "def": 0.0
       },
       "24": {
-        "life": 3359.6736,
-        "atk": 121.7106,
+        "life": 4433.904,
+        "atk": 92.205,
         "def": 0.0
       },
       "25": {
-        "life": 3438.2412,
-        "atk": 124.4892,
+        "life": 4537.593,
+        "atk": 94.31,
         "def": 0.0
       },
       "26": {
-        "life": 3516.8088,
-        "atk": 127.2711,
+        "life": 4641.282,
+        "atk": 96.4175,
         "def": 0.0
       },
       "27": {
-        "life": 3595.2832,
-        "atk": 130.053,
+        "life": 4744.848,
+        "atk": 98.525,
         "def": 0.0
       },
       "28": {
-        "life": 3673.8508,
-        "atk": 132.8316,
+        "life": 4848.537,
+        "atk": 100.63,
         "def": 0.0
       },
       "29": {
-        "life": 3752.4184,
-        "atk": 135.6135,
+        "life": 4952.226,
+        "atk": 102.7375,
         "def": 0.0
       },
       "30": {
-        "life": 3830.8928,
-        "atk": 138.3954,
+        "life": 5055.792,
+        "atk": 104.845,
         "def": 0.0
       },
       "31": {
-        "life": 3909.4604,
-        "atk": 141.174,
+        "life": 5159.481,
+        "atk": 106.95,
         "def": 0.0
       },
       "32": {
-        "life": 3988.028,
-        "atk": 143.9559,
+        "life": 5263.17,
+        "atk": 109.0575,
         "def": 0.0
       },
       "33": {
-        "life": 4066.5024,
-        "atk": 146.7378,
+        "life": 5366.736,
+        "atk": 111.165,
         "def": 0.0
       },
       "34": {
-        "life": 4145.07,
-        "atk": 149.5164,
+        "life": 5470.425,
+        "atk": 113.27,
         "def": 0.0
       },
       "35": {
-        "life": 4223.6376,
-        "atk": 152.2983,
+        "life": 5574.114,
+        "atk": 115.3775,
         "def": 0.0
       },
       "36": {
-        "life": 4302.2052,
-        "atk": 155.0802,
+        "life": 5677.803,
+        "atk": 117.485,
         "def": 0.0
       },
       "37": {
-        "life": 4380.6796,
-        "atk": 157.8621,
+        "life": 5781.369,
+        "atk": 119.5925,
         "def": 0.0
       },
       "38": {
-        "life": 4459.2472,
-        "atk": 160.6407,
+        "life": 5885.058,
+        "atk": 121.6975,
         "def": 0.0
       },
       "39": {
-        "life": 4537.8148,
-        "atk": 163.4226,
+        "life": 5988.747,
+        "atk": 123.805,
         "def": 0.0
       },
       "40": {
-        "life": 4616.2892,
-        "atk": 166.2045,
+        "life": 6092.313,
+        "atk": 125.9125,
         "def": 0.0
       }
     },
     "2": {
       "40": {
-        "life": 5237.6536,
-        "atk": 190.9545,
+        "life": 6912.354,
+        "atk": 144.6625,
         "def": 0.0
       },
       "41": {
-        "life": 5316.2212,
-        "atk": 193.7331,
+        "life": 7016.043,
+        "atk": 146.7675,
         "def": 0.0
       },
       "42": {
-        "life": 5394.6956,
-        "atk": 196.515,
+        "life": 7119.609,
+        "atk": 148.875,
         "def": 0.0
       },
       "43": {
-        "life": 5473.2632,
-        "atk": 199.2969,
+        "life": 7223.298,
+        "atk": 150.9825,
         "def": 0.0
       },
       "44": {
-        "life": 5551.8308,
-        "atk": 202.0755,
+        "life": 7326.987,
+        "atk": 153.0875,
         "def": 0.0
       },
       "45": {
-        "life": 5630.3052,
-        "atk": 204.8574,
+        "life": 7430.553,
+        "atk": 155.195,
         "def": 0.0
       },
       "46": {
-        "life": 5708.8728,
-        "atk": 207.6393,
+        "life": 7534.242,
+        "atk": 157.3025,
         "def": 0.0
       },
       "47": {
-        "life": 5787.4404,
-        "atk": 210.4212,
+        "life": 7637.931,
+        "atk": 159.41,
         "def": 0.0
       },
       "48": {
-        "life": 5866.008,
-        "atk": 213.1998,
+        "life": 7741.62,
+        "atk": 161.515,
         "def": 0.0
       },
       "49": {
-        "life": 5944.4824,
-        "atk": 215.9817,
+        "life": 7845.186,
+        "atk": 163.6225,
         "def": 0.0
       },
       "50": {
-        "life": 6023.05,
-        "atk": 218.7636,
+        "life": 7948.875,
+        "atk": 165.73,
         "def": 0.0
       }
     },
     "3": {
       "50": {
-        "life": 6644.4144,
-        "atk": 243.5136,
+        "life": 8768.916,
+        "atk": 184.48,
         "def": 0.0
       },
       "51": {
-        "life": 6722.8888,
-        "atk": 246.2922,
+        "life": 8872.482,
+        "atk": 186.585,
         "def": 0.0
       },
       "52": {
-        "life": 6801.4564,
-        "atk": 249.0741,
+        "life": 8976.171,
+        "atk": 188.6925,
         "def": 0.0
       },
       "53": {
-        "life": 6880.024,
-        "atk": 251.856,
+        "life": 9079.86,
+        "atk": 190.8,
         "def": 0.0
       },
       "54": {
-        "life": 6958.4984,
-        "atk": 254.6346,
+        "life": 9183.426,
+        "atk": 192.905,
         "def": 0.0
       },
       "55": {
-        "life": 7037.066,
-        "atk": 257.4165,
+        "life": 9287.115,
+        "atk": 195.0125,
         "def": 0.0
       },
       "56": {
-        "life": 7115.6336,
-        "atk": 260.1984,
+        "life": 9390.804,
+        "atk": 197.12,
         "def": 0.0
       },
       "57": {
-        "life": 7194.2012,
-        "atk": 262.9803,
+        "life": 9494.493,
+        "atk": 199.2275,
         "def": 0.0
       },
       "58": {
-        "life": 7272.6756,
-        "atk": 265.7589,
+        "life": 9598.059,
+        "atk": 201.3325,
         "def": 0.0
       },
       "59": {
-        "life": 7351.2432,
-        "atk": 268.5408,
+        "life": 9701.748,
+        "atk": 203.44,
         "def": 0.0
       },
       "60": {
-        "life": 7429.8108,
-        "atk": 271.3227,
+        "life": 9805.437,
+        "atk": 205.5475,
         "def": 0.0
       }
     },
     "4": {
       "60": {
-        "life": 8051.082,
-        "atk": 296.0727,
+        "life": 10625.355,
+        "atk": 224.2975,
         "def": 0.0
       },
       "61": {
-        "life": 8129.6496,
-        "atk": 298.8513,
+        "life": 10729.044,
+        "atk": 226.4025,
         "def": 0.0
       },
       "62": {
-        "life": 8208.2172,
-        "atk": 301.6332,
+        "life": 10832.733,
+        "atk": 228.51,
         "def": 0.0
       },
       "63": {
-        "life": 8286.6916,
-        "atk": 304.4151,
+        "life": 10936.299,
+        "atk": 230.6175,
         "def": 0.0
       },
       "64": {
-        "life": 8365.2592,
-        "atk": 307.1937,
+        "life": 11039.988,
+        "atk": 232.7225,
         "def": 0.0
       },
       "65": {
-        "life": 8443.8268,
-        "atk": 309.9756,
+        "life": 11143.677,
+        "atk": 234.83,
         "def": 0.0
       },
       "66": {
-        "life": 8522.3012,
-        "atk": 312.7575,
+        "life": 11247.243,
+        "atk": 236.9375,
         "def": 0.0
       },
       "67": {
-        "life": 8600.8688,
-        "atk": 315.5361,
+        "life": 11350.932,
+        "atk": 239.0425,
         "def": 0.0
       },
       "68": {
-        "life": 8679.4364,
-        "atk": 318.318,
+        "life": 11454.621,
+        "atk": 241.15,
         "def": 0.0
       },
       "69": {
-        "life": 8758.004,
-        "atk": 321.0999,
+        "life": 11558.31,
+        "atk": 243.2575,
         "def": 0.0
       },
       "70": {
-        "life": 8836.4784,
-        "atk": 323.8818,
+        "life": 11661.876,
+        "atk": 245.365,
         "def": 0.0
       }
     },
     "5": {
       "70": {
-        "life": 9457.8428,
-        "atk": 340.3818,
+        "life": 12481.917,
+        "atk": 257.865,
         "def": 0.0
       },
       "71": {
-        "life": 9536.4104,
-        "atk": 343.1604,
+        "life": 12585.606,
+        "atk": 259.97,
         "def": 0.0
       },
       "72": {
-        "life": 9614.8848,
-        "atk": 345.9423,
+        "life": 12689.172,
+        "atk": 262.0775,
         "def": 0.0
       },
       "73": {
-        "life": 9693.4524,
-        "atk": 348.7242,
+        "life": 12792.861,
+        "atk": 264.185,
         "def": 0.0
       },
       "74": {
-        "life": 9772.02,
-        "atk": 351.5028,
+        "life": 12896.55,
+        "atk": 266.29,
         "def": 0.0
       },
       "75": {
-        "life": 9850.4944,
-        "atk": 354.2847,
+        "life": 13000.116,
+        "atk": 268.3975,
         "def": 0.0
       },
       "76": {
-        "life": 9929.062,
-        "atk": 357.0666,
+        "life": 13103.805,
+        "atk": 270.505,
         "def": 0.0
       },
       "77": {
-        "life": 10007.6296,
-        "atk": 359.8452,
+        "life": 13207.494,
+        "atk": 272.61,
         "def": 0.0
       },
       "78": {
-        "life": 10086.104,
-        "atk": 362.6271,
+        "life": 13311.06,
+        "atk": 274.7175,
         "def": 0.0
       },
       "79": {
-        "life": 10164.6716,
-        "atk": 365.409,
+        "life": 13414.749,
+        "atk": 276.825,
         "def": 0.0
       },
       "80": {
-        "life": 10243.2392,
-        "atk": 368.1909,
+        "life": 13518.438,
+        "atk": 278.9325,
         "def": 0.0
       }
     },
     "6": {
       "80": {
-        "life": 10864.6036,
-        "atk": 384.6909,
+        "life": 14338.479,
+        "atk": 291.4325,
         "def": 0.0
       },
       "81": {
-        "life": 10943.078,
-        "atk": 387.4695,
+        "life": 14442.045,
+        "atk": 293.5375,
         "def": 0.0
       },
       "82": {
-        "life": 11021.6456,
-        "atk": 390.2514,
+        "life": 14545.734,
+        "atk": 295.645,
         "def": 0.0
       },
       "83": {
-        "life": 11100.2132,
-        "atk": 393.0333,
+        "life": 14649.423,
+        "atk": 297.7525,
         "def": 0.0
       },
       "84": {
-        "life": 11178.6876,
-        "atk": 395.8119,
+        "life": 14752.989,
+        "atk": 299.8575,
         "def": 0.0
       },
       "85": {
-        "life": 11257.2552,
-        "atk": 398.5938,
+        "life": 14856.678,
+        "atk": 301.965,
         "def": 0.0
       },
       "86": {
-        "life": 11335.8228,
-        "atk": 401.3757,
+        "life": 14960.367,
+        "atk": 304.0725,
         "def": 0.0
       },
       "87": {
-        "life": 11414.2972,
-        "atk": 404.1543,
+        "life": 15063.933,
+        "atk": 306.1775,
         "def": 0.0
       },
       "88": {
-        "life": 11492.8648,
-        "atk": 406.9362,
+        "life": 15167.622,
+        "atk": 308.285,
         "def": 0.0
       },
       "89": {
-        "life": 11571.4324,
-        "atk": 409.7181,
+        "life": 15271.311,
+        "atk": 310.3925,
         "def": 0.0
       },
       "90": {
-        "life": 11650.0,
-        "atk": 412.5,
+        "life": 15375.0,
+        "atk": 312.5,
         "def": 0.0
       }
     }
@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "死生徘徊",
-        "desc": "<color=Title>普攻·摄召</color>\n若景燃处于<color=Highlight>负阴状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·摄召第3段</color>可获得{0}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·摄召第4段</color>可获得{1}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>普攻·灭煞</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·灭煞第3段</color>可获得{2}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·灭煞第4段</color>可获得{3}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Fire>热熔伤害</color>。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>闪避反击·探幽</color>\n若景燃处于<color=Highlight>负阴状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·探幽</color>可获得{4}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第4段</color>。\n\n<color=Title>闪避反击·守明</color>\n若景燃处于<color=Highlight>抱阳状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·守明</color>可获得{5}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第4段</color>。\n\n<color=Title>潜影</color>\n景燃处于战斗状态下，且在地面时，向前<color=Highlight>短按闪避</color>可施放<color=Highlight>潜影</color>，造成固定<color=Fire>热熔伤害</color>，此次伤害为普攻伤害，不受伤害加成影响，施放该技能一定时间内可以触发成功闪避效果。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+        "desc": "<color=Title>普攻·摄召</color>\n若景燃处于<color=Highlight>负阴状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·摄召第3段</color>时可获得{0}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·摄召第4段</color>时可获得{1}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>普攻·灭煞</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可进行最多4段连续攻击，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>普攻·灭煞第3段</color>时可获得{2}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放<color=Highlight>普攻·灭煞第4段</color>时可获得{3}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Fire>热熔伤害</color>。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>闪避反击·探幽</color>\n若景燃处于<color=Highlight>负阴状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·探幽</color>时可获得{4}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第4段</color>。\n\n<color=Title>闪避反击·守明</color>\n若景燃处于<color=Highlight>抱阳状态</color>，成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>闪避反击·守明</color>时可获得{5}点【<color=Highlight>炁</color>】，且此伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第4段</color>。\n\n<color=Title>潜影</color>\n景燃处于战斗状态下，且在地面时，向前<color=Highlight>短按闪避</color>可施放<color=Highlight>潜影</color>，造成固定<color=Fire>热熔伤害</color>，此次伤害为普攻伤害，不受伤害加成影响，施放该技能一定时间内可以触发成功闪避。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
         "param": [
           "50",
           "50",
@@ -761,33 +761,6 @@
             "name": "闪避反击·探幽伤害",
             "param": [
               [
-                "37.51%+37.51%+50.01%",
-                "40.59%+40.59%+54.12%",
-                "43.66%+43.66%+58.22%",
-                "47.97%+47.97%+63.96%",
-                "51.05%+51.05%+68.06%",
-                "54.58%+54.58%+72.77%",
-                "59.50%+59.50%+79.34%",
-                "64.42%+64.42%+85.90%",
-                "69.35%+69.35%+92.46%",
-                "74.57%+74.57%+99.43%",
-                "80.72%+80.72%+107.63%",
-                "86.88%+86.88%+115.83%",
-                "93.03%+93.03%+124.03%",
-                "99.18%+99.18%+132.24%",
-                "105.33%+105.33%+140.44%",
-                "111.48%+111.48%+148.64%",
-                "117.63%+117.63%+156.84%",
-                "123.78%+123.78%+165.04%",
-                "129.93%+129.93%+173.24%",
-                "136.09%+136.09%+181.45%"
-              ]
-            ]
-          },
-          "11": {
-            "name": "闪避反击·守明伤害",
-            "param": [
-              [
                 "25.00%*4",
                 "27.05%*4",
                 "29.10%*4",
@@ -808,6 +781,33 @@
                 "82.49%*4",
                 "86.59%*4",
                 "90.68%*4"
+              ]
+            ]
+          },
+          "11": {
+            "name": "闪避反击·守明伤害",
+            "param": [
+              [
+                "37.51%+37.51%+50.01%",
+                "40.59%+40.59%+54.12%",
+                "43.66%+43.66%+58.22%",
+                "47.97%+47.97%+63.96%",
+                "51.05%+51.05%+68.06%",
+                "54.58%+54.58%+72.77%",
+                "59.50%+59.50%+79.34%",
+                "64.42%+64.42%+85.90%",
+                "69.35%+69.35%+92.46%",
+                "74.57%+74.57%+99.43%",
+                "80.72%+80.72%+107.63%",
+                "86.88%+86.88%+115.83%",
+                "93.03%+93.03%+124.03%",
+                "99.18%+99.18%+132.24%",
+                "105.33%+105.33%+140.44%",
+                "111.48%+111.48%+148.64%",
+                "117.63%+117.63%+156.84%",
+                "123.78%+123.78%+165.04%",
+                "129.93%+129.93%+173.24%",
+                "136.09%+136.09%+181.45%"
               ]
             ]
           },
@@ -862,6 +862,33 @@
                 "30+25",
                 "30+25",
                 "30+25"
+              ]
+            ]
+          },
+          "14": {
+            "name": "潜影耐力消耗",
+            "param": [
+              [
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20",
+                "20"
               ]
             ]
           }
@@ -1016,15 +1043,16 @@
     "2": {
       "skill": {
         "name": "撞煞",
-        "desc": "<color=Title>共鸣技能·阴蚀骨</color>\n若景燃处于<color=Highlight>负阴状态</color>，可施放<color=Highlight>共鸣技能·阴蚀骨</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阴蚀骨</color>可在空中施放。\n\n<color=Title>共鸣技能·阳焚身</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可施放<color=Highlight>共鸣技能·阳焚身</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阳焚身</color>可在空中施放。\n\n<color=Title>破秽</color>\n施放<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>时，获得<color=Highlight>破秽</color>，持续{0}秒，满足下述条件之一时，<color=Highlight>破秽</color>提前结束。\n·切换至其他角色。\n·切换至<color=Highlight>负阴状态</color>或<color=Highlight>抱阳状态</color>时。\n·景燃不在空中状态。\n\n<color=Title>共鸣技能·黄泉渡</color>\n若景燃处于<color=Highlight>负阴状态</color>且持有<color=Highlight>破秽</color>时，按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·黄泉渡</color>，攻击目标，造成<color=Fire>热熔伤害</color>，并获得{1}点【<color=Highlight>炁</color>】，本次伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n\n<color=Title>共鸣技能·往生送</color>\n若景燃处于<color=Highlight>抱阳状态</color>且持有<color=Highlight>破秽</color>时，按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·往生送</color>，攻击目标，造成<color=Fire>热熔伤害</color>，并获得{2}点【<color=Highlight>炁</color>】，本次伤害为重击伤害。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+        "desc": "<color=Title>共鸣技能·阴蚀骨</color>\n若景燃处于<color=Highlight>负阴状态</color>，可施放<color=Highlight>共鸣技能·阴蚀骨</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阴蚀骨</color>可在空中施放。\n\n<color=Title>共鸣技能·阳焚身</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可施放<color=Highlight>共鸣技能·阳焚身</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阳焚身</color>可在空中施放。\n\n<color=Title>破秽</color>\n施放<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>时，获得<color=Highlight>破秽</color>，持续{0}秒，满足下述条件之一时，<color=Highlight>破秽</color>提前结束。\n·切换至其他角色。\n·切换至<color=Highlight>负阴状态</color>或<color=Highlight>抱阳状态</color>时。\n·施放<color=Highlight>共鸣技能·黄泉渡</color>或<color=Highlight>共鸣技能·往生送</color>时。\n\n<color=Title>共鸣技能·黄泉渡</color>\n若景燃处于<color=Highlight>负阴状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·黄泉渡</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·黄泉渡</color>时可获得{1}点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n\n<color=Title>共鸣技能·往生送</color>\n若景燃处于<color=Highlight>抱阳状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·往生送</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·往生送</color>时可获得{2}点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
         "param": [
           "4",
+          "100",
           "100",
           "100"
         ],
         "type": "共鸣技能",
         "level": {
-          "14": {
+          "15": {
             "name": "阴蚀骨伤害",
             "param": [
               [
@@ -1051,7 +1079,7 @@
               ]
             ]
           },
-          "15": {
+          "16": {
             "name": "黄泉渡伤害",
             "param": [
               [
@@ -1078,7 +1106,7 @@
               ]
             ]
           },
-          "16": {
+          "17": {
             "name": "阳焚身伤害",
             "param": [
               [
@@ -1105,34 +1133,34 @@
               ]
             ]
           },
-          "17": {
+          "18": {
             "name": "往生送伤害",
             "param": [
               [
-                "33.14%+33.14%+13.26%+53.01%",
-                "35.85%+35.85%+14.34%+57.36%",
-                "38.57%+38.57%+15.43%+61.71%",
-                "42.37%+42.37%+16.95%+67.79%",
-                "45.09%+45.09%+18.04%+72.14%",
-                "48.21%+48.21%+19.29%+77.14%",
-                "52.56%+52.56%+21.03%+84.09%",
-                "56.91%+56.91%+22.77%+91.05%",
-                "61.25%+61.25%+24.50%+98.00%",
-                "65.87%+65.87%+26.35%+105.39%",
-                "71.31%+71.31%+28.53%+114.09%",
-                "76.74%+76.74%+30.70%+122.78%",
-                "82.17%+82.17%+32.87%+131.48%",
-                "87.61%+87.61%+35.05%+140.17%",
-                "93.04%+93.04%+37.22%+148.86%",
-                "98.47%+98.47%+39.39%+157.56%",
-                "103.91%+103.91%+41.57%+166.25%",
-                "109.34%+109.34%+43.74%+174.94%",
-                "114.77%+114.77%+45.91%+183.64%",
-                "120.21%+120.21%+48.09%+192.33%"
+                "33.14%+33.14%+66.27%",
+                "35.85%+35.85%+71.70%",
+                "38.57%+38.57%+77.13%",
+                "42.37%+42.37%+84.74%",
+                "45.09%+45.09%+90.18%",
+                "48.21%+48.21%+96.42%",
+                "52.56%+52.56%+105.12%",
+                "56.91%+56.91%+113.81%",
+                "61.25%+61.25%+122.50%",
+                "65.87%+65.87%+131.74%",
+                "71.31%+71.31%+142.61%",
+                "76.74%+76.74%+153.48%",
+                "82.17%+82.17%+164.34%",
+                "87.61%+87.61%+175.21%",
+                "93.04%+93.04%+186.08%",
+                "98.47%+98.47%+196.94%",
+                "103.91%+103.91%+207.81%",
+                "109.34%+109.34%+218.68%",
+                "114.77%+114.77%+229.54%",
+                "120.21%+120.21%+240.41%"
               ]
             ]
           },
-          "18": {
+          "19": {
             "name": "阴蚀骨冷却时间",
             "param": [
               [
@@ -1159,7 +1187,7 @@
               ]
             ]
           },
-          "19": {
+          "20": {
             "name": "阳焚身冷却时间",
             "param": [
               [
@@ -1337,25 +1365,22 @@
     "3": {
       "skill": {
         "name": "万鬼同葬",
-        "desc": "<color=Highlight>共鸣解放·万鬼同葬</color>可在空中施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放后获得下述效果。\n·生命降至生命上限的{0}。\n·获得{1}点【<color=Highlight>炁</color>】。\n·获得{2}层<color=Highlight>行途</color>。\n·获得{3}点【<color=Highlight>命火</color>】。\n·进入<color=Highlight>荧惑</color>状态，持续{4}秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为{5}层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复{6}点【<color=Highlight>炁</color>】，并减少{7}层<color=Highlight>行途</color>，持续{8}秒。\n\n<color=Title>命火</color>\n若景燃处于<color=Highlight>荧惑</color>状态且景燃持有的【<color=Highlight>命火</color>】不为{9}时，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，景燃每拥有{10}点生命上限增加本次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害倍率，最多计入{11}生命上限，且施放后消耗{12}点【<color=Highlight>命火</color>】。\n\n<color=Title>荧惑</color>\n·施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
+        "desc": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得{0}点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的{1}，将当前生命值降至生命上限的{2}。\n·获得{3}点【<color=Highlight>炁</color>】。\n·获得{4}层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续{5}秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为{6}层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{7}点【<color=Highlight>炁</color>】，并减少{8}层<color=Highlight>行途</color>，持续{9}秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>命中目标时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
         "param": [
-          "75%",
+          "100",
+          "50%",
+          "50%",
           "200",
           "3",
-          "100",
           "15",
           "3",
           "200",
           "1",
-          "15",
-          "0",
-          "1000",
-          "35000",
-          "25"
+          "15"
         ],
         "type": "共鸣解放",
         "level": {
-          "20": {
+          "21": {
             "name": "万鬼同葬伤害",
             "param": [
               [
@@ -1382,7 +1407,7 @@
               ]
             ]
           },
-          "21": {
+          "22": {
             "name": "魑魅魍魉伤害",
             "param": [
               [
@@ -1409,61 +1434,7 @@
               ]
             ]
           },
-          "22": {
-            "name": "每1000最大生命增加重击·劫魄伤害",
-            "param": [
-              [
-                "0.56%*2+0.72%*3+4.68%",
-                "0.60%*2+0.78%*3+5.06%",
-                "0.65%*2+0.83%*3+5.44%",
-                "0.71%*2+0.92%*3+5.98%",
-                "0.76%*2+0.97%*3+6.36%",
-                "0.81%*2+1.04%*3+6.80%",
-                "0.88%*2+1.14%*3+7.42%",
-                "0.96%*2+1.23%*3+8.03%",
-                "1.03%*2+1.32%*3+8.64%",
-                "1.11%*2+1.42%*3+9.29%",
-                "1.20%*2+1.54%*3+10.06%",
-                "1.29%*2+1.66%*3+10.83%",
-                "1.38%*2+1.77%*3+11.59%",
-                "1.47%*2+1.89%*3+12.36%",
-                "1.56%*2+2.01%*3+13.12%",
-                "1.65%*2+2.12%*3+13.89%",
-                "1.74%*2+2.24%*3+14.66%",
-                "1.83%*2+2.36%*3+15.42%",
-                "1.93%*2+2.47%*3+16.19%",
-                "2.02%*2+2.59%*3+16.96%"
-              ]
-            ]
-          },
-          "23": {
-            "name": "每1000最大生命增加重击·踏罡伤害",
-            "param": [
-              [
-                "0.82%+0.82%+1.63%+4.88%",
-                "0.88%+0.88%+1.76%+5.28%",
-                "0.95%+0.95%+1.90%+5.68%",
-                "1.04%+1.04%+2.08%+6.24%",
-                "1.11%+1.11%+2.22%+6.64%",
-                "1.19%+1.19%+2.37%+7.10%",
-                "1.29%+1.29%+2.58%+7.74%",
-                "1.40%+1.40%+2.80%+8.38%",
-                "1.51%+1.51%+3.01%+9.02%",
-                "1.62%+1.62%+3.24%+9.70%",
-                "1.75%+1.75%+3.50%+10.50%",
-                "1.89%+1.89%+3.77%+11.30%",
-                "2.02%+2.02%+4.04%+12.10%",
-                "2.15%+2.15%+4.30%+12.89%",
-                "2.29%+2.29%+4.57%+13.69%",
-                "2.42%+2.42%+4.83%+14.49%",
-                "2.55%+2.55%+5.10%+15.29%",
-                "2.69%+2.69%+5.37%+16.09%",
-                "2.82%+2.82%+5.63%+16.89%",
-                "2.95%+2.95%+5.90%+17.69%"
-              ]
-            ]
-          },
-          "24": {
+          "25": {
             "name": "冷却时间",
             "param": [
               [
@@ -1490,7 +1461,7 @@
               ]
             ]
           },
-          "25": {
+          "26": {
             "name": "消耗共鸣能量",
             "param": [
               [
@@ -1517,7 +1488,7 @@
               ]
             ]
           },
-          "26": {
+          "27": {
             "name": "回复协奏能量",
             "param": [
               [
@@ -1695,15 +1666,17 @@
     "4": {
       "skill": {
         "name": "贴壁听尘",
-        "desc": "施放<color=Highlight>变奏技能·挑灯问冢</color>，<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>可获得<color=Highlight>画地</color>。\n\n<color=Title>画地</color>\n{0}秒内，若景燃为登场角色，造成伤害时获得最大生命{1}+{2}的护盾，不可叠加，持续{3}秒，每{4}秒可生效一次。该护盾在切换至其他角色时不会继承。\n处于<color=Highlight>荧惑</color>状态时，该护盾值提升为最大生命{5}+{6}。",
+        "desc": "施放<color=Highlight>变奏技能·挑灯问冢</color>，<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>可获得<color=Highlight>画地</color>。\n\n<color=Title>画地</color>\n{0}秒内，若景燃为登场角色，造成伤害时获得生命上限{1}+{2}的护盾，不可叠加，持续{3}秒，每{4}秒可生效一次。该护盾在切换至其他角色时不会继承。\n处于<color=Highlight>荧惑</color>状态时，若景燃为登场角色，造成伤害时额外获得生命上限{5}+{6}的护盾，不可叠加，持续{7}秒，每{8}秒可生效一次。该护盾在切换至其他角色时不会继承。",
         "param": [
           "15",
           "1.6%",
           "700",
           "5",
           "0.5",
-          "2.4%",
-          "1050"
+          "0.8%",
+          "350",
+          "5",
+          "0.5"
         ],
         "type": "固有技能",
         "level": {},
@@ -1732,11 +1705,15 @@
     "5": {
       "skill": {
         "name": "扫痕观迹",
-        "desc": "附近队伍中除景燃外的其他角色获得护盾时，景燃获得{0}点【<color=Highlight>鬼护</color>】，每{1}秒可触发一次。\n\n每次进入战斗或施放<color=Highlight>延奏技能·收山出煞</color>时，景燃获得<color=Highlight>敛神</color>。\n\n<color=Title>敛神</color>\n附近队伍中除景燃外的其他角色获得护盾时，景燃获得{2}点【<color=Highlight>鬼护</color>】，并移除<color=Highlight>敛神</color>。",
+        "desc": "每次进入战斗时，若景燃持有的【<color=Highlight>鬼护</color>】不足{0}点，补充至{1}点，每{2}秒可触发1次。\n\n附近队伍中除景燃以外的角色获得护盾时，景燃获得{3}点【<color=Highlight>鬼护</color>】，每{4}秒可触发一次。\n\n<color=Title>敛神</color>\n·每次进入战斗时，景燃获得<color=Highlight>敛神</color>，每{5}秒可触发1次。\n·施放<color=Highlight>延奏技能·收山出煞</color>时，景燃获得<color=Highlight>敛神</color>。\n·附近队伍中除景燃以外的角色获得护盾时，景燃获得{6}点【<color=Highlight>鬼护</color>】，并移除<color=Highlight>敛神</color>。",
         "param": [
+          "25",
+          "25",
+          "4",
           "2",
           "0.5",
-          "10"
+          "4",
+          "15"
         ],
         "type": "固有技能",
         "level": {},
@@ -1765,13 +1742,13 @@
     "6": {
       "skill": {
         "name": "挑灯问冢",
-        "desc": "攻击目标，造成<color=Fire>热熔伤害</color>，并获得{0}点【<color=Highlight>炁</color>】。消耗全部【<color=Highlight>鬼护</color>】，并转化为相同层数的<color=Highlight>祸兮福兮</color>。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>祸兮福兮</color>\n<color=Highlight>祸兮福兮</color>上限为{1}层，每层<color=Highlight>祸兮福兮</color>使得景燃基于生命上限获得额外热熔伤害加成提升：景燃每{2}生命上限获得{3}热熔伤害加成提升，每层最多以此方式使得景燃获得{4}热熔伤害加成提升，持续{5}秒。\n若切换至其他角色则该效果提前结束。\n\n<color=Title>【鬼护】获取规则</color>\n·【<color=Highlight>鬼护</color>】上限为{6}点。\n·景燃获得护盾时，可获得{7}点【<color=Highlight>鬼护</color>】，每{8}秒可生效一次。",
+        "desc": "攻击目标，造成<color=Fire>热熔伤害</color>。消耗全部【<color=Highlight>鬼护</color>】，并转化为相同层数的<color=Highlight>祸兮福兮</color>。\n施放<color=Highlight>变奏技能·挑灯问冢</color>时可获得{0}点【<color=Highlight>炁</color>】。\n若景燃处于<color=Highlight>负阴状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n若景燃处于<color=Highlight>抱阳状态</color>，施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>祸兮福兮</color>\n<color=Highlight>祸兮福兮</color>上限为{1}层，每层<color=Highlight>祸兮福兮</color>使得景燃基于生命上限获得额外热熔伤害加成提升：景燃每{2}生命上限获得{3}热熔伤害加成提升，每层最多以此方式使得景燃获得{4}热熔伤害加成提升，持续{5}秒。\n若切换至其他角色则该效果提前结束。\n\n<color=Title>【鬼护】获取规则</color>\n·【<color=Highlight>鬼护</color>】上限为{6}点。\n·景燃获得护盾时，可获得{7}点【<color=Highlight>鬼护</color>】，每{8}秒可生效一次。",
         "param": [
           "100",
           "50",
           "1000",
-          "0.08%",
-          "2.8%",
+          "0.05%",
+          "2.5%",
           "15",
           "50",
           "1",
@@ -1779,7 +1756,7 @@
         ],
         "type": "变奏技能",
         "level": {
-          "27": {
+          "28": {
             "name": "技能伤害",
             "param": [
               [
@@ -1806,7 +1783,7 @@
               ]
             ]
           },
-          "28": {
+          "29": {
             "name": "回复协奏能量",
             "param": [
               [
@@ -1984,7 +1961,7 @@
     "7": {
       "skill": {
         "name": "逆渡三途",
-        "desc": "<color=Title>炁机斡旋</color>\n景燃施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>可以在<color=Highlight>负阴状态</color>和<color=Highlight>抱阳状态</color>之间切换，景燃初始处于<color=Highlight>抱阳状态</color>。\n\n<color=Title>重击·劫魄</color>\n若景燃拥有{0}点【<color=Highlight>炁</color>】，且处于<color=Highlight>负阴状态</color>，<color=Highlight>长按普攻</color>消耗{1}点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·劫魄</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·劫魄</color>后切换至<color=Highlight>抱阳状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>重击·踏罡</color>\n若景燃拥有{2}点【<color=Highlight>炁</color>】，且处于<color=Highlight>抱阳状态</color>，<color=Highlight>长按普攻</color>消耗{3}点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·踏罡</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·踏罡</color>后切换至<color=Highlight>负阴状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n<color=Highlight>重击·踏罡</color>可在空中施放。\n\n<color=Title>【炁】获取规则</color>\n【<color=Highlight>炁</color>】上限{4}点。\n·施放<color=Highlight>普攻·摄召第3段</color>、<color=Highlight>普攻·摄召第4段</color>、<color=Highlight>普攻·灭煞第3段</color>或<color=Highlight>普攻·灭煞第4段</color>时，获得{5}点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>变奏技能·挑灯问冢</color>，获得{6}点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>或持有<color=Highlight>行途</color>时施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>，获得{7}点【<color=Highlight>炁</color>】。\n\n<color=Title>幽而复明</color>\n·景燃的防御始终为{8}。\n·景燃基于生命上限获得额外受治疗效率：景燃每{9}点生命上限获得{10}受治疗效率，上限{11}。\n\n<color=Title>阳变阴合</color>\n景燃基于生命上限获得额外攻击：景燃每{12}点生命上限获得{13}点攻击，上限{14}。",
+        "desc": "<color=Title>炁机斡旋</color>\n景燃施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>可以在<color=Highlight>负阴状态</color>和<color=Highlight>抱阳状态</color>之间切换，景燃初始处于<color=Highlight>抱阳状态</color>。\n\n<color=Title>重击·劫魄</color>\n若景燃拥有{0}点【<color=Highlight>炁</color>】，且处于<color=Highlight>负阴状态</color>，<color=Highlight>长按普攻</color>消耗{1}点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·劫魄</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·劫魄</color>后切换至<color=Highlight>抱阳状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>重击·踏罡</color>\n若景燃拥有{2}点【<color=Highlight>炁</color>】，且处于<color=Highlight>抱阳状态</color>，<color=Highlight>长按普攻</color>消耗{3}点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·踏罡</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·踏罡</color>后切换至<color=Highlight>负阴状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n<color=Highlight>重击·踏罡</color>可在空中施放。\n\n<color=Title>【炁】获取规则</color>\n【<color=Highlight>炁</color>】上限{4}点。\n·施放<color=Highlight>普攻·摄召第3段</color>、<color=Highlight>普攻·摄召第4段</color>、<color=Highlight>普攻·灭煞第3段</color>或<color=Highlight>普攻·灭煞第4段</color>时，获得{5}点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>闪避反击·探幽</color>、<color=Highlight>闪避反击·守明</color>、<color=Highlight>共鸣技能·黄泉渡</color>、<color=Highlight>共鸣技能·往生送</color>或<color=Highlight>变奏技能·挑灯问冢</color>时，获得{6}点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>或持有<color=Highlight>行途</color>时施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>，获得{7}点【<color=Highlight>炁</color>】。\n\n<color=Title>【命火】获取规则</color>\n【<color=Highlight>命火</color>】上限{8}点。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时获得{9}点【<color=Highlight>命火</color>】。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n若景燃处于<color=Highlight>荧惑</color>状态且景燃持有的【<color=Highlight>命火</color>】不为{10}时，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时消耗{11}点【<color=Highlight>命火</color>】，并使本次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的伤害倍率基于景燃生命上限增加：景燃自身生命上限大于{12}点时，每超过{13}点生命上限增加<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率，最多计入{14}点生命上限。\n\n<color=Title>幽而复明</color>\n·景燃的防御始终为{15}。\n·景燃基于生命上限提升受到的治疗效果：景燃每{16}点生命上限提升{17}受到的治疗效果，上限{18}。\n·景燃基于生命上限获得热熔伤害加成提升：景燃每{19}点生命上限获得{20}热熔伤害加成提升，上限{21}。\n\n<color=Title>阳变阴合</color>\n景燃基于生命上限获得额外攻击：景燃每{22}点生命上限获得{23}点攻击，上限{24}。",
         "param": [
           "300",
           "300",
@@ -1994,67 +1971,131 @@
           "50",
           "100",
           "200",
+          "100",
+          "100",
+          "0",
+          "25",
+          "25000",
+          "1000",
+          "25000",
           "0",
           "1000",
-          "6%",
-          "210%",
+          "6.2%",
+          "310%",
           "1000",
-          "52",
-          "1820"
+          "1.5%",
+          "75%",
+          "1000",
+          "36",
+          "1800"
         ],
         "type": "共鸣回路",
         "level": {
-          "29": {
-            "name": "重击·劫魄伤害",
+          "23": {
+            "name": "每1000最大生命增加重击·劫魄伤害",
             "param": [
               [
-                "11.09%*2+14.26%*3+93.45%",
-                "12.00%*2+15.43%*3+101.11%",
-                "12.91%*2+16.60%*3+108.77%",
-                "14.18%*2+18.23%*3+119.50%",
-                "15.09%*2+19.40%*3+127.16%",
-                "16.14%*2+20.75%*3+135.97%",
-                "17.59%*2+22.62%*3+148.23%",
-                "19.05%*2+24.49%*3+160.49%",
-                "20.50%*2+26.36%*3+172.75%",
-                "22.05%*2+28.34%*3+185.78%",
-                "23.86%*2+30.68%*3+201.10%",
-                "25.68%*2+33.02%*3+216.42%",
-                "27.50%*2+35.36%*3+231.75%",
-                "29.32%*2+37.69%*3+247.07%",
-                "31.14%*2+40.03%*3+262.40%",
-                "32.95%*2+42.37%*3+277.72%",
-                "34.77%*2+44.71%*3+293.05%",
-                "36.59%*2+47.04%*3+308.37%",
-                "38.41%*2+49.38%*3+323.69%",
-                "40.23%*2+51.72%*3+339.02%"
+                "0.75%*2+0.96%*3+6.26%",
+                "0.81%*2+1.04%*3+6.77%",
+                "0.87%*2+1.12%*3+7.29%",
+                "0.95%*2+1.23%*3+8.01%",
+                "1.02%*2+1.30%*3+8.52%",
+                "1.09%*2+1.39%*3+9.11%",
+                "1.18%*2+1.52%*3+9.93%",
+                "1.28%*2+1.64%*3+10.75%",
+                "1.38%*2+1.77%*3+11.57%",
+                "1.48%*2+1.90%*3+12.44%",
+                "1.60%*2+2.06%*3+13.47%",
+                "1.72%*2+2.22%*3+14.50%",
+                "1.85%*2+2.37%*3+15.52%",
+                "1.97%*2+2.53%*3+16.55%",
+                "2.09%*2+2.69%*3+17.57%",
+                "2.21%*2+2.84%*3+18.60%",
+                "2.33%*2+3.00%*3+19.63%",
+                "2.45%*2+3.15%*3+20.65%",
+                "2.58%*2+3.31%*3+21.68%",
+                "2.70%*2+3.47%*3+22.71%"
+              ]
+            ]
+          },
+          "24": {
+            "name": "每1000最大生命增加重击·踏罡伤害",
+            "param": [
+              [
+                "1.09%+1.09%+2.18%+6.53%",
+                "1.18%+1.18%+2.36%+7.07%",
+                "1.27%+1.27%+2.54%+7.60%",
+                "1.40%+1.40%+2.79%+8.35%",
+                "1.49%+1.49%+2.97%+8.89%",
+                "1.59%+1.59%+3.17%+9.50%",
+                "1.73%+1.73%+3.46%+10.36%",
+                "1.87%+1.87%+3.74%+11.22%",
+                "2.02%+2.02%+4.03%+12.07%",
+                "2.17%+2.17%+4.33%+12.98%",
+                "2.35%+2.35%+4.69%+14.06%",
+                "2.53%+2.53%+5.05%+15.13%",
+                "2.70%+2.70%+5.40%+16.20%",
+                "2.88%+2.88%+5.76%+17.27%",
+                "3.06%+3.06%+6.12%+18.34%",
+                "3.24%+3.24%+6.47%+19.41%",
+                "3.42%+3.42%+6.83%+20.48%",
+                "3.60%+3.60%+7.19%+21.55%",
+                "3.77%+3.77%+7.54%+22.62%",
+                "3.95%+3.95%+7.90%+23.69%"
               ]
             ]
           },
           "30": {
+            "name": "重击·劫魄伤害",
+            "param": [
+              [
+                "8.25%*2+10.61%*3+69.53%",
+                "8.93%*2+11.48%*3+75.23%",
+                "9.61%*2+12.35%*3+80.93%",
+                "10.55%*2+13.57%*3+88.91%",
+                "11.23%*2+14.44%*3+94.61%",
+                "12.01%*2+15.44%*3+101.16%",
+                "13.09%*2+16.83%*3+110.29%",
+                "14.17%*2+18.22%*3+119.41%",
+                "15.25%*2+19.61%*3+128.53%",
+                "16.40%*2+21.09%*3+138.22%",
+                "17.76%*2+22.83%*3+149.62%",
+                "19.11%*2+24.57%*3+161.02%",
+                "20.46%*2+26.31%*3+172.42%",
+                "21.81%*2+28.05%*3+183.82%",
+                "23.17%*2+29.78%*3+195.22%",
+                "24.52%*2+31.52%*3+206.63%",
+                "25.87%*2+33.26%*3+218.03%",
+                "27.22%*2+35.00%*3+229.43%",
+                "28.58%*2+36.74%*3+240.83%",
+                "29.93%*2+38.48%*3+252.23%"
+              ]
+            ]
+          },
+          "31": {
             "name": "重击·踏罡伤害",
             "param": [
               [
-                "16.25%+16.25%+32.50%+97.50%",
-                "17.59%+17.59%+35.17%+105.50%",
-                "18.92%+18.92%+37.83%+113.49%",
-                "20.79%+20.79%+41.57%+124.69%",
-                "22.12%+22.12%+44.23%+132.68%",
-                "23.65%+23.65%+47.30%+141.88%",
-                "25.78%+25.78%+51.56%+154.67%",
-                "27.91%+27.91%+55.82%+167.46%",
-                "30.05%+30.05%+60.09%+180.25%",
-                "32.31%+32.31%+64.62%+193.84%",
-                "34.98%+34.98%+69.95%+209.83%",
-                "37.64%+37.64%+75.28%+225.82%",
-                "40.31%+40.31%+80.61%+241.81%",
-                "42.97%+42.97%+85.94%+257.80%",
-                "45.64%+45.64%+91.27%+273.79%",
-                "48.30%+48.30%+96.60%+289.78%",
-                "50.97%+50.97%+101.93%+305.77%",
-                "53.63%+53.63%+107.26%+321.76%",
-                "56.30%+56.30%+112.59%+337.75%",
-                "58.96%+58.96%+117.92%+353.74%"
+                "12.09%+12.09%+24.18%+72.54%",
+                "13.09%+13.09%+26.17%+78.49%",
+                "14.08%+14.08%+28.15%+84.44%",
+                "15.47%+15.47%+30.93%+92.77%",
+                "16.46%+16.46%+32.91%+98.72%",
+                "17.60%+17.60%+35.19%+105.56%",
+                "19.18%+19.18%+38.36%+115.08%",
+                "20.77%+20.77%+41.53%+124.59%",
+                "22.36%+22.36%+44.71%+134.11%",
+                "24.04%+24.04%+48.08%+144.22%",
+                "26.02%+26.02%+52.04%+156.12%",
+                "28.01%+28.01%+56.01%+168.01%",
+                "29.99%+29.99%+59.97%+179.91%",
+                "31.97%+31.97%+63.94%+191.81%",
+                "33.95%+33.95%+67.90%+203.70%",
+                "35.94%+35.94%+71.87%+215.60%",
+                "37.92%+37.92%+75.84%+227.50%",
+                "39.90%+39.90%+79.80%+239.39%",
+                "41.89%+41.89%+83.77%+251.29%",
+                "43.87%+43.87%+87.73%+263.19%"
               ]
             ]
           }
@@ -2452,37 +2493,37 @@
   "chains": {
     "1": {
       "name": "阴阳其和，终始其义",
-      "desc": "<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>造成的伤害倍率提升{0}。\n<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>免疫打断。",
+      "desc": "<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>伤害倍率提升{0}。\n<color=Highlight>共鸣技能·阴蚀骨</color>，<color=Highlight>共鸣技能·黄泉渡</color>，<color=Highlight>共鸣技能·阳焚身</color>，<color=Highlight>共鸣技能·往生送</color>免疫打断。",
       "param": [
-        "60%"
+        "80%"
       ]
     },
     "2": {
       "name": "孤灯踩影，有迹山河",
-      "desc": "<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害倍率提升{0}。<color=Highlight>荧惑</color>状态下对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升{1}。\n\n每次进入战斗时，景燃获得下述效果。\n·回复{2}点【<color=Highlight>炁</color>】。\n·若景燃持有的【<color=Highlight>鬼护</color>】不足{3}点，补充至{4}点。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害加深{5}，持续{6}秒。",
+      "desc": "<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率提升{0}。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升{1}。\n\n每次进入战斗时，景燃获得下述效果，每{2}秒可触发1次。\n·获得{3}点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限{4}的共鸣能量且<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害加深{5}，持续{6}秒。",
       "param": [
-        "45%",
-        "45%",
+        "46%",
+        "46%",
+        "4",
         "300",
-        "25",
-        "25",
+        "25%",
         "180%",
         "4"
       ]
     },
     "3": {
       "name": "乾道变化，各正性命",
-      "desc": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>，获得{0}点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每{1}点生命上限获得{2}点攻击，上限{3}。",
+      "desc": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{0}点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每{1}点生命上限获得{2}点攻击，上限{3}。",
       "param": [
         "5",
         "1000",
-        "72",
-        "2520"
+        "50",
+        "2500"
       ]
     },
     "4": {
       "name": "虚实莫辨，人鬼无间",
-      "desc": "队伍中的角色获得护盾时，使队伍中的角色全属性伤害提升{0}，持续{1}秒。",
+      "desc": "队伍中的角色获得护盾时，使队伍中的角色全属性伤害加成提升{0}，持续{1}秒。",
       "param": [
         "20%",
         "30"
@@ -2490,7 +2531,7 @@
     },
     "5": {
       "name": "原始反终，故知死生",
-      "desc": "景燃受到致死伤害时，此次伤害不会使景燃倒下，并获得基于景燃最大生命值{0}的护盾，护盾持续{1}秒，该效果每{2}分钟可触发一次，该护盾在切换至其他角色时不会继承。",
+      "desc": "景燃受到致死伤害时，此次伤害不会使景燃倒下，并获得基于景燃生命上限{0}的护盾，护盾持续{1}秒，该效果每{2}分钟可触发一次，该护盾在切换至其他角色时不会继承。",
       "param": [
         "50%",
         "15",
@@ -2499,10 +2540,11 @@
     },
     "6": {
       "name": "恩仇了了，后文有期",
-      "desc": "目标受到景燃的重击伤害提升{0}。\n\n<color=Highlight>魑魅魍魉</color>造成的伤害倍率提升{1}。\n\n<color=Highlight>荧惑</color>持续期间，若景燃为队伍中的登场角色且存在索敌目标时，景燃持续召唤<color=Highlight>魑魅魍魉</color>攻击目标，对目标造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n\n此方式召唤<color=Highlight>魑魅魍魉</color>间隔为{2}秒，最多以此方式召唤12次，满足任一下述条件时，重置<color=Highlight>魑魅魍魉</color>的召唤次数。\n·<color=Highlight>荧惑</color>持续时间结束。\n·<color=Highlight>荧惑</color>被移除。\n·获得<color=Highlight>荧惑</color>。",
+      "desc": "目标受到景燃的重击伤害提升{0}。\n\n<color=Highlight>魑魅魍魉</color>伤害倍率提升{1}。\n\n进入<color=Highlight>荧惑</color>状态后，景燃获得<color=Highlight>万鬼同行</color>，持续{2}秒。<color=Highlight>万鬼同行</color>持续期间，若景燃为队伍中登场角色，景燃造成伤害时，召唤<color=Highlight>魑魅魍魉</color>攻击目标，对目标造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n\n此方式召唤<color=Highlight>魑魅魍魉</color>间隔为{3}秒，最多以此方式召唤8次，满足任一下述条件时，移除<color=Highlight>万鬼同行</color>并重置<color=Highlight>魑魅魍魉</color>的召唤次数。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时。\n·<color=Highlight>荧惑</color>持续时间结束或被移除时。",
       "param": [
         "40%",
-        "50%",
+        "80%",
+        "15",
         "1"
       ]
     }

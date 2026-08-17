@@ -1,6 +1,6 @@
 from datetime import datetime
-import json
 import hashlib
+import json
 import time
 
 from gsuid_core.bot import Bot
@@ -37,7 +37,7 @@ def is_code_expired(etime: str) -> bool:
 @sv_waves_code.on_fullmatch(("code", "兑换码"))
 async def get_sign_func(bot: Bot, ev: Event):
     # 分别获取结果
-    list1 = await get_code_list()          # 国服（已修复签名）
+    list1 = await get_code_list()  # 国服（已修复签名）
     list2 = await get_oversea_code_list()  # 国际服
 
     msgs = []
@@ -94,7 +94,7 @@ async def get_code_list():
         params = {
             "child_id": "11",
             "keyword": "",
-            "status": "1",           # 只查询有效的兑换码
+            "status": "1",  # 只查询有效的兑换码
             "currentPage": "1",
             "pageSize": "20",
             "scookie": "",

@@ -1,5 +1,7 @@
 from datetime import datetime
 import json
+import hashlib
+import time
 
 from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
@@ -11,7 +13,11 @@ sv_waves_code = SV("鸣潮兑换码")
 
 invalid_code_list = ("MINGCHAO",)
 
-url = "https://huodong2.4399.com/n/comm/tool/api.php?path=dhmCode/index&tool_id=10"
+# 国服接口配置（带签名）
+api_path = "dhmCode/index"
+tool_id = "10"
+sign_key = "38d8cb06671bef65"
+url = f"https://huodong2.4399.com/n/comm/tool/api.php?path={api_path}&tool_id={tool_id}"
 
 
 def is_code_expired(etime: str) -> bool:
@@ -31,7 +37,7 @@ def is_code_expired(etime: str) -> bool:
 @sv_waves_code.on_fullmatch(("code", "兑换码"))
 async def get_sign_func(bot: Bot, ev: Event):
     # 分别获取结果
-    list1 = await get_code_list()  # 国服
+    list1 = await get_code_list()          # 国服（已修复签名）
     list2 = await get_oversea_code_list()  # 国际服
 
     msgs = []
@@ -80,33 +86,44 @@ async def get_sign_func(bot: Bot, ev: Event):
 
 
 async def get_code_list():
+    """获取国服兑换码（带签名验证）"""
     try:
+        timestamp = int(time.time())
+        sign_content = f"scookiet{timestamp}tool_id{tool_id}path{api_path}{sign_key}"
+        token = hashlib.md5(sign_content.encode(), usedforsecurity=False).hexdigest()
         params = {
             "child_id": "11",
             "keyword": "",
-            "status": "",
+            "status": "1",           # 只查询有效的兑换码
             "currentPage": "1",
             "pageSize": "20",
             "scookie": "",
             "device": "",
+            "t": str(timestamp),
         }
         async with httpx.AsyncClient(timeout=None) as client:
-            res = await client.post(url, data=params, timeout=10)
+            res = await client.post(
+                url,
+                data=params,
+                headers={"X-Token": token},
+                timeout=10,
+            )
+            res.raise_for_status()
             json_data = res.json()
-            logger.debug(f"[获取兑换码] url:{url}, codeList:{json_data}")
+            logger.debug(f"[获取兑换码-国服] url:{url}, codeList:{json_data}")
             if json_data.get("success"):
                 return json_data.get("list", [])
+            logger.warning(f"[获取兑换码-国服] 失败 error_code:{json_data.get('error_code')}, msg:{json_data.get('msg')}")
             return []
-
     except Exception as e:
-        logger.exception("[获取兑换码失败] ", e)
-        return
+        logger.exception("[获取兑换码-国服] 异常 ", e)
+        return []
 
 
 async def get_oversea_code_list():
+    """获取国际服兑换码（从 GitHub 源）"""
     code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@main/js/oversea_codes.js"
 
-    # 备选CDN镜像源
     mirrors = [
         code_url,
         code_url.replace("cdn.jsdelivr.net", "fastly.jsdelivr.net"),
@@ -118,7 +135,6 @@ async def get_oversea_code_list():
         try:
             async with httpx.AsyncClient(timeout=None) as client:
                 res = await client.get(url, timeout=10)
-
                 if res.status_code != 200:
                     logger.error(f"[获取兑换码-国际服] 无效响应 {res.status_code}: {url}")
                     continue
@@ -130,4 +146,4 @@ async def get_oversea_code_list():
             logger.error(f"[获取兑换码-国际服] 请求失败 {url}: {str(e)}")
 
     logger.error("[获取兑换码-国际服] 所有镜像源均失败")
-    return
+    return []

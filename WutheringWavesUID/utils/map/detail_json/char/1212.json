@@ -1047,7 +1047,6 @@
         "param": [
           "4",
           "100",
-          "100",
           "100"
         ],
         "type": "共鸣技能",
@@ -1365,7 +1364,7 @@
     "3": {
       "skill": {
         "name": "万鬼同葬",
-        "desc": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得{0}点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的{1}，将当前生命值降至生命上限的{2}。\n·获得{3}点【<color=Highlight>炁</color>】。\n·获得{4}层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续{5}秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为{6}层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{7}点【<color=Highlight>炁</color>】，并减少{8}层<color=Highlight>行途</color>，持续{9}秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>命中目标时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
+        "desc": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得{0}点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的{1}，将当前生命值降至生命上限的{2}。\n·获得{3}点【<color=Highlight>炁</color>】。\n·获得{4}层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续{5}秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为{6}层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{7}点【<color=Highlight>炁</color>】，并减少{8}层<color=Highlight>行途</color>，持续{9}秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成伤害时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
         "param": [
           "100",
           "50%",
@@ -1666,7 +1665,7 @@
     "4": {
       "skill": {
         "name": "贴壁听尘",
-        "desc": "施放<color=Highlight>变奏技能·挑灯问冢</color>，<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>可获得<color=Highlight>画地</color>。\n\n<color=Title>画地</color>\n{0}秒内，若景燃为登场角色，造成伤害时获得生命上限{1}+{2}的护盾，不可叠加，持续{3}秒，每{4}秒可生效一次。该护盾在切换至其他角色时不会继承。\n处于<color=Highlight>荧惑</color>状态时，若景燃为登场角色，造成伤害时额外获得生命上限{5}+{6}的护盾，不可叠加，持续{7}秒，每{8}秒可生效一次。该护盾在切换至其他角色时不会继承。",
+        "desc": "施放<color=Highlight>变奏技能·挑灯问冢</color>，<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>时可获得<color=Highlight>画地</color>。\n\n<color=Title>画地</color>\n{0}秒内，若景燃为队伍中登场角色，造成伤害时获得生命上限{1}+{2}的护盾，不可叠加，持续{3}秒，每{4}秒可生效一次。该护盾在切换至其他角色时不会继承。\n处于<color=Highlight>荧惑</color>状态时，若景燃为队伍中登场角色，造成伤害时额外获得生命上限{5}+{6}的护盾，不可叠加，持续{7}秒，每{8}秒可生效一次。该护盾在切换至其他角色时不会继承。",
         "param": [
           "15",
           "1.6%",
@@ -2500,7 +2499,7 @@
     },
     "2": {
       "name": "孤灯踩影，有迹山河",
-      "desc": "<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率提升{0}。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升{1}。\n\n每次进入战斗时，景燃获得下述效果，每{2}秒可触发1次。\n·获得{3}点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限{4}的共鸣能量且<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害加深{5}，持续{6}秒。",
+      "desc": "<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>伤害倍率提升{0}。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升{1}。\n\n每次进入战斗时，景燃获得下述效果，每{2}秒可触发1次。\n·获得{3}点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限{4}的共鸣能量且<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>造成的伤害加深{5}，持续{6}秒。",
       "param": [
         "46%",
         "46%",
@@ -2513,9 +2512,10 @@
     },
     "3": {
       "name": "乾道变化，各正性命",
-      "desc": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{0}点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每{1}点生命上限获得{2}点攻击，上限{3}。",
+      "desc": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得{0}点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>，持续{1}秒。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每{2}点生命上限获得{3}点攻击，上限{4}。",
       "param": [
         "5",
+        "15",
         "1000",
         "50",
         "2500"

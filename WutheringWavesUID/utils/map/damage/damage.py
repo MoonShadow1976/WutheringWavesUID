@@ -148,7 +148,7 @@ def phase_damage(
             # 声骸五件套
             title = f"{phase_name}-{ph_detail.ph_name}"
             msg = "使用变奏技能登场时，气动伤害提升30%，持续15秒"
-            attr.add_atk_percent(0.3, title, msg)
+            attr.add_dmg_bonus(0.3, title, msg)
 
         # 浮星祛暗
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_CELESTIAL):
@@ -488,7 +488,7 @@ def phase_damage(
                 return
             title = f"{phase_name}-{ph_detail.ph_name}"
             msg = "添加【集谐·偏移】，自身暴击伤害提升20%"
-            attr.add_crit_rate(0.2, title, msg)
+            attr.add_crit_dmg(0.2, title, msg)
             if attr.char_attr == CHAR_ATTR_SIERRA:
                 msg = "添加【集谐·偏移】，气动伤害提升30%"
                 attr.add_dmg_bonus(0.3, title, msg)

@@ -2435,13 +2435,13 @@
         "25",
         "400%",
         "4%",
-        "1",
+        "2",
         "25"
       ]
     },
     "2": {
       "name": "罢如素英落无声",
-      "desc": "<color=Highlight>重击·弦剑</color>伤害倍率提升{0}。\n\n处于战斗状态，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至{1}。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至{2}。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至{3}层。",
+      "desc": "<color=Highlight>重击·弦剑</color>伤害倍率提升{0}。\n\n进入战斗状态后，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至{1}。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至{2}。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至{3}层。",
       "param": [
         "40%",
         "25",

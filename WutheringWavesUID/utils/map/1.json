@@ -8196,14 +8196,14 @@
         "unlocked": true
       },
       {
-        "description": "<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率提升46%。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升46%。\n\n每次进入战斗时，景燃获得下述效果，每4秒可触发1次。\n·获得300点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限25%的共鸣能量且<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成的伤害加深180%，持续4秒。",
+        "description": "<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>伤害倍率提升46%。<color=Highlight>荧惑</color>状态下【<color=Highlight>命火</color>】对<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的倍率增加效果提升46%。\n\n每次进入战斗时，景燃获得下述效果，每4秒可触发1次。\n·获得300点【<color=Highlight>炁</color>】。\n·景燃获得<color=Highlight>通幽</color>。\n\n<color=Title>通幽</color>\n施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，回复共鸣能量上限25%的共鸣能量且<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>造成的伤害加深180%，持续4秒。",
         "iconUrl": "",
         "name": "孤灯踩影，有迹山河",
         "order": 2,
         "unlocked": true
       },
       {
-        "description": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得5点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得50点攻击，上限2500。",
+        "description": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得5点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>，持续15秒。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得50点攻击，上限2500。",
         "iconUrl": "",
         "name": "乾道变化，各正性命",
         "order": 3,
@@ -8557,7 +8557,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得100点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的50%，将当前生命值降至生命上限的50%。\n·获得200点【<color=Highlight>炁</color>】。\n·获得3层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续15秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为3层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得200点【<color=Highlight>炁</color>】，并减少1层<color=Highlight>行途</color>，持续15秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>命中目标时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
+          "description": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得100点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的50%，将当前生命值降至生命上限的50%。\n·获得200点【<color=Highlight>炁</color>】。\n·获得3层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续15秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为3层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得200点【<color=Highlight>炁</color>】，并减少1层<color=Highlight>行途</color>，持续15秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成伤害时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
           "iconUrl": "",
           "id": 0,
           "name": "万鬼同葬",
@@ -8610,7 +8610,7 @@
       "level": 90,
       "resonLevel": 5,
       "weapon": {
-        "weaponEffectName": "全属性伤害加成提升24%。施放变奏技能或获得护盾时，获得1层【承天】和1层【载物】，每0.5秒可通过获得护盾触发1次，可叠加6层，持续7秒。\n若切换至其他角色【承天】和【载物】提前结束。\n承天：暴击伤害提升8%，最多提升48%。【承天】达到6层时，重击伤害的暴击提升24%。\n载物：施放重击时，消耗最多2层【载物】，每消耗1层【载物】，重击伤害无视目标25%防御，最多无视目标50%防御，持续2秒。",
+        "weaponEffectName": "全属性伤害加成提升24%。自身为登场角色施放变奏技能或获得护盾时，获得1层【承天】和1层【载物】，每0.5秒可通过获得护盾触发1次，可叠加6层，持续7秒。\n若切换至其他角色【承天】和【载物】提前结束。\n承天：暴击伤害提升8%，最多提升48%。【承天】达到6层时，重击伤害的暴击提升24%。\n载物：施放重击时，消耗最多2层【载物】，每消耗1层【载物】，重击伤害无视目标25%防御，最多无视目标50%防御，持续2秒。",
         "weaponIcon": "",
         "weaponId": 21010076,
         "weaponName": "千般渡",
@@ -16809,14 +16809,14 @@
   {
     "chainList": [
       {
-        "description": "暴击提升16%。\n\n<color=Highlight>护体剑光</color>层数上限提升至2层，施放<color=Highlight>重击·弦剑</color>时，可额外获得1层<color=Highlight>护体剑光</color>。\n\n进入战斗后，获得25层的<color=Highlight>清邪剑诀</color>。\n<color=Highlight>普攻·弦剑</color>、<color=Highlight>空中攻击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>造成伤害后，若拥有<color=Highlight>清邪剑诀</color>，将移除<color=Highlight>清邪剑诀</color>，触发<color=Highlight>巨阙灭迹</color>，造成清宵攻击400%的<color=Wind>气动伤害</color>，本次伤害为普攻伤害，该效果每秒最多触发1次。每移除一层<color=Highlight>清邪剑诀</color>，使目标受到<color=Highlight>巨阙灭迹</color>伤害提升4%，该效果持续1秒。\n<color=Highlight>清邪剑诀</color>层数上限为25。",
+        "description": "暴击提升16%。\n\n<color=Highlight>护体剑光</color>层数上限提升至2层，施放<color=Highlight>重击·弦剑</color>时，可额外获得1层<color=Highlight>护体剑光</color>。\n\n进入战斗后，获得25层的<color=Highlight>清邪剑诀</color>。\n<color=Highlight>普攻·弦剑</color>、<color=Highlight>空中攻击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>造成伤害后，若拥有<color=Highlight>清邪剑诀</color>，将移除<color=Highlight>清邪剑诀</color>，触发<color=Highlight>巨阙灭迹</color>，造成清宵攻击400%的<color=Wind>气动伤害</color>，本次伤害为普攻伤害，该效果每秒最多触发1次。每移除一层<color=Highlight>清邪剑诀</color>，使目标受到<color=Highlight>巨阙灭迹</color>伤害提升4%，该效果持续2秒。\n<color=Highlight>清邪剑诀</color>层数上限为25。",
         "iconUrl": "",
         "name": "起若流云聚还散",
         "order": 1,
         "unlocked": true
       },
       {
-        "description": "<color=Highlight>重击·弦剑</color>伤害倍率提升40%。\n\n处于战斗状态，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至25。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至25。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至6层。",
+        "description": "<color=Highlight>重击·弦剑</color>伤害倍率提升40%。\n\n进入战斗状态后，附近敌人的<color=Highlight>心识锁定</color>层数上限提升至25。\n<color=Highlight>固有技能·识海浩渺，尘世万千</color>的<color=Highlight>【凝识】</color>层数上限提升至25。\n\n<color=Highlight>天心空明</color>效果强化：\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加的<color=Highlight>心识锁定</color>层数提升至6层。",
         "iconUrl": "",
         "name": "罢如素英落无声",
         "order": 2,

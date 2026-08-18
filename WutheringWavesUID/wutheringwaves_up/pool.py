@@ -8,7 +8,6 @@ from gsuid_core.utils.image.convert import convert_img
 import httpx
 from PIL import Image, ImageDraw
 
-from ..utils.api.wwapi import GET_POOL_LIST
 from ..utils.fonts.waves_fonts import waves_font_30, waves_font_58
 from ..utils.image import (
     SPECIAL_GOLD,
@@ -21,6 +20,7 @@ from ..utils.image import (
     get_waves_bg,
 )
 from ..utils.name_convert import easy_id_to_name
+from ..utils.resource.download_github import check_speed, fetch_json_index
 from ..utils.util import timed_async_cache
 from .model import WavesPool
 
@@ -31,19 +31,20 @@ avatar_mask = Image.open(TEXT_PATH / "avatar_mask.png")
 
 @timed_async_cache(expiration=3600, condition=lambda x: isinstance(x, list))
 async def get_pool_data() -> list | None:
-    async with httpx.AsyncClient() as client:
-        try:
-            res = await client.get(
-                GET_POOL_LIST,
-                headers={
-                    "Content-Type": "application/json",
-                },
-                timeout=httpx.Timeout(10),
+    try:
+        # 通过 check_speed 选定镜像站后，复用 fetch_json_index 取卡池 JSON
+        # compressed_pool.json 是单行压缩版, 体积约小 36%, 字段与 WavesPool 完全一致
+        _tag, base_url = await check_speed()
+        async with httpx.AsyncClient(follow_redirects=True, timeout=30) as client:
+            data = await fetch_json_index(
+                client, base_url, "pool_list/data/compressed_pool.json"
             )
-            if res.status_code == 200:
-                return res.json().get("data", [])
-        except Exception as e:
-            logger.exception(f"获取卡池数据失败: {e}")
+        if isinstance(data, list):
+            return data
+        logger.warning(f"获取卡池数据失败: 返回数据格式异常, type={type(data)}")
+    except Exception as e:
+        logger.exception(f"获取卡池数据失败: {e}")
+    return None
 
 
 async def clean_pool_data():

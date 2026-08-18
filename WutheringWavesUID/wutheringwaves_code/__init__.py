@@ -9,6 +9,8 @@ from gsuid_core.models import Event
 from gsuid_core.sv import SV
 import httpx
 
+from ..utils.resource.download_github import check_speed
+
 sv_waves_code = SV("鸣潮兑换码")
 
 invalid_code_list = ("MINGCHAO",)
@@ -121,29 +123,25 @@ async def get_code_list():
 
 
 async def get_oversea_code_list():
-    """获取国际服兑换码（从 GitHub 源）"""
-    code_url = "https://cdn.jsdelivr.net/gh/MoonShadow1976/WutheringWaves_OverSea_StaticAssets@main/js/oversea_codes.js"
+    """获取国际服兑换码（复用 check_speed 选择 GitHub 镜像站）"""
+    try:
+        _tag, base_url = await check_speed()
+        url = f"{base_url.rstrip('/')}/js/oversea_codes.js"
+        async with httpx.AsyncClient(follow_redirects=True, timeout=15) as client:
+            res = await client.get(url, timeout=10)
+            if res.status_code != 200:
+                logger.error(f"[获取兑换码-国际服] 无效响应 {res.status_code}: {url}")
+                return []
+            content = res.text
+    except Exception as e:
+        logger.exception(f"[获取兑换码-国际服] 请求失败: {e}")
+        return []
 
-    mirrors = [
-        code_url,
-        code_url.replace("cdn.jsdelivr.net", "fastly.jsdelivr.net"),
-        code_url.replace("cdn.jsdelivr.net", "gcore.jsdelivr.net"),
-        "https://raw.githubusercontent.com/MoonShadow1976/WutheringWaves_OverSea_StaticAssets/main/js/oversea_codes.js",
-    ]
-
-    for url in mirrors:
-        try:
-            async with httpx.AsyncClient(timeout=None) as client:
-                res = await client.get(url, timeout=10)
-                if res.status_code != 200:
-                    logger.error(f"[获取兑换码-国际服] 无效响应 {res.status_code}: {url}")
-                    continue
-
-                json_data = res.text.split("=", 1)[1].strip().rstrip(";")
-                logger.debug(f"[获取兑换码-国际服] url:{url}, codeList:{json_data}")
-                return json.loads(json_data)
-        except Exception as e:
-            logger.error(f"[获取兑换码-国际服] 请求失败 {url}: {str(e)}")
-
-    logger.error("[获取兑换码-国际服] 所有镜像源均失败")
-    return []
+    try:
+        # oversea_codes.js 格式: var mlList = [...];
+        json_data = content.split("=", 1)[1].strip().rstrip(";")
+        logger.debug(f"[获取兑换码-国际服] codeList:{json_data}")
+        return json.loads(json_data)
+    except (IndexError, json.JSONDecodeError) as e:
+        logger.exception(f"[获取兑换码-国际服] 解析文件失败: {e}")
+        return []

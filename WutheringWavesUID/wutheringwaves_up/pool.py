@@ -36,9 +36,7 @@ async def get_pool_data() -> list | None:
         # compressed_pool.json 是单行压缩版, 体积约小 36%, 字段与 WavesPool 完全一致
         _tag, base_url = await check_speed()
         async with httpx.AsyncClient(follow_redirects=True, timeout=30) as client:
-            data = await fetch_json_index(
-                client, base_url, "pool_list/data/compressed_pool.json"
-            )
+            data = await fetch_json_index(client, base_url, "pool_list/data/compressed_pool.json")
         if isinstance(data, list):
             return data
         logger.warning(f"获取卡池数据失败: 返回数据格式异常, type={type(data)}")

@@ -191,16 +191,13 @@ def _merge_rank_data(
 async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     waves_id = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     match = re.search(r"(\d+)", ev.raw_text)
-    if match:
-        pages = int(match.group(1))
-    else:
-        pages = 1
-    pages = max(pages, 1)  # 最小为1
-    pages = min(pages, 5)  # 最大为5
+    pages = int(match.group(1)) if match else 1
+    pages = max(1, min(pages, 5))
     page_num = 20
 
     waves_id_list = None
     title = "总"
+    last_rank = ""
     if "总" not in ev.raw_text:
         if "bot" in ev.raw_text:
             group_binds = await WavesBind.get_all_data()
@@ -233,15 +230,34 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     local_records: list[GroupRankRecord] = []  # Step B: 从本地数据库获取记录
 
     if "上期" in ev.raw_text:
+        # “总上期”不支持（无本地数据）
+        if "总" in ev.raw_text:
+            return "总排行不支持上期查询"
+        # 确定目标版本
         idx = all_versions_sorted.index(current_version)
-        if idx + 1 < len(all_versions_sorted):  # 存在更旧版本
+        if idx + 1 < len(all_versions_sorted):
             target_version = all_versions_sorted[idx + 1]
-            title = "上期" + title
+            last_rank = "上期"
         else:
             return "暂无上期排行数据"
-    else:
-        target_version = current_version  # 本期永远用当前版本
 
+        local_records = await GroupRankRecord.get_matrix_records(
+            waves_ids=waves_id_list or [],
+            version=target_version,
+        )
+        if not local_records:
+            return "暂无上期排行数据"
+        # 用本地记录构建 display_list（API 列表传空）
+        display_list = _merge_rank_data(
+            local_records,
+            [],  # 无 API 数据
+            waves_id_list or [],
+            page_num,
+            waves_id,
+        )
+    else:
+        target_version = current_version  # 用于可能的本地补充，本期也用 current_version
+        # 构造 API 请求参数
         api_item = MatrixRankItem(
             page=pages,
             page_num=page_num,
@@ -249,22 +265,24 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
             version=version,
             waves_id_list=waves_id_list,
         )
+        # 获取 API 数据
+        rankInfoList = await get_rank(api_item)
+        api_rank_list = rankInfoList.data.rank_list if rankInfoList and rankInfoList.data else []
 
-    if waves_id_list:
-        local_records = await GroupRankRecord.get_matrix_records(
-            waves_ids=waves_id_list,
-            version=target_version,
-        )
-
-    rankInfoList = await get_rank(api_item)
-    if rankInfoList and rankInfoList.data:
-        api_rank_list = rankInfoList.data.rank_list
-
-    # 合并去重
-    if "总" in ev.raw_text:  # 仅有API数据
-        display_list = api_rank_list
-    else:  # 合并
-        display_list = _merge_rank_data(local_records, api_rank_list, waves_id_list or [], page_num, waves_id)
+        if "总" in ev.raw_text:
+            # “总”排行：只用 API
+            display_list = api_rank_list
+        else:
+            # “群/bot”排行：合并本地 + API
+            local_records = (
+                await GroupRankRecord.get_matrix_records(
+                    waves_ids=waves_id_list,
+                    version=target_version,
+                )
+                if waves_id_list
+                else []
+            )
+            display_list = _merge_rank_data(local_records, api_rank_list, waves_id_list or [], page_num, waves_id)
 
     if not display_list:
         return "暂无矩阵排行数据" if "上期" not in ev.raw_text else "暂无上期排行数据"
@@ -297,7 +315,7 @@ async def draw_all_matrix_rank_card(bot: Bot, ev: Event):
     title_bg.paste(icon, (60, 240), icon)
 
     # title
-    title_text = f"#矩阵{title}排行"
+    title_text = f"#{last_rank}矩阵{title}排行"
     title_bg_draw = ImageDraw.Draw(title_bg)
     title_bg_draw.text((220, 290), title_text, "white", waves_font_58, "lm")
 

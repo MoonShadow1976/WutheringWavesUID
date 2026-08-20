@@ -538,7 +538,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
             line_clean = re.sub(r"[^0-9\u4e00-\u9fa5\s]", "", line_clean)  # 先删除非数字中英文的符号, 匹配“源能臂铠·测肆”
             line_clean = re.sub(r"\s+", " ", line_clean).strip()  # 再合并多余空白
             if patterns["name"].search(line_clean):
-                line_clean = line_clean.replace("幽冥的忘爱章", "幽冥的忘忧章")
+                line_clean = line_clean.replace("幽冥的忘爱章", "幽冥的忘忧章").replace("質作的矮星", "赝作的矮星")
                 line_clean = re.sub(r".*古洑流$", "千古洑流", line_clean)
                 final_result["武器信息"]["武器名"] = cc.convert(line_clean)
                 continue

@@ -17,6 +17,7 @@ guide_map = {
     "小沐XMu": "XMu",
     "小羊早睡不遭罪": "XiaoYang",
     "吃我无痕": "WuHen",
+    "轩儿": "XvanEr",
 }
 
 guide_author_map = {v: k for k, v in guide_map.items()}

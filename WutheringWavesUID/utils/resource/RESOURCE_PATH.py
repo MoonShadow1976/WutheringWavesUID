@@ -47,6 +47,8 @@ JIEXING_GUIDE_PATH = GUIDE_PATH / "JieXing"
 XIAOYANG_GUIDE_PATH = GUIDE_PATH / "XiaoYang"
 # 吃我无痕 攻略库
 WUHEN_GUIDE_PATH = GUIDE_PATH / "WuHen"
+# 轩儿 攻略库
+XVANER_GUIDE_PATH = GUIDE_PATH / "XvanEr"
 
 # 自定义背景图
 CUSTOM_CARD_PATH = MAIN_PATH / "custom_role_pile"
@@ -92,6 +94,7 @@ def init_dir():
         JINLINGZI_GUIDE_PATH,
         JIEXING_GUIDE_PATH,
         XIAOYANG_GUIDE_PATH,
+        XVANER_GUIDE_PATH,
         CUSTOM_CARD_PATH,
         OTHER_PATH,
         CALENDAR_PATH,

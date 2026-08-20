@@ -51,12 +51,11 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         ["all"],
         options=[
             "all",
-            "小羊早睡不遭罪",
             "金铃子攻略组",
             "結星",
             "Moealkyne",
             "小沐XMu",
-            "吃我无痕",
+            "轩儿",
         ],
     ),
     "GuideSegment": GsBoolConfig("攻略切段", "避免攻略过长过大", False),

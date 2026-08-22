@@ -10,7 +10,7 @@ from ..utils.bot_url import get_url
 from ..utils.button import WavesButton
 from ..utils.database.models import WavesBind
 from ..utils.error_reply import ERROR_CODE, WAVES_CODE_103
-from ..wutheringwaves_config import PREFIX
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .draw_gachalogs import draw_card, draw_card_help
 from .edit_gachalogs import send_edit_link
 from .get_gachalogs import export_gachalogs, import_gachalogs, save_gachalogs
@@ -111,6 +111,9 @@ async def send_gacha_log_help(bot: Bot, ev: Event):
 
 @sv_import_gacha_log.on_file("json")
 async def get_gacha_log_by_file(bot: Bot, ev: Event):
+    if ev.user_pm > 1 and not WutheringWavesConfig.get_config("AllowImportGachaLogs").data:
+        return await bot.send("最高管理员已禁用导入抽卡记录功能，请将json文件交给最高管理员处理\n")
+
     # 没有uid 就别导了吧
     uid = await WavesBind.get_uid_by_game(ev.user_id, ev.bot_id)
     if not uid:

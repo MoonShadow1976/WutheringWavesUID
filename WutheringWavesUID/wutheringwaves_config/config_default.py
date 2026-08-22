@@ -109,6 +109,11 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         "每天定时删除无效token",
         False,
     ),
+    "AllowImportGachaLogs": GsBoolConfig(
+        "允许用户导入抽卡记录",
+        "是否允许用户直接更新抽卡记录",
+        False,
+    ),
     "AnnMinuteCheck": GsIntConfig("公告推送时间检测（单位min）", "公告推送时间检测（单位min）", 10, 60),
     "RefreshIntervalOne": GsIntConfig(
         "刷新单角色面板间隔，重启生效（单位秒）",

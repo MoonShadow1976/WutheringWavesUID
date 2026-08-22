@@ -851,6 +851,7 @@
         const poolTypes = {{ poolTypes | safe }};
         const normalNames = {{ normalNames | safe }};  // 常驻抽卡对象
         const resourceData = {{ resourceData | safe }};  // 默认抽卡对象
+        const allowSave = {{ allowSave | tojson }};  // 是否允许普通用户直接保存记录到服务器
         const auth = window.location.pathname.split('/').pop();
         let gachaData = null;
         let currentPage = 1;
@@ -867,6 +868,8 @@
         if (userPm <= 1) {
             document.getElementById('saveBtn').style.display = 'inline-flex';
             document.getElementById('fetchBtn').style.display = 'inline-flex';
+        }else if (allowSave) {
+            document.getElementById('saveBtn').style.display = 'inline-flex';
         }
 
         let timerInterval = null;

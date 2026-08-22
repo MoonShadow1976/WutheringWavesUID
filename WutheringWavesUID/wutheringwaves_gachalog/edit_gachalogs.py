@@ -200,6 +200,8 @@ async def waves_edit_index(auth: str):
         elapsed = datetime.now().timestamp() - create_time
         remaining = max(0, TIMEOUT - elapsed)
 
+        allow_save = WutheringWavesConfig.get_config("AllowImportGachaLogs").data
+
         url, _ = await get_url()
         template = waves_templates.get_template("gacha_editor.html")
         return HTMLResponse(
@@ -212,6 +214,7 @@ async def waves_edit_index(auth: str):
                 normalNames=normal_names_json,  # 常驻抽卡对象
                 timeout=int(remaining),  # 传递剩余秒数
                 resourceData=json.dumps(get_resource_data()),  # 资源数据
+                allowSave=allow_save,  # 是否允许普通用户直接保存记录到服务器
             )
         )
 
@@ -259,6 +262,12 @@ async def waves_edit_data_post(auth: str, data: dict):
         return JSONResponse(status_code=404, content={"success": False, "msg": "链接已过期"})
 
     pm = temp.get("pm", 6)
+
+    # 🔒 普通用户禁止保存到服务器
+    if pm > 1 and not WutheringWavesConfig.get_config("AllowImportGachaLogs").data:
+        return JSONResponse(
+            status_code=403, content={"success": False, "msg": "普通用户无权保存到服务器，请导出为JSON，交给最高权限者导入"}
+        )
 
     # 确定目标UID
     if pm <= 1:  # 超级管理员：目标UID从前端数据获取

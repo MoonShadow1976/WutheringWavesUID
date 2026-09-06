@@ -837,6 +837,15 @@
         "echo": 6000219,
         "name": "玉冥蛇"
     },
+    "310001040": {
+        "rarity": 1,
+        "attributeId": 1,
+        "elementResistance": [
+            1
+        ],
+        "echo": 6000222,
+        "name": "奇绽傀"
+    },
     "320000010": {
         "rarity": 2,
         "attributeId": 0,
@@ -1413,6 +1422,24 @@
         ],
         "echo": 6000220,
         "name": "巡霄枪卫"
+    },
+    "320000700": {
+        "rarity": 2,
+        "attributeId": 5,
+        "elementResistance": [
+            5
+        ],
+        "echo": 6000223,
+        "name": "解形煞"
+    },
+    "320000710": {
+        "rarity": 2,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 6000224,
+        "name": "绝息魄"
     },
     "330000010": {
         "rarity": 3,

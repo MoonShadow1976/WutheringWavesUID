@@ -24,6 +24,11 @@ weapon_alias_data: dict[str, list[str]] = {}
 sonata_alias_data: dict[str, list[str]] = {}
 echo_alias_data: dict[str, list[str]] = {}
 
+char_alias_keys_sorted: list[str] = []
+weapon_alias_keys_sorted: list[str] = []
+sonata_alias_keys_sorted: list[str] = []
+echo_alias_keys_sorted: list[str] = []
+
 CHAR_NAME_PATTERN = r"[\w\u4e00-\u9fa5·]+"
 
 
@@ -46,6 +51,8 @@ def add_dictionaries(dict1, dict2):
 
 def load_alias_data():
     global char_alias_data, weapon_alias_data, sonata_alias_data, echo_alias_data
+    global char_alias_keys_sorted, weapon_alias_keys_sorted, sonata_alias_keys_sorted, echo_alias_keys_sorted
+
     with open(CHAR_ALIAS, encoding="UTF-8") as f:
         char_alias_data = msgjson.decode(f.read(), type=dict[str, list[str]])
 
@@ -110,6 +117,17 @@ def load_alias_data():
     with open(CUSTOM_ECHO_ALIAS_PATH, "w", encoding="UTF-8") as f:
         f.write(json.dumps(echo_alias_data, indent=2, ensure_ascii=False))
 
+    # 合并完成后，生成排序键列表
+    char_alias_keys_sorted = sorted(char_alias_data.keys(), key=lambda x: len(x))
+    weapon_alias_keys_sorted = sorted(weapon_alias_data.keys(), key=lambda x: len(x))
+    sonata_alias_keys_sorted = sorted(sonata_alias_data.keys(), key=lambda x: len(x))
+    echo_alias_keys_sorted = sorted(echo_alias_data.keys(), key=lambda x: len(x))
+
+    logger.debug(f"[鸣潮] 角色别名排序键列表: {char_alias_keys_sorted}")
+    logger.debug(f"[鸣潮] 武器别名排序键列表: {weapon_alias_keys_sorted}")
+    logger.debug(f"[鸣潮] 合鸣别名排序键列表: {sonata_alias_keys_sorted}")
+    logger.debug(f"[鸣潮] 声骸别名排序键列表: {echo_alias_keys_sorted}")
+
 
 load_alias_data()
 
@@ -121,7 +139,7 @@ with open(MAP_PATH / "id2name.json", encoding="UTF-8") as f:
 
 
 def alias_to_char_name(char_name: str) -> str:
-    for i in char_alias_data:
+    for i in char_alias_keys_sorted:
         if (char_name in i) or (char_name in char_alias_data[i]):
             return i
     return char_name
@@ -130,14 +148,14 @@ def alias_to_char_name(char_name: str) -> str:
 def alias_to_char_name_optional(char_name: str | None) -> str | None:
     if not char_name:
         return None
-    for i in char_alias_data:
+    for i in char_alias_keys_sorted:
         if (char_name in i) or (char_name in char_alias_data[i]):
             return i
     return None
 
 
 def alias_to_char_name_list(char_name: str) -> list[str]:
-    for i in char_alias_data:
+    for i in char_alias_keys_sorted:
         if (char_name in i) or (char_name in char_alias_data[i]):
             return char_alias_data[i]
     return []
@@ -161,7 +179,7 @@ def char_name_to_char_id(char_name: str) -> str | None:
 
 
 def alias_to_weapon_name(weapon_name: str) -> str:
-    for i in weapon_alias_data:
+    for i in weapon_alias_keys_sorted:
         if (weapon_name in i) or (weapon_name in weapon_alias_data[i]):
             return i
 
@@ -170,7 +188,7 @@ def alias_to_weapon_name(weapon_name: str) -> str:
         name = alias_to_char_name(char_name)
         weapon_name = f"{name}专武"
 
-    for i in weapon_alias_data:
+    for i in weapon_alias_keys_sorted:
         if (weapon_name in i) or (weapon_name in weapon_alias_data[i]):
             return i
 
@@ -189,7 +207,7 @@ def weapon_name_to_weapon_id(weapon_name: str) -> str | None:
 def alias_to_sonata_name(sonata_name: str | None) -> str | None:
     if sonata_name is None:
         return None
-    for i in sonata_alias_data:
+    for i in sonata_alias_keys_sorted:
         if (sonata_name in i) or (sonata_name in sonata_alias_data[i]):
             return i
     return None
@@ -206,14 +224,14 @@ def phantom_id_to_phantom_name(phantom_id: str) -> str | None:
 def alias_to_echo_name(echo_name: str) -> str:
     if echo_name in echo_alias_data:
         return echo_name
-    for i, j in echo_alias_data.items():
-        if echo_name in j:
+    for i in echo_alias_keys_sorted:
+        if echo_name in echo_alias_data[i]:
             return i
 
-    for i, j in echo_alias_data.items():
+    for i in echo_alias_keys_sorted:
         if echo_name in i:
             return i
-        for k in j:
+        for k in echo_alias_data[i]:
             if k and echo_name in k:
                 return i
     return echo_name

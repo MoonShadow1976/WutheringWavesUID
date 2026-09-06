@@ -138,11 +138,7 @@ def build_abyss_detail_model(
     star_counts = star_counts or [3] * 6
 
     def _floor_roles(role_ids: list[int]) -> list[AbyssRole]:
-        return [
-            AbyssRole.model_validate({"roleId": int(rid), "iconUrl": ""})
-            for rid in role_ids
-            if rid and int(rid) > 0
-        ]
+        return [AbyssRole.model_validate({"roleId": int(rid), "iconUrl": ""}) for rid in role_ids if rid and int(rid) > 0]
 
     def _floor(floor_num: int, role_ids: list[int], star: int) -> AbyssFloor:
         return AbyssFloor.model_validate(

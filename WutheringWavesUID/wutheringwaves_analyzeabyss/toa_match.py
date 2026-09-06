@@ -7,9 +7,9 @@
   row2-5 -> 塔2(深境之塔) 1-4层
 """
 
+from dataclasses import dataclass, field
 import os
 import re
-from dataclasses import dataclass, field
 
 from gsuid_core.logger import logger
 import numpy as np
@@ -38,12 +38,24 @@ EMPTY_LUMA_STD_THRESHOLD = 35
 
 # 18 个槽位, 按行排列: 6 行 x 3 列
 RESONATORS_REF = [
-    (937, 386), (1020, 386), (1103, 386),
-    (937, 526), (1020, 526), (1103, 526),
-    (1397, 386), (1480, 386), (1563, 386),
-    (1397, 486), (1480, 486), (1563, 486),
-    (1397, 586), (1480, 586), (1563, 586),
-    (1397, 686), (1480, 686), (1563, 686),
+    (937, 386),
+    (1020, 386),
+    (1103, 386),
+    (937, 526),
+    (1020, 526),
+    (1103, 526),
+    (1397, 386),
+    (1480, 386),
+    (1563, 386),
+    (1397, 486),
+    (1480, 486),
+    (1563, 486),
+    (1397, 586),
+    (1480, 586),
+    (1563, 586),
+    (1397, 686),
+    (1480, 686),
+    (1563, 686),
 ]
 
 # UID 区域 (用户实测 1760x995, 转换到 1747x983)
@@ -54,11 +66,11 @@ REF_UID_BOX = (1519, 914, 1681, 954)
 # 用户实测塔1-4层: 星1 左上(817,416) 右下(841,438) in 1760x995
 # 角色1 位置(937,386) -> 转换后星1(811,411)-(835,433)
 # 偏移: dx=-126, dy=25, 宽24, 高22, 星间距33
-STAR_OFFSET_X = -126       # 星1左边缘相对角色左边缘
-STAR_OFFSET_Y = 25         # 星1上边缘相对角色上边缘
+STAR_OFFSET_X = -126  # 星1左边缘相对角色左边缘
+STAR_OFFSET_Y = 25  # 星1上边缘相对角色上边缘
 STAR_WIDTH = 24
 STAR_HEIGHT = 22
-STAR_GAP = 33             # 相邻星左边缘间距
+STAR_GAP = 33  # 相邻星左边缘间距
 STAR_SUM_THRESHOLD = 200  # 亮星 RGB sum 阈值
 
 image_files: list[str] = []
@@ -135,9 +147,7 @@ def _match_resonator(sub_rgb: Image.Image) -> tuple[int, float]:
     return _parse_role_id(image_files[best_idx]), best_score
 
 
-def _detect_row_stars(
-    img_arr: np.ndarray, role_x: int, role_y: int, sx: float, sy: float
-) -> int:
+def _detect_row_stars(img_arr: np.ndarray, role_x: int, role_y: int, sx: float, sy: float) -> int:
     """检测一行(一层)的星级, 返回 0-3.
 
     三颗星水平排列在第一个角色左边, 亮星 RGB sum 大于阈值。
@@ -157,7 +167,7 @@ def _detect_row_stars(
         avg = region.reshape(-1, 3).mean(axis=0)
         rgb_sum = int(avg[0]) + int(avg[1]) + int(avg[2])
         logger.debug(
-            f"[toa-star] row star{i+1}: pos=({x},{base_y}) "
+            f"[toa-star] row star{i + 1}: pos=({x},{base_y}) "
             f"avg=({avg[0]:.0f},{avg[1]:.0f},{avg[2]:.0f}) sum={rgb_sum} "
             f"{'LIT' if rgb_sum > STAR_SUM_THRESHOLD else 'dark'}"
         )

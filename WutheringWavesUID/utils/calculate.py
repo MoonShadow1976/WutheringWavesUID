@@ -174,9 +174,9 @@ def get_valid_color(name, value, calc_map: dict | None):
         flag = True
 
     if flag:
-        if name in ph_sub_map and float(value.rstrip("%")) == float(ph_sub_map[name][-1].rstrip("%")):
+        if value and name in ph_sub_map and float(value.rstrip("%")) == float(ph_sub_map[name][-1].rstrip("%")):
             num_color = WAVES_MOLTEN
-        elif name + "%" in ph_sub_map and float(value.rstrip("%")) == float(ph_sub_map[name + "%"][-1].rstrip("%")):
+        elif value and name + "%" in ph_sub_map and float(value.rstrip("%")) == float(ph_sub_map[name + "%"][-1].rstrip("%")):
             num_color = WAVES_MOLTEN
 
     return name_color, num_color

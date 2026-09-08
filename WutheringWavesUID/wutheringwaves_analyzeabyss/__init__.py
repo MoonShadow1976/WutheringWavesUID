@@ -64,11 +64,6 @@ async def _process_slash_image(bot: Bot, ev: Event, imgs):
             error_reply(WAVES_CODE_103) + "（若分享图未识别到特征码，请先在机器人处绑定特征码再重试）\n",
             at,
         )
-    if ev.group_id:
-        try:
-            await WavesBind.insert_waves_uid(user_id, ev.bot_id, save_uid, ev.group_id)
-        except Exception as e:
-            logger.warning(f"[ww-upload-slash] 关联群组失败: {e}")
     header = f"{uid_warn}[鸣潮]{ctype_label(TYPE_SLASH)}分享图识别成功！写入特征码: {save_uid}\n"
     logger.info(header + "\n".join(r.summary_lines) + "\n正在绘制卡片，请稍候…\n")
     ok = await set_challenge_data(save_uid, TYPE_SLASH, r.slash_dict or {})
@@ -95,11 +90,6 @@ async def _process_toa_image(bot: Bot, ev: Event, imgs):
             error_reply(WAVES_CODE_103) + "（请先在机器人处绑定特征码再重试）\n",
             at,
         )
-    if ev.group_id:
-        try:
-            await WavesBind.insert_waves_uid(user_id, ev.bot_id, save_uid, ev.group_id)
-        except Exception as e:
-            logger.warning(f"[ww-upload-toa] 关联群组失败: {e}")
     logger.info(f"[鸣潮][上传{ctype_label(TYPE_ABYSS)}] 开始识别, 特征码: {save_uid}")
     result = await run_toa_recognize(bot, ev, img, save_uid, user_id)
     if isinstance(result, str):

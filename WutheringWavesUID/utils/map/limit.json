@@ -1156,24 +1156,45 @@
                     "equipPhantomList": [
                         {
                             "phantomId": 6000217,
+                            "subPropName":[
+                                "生命%",
+                                "攻击%"
+                            ],
                             "cost": 4
                         },
                         {
                             "phantomId": 6000221,
+                            "subPropName":[
+                                "生命%",
+                                "攻击%"
+                            ],
                             "cost": 4
                         },
                         {
                             "phantomId": 6000203,
                             "mainPropName": "攻击%",
+                            "subPropName":[
+                                "生命%",
+                                "攻击%"
+                            ],
                             "cost": 1
                         },
                         {
                             "phantomId": 6000204,
                             "mainPropName": "攻击%",
+                            "subPropName":[
+                                "生命%",
+                                "攻击%"
+                            ],
                             "cost": 1
                         },
                         {
                             "phantomId": 6000210,
+                            "subPropName":[
+                                "生命%",
+                                "攻击%",
+                                "生命"
+                            ],
                             "cost": 1
                         }
                     ]

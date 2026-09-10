@@ -8203,7 +8203,7 @@
         "unlocked": true
       },
       {
-        "description": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得5点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳相生</color>，持续15秒。\n\n<color=Title>阴阳相生</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得50点攻击，上限2500。",
+        "description": "景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得5点【<color=Highlight>鬼护</color>】。\n\n景燃施放<color=Highlight>共鸣解放·万鬼同葬</color>后，<color=Highlight>阳变阴合</color>替换为<color=Highlight>阴阳交错</color>，持续15秒。\n\n<color=Title>阴阳交错</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得50点攻击，上限2500。",
         "iconUrl": "",
         "name": "乾道变化，各正性命",
         "order": 3,
@@ -8264,8 +8264,8 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "580"
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
             },
             {
               "attributeName": "暴击",
@@ -8320,8 +8320,8 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "580"
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
             },
             {
               "attributeName": "暴击",
@@ -8376,8 +8376,8 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "580"
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
             },
             {
               "attributeName": "暴击",
@@ -8432,8 +8432,8 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "580"
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
             },
             {
               "attributeName": "暴击",
@@ -8488,12 +8488,12 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "580"
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
             },
             {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
+              "attributeName": "生命",
+              "attributeValue": "580"
             },
             {
               "attributeName": "暴击伤害",
@@ -8547,7 +8547,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Title>共鸣技能·阴蚀骨</color>\n若景燃处于<color=Highlight>负阴状态</color>，可施放<color=Highlight>共鸣技能·阴蚀骨</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阴蚀骨</color>可在空中施放。\n\n<color=Title>共鸣技能·阳焚身</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可施放<color=Highlight>共鸣技能·阳焚身</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阳焚身</color>可在空中施放。\n\n<color=Title>破秽</color>\n施放<color=Highlight>共鸣技能·阴蚀骨</color>和<color=Highlight>共鸣技能·阳焚身</color>时，获得<color=Highlight>破秽</color>，持续4秒，满足下述条件之一时，<color=Highlight>破秽</color>提前结束。\n·切换至其他角色。\n·切换至<color=Highlight>负阴状态</color>或<color=Highlight>抱阳状态</color>时。\n·施放<color=Highlight>共鸣技能·黄泉渡</color>或<color=Highlight>共鸣技能·往生送</color>时。\n\n<color=Title>共鸣技能·黄泉渡</color>\n若景燃处于<color=Highlight>负阴状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·黄泉渡</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·黄泉渡</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n\n<color=Title>共鸣技能·往生送</color>\n若景燃处于<color=Highlight>抱阳状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·往生送</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·往生送</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
+          "description": "<color=Title>共鸣技能·阴蚀骨</color>\n若景燃处于<color=Highlight>负阴状态</color>，可施放<color=Highlight>共鸣技能·阴蚀骨</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阴蚀骨</color>可在空中施放。\n\n<color=Title>共鸣技能·阳焚身</color>\n若景燃处于<color=Highlight>抱阳状态</color>，可施放<color=Highlight>共鸣技能·阳焚身</color>，攻击目标，造成<color=Fire>热熔伤害</color>。\n<color=Highlight>共鸣技能·阳焚身</color>可在空中施放。\n\n<color=Title>破秽</color>\n施放<color=Highlight>共鸣技能·阴蚀骨</color>或<color=Highlight>共鸣技能·阳焚身</color>时，获得<color=Highlight>破秽</color>，持续4秒，满足下述条件之一时，<color=Highlight>破秽</color>提前结束。\n·切换至其他角色。\n·切换至<color=Highlight>负阴状态</color>或<color=Highlight>抱阳状态</color>时。\n·施放<color=Highlight>共鸣技能·黄泉渡</color>或<color=Highlight>共鸣技能·往生送</color>时。\n\n<color=Title>共鸣技能·黄泉渡</color>\n若景燃处于<color=Highlight>负阴状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·黄泉渡</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·黄泉渡</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n\n<color=Title>共鸣技能·往生送</color>\n若景燃处于<color=Highlight>抱阳状态</color>且持有<color=Highlight>破秽</color>时，在空中按下<color=Highlight>普攻</color>可施放<color=Highlight>共鸣技能·往生送</color>，攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。\n施放<color=Highlight>共鸣技能·往生送</color>时可获得100点【<color=Highlight>炁</color>】。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。",
           "iconUrl": "",
           "id": 0,
           "name": "撞煞",
@@ -8557,7 +8557,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得100点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的50%，将当前生命值降至生命上限的50%。\n·获得200点【<color=Highlight>炁</color>】。\n·获得3层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续15秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为3层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得200点【<color=Highlight>炁</color>】，并减少1层<color=Highlight>行途</color>，持续15秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成伤害时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
+          "description": "<color=Highlight>共鸣解放·万鬼同葬</color>可在低空施放。\n攻击目标，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害，施放时获得100点【<color=Highlight>命火</color>】。\n施放后获得下述效果。\n·若景燃的当前生命值大于生命上限的50%，将当前生命值降至生命上限的50%。\n·获得200点【<color=Highlight>炁</color>】。\n·获得3层<color=Highlight>行途</color>。\n·进入<color=Highlight>荧惑</color>状态，持续15秒。\n\n<color=Title>行途</color>\n<color=Highlight>行途</color>上限为3层，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时，获得200点【<color=Highlight>炁</color>】，并减少1层<color=Highlight>行途</color>，持续15秒。\n\n<color=Title>荧惑</color>\n·<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>造成伤害时景燃召唤<color=Highlight>魑魅魍魉</color>进行攻击，造成<color=Fire>热熔伤害</color>，本次伤害为重击伤害。每次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>仅可触发一次。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n",
           "iconUrl": "",
           "id": 0,
           "name": "万鬼同葬",
@@ -8577,7 +8577,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Title>炁机斡旋</color>\n景燃施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>可以在<color=Highlight>负阴状态</color>和<color=Highlight>抱阳状态</color>之间切换，景燃初始处于<color=Highlight>抱阳状态</color>。\n\n<color=Title>重击·劫魄</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>负阴状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·劫魄</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·劫魄</color>后切换至<color=Highlight>抱阳状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>重击·踏罡</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>抱阳状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·踏罡</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·踏罡</color>后切换至<color=Highlight>负阴状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n<color=Highlight>重击·踏罡</color>可在空中施放。\n\n<color=Title>【炁】获取规则</color>\n【<color=Highlight>炁</color>】上限300点。\n·施放<color=Highlight>普攻·摄召第3段</color>、<color=Highlight>普攻·摄召第4段</color>、<color=Highlight>普攻·灭煞第3段</color>或<color=Highlight>普攻·灭煞第4段</color>时，获得50点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>闪避反击·探幽</color>、<color=Highlight>闪避反击·守明</color>、<color=Highlight>共鸣技能·黄泉渡</color>、<color=Highlight>共鸣技能·往生送</color>或<color=Highlight>变奏技能·挑灯问冢</color>时，获得100点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>或持有<color=Highlight>行途</color>时施放<color=Highlight>重击·劫魄</color>和<color=Highlight>重击·踏罡</color>，获得200点【<color=Highlight>炁</color>】。\n\n<color=Title>【命火】获取规则</color>\n【<color=Highlight>命火</color>】上限100点。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时获得100点【<color=Highlight>命火</color>】。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n若景燃处于<color=Highlight>荧惑</color>状态且景燃持有的【<color=Highlight>命火</color>】不为0时，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时消耗25点【<color=Highlight>命火</color>】，并使本次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的伤害倍率基于景燃生命上限增加：景燃自身生命上限大于25000点时，每超过1000点生命上限增加<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率，最多计入25000点生命上限。\n\n<color=Title>幽而复明</color>\n·景燃的防御始终为0。\n·景燃基于生命上限提升受到的治疗效果：景燃每1000点生命上限提升6.2%受到的治疗效果，上限310%。\n·景燃基于生命上限获得热熔伤害加成提升：景燃每1000点生命上限获得1.5%热熔伤害加成提升，上限75%。\n\n<color=Title>阳变阴合</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得36点攻击，上限1800。",
+          "description": "<color=Title>炁机斡旋</color>\n景燃施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>可以在<color=Highlight>负阴状态</color>和<color=Highlight>抱阳状态</color>之间切换，景燃初始处于<color=Highlight>抱阳状态</color>。\n\n<color=Title>重击·劫魄</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>负阴状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·劫魄</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·劫魄</color>后切换至<color=Highlight>抱阳状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·灭煞第2段</color>。\n\n<color=Title>重击·踏罡</color>\n若景燃拥有300点【<color=Highlight>炁</color>】，且处于<color=Highlight>抱阳状态</color>，<color=Highlight>长按普攻</color>消耗300点【<color=Highlight>炁</color>】可施放<color=Highlight>重击·踏罡</color>，造成<color=Fire>热熔伤害</color>。\n施放<color=Highlight>重击·踏罡</color>后切换至<color=Highlight>负阴状态</color>。\n施放该技能后的一定时间内，按下<color=Highlight>普攻</color>将会施放<color=Highlight>普攻·摄召第2段</color>。\n<color=Highlight>重击·踏罡</color>可在空中施放。\n\n<color=Title>【炁】获取规则</color>\n【<color=Highlight>炁</color>】上限300点。\n·施放<color=Highlight>普攻·摄召第3段</color>、<color=Highlight>普攻·摄召第4段</color>、<color=Highlight>普攻·灭煞第3段</color>或<color=Highlight>普攻·灭煞第4段</color>时，获得50点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>闪避反击·探幽</color>、<color=Highlight>闪避反击·守明</color>、<color=Highlight>共鸣技能·黄泉渡</color>、<color=Highlight>共鸣技能·往生送</color>或<color=Highlight>变奏技能·挑灯问冢</color>时，获得100点【<color=Highlight>炁</color>】。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>或持有<color=Highlight>行途</color>时施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>，获得200点【<color=Highlight>炁</color>】。\n\n<color=Title>【命火】获取规则</color>\n【<color=Highlight>命火</color>】上限100点。\n·施放<color=Highlight>共鸣解放·万鬼同葬</color>时获得100点【<color=Highlight>命火</color>】。\n·<color=Highlight>荧惑</color>状态结束时清空【<color=Highlight>命火</color>】。\n若景燃处于<color=Highlight>荧惑</color>状态且景燃持有的【<color=Highlight>命火</color>】不为0时，施放<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>时消耗25点【<color=Highlight>命火</color>】，并使本次<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>的伤害倍率基于景燃生命上限增加：景燃自身生命上限大于25000点时，每超过1000点生命上限增加<color=Highlight>重击·劫魄</color>或<color=Highlight>重击·踏罡</color>伤害倍率，最多计入25000点生命上限。\n\n<color=Title>幽而复明</color>\n·景燃的防御始终为0。\n·景燃基于生命上限提升受到的治疗效果：景燃每1000点生命上限提升6.2%受到的治疗效果，上限310%。\n·景燃基于生命上限获得热熔伤害加成提升：景燃每1000点生命上限获得1.5%热熔伤害加成提升，上限75%。\n\n<color=Title>阳变阴合</color>\n景燃基于生命上限获得额外攻击：景燃每1000点生命上限获得36点攻击，上限1800。",
           "iconUrl": "",
           "id": 0,
           "name": "逆渡三途",
@@ -17197,7 +17197,7 @@
       {
         "level": 10,
         "skill": {
-          "description": "<color=Title>昙体仙身</color>\n清宵处于<color=Highlight>昙体仙身</color>状态时，解锁<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>。\n\n<color=Title>普攻·昙体仙身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>闪避反击·昙体仙身</color>\n成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>重击·天钧荡煞·昙体仙身</color>\n<color=Highlight>【心剑意】</color>充满时，解锁<color=Highlight>重击·天钧荡煞·昙体仙身</color>，长按<color=Highlight>普攻</color>可施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【心剑意】</color>，退出<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>心识锁定</color>\n<color=Highlight>心识锁定</color>层数上限为15。\n每次队伍中的角色对目标附加<color=Highlight>【集谐·干涉】</color>后，对目标附加1层<color=Highlight>心识锁定</color>。\n目标每拥有1层<color=Highlight>心识锁定</color>，受到清宵以下技能伤害加深2%，前7层每层额外加深5%。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n<color=Title>天心空明</color>\n进入战斗或施放共鸣解放<color=Highlight>天光云影沧澜兴</color>时，获得<color=Highlight>天心空明</color>。\n<color=Highlight>藏剑式</color>/<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>/<color=Highlight>【剑韵】</color>效率提升100%。\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加3层<color=Highlight>心识锁定</color>，使自身下一次<color=Highlight>重击·天钧荡煞·昙体仙身</color>获得强化：伤害倍率提升100%，对目标额外累积偏谐值。切换至其他角色提前结束<color=Highlight>重击·天钧荡煞·昙体仙身</color>强化效果。\n施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后，移除<color=Highlight>天心空明</color>。\n\n<color=Title>护体剑光</color>\n施放<color=Highlight>变奏技能·改韵易调</color>或<color=Highlight>重击·弦剑</color>时，获得1层<color=Highlight>护体剑光</color>。\n<color=Highlight>护体剑光</color>上限为1层，受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>护体剑光</color>，使自身免疫打断且受到伤害降低60%，持续1秒。该效果每秒可触发1次。\n\n<color=Title>御剑飞行</color>\n处于<color=Highlight>御剑飞行</color>状态时，将以特殊表现进行移动。\n<color=Highlight>御剑飞行</color>移动期间持续消耗<color=Highlight>【御剑气劲】</color>。\n·施放以下技能后，将进入<color=Highlight>御剑飞行</color>状态：\n<color=Highlight>御剑闪避</color>、<color=Highlight>重击·弦剑</color>、<color=Highlight>空中攻击·弦剑第1段</color>、<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>浮声一刹·凌霄</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>变奏技能·改韵易调</color>。\n·通过以下方式可退出<color=Highlight>御剑飞行</color>状态：\n1.施放<color=Highlight>空中攻击·弦剑第3段</color>、<color=Highlight>空中下落攻击</color>。\n2.触发特定场景交互或探索工具。\n3.回到地面。\n4.切换至其他角色。\n5.<color=Highlight>【御剑气劲】</color>为空。\n\n<color=Title>清绝剑遁</color>\n处于<color=Highlight>御剑飞行</color>状态时，长按<color=Highlight>跳跃</color>，可跃起并向前突进一段距离。\n<color=Highlight>御剑飞行</color>期间仅可施放1次<color=Highlight>清绝剑遁</color>。\n\n<color=Title>【琴心】获取规则</color>\n上限100点。\n<color=Highlight>藏剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【琴心】</color>。\n\n<color=Title>【剑韵】获取规则</color>\n上限100点。\n<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【剑韵】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【剑韵】</color>。\n\n<color=Title>【心剑意】获取规则</color>\n上限100点。\n<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>造成伤害时，获得<color=Highlight>【心剑意】</color>。",
+          "description": "<color=Title>昙体仙身</color>\n清宵处于<color=Highlight>昙体仙身</color>状态时，解锁<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>。\n\n<color=Title>普攻·昙体仙身</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多4段的连续攻击，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>闪避反击·昙体仙身</color>\n成功闪避后一定时间内按下<color=Highlight>普攻</color>，将会攻击目标，造成<color=Wind>气动伤害</color>。\n<color=Highlight>重击·天钧荡煞·昙体仙身</color>解锁前，该技能伤害倍率提升100%。\n可在空中施放。\n\n<color=Title>重击·天钧荡煞·昙体仙身</color>\n<color=Highlight>【心剑意】</color>充满时，解锁<color=Highlight>重击·天钧荡煞·昙体仙身</color>，长按<color=Highlight>普攻</color>可施放，造成<color=Wind>气动伤害</color>。\n施放该技能，消耗所有<color=Highlight>【心剑意】</color>，退出<color=Highlight>昙体仙身</color>状态。\n\n<color=Title>心识锁定</color>\n<color=Highlight>心识锁定</color>层数上限为15。\n每次队伍中的角色对目标附加<color=Highlight>【集谐·干涉】</color>后，对目标附加1层<color=Highlight>心识锁定</color>。\n目标每拥有1层<color=Highlight>心识锁定</color>，受到清宵以下技能伤害加深2%，前7层每层额外加深5%。\n·<color=Highlight>重击·弦剑</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>共鸣解放·天光云影沧澜兴</color>。\n\n<color=Title>天心空明</color>\n进入战斗或施放共鸣解放<color=Highlight>天光云影沧澜兴</color>时，获得<color=Highlight>天心空明</color>。\n<color=Highlight>藏剑式</color>/<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>/<color=Highlight>【剑韵】</color>效率提升100%。\n施放<color=Highlight>重击·弦剑</color>时，对附近的目标附加3层<color=Highlight>心识锁定</color>，使自身下一次<color=Highlight>重击·天钧荡煞·昙体仙身</color>获得强化：伤害倍率提升100%，对目标额外累积偏谐值。切换至其他角色提前结束<color=Highlight>重击·天钧荡煞·昙体仙身</color>强化效果。\n施放<color=Highlight>重击·天钧荡煞·昙体仙身</color>后，移除<color=Highlight>天心空明</color>。\n\n<color=Title>护体剑光</color>\n施放<color=Highlight>变奏技能·改韵易调</color>或<color=Highlight>重击·弦剑</color>时，获得1层<color=Highlight>护体剑光</color>。\n<color=Highlight>护体剑光</color>上限为1层，受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>护体剑光</color>，使自身免疫打断且受到伤害降低60%，持续1秒。该效果每秒可触发1次。\n\n<color=Title>御剑飞行</color>\n处于<color=Highlight>御剑飞行</color>状态时，将以特殊表现进行移动。\n<color=Highlight>御剑飞行</color>移动期间持续消耗<color=Highlight>【御剑气劲】</color>。\n·施放以下技能后，将进入<color=Highlight>御剑飞行</color>状态：\n<color=Highlight>御剑疾行</color>、<color=Highlight>重击·弦剑</color>、<color=Highlight>空中攻击·弦剑第1段</color>、<color=Highlight>空中攻击·弦剑第2段</color>、<color=Highlight>浮声一刹·凌霄</color>、<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>、<color=Highlight>重击·天钧荡煞·昙体仙身</color>、<color=Highlight>变奏技能·改韵易调</color>。\n·通过以下方式可退出<color=Highlight>御剑飞行</color>状态：\n1.施放<color=Highlight>空中攻击·弦剑第3段</color>、<color=Highlight>空中下落攻击</color>。\n2.触发特定场景交互或探索工具。\n3.回到地面。\n4.切换至其他角色。\n5.<color=Highlight>【御剑气劲】</color>为空。\n\n<color=Title>清绝剑遁</color>\n处于<color=Highlight>御剑飞行</color>状态时，长按<color=Highlight>跳跃</color>，可跃起并向前突进一段距离。\n<color=Highlight>御剑飞行</color>期间仅可施放1次<color=Highlight>清绝剑遁</color>。\n\n<color=Title>【琴心】获取规则</color>\n上限100点。\n<color=Highlight>藏剑式</color>造成伤害时，获得<color=Highlight>【琴心】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【琴心】</color>。\n\n<color=Title>【剑韵】获取规则</color>\n上限100点。\n<color=Highlight>执剑式</color>造成伤害时，获得<color=Highlight>【剑韵】</color>。\n处于<color=Highlight>昙体仙身</color>状态时，无法获得<color=Highlight>【剑韵】</color>。\n\n<color=Title>【心剑意】获取规则</color>\n上限100点。\n<color=Highlight>普攻·昙体仙身</color>、<color=Highlight>闪避反击·昙体仙身</color>造成伤害时，获得<color=Highlight>【心剑意】</color>。",
           "iconUrl": "",
           "id": 0,
           "name": "无相心剑",

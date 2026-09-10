@@ -79,7 +79,7 @@ class MonsterProp(BaseModel):
     attributeType: int
     key: str
     name: str
-    value: int
+    value: int | float
     isPercent: bool
     icon: str = ""
 

@@ -199,7 +199,7 @@ async def refresh_char(
     if not ck:
         is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
-        return error_reply(WAVES_CODE_102)
+        return waves_api.last_error or error_reply(WAVES_CODE_102)
     # 共鸣者信息
     role_info = await waves_api.get_role_info(uid, ck)
     if not role_info.success:

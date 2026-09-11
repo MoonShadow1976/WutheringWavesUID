@@ -115,7 +115,7 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str, abyss_data: AbyssCha
             ck_res = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
             is_self_ck, ck = ck_res
             if not ck:
-                return None, error_reply(WAVES_CODE_102)
+                return None, waves_api.last_error or error_reply(WAVES_CODE_102)
             account_resp = await waves_api.get_base_info(uid, ck)
             if not account_resp.success:
                 return None, account_resp.throw_msg()

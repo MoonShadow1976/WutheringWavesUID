@@ -10,7 +10,7 @@ from ..utils.resource.download_all_resource import download_all_resource
 sv_download_config = SV("ww资源下载", pm=1)
 
 
-@sv_download_config.on_fullmatch(("下载全部资源", "补充资源", "刷新补充资源"))
+@sv_download_config.on_fullmatch(("下载全部资源", "补充资源", "刷新补充资源", "更新资源"))
 async def send_download_resource_msg(bot: Bot, ev: Event):
     await bot.send("[鸣潮] 正在开始下载~可能需要较久的时间!")
     result = await download_all_resource()

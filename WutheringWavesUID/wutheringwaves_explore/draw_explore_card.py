@@ -78,7 +78,7 @@ def get_progress_color(progress):
 async def draw_explore_img(ev: Event, uid: str, user_id: str):
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
-        return hint.error_reply(WAVES_CODE_102)
+        return waves_api.last_error or hint.error_reply(WAVES_CODE_102)
     account_info = await waves_api.get_base_info(uid, ck)
     if not account_info.success:
         return account_info.throw_msg()

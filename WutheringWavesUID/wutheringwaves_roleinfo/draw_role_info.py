@@ -58,6 +58,8 @@ async def draw_role_img(uid: str, ck: str, user_id: str, ev: Event):
         role_info = await waves_api.get_role_info(uid, ck)
         if not role_info.success:
             return role_info.throw_msg()
+        if not role_info.data:
+            return "角色信息为空，或请检查登录状态"
 
         role_info = RoleList.model_validate(role_info.data)
     role_info.roleList.sort(key=lambda i: (i.level, i.starLevel, i.roleId), reverse=True)
@@ -88,6 +90,8 @@ async def draw_role_img(uid: str, ck: str, user_id: str, ev: Event):
         calabash_data = await waves_api.get_calabash_data(uid, ck)
         if not calabash_data.success:
             return calabash_data.throw_msg()
+        if not calabash_data.data:
+            return "数据坞信息为空，或请检查登录状态"
         calabash_data = CalabashData.model_validate(calabash_data.data)
 
     # five_num = sum(1 for i in role_info.roleList if i.starLevel == 5)

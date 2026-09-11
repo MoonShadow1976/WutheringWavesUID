@@ -71,7 +71,7 @@ async def get_matrix_data(uid: str, ck: str, is_self_ck: bool):
 async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
-        return error_reply(WAVES_CODE_102)
+        return waves_api.last_error or error_reply(WAVES_CODE_102)
 
     # 账户数据
     account_info = await waves_api.get_base_info(uid, ck)

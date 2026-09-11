@@ -25,7 +25,7 @@ async def send_skin_gallery(bot: Bot, ev: Event):
 
     _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
-        await bot.send(error_reply(WAVES_CODE_102))
+        await bot.send(waves_api.last_error or error_reply(WAVES_CODE_102))
         return
 
     im = await draw_skin_img(uid, ck, ev)

@@ -25,7 +25,7 @@ async def send_role_info(bot: Bot, ev: Event):
 
     _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck and not waves_api.is_net(uid):
-        await bot.send(error_reply(WAVES_CODE_102))
+        await bot.send(waves_api.last_error or error_reply(WAVES_CODE_102))
         return
 
     im = await draw_role_img(uid, ck, user_id, ev)

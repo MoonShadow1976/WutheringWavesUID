@@ -133,6 +133,8 @@ async def draw_char_list_img(
     if not all_role_detail:
         if waves_api.is_net(uid):
             return error_reply(WAVES_CODE_099)
+        if waves_api.last_error:
+            return waves_api.last_error
         return error_reply(code=-111, msg="练度获取失败，请先刷新角色面板")
 
     waves_char_rank = await get_waves_char_rank(uid, all_role_detail)

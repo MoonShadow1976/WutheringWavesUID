@@ -94,6 +94,14 @@ NOT_SEND_MASTER_INFO_MSGS = (
     "系统繁忙",
 )
 
+# 系统维护相关消息关键词
+SYSTEM_MAINTENANCE_MSGS = (
+    "维护",
+    "停机",
+    "升级中",
+    "系统升级",
+)
+
 
 def check_send_master_info(code: int, msg: str, data: T | None = None) -> bool:
     if code in SEND_MASTER_INFO_CODES:
@@ -148,6 +156,10 @@ class KuroApiResp(BaseModel, Generic[T]):
         if self.code == RespCode.BAT_TOKEN_INVALID.value:
             return True
         return self.msg in ("数据令牌已失效")
+
+    @property
+    def is_system_maintenance(self) -> bool:
+        return isinstance(self.msg, str) and any(kw in self.msg for kw in SYSTEM_MAINTENANCE_MSGS)
 
     @model_validator(mode="after")
     def _post_validate(self) -> "KuroApiResp[T]":

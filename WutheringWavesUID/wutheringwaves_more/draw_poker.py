@@ -77,7 +77,7 @@ def draw_progress_bar(
 async def draw_poker_img(ev: Event, uid: str, user_id: str):
     is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck:
-        return error_reply(WAVES_CODE_102)
+        return waves_api.last_error or error_reply(WAVES_CODE_102)
 
     moreActivity = await waves_api.get_more_activity(uid, ck)
     if not moreActivity.success:

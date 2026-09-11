@@ -136,7 +136,7 @@ async def calc_develop_cost(ev: Event, develop_list: list[str], is_flush=False):
 
     token_result, token = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not token_result or not token:
-        return error_reply(WAVES_CODE_102)
+        return waves_api.last_error or error_reply(WAVES_CODE_102)
 
     alias_char_ids = []
     for develop in develop_list:

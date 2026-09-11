@@ -1044,7 +1044,7 @@ async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, wave
 
     _, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
     if not ck and not waves_api.is_net(uid):
-        return hint.error_reply(WAVES_CODE_102)
+        return waves_api.last_error or hint.error_reply(WAVES_CODE_102)
 
     # 账户数据
     if waves_id:

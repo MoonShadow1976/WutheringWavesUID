@@ -292,9 +292,7 @@ async def get_abyss_detail_local(uid) -> AbyssChallenge | None:
     return AbyssChallenge.model_validate(local)
 
 
-# ---------------------------------------------------------------------------
 # Matrix (终焉矩阵) 本地数据工具
-# ---------------------------------------------------------------------------
 
 # 奇点扩张模式
 MATRIX_MODE_SINGULARITY = 1

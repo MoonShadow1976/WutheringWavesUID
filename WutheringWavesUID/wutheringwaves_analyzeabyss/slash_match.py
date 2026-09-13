@@ -73,7 +73,9 @@ def crop_number_rois_from_image(pil_src: Image.Image) -> dict[str, Image.Image]:
     return {"uid": _crop(REF_UID_BOX), "score1": _crop(REF_SCORE1_BOX), "score2": _crop(REF_SCORE2_BOX)}
 
 
-def init() -> None:
+def init(force: bool = False) -> None:
+    if not force and img_data and token_img:
+        return
     image_files.clear()
     img_data.clear()
     token_files.clear()

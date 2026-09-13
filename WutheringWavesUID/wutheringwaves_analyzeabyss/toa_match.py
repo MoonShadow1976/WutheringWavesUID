@@ -105,7 +105,9 @@ def _scale_box(ref_box: tuple[int, int, int, int], img_w: int, img_h: int):
     return x1, y1, max(1, x2 - x1), max(1, y2 - y1)
 
 
-def init() -> None:
+def init(force: bool = False) -> None:
+    if not force and img_data:
+        return
     image_files.clear()
     img_data.clear()
     if not CIRCLE_AVATAR_FOLDER.exists():

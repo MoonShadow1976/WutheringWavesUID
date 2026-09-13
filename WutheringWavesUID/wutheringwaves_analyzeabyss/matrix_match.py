@@ -24,6 +24,8 @@ NUMBER_PATH = str(Path(__file__).parent / "number_images")
 # 空位检测: luma 标准差低于此值视为空位
 EMPTY_LUMA_STD_THRESHOLD = 35
 
+# 数字模板匹配参数
+NUMBER_COMPARE_SIZE = (32, 43)
 
 # arrays for data
 number_files = sorted([f for f in os.listdir(NUMBER_PATH) if f.lower().endswith(".png")])
@@ -115,11 +117,16 @@ def to_hsv(r, g, b):
     return h, s, v
 
 
-def init():
-    # Read number files
+def init(force: bool = False) -> None:
+    if not force and num_data and img_data and buff_data:
+        return
+    num_data.clear()
+    img_data.clear()
+    buff_data.clear()
+    # Read number templates
     for img_name in number_files:
         img_ava = Image.open(os.path.join(NUMBER_PATH, img_name))
-        rgb = pil_to_rgb_on_black(img_ava).resize((32, 43), Image.Resampling.LANCZOS)
+        rgb = pil_to_rgb_on_black(img_ava).resize(NUMBER_COMPARE_SIZE, Image.Resampling.LANCZOS)
         arr = np.array(rgb)
         luma_np = rgb_to_luma_np_uint8(rgb)
         mean_rgb = arr.reshape(-1, 3).mean(axis=0).astype(np.float64)
@@ -175,29 +182,8 @@ def ReadMatrixImg(Matrix_Img_PATH):
         if team_to_test.shape[1] < img.size[0] // 3:
             continue
 
-        # Identify team ID=
+        # team number 完全由 OCR 识别, 不再做数字模板匹配
         res_numbers = 0
-        NUMBER_POS_X = [33 * h_block // 118, 67 * h_block // 118]
-        NUMBER_COMPARE_SIZE = (32, 43)
-
-        for i, num_pos_x in enumerate(NUMBER_POS_X):
-            number_data = team_to_test[
-                h_block // 2 - 23 * h_block // 118 : h_block // 2 + 22 * h_block // 118,
-                num_pos_x : num_pos_x + 33 * h_block // 118,
-            ]
-            num_img = Image.fromarray(number_data)
-
-            num_arr = np.array(num_img.resize(NUMBER_COMPARE_SIZE, Image.Resampling.LANCZOS))
-
-            best_score = -1.0
-            best_idx = 0
-            for idx, tpl in enumerate(num_data):
-                final, _, _, _ = compare_slot(num_img, tpl, NUMBER_COMPARE_SIZE)
-                if final > best_score:
-                    best_score = final
-                    best_idx = idx
-
-            res_numbers = res_numbers * 10 + int(number_files[best_idx].split(".")[0])
 
         # Identify resonator
         start_pos = [159 * h_block // 122, 0]
@@ -278,6 +264,13 @@ def ReadMatrixImg(Matrix_Img_PATH):
                 best_idx = idx
 
         # Bounding box for wave info & score
+        # team number 区域 (合并十位+个位), 供 processor 裁切 OCR
+        team_number_area = [
+            res[index]["bbox"][0] + 33 * h_block // 118,
+            res[index]["bbox"][1] + h_block // 2 - 23 * h_block // 118,
+            67 * h_block // 118,
+            45 * h_block // 118,
+        ]
         wave_number = [
             res[index]["bbox"][0] + (grayBar_pos + team_to_test.shape[1]) // 2 - int(h_block * 1.2),
             res[index]["bbox"][1] + h_block // 6,
@@ -304,6 +297,7 @@ def ReadMatrixImg(Matrix_Img_PATH):
                 "Team #": res_numbers,
                 "Resonators": res_resonator,
                 "BUFF": buff_imgs[best_idx],
+                "Team Number Area": team_number_area,
                 "Wave Number Area": wave_number,
                 "Monster Count Area": monster_count,
                 "Team Score Area": team_score,
@@ -312,6 +306,19 @@ def ReadMatrixImg(Matrix_Img_PATH):
         )
 
     return res_img
+
+
+def match_team_number(pil_img: Image.Image, h_block: int) -> int:
+    """数字模板匹配 team number. 输入 team number 区域的裁切图, 返回两位数."""
+    num_img = pil_img.resize(NUMBER_COMPARE_SIZE, Image.Resampling.LANCZOS)
+    best_score = -1.0
+    best_idx = 0
+    for idx, tpl in enumerate(num_data):
+        final, _, _, _ = compare_slot(num_img, tpl, NUMBER_COMPARE_SIZE)
+        if final > best_score:
+            best_score = final
+            best_idx = idx
+    return int(number_files[best_idx].split(".")[0])
 
 
 # wwuid 兼容别名

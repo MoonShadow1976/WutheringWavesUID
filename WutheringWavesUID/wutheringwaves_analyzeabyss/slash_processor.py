@@ -8,7 +8,8 @@ from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from PIL import Image
 
-from ..wutheringwaves_abyss.draw_slash_info import get_slash_schedule
+from ..wutheringwaves_analyzecard.ocrspace import ocrspace
+from ..wutheringwaves_analyzecard.ScoreQuery import can_score_query_card, set_cache_score_query_card
 from .abyss_data_utils import build_slash_detail_model
 from .slash_match import ReadWhiWaShare_image, ShareMatchResult, init
 
@@ -52,10 +53,7 @@ def _parse_score(text: str) -> int | None:
     cand = _RE_SHORT.findall(norm) or _RE_SHORT.findall(s)
     best: int | None = None
     for c in cand:
-        try:
-            n = int(c)
-        except (TypeError, ValueError):
-            continue
+        n = int(c)
         if 0 <= n <= 999999 and (best is None or n > best):
             best = n
     return best
@@ -89,32 +87,25 @@ def _make_summary(r: SlashRecognizeResult) -> list[str]:
     return lines
 
 
-def recognize_slash_image(src: Image.Image) -> SlashRecognizeResult:
-    """匹配 + 裁切数字ROI"""
-    try:
-        init()
-    except Exception as e:
-        logger.warning(f"[ww-slash-processor] init 失败: {e}")
-    m: ShareMatchResult = ReadWhiWaShare_image(src)
-    r = SlashRecognizeResult()
-    r.match_empty = m.is_empty()
-    for half_roles, half_tok in [
-        (m.half_1_roles, m.half_1_token),
-        (m.half_2_roles, m.half_2_token),
-    ]:
-        cnames = [name for _cid, name in half_roles if name]
-        r.half_char_names.append(cnames)
-        r.token_files.append(half_tok or "")
-    return r
-
-
 async def run_full_slash_recognize(
     bot: Bot,
     ev_user_id: str,
     at_sender: bool,
     src: Image.Image,
-) -> tuple[SlashRecognizeResult, ShareMatchResult]:
+) -> tuple[SlashRecognizeResult, ShareMatchResult] | str:
     """匹配 -> OCR -> 拼 slash_dict"""
+    # 时限: 防止同一用户重复触发 OCR (整个识别+绘图期间阻断)
+    wait = can_score_query_card(ev_user_id)
+    if wait > 0:
+        return f"[鸣潮]海墟识别进行中，请等待{wait}秒后再试。\n"
+    set_cache_score_query_card(ev_user_id, True)
+    try:
+        return await _run_slash_recognize(bot, ev_user_id, at_sender, src)
+    finally:
+        set_cache_score_query_card(ev_user_id, False)
+
+
+async def _run_slash_recognize(bot, ev_user_id, at_sender, src) -> tuple[SlashRecognizeResult, ShareMatchResult]:
     try:
         init()
     except Exception as e:
@@ -129,42 +120,30 @@ async def run_full_slash_recognize(
         r.half_char_names.append([name for _cid, name in half_roles if name])
         r.token_files.append(half_tok or "")
 
-    try:
-        from ..wutheringwaves_analyzecard.ocrspace import ocrspace
-        from ..wutheringwaves_analyzecard.ScoreQuery import set_cache_score_query_card
+    rois = getattr(share_result, "number_rois", None)
+    if rois and rois.get("uid") and rois.get("score1") and rois.get("score2"):
+        images = [rois["uid"], rois["score1"], rois["score2"]]
+        ocr_ret = None
+        try:
+            ocr_ret = await ocrspace(images, bot, at_sender, language="eng", isTable=False)
+        except Exception as e:
+            logger.exception(f"[ww-slash-processor] ocrspace 异常: {e}")
+        if isinstance(ocr_ret, str):
+            r.summary_lines = [f"[OCR_ERROR]{ocr_ret}"]
+            return r, share_result
+        if isinstance(ocr_ret, (list, tuple)) and ocr_ret:
 
-        can_ocr = True
-    except Exception:
-        can_ocr = False
+            def _t(i):
+                p = ocr_ret[i] if i < len(ocr_ret) else None
+                if isinstance(p, dict):
+                    return str(p.get("text") or "")
+                if isinstance(p, str):
+                    return p
+                return ""
 
-    if can_ocr:
-        rois = getattr(share_result, "number_rois", None)
-        if rois and rois.get("uid") and rois.get("score1") and rois.get("score2"):
-            images = [rois["uid"], rois["score1"], rois["score2"]]
-            set_cache_score_query_card(ev_user_id, True)
-            ocr_ret = None
-            try:
-                ocr_ret = await ocrspace(images, bot, at_sender, language="eng", isTable=False)
-            except Exception as e:
-                logger.exception(f"[ww-slash-processor] ocrspace 异常: {e}")
-            finally:
-                set_cache_score_query_card(ev_user_id, False)
-            if isinstance(ocr_ret, str):
-                r.summary_lines = [f"[OCR_ERROR]{ocr_ret}"]
-                return r, share_result
-            if isinstance(ocr_ret, (list, tuple)) and ocr_ret:
-
-                def _t(i):
-                    p = ocr_ret[i] if i < len(ocr_ret) else None
-                    if isinstance(p, dict):
-                        return str(p.get("text") or "")
-                    if isinstance(p, str):
-                        return p
-                    return ""
-
-                r.recognized_uid = _parse_uid(_t(0))
-                r.score_half_1 = _parse_score(_t(1))
-                r.score_half_2 = _parse_score(_t(2))
+            r.recognized_uid = _parse_uid(_t(0))
+            r.score_half_1 = _parse_score(_t(1))
+            r.score_half_2 = _parse_score(_t(2))
 
     share_result.recognized_uid = r.recognized_uid
     share_result.score_half_1 = r.score_half_1
@@ -182,16 +161,15 @@ async def run_full_slash_recognize(
         for roles_raw, tok in zip(halves_raw, tokens_raw):
             ids = []
             for cid, _cname in roles_raw:
-                try:
-                    n = int(cid) if cid is not None and str(cid).isdigit() else 0
-                except (TypeError, ValueError):
-                    n = 0
+                n = int(cid) if cid is not None and str(cid).isdigit() else 0
                 if n > 0:
                     ids.append(n)
             half_char_ids.append(ids)
             half_buff_icons.append(tok if tok and tok != "EMPTY_SLOT" else "")
 
         now = datetime.now()
+        from ..wutheringwaves_abyss.draw_slash_info import get_slash_schedule
+
         schedule_data = await get_slash_schedule()
         sorted_ids = sorted(schedule_data, key=int)
         current_id = next(

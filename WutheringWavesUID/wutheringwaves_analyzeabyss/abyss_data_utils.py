@@ -13,6 +13,11 @@ from ..utils.api.model import (
     AbyssDifficulty,
     AbyssFloor,
     AbyssRole,
+    MatrixBuff,
+    MatrixData,
+    MatrixModeDetail,
+    MatrixRole,
+    MatrixTeam,
     SlashChallenge,
     SlashDetail,
     SlashDifficulty,
@@ -20,6 +25,7 @@ from ..utils.api.model import (
     SlashRole,
 )
 from ..utils.resource.RESOURCE_PATH import PLAYER_PATH
+from ..utils.util import get_version
 
 ABYSS_DATA_FILENAME = "abyssData.json"
 
@@ -28,7 +34,7 @@ TYPE_ABYSS = "abyss"
 TYPE_MATRIX = "matrix"
 
 SUPPORTED_TYPES = {TYPE_SLASH, TYPE_ABYSS, TYPE_MATRIX}
-IMPLEMENTED_TYPES = {TYPE_SLASH, TYPE_ABYSS}
+IMPLEMENTED_TYPES = {TYPE_SLASH, TYPE_ABYSS, TYPE_MATRIX}
 
 CTYPE_LABEL = {TYPE_SLASH: "海墟", TYPE_ABYSS: "深塔", TYPE_MATRIX: "矩阵"}
 
@@ -284,3 +290,142 @@ async def get_abyss_detail_local(uid) -> AbyssChallenge | None:
     if not local:
         return None
     return AbyssChallenge.model_validate(local)
+
+
+# ---------------------------------------------------------------------------
+# Matrix (终焉矩阵) 本地数据工具
+# ---------------------------------------------------------------------------
+
+# 奇点扩张模式
+MATRIX_MODE_SINGULARITY = 1
+
+
+def get_current_version() -> str:
+    """项目版本前两段, 用于本地 matrix 数据版本管理."""
+    return ".".join(get_version().split(".")[:2])
+
+
+def _build_matrix_team(team_dict: dict) -> MatrixTeam:
+    """把识别到的 team dict 转成 MatrixTeam model."""
+    role_icons = team_dict.get("roleIcons") or []
+    role_list = team_dict.get("roleList") or []
+    buffs = team_dict.get("buffs") or []
+    return MatrixTeam.model_validate(
+        {
+            "bossCount": int(team_dict.get("bossCount") or 0),
+            "passBoss": int(team_dict.get("passBoss") or 0),
+            "round": int(team_dict.get("round") or 1),
+            "score": int(team_dict.get("score") or 0),
+            "roleIcons": role_icons,
+            "roleList": [MatrixRole.model_validate(r) for r in role_list],
+            "buffs": [MatrixBuff.model_validate(b) for b in buffs],
+        }
+    )
+
+
+def _empty_matrix_team() -> MatrixTeam:
+    """空队伍占位: score=0, 无角色/buff. 用于 None 占位, 避免群排行/总分计算崩溃."""
+    return MatrixTeam.model_validate(
+        {
+            "bossCount": 0,
+            "passBoss": 0,
+            "round": 0,
+            "score": 0,
+            "roleIcons": [],
+            "roleList": [],
+            "buffs": [],
+        }
+    )
+
+
+def _is_empty_team(t) -> bool:
+    """判断是否空队伍 (None 或无角色图标)."""
+    return t is None or not (t.roleIcons if hasattr(t, "roleIcons") else t.get("roleIcons"))
+
+
+def build_matrix_detail_model(
+    teams: list[dict | None],
+    season_end_time_ms: int = 0,
+) -> MatrixData:
+    """由识别 teams (dict 或 None 列表) 构造 MatrixData model (奇点扩张).
+
+    - 尾部空队伍截断 (不留占位)
+    - 中间空队伍转为 score=0 的空 MatrixTeam (用于占位 + 群排行计算)
+    """
+    if not season_end_time_ms:
+        season_end_time_ms = int(time.time() + 20 * 86400) * 1000
+
+    # 截断尾部空队伍
+    trimmed = list(teams)
+    while trimmed and _is_empty_team(trimmed[-1]):
+        trimmed.pop()
+
+    # dict -> MatrixTeam, None -> 空 MatrixTeam (score=0)
+    model_teams: list[MatrixTeam] = [_build_matrix_team(t) if t is not None else _empty_matrix_team() for t in trimmed]
+    total_score = sum(t.score for t in model_teams)
+
+    mode = MatrixModeDetail.model_validate(
+        {
+            "bossCount": 0,
+            "hasRecord": any(t.roleIcons for t in model_teams),
+            "isUnlock": True,
+            "modeId": MATRIX_MODE_SINGULARITY,
+            "passBoss": 0,
+            "rank": 0,
+            "round": 0,
+            "score": total_score,
+            "teams": model_teams,
+        }
+    )
+    return MatrixData.model_validate(
+        {
+            "endTime": int(season_end_time_ms),
+            "isUnlock": True,
+            "modeDetails": [mode],
+        }
+    )
+
+
+async def save_matrix_detail(uid, detail: MatrixData, version: str) -> bool:
+    data = detail.model_dump()
+    data["version"] = version
+    data["last_update"] = int(time.time())
+    return await set_challenge_data(uid, TYPE_MATRIX, data)
+
+
+async def get_matrix_detail_local(uid) -> tuple[MatrixData | None, str]:
+    """返回 (matrix_data, version). 无数据返回 (None, '')."""
+    local = await get_challenge_data(uid, TYPE_MATRIX)
+    if not local:
+        return None, ""
+    version = str(local.get("version") or "")
+    try:
+        matrix_data = MatrixData.model_validate(local)
+    except Exception as e:
+        logger.warning(f"[matrix-data] 本地数据解析失败 (uid={uid}): {e}")
+        return None, version
+    return matrix_data, version
+
+
+async def get_matrix_local_version(uid) -> str:
+    """仅读本地 matrix 版本号."""
+    local = await get_challenge_data(uid, TYPE_MATRIX)
+    if not local:
+        return ""
+    return str(local.get("version") or "")
+
+
+def merge_matrix_teams(
+    local_teams: list[dict | None],
+    new_teams: list[dict],
+) -> list[dict | None]:
+    """按 Team#-1 索引合并. new_teams 中的元素覆盖 local 同位置, 缺失位置保持 None."""
+    result = list(local_teams)
+    for team in new_teams:
+        idx = int(team.get("Team #", 0)) - 1
+        if idx < 0:
+            continue
+        while len(result) <= idx:
+            result.append(None)
+        result[idx] = team
+    return result

@@ -17,6 +17,7 @@ from PIL import Image
 
 from ..utils.resource.RESOURCE_PATH import CIRCLE_AVATAR_PATH
 from .match_core import (
+    is_gray_slot,
     match_slot_best,
     pil_to_rgb_on_black,
     rgb_to_luma_np_uint8,
@@ -130,16 +131,9 @@ def _parse_role_id(fname: str) -> int:
     return 0
 
 
-def _is_gray_slot(sub_rgb: Image.Image) -> bool:
-    """检测空位: luma 标准差低 (空位细节少, std~24; 角色头像 std>40)."""
-    arr = np.array(sub_rgb.resize(AVATAR_COMPARE_SIZE, Image.Resampling.LANCZOS))
-    luma = arr[:, :, 0] * 0.299 + arr[:, :, 1] * 0.587 + arr[:, :, 2] * 0.114
-    return float(luma.std()) < EMPTY_LUMA_STD_THRESHOLD
-
-
 def _match_resonator(sub_rgb: Image.Image) -> tuple[int, float]:
     # 灰色空位直接返回 0, 不依赖 test.png 模板
-    if _is_gray_slot(sub_rgb):
+    if is_gray_slot(sub_rgb, AVATAR_COMPARE_SIZE, EMPTY_LUMA_STD_THRESHOLD):
         return 0, 0.0
     best_idx, best_score = match_slot_best(sub_rgb, img_data, AVATAR_COMPARE_SIZE, RESO_THRESHOLD)
     if best_idx < 0:

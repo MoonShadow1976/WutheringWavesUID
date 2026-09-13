@@ -56,6 +56,13 @@ def safe_crop(img_arr: np.ndarray, x: int, y: int, w: int, h: int) -> np.ndarray
     return crop
 
 
+def is_gray_slot(sub_rgb_pil: Image.Image, compare_size: tuple[int, int], std_thr: int = 35) -> bool:
+    """空位检测: luma 标准差低于阈值视为空位 (灰色背景无细节). 矩阵+深塔共用."""
+    arr = np.array(sub_rgb_pil.resize(compare_size, Image.Resampling.LANCZOS))
+    luma = arr[:, :, 0] * 0.299 + arr[:, :, 1] * 0.587 + arr[:, :, 2] * 0.114
+    return float(luma.std()) < std_thr
+
+
 def is_slot_empty(rgb_arr: np.ndarray, black_thr: int = 50, empty_pct_thr: int = 80) -> bool:
     is_black = np.all(rgb_arr < black_thr, axis=2)
     tot = rgb_arr.shape[0] * rgb_arr.shape[1]

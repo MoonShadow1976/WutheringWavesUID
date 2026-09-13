@@ -8,8 +8,10 @@ from PIL import Image, ImageDraw
 from ..utils.api.model import (
     AccountBaseInfo,
     MatrixData,
+    Role,
     RoleList,
 )
+from ..utils.ascension.char import get_char_model
 from ..utils.char_info_utils import get_role_detail_info_with_refresh
 from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
@@ -29,12 +31,14 @@ from ..utils.queues.queues import push_item
 from ..utils.resource.RESOURCE_PATH import MATRIX_PATH
 from ..utils.util import get_version
 from ..utils.waves_api import waves_api
-from ..wutheringwaves_config import WutheringWavesConfig
+from ..wutheringwaves_analyzeabyss.abyss_data_utils import get_matrix_detail_local
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
+from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
-MATRIX_ERROR_MESSAGE_NO_DATA = "当前暂无终焉矩阵数据\n"
+MATRIX_ERROR_MESSAGE_NO_DATA = f"当前暂无终焉矩阵数据，可考虑【{PREFIX}上传矩阵】上传‘奇点扩张’截图(暂不支持分享图)\n"
 MATRIX_ERROR_MESSAGE_NO_UNLOCK = "终焉矩阵暂未解锁\n"
 
 MATRIX_MODE_NAMES = {
@@ -68,37 +72,116 @@ async def get_matrix_data(uid: str, ck: str, is_self_ck: bool):
     return matrix_data
 
 
-async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
-    is_self_ck, ck = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
-    if not ck:
-        return waves_api.last_error or error_reply(WAVES_CODE_102)
+async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: MatrixData | None = None) -> bytes | str:
+    from_local = False
+    is_self_ck = False
 
-    # 账户数据
-    account_info = await waves_api.get_base_info(uid, ck)
-    if not account_info.success:
-        return account_info.throw_msg()
-    account_info = AccountBaseInfo.model_validate(account_info.data)
+    def _build_role_info_from_matrix(mdata: MatrixData) -> RoleList:
+        """从矩阵数据中提取 roleIds, 用 get_char_model 构造 RoleList."""
+        role_ids: set[int] = set()
+        for mode in mdata.modeDetails or []:
+            if not mode.teams:
+                continue
+            for team in mode.teams:
+                if team is None or not team.roleIcons:
+                    continue
+                for r in team.roleList or []:
+                    if r.roleId:
+                        role_ids.add(int(r.roleId))
+        roles: list[Role] = []
+        for rid in role_ids:
+            cm = get_char_model(rid)
+            if cm is None:
+                continue
+            roles.append(
+                Role.model_validate(
+                    {
+                        "roleId": rid,
+                        "level": 0,
+                        "breach": 0,
+                        "roleName": cm.name,
+                        "roleIconUrl": f"role_circle_head_{rid}.png",
+                        "rolePicUrl": "",
+                        "starLevel": cm.starLevel,
+                        "attributeId": cm.attributeId,
+                        "attributeName": None,
+                        "weaponTypeId": cm.weaponTypeId,
+                        "weaponTypeName": None,
+                        "acronym": "",
+                    }
+                )
+            )
+        return RoleList.model_validate({"roleList": roles, "showToGuest": True})
 
-    # 共鸣者信息
-    role_info = await waves_api.get_role_info(uid, ck)
-    if not role_info.success:
-        return role_info.throw_msg()
+    if matrix_data is not None:
+        # 上传截图识别结果直接传入
+        account_info = await get_user_detail_info(uid)
+        role_info = _build_role_info_from_matrix(matrix_data)
+        from_local = True
+    else:
 
-    role_info = RoleList.model_validate(role_info.data)
+        async def _try_local():
+            local_matrix, _ver = await get_matrix_detail_local(uid)
+            if local_matrix is None or not local_matrix.modeDetails:
+                return None
+            if not any(m.teams for m in local_matrix.modeDetails):
+                return None
+            acc = await get_user_detail_info(uid)
+            ri = _build_role_info_from_matrix(local_matrix)
+            return (acc, ri, local_matrix)
 
-    # 终焉矩阵
-    matrix_data = await get_matrix_data(uid, ck, is_self_ck)
-    if isinstance(matrix_data, str):
-        return matrix_data
+        async def _try_ck():
+            ck_res = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
+            is_self, ck = ck_res
+            if not ck:
+                return None, waves_api.last_error or error_reply(WAVES_CODE_102)
+            acc_resp = await waves_api.get_base_info(uid, ck)
+            if not acc_resp.success:
+                return None, acc_resp.throw_msg()
+            acc = AccountBaseInfo.model_validate(acc_resp.data)
+            role_resp = await waves_api.get_role_info(uid, ck)
+            if not role_resp.success:
+                return None, role_resp.throw_msg()
+            ri = RoleList.model_validate(role_resp.data)
+            mdata = await get_matrix_data(uid, ck, is_self)
+            if isinstance(mdata, str):
+                return None, mdata
+            if not mdata.isUnlock:
+                return None, MATRIX_ERROR_MESSAGE_NO_UNLOCK
+            return (acc, ri, mdata, is_self), None
+
+        if waves_api.is_net(uid):
+            # 国际服: 本地优先
+            local_result = await _try_local()
+            if local_result is None:
+                return MATRIX_ERROR_MESSAGE_NO_DATA
+            account_info, role_info, matrix_data = local_result
+            from_local = True
+        else:
+            # 国服: API 优先, 失败回退本地
+            ck_result, err = await _try_ck()
+            if ck_result is not None:
+                account_info, role_info, matrix_data, is_self_ck = ck_result
+            else:
+                local_result = await _try_local()
+                if local_result is not None:
+                    account_info, role_info, matrix_data = local_result
+                    from_local = True
+                else:
+                    return err if isinstance(err, str) else MATRIX_ERROR_MESSAGE_NO_DATA
 
     command = ev.command
     text = ev.text.strip()
-    modeIds = [1] if is_self_ck else [1, 0]  # MATRIX_MODE_NAMES
-    if "稳态" in text or "稳态" in command:
-        modeIds = [0]
-    elif text.isdigit() and 0 <= int(text) <= 1:
-        modeIds = [int(text)]
-    logger.debug(f"[鸣潮][终焉矩阵] modeIds: {modeIds}")
+    if from_local:
+        # 本地数据仅奇点扩张, 不响应稳态命令
+        modeIds = [1]
+    else:
+        modeIds = [1] if is_self_ck else [1, 0]  # MATRIX_MODE_NAMES
+        if "稳态" in text or "稳态" in command:
+            modeIds = [0]
+        elif text.isdigit() and 0 <= int(text) <= 1:
+            modeIds = [int(text)]
+    logger.debug(f"[鸣潮][终焉矩阵] modeIds: {modeIds}, from_local={from_local}")
 
     # 画布 2560 * 1440
     card_img = await get_random_share_bg()  # 已返回 2560 x 1440 图像
@@ -140,7 +223,7 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
         if not mode.teams:
             continue
         for team in mode.teams:
-            if not team.roleIcons:
+            if team is None or not team.roleIcons:
                 continue
             for icon_url in team.roleIcons:
                 if not icon_url:
@@ -326,6 +409,26 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                 x = 30 + col * (card_width + card_h_gap)
                 y = row_y + row * (card_height + card_v_gap)
 
+                # 空位占位: 无角色图标的队伍画一个空卡片保持布局
+                if team is None or not team.roleIcons:
+                    team_card = Image.new("RGBA", (base_width, base_height), (0, 0, 0, 0))
+                    team_card_draw = ImageDraw.Draw(team_card)
+                    team_card_draw.rounded_rectangle([0, 0, base_width, base_height], 50, (30, 30, 50, 100))
+                    # 标题区占位边框
+                    team_card_draw.rounded_rectangle([5, 5, base_width - 5, team_header_height - 5], 20, (60, 60, 80, 120))
+                    team_card_draw.text(
+                        (base_width // 2, team_header_height // 2),
+                        "未上传",
+                        GREY,
+                        waves_font_16,
+                        "mm",
+                    )
+                    actual_card_width = int(128 * best_factor)
+                    card_height_new = int(team_card.height * best_factor)
+                    team_card_scaled = team_card.resize((actual_card_width, card_height_new), Image.Resampling.LANCZOS)
+                    card_img.paste(team_card_scaled, (x, y), team_card_scaled)
+                    continue
+
                 # 标题区 team_bg
                 team_bg = team_card_line_deco.copy()
                 team_draw = ImageDraw.Draw(team_bg)
@@ -385,11 +488,11 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                     y_offset_role += role_card.height
 
                 # 将 team_card 粘贴到最终画布
-                # 目标尺寸（基于 best_factor 计算）
-                card_width = int(128 * best_factor)
+                # 目标尺寸（基于 best_factor 计算, 用独立变量避免覆盖布局 card_width）
+                actual_card_width = int(128 * best_factor)
                 card_height_new = int(team_card.height * best_factor)  # 按实际原始高度等比缩放
 
-                team_card_scaled = team_card.resize((card_width, card_height_new), Image.Resampling.LANCZOS)
+                team_card_scaled = team_card.resize((actual_card_width, card_height_new), Image.Resampling.LANCZOS)
 
                 # 粘贴位置仍用原布局的 x,y（布局计算中仍使用 card_height = 448 * best_factor 占位）
                 card_img.paste(team_card_scaled, (x, y), team_card_scaled)
@@ -397,11 +500,11 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str) -> bytes | str:
             # 更新 y_offset（所有队伍卡片之后）
             y_offset += total_teams_height
 
-    # 上传矩阵数据到排行榜
-    await upload_matrix_record(uid, matrix_data, role_info, role_detail_info_map)
-
-    # 保存矩阵数据到本地群排行
-    await save_matrix_to_group_rank(user_id, uid, account_info.name, matrix_data, role_info, role_detail_info_map)
+    # 上传矩阵记录 (仅 API 数据) / 保存群排行 (本地数据也支持, 空队伍 score=0 不影响计算)
+    if matrix_data:
+        if not from_local:
+            await upload_matrix_record(uid, matrix_data, role_info, role_detail_info_map)
+        await save_matrix_to_group_rank(user_id, uid, account_info.name, matrix_data, role_info, role_detail_info_map)
 
     # 裁剪画布到实际使用的高度，并添加页脚
     final_height = max(y_offset, 1440)
@@ -455,8 +558,12 @@ async def save_matrix_to_group_rank(
             logger.info("[矩阵本地保存] 跳过: 奇点扩张无队伍数据")
             return False
 
-        # 2. 找到分数最高的队伍
-        highest_team = max(singularity_mode.teams, key=lambda t: t.score)
+        # 2. 找到分数最高的队伍 (过滤空队伍: None 或无角色图标)
+        valid_teams = [t for t in singularity_mode.teams if t is not None and t.roleIcons]
+        if not valid_teams:
+            logger.info("[矩阵本地保存] 跳过: 无有效队伍")
+            return False
+        highest_team = max(valid_teams, key=lambda t: t.score)
 
         # 3. 通过角色图标匹配角色并获取链度（与绘制卡片逻辑一致）
         if not highest_team.roleIcons:
@@ -505,7 +612,7 @@ async def save_matrix_to_group_rank(
             name=name,
             version=current_version,
             total_score=singularity_mode.score,
-            team_count=len(singularity_mode.teams),
+            team_count=len(valid_teams),
             team_score=highest_team.score,
             buff_icon=buff_icon,
             char_scores=char_scores,
@@ -558,8 +665,12 @@ async def upload_matrix_record(
         logger.info("[矩阵数据上传] 跳过上传: 奇点扩张无队伍数据")
         return
 
-    # 找到分数最高的队伍
-    highest_team = max(singularity_mode.teams, key=lambda t: t.score)
+    # 找到分数最高的队伍 (过滤空队伍)
+    valid_teams = [t for t in singularity_mode.teams if t is not None and t.roleIcons]
+    if not valid_teams:
+        logger.info("[矩阵数据上传] 跳过上传: 无有效队伍")
+        return
+    highest_team = max(valid_teams, key=lambda t: t.score)
 
     # 从roleIcons匹配角色（与绘制卡片逻辑一致）
     if not highest_team.roleIcons:

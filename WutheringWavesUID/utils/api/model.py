@@ -788,7 +788,7 @@ class MatrixModeDetail(BaseModel):
     rank: int
     round: int | None = 0
     score: int
-    teams: list[MatrixTeam] = []
+    teams: list[MatrixTeam | None] = []
 
 
 class MatrixData(BaseModel):

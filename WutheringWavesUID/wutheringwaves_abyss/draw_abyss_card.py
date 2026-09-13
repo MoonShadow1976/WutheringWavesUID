@@ -33,6 +33,8 @@ from ..utils.queues.const import QUEUE_ABYSS_RECORD
 from ..utils.queues.queues import push_item
 from ..utils.util import get_version
 from ..utils.waves_api import waves_api
+from ..wutheringwaves_analyzeabyss.abyss_data_utils import get_abyss_detail_local
+from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
 from ..wutheringwaves_config import PREFIX
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
@@ -70,8 +72,6 @@ async def get_abyss_data(uid: str, ck: str, is_self_ck: bool):
 async def draw_abyss_img(ev: Event, uid: str, user_id: str, abyss_data: AbyssChallenge | None = None) -> bytes | str:
     from_local = False
     if abyss_data is not None:
-        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
-
         account_info = await get_user_detail_info(uid)
         role_ids = {
             r.roleId
@@ -108,9 +108,6 @@ async def draw_abyss_img(ev: Event, uid: str, user_id: str, abyss_data: AbyssCha
         from_local = True
     else:
         # 尝试 CK 获取，失败则回退本地
-        from ..wutheringwaves_analyzeabyss.abyss_data_utils import get_abyss_detail_local
-        from ..wutheringwaves_analyzecard.user_info_utils import get_user_detail_info
-
         async def _try_ck():
             ck_res = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
             is_self_ck, ck = ck_res

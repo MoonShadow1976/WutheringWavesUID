@@ -10,7 +10,8 @@ from gsuid_core.bot import Bot
 from gsuid_core.logger import logger
 from PIL import Image
 
-from ..wutheringwaves_abyss.draw_abyss_card import draw_abyss_img
+from ..wutheringwaves_analyzecard.ocrspace import ocrspace
+from ..wutheringwaves_analyzecard.ScoreQuery import can_score_query_card, set_cache_score_query_card
 from .abyss_data_utils import build_abyss_detail_model, save_abyss_detail
 from .slash_processor import _parse_uid
 from .toa_match import ToaMatchResult, init, read_toa_image
@@ -48,6 +49,18 @@ def _make_summary(r: ToaRecognizeResult) -> list[str]:
 
 
 async def run_toa_recognize(bot: Bot, ev, src: Image.Image, uid: str, user_id: str) -> bytes | str:
+    # 时限: 防止同一用户重复触发 OCR
+    wait = can_score_query_card(user_id)
+    if wait > 0:
+        return f"[鸣潮]深塔识别进行中，请等待{wait}秒后再试。\n"
+    set_cache_score_query_card(user_id, True)
+    try:
+        return await _run_toa_recognize(bot, ev, src, uid, user_id)
+    finally:
+        set_cache_score_query_card(user_id, False)
+
+
+async def _run_toa_recognize(bot, ev, src, uid, user_id) -> bytes | str:
     try:
         init()
     except Exception as e:
@@ -63,14 +76,7 @@ async def run_toa_recognize(bot: Bot, ev, src: Image.Image, uid: str, user_id: s
         return "[鸣潮]未能识别到任何角色，请确认深塔分享图完整清晰。\n"
 
     # OCR 提取 UID
-    try:
-        from ..wutheringwaves_analyzecard.ocrspace import ocrspace
-
-        can_ocr = True
-    except Exception:
-        can_ocr = False
-
-    if can_ocr and match_result.uid_roi is not None:
+    if match_result.uid_roi is not None:
         try:
             ocr_ret = await ocrspace([match_result.uid_roi], bot, True, language="eng", isTable=False)
             if isinstance(ocr_ret, (list, tuple)) and ocr_ret:
@@ -95,5 +101,7 @@ async def run_toa_recognize(bot: Bot, ev, src: Image.Image, uid: str, user_id: s
 
     r.summary_lines = _make_summary(r)
     logger.info("[鸣潮][深塔] " + "\n".join(r.summary_lines))
+
+    from ..wutheringwaves_abyss.draw_abyss_card import draw_abyss_img
 
     return await draw_abyss_img(ev, str(uid), user_id, abyss_data=abyss_data)

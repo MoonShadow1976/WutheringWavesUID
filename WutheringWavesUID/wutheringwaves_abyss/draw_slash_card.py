@@ -14,6 +14,7 @@ from ..utils.api.wwapi import SlashDetailRequest
 from ..utils.ascension.char import get_char_model
 from ..utils.char_info_utils import get_role_detail_info_with_refresh
 from ..utils.database.models import WavesBind
+from ..utils.error_reply import WAVES_CODE_102
 from ..utils.fonts.waves_fonts import (
     waves_font_18,
     waves_font_25,
@@ -22,8 +23,6 @@ from ..utils.fonts.waves_fonts import (
     waves_font_40,
     waves_font_42,
 )
-
-from ..utils.error_reply import WAVES_CODE_102
 from ..utils.hint import error_reply
 from ..utils.image import (
     GOLD,

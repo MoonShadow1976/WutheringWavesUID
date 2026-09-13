@@ -14,7 +14,7 @@ from ...damage.utils import (
     liberation_damage,
     skill_damage_calc,
 )
-from .buff import chisa_buff, lucilla_buff, lynae_buff
+from .buff import chisa_buff, lucilla_buff, lynae_buff, suisui_buff
 from .damage import echo_damage, phase_damage, weapon_damage
 
 
@@ -332,7 +332,7 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
 
 
 def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
-    """0+1千咲/0+1琳奈/归刃伤害"""
+    """0+1千咲/0+1洛瑟菈/归刃伤害"""
     attr.set_char_damage(liberation_damage)
     attr.set_char_template("temp_atk")
 
@@ -342,6 +342,24 @@ def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
 
     # 千咲buff
     chisa_buff(attr, 0, 1, isGroup)
+
+    # 洛瑟菈buff
+    lucilla_buff(attr, 0, 1, isGroup)
+
+    return calc_damage_3(attr, role, isGroup, r="r2", p_num=1)
+
+
+def calc_damage_12(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+    """0+1穗穗/0+1洛瑟菈/归刃伤害"""
+    attr.set_char_damage(liberation_damage)
+    attr.set_char_template("temp_atk")
+
+    title = "常态"
+    msg = "特定攻击为命中目标附加【霜渐效应】"
+    attr.set_env_glacio_chafe()
+
+    # 穗穗buff
+    suisui_buff(attr, 0, 1, isGroup)
 
     # 洛瑟菈buff
     lucilla_buff(attr, 0, 1, isGroup)
@@ -381,6 +399,10 @@ damage_detail = [
     {
         "title": "01咲/01洛/·归刃(一锻雪)",
         "func": lambda attr, role: calc_damage_11(attr, role),
+    },
+    {
+        "title": "01穗/01洛/·归刃(三锻雪)",
+        "func": lambda attr, role: calc_damage_12(attr, role),
     },
 ]
 

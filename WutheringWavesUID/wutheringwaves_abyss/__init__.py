@@ -183,8 +183,6 @@ async def send_waves_matrix_info(bot: Bot, ev: Event):
     uid = await WavesBind.get_uid_by_game(user_id, ev.bot_id)
     if not uid:
         return await bot.send(error_reply(WAVES_CODE_103))
-    if waves_api.is_net(uid):
-        return await bot.send(error_reply(WAVES_CODE_098))
 
     im = await draw_matrix_img(ev, uid, user_id)
     return await bot.send(im)

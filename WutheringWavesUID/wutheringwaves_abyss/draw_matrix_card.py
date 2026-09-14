@@ -358,12 +358,10 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
             best_N = 1
             best_factor = 0.0
             for N in range(1, team_count + 1):
-                # 水平最小宽度
-                min_width = N * base_width + (N - 1) * card_h_gap
-                if min_width > content_width:
-                    continue
                 # 水平方向最大宽度（填满）
                 max_width_by_width = (content_width - (N - 1) * card_h_gap) / N
+                if max_width_by_width <= 0:
+                    continue
                 # 所需行数
                 rows = (team_count + N - 1) // N
                 # 垂直方向允许的最大高度
@@ -372,7 +370,9 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
                 # 实际宽度取较小值，得到缩放因子
                 actual_width = min(max_width_by_width, max_width_by_height)
                 factor = actual_width / base_width
-                if factor > best_factor:
+
+                # 优先选能放更多列的 N；如果缩放因子相同，也选更大的 N
+                if factor > best_factor or (abs(factor - best_factor) < 1e-6 and N > best_N):
                     best_factor = factor
                     best_N = N
 
@@ -401,11 +401,17 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
             rows = (team_count + best_N - 1) // best_N
             total_teams_height = rows * card_height + (rows - 1) * card_v_gap
             row_y = y_offset
+            # 均匀分配每行队伍数，行数不变
+            row_counts = [team_count // rows + (1 if i < team_count % rows else 0) for i in range(rows)]
+            row_of, col_of = [], []
+            for r, c in enumerate(row_counts):
+                row_of += [r] * c
+                col_of += list(range(c))
 
             # 遍历队伍，构建每个队伍的完整卡片（标题区+角色卡）
             for idx, team in enumerate(mode.teams):
-                col = idx % best_N
-                row = idx // best_N
+                row = row_of[idx]
+                col = col_of[idx]
                 x = 30 + col * (card_width + card_h_gap)
                 y = row_y + row * (card_height + card_v_gap)
 

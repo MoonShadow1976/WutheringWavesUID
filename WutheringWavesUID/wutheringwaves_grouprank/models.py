@@ -126,8 +126,15 @@ class GroupRankRecord(SQLModel, table=True):
             existing_record.name = data.get("name", "")
             existing_record.score = int(data.get("score", 0))
             existing_record.rank_level = data.get("rank", "")
-            # 删除旧的队伍信息以便重新创建
-            await session.execute(delete(GroupRankTeam).where(GroupRankTeam.record_id == existing_record.id))
+            # 先删旧角色（显式删除，避免依赖 ORM 级联）
+            team_ids_subq = select(GroupRankTeam.id).where(GroupRankTeam.record_id == existing_record.id)
+            await session.execute(
+                delete(GroupRankRole).where(GroupRankRole.team_id.in_(team_ids_subq))
+            )
+            # 再删旧队伍
+            await session.execute(
+                delete(GroupRankTeam).where(GroupRankTeam.record_id == existing_record.id)
+            )
             record = existing_record
         else:
             # 如果记录不存在，则创建新记录
@@ -443,8 +450,15 @@ class GroupRankRecord(SQLModel, table=True):
             existing.score = total_score
             existing.team_count = team_count
             existing.team_score = team_score
-            # 删除旧的队伍和角色（因为角色通过队伍级联删除）
-            await session.execute(delete(GroupRankTeam).where(GroupRankTeam.record_id == existing.id))
+            # 先删旧角色（显式删除，避免依赖 ORM 级联）
+            team_ids_subq = select(GroupRankTeam.id).where(GroupRankTeam.record_id == existing.id)
+            await session.execute(
+                delete(GroupRankRole).where(GroupRankRole.team_id.in_(team_ids_subq))
+            )
+            # 再删旧队伍
+            await session.execute(
+                delete(GroupRankTeam).where(GroupRankTeam.record_id == existing.id)
+            )
             record = existing
         else:
             record = cls(

@@ -620,7 +620,7 @@ async def save_matrix_to_group_rank(
 
         logger.info(
             f"[矩阵本地保存] 成功 user_id={user_id}, waves_id={waves_id}, "
-            f"version={current_version}, total_score={singularity_mode.score}"
+            f"version={current_version}, total_score={singularity_mode.score}，char_scores={char_scores}"
         )
 
         # 清理旧版本数据（仅保留最近两个版本）

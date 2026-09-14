@@ -22,8 +22,7 @@ from .abyss_data_utils import (
     save_matrix_detail,
 )
 from .matrix_match import init as matrix_init
-from .matrix_match import match_team_number
-from .matrix_match import read_matrix_image
+from .matrix_match import match_team_number, read_matrix_image
 from .slash_processor import _parse_uid
 
 # 文件名 -> roleId

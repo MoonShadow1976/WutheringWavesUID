@@ -102,7 +102,7 @@ def get_valid_blocks(img, min_pixel_size=5000):
     for i, iblock in enumerate(blocks):
         if used[i] == True:
             continue
-        x0, y0, x1, y1 = iblock['bbox'][0], iblock['bbox'][1], iblock['bbox'][2], iblock['bbox'][3]
+        x0, y0, x1, y1 = iblock["bbox"][0], iblock["bbox"][1], iblock["bbox"][2], iblock["bbox"][3]
         used[i] = True
         res_curr = iblock
         heights.append(y1 - y0)
@@ -110,11 +110,11 @@ def get_valid_blocks(img, min_pixel_size=5000):
         for j, jblock in enumerate(blocks):
             if used[j] == True:
                 continue
-            xx0, yy0, xx1, yy1 = jblock['bbox'][0], jblock['bbox'][1], jblock['bbox'][2], jblock['bbox'][3]
+            xx0, yy0, xx1, yy1 = jblock["bbox"][0], jblock["bbox"][1], jblock["bbox"][2], jblock["bbox"][3]
             if abs(y0 - yy0) <= 3 and abs(y1 - yy1) <= 3 and (abs(x1 - xx0) <= 5 or x1 > xx0):
-                res_curr['pixel_count'] = res_curr['pixel_count'] + jblock['pixel_count']
-                res_curr['bbox'] = (min(x0, xx0), y0, max(x1, xx1), y1)
-                x0, y0, x1, y1 = res_curr['bbox'][0], res_curr['bbox'][1], res_curr['bbox'][2], res_curr['bbox'][3]
+                res_curr["pixel_count"] = res_curr["pixel_count"] + jblock["pixel_count"]
+                res_curr["bbox"] = (min(x0, xx0), y0, max(x1, xx1), y1)
+                x0, y0, x1, y1 = res_curr["bbox"][0], res_curr["bbox"][1], res_curr["bbox"][2], res_curr["bbox"][3]
                 used[j] = True
 
         res.append(res_curr)
@@ -127,14 +127,23 @@ def get_valid_blocks(img, min_pixel_size=5000):
             count = count + 1
     if count == 1:
         most_common_height = int(np.median(heights) + 0.5)
-    
+
     for i, height in enumerate(heights):
         if height < most_common_height and most_common_height - height >= 2:
-            if res[i]['bbox'][1] < img.size[1] // 2:
-                res[i]['bbox'] = [res[i]['bbox'][0], max(0, res[i]['bbox'][1] - most_common_height + height), res[i]['bbox'][2], res[i]['bbox'][3]]
+            if res[i]["bbox"][1] < img.size[1] // 2:
+                res[i]["bbox"] = [
+                    res[i]["bbox"][0],
+                    max(0, res[i]["bbox"][1] - most_common_height + height),
+                    res[i]["bbox"][2],
+                    res[i]["bbox"][3],
+                ]
             else:
-                res[i]['bbox'] = [res[i]['bbox'][0],res[i]['bbox'][1], res[i]['bbox'][2], min(img.size[1], res[i]['bbox'][3] + most_common_height - height)]
-                
+                res[i]["bbox"] = [
+                    res[i]["bbox"][0],
+                    res[i]["bbox"][1],
+                    res[i]["bbox"][2],
+                    min(img.size[1], res[i]["bbox"][3] + most_common_height - height),
+                ]
 
     return res
 

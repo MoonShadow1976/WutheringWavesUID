@@ -24,7 +24,13 @@ from ..utils.damage.buff import (
     is_registered,
     state_spec,
 )
-from ..utils.name_convert import alias_to_char_name, char_name_to_char_id, weapon_name_to_weapon_id,alias_to_echo_name,      alias_to_sonata_name
+from ..utils.name_convert import (
+    alias_to_char_name,
+    alias_to_echo_name,
+    alias_to_sonata_name,
+    char_name_to_char_id,
+    weapon_name_to_weapon_id,
+)
 
 TEAM_PREFIX = "换队友"
 
@@ -229,9 +235,7 @@ def _parse_options(options_text: str | None, role_id: int):
                 if not value.isdigit():
                     value = weapon_name_to_weapon_id(value)
                     if value is None:
-                        raise TeamParseError(
-                            f"找不到武器【{value}】，请填武器名或武器 ID，或填 开/关"
-                        )
+                        raise TeamParseError(f"找不到武器【{value}】，请填武器名或武器 ID，或填 开/关")
                 fields["weapon_id"] = value
                 fields["weapon"] = True
         elif target in ("sonata", "echo"):

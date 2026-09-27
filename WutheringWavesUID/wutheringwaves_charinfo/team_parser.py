@@ -24,7 +24,7 @@ from ..utils.damage.buff import (
     is_registered,
     state_spec,
 )
-from ..utils.name_convert import alias_to_char_name, char_name_to_char_id
+from ..utils.name_convert import alias_to_char_name, char_name_to_char_id, weapon_name_to_weapon_id,alias_to_echo_name,      alias_to_sonata_name
 
 TEAM_PREFIX = "换队友"
 
@@ -226,10 +226,16 @@ def _parse_options(options_text: str | None, role_id: int):
             elif folded in OFF_WORDS:
                 fields["weapon"] = False
             else:
-                fields["weapon"] = True
+                if not value.isdigit():
+                    value = weapon_name_to_weapon_id(value)
+                    if value is None:
+                        raise TeamParseError(
+                            f"找不到武器【{value}】，请填武器名或武器 ID，或填 开/关"
+                        )
                 fields["weapon_id"] = value
+                fields["weapon"] = True
         elif target in ("sonata", "echo"):
-            fields[target] = _parse_equip_choice(value)
+            fields[target] = _parse_equip_choice(value, target)
         else:
             states[target] = _parse_state(role_id, target, key, value)
         rows.append((key, value))
@@ -239,13 +245,21 @@ def _parse_options(options_text: str | None, role_id: int):
     return fields, rows
 
 
-def _parse_equip_choice(value: str) -> str:
-    """合鸣/声骸：默认、关，或者直接写要替换的套装/声骸名（名字合法性交给 validate_team）。"""
+def _parse_equip_choice(value: str, kind: str) -> str:
+    """合鸣/声骸：默认、关，或者写预设名（支持别名）。
+
+    别名解析出来的是**规范预设名**（对应 PRESETS 里的 key），
+    认不出来就原样传给 validate_team，让那边报「不在可用列表里」。
+    """
     folded = value.casefold()
     if folded in DEFAULT_WORDS:
         return "default"
     if folded in OFF_WORDS:
         return "none"
+    if kind == "sonata":
+        return alias_to_sonata_name(value) or value
+    if kind == "echo":
+        return alias_to_echo_name(value) or value
     return value
 
 

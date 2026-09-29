@@ -183,6 +183,16 @@ def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     return calc_damage_1(attr, role, isGroup)
 
 
+def calc_damage_6(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
+    # 设置角色伤害类型
+    # 设置角色模板  "temp_atk", "temp_life", "temp_def"
+
+    # 01守岸人/01心
+    attr.set_teammate((1505, 0, 1), (1311, 0, 1))
+
+    return calc_damage_1(attr, role, isGroup)
+
+
 damage_detail = [
     {"title": "惊龙破空·炳星", "func": lambda attr, role: calc_damage_1(attr, role)},
     {
@@ -196,6 +206,10 @@ damage_detail = [
     {
         "title": "0+1守/0折枝/惊龙破空·炳星",
         "func": lambda attr, role: calc_damage_4(attr, role),
+    },
+    {
+        "title": "01守/01心/惊龙破空·炳星",
+        "func": lambda attr, role: calc_damage_6(attr, role),
     },
     {
         "title": "6+5守/6灯灯/惊龙破空·炳星",

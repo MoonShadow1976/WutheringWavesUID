@@ -1,0 +1,44 @@
+[
+  {
+    "choose": "calc-6链.json",
+    "key": "chain",
+    "op": "=",
+    "value": 6
+  },
+  {
+    "choose": "calc-4-5链.json",
+    "key": "chain",
+    "op": "=",
+    "value": 5
+  },
+  {
+    "choose": "calc-4-5链.json",
+    "key": "chain",
+    "op": "=",
+    "value": 4
+  },
+  {
+    "choose": "calc-3链.json",
+    "key": "chain",
+    "op": "=",
+    "value": 3
+  },
+  {
+    "choose": "calc.json",
+    "key": "chain",
+    "op": "=",
+    "value": 2
+  },
+  {
+    "choose": "calc.json",
+    "key": "chain",
+    "op": "=",
+    "value": 1
+  },
+  {
+    "choose": "calc.json",
+    "key": "chain",
+    "op": "=",
+    "value": 0
+  }
+]

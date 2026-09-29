@@ -1221,6 +1221,28 @@ class Echo_6000220(EchoAbstract):
     name = "巡霄枪卫"
 
 
+class Echo_6000222(EchoAbstract):
+    id = 6000222
+    name = "奇绽傀"
+
+
+class Echo_6000223(EchoAbstract):
+    id = 6000223
+    name = "解形煞"
+
+    # 在首位装配该声骸技能时，自身共鸣效率提升10.00%
+    def do_equipment_first(self, role_id: int):
+        """首位装备"""
+        return {"共鸣效率": "10%"}
+
+
+class Echo_6000224(EchoAbstract):
+    id = 6000224
+    name = "绝息魄"
+
+    # 三段落雷伤害自身不入条目；延奏后下一位角色导电加成提升属于队友buff，未计自身。
+
+
 class Echo_6000221(EchoAbstract):
     id = 6000221
     name = "天傀劫煞"

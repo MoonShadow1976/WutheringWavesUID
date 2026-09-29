@@ -25,6 +25,7 @@ from ...damage.utils import (
     SONATA_HARMONY,
     SONATA_LINGERING,
     SONATA_MIDNIGHT,
+    SONATA_MIRROR_LIGHTNING,
     SONATA_MOLTEN,
     SONATA_MOONLIT,
     SONATA_NETHER_ROAD,
@@ -37,6 +38,7 @@ from ...damage.utils import (
     SONATA_SIERRA,
     SONATA_SINKING,
     SONATA_SNOWFALL,
+    SONATA_SORROW_BLOOM,
     SONATA_SPAGYRIC,
     SONATA_TIDEBREAKING,
     SONATA_TRAILBLAZE,
@@ -47,6 +49,7 @@ from ...damage.utils import (
     Spectro_Frazzle_Role_Ids,
     attack_damage,
     cast_attack,
+    cast_healing,
     cast_hit,
     cast_liberation,
     cast_skill,
@@ -497,6 +500,18 @@ def phase_damage(
                 msg = "添加【集谐·偏移】，气动伤害提升30%"
                 attr.add_dmg_bonus(0.3, title, msg)
 
+        # 冥途夜行之灯
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_NETHER_ROAD):
+            # 角色获得护盾时，自身暴击提升5%，该效果可叠加4层，持续5秒，每0.5秒可触发一次。叠至满层时，自身造成的热熔伤害提升15%。
+            if not attr.trigger_shield:
+                return
+            title = f"{phase_name}-{ph_detail.ph_name}"
+            msg = "添加4层【护盾】，自身暴击提升5%*4"
+            attr.add_crit_rate(0.2, title, msg)
+            if attr.char_attr == CHAR_ATTR_MOLTEN:
+                msg = "添加4层【护盾】，自身造成的热熔伤害提升15%"
+                attr.add_dmg_bonus(0.15, title, msg)
+
         # 衔梦照世之心：二件套常驻属性由面板处理，这里只计五件套条件增益。
         elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_DREAMHEART):
             if not (
@@ -512,14 +527,20 @@ def phase_damage(
             if attr.char_attr == CHAR_ATTR_VOID:
                 attr.add_dmg_bonus(0.225, title, "附加电磁效应或获得/响应同奏后30秒内，导电伤害提升22.5%")
 
-        # 冥途夜行之灯
-        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_NETHER_ROAD):
-            # 角色获得护盾时，自身暴击提升5%，该效果可叠加4层，持续5秒，每0.5秒可触发一次。叠至满层时，自身造成的热熔伤害提升15%。
-            if not attr.trigger_shield:
-                return
-            title = f"{phase_name}-{ph_detail.ph_name}"
-            msg = "添加4层【护盾】，自身暴击提升5%*4"
-            attr.add_crit_rate(0.2, title, msg)
-            if attr.char_attr == CHAR_ATTR_MOLTEN:
-                msg = "添加4层【护盾】，自身造成的热熔伤害提升15%"
-                attr.add_dmg_bonus(0.15, title, msg)
+        # 镜影流电之瞬：二件套常驻属性由面板处理，延奏给下一位角色的加成属于队友buff。
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_MIRROR_LIGHTNING):
+            # 角色为敌人添加【电磁效应】时，自身导电伤害提升10%，持续15秒。
+            if attr.env_electro_flare and attr.char_attr == CHAR_ATTR_VOID:
+                title = f"{phase_name}-{ph_detail.ph_name}"
+                msg = "添加【电磁效应】后自身导电伤害提升10%"
+                attr.add_dmg_bonus(0.1, title, msg)
+
+        # 茜染怀想之花：二件套治疗加成由面板处理，五件套在提供治疗时给全队攻击加成。
+        elif check_if_ph_5(ph_detail.ph_name, ph_detail.ph_num, SONATA_SORROW_BLOOM):
+            if cast_healing in (damage_func if isinstance(damage_func, list) else [damage_func]):
+                title = f"{phase_name}-{ph_detail.ph_name}"
+                msg = "为队伍提供治疗后队伍中角色攻击提升10%"
+                attr.add_atk_percent(0.1, title, msg)
+                if attr.env_unison or attr.env_unison_response:
+                    msg = "获得/响应同奏后攻击额外提升15%"
+                    attr.add_atk_percent(0.15, title, msg)

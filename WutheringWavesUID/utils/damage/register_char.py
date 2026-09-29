@@ -1,5 +1,5 @@
 from ...utils.damage.abstract import CharAbstract, WavesCharRegister, WavesWeaponRegister
-from .damage import DamageAttribute
+from .damage import DamageAttribute, check_char_id
 from .utils import (
     CHAR_ATTR_CELESTIAL,
     CHAR_ATTR_FREEZING,
@@ -762,6 +762,123 @@ class Char_1310(CharAbstract):
         title = "雷主-延奏技能"
         msg = "持有电髓的角色附加异常效应时，全伤害加深25%"
         attr.add_dmg_deepen(0.25, title, msg)
+
+
+class Char_1311(CharAbstract):
+    id = 1311
+    teammate_equip = {
+        "sonata": "衔梦照世之心",
+        "echo": "天演溯心",
+    }
+    name = "心"
+    starLevel = 5
+    teammate_states = {
+        "模态": {
+            "type": "enum",
+            "choices": ["同奏", "电磁"],
+            "default": "同奏",
+            "desc": "共鸣模态：同奏给全队最终伤害与全属性加成，电磁给导电加深",
+        },
+    }
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        """获得buff"""
+        states = states or {}
+        mode = states.get("模态", "同奏")
+
+        # 延奏技能:同奏模态给持有【灯同辉】的角色全伤害加深20%;电磁模态给队伍中除心之外的角色导电伤害加深20%
+        title = f"{self.name}-延奏技能"
+        if mode == "电磁":
+            if attr.char_attr == CHAR_ATTR_VOID:
+                msg = "电磁模态:队伍中角色导电伤害加深20%,持续20秒"
+                attr.add_dmg_deepen(0.2, title, msg)
+        else:
+            msg = "同奏模态:持有【灯同辉】的角色全伤害加深20%"
+            attr.add_dmg_deepen(0.2, title, msg)
+
+        # 共鸣回路-响应同奏:队伍中的角色获得同奏增益
+        # 基础1层+固有技能-信步拾清欢(四破)1层+六链1层,每层最终伤害提升3%,持续30秒
+        if mode != "电磁":
+            stack = 2 + (1 if chain >= 6 else 0)
+            title = f"{self.name}-响应同奏"
+            msg = f"队伍获得{stack}层同奏增益,每层最终伤害提升3%"
+            attr.add_final_damage(0.03 * stack, title, msg)
+
+        # 四链:队伍中所有角色全属性伤害加成提升20%,持续30秒
+        if chain >= 4:
+            title = f"{self.name}-四链"
+            msg = "队伍中所有角色全属性伤害加成提升20%,持续30秒"
+            attr.add_dmg_bonus(0.2, title, msg)
+
+        # 固有技能-循流引兴替(电磁模态):同编队有漂泊者·导电时,心和漂泊者·导电导电伤害加成提升30%
+        if mode == "电磁" and (check_char_id(attr, [1309, 1310]) or not {1309, 1310}.isdisjoint(attr.teammate_char_ids or ())):
+            title = "固有技能-循流引兴替"
+            msg = "与漂泊者·导电同队,导电伤害加成提升30%,持续30秒"
+            attr.add_dmg_bonus(0.3, title, msg)
+
+
+class Char_1312(CharAbstract):
+    id = 1312
+    teammate_equip = {
+        "sonata": "镜影流电之瞬",
+        "echo": "绝息魄",
+    }
+    name = "锁暝"
+    starLevel = 5
+    teammate_states = {
+        "协契": {
+            "type": "bool",
+            "default": True,
+            "desc": "协契是否生效（延奏给下一位角色的导电与暴击伤害加成）",
+        },
+    }
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        """获得buff"""
+        states = states or {}
+        # 同奏增益:响应同奏1层+三链普通变奏1层(六链再+1层),每层最终伤害提升3%,锁暝六链提升至4.5%
+        stack = 2 + (1 if chain >= 6 else 0)
+        per = 0.045 if chain >= 6 else 0.03
+        title = f"{self.name}-同奏增益"
+        msg = f"队伍获得{stack}层同奏增益,每层最终伤害提升{per * 100:.1f}%"
+        attr.add_final_damage(stack * per, title, msg)
+
+        # 延奏技能:下一位登场角色导电伤害加深20%;拥有同奏增益时共鸣技能伤害加深25%,持续8秒
+        title = f"{self.name}-延奏技能"
+        if attr.char_attr == CHAR_ATTR_VOID:
+            msg = "下一位登场角色导电伤害加深20%,持续8秒"
+            attr.add_dmg_deepen(0.2, title, msg)
+        if skill_damage == attr.char_damage:
+            msg = "拥有同奏增益时下一位角色共鸣技能伤害加深25%"
+            attr.add_dmg_deepen(0.25, title, msg)
+
+        if states.get("协契", True) and attr.char_attr == CHAR_ATTR_VOID:
+            # 固有技能-沉契凝锁(四破):协契期间延奏,下一位角色导电伤害加成提升30%,每层同奏增益额外20%,最多40%
+            title = "固有技能-沉契凝锁"
+            extra = min(0.2 * stack, 0.4)
+            msg = f"协契延奏:下一位角色导电伤害加成提升30%,同奏增益额外{extra * 100:.0f}%"
+            attr.add_dmg_bonus(0.3 + extra, title, msg)
+
+        # 二链:延奏时下一位登场角色暴击伤害提升10%,每层同奏增益额外6%,最多24%,持续30秒
+        if chain >= 2:
+            title = f"{self.name}-二链"
+            extra = min(0.06 * stack, 0.24)
+            msg = f"延奏:下一位角色暴击伤害提升10%,同奏增益额外{extra * 100:.0f}%"
+            attr.add_crit_dmg(0.1 + extra, title, msg)
 
 
 class Char_1402(CharAbstract):

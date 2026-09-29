@@ -12479,6 +12479,872 @@
   {
     "chainList": [
       {
+        "description": "施放<color=Highlight>共鸣解放·转相</color>时，心获得2层<color=Highlight>敛华障</color>，可叠加2层，转变为<color=Highlight>应世相</color>时移除全部层数。心受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>敛华障</color>，使自身免疫打断且受到的伤害降低60%，持续1秒，该效果每1秒可触发1次。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率提升15%。且每有1层<color=Highlight>【同奏增益】</color>，使<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率额外提升10%，至多叠加4层。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n心进入战斗状态时，若<color=Highlight>霆心域</color>层数不足50层，则增加至50层，每12秒可触发一次。\n<color=Highlight>共鸣回路·共鸣技能·踏月归心</color>触发<color=Highlight>【电磁效应】</color>伤害的倍率系数提升至42%。",
+        "iconUrl": "",
+        "name": "授以舟楫渡潮生",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>重击·应世相·步红尘</color>和<color=Highlight>重击·应世相·镇红尘</color>的伤害倍率提升60%。\n<color=Highlight>重击·照世相·临寰宇</color>和<color=Highlight>重击·照世相·镇寰宇</color>的伤害倍率提升60%。\n\n心进入战斗状态时，重置心获得<color=Highlight>了尘愿</color>和<color=Highlight>承天则</color>的冷却时间，并额外回复100点<color=Highlight>【应世心】</color>，上述效果每12秒可触发一次。",
+        "iconUrl": "",
+        "name": "一念初醒问此身",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣解放·万阙垂天</color>的伤害倍率提升70%。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n<color=Highlight>共鸣解放·万阙垂天</color>的暴击伤害提升20%。且每有1层<color=Highlight>【同奏增益】</color>额外使其暴击伤害提升15%，至多叠加4层。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n<color=Highlight>共鸣解放·万阙垂天</color>最后一段命中具有<color=Highlight>【电磁效应】</color>的目标时，主动触发一次<color=Highlight>【电磁效应】</color>伤害，伤害倍率为1500%*目标当前<color=Highlight>【电磁效应】</color>的层数对应的<color=Highlight>【电磁效应】</color>伤害倍率。",
+        "iconUrl": "",
+        "name": "溪山深处留归梦",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "队伍中的角色为目标附加<color=Highlight>【电磁效应】</color>、<color=Highlight>【电磁爆发】</color>后，或队伍中的角色获得<color=Highlight>同奏</color>、<color=Highlight>响应同奏</color>时，使队伍中所有角色全属性伤害加成提升20%，持续30秒。",
+        "iconUrl": "",
+        "name": "浮灯照水藏微愿",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "处于<color=Highlight>照世相</color>时，心受到的伤害降低20%。\n心受到致命伤害时，此次伤害不会使心倒下，并回复心100%生命上限的生命值，同时免疫伤害和打断，持续1秒。该效果每10分钟可触发1次。",
+        "iconUrl": "",
+        "name": "诸相流转由心定",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "目标受到心的共鸣技能伤害提升40%。\n\n心造成的共鸣技能伤害无视目标20%防御。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n队伍中的角色<color=Highlight>【同奏增益】</color>效果的层数上限增加1层。队伍中的角色<color=Highlight>响应同奏</color>时，队伍中的角色获得1层<color=Highlight>【同奏增益】</color>，持续30秒，该效果无法叠加。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n处于战斗状态时，心附近一定范围内的目标受到<color=Highlight>【电磁效应】</color>的伤害可暴击，暴击固定为80%，暴击伤害固定为230%。",
+        "iconUrl": "",
+        "name": "不教朝月负今人",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "天演溯心",
+            "phantomId": 6000225,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "导电伤害加成",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "绝息魄",
+            "phantomId": 6000224,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "解形煞",
+            "phantomId": 6000223,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "玉冥蛇",
+            "phantomId": 6000219,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "共鸣技能伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "奇绽傀",
+            "phantomId": 6000222,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 3,
+      "attributeName": "导电",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1311,
+      "roleName": "心",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 5,
+      "weaponTypeName": "音感仪",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻·应世相</color>\n处于<color=Highlight>应世相</color>时，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·应世相</color>\n处于<color=Highlight>应世相</color>时，消耗耐力，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>空中攻击·应世相</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，短按<color=Highlight>普攻</color>施放，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>重击·应世相·闲中御</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，按住<color=Highlight>普攻</color>将施放<color=Highlight>重击·应世相·闲中御</color>，持续消耗耐力并对目标造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·应世相·闲中御</color>\n施放<color=Highlight>重击·应世相·闲中御</color>期间抬起<color=Highlight>普攻</color>，将施放<color=Highlight>空中攻击·应世相·闲中御</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>空中攻击·应世相·闲中御</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>闪避反击·应世相</color>\n处于<color=Highlight>应世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第3段</color>。\n\n<color=Title>普攻·照世相</color>\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·照世相第1段</color>时，将在目标位置生成<color=Highlight>活字心锁</color>。施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间将令<color=Highlight>活字心锁</color>崩解，造成<color=Thunder>导电伤害</color>。\n心在空中状态时，施放该技能将消耗耐力。\n\n<color=Title>重击·照世相</color>\n处于<color=Highlight>照世相</color>时，消耗耐力，御使玄方机巧造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>上挑攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，处于地面状态时，短按<color=Highlight>跳跃</color>可施放该技能，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，心在空中状态时，<color=Highlight>共鸣技能·照世相</color>将替换为<color=Highlight>空中攻击·照世相</color>。\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相</color>\n处于<color=Highlight>照世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>普攻·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相·万阙连衡第3段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "万相生华",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·应世相</color>\n处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣技能</color>，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第4段</color>。\n可在空中施放。\n\n施放该技能一定时间内，若心处于地面状态进行移动，则将化作<color=Highlight>心狐</color>。\n·化作<color=Highlight>心狐</color>时，若心处于非战斗状态下，获得<color=Highlight>不惊尘</color>。拥有<color=Highlight>不惊尘</color>时，心进入目标的警戒范围将不会进入战斗状态。心进入战斗、切换至其他角色时，或心进行场景、玩法、功能交互退出<color=Highlight>心狐</color>形态时，将强制移除<color=Highlight>不惊尘</color>。\n·化作<color=Highlight>心狐</color>期间，若心处于非战斗状态下，每3秒回复生命上限6%的生命值。\n·化作<color=Highlight>心狐</color>期间，心受到伤害时、处于地面状态下若未按下方向键进行<color=Highlight>闪避</color>时、处于空中状态下进行<color=Highlight>闪避</color>时将退出<color=Highlight>心狐</color>形态。切换至其他角色或短按<color=Highlight>共鸣技能</color>也会退出<color=Highlight>心狐</color>形态。短按<color=Highlight>普攻</color>则会退出<color=Highlight>心狐</color>形态并施放<color=Highlight>普攻·应世相第4段</color>。\n·化作<color=Highlight>心狐</color>期间，心无法施放<color=Highlight>共鸣解放</color>。\n\n<color=Title>共鸣技能·照世相</color>\n处于<color=Highlight>照世相</color>时，若心在地面状态，短按<color=Highlight>共鸣技能</color>，心将御使巨型玄方机巧，造成<color=Thunder>导电伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "踏月归心",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>转相</color>\n施放<color=Highlight>重击·应世相·步红尘</color>后，解锁<color=Highlight>转相</color>。\n施放<color=Highlight>转相</color>，展开万相神宫，心将转为<color=Highlight>照世相</color>，解锁全新的战斗能力，并进入<color=Highlight>心相心生</color>状态。\n可在低空中施放。\n处于<color=Highlight>照世相</color>时，进行<color=Highlight>任务对话</color>、使用<color=Highlight>附带动作表现的场景交互</color>或<color=Highlight>探索工具</color>时，会切换回<color=Highlight>应世相</color>，并进行对应动作。\n处于<color=Highlight>照世相</color>的心可在水面行走，在深水区时，会持续消耗体力；在步行模式下，处于<color=Highlight>照世相</color>的心可由悬崖步入空中，并在空中缓慢行走，该状态下将持续消耗体力。处于<color=Highlight>照世相</color>的心在空中状态时，无法回复体力。\n\n<color=Title>万阙垂天</color>\n施放<color=Highlight>重击·照世相·临寰宇</color>时，解锁<color=Highlight>万阙垂天</color>。\n施放<color=Highlight>万阙垂天</color>，引导万相神宫坠落，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n可在低空中施放。\n心将回到<color=Highlight>应世相</color>，并退出<color=Highlight>心相心生</color>状态。\n\n<color=Title>敕令</color>\n施放<color=Highlight>转相</color>时，心将同时获得21层<color=Highlight>敕令</color>，上限21层，持续45秒，持续时间结束移除全部层数。\n队伍中在场角色造成伤害后，心将在后续3秒内自动消耗<color=Highlight>敕令</color>，该效果每秒至多获得1次，重复获得时刷新该效果持续时间：\n·消耗<color=Highlight>敕令</color>时，从万相神宫召唤<color=Highlight>飞阙</color>对目标进行一次协同攻击，造成<color=Thunder>导电伤害</color>。\n·每秒至多自动消耗1层<color=Highlight>敕令</color>。\n·通过<color=Highlight>飞阙</color>造成的伤害不会获得该效果。\n·心失去意识时，移除全部<color=Highlight>敕令</color>。\n\n<color=Title>心相心生</color>\n提升心自身抗打断能力，持续45秒。\n进入<color=Highlight>心相心生</color>状态时，重置心的<color=Highlight>照世相</color>。\n<color=Highlight>心相心生</color>状态下，处于<color=Highlight>照世相</color>时，若未解锁<color=Highlight>万阙垂天</color>，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·应世</color>；处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·照世</color>。\n\n<color=Title>借相·应世</color>\n心临时转变回<color=Highlight>应世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>普攻·应世相第2段</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·应世相</color>。\n\n<color=Title>借相·照世</color>\n心重新转变为<color=Highlight>照世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>上挑攻击·照世相</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·照世相</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "引枢作清辉",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>变奏技能·应世相</color>\n处于<color=Highlight>应世相</color>时可施放该技能，攻击目标，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，处于<color=Highlight>共鸣模态·同奏</color>将会施放<color=Highlight>普攻·应世相第3段</color>，处于<color=Highlight>共鸣模态·电磁</color>将会施放<color=Highlight>普攻·应世相第4段</color>。\n\n<color=Title>变奏技能·应世相·诸相同奏</color>\n处于<color=Highlight>应世相</color>时可施放该技能，攻击目标，造成更高的<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第3段</color>。\n\n<color=Title>变奏技能·照世相</color>\n处于<color=Highlight>照世相</color>时可施放该技能，攻击目标，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>变奏技能·照世相·诸相同奏</color>\n处于<color=Highlight>照世相</color>时可施放该技能，攻击目标，造成更高的<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "乘兴一顾",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>诸相心生</color>\n处于<color=Highlight>应世相</color>时，心可获得和消耗<color=Highlight>【应世心】</color>。\n处于<color=Highlight>照世相</color>时，心可获得和消耗<color=Highlight>【照世心】</color>。\n\n<color=Title>重击·应世相·步红尘</color>\n处于<color=Highlight>应世相</color>时，心的<color=Highlight>【应世心】</color>达到100点时，<color=Highlight>重击·应世相</color>替换为<color=Highlight>重击·应世相·步红尘</color>。\n按住<color=Highlight>普攻</color>，消耗耐力和100点<color=Highlight>【应世心】</color>施放，期间免疫打断，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>时，心将获得<color=Highlight>了尘愿</color>。此次<color=Highlight>重击·应世相·步红尘</color>将消耗<color=Highlight>了尘愿</color>替换为<color=Highlight>重击·应世相·镇红尘</color>，造成更高的伤害。每24秒仅可获得1次<color=Highlight>了尘愿</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>或<color=Highlight>重击·应世相·镇红尘</color>期间，若不处于<color=Highlight>心相心生</color>状态，解锁<color=Highlight>共鸣解放·转相</color>。\n\n<color=Title>重击·照世相·临寰宇</color>\n处于<color=Highlight>照世相</color>时，且心处于<color=Highlight>统御众机</color>状态期间，消耗全部<color=Highlight>【照世心】</color>时，<color=Highlight>重击·照世相</color>替换为<color=Highlight>重击·照世相·临寰宇</color>。\n按住<color=Highlight>普攻</color>，消耗耐力施放，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>时，心将获得<color=Highlight>承天则</color>。此次<color=Highlight>重击·照世相·临寰宇</color>将消耗<color=Highlight>承天则</color>替换为<color=Highlight>重击·照世相·镇寰宇</color>，造成更高的伤害。每24秒仅可获得1次<color=Highlight>承天则</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>或<color=Highlight>重击·照世相·镇寰宇</color>时，退出<color=Highlight>统御众机</color>状态，解锁<color=Highlight>共鸣解放·万阙垂天</color>。\n\n<color=Title>共鸣技能·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时，心的<color=Highlight>【照世心】</color>达到300点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·照世相·万阙连衡</color>。\n若心在地面状态，短按<color=Highlight>共鸣技能</color>，对周围的目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>共鸣技能·照世相·万阙连衡</color>时，心将进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>统御众机</color>\n<color=Highlight>统御众机</color>状态持续13秒。\n该状态持续期间，<color=Highlight>普攻·照世相</color>将进一步强化为<color=Highlight>普攻·照世相·万阙连衡</color>，同时<color=Highlight>闪避反击·照世相</color>替换为<color=Highlight>闪避反击·照世相·万阙连衡</color>。\n<color=Highlight>普攻·照世相·万阙连衡</color>或<color=Highlight>闪避反击·照世相·万阙连衡</color>命中目标时，若心为队伍中登场角色将消耗<color=Highlight>【照世心】</color>。\n退出<color=Highlight>统御众机</color>状态时，清除<color=Highlight>【照世心】</color>。\n\n<color=Title>共鸣模态·同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，获得以下效果：\n·心拥有<color=Highlight>响应同奏</color>的能力，该效果联机状态下不会生效。\n·心施放<color=Highlight>变奏技能·应世相</color>或<color=Highlight>变奏技能·应世相·诸相同奏</color>时，使下一次施放<color=Highlight>共鸣解放·转相</color>时，心获得<color=Highlight>同奏</color>，持续5秒。\n·心<color=Highlight>响应同奏</color>时，获得<color=Highlight>溯意</color>，并使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n心施放<color=Highlight>变奏技能</color>时，若未<color=Highlight>响应同奏</color>且拥有<color=Highlight>溯意</color>，则将消耗<color=Highlight>溯意</color>，使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n·心切换模态时，移除自身获得的上述效果。\n·施放<color=Highlight>变奏技能·照世相</color>或<color=Highlight>变奏技能·照世相·诸相同奏</color>时，心将直接进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>共鸣模态·电磁</color>\n处于<color=Highlight>共鸣模态·电磁</color>时，获得以下效果：\n·心进入战斗状态时，一定范围内的目标<color=Highlight>【电磁效应】</color>每次自动进行结算时不再减少层数。\n·队伍中的角色为目标添加<color=Highlight>【电磁爆发】</color>后，每添加1层<color=Highlight>【电磁爆发】</color>使心获得1层<color=Highlight>霆心域</color>，可叠加100层，并消耗目标全部的<color=Highlight>【电磁爆发】</color>层数。心切换模态时移除<color=Highlight>霆心域</color>。\n·<color=Highlight>共鸣技能·踏月归心</color>最后一段攻击时，心将主动触发一次<color=Highlight>【电磁效应】</color>伤害，伤害倍率为35%*自身<color=Highlight>霆心域</color>层数*目标当前<color=Highlight>【电磁效应】</color>的层数对应的<color=Highlight>【电磁效应】</color>伤害倍率。\n施放<color=Highlight>共鸣技能·踏月归心</color>期间，切换至其他角色或提前结束技能则上述效果提前退出。\n施放<color=Highlight>共鸣技能·踏月归心</color>一定时间后，消耗全部<color=Highlight>霆心域</color>。\n施放<color=Highlight>共鸣技能·照世相</color>时，若心拥有至少50层<color=Highlight>霆心域</color>，则<color=Highlight>共鸣技能·照世相</color>将停滞命中的目标，切换至其他角色则提前清除停滞效果。\n·施放<color=Highlight>共鸣解放·转相</color>后，为附近一定范围内的目标附加5层<color=Highlight>【电磁效应】</color>，并使<color=Highlight>普攻·照世相·万阙连衡</color>、<color=Highlight>闪避反击·照世相·万阙连衡</color>可为命中的目标附加<color=Highlight>【电磁效应】</color>，至多生效5次，施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。\n<color=Highlight>照世相·万阙连衡</color>、<color=Highlight>重击·照世相·镇寰宇</color>为命中的目标附加5层<color=Highlight>【电磁效应】</color>，<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·照世相</color>、<color=Highlight>重击·应世相·镇红尘</color>为命中的目标附加1层<color=Highlight>【电磁效应】</color>。\n\n<color=Title>同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，心拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，心则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。心协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，队伍中的角色拥有<color=Highlight>同奏</color>时，若切换至心，心施放<color=Highlight>变奏技能</color>时<color=Highlight>响应同奏</color>，队伍中的角色获得1层<color=Highlight>【同奏增益】</color>，持续30秒。\n心至多以此方式提供1层<color=Highlight>【同奏增益】</color>。\n\n<color=Title>同奏增益</color>\n每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升3%，可叠加2层。\n\n<color=Title>【应世心】获取规则</color>\n<color=Highlight>【应世心】</color>上限100点。\n处于<color=Highlight>应世相</color>时，<color=Highlight>常态攻击·应世相</color>、<color=Highlight>共鸣技能·应世相</color>、<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【应世心】</color>。\n施放<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>时，获得60点<color=Highlight>【应世心】</color>。\n\n<color=Title>【照世心】获取规则</color>\n<color=Highlight>【照世心】</color>上限300点。\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，<color=Highlight>常态攻击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·同奏</color>时，施放<color=Highlight>变奏技能·照世相</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>时，将直接进入<color=Highlight>统御众机</color>状态，并获得300点<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·电磁</color>时，施放<color=Highlight>共鸣解放·转相</color>后，施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间令<color=Highlight>普攻·照世相第1段</color>生成的<color=Highlight>活字心锁</color>崩解时，若心为队伍中登场角色则获得150点<color=Highlight>【照世心】</color>，可生效1次，施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "万相流转，此心自明",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "攻击目标，造成100%的<color=Thunder>导电伤害</color>。\n心进入战斗状态或施放<color=Highlight>共鸣解放·万阙垂天</color>时，将获得<color=Highlight>照夜明</color>。心施放<color=Highlight>延奏技能</color>时，将消耗<color=Highlight>照夜明</color>并根据所处的<color=Highlight>共鸣模态</color>触发不同的效果：\n·处于<color=Highlight>共鸣模态·同奏</color>时，队伍中除心之外的角色获得<color=Highlight>同奏</color>时将获得<color=Highlight>灯同辉</color>。心施放<color=Highlight>延奏技能</color>后，拥有<color=Highlight>灯同辉</color>的角色全伤害加深20%，持续30秒。\n·处于<color=Highlight>共鸣模态·电磁</color>时，队伍中除心之外的角色导电伤害加深20%，持续20秒。\n心切换模态时，上述效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "身作千灯",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·音感仪",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "全属性伤害加成提升24%。附加电磁效应后或响应同奏时，共鸣技能伤害加深72%，共鸣技能伤害无视目标24%导电伤害抗性，且自身为队伍中登场角色时，一定范围内的目标受到电磁效应伤害加深60%，持续30秒，每0.1秒可触发1次。同名效果之间取最高值。",
+        "weaponIcon": "",
+        "weaponId": 21050116,
+        "weaponName": "玉阙玄华",
+        "weaponStarLevel": 5,
+        "weaponType": 5
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
+        "description": "<color=Highlight>共鸣技能·解伞形·无舍念</color>免疫打断。\n<color=Highlight>变奏技能·拢伞形·闪裂</color>、<color=Highlight>变奏技能·解伞形·碎霆</color>、<color=Highlight>变奏技能·拢伞形·锁妄念·同奏</color>、<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>的伤害倍率提升60%。",
+        "iconUrl": "",
+        "name": "身入凄雨",
+        "order": 1,
+        "unlocked": true
+      },
+      {
+        "description": "暴击伤害提升40%。\n施放<color=Highlight>延奏技能</color>时，下一位登场的角色暴击伤害提升10%，每拥有一层<color=Highlight>【同奏增益】</color>，暴击伤害额外提升6%，最多额外提升24%，持续30秒。若切换至其他角色则该效果提前结束。",
+        "iconUrl": "",
+        "name": "破雷斩恶",
+        "order": 2,
+        "unlocked": true
+      },
+      {
+        "description": "施放<color=Highlight>变奏技能·拢伞形·闪裂</color>或<color=Highlight>变奏技能·解伞形·碎霆</color>时，获得1层<color=Highlight>【同奏增益】</color>，该效果每25秒生效一次。\n·若锁暝提供过<color=Highlight>【同奏增益】</color>，在<color=Highlight>【同奏增益】</color>存在期间内则仅刷新持续时间。\n\n施放<color=Highlight>共鸣解放</color>时，锁暝自身普攻伤害加深30%，持续25秒。",
+        "iconUrl": "",
+        "name": "孤伞独行",
+        "order": 3,
+        "unlocked": true
+      },
+      {
+        "description": "锁暝攻击提升20%。",
+        "iconUrl": "",
+        "name": "承印于心",
+        "order": 4,
+        "unlocked": true
+      },
+      {
+        "description": "<color=Highlight>共鸣解放·暝伞形·重锁狱瘴</color>的伤害倍率提升40%。",
+        "iconUrl": "",
+        "name": "契深未忘",
+        "order": 5,
+        "unlocked": true
+      },
+      {
+        "description": "每层<color=Highlight>【同奏增益】</color>的效果提升50%，最多对4层<color=Highlight>同奏增益</color>生效。\n<color=Highlight>普攻·暝伞形·刻心念</color>的伤害倍率提升50%。\n拥有<color=Highlight>禁锁契主</color>效果时，锁暝暴击伤害额外提升200%。",
+        "iconUrl": "",
+        "name": "九影相随",
+        "order": 6,
+        "unlocked": true
+      }
+    ],
+    "level": 90,
+    "phantomData": {
+      "cost": 12,
+      "equipPhantomList": [
+        {
+          "cost": 4,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "150",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 4,
+            "iconUrl": "",
+            "name": "天演溯心",
+            "phantomId": 6000225,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "绝息魄",
+            "phantomId": 6000224,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 3,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "30%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "100",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 3,
+            "iconUrl": "",
+            "name": "解形煞",
+            "phantomId": 6000223,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "玉冥蛇",
+            "phantomId": 6000219,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "衔梦照世之心",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "攻击",
+              "attributeValue": "18%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "攻击",
+              "attributeValue": "60"
+            },
+            {
+              "attributeName": "普攻伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "奇绽傀",
+            "phantomId": 6000222,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        }
+      ]
+    },
+    "role": {
+      "acronym": "",
+      "attributeId": 3,
+      "attributeName": "导电",
+      "breach": 6,
+      "isMainRole": false,
+      "level": 90,
+      "roleIconUrl": "",
+      "roleId": 1312,
+      "roleName": "锁暝",
+      "rolePicUrl": "",
+      "starLevel": 5,
+      "weaponTypeId": 2,
+      "weaponTypeName": "迅刀",
+      "iconUrl": ""
+    },
+    "skillList": [
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>普攻</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>普攻·解伞形</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·解伞形</color>，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>；\n长按<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形第1段</color>、<color=Highlight>普攻·解伞形第2段</color>；\n施放<color=Highlight>普攻·解伞形第2段</color>后一定时间内，按住<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>、<color=Highlight>普攻·解伞形·旋雷破第2段</color>；\n施放<color=Highlight>普攻·解伞形第3段</color>后一定时间内，按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形第4段</color>；\n施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>后一定时间内，短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形·旋雷破第2段</color>。\n\n<color=Title>普攻·解伞形·旋雷破</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·<color=Highlight>念深</color>状态下，<color=Highlight>闪避反击</color>替换为<color=Highlight>闪避反击·解伞形</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻第3段</color>。\n\n<color=Title>闪避反击·解伞形</color>\n成功<color=Highlight>闪避</color>一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形第3段</color>。\n·施放该技能后一定时间内，长按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>，造成<color=Thunder>导电伤害</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "拢伞形",
+          "type": "常态攻击"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击范围内的目标，造成<color=Thunder>导电伤害</color>。\n·开伞向前冲击的一定时间内受到敌方目标攻击，免疫此次伤害并停滞周围的目标，随后一定时间内免疫打断且受到的伤害降低100%，并施放<color=Highlight>共鸣技能·解伞形·赤芒瞬闪</color>。\n·进入<color=Highlight>念深</color>状态时，<color=Highlight>共鸣技能</color>刷新冷却时间。\n·<color=Highlight>念起</color>状态下，施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻第2段</color>。\n·<color=Highlight>念深</color>状态下，施放该技能后一定时间内，短按<color=Highlight>普攻</color>衔接<color=Highlight>普攻·解伞形第3段</color>。\n\n<color=Title>共鸣技能·解伞形·赤芒瞬闪</color>\n攻击范围内的目标，造成<color=Thunder>导电伤害</color>。\n·<color=Highlight>念起</color>状态下，施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻第3段</color>。\n·<color=Highlight>念深</color>状态下，施放该技能后一定时间内，短按<color=Highlight>普攻</color>衔接<color=Highlight>普攻·解伞形第4段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "拢伞形·破隙",
+          "type": "共鸣技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Highlight>念深</color>状态下，解锁<color=Highlight>共鸣解放</color>，施放后对范围内目标造成<color=Thunder>导电伤害</color>。\n可在低空中施放。\n·施放<color=Highlight>共鸣解放</color>时，锁暝获得<color=Highlight>同奏</color>，持续5秒，每25秒内只能获得1次。\n\n<color=Title>凄雨瘴雷</color>\n施放<color=Highlight>延奏技能</color>时，若锁暝拥有<color=Highlight>同奏</color>，队伍中在场角色造成伤害时，会召唤<color=Highlight>雷痕</color>对目标进行协同攻击，造成<color=Thunder>导电伤害</color>。\n·造成伤害的接下来的3秒内，每秒可召唤1道<color=Highlight>雷痕</color>，该效果每秒可触发1次。<color=Highlight>雷痕</color>造成的伤害不会触发该效果。\n·<color=Highlight>雷痕</color>每秒最多召唤1道，共可召唤6道。\n·效果持续8秒，或持续至<color=Highlight>雷痕</color>达到最大召唤数。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "暝伞形·重锁狱瘴",
+          "type": "共鸣解放"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "攻击目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·<color=Highlight>念起</color>状态下，施放该技能时，锁暝进入<color=Highlight>念深</color>状态并清空<color=Highlight>【妄执】</color>。\n·<color=Highlight>念深</color>状态下，<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·解伞形·碎霆</color>。\n·<color=Highlight>念起</color>状态下，响应同奏时，<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·拢伞形·锁妄念·同奏</color>。\n·<color=Highlight>念深</color>状态下，响应同奏时，<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>。\n\n<color=Title>变奏技能·解伞形·碎霆</color>\n造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>将衔接<color=Highlight>普攻·解伞形·旋雷破第2段</color>。\n\n<color=Title>变奏技能·拢伞形·锁妄念·同奏</color>\n攻击目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，锁暝进入<color=Highlight>念深</color>状态并清空<color=Highlight>【妄执】</color>。\n\n<color=Title>变奏技能·解伞形·旋雷破·同奏</color>\n攻击目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·<color=Highlight>念深</color>状态下，施放<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>后一定时间内，短按<color=Highlight>普攻</color>将衔接<color=Highlight>普攻·解伞形·旋雷破第2段</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "拢伞形·闪裂",
+          "type": "变奏技能"
+        }
+      },
+      {
+        "level": 10,
+        "skill": {
+          "description": "<color=Title>共鸣技能·拢伞形·锁妄念</color>\n<color=Highlight>念起</color>状态下，<color=Highlight>【妄执】</color>达到800点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·拢伞形·锁妄念</color>，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，锁暝进入<color=Highlight>念深</color>并清空<color=Highlight>【妄执】</color>。\n\n<color=Title>共鸣技能·解伞形·无舍念</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>【妄执】</color>达到800点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·解伞形·无舍念</color>，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n\n<color=Title>普攻·暝伞形·刻心念</color>\n施放<color=Highlight>共鸣技能·解伞形·无舍念</color>后，<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>替换为<color=Highlight>普攻·暝伞形·刻心念</color>。点按或长按<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>施放该技能。攻击范围内目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，进入<color=Highlight>念劫</color>并清空<color=Highlight>【妄执】</color>，技能结束后进入<color=Highlight>念起</color>。\n·施放该技能时，按住<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>，可持续攻击目标一定时间。\n·施放该技能时，一定时间内锁暝免疫伤害和受击，期间无法移动、冲刺、跳跃、闪避或施放<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>、<color=Highlight>共鸣解放</color>、<color=Highlight>闪避反击</color>、<color=Highlight>下落攻击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能</color>、且期间不能切换角色。\n\n<color=Title>同奏</color>\n锁暝拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，锁暝则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。锁暝协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n锁暝拥有<color=Highlight>响应同奏</color>的能力\n队伍中的角色拥有<color=Highlight>同奏</color>时，若切换至锁暝，锁暝施放变奏技能时响应同奏，队伍中的角色获得1层<color=Highlight>【同奏增益】</color>，持续30秒。\n锁暝至多以此方式提供1层<color=Highlight>【同奏增益】</color>，重复获得刷新持续时间。\n联机状态下，无法<color=Highlight>响应同奏</color>。\n\n<color=Title>同奏增益</color>\n每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升3%，可叠加2层。\n\n<color=Title>【妄执】获取规则</color>\n【妄执】上限为800点。\n·<color=Highlight>普攻</color>、<color=Highlight>普攻·解伞形</color>、<color=Highlight>普攻·解伞形·旋雷破</color>、<color=Highlight>闪避反击</color>或<color=Highlight>闪避反击·解伞形</color>命中目标时，若锁暝为登场角色则获得【妄执】。\n·施放<color=Highlight>共鸣解放</color>时，获得200点【妄执】。\n·施放<color=Highlight>变奏技能·解伞形·碎霆</color>或<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>时，获得200点【妄执】。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "囚执化念",
+          "type": "共鸣回路"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "下一位登场角色导电伤害加深20%，拥有<color=Highlight>【同奏增益】</color>时，共鸣技能伤害加深25%，效果持续8秒。若切换至其他角色则该效果提前结束。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "伞机鸣动",
+          "type": "延奏技能"
+        }
+      },
+      {
+        "level": 1,
+        "skill": {
+          "description": "目标<color=Highlight>【偏谐值】</color>满时，可对其施放<color=Highlight>【谐度破坏】</color>。",
+          "iconUrl": "",
+          "id": 0,
+          "name": "谐度破坏·迅刀",
+          "type": "谐度破坏"
+        }
+      }
+    ],
+    "weaponData": {
+      "breach": 6,
+      "level": 90,
+      "resonLevel": 5,
+      "weapon": {
+        "weaponEffectName": "攻击提升24%。获得同奏时，导电伤害提升60%，持续30秒。\n获得同奏时，获得【羁念】效果并移除【怅念】，队伍中角色导电伤害加成提升48%，持续30秒。同名效果之间不可叠加。\n自身的协奏能量消耗时，获得【怅念】效果并移除【羁念】，自身导电伤害额外提升80%，持续14秒， 切换至其他角色时，该效果提前结束。",
+        "weaponIcon": "",
+        "weaponId": 21020107,
+        "weaponName": "沉冥",
+        "weaponStarLevel": 5,
+        "weaponType": 2
+      }
+    }
+  },
+  {
+    "chainList": [
+      {
         "description": "施放变奏技能<color=Highlight>湛蓝礼赞</color>后，秧秧的气动伤害加成额外提升15%，效果持续8秒。",
         "iconUrl": "",
         "name": "底色湛蓝如洗",

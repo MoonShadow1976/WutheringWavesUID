@@ -205,7 +205,7 @@ def main():
     for char_limit in limit_data["charList"]:
         char_name = char_limit["name"]
         for i in TARGET_CHARS:
-            if i in char_name:
+            if i == char_name:
                 print(f"\n########## 角色{char_name} 开始生成 {min(CHAIN_LIST)}~{max(CHAIN_LIST)} 链权重 ##########")
                 summary[char_name] = generate_char(char_limit)
                 break

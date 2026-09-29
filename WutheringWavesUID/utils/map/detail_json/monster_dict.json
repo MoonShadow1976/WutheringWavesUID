@@ -1416,18 +1416,18 @@
     },
     "320000690": {
         "rarity": 2,
-        "attributeId": 2,
+        "attributeId": 4,
         "elementResistance": [
             4
         ],
-        "echo": 6000220,
+        "echo": 0,
         "name": "巡霄枪卫"
     },
     "320000700": {
         "rarity": 2,
         "attributeId": 5,
         "elementResistance": [
-            5
+            2
         ],
         "echo": 6000223,
         "name": "解形煞"
@@ -1780,5 +1780,14 @@
         ],
         "echo": 6000221,
         "name": "天傀劫煞"
+    },
+    "340000330": {
+        "rarity": 4,
+        "attributeId": 3,
+        "elementResistance": [
+            3
+        ],
+        "echo": 0,
+        "name": "天演溯心"
     }
 }

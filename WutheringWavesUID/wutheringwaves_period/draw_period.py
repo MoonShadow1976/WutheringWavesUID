@@ -106,7 +106,7 @@ def _get_relative_period_node(period_param: str, period_list: PeriodList) -> tup
 async def process_uid(uid, ev, period_param: int | str | None) -> dict[str, Any] | str | None:
     ck = await waves_api.get_self_waves_ck(uid, ev.user_id, ev.bot_id)
     if not ck:
-        return None
+        return waves_api.last_error or None
 
     period_list = await waves_api.get_period_list(uid, ck)
     if not period_list.success or not period_list.data:

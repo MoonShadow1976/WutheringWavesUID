@@ -57,7 +57,7 @@ async def seconds2hours(seconds: int) -> str:
 async def process_uid(uid, ev):
     ck = await waves_api.get_self_waves_ck(uid, ev.user_id, ev.bot_id)
     if not ck:
-        return None
+        return waves_api.last_error or None
 
     await asyncio.sleep(0.3)  # 避免请求过快
 
@@ -71,7 +71,7 @@ async def process_uid(uid, ev):
 
         (daily_info_res, account_info_res) = results
         if not isinstance(daily_info_res, KuroApiResp) or not isinstance(account_info_res, KuroApiResp):
-            return None
+            return waves_api.last_error or None
 
         if not daily_info_res.success:
             return f"uid{uid}:{daily_info_res.throw_msg()}"

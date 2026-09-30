@@ -51,7 +51,7 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: dict):
 
     except Exception as e:
         logger.error(f" [鸣潮][dc卡片识别] 识别结果缺失结构：{e}")
-        await bot.send(f"[鸣潮]识别结果缺失结构：{e}\n", at_sender)
+        await bot.send(f"[鸣潮]识别结果缺失结构：{e}\n或请使用高分辨率图片(或图片链接)重试！", at_sender)
         return
 
     # 存储用户昵称

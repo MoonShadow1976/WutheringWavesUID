@@ -100,7 +100,7 @@ def get_valid_blocks(img, min_pixel_size=5000):
     heights = []
 
     for i, iblock in enumerate(blocks):
-        if used[i] == True:
+        if used[i]:
             continue
         x0, y0, x1, y1 = iblock["bbox"][0], iblock["bbox"][1], iblock["bbox"][2], iblock["bbox"][3]
         used[i] = True
@@ -108,7 +108,7 @@ def get_valid_blocks(img, min_pixel_size=5000):
         heights.append(y1 - y0)
 
         for j, jblock in enumerate(blocks):
-            if used[j] == True:
+            if used[j]:
                 continue
             xx0, yy0, xx1, yy1 = jblock["bbox"][0], jblock["bbox"][1], jblock["bbox"][2], jblock["bbox"][3]
             if abs(y0 - yy0) <= 3 and abs(y1 - yy1) <= 3 and (abs(x1 - xx0) <= 5 or x1 > xx0):

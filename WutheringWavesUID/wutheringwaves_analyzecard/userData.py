@@ -117,15 +117,15 @@ async def save_card_dict_to_json(bot: Bot, ev: Event, result_dict: dict):
         echo["mainProps"] = echo_value.get("mainProps", [])
         echo["subProps"] = echo_value.get("subProps", [])
 
-        # 根据主词条判断声骸cost并适配id
-        if check_echo_id and (check_echo := get_echo_model(check_echo_id)):
-            # 有check_echo的情况
+        # 先根据主词条推断 cost 作为默认值
+        echo_id, cost = await echo_data_to_cost(char_id, echo["mainProps"], slot - 1, cost4_counter)
+        name = f"识别默认{cost}c"
+        if cost == 4:
+            name = phantom_id_to_phantom_name(str(echo_id))
+
+        # 图标匹配结果仅在 cost 与主词条推断一致时才采用
+        if check_echo_id and (check_echo := get_echo_model(check_echo_id)) and check_echo.get_cost() == cost:
             echo_id, cost, name = check_echo.id, check_echo.get_cost(), check_echo.name
-        else:
-            echo_id, cost = await echo_data_to_cost(char_id, echo["mainProps"], slot - 1, cost4_counter)
-            name = f"识别默认{cost}c"
-            if cost == 4:
-                name = phantom_id_to_phantom_name(str(echo_id))
 
         # 设置echo属性
         echo["phantomProp"]["name"] = name

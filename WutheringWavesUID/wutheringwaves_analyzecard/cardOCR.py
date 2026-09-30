@@ -54,9 +54,17 @@ chain_crop_ratios = [
 CHAR_WIDTH = 420
 CHAR_HEIGHT = 350
 char_crop_ratios = [
-    (36 / CHAR_WIDTH, 0 / CHAR_HEIGHT, 250 / CHAR_WIDTH, 45 / CHAR_HEIGHT),  # 上面角色名称与等级
-    (9 / CHAR_WIDTH, 45 / CHAR_HEIGHT, 155 / CHAR_WIDTH, 62 / CHAR_HEIGHT),  # 下面用户昵称
-    (9 / CHAR_WIDTH, 62 / CHAR_HEIGHT, 155 / CHAR_WIDTH, 80 / CHAR_HEIGHT),  # 下面用户uid
+    (34 / CHAR_WIDTH, 0 / CHAR_HEIGHT, 250 / CHAR_WIDTH, 45 / CHAR_HEIGHT),  # 上面角色名称与等级
+    (8 / CHAR_WIDTH, 45 / CHAR_HEIGHT, 155 / CHAR_WIDTH, 62 / CHAR_HEIGHT),  # 下面用户昵称
+    (8 / CHAR_WIDTH, 62 / CHAR_HEIGHT, 155 / CHAR_WIDTH, 80 / CHAR_HEIGHT),  # 下面用户uid
+]
+
+# 原始武器裁切区域参考分辨率，from crop_ratios
+WEAPON_WIDTH = 233
+WEAPON_HEIGHT = 125
+weapon_crop_ratios = [
+    (7 / WEAPON_WIDTH, 22 / WEAPON_HEIGHT, 233 / WEAPON_WIDTH, 48 / WEAPON_HEIGHT),  # 武器名称
+    (44 / WEAPON_WIDTH, 72 / WEAPON_HEIGHT, 233 / WEAPON_WIDTH, 110 / WEAPON_HEIGHT),  # 武器等级
 ]
 
 # 原始声骸裁切区域参考分辨率，from crop_ratios
@@ -413,6 +421,12 @@ async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Ima
     # 把image_char[]拼接成角色头图
     cropped_images[0] = cut_image_need_data(image_char)
 
+    # 进一步处理武器
+    image_weapon = cut_image(cropped_images[1], weapon_crop_ratios)
+    image_weapon[0] = sharpen_and_clean(image_weapon[0], k=0, median_size=1, resize=3)  # 锐化放大
+    # 把image_weapon[]拼接成武器图
+    cropped_images[1] = cut_image_need_data(image_weapon)
+
     # 进一步处理声骸图：裁切数值、图像匹配
     analyze_echoes_results = []
     for i in range(7, 12):
@@ -550,6 +564,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                     line_clean.replace("幽冥的忘爱章", "幽冥的忘忧章")
                     .replace("質作的矮星", "赝作的矮星")
                     .replace("永遠啟明星", "永远的启明星")
+                    .replace("萬物持存注釋", "万物持存的注释")
                 )
                 line_clean = re.sub(r".*古洑流$", "千古洑流", line_clean)
                 if not final_result["武器信息"].get("武器名"):

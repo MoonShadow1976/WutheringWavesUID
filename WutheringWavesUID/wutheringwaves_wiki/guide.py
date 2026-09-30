@@ -30,7 +30,7 @@ async def get_guide(bot: Bot, ev: Event, char_name: str):
     config = WutheringWavesConfig.get_config("WavesGuide").data
 
     imgs_result = []
-    pattern = re.compile(re.escape(char_name), re.IGNORECASE)
+    pattern = re.compile(rf"^{re.escape(char_name)}", re.IGNORECASE)
     if "all" in config:
         for guide_path in GUIDE_PATH.iterdir():
             imgs = await get_guide_pic(

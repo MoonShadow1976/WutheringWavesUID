@@ -29,11 +29,11 @@ REF_HEIGHT = 602
 crop_ratios = [
     (0 / REF_WIDTH, 0 / REF_HEIGHT, 420 / REF_WIDTH, 350 / REF_HEIGHT),  # 角色
     (890 / REF_WIDTH, 240 / REF_HEIGHT, 1020 / REF_WIDTH, 310 / REF_HEIGHT),  # 武器
-    (583 / REF_WIDTH, 30 / REF_HEIGHT, 653 / REF_WIDTH, 130 / REF_HEIGHT),  # 普攻
-    (456 / REF_WIDTH, 115 / REF_HEIGHT, 526 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣技能
-    (694 / REF_WIDTH, 115 / REF_HEIGHT, 764 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣解放
-    (501 / REF_WIDTH, 250 / REF_HEIGHT, 571 / REF_WIDTH, 350 / REF_HEIGHT),  # 变奏技能
-    (650 / REF_WIDTH, 250 / REF_HEIGHT, 720 / REF_WIDTH, 350 / REF_HEIGHT),  # 共鸣回路 各技能后续合并
+    (583 / REF_WIDTH, 100 / REF_HEIGHT, 653 / REF_WIDTH, 130 / REF_HEIGHT),  # 普攻
+    (456 / REF_WIDTH, 185 / REF_HEIGHT, 526 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣技能
+    (694 / REF_WIDTH, 185 / REF_HEIGHT, 764 / REF_WIDTH, 215 / REF_HEIGHT),  # 共鸣解放
+    (501 / REF_WIDTH, 320 / REF_HEIGHT, 571 / REF_WIDTH, 350 / REF_HEIGHT),  # 变奏技能
+    (650 / REF_WIDTH, 320 / REF_HEIGHT, 720 / REF_WIDTH, 350 / REF_HEIGHT),  # 共鸣回路 各技能后续合并
     (12 / REF_WIDTH, 360 / REF_HEIGHT, 216 / REF_WIDTH, 590 / REF_HEIGHT),  # 声骸1
     (221 / REF_WIDTH, 360 / REF_HEIGHT, 425 / REF_WIDTH, 590 / REF_HEIGHT),  # 声骸2
     (430 / REF_WIDTH, 360 / REF_HEIGHT, 634 / REF_WIDTH, 590 / REF_HEIGHT),  # 声骸3
@@ -482,7 +482,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
             r"([A-Za-z\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7A3\u00C0-\u00FF]+)"
         ),  # 支持英文、中文、日文、韩文，以及西班牙文、德文和法文中的扩展拉丁字符，为后续逻辑判断用
         "level": re.compile(r"(?i)(?:.*?[LV]?)?\s*?(\d+)"),  # 兼容 "666", "L.9", "L1", "v8", "v.99", "L.V.2"
-        "skill_level": re.compile(r"(\d+)\s*[/ ]\s*\d*"),  # 兼容 L.10/10、LV.10/1、4 10、4/ 等格式
+        "skill_level": re.compile(r".*(?<!\d)(\d+)\s*/\s*\d+"),  # 兼容 1V.9/10、L.10/10、LV.10/1、4 10、4/ 等格式
         "player_info": re.compile(r"玩.名(?:稱)?\s*[:：]?\s*([^\t\r\n]+)"),
         "uid_info": re.compile(r"(?:特|徵|碼)[^\d]*(\d{9})"),
         "echo_cut": re.compile(r"([\u4e00-\u9fa5]+)\s*\D*([\d.]+%?)"),  # 分割各个词条与对应数值
@@ -693,6 +693,9 @@ async def which_char(bot: Bot, ev: Event, char: str) -> tuple[None | str, None |
     if len(candidates) == 1:  # 唯一匹配
         char_id, info = candidates[0]
         return info["name"], char_id
+
+    # candidates 按照 info["name"] 字数 从少到多排序
+    candidates = sorted(candidates, key=lambda x: len(x[1]["name"]))
 
     # 为漂泊者？
     options = []

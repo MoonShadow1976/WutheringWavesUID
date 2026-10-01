@@ -15,10 +15,11 @@ from gsuid_core.utils.image.image_tools import crop_center_img
 from opencc import OpenCC
 from PIL import Image, ImageDraw
 
-from ..utils.api.model import EquipPhantom, FetterDetail, PhantomProp, Props
+from ..utils.api.model import EquipPhantom, FetterDetail, PhantomProp, Props, RoleDetailData
 from ..utils.ascension.char import get_char_model
 from ..utils.at_help import ruser_id
 from ..utils.cache import TimedCache
+from ..utils.calc import WuWaCalc
 from ..utils.calculate import (
     calc_phantom_entry,
     calc_phantom_score,
@@ -343,6 +344,20 @@ def compress_image(images: list[Image.Image], max_size_kb: int) -> list[Image.Im
     return result
 
 
+async def _build_calc_ctx(role_detail: RoleDetailData) -> dict:
+    """用本地角色数据构造 calc_temp 的条件上下文（chain / ph），供条件权重文件匹配。
+
+    chain 取自本地角色的共鸣链，ph 取自主力声骸套装名。
+    本地角色没有声骸数据时返回空 dict，get_calc_map 会回退到默认 calc.json。
+    """
+    if not (role_detail.phantomData and role_detail.phantomData.equipPhantomList):
+        return {}
+
+    calc: WuWaCalc = WuWaCalc(role_detail)
+    calc.phantom_pre = calc.prepare_phantom()
+    return calc.enhance_summation_phantom_value(calc.phantom_pre)
+
+
 async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
     """声骸OCR查分"""
     at_sender = True if ev.group_id else False
@@ -386,7 +401,9 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
         return await bot.send(ocr_results, at_sender)
     # ocr_results = [{'error': None, 'text': '异相•冰盈舞者\nCOST 1\n+25\n攻击\n◎ 生命\n•攻击\n• 暴击伤害\n•共鸣技能伤害加成\n• 暴击\n• 共鸣效率\n18.0%\n2280\n10.9%\n17.4%\n7.9%\n8.7%\n9.2%\n异相•冰盈舞者\nCOST 1\n+25\n攻击\n◎ 生命\n• 暴击\n• 暴击伤害\n• 共鸣解放伤害加成\n• 攻击\n•共鸣效率\n18.0%\n2280\n10.5%\n15.0%\n7.9%\n50\n10.0%'}]
 
-    calc_temp = get_calc_map({}, char_name, char_id)
+    role_detail = await _load_local_role_detail(ev, char_id, char_name, ruser_id(ev))
+    calc_ctx = await _build_calc_ctx(role_detail) if role_detail else {}
+    calc_temp = get_calc_map(calc_ctx, char_name, char_id)
     msg = []
     for part in ocr_results:
         if not part["text"]:
@@ -760,18 +777,8 @@ async def phantom_score_ocr_to_char(bot: Bot, ev: Event, char_name: str, extra: 
         return await bot.send(im, at_sender)
 
 
-async def _load_base_equiphantom_list(
-    ev,
-    char_id: str,
-    char_name: str,
-    user_id,
-) -> list[EquipPhantom | None] | None:
-    """尝试加载已有角色（或极限面板角色）的声骸列表作为合并基准。
-
-    返回:
-        长度为5的列表（含 None）表示可用基准；
-        None 表示没有任何可用基准（此时应忽略换声骸映射指令）。
-    """
+async def _load_local_role_detail(ev, char_id: str, char_name: str, user_id) -> RoleDetailData | None:
+    """加载本地角色数据（或极限面板角色数据），失败时回退到构造的默认角色数据。"""
     # 延迟导入避免循环依赖
     from ..utils.database.models import WavesBind
     from ..wutheringwaves_charinfo.draw_char_card import (
@@ -799,8 +806,24 @@ async def _load_base_equiphantom_list(
     )
     if isinstance(role_detail, str) or not role_detail:
         role_detail = await generate_online_role_detail(char_id)
-        if not role_detail:
-            return None
+    return role_detail if isinstance(role_detail, RoleDetailData) else None
+
+
+async def _load_base_equiphantom_list(
+    ev,
+    char_id: str,
+    char_name: str,
+    user_id,
+) -> list[EquipPhantom | None] | None:
+    """尝试加载已有角色（或极限面板角色）的声骸列表作为合并基准。
+
+    返回:
+        长度为5的列表（含 None）表示可用基准；
+        None 表示没有任何可用基准（此时应忽略换声骸映射指令）。
+    """
+    role_detail = await _load_local_role_detail(ev, char_id, char_name, user_id)
+    if not role_detail:
+        return None
 
     equip_list: list[EquipPhantom | None] = [None] * 5
     if role_detail.phantomData and role_detail.phantomData.equipPhantomList:

@@ -342,14 +342,18 @@ async def send_char_detail_msg2(bot: Bot, ev: Event):
             return await bot.send(msg + "\n" + im, at_sender)
 
 
-@waves_new_char_detail.on_regex(rf"^(\d+)?{CHAR_NAME_PATTERN}(?:权重)$", block=True)
+@waves_new_char_detail.on_regex(rf"^(\d+)?{CHAR_NAME_PATTERN}(?:权重)((换[^换]*)*)?$", block=True)
 async def send_char_detail_msg2_weight(bot: Bot, ev: Event):
-    match = re.search(rf"(?P<waves_id>\d+)?(?P<char>{CHAR_NAME_PATTERN})(?:权重)", get_event_command_text(ev))
+    match = re.search(
+        rf"(?P<waves_id>\d+)?(?P<char>{CHAR_NAME_PATTERN})(?:权重)(\s*)?(?P<change_list>((换[^换]*)*)?)",
+        get_event_command_text(ev),
+    )
     if not match:
         return
     ev.regex_dict = match.groupdict()
     waves_id = ev.regex_dict.get("waves_id")
     char = ev.regex_dict.get("char")
+    change_list_regex = ev.regex_dict.get("change_list")
 
     if waves_id and len(waves_id) != 9:
         return
@@ -361,7 +365,7 @@ async def send_char_detail_msg2_weight(bot: Bot, ev: Event):
     if not char:
         return
 
-    im = await draw_char_score_img(ev, uid, char, user_id, waves_id)  # type: ignore
+    im = await draw_char_score_img(ev, uid, char, user_id, waves_id, change_list_regex)  # type: ignore
     at_sender = False
     if isinstance(im, str) and ev.group_id:
         at_sender = True

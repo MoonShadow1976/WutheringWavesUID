@@ -1059,7 +1059,14 @@ async def draw_char_detail_img(
     return img
 
 
-async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, waves_id: str | None = None):
+async def draw_char_score_img(
+    ev: Event,
+    uid: str,
+    char: str,
+    user_id: str,
+    waves_id: str | None = None,
+    change_list_regex: str | None = None,
+):
     char, damageId = parse_text_and_number(char)
 
     char_id = char_name_to_char_id(char)
@@ -1094,6 +1101,15 @@ async def draw_char_score_img(ev: Event, uid: str, char: str, user_id: str, wave
             )
     if isinstance(role_detail, str):
         return role_detail
+
+    # 换角色/换武器等（如 换角色3链）：影响 calc_temp 的权重模板匹配
+    if change_list_regex:
+        temp = copy.deepcopy(role_detail)
+        try:
+            role_detail, _ = await change_role_detail(uid, "", role_detail, EnemyDetailData(), change_list_regex)
+        except Exception as e:
+            logger.exception("角色数据转换错误", e)
+            role_detail = temp
 
     # 创建背景
     img = await get_card_bg(1200, 3380, "bg3")

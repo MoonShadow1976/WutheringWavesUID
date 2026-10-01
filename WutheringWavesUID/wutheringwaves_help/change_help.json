@@ -192,7 +192,7 @@
       {
         "name": "队友配置",
         "desc": "查某个队友支持什么",
-        "eg": "ww队友配置守岸人",
+        "eg": "队友配置守岸人",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false
@@ -200,7 +200,7 @@
       {
         "name": "可当队友的角色",
         "desc": "列出全部可选队友",
-        "eg": "ww队友配置",
+        "eg": "队友配置",
         "need_ck": false,
         "need_sk": false,
         "need_admin": false

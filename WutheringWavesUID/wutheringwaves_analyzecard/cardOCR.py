@@ -545,12 +545,15 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                             "清胥": "清宵",
                             "清育": "清宵",
                             "ト靈": "卜灵",
+                            "狭·玄翎": "玄翎",
                         }
                         for old, new in REPLACE_MAP.items():
                             name = name.replace(old, new)
-                        if not re.match(r"^[\u4e00-\u9fa5]+$", name):
-                            logger.warning(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
+                        name_match = re.search(r"[\u4e00-\u9fa5]+", name)
+                        if not name_match:
+                            print(f" [鸣潮][dc卡片识别] 识别出非中文角色名:{name}，退出识别！")
                             return False, final_result
+                        name = name_match.group()  # 心LV.90
                         final_result["角色信息"]["角色名"] = cc.convert(name)
 
     # 处理武器信息（第二个结果）1

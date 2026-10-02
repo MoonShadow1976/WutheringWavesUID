@@ -511,10 +511,10 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
             # 文本预处理：删除非数字中英文的符号及多余空白
             # line = re.sub(r" ", "", line)
             line_clean_text = re.sub(
-            r"[^\u4e00-\u9fa5\u3041-\u3096\u30A1-\u30FA\uAC00-\uD7A3\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FFA-Za-z0-9\s]",
-            "",
-            line
-        )  # 先删除特殊符号，匹配“漂泊者·湮灭”，并剔除“・”等中点/长音/迭代符号
+                r"[^\u4e00-\u9fa5\u3041-\u3096\u30A1-\u30FA\uAC00-\uD7A3\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FFA-Za-z0-9\s]",
+                "",
+                line,
+            )  # 先删除特殊符号，匹配“漂泊者·湮灭”，并剔除“・”等中点/长音/迭代符号
             line_clean_text = re.sub(r"\s+", " ", line_clean_text).strip()  # 再合并多余空白
 
             # UID提取
@@ -588,7 +588,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
         if "\t" in text:
             tab = "\t"
         else:
-            text = text.replace("\n", " ") # 引擎3 'LV.6/10\nLV.5/10 LV.10/10 LV.6/10\nLV.10/10'
+            text = text.replace("\n", " ")  # 引擎3 'LV.6/10\nLV.5/10 LV.10/10 LV.6/10\nLV.10/10'
             tab = " "
 
         for seg in text.split(tab):  # 按 tab 分割逐个处理

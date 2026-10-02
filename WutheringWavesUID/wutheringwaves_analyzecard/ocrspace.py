@@ -74,7 +74,7 @@ async def _get_status_page_id_by_custom_domain() -> int | None:
 async def check_ocr_engine_accessible(plan: str) -> int:
     """
     通过 Checkly API 检查指定套餐（FREE 或 PRO）的 OCR 引擎健康状况。
-    优先返回可用引擎：2 > 1 > 其他引擎
+    优先返回可用引擎：2 > 其他引擎 > 1
 
     参数:
         plan: "FREE" 或 "PRO"
@@ -127,14 +127,14 @@ async def check_ocr_engine_accessible(plan: str) -> int:
                 logger.warning(f"[鸣潮][OCRspace Checkly] 未找到 {plan} 套餐的任何引擎")
                 return 0
 
-            # 优先级：引擎2 > 引擎1 > 其他引擎
+            # 优先级：引擎2 > 其他引擎 > 引擎1
             def priority(engine_num: int) -> int:
                 if engine_num == 2:
                     return 0
                 elif engine_num == 1:
-                    return 1
+                    return 10000  # 让引擎1排到最后
                 else:
-                    return 2 + engine_num
+                    return engine_num  # 其他引擎按编号升序
 
             engine_status.sort(key=lambda x: priority(x[0]))
 

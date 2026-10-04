@@ -35,6 +35,8 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色等级
     attr.set_character_level(role_level)
 
+    echo_damage(attr, isGroup)
+
     attr.set_phantom_dmg_bonus(needShuxing=False)
 
     chain_num = role.get_chain_num()
@@ -42,8 +44,6 @@ def calc_damage_1(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
         title = f"{role_name}-四链"
         msg = "施放共鸣技能混沌理论时，治疗效果加成提升70%。"
         attr.add_dmg_bonus(0.7, title, msg)
-
-    echo_damage(attr, isGroup)
 
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
@@ -76,6 +76,8 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色等级
     attr.set_character_level(role_level)
 
+    echo_damage(attr, isGroup)
+
     attr.set_phantom_dmg_bonus(needShuxing=False)
 
     chain_num = role.get_chain_num()
@@ -83,8 +85,6 @@ def calc_damage_2(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
         title = f"{role_name}-四链"
         msg = "施放共鸣技能混沌理论时，治疗效果加成提升70%。"
         attr.add_dmg_bonus(0.7, title, msg)
-
-    echo_damage(attr, isGroup)
 
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
@@ -119,6 +119,8 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
     # 设置角色等级
     attr.set_character_level(role_level)
 
+    echo_damage(attr, isGroup)
+
     title = "守岸人-共鸣解放-深潜星域"
     value = min(0.0001 * (attr.energy_regen * 1000 // 2), 0.125)
     msg = f"每0.2%共鸣效率提升0.01%暴击,上限12.5%,当前{value * 100:.2f}%"
@@ -141,8 +143,6 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = T
         msg = "洞悉伤害倍率提升42%。守岸人的暴击伤害提升500%。"
         attr.add_skill_ratio(0.42, title, msg)
         attr.add_crit_dmg(5)
-
-    echo_damage(attr, isGroup)
 
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 

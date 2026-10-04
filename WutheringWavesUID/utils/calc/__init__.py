@@ -5,18 +5,13 @@ from gsuid_core.logger import logger
 
 from ...utils.api.model import Props, RoleDetailData
 from ...utils.api.model_other import EnemyDetailData
-from ...utils.damage.utils import (
-    SONATA_ANCIENT,
-    SONATA_TIDEBREAKING,
-    Ancient_Role_Ids,
-)
-from ...utils.map.damage.damage import check_if_ph_3, check_if_ph_5
 from ..ascension.char import WavesCharResult, get_char_detail
 from ..ascension.constant import percent_to_float, sum_numbers, sum_percentages
 from ..ascension.sonata import WavesSonataResult, get_sonata_detail
 from ..ascension.weapon import WavesWeaponResult, get_weapon_detail
 from ..damage.abstract import WavesEchoRegister
 from ..damage.damage import DamageAttribute
+from ..damage.register_sonata import get_sonata
 from ..resource.constant import card_sort_map as card_sort_map_back
 
 
@@ -227,6 +222,8 @@ class WuWaCalc:
         self,
         result,
     ):
+        # 常态套装会增加面板，重复生成不得反向修改原声骸汇总。
+        result = copy.deepcopy(result)
         role_id = self.role_detail.role.roleId
         role_level = self.role_detail.role.level
         role_breach = self.role_detail.role.breach
@@ -287,25 +284,9 @@ class WuWaCalc:
         for ph_detail in card_sort_map.get("ph_detail", []):
             if not ph_detail:
                 continue
-            # 无惧浪涛之勇
-            if check_if_ph_5(ph_detail["ph_name"], ph_detail["ph_num"], SONATA_TIDEBREAKING):
-                # 角色攻击提升15%，共鸣效率达到250%后，当前角色全属性伤害提升30%
-                result["atk_percent"] += 0.15
-                if card_sort_map["energy_regen"] >= 2.5:
-                    card_sort_map["属性伤害加成"] = sum_percentages(
-                        "30%",
-                        card_sort_map["属性伤害加成"],
-                    )
-                card_sort_map["ph_result"] = True
-
-            # 失序彼岸之梦
-            if role_id in Ancient_Role_Ids and check_if_ph_3(ph_detail["ph_name"], ph_detail["ph_num"], SONATA_ANCIENT):
-                # 角色共鸣能量为0时，暴击率提升35%
-                card_sort_map["暴击"] = sum_percentages(
-                    "20%",
-                    card_sort_map["暴击"],
-                )
-                card_sort_map["ph_result"] = True
+            sonata = get_sonata(ph_detail["ph_name"], ph_detail["ph_num"])
+            if sonata:
+                sonata.do_panel(card_sort_map, result, role_id)
 
         base_atk = float(sum_numbers(_atk, _weapon_atk))
         # 各种攻击百分比 = 武器副词条+武器谐振+固有技能
@@ -413,6 +394,6 @@ class WuWaCalc:
         if card_sort_map.get("ph_detail"):
             for ph_detail in card_sort_map["ph_detail"]:
                 attr.add_ph_detail(ph_detail)
-        attr.set_ph_result(card_sort_map["ph_result"])
+        attr.set_ph_result(card_sort_map["ph_result"], card_sort_map.get("sonata_applied"))
         attr.set_role(self.role_detail)
         return attr

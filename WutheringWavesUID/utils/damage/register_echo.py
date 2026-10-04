@@ -1,3 +1,4 @@
+from ...utils.ascension.echo import echo_id_data
 from ...utils.damage.abstract import EchoAbstract, WavesEchoRegister
 from .damage import DamageAttribute
 from .utils import (
@@ -207,6 +208,16 @@ class Echo_390080005(EchoAbstract):
     id = 390080005
     name = "鸣钟之龟"
 
+    def damage(self, attr: DamageAttribute, isGroup: bool = False):
+        self.do_teammate(attr, isGroup=isGroup)
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """鸣钟之盾有效期间，自身和下一位登场角色共享伤害提升。"""
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][3].removesuffix("%")) / 100
+        attr.add_dmg_bonus(value, title, "鸣钟之盾期间伤害提升10%")
+        attr.set_trigger_shield()
+
 
 class Echo_390080007(EchoAbstract):
     id = 390080007
@@ -367,6 +378,11 @@ class Echo_6000052(EchoAbstract):
     id = 6000052
     name = "无常凶鹭"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        attr.add_dmg_bonus(0.12, title, "延奏后下一位角色伤害提升12%")
+
 
 class Echo_6000053(EchoAbstract):
     id = 6000053
@@ -421,10 +437,13 @@ class Echo_6000060(EchoAbstract):
         attr.add_effect(title, msg)
         attr.add_energy_regen(0.1)
 
+        self.do_teammate(attr, isGroup=isGroup)
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """施放声骸后20秒内，全队共享攻击提升，不共享自身共鸣效率。"""
         if attr.char_template == temp_atk:
-            title = self.name
-            msg = "全队角色攻击提升10%"
-            attr.add_atk_percent(0.1, title, msg)
+            title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+            attr.add_atk_percent(0.1, title, "全队角色攻击提升10%")
 
 
 class Echo_6000061(EchoAbstract):
@@ -1013,7 +1032,11 @@ class Echo_6000189(EchoAbstract):
     id = 6000189
     name = "海维夏"
 
-    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色全属性伤害加成提升10.00%
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][2].removesuffix("%")) / 100
+        attr.add_dmg_bonus(value, title, "延奏后下一位全属性伤害提升10%")
 
 
 class Echo_6000190(EchoAbstract):
@@ -1062,7 +1085,13 @@ class Echo_6000195(EchoAbstract):
     id = 6000195
     name = "格洛犸图"
 
-    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色冷凝伤害加成提升12.00%
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        if attr.char_attr != CHAR_ATTR_FREEZING:
+            return
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][2].removesuffix("%")) / 100
+        attr.add_dmg_bonus(value, title, "延奏后下一位冷凝伤害提升12%")
 
 
 class Echo_6000196(EchoAbstract):
@@ -1079,7 +1108,13 @@ class Echo_6000198(EchoAbstract):
     id = 6000198
     name = "迷胧幻蛾"
 
-    # 使用该声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色攻击提升12.00%，持续15秒
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        if attr.char_template != temp_atk:
+            return
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][3].removesuffix("%")) / 100
+        attr.add_atk_percent(value, title, "延奏后下一位攻击提升12%")
 
 
 class Echo_6000199(EchoAbstract):
@@ -1096,7 +1131,13 @@ class Echo_6000200(EchoAbstract):
     id = 6000200
     name = "共鸣回响·达妮娅"
 
-    # 使用声骸技能后15秒内，若自身施放延奏技能，使下一个变奏技能登场的角色热熔伤害加成提升12.00%，持续15秒。
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        if attr.char_attr != CHAR_ATTR_MOLTEN:
+            return
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][2].removesuffix("%")) / 100
+        attr.add_dmg_bonus(value, title, "延奏后下一位热熔伤害提升12%")
 
 
 class Echo_6000201(EchoAbstract):
@@ -1239,6 +1280,14 @@ class Echo_6000223(EchoAbstract):
 class Echo_6000224(EchoAbstract):
     id = 6000224
     name = "绝息魄"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """按声骸技能已命中、延奏后下一位登场的有效窗口计算。"""
+        if attr.char_attr != CHAR_ATTR_VOID:
+            return
+        title = f"{char_name}-声骸技能-{self.name}" if char_name else self.get_title()
+        value = float(echo_id_data[str(self.id)]["skill"]["params"][-1][2].removesuffix("%")) / 100
+        attr.add_dmg_bonus(value, title, "延奏后下一位导电伤害提升12%")
 
     # 三段落雷伤害自身不入条目；延奏后下一位角色导电加成提升属于队友buff，未计自身。
 

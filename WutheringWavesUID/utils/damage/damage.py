@@ -270,15 +270,20 @@ class DamageAttribute:
         self.env_glacio_chafe = False
         # 霜渐效应伤害加深
         self.env_glacio_chafe_deepen = False
-        # 已获得/响应同奏触发的装备buff窗口，不是当前持有同奏；消耗同奏不清除未到期的30秒增益。
-        self.env_unison = False
-        self.env_unison_response = False
         # 电磁效应
         self.env_electro_flare = False
         # 电磁效应伤害加深
         self.env_electro_flare_deepen = False
         # 异常类型
         self.abnormalType = None
+        # 获得同奏
+        self.env_unison = False
+        # 响应同奏
+        self.env_unison_response = False
+        # 同奏增益层数
+        self.unison_stack = 0
+        # 同奏增益层数上限
+        self.unison_stack_max: int = 2
         # 偏移效果
         self.env_shifting = None
         # 震谐·干涉
@@ -295,12 +300,16 @@ class DamageAttribute:
         self.tune_strain_stack = 0
         # 队友配置：换队友或条目自带的默认配队，见 set_teammate_buff
         self._teammate_config = ()
+        self._teammate_applied = False
+        self._teammate_rows_added = False
         # 是否按组队模式计算（挂了队友就是 True，见 buff.apply_teammates）
         self.group_mode = False
         # 触发护盾
         self.trigger_shield = False
         # 声骸结果
         self.ph_result = False
+        # 逐套记录实际已计入的字段；条件未满足的项不能被总标志吞掉。
+        self.sonata_applied: dict[str, list[str]] = {}
         # 联觉等级
         self.online_level = online_level
 
@@ -407,11 +416,10 @@ class DamageAttribute:
         return self
 
     def set_teammate_buff(self):
-        """在伤害函数里应用队友增益，读的就是 ``_teammate_config``。
+        """在当前插入位置直接应用已配置的队友增益，一次计算只加一次。
 
-        写法参考 ``set_phantom_dmg_bonus``：伤害函数开头用 ``set_teammate(...)``
-        声明这个条目自带的默认配队，到合适的位置再调一次本方法应用。
-        用户用「换队友」指定了配队时，默认配队让位，只算用户那套。
+        不预演、不检查配队冲突；角色的模板/属性/环境位由伤害条目先设置。
+        用户「换队友」覆盖条目默认配队，不改变本方法的插入位置。
         """
         from .buff import apply_teammates
 
@@ -640,9 +648,10 @@ class DamageAttribute:
         self.ph_detail.append(PhantomDetail.dict2Object(ph_detail))
         return self
 
-    def set_ph_result(self, ph_result: bool):
+    def set_ph_result(self, ph_result: bool, sonata_applied: dict[str, list[str]] | None = None):
         """设置声骸结果"""
         self.ph_result = ph_result
+        self.sonata_applied = {name: list(fields) for name, fields in (sonata_applied or {}).items()}
         return self
 
     def set_echo_id(self, echo_id: int):
@@ -739,6 +748,21 @@ class DamageAttribute:
     def set_env_electro_flare_deepen(self):
         """电磁效应伤害加深"""
         self.env_electro_flare_deepen = True
+        return self
+
+    def set_env_unison(self):
+        """获得同奏"""
+        self.env_unison = True
+        return self
+
+    def set_env_unison_response(self):
+        """响应同奏"""
+        self.env_unison_response = True
+        return self
+
+    def add_unison_stack(self, unison_stack: int, title="", msg=""):
+        self.unison_stack += unison_stack
+        self.add_effect(title, msg)
         return self
 
     def is_env_shifting(self):
@@ -879,12 +903,19 @@ class DamageAttribute:
         else:
             return 1 - self.enemy_resistance
 
+    def _finalize_sonata(self):
+        if self.ph_detail:
+            from .register_sonata import finalize_sonata
+
+            finalize_sonata(self)
+
     def calculate_crit_damage(self, effect_value=None):
         """
         计算暴击伤害。
 
         :return: 暴击伤害值
         """
+        self._finalize_sonata()
         if not effect_value:
             effect_value = self.effect_attack
         # 计算暴击伤害
@@ -908,6 +939,7 @@ class DamageAttribute:
 
         :return: 期望伤害值
         """
+        self._finalize_sonata()
         if self.crit_rate > 1:
             return self.calculate_crit_damage(effect_value)
 

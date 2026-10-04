@@ -143,6 +143,9 @@ class Weapon_21010036(WeaponAbstract):
     type = 1
     name = "焰痕"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.cast_hit(attr, isGroup)
+
     # 攻击提升12%。施放变奏技能或共鸣解放时，共鸣解放伤害提升24%，持续6秒；造成重击伤害时，该效果延长4秒，最多可延长1次。成功延长效果时，使队伍中的角色热熔伤害加成提升24%，持续30秒，同名效果之间不可叠加。
 
     def cast_variation(self, attr: DamageAttribute, isGroup: bool = False):
@@ -260,6 +263,10 @@ class Weapon_21010056(WeaponAbstract):
     type = 1
     name = "昙切"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        if attr.is_env_abnormal():
+            self.do_action([cast_variation], attr, isGroup, isSelf=False)
+
     def do_action(
         self,
         func_list: list[str] | str,
@@ -309,6 +316,9 @@ class Weapon_21010066(WeaponAbstract):
     id = 21010066
     type = 1
     name = "宙算仪轨"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.cast_healing(attr, isGroup)
 
     # # 造成治疗时，使附近队伍中所有角色的暴击伤害提升{4}
     def cast_healing(self, attr: DamageAttribute, isGroup: bool = False):
@@ -654,6 +664,11 @@ class Weapon_21020046(WeaponAbstract):
     type = 2
     name = "血誓盟约"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        # 仅风主持有并施放缥缈无相可触发，不以队伍里存在风主代替持有者。
+        if char_name == "漂泊者·气动":
+            self.cast_skill(attr, isGroup, isSelf=False)
+
     def cast_healing(self, attr: DamageAttribute, isGroup: bool = False):
         """施放治疗"""
         if attr.char_damage != skill_damage:
@@ -663,14 +678,13 @@ class Weapon_21020046(WeaponAbstract):
         msg = f"造成治疗时，自身共鸣技能伤害提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
-    def cast_skill(self, attr: DamageAttribute, isGroup: bool = False):
+    def cast_skill(self, attr: DamageAttribute, isGroup: bool = False, isSelf: bool = True):
         """施放共鸣技能"""
         if attr.char_attr != CHAR_ATTR_SIERRA:
             return
-        # 持有者是不是风主：主C自己就是风主，或者风主作为队友在队伍里
-        # （队友侧由 Char_1406._do_buff 按声明调到这里，attr.role 是主C）
+        # 自用只认持有者；队友入口已通过正式角色名核验风主。
         holder = attr.role.role.roleId if attr.role else None
-        if holder in (1406, 1408) or 1406 in attr.teammate_char_ids or 1408 in attr.teammate_char_ids:
+        if not isSelf or holder in (1406, 1408):
             dmg = f"{self.param(2)}"
             title = self.get_title()
             msg = f"风主施放共鸣技能时，附近队伍中登场角色气动伤害加深{dmg}"
@@ -727,6 +741,9 @@ class Weapon_21020066(WeaponAbstract):
     id = 21020066
     type = 2
     name = "裁竹"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.cast_variation(attr, isGroup)
 
     # 施放变奏技能或普攻后10秒内，施放声骸技能时，获得1层【解竹】，重击伤害加成提升30%，同名声骸只可触发一次，最多可叠加2层，持续12秒，叠加至2层后施放声骸技能不刷新持续时间。该效果10秒内最多生效1次，若切换至其他角色则该效果提前结束。
     # 施放变奏技能时，队伍中的角色声骸技能伤害加成提升20%，持续30秒，同名效果之间不可叠加。
@@ -827,6 +844,7 @@ class Weapon_21020086(WeaponAbstract):
     ):
         if not attr.env_glacio_chafe:
             return
+        title = self.get_title()
         if attr.char_attr == CHAR_ATTR_FREEZING:
             title = self.get_title()
             dmg = f"{self.param(1)}"
@@ -947,11 +965,15 @@ class Weapon_21020107(WeaponAbstract):
     type = 2
     name = "沉冥"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action(["unison_jinian"], attr, isGroup, isSelf=False)
+
     def do_action(
         self,
         func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
+        isSelf: bool = True,
     ):
         # 只读取本次伤害的有效状态，不将施放解放、同奏增益或响应同奏等同于获得同奏。
         # param(0)常驻攻击已由面板处理；全队羁念也包含持有者自身。
@@ -960,19 +982,19 @@ class Weapon_21020107(WeaponAbstract):
         if isinstance(func_list, str):
             func_list = [func_list]
         title = self.get_title()
-        if "gain_unison" in func_list:
+        if isSelf and attr.env_unison:
             dmg = self.param(1)
             msg = f"获得同奏后{self.param(3)}秒内，导电伤害加成提升{dmg}"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
         # 羁念/怅念为互斥的最终状态；误传两者时按已消耗协奏处理，不重复叠加。
-        if "consume_concerto" in func_list:
-            dmg = self.param(4)
-            msg = f"怅念：消耗协奏后{self.param(5)}秒内且未切人，导电伤害加成提升{dmg}，移除羁念"
-            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
-        elif "unison_jinian" in func_list:
+        if "unison_jinian" in func_list:
             dmg = self.param(2)
-            msg = f"羁念：全队导电伤害加成提升{dmg}，持有者自身也享受，持续{self.param(3)}秒"
+            msg = f"羁念：全队导电伤害加成提升{dmg}，持续{self.param(3)}秒"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
+        elif isSelf:
+            dmg = self.param(4)
+            msg = f"怅念：移除羁念后，自身导电伤害加成提升{dmg}"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
@@ -998,6 +1020,9 @@ class Weapon_21030015(WeaponAbstract):
     id = 21030015
     type = 3
     name = "停驻之烟"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.buff(attr, isGroup)
 
     def buff(self, attr: DamageAttribute, isGroup: bool = False):
         """造成伤害"""
@@ -1151,6 +1176,9 @@ class Weapon_21030046(WeaponAbstract):
     type = 3
     name = "溢彩荧辉"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action(["cast_attack"], attr, isGroup, isSelf=False)
+
     def do_action(
         self,
         func_list: list[str] | str,
@@ -1230,6 +1258,9 @@ class Weapon_21030066(WeaponAbstract):
     id = 21030066
     type = 3
     name = "碎骨"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action([cast_variation], attr, isGroup, isSelf=False)
 
     # 施放变奏技能时，自身普攻伤害加成提升{1}
     # 附加【骇破·偏移】时，自身普攻伤害加成提升{3}，持续{4}秒，队伍中的角色攻击提升{5}
@@ -1923,6 +1954,9 @@ class Weapon_21050036(WeaponAbstract):
     type = 5
     name = "星序协响"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.skill_create_healing(attr, isGroup)
+
     def skill_create_healing(self, attr: DamageAttribute, isGroup: bool = False):
         """共鸣技能造成治疗"""
         if attr.char_template != temp_atk:
@@ -1982,6 +2016,9 @@ class Weapon_21050046(WeaponAbstract):
     id = 21050046
     type = 5
     name = "和光回唱"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.cast_extension(attr, isGroup)
 
     def check_1(self, attr: DamageAttribute, isGroup: bool = False):
         if attr.role is None:
@@ -2130,6 +2167,9 @@ class Weapon_21050076(WeaponAbstract):
     type = 5
     name = "赝作的矮星"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action([cast_variation], attr, isGroup, isSelf=False)
+
     # 附加聚爆效应或集谐·偏移时，共鸣解放伤害加成提升{1}
     # 该效果生效期间，队伍中的角色附加聚爆效应或集谐·偏移时，该角色攻击提升{3}
     def do_action(
@@ -2174,6 +2214,9 @@ class Weapon_21050086(WeaponAbstract):
     id = 21050086
     type = 5
     name = "存帧"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action([cast_variation], attr, isGroup, isSelf=False)
 
     # 附加霜渐效应时，自身冷凝伤害加成提升{1}
     # 队伍中的角色攻击提升{3}
@@ -2221,6 +2264,9 @@ class Weapon_21050096(WeaponAbstract):
     type = 5
     name = "栖霞饮露"
 
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.do_action([cast_variation], attr, isGroup)
+
     # 附近队伍中所有角色攻击提升{2}
     def do_action(
         self,
@@ -2266,7 +2312,7 @@ class Weapon_21050116(WeaponAbstract):
         func_list: list[str] | str,
         attr: DamageAttribute,
         isGroup: bool = False,
-        on_field: bool = True,
+        isSelf: bool = True,
     ):
         # param(0)全属性伤害加成为面板常驻属性，不在伤害计算中重加。
         actions = [func_list] if isinstance(func_list, str) else func_list
@@ -2281,7 +2327,7 @@ class Weapon_21050116(WeaponAbstract):
                 attr.add_enemy_resistance(
                     -calc_percent_expression(self.param(2)), title, f"共鸣技能伤害无视{self.param(2)}导电抗性"
                 )
-        if on_field and attr.env_electro_flare_deepen:
+        if isSelf and attr.env_electro_flare_deepen:
             attr.add_dmg_deepen(
                 calc_percent_expression(self.param(3)), title, f"自身在场且目标位于范围内，电磁效应伤害加深{self.param(3)}"
             )

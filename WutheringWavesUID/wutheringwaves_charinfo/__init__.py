@@ -16,7 +16,7 @@ from ..utils.resource.constant import SPECIAL_CHAR
 from ..utils.waves_api import waves_api
 from ..wutheringwaves_config import WutheringWavesConfig
 from .draw_char_card import draw_char_detail_img, draw_char_score_img
-from .draw_team_config import draw_teammate_config_img, draw_teammate_overview_img
+from .draw_team_config import draw_teammate_config_img, draw_teammate_equipment_img, draw_teammate_overview_img
 from .upload_card import (
     compress_all_custom_card,
     delete_all_custom_card,
@@ -39,11 +39,11 @@ waves_team_config = SV("waves队友配置", priority=3)
 
 
 @waves_team_config.on_regex(
-    rf"^队友配置(?P<char>{CHAR_NAME_PATTERN})?$",
+    rf"^队友配置(?P<char>装备|{CHAR_NAME_PATTERN})?$",
     block=True,
 )
 async def send_team_config_msg(bot: Bot, ev: Event):
-    match = re.search(rf"^队友配置(?P<char>{CHAR_NAME_PATTERN})?$", get_event_command_text(ev))
+    match = re.search(rf"^队友配置(?P<char>装备|{CHAR_NAME_PATTERN})?$", get_event_command_text(ev))
     if not match:
         return
     ev.regex_dict = match.groupdict()
@@ -52,6 +52,10 @@ async def send_team_config_msg(bot: Bot, ev: Event):
 
     if not char:
         im = await draw_teammate_overview_img()
+        return await bot.send(await convert_img(im))
+
+    if char == "装备":
+        im = await draw_teammate_equipment_img()
         return await bot.send(await convert_img(im))
 
     char_id = char_name_to_char_id(char)

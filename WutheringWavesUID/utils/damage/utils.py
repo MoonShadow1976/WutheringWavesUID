@@ -129,7 +129,7 @@ Fusion_Burst_Role_Ids = [1210, 1211]
 Glacio_Chafe_Role_Ids = [1108, 1109, 1110]
 
 # 电磁效应
-Electro_Flare_Role_Ids = [1307, 1309, 1310]
+Electro_Flare_Role_Ids = [1307, 1309, 1310, 1311]
 
 # 震谐伤害
 Tune_Rupture_Role_Ids = [1209, 1210, 1509]

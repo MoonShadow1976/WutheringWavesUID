@@ -216,6 +216,8 @@ def _parse_options(options_text: str | None, role_id: int):
             raise TeamParseError(f"队友状态【{raw.strip()}】要写成 名称=值 的形式")
         key, value = pair[0].strip(), pair[1].strip()
         target = _SWITCH_KEYS.get(key) or _STATE_KEYS.get(key)
+        if target is None and state_spec(role_id, key) is not None:
+            target = key
         if target is None:
             raise TeamParseError(f"未知队友状态【{key}】")
         if target in seen:
@@ -233,9 +235,10 @@ def _parse_options(options_text: str | None, role_id: int):
                 fields["weapon"] = False
             else:
                 if not value.isdigit():
-                    value = weapon_name_to_weapon_id(value)
-                    if value is None:
+                    weapon_id = weapon_name_to_weapon_id(value)
+                    if weapon_id is None:
                         raise TeamParseError(f"找不到武器【{value}】，请填武器名或武器 ID，或填 开/关")
+                    value = weapon_id
                 fields["weapon_id"] = value
                 fields["weapon"] = True
         elif target in ("sonata", "echo"):

@@ -10,6 +10,7 @@ async def all_start():
     try:
         from ..utils.damage.register_char import register_char
         from ..utils.damage.register_echo import register_echo
+        from ..utils.damage.register_sonata import register_sonata
         from ..utils.damage.register_weapon import register_weapon
         from ..utils.limit_user_card import load_limit_user_card
         from ..utils.map.damage.register import register_damage, register_rank
@@ -18,6 +19,7 @@ async def all_start():
         # 注册
         register_weapon()
         register_echo()
+        register_sonata()
         register_damage()
         register_rank()
         register_char()

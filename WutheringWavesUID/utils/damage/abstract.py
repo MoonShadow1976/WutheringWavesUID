@@ -24,6 +24,10 @@ class WavesEchoRegister(WavesRegister):
     _id_cls_map = {}
 
 
+class WavesSonataRegister(WavesRegister):
+    _id_cls_map = {}
+
+
 class WavesCharRegister(WavesRegister):
     _id_cls_map = {}
 
@@ -40,6 +44,10 @@ class WeaponAbstract:
     id = None
     type = None
     name = None
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """该武器给予其他角色的增益，触发方式与数值由注册类统一维护。"""
+        pass
 
     def __init__(
         self,
@@ -192,9 +200,37 @@ class WeaponAbstract:
         pass
 
 
+class SonataAbstract:
+    name = None
+    pieces = 5
+
+    def do_panel(self, card_sort_map: dict, result: dict, role_id: int):
+        """常态面板已满足的套装增益；伤害触发入口不能重复施加。"""
+        pass
+
+    def do_phase(self, attr: DamageAttribute, role, damage_func: list[str], isGroup: bool = False, isHealing: bool = False):
+        """该套装的持有者触发效果，件数由注册类声明。"""
+        pass
+
+    def do_finalize(self, attr: DamageAttribute):
+        """结算前检查晚生效属性改变的门槛；具体套装自行保证只计一次。"""
+        pass
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """该套装给予队友的增益，套装数值只在注册实现中维护。"""
+        pass
+
+
 class EchoAbstract:
     name = None
     id = None
+
+    def get_title(self) -> str:
+        return self.name
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        """该声骸给予队友的增益，不带入持有者自身首位属性。"""
+        pass
 
     def do_echo(self, attr: DamageAttribute, isGroup: bool = False):
         self.damage(attr, isGroup)
@@ -238,17 +274,17 @@ class CharAbstract:
     # 写法（键就是装备目录里的分类名）::
     #
     #     teammate_equip = {
-    #         "sonata": "轻云出月",  # 默认合鸣，取值见 buff.SONATA_PRESETS
-    #         "echo": "无常凶鹭",  # 默认声骸，取值见 buff.ECHO_PRESETS
-    #         "weapon": {"id": 21050036, "action": "skill_create_healing"},  # 默认专武 + 用哪个行为触发
+    #         "sonata": "轻云出月",  # 默认合鸣，取值由套装注册类自动生成
+    #         "echo": "无常凶鹭",  # 默认声骸，取值由声骸注册类自动生成
+    #         "weapon": {"id": 21050036},  # 默认武器；触发方式由武器注册类维护
     #     }
     #
     # 每个键都是「这个角色本来就有这一部分」的意思：写了才会作为默认值施加，
     # 也才能被指令覆盖（`合鸣=…` / `声骸=…` / `武器=…`，填「关」表示这次不带）。
     # 没写的键表示角色本来就不带这一部分，此时任何预设都可以由指令直接指定。
     #
-    # 数值和生效条件只在 buff.py 的目录里维护一份：这里只写「用哪一套」，
-    # 具体给多少、什么条件下给（例如只在主C为某属性时给）都写在预设的 apply 里，
+    # 数值、生效条件与触发方式只在装备注册类中维护一份：这里只写「用哪一套」，
+    # buff.py 根据注册方法自动生成可选目录，不另外维护装备效果表，
     # 所以 _do_buff 里不要再把同一套合鸣 / 声骸写第二遍。
     teammate_equip: dict = {}
 
@@ -268,8 +304,37 @@ class CharAbstract:
         :param isGroup: 是否组队
 
         """
+        from .buff import TeamMember, _apply_member
+
         attr.add_teammate(self.id)
-        self._do_buff(attr, chain, resonLevel, isGroup)
+        _apply_member(attr, TeamMember(self.id, chain, resonLevel, name=self.name), isGroup=isGroup)
+
+    def _do_outro(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        """队友延奏增益，与角色固有/共鸣链分开，方便独立开关。"""
+        pass
+
+    def _do_weapon(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        """角色仅声明默认武器，实际队友增益由武器注册类触发。"""
+        from .buff import apply_weapon, resolve_declared_equip
+
+        equip = resolve_declared_equip(attr, self.teammate_equip, chain)
+        weapon_id = (equip.get("weapon") or {}).get("id")
+        if weapon_id:
+            apply_weapon(attr, weapon_id, resonLevel, isGroup, self.name)
 
     def _do_buff(
         self,
@@ -277,6 +342,7 @@ class CharAbstract:
         chain: int = 0,
         resonLevel: int = 1,
         isGroup: bool = True,
+        states: dict | None = None,
     ):
         """
         获得buff

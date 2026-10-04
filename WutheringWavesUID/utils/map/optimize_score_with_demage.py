@@ -18,6 +18,7 @@ from WutheringWavesUID.utils.calc import WuWaCalc
 from WutheringWavesUID.utils.damage.abstract import DamageRankRegister
 from WutheringWavesUID.utils.damage.register_char import register_char
 from WutheringWavesUID.utils.damage.register_echo import register_echo
+from WutheringWavesUID.utils.damage.register_sonata import register_sonata
 from WutheringWavesUID.utils.damage.register_weapon import register_weapon
 from WutheringWavesUID.utils.expression_evaluator import find_first_matching_expression
 from WutheringWavesUID.utils.map.damage.register import register_damage, register_rank
@@ -82,6 +83,133 @@ JINENG_LIST = [
     "共鸣技能伤害加成",
     "共鸣解放伤害加成",
 ]
+
+# ----- 声骸副词条概率表 -----
+phantom_sub_prob = {
+    "攻击": {"30": 0.067961, "40": 0.524272, "50": 0.378641, "60": 0.029126},
+    "防御": {"40": 0.145631, "50": 0.446602, "60": 0.320388, "70": 0.087379},
+    "暴击": {
+        "6.3%": 0.233333,
+        "6.9%": 0.233333,
+        "7.5%": 0.233333,
+        "8.1%": 0.08,
+        "8.7%": 0.08,
+        "9.3%": 0.08,
+        "9.9%": 0.03,
+        "10.5%": 0.03,
+    },
+    "暴击伤害": {
+        "12.6%": 0.233333,
+        "13.8%": 0.233333,
+        "15%": 0.233333,
+        "16.2%": 0.08,
+        "17.4%": 0.08,
+        "18.6%": 0.08,
+        "19.8%": 0.03,
+        "21.0%": 0.03,
+    },
+    "生命": {
+        "320": 0.067961,
+        "360": 0.077670,
+        "390": 0.203883,
+        "430": 0.242718,
+        "470": 0.174757,
+        "510": 0.145631,
+        "540": 0.058252,
+        "580": 0.029126,
+    },
+    "生命%": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    "防御%": {
+        "8.1%": 0.067961,
+        "9%": 0.077670,
+        "10%": 0.203883,
+        "10.9%": 0.242718,
+        "11.8%": 0.174757,
+        "12.8%": 0.145631,
+        "13.8%": 0.058252,
+        "14.7%": 0.029126,
+    },
+    "共鸣效率": {
+        "6.8%": 0.067961,
+        "7.6%": 0.077670,
+        "8.4%": 0.203883,
+        "9.2%": 0.242718,
+        "10%": 0.174757,
+        "10.8%": 0.145631,
+        "11.6%": 0.058252,
+        "12.4%": 0.029126,
+    },
+    "攻击%": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    # 伤害加成概率与攻击%一致
+    "普攻伤害加成": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    "重击伤害加成": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    "共鸣技能伤害加成": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    "共鸣解放伤害加成": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+    "技能伤害加成": {
+        "6.4%": 0.067961,
+        "7.1%": 0.077670,
+        "7.9%": 0.203883,
+        "8.6%": 0.242718,
+        "9.4%": 0.174757,
+        "10.1%": 0.145631,
+        "10.9%": 0.058252,
+        "11.6%": 0.029126,
+    },
+}
 
 
 def calc_sub_max_score(_temp, sub_props, jineng: list | None = None, skill_weight: list | None = None):
@@ -303,12 +431,12 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
             }
         )
 
-        if "暴击" != sub_name.replace("%", ""):
-            need_crit = True
-            base_damage = base_crit_damage
-        else:
-            need_crit = False
-            base_damage = base_expected_damage
+        # if "暴击" != sub_name.replace("%", ""):
+        #     need_crit = True
+        #     base_damage = base_crit_damage
+        # else:
+        need_crit = False
+        base_damage = base_expected_damage
         new_damage = calc_damage(test_data, need_crit)
         improvement = (new_damage - base_damage) / base_damage
         improvement = improvement / float(max_val_str.replace("%", ""))
@@ -369,6 +497,7 @@ def register_all():
     """注册伤害计算所需的武器/声骸/伤害/排行/角色数据"""
     register_weapon()
     register_echo()
+    register_sonata()
     register_damage()
     register_rank()
     register_char()

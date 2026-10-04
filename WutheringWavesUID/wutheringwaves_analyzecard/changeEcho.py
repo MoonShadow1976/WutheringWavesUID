@@ -89,9 +89,14 @@ async def get_local_all_role_detail(uid: str) -> tuple[bool, dict]:
 async def get_char_name_from_local(char_name: str, role_data: dict):
     for char_id, role_info in role_data.items():
         roleName = role_info.get("role").get("roleName")
-        if char_name in roleName:
+        if char_name == roleName:
             logger.info(f"[鸣潮] 角色{char_name}与{roleName}匹配")
             return int(char_id), roleName
+    for char_id, role_info in role_data.items():
+            roleName = role_info.get("role").get("roleName")
+            if char_name in roleName:
+                logger.info(f"[鸣潮] 角色{char_name}与{roleName}匹配")
+                return int(char_id), roleName
     # 未找到匹配角色
     return None, None
 
@@ -336,4 +341,4 @@ async def change_weapon_resonLevel(waves_id: str, char: str, reson_level: int):
 
     # 覆盖更新
     await save_card_info(waves_id, waves_data)
-    return f"[鸣潮] 修改用户{waves_id}{char}角色武器精炼为{reson_level}成功！"
+    return f"[鸣潮] 修改用户{waves_id}{roleName}角色武器精炼为{reson_level}成功！"

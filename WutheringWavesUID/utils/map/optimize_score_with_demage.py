@@ -15,7 +15,7 @@ sys.path.insert(0, str(root))
 from WutheringWavesUID.utils.api.model import RoleDetailData
 from WutheringWavesUID.utils.ascension.weapon import get_weapon_model
 from WutheringWavesUID.utils.calc import WuWaCalc
-from WutheringWavesUID.utils.damage.abstract import DamageRankRegister
+from WutheringWavesUID.utils.damage.abstract import DamageDetailRegister, DamageRankRegister
 from WutheringWavesUID.utils.damage.register_char import register_char
 from WutheringWavesUID.utils.damage.register_echo import register_echo
 from WutheringWavesUID.utils.damage.register_sonata import register_sonata
@@ -373,12 +373,16 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
 
     # 获取伤害计算类
     rankDetail = DamageRankRegister.find_class(str(char_id))
-    if rankDetail is None:
+    damageDetail = DamageDetailRegister.find_class(str(char_id))
+    if not rankDetail or not damageDetail:
         print(f"角色{char_name}({char_id})未适配伤害计算，跳过更新权重")
         return None
 
+    # 计算排行伤害还是总伤害
+    all_damage = True
+
     # 辅助函数：计算伤害
-    def calc_damage(role_dict, need_crit=False):
+    def calc_damage(role_dict, need_crit=False, all_damage=False):
         role_obj = RoleDetailData(**role_dict)
         calc = WuWaCalc(role_obj)
         calc.phantom_pre = calc.prepare_phantom()
@@ -390,19 +394,34 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
         )
         calc.role_card = calc.enhance_summation_card_value(calc.phantom_card)
         attr = calc.card_sort_map_to_attribute(calc.role_card)
-        crit_damage, expected_damage = rankDetail["func"](attr, role_obj)
+
+        if all_damage:
+            crit_damage, expected_damage = 0, 0
+            for _dindex, damage_temp in enumerate(damageDetail):
+                # if "/" in damage_temp["title"]:
+                    # print(f"        总伤害统计跳过组队伤害：{damage_temp['title']}")
+                    # continue
+                attr_temp = copy.deepcopy(attr)
+                cd, ed = damage_temp["func"](attr_temp, role_obj)
+                crit_damage += int(cd.replace(",", "")[:6])
+                expected_damage += int(ed.replace(",", "")[:6])
+        else:
+            cd, ed = rankDetail["func"](attr, role_obj)
+            crit_damage = int(cd.replace(",", ""))
+            expected_damage = int(ed.replace(",", ""))
+
         print(
             f"  角色面板 暴击：{attr.crit_rate} 爆伤：{attr.crit_dmg} 攻击：{attr.effect_attack} 防御：{attr.effect_def} 生命：{attr.effect_life} 加成：{attr.dmg_bonus} 共效：{attr.energy_regen}"
         )
         if need_crit:
-            return int(crit_damage.replace(",", ""))
-        return int(expected_damage.replace(",", ""))
+            return crit_damage
+        return expected_damage
 
-    base_crit_damage = calc_damage(base_data, True)
-    base_expected_damage = calc_damage(base_data)
+    base_crit_damage = calc_damage(base_data, True, all_damage=all_damage)
+    base_expected_damage = calc_damage(base_data, all_damage=all_damage)
 
     # print(f"基础词条：test {base_data['phantomData']['equipPhantomList'][0]}=> 空")
-    print(f"基础伤害 暴击：{base_crit_damage} 期望伤害：{base_expected_damage}\n")
+    print(f"基础伤害(只取前三位有效数字) 暴击：{base_crit_damage} 期望伤害：{base_expected_damage}\n")
     # print(f"测试词条：test {base_phantom['equipPhantomList'][0]}")
     # 对每个 max_sub_props 词条，在第一个声骸添加该词条（最大值），计算提升
     improvements = {}
@@ -437,7 +456,7 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
         # else:
         need_crit = False
         base_damage = base_expected_damage
-        new_damage = calc_damage(test_data, need_crit)
+        new_damage = calc_damage(test_data, need_crit, all_damage=all_damage)
         improvement = (new_damage - base_damage) / base_damage
         improvement = improvement / float(max_val_str.replace("%", ""))
         improvements[sub_name] = improvement
@@ -508,7 +527,7 @@ if __name__ == "__main__":
 
     for char_limit in limit_data["charList"]:
         char_name = char_limit["name"]
-        for i in ["景燃", "清宵"]:
-            if i in char_name:
+        for i in ["心"]:
+            if i == char_name:
                 print(f"\n角色{char_name} 开始计算")
                 update_calc_json_weights(char_name, char_limit["charId"], char_limit["calcFile"], char_limit["weaponId"])

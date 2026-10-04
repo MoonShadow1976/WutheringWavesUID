@@ -369,6 +369,8 @@ async def parse_char_skill(data: dict[str, dict[str, Skill]]):
             relate_desc = relate_item.get_desc_detail()
             wrapped_relate_desc = wrap_text_with_manual_newlines(relate_desc, width=65)
 
+            lines_desc.append("")
+            lines_desc.append("^^^^^^^^")
             lines_desc.append(relate_title)
             lines_desc.extend(wrapped_relate_desc.split("\n"))
 

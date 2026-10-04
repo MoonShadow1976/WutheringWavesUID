@@ -71,8 +71,8 @@ CHAIN_FILE_PATTERN = re.compile(r"^calc-[\d\-+]+链\.json$")
 
 # 两组权重的最大相对差异小于这个比例时，认为它们是同一条权重，合并共用一个文件。
 # 权重本身被 floor 到 1e-5，有些链数之间只差最后一个最小位（伤害计算里的浮点噪声，
-# 比如全队统一的伤害乘区不改变相对收益），这种差异对评分的影响远小于 0.01%。
-WEIGHT_TOLERANCE = 1e-4
+# 比如全队统一的伤害乘区不改变相对收益），这种差异对评分的影响远小于 3%。
+WEIGHT_TOLERANCE = 3e-2
 
 
 def chains_tag(chains: list[int]) -> str:

@@ -1156,7 +1156,6 @@ class Char_1311(CharAbstract):
 class Char_1312(CharAbstract):
     id = 1312
     teammate_equip = {
-        "sonata": "镜影流电之瞬",
         "echo": "绝息魄",
         "weapon": {"id": 21020107},
     }
@@ -1183,9 +1182,6 @@ class Char_1312(CharAbstract):
         attr.set_env_unison()
         attr.add_effect(f"{self.name}-常态", "施放共鸣解放时，锁暝获得同奏")
         attr.add_unison_stack(1, f"{self.name}-响应同奏", "获得1层同奏增益")
-        from gsuid_core.logger import logger
-
-        logger.success(f"获得同奏增益:{attr.env_unison}")
         # 延奏技能:下一位登场角色导电伤害加深20%;拥有同奏增益时共鸣技能伤害加深25%,持续8秒
         title = f"{self.name}-延奏技能"
         if attr.char_attr == CHAR_ATTR_VOID:

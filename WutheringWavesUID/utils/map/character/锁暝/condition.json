@@ -18,13 +18,13 @@
     "value": 4
   },
   {
-    "choose": "calc-3链.json",
+    "choose": "calc-2-3链.json",
     "key": "chain",
     "op": "=",
     "value": 3
   },
   {
-    "choose": "calc-2链.json",
+    "choose": "calc-2-3链.json",
     "key": "chain",
     "op": "=",
     "value": 2

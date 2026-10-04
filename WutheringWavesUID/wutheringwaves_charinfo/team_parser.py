@@ -5,9 +5,11 @@
     心伤害3 换队友 散华61 守岸人01
     心伤害3 换队友 散华6链专武精一 守岸人01[领域=开,延奏=开,合鸣=关]
 
-- 队友之间用空格分隔，最多两人；
+- 队友之间可用空格分隔或直接连写（如 ``换队友守岸人01散华``），最多两人；
 - 队友名字支持角色别名，名字后面可以跟 ``61``（6链、专武精1）、
   ``6链专武精一``、``6链``、``精3`` 等写法，不写则默认 0链 精1；
+- 两位简写的精炼位 ``0`` 表示不计专武（``00`` 为0链，``60`` 为6链），
+  单独 ``0`` 等同 ``00``；方括号内显式武器配置优先于简写；
 - ``[]`` 内是该队友的状态配置，逗号分隔，可写：
   角色增益 / 延奏 / 武器 / 合鸣 / 声骸 = 开|关，
   以及角色特有状态（领域、祝福层数、暴击增益、固定攻击、模式）。
@@ -141,10 +143,50 @@ def _tokenize(body: str) -> list[str]:
         raise TeamParseError("队友状态括号未闭合")
     if current:
         tokens.append(current)
-    return tokens
+    return [member for token in tokens for member in _split_packed_members(token)]
 
 
-def _match_suffix(rest: str) -> tuple[int, int] | None:
+def _split_packed_members(token: str) -> list[str]:
+    """以现有名字/后缀规则拆连写队友；完整名字优先，不切开状态括号。"""
+    boundaries = [0]
+    inside = False
+    for index, char in enumerate(token, start=1):
+        if char == "[":
+            inside = True
+        elif char == "]":
+            inside = False
+        if not inside:
+            boundaries.append(index)
+    cache: dict[int, list[str] | None] = {len(token): []}
+
+    def split(start: int) -> list[str] | None:
+        if start in cache:
+            return cache[start]
+        for end in reversed(boundaries):
+            if end <= start:
+                continue
+            part = token[start:end]
+            try:
+                name, _ = _split_options(part)
+                matched = _match_member(name)
+            except TeamParseError:
+                continue
+            if matched is None:
+                continue
+            rest = split(end)
+            if rest is not None:
+                cache[start] = [part, *rest]
+                return cache[start]
+        cache[start] = None
+        return None
+
+    # 拆不出来时仍交给原解析路径报错，不吞掉非法后缀/状态错误。
+    return split(0) or [token]
+
+
+def _match_suffix(rest: str) -> tuple[int, int, bool] | None:
+    if rest == "0":
+        return 0, 1, False
     for pattern, has_both in _SUFFIX_RULES:
         match = pattern.match(rest)
         if not match:
@@ -152,14 +194,18 @@ def _match_suffix(rest: str) -> tuple[int, int] | None:
         groups = match.groupdict()
         chain = _DIGITS.get(groups["chain"], 0) if groups.get("chain") else 0
         reson = _RESON_DIGITS.get(groups["reson"], 1) if groups.get("reson") else 1
+        # 仅数字简写的精炼位0代表无专武，不把非法精炼0传入伤害计算。
+        weapon = not (len(rest) == 2 and rest.isdigit() and reson == 0)
+        if not weapon:
+            reson = 1
         if has_both and (not 0 <= chain <= 6 or not 1 <= reson <= 5):
             raise TeamParseError("共鸣链范围是0至6，武器精炼范围是1至5")
-        return chain, reson
+        return chain, reson, weapon
     return None
 
 
-def _match_member(name_part: str) -> tuple[int, int, int, str] | None:
-    """把「名字」或「名字+链/精炼后缀」解析成 ``(角色id, 共鸣链, 精炼, 命中名字)``。
+def _match_member(name_part: str) -> tuple[int, int, int, bool, str] | None:
+    """把「名字」或「名字+链/精炼后缀」解析成 ``(角色id, 共鸣链, 精炼, 计专武, 命中名字)``。
 
     先按整个名字查一次（别名表里认得的就是这个分支），认不出再拆「散华61」
     「尤诺21」「散华6链专武精一」这种后缀：从长名字往短里试，和旧实现
@@ -167,7 +213,7 @@ def _match_member(name_part: str) -> tuple[int, int, int, str] | None:
     """
     role_id = _char_id_of(name_part)
     if role_id is not None:
-        return role_id, 0, 1, alias_to_char_name(name_part)
+        return role_id, 0, 1, True, alias_to_char_name(name_part)
 
     for index in range(len(name_part) - 1, 0, -1):
         parsed = _match_suffix(name_part[index:])
@@ -177,8 +223,8 @@ def _match_member(name_part: str) -> tuple[int, int, int, str] | None:
         head_id = _char_id_of(head)
         if head_id is None:
             continue
-        chain, reson = parsed
-        return head_id, chain, reson, alias_to_char_name(head)
+        chain, reson, weapon = parsed
+        return head_id, chain, reson, weapon, alias_to_char_name(head)
     return None
 
 
@@ -188,7 +234,7 @@ def _parse_member_token(token: str, member_factory):
     matched = _match_member(name_part)
     if matched is None:
         raise TeamParseError(f"未知队友或配置写法【{name_part}】，请检查角色名是否正确")
-    role_id, chain, reson, matched_name = matched
+    role_id, chain, reson, weapon, matched_name = matched
 
     if not 0 <= chain <= 6:
         raise TeamParseError("共鸣链范围是0至6")
@@ -196,6 +242,8 @@ def _parse_member_token(token: str, member_factory):
         raise TeamParseError("武器精炼范围是1至5")
 
     fields, rows = _parse_options(options_text, role_id)
+    if not weapon:
+        fields.setdefault("weapon", False)
     member = member_factory(role_id=role_id, chain=chain, reson_level=reson, **fields)
     return member, rows, matched_name
 

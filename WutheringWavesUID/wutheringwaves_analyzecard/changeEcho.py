@@ -93,10 +93,10 @@ async def get_char_name_from_local(char_name: str, role_data: dict):
             logger.info(f"[鸣潮] 角色{char_name}与{roleName}匹配")
             return int(char_id), roleName
     for char_id, role_info in role_data.items():
-            roleName = role_info.get("role").get("roleName")
-            if char_name in roleName:
-                logger.info(f"[鸣潮] 角色{char_name}与{roleName}匹配")
-                return int(char_id), roleName
+        roleName = role_info.get("role").get("roleName")
+        if char_name in roleName:
+            logger.info(f"[鸣潮] 角色{char_name}与{roleName}匹配")
+            return int(char_id), roleName
     # 未找到匹配角色
     return None, None
 

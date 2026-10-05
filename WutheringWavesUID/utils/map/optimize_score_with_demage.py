@@ -399,8 +399,8 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
             crit_damage, expected_damage = 0, 0
             for _dindex, damage_temp in enumerate(damageDetail):
                 # if "/" in damage_temp["title"]:
-                    # print(f"        总伤害统计跳过组队伤害：{damage_temp['title']}")
-                    # continue
+                # print(f"        总伤害统计跳过组队伤害：{damage_temp['title']}")
+                # continue
                 attr_temp = copy.deepcopy(attr)
                 cd, ed = damage_temp["func"](attr_temp, role_obj)
                 crit_damage += int(cd.replace(",", "")[:6])

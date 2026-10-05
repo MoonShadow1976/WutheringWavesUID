@@ -1243,11 +1243,11 @@
                         },
                         {
                             "phantomId": 6000224,
+                            "mainPropName": "属性伤害加成",
                             "cost": 3
                         },
                         {
                             "phantomId": 6000223,
-                            "mainPropName": "攻击%",
                             "cost": 3
                         },
                         {

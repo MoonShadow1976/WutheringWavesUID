@@ -12971,8 +12971,8 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "暴击伤害",
-              "attributeValue": "44%",
+              "attributeName": "攻击",
+              "attributeValue": "33%",
               "iconUrl": ""
             },
             {
@@ -13027,7 +13027,7 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "攻击",
+              "attributeName": "导电伤害加成",
               "attributeValue": "30%",
               "iconUrl": ""
             },
@@ -13083,7 +13083,7 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "攻击",
+              "attributeName": "导电伤害加成",
               "attributeValue": "30%",
               "iconUrl": ""
             },

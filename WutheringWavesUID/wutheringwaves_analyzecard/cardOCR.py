@@ -574,6 +574,8 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                     .replace("永遠啟明星", "永远的启明星")
                     .replace("萬物持存注釋", "万物持存的注释")
                     .replace("玉關玄華", "玉阙玄华")
+                    .replace("林間詠嘆調", "林间的咏叹调")
+                    .replace("海呢喃", "海的呢喃")
                 )
                 line_clean = re.sub(r".*古洑流$", "千古洑流", line_clean)
                 if not final_result["武器信息"].get("武器名"):

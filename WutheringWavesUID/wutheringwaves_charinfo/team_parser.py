@@ -10,7 +10,7 @@
   ``6链专武精一``、``6链``、``精3`` 等写法，不写则默认 0链 精1；
 - 两位简写的精炼位 ``0`` 表示不计专武（``00`` 为0链，``60`` 为6链），
   单独 ``0`` 等同 ``00``；方括号内显式武器配置优先于简写；
-- ``[]`` 内是该队友的状态配置，逗号分隔，可写：
+- ``[]`` 内是该队友的状态配置，可用逗号、空格、分号或顿号分隔，可写：
   角色增益 / 延奏 / 武器 / 合鸣 / 声骸 = 开|关，
   以及角色特有状态（领域、祝福层数、暴击增益、固定攻击、模式）。
 """
@@ -116,11 +116,14 @@ def _split_options(token: str) -> tuple[str, str | None]:
         raise TeamParseError("队友状态括号未闭合，请使用 [状态=值] 的形式")
     if "]" in options[:-1]:
         raise TeamParseError("队友状态格式错误，不能嵌套括号")
-    return name, options[:-1]
+    return name.strip(), options[:-1]
 
 
 def _tokenize(body: str) -> list[str]:
     """按空格切分队友；方括号内的空格和逗号都属于状态配置。"""
+    # 兼容中文输入法括号，以及名字和状态括号间的空白。
+    body = body.translate(str.maketrans("［］【】", "[][]"))
+    body = re.sub(r"(?<=\S)\s+(?=\[)", "", body)
     tokens: list[str] = []
     current = ""
     inside = False
@@ -258,8 +261,15 @@ def _parse_options(options_text: str | None, role_id: int):
 
     states: dict = {}
     seen: set[str] = set()
-    for raw in re.split("[,，]", options_text):
-        pair = re.split("[=＝]", raw)
+    # 只在下一个“名称=值”之前拆空白，保留装备名称/状态值内部的空格；
+    # 等号两侧允许空白，连续或末尾分隔符也不影响有效配置。
+    option_parts = re.split(r"[,，;；、]+|\s+(?=[^\s=＝:：,，;；、]+\s*[=＝:：])", options_text)
+    if not any(raw.strip() for raw in option_parts):
+        raise TeamParseError("队友状态不能为空，请填写 名称=值")
+    for raw in option_parts:
+        if not raw.strip():
+            continue
+        pair = re.split("[=＝:：]", raw)
         if len(pair) != 2 or not pair[0].strip() or not pair[1].strip():
             raise TeamParseError(f"队友状态【{raw.strip()}】要写成 名称=值 的形式")
         key, value = pair[0].strip(), pair[1].strip()

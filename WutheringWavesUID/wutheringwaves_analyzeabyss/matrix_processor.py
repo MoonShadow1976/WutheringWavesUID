@@ -163,7 +163,7 @@ async def _run_matrix_recognize(bot, ev, images, uid, user_id, at) -> bytes | st
                 logger.warning(f"[ww-matrix-processor] 裁切失败: {e}")
 
     if not all_raw_teams:
-        return "[鸣潮]未能识别到任何矩阵队伍，请确认分享图完整清晰。\n"
+        return "[鸣潮]未能识别到任何矩阵队伍，请确认矩阵截图完整清晰且没有滤镜改色(暂不支持分享图)。\n"
 
     r.match_empty = False
 
@@ -334,4 +334,4 @@ async def _run_matrix_recognize(bot, ev, images, uid, user_id, at) -> bytes | st
     # 8. 绘图
     from ..wutheringwaves_abyss.draw_matrix_card import draw_matrix_img
 
-    return await draw_matrix_img(ev, str(uid), user_id, matrix_data=matrix_data)
+    return await draw_matrix_img(ev, str(uid), user_id, matrix_data=matrix_data, matrix_version=current_version)

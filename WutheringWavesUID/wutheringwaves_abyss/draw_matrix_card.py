@@ -72,7 +72,13 @@ async def get_matrix_data(uid: str, ck: str, is_self_ck: bool):
     return matrix_data
 
 
-async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: MatrixData | None = None) -> bytes | str:
+async def draw_matrix_img(
+    ev: Event,
+    uid: str,
+    user_id: str,
+    matrix_data: MatrixData | None = None,
+    matrix_version: str | None = None,
+) -> bytes | str:
     from_local = False
     is_self_ck = False
 
@@ -121,14 +127,14 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
     else:
 
         async def _try_local():
-            local_matrix, _ver = await get_matrix_detail_local(uid)
+            local_matrix, local_version = await get_matrix_detail_local(uid)
             if local_matrix is None or not local_matrix.modeDetails:
                 return None
             if not any(m.teams for m in local_matrix.modeDetails):
                 return None
             acc = await get_user_detail_info(uid)
             ri = _build_role_info_from_matrix(local_matrix)
-            return (acc, ri, local_matrix)
+            return (acc, ri, local_matrix, local_version)
 
         async def _try_ck():
             ck_res = await waves_api.get_ck_result(uid, user_id, ev.bot_id)
@@ -155,7 +161,7 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
             local_result = await _try_local()
             if local_result is None:
                 return MATRIX_ERROR_MESSAGE_NO_DATA
-            account_info, role_info, matrix_data = local_result
+            account_info, role_info, matrix_data, matrix_version = local_result
             from_local = True
         else:
             # 国服: API 优先, 失败回退本地
@@ -165,10 +171,18 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
             else:
                 local_result = await _try_local()
                 if local_result is not None:
-                    account_info, role_info, matrix_data = local_result
+                    account_info, role_info, matrix_data, matrix_version = local_result
                     from_local = True
                 else:
                     return err if isinstance(err, str) else MATRIX_ERROR_MESSAGE_NO_DATA
+
+    # 本地历史记录必须保留原周期；缺失周期不能冒充当前版本。
+    if not from_local:
+        matrix_version = ".".join(get_version().split(".")[:2])
+    elif matrix_version:
+        matrix_version = ".".join(matrix_version.split(".")[:2])
+    else:
+        matrix_version = ""
 
     command = ev.command
     text = ev.text.strip()
@@ -188,6 +202,7 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
     img = Image.new("RGBA", (2560, 1440), (30, 45, 65, 70))  # 遮罩
     card_img = Image.alpha_composite(card_img, img)
     card_img_draw = ImageDraw.Draw(card_img)
+    # card_img_draw.text((2500, 80), f"周期: {matrix_version or '未知'}", "white", waves_font_30, "rm")
 
     # 基础信息
     base_info_bg = Image.new("RGBA", (2560, 1440), (0, 0, 0, 0))
@@ -510,7 +525,9 @@ async def draw_matrix_img(ev: Event, uid: str, user_id: str, matrix_data: Matrix
     if matrix_data:
         if not from_local:
             await upload_matrix_record(uid, matrix_data, role_info, role_detail_info_map)
-        await save_matrix_to_group_rank(user_id, uid, account_info.name, matrix_data, role_info, role_detail_info_map)
+        await save_matrix_to_group_rank(
+            user_id, uid, account_info.name, matrix_data, role_info, role_detail_info_map, version=matrix_version
+        )
 
     # 裁剪画布到实际使用的高度，并添加页脚
     final_height = max(y_offset, 1440)
@@ -527,6 +544,7 @@ async def save_matrix_to_group_rank(
     matrix_data: MatrixData,
     role_info: RoleList,
     role_detail_info_map: dict | None = None,
+    version: str | None = None,
 ) -> bool:
     """
     保存矩阵数据到本地群排行数据库（仅本地存储，不涉及上传队列）
@@ -538,11 +556,19 @@ async def save_matrix_to_group_rank(
         matrix_data: 矩阵数据对象
         role_info: 角色列表（用于匹配角色ID与图标）
         role_detail_info_map: 角色详细信息映射（用于获取链度）
+        version: 数据所属周期；None 使用当前版本，空字符串跳过写入
 
     Returns:
         bool: 保存成功返回 True，否则 False
     """
     try:
+        if version is None:
+            version = ".".join(get_version().split(".")[:2])
+        if not version:
+            logger.info("[矩阵本地保存] 跳过: 数据周期未知")
+            return False
+        version = ".".join(version.split(".")[:2])
+
         # 1. 提取奇点扩张模式 (modeId=1)
         if not matrix_data.modeDetails:
             logger.info("[矩阵本地保存] 跳过: 无模式数据")
@@ -608,15 +634,12 @@ async def save_matrix_to_group_rank(
         if highest_team.buffs and len(highest_team.buffs) > 0:
             buff_icon = highest_team.buffs[0].buffIcon
 
-        # 5. 获取当前版本
-        current_version = ".".join(get_version().split(".")[:2])
-
-        # 6. 保存到数据库
+        # 5. 按数据所属周期保存到数据库
         await GroupRankRecord.save_matrix_record(
             user_id=user_id,
             waves_id=waves_id,
             name=name,
-            version=current_version,
+            version=version,
             total_score=singularity_mode.score,
             team_count=len(valid_teams),
             team_score=highest_team.score,
@@ -626,7 +649,7 @@ async def save_matrix_to_group_rank(
 
         logger.info(
             f"[矩阵本地保存] 成功 user_id={user_id}, waves_id={waves_id}, "
-            f"version={current_version}, total_score={singularity_mode.score}，char_scores={char_scores}"
+            f"version={version}, total_score={singularity_mode.score}，char_scores={char_scores}"
         )
 
         # 清理旧版本数据（仅保留最近两个版本）

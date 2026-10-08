@@ -45,7 +45,7 @@ from ..wutheringwaves_grouprank.models import GroupRankRecord
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
 SLASH_ERROR = "数据获取失败，请稍后再试"
-SLASH_ERROR_MESSAGE_NO_DATA = f"当前暂无冥歌海墟数据, 可考虑【{PREFIX}上传无尽】上传分享图\n"
+SLASH_ERROR_MESSAGE_NO_DATA = f"当前暂无冥歌海墟数据, 可考虑【{PREFIX}上传无尽】上传分享图(删除使用【{PREFIX}删除无尽】)\n"
 SLASH_ERROR_MESSAGE_NO_UNLOCK = "无冥歌海墟暂未解锁"
 
 

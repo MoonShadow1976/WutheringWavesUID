@@ -39,7 +39,7 @@ from ..wutheringwaves_config import PREFIX
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
-ABYSS_ERROR_MESSAGE_NO_DATA = f"当前暂无深塔数据, 可考虑【{PREFIX}上传深塔】上传分享图\n"
+ABYSS_ERROR_MESSAGE_NO_DATA = f"当前暂无深塔数据, 可考虑【{PREFIX}上传深塔】上传分享图(删除使用【{PREFIX}删除深塔】)\n"
 ABYSS_ERROR_MESSAGE_NO_UNLOCK = "深塔暂未解锁\n"
 ABYSS_ERROR_MESSAGE_NO_DEEP = "当前暂无深境区深塔数据\n"
 no_login_msg = [

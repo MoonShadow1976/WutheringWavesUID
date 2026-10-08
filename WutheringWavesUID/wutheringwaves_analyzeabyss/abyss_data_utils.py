@@ -276,6 +276,17 @@ async def set_challenge_data(uid, ctype: str, challenge_data: dict) -> bool:
     return await save_abyss_data(uid, data)
 
 
+async def del_challenge_data(uid, ctype: str) -> bool:
+    """删除本地指定类型的挑战数据, 无该类型数据返回 False."""
+    if ctype not in SUPPORTED_TYPES:
+        return False
+    data = await load_abyss_data(uid)
+    if ctype not in data:
+        return False
+    data.pop(ctype, None)
+    return await save_abyss_data(uid, data)
+
+
 async def get_slash_detail_local(uid) -> SlashDetail | None:
     """读本地 slash, 直接转 SlashDetail"""
     local = await get_challenge_data(uid, TYPE_SLASH)

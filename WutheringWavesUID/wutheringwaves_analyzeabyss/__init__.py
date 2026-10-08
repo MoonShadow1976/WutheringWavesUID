@@ -1,4 +1,4 @@
-"""slash/abyss/matrix 挑战分享图上传命令层.
+"""slash/abyss/matrix 挑战分享图上传/本地数据删除命令层.
 
 3 种挑战 key 与 abyss 模块/wwapi 对齐:
   slash (海墟)  - 已实现 change from https://github.com/TedIwaArdN/WhiWaReader
@@ -22,6 +22,8 @@ from .abyss_data_utils import (
     TYPE_MATRIX,
     TYPE_SLASH,
     ctype_label,
+    del_challenge_data,
+    get_challenge_data,
     set_challenge_data,
 )
 from .matrix_processor import run_matrix_recognize
@@ -31,6 +33,7 @@ from .toa_processor import run_toa_recognize
 sv_waves_upload_haixu = SV("waves上传海墟分享图", priority=4)
 sv_waves_upload_abyss = SV("waves上传深塔分享图", priority=4)
 sv_waves_upload_matrix = SV("waves上传矩阵分享图", priority=4)
+sv_waves_delete_challenge = SV("waves删除挑战数据", priority=4)
 
 _NOT_IMPL = "[鸣潮]上传{}：敬请期待，暂未开放~\n目前已开放：上传海墟无尽、深塔、矩阵。\n"
 
@@ -192,3 +195,39 @@ async def upload_abyss_cmd(bot: Bot, ev: Event) -> None:
 async def upload_matrix_cmd(bot: Bot, ev: Event) -> None:
     logger.info("[鸣潮][上传矩阵] 开始处理")
     await _upload_entry(bot, ev, TYPE_MATRIX)
+
+
+async def _delete_entry(bot: Bot, ev: Event, ctype: str):
+    """删除本地挑战数据: 深塔/海墟/矩阵, 复用上传的绑定特征码逻辑."""
+    at = _at(ev)
+    _, save_uid = await _resolve_bound_uid(ev)
+    if not save_uid:
+        return await bot.send(
+            error_reply(WAVES_CODE_103) + "（请先在机器人处绑定特征码再重试）\n",
+            at,
+        )
+    label = ctype_label(ctype)
+    if not await get_challenge_data(save_uid, ctype):
+        return await bot.send(f"[鸣潮]当前特征码 {save_uid} 暂无本地{label}数据，无需删除~\n", at)
+    if not await del_challenge_data(save_uid, ctype):
+        return await bot.send(f"[鸣潮]删除本地{label}数据失败，请稍后再试~\n", at)
+    logger.info(f"[鸣潮][删除{label}] 特征码: {save_uid}")
+    return await bot.send(f"[鸣潮]已删除特征码 {save_uid} 的本地{label}数据~\n", at)
+
+
+@sv_waves_delete_challenge.on_command(("删除无尽", "删除海墟", "删除冥海", "删除冥歌海墟"), block=True)
+async def delete_haixu_cmd(bot: Bot, ev: Event) -> None:
+    logger.info("[鸣潮][删除无尽] 开始处理")
+    await _delete_entry(bot, ev, TYPE_SLASH)
+
+
+@sv_waves_delete_challenge.on_command(("删除深塔", "删除高塔", "删除深渊"), block=True)
+async def delete_abyss_cmd(bot: Bot, ev: Event) -> None:
+    logger.info("[鸣潮][删除深塔] 开始处理")
+    await _delete_entry(bot, ev, TYPE_ABYSS)
+
+
+@sv_waves_delete_challenge.on_command(("删除矩阵", "删除终焉矩阵"), block=True)
+async def delete_matrix_cmd(bot: Bot, ev: Event) -> None:
+    logger.info("[鸣潮][删除矩阵] 开始处理")
+    await _delete_entry(bot, ev, TYPE_MATRIX)

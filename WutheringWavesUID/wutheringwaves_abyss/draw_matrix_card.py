@@ -38,7 +38,9 @@ from ..wutheringwaves_grouprank.models import GroupRankRecord
 
 TEXT_PATH = Path(__file__).parent / "texture2d"
 
-MATRIX_ERROR_MESSAGE_NO_DATA = f"当前暂无终焉矩阵数据，可考虑【{PREFIX}上传矩阵】上传‘奇点扩张’截图(暂不支持分享图，删除使用【{PREFIX}删除矩阵】)\n"
+MATRIX_ERROR_MESSAGE_NO_DATA = (
+    f"当前暂无终焉矩阵数据，可考虑【{PREFIX}上传矩阵】上传‘奇点扩张’截图(暂不支持分享图，删除使用【{PREFIX}删除矩阵】)\n"
+)
 MATRIX_ERROR_MESSAGE_NO_UNLOCK = "终焉矩阵暂未解锁\n"
 
 MATRIX_MODE_NAMES = {

@@ -118,6 +118,7 @@ async def draw_char_list_img(
     is_peek: bool = False,
     user_waves_id: str = "",
     page_index: int = 1,
+    show_all: bool = False,
 ) -> str | bytes:
     _, ck = await waves_api.get_ck_result(user_waves_id, user_id, ev.bot_id)
     account_info = await get_user_detail_info(uid)
@@ -177,12 +178,16 @@ async def draw_char_list_img(
             all_num_5 += 1
 
     # 分页处理
-    page_size = 15
-    total_pages = (len(waves_char_rank) + page_size - 1) // page_size
-    if page_index > total_pages:
-        page_index = total_pages
-
-    render_list = waves_char_rank[(page_index - 1) * page_size : page_index * page_size]
+    if show_all:
+        render_list = waves_char_rank
+        total_pages = 1
+        page_index = 1
+    else:
+        page_size = 15
+        total_pages = (len(waves_char_rank) + page_size - 1) // page_size
+        if page_index > total_pages:
+            page_index = total_pages
+        render_list = waves_char_rank[(page_index - 1) * page_size : page_index * page_size]
 
     avatar_h = 230
     info_bg_h = 260
@@ -340,7 +345,7 @@ async def draw_char_list_img(
     info_bg_draw.text((750, 120), f"{chain_num_5}/{all_num_5}", "white", waves_font_40, "mm")
     info_bg_draw.text((750, 160), "高链5星", "white", waves_font_20, "mm")
 
-    page_info = f"-= 第{page_index}/{total_pages}页 =-"
+    page_info = "-= 全部角色 =-" if show_all else f"-= 第{page_index}/{total_pages}页 =-"
     info_bg_draw.text((500, 240), page_info, "white", waves_font_38, "mm")
 
     card_img.paste(info_bg, (0, avatar_h), info_bg)

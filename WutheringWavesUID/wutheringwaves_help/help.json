@@ -196,7 +196,7 @@
       {
         "name": "练度统计",
         "desc": "查询练度统计一览",
-        "eg": "练度统计(2)",
+        "eg": "练度统计(all/第2页)",
         "need_ck": true,
         "need_sk": false,
         "need_admin": false

@@ -397,7 +397,11 @@ def sharpen_and_clean(img: Image.Image, k: float = 10, median_size: int = 5, res
 
     result = arr.copy().astype(np.uint8)
     result[1:-1, 1:-1] = sharp
-    return Image.fromarray(result).filter(ImageFilter.MedianFilter(size=median_size))
+
+    out = Image.fromarray(result)
+    if median_size > 1:
+        out = out.filter(ImageFilter.MedianFilter(size=median_size))
+    return out
 
 
 async def cut_card_to_ocr(image: Image.Image) -> tuple[int, list[dict], list[Image.Image]]:

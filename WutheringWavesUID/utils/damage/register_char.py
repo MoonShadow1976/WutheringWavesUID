@@ -1167,6 +1167,13 @@ class Char_1312(CharAbstract):
             "default": True,
             "desc": "协契是否生效（延奏给下一位角色的导电与暴击伤害加成）",
         },
+        "同奏增益": {
+            "type": "int",
+            "min": 0,
+            "max": 9,
+            "default": 4,
+            "desc": "同奏增益效果的层数",
+        },
     }
 
     def _do_outro(
@@ -1178,6 +1185,7 @@ class Char_1312(CharAbstract):
         states: dict | None = None,
     ):
         states = states or {}
+        unison_stack = int(states.get("同奏增益", 4))
 
         attr.set_env_unison()
         attr.add_effect(f"{self.name}-常态", "施放共鸣解放时，锁暝获得同奏")
@@ -1194,16 +1202,35 @@ class Char_1312(CharAbstract):
         if states.get("协契", True) and attr.char_attr == CHAR_ATTR_VOID:
             # 固有技能-沉契凝锁(四破):协契期间延奏,下一位角色导电伤害加成提升30%,每层同奏增益额外20%,最多40%
             title = "固有技能-沉契凝锁"
-            extra = min(0.2 * attr.unison_stack_max, 0.4)
+            extra = min(0.2 * unison_stack, 0.4)
             msg = f"协契延奏:下一位角色导电伤害加成提升30%,同奏增益额外{extra * 100:.0f}%"
             attr.add_dmg_bonus(0.3 + extra, title, msg)
 
         # 二链:延奏时下一位登场角色暴击伤害提升10%,每层同奏增益额外6%,最多24%,持续30秒
         if chain >= 2:
             title = f"{self.name}-二链"
-            extra = min(0.06 * attr.unison_stack_max, 0.24)
+            extra = min(0.06 * unison_stack, 0.24)
             msg = f"延奏:下一位角色暴击伤害提升10%,同奏增益额外{extra * 100:.0f}%"
             attr.add_crit_dmg(0.1 + extra, title, msg)
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        states = states or {}
+        unison_stack = int(states.get("同奏增益", 4))
+        # 每层【同奏增益】的效果提升50%, 最多四层
+        if chain >= 6:
+            unison_stack = min(unison_stack, 4)
+            per_stack = 0.015
+            title = f"{self.name}-六链-同奏增益"
+            value = unison_stack * per_stack
+            msg = f"当前{unison_stack}层,每层最终伤害额外提升{per_stack * 100:.1f}%"
+            attr.add_final_damage(value, title, msg)
 
 
 class Char_1402(CharAbstract):

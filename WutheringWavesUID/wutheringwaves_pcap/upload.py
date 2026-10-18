@@ -193,6 +193,8 @@ async def handle_file_list(files: list[UploadFile]) -> ResultModel:
             # 从解析器中获取统计信息
             msg = [
                 f"📊 解析結果(uid:{parser.account_info.id})：",
+                f"• 成就数量：{parser.account_info.achievementCount}",
+                f"• 成就星数：{parser.account_info.achievementStar}",
                 f"• 角色数量：{len(waves_data)}",
                 f"• 武器数量：{len(parser.weapon_data)}",
                 f"• 声骸套数：{len(parser.phantom_data)}",

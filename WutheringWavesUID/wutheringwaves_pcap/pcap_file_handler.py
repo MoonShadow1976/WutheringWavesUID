@@ -83,16 +83,14 @@ class PcapFileHandler:
 
             # 發送成功消息
             # 從解析器中獲取統計信息
-            total_roles = len(waves_data)
-            total_weapons = len(self.parser.weapon_data)
-            total_phantoms = len(self.parser.phantom_data)
-
             msg = [
                 "✅ pcap 数据解析成功！",
                 f"📊 解析結果(uid:{self.parser.account_info.id})：",
-                f"• 角色数量：{total_roles}",
-                f"• 武器数量：{total_weapons}",
-                f"• 声骸套数：{total_phantoms}",
+                f"• 成就数量：{self.parser.account_info.achievementCount}",
+                f"• 成就星数：{self.parser.account_info.achievementStar}",
+                f"• 角色数量：{len(waves_data)}",
+                f"• 武器数量：{len(self.parser.weapon_data)}",
+                f"• 声骸套数：{len(self.parser.phantom_data)}",
                 "",
                 f"🎯 现在可以使用「{PREFIX}刷新面板」更新到您的数据里了！",
                 "",

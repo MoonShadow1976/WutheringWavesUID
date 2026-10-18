@@ -69,7 +69,7 @@ async def send_team_config_msg(bot: Bot, ev: Event):
 
 
 @waves_delete_char_detail.on_regex(
-    rf".*删除(?P<char>{CHAR_NAME_PATTERN})?数据",
+    rf".*删除(?P<char>{CHAR_NAME_PATTERN})?数据$",
     block=True,
 )
 async def send_delete_char_detail_msg(bot: Bot, ev: Event):

@@ -154,10 +154,10 @@ def extract_valid_info(info: list[str]) -> list[tuple[list, list, int]]:
             cost = None
 
     # 循环结束后，处理可能剩余的不完整声骸
-    if keys and values and len(keys) == len(values):
+    if keys and values:
         result.append((keys, values, cost))
-    elif keys or values:
-        # 数量不匹配，说明识别可能有误，记录日志但不添加
+    else:
+        # 识别可能有误，记录日志但不添加
         logger.warning(f"丢弃不完整声骸: keys={keys}, values={values}, cost={cost}")
 
     return result
@@ -420,12 +420,17 @@ async def phantom_score_ocr(bot: Bot, ev: Event, char_name: str, cost: int):
         for keys, values, ocr_cost in results:
             logger.info(f"[鸣潮][声骸查分] 提取结果: cost {ocr_cost}, 词条：{keys}, 数值：{values}")
             props = []
-            if len(keys) != len(values):
-                logger.warning(f"识别到的词条和值数量不匹配！keys: {keys}, values: {values}")
-                msg.append("识别到的词条和值数量不匹配！请确保图片内容清晰规范！\n")
+
+            n = min(len(keys), len(values))
+            if n == 0:
+                logger.warning(f"词条或数值为空，跳过: keys={keys}, values={values}")
+                msg.append("未识别到有效的词条与数值配对！请确保图片内容清晰规范！\n")
                 continue
 
-            for i in range(len(keys)):
+            if len(keys) != len(values):
+                logger.warning(f"识别到的词条和值数量不匹配，按最小匹配组 {n} 条处理！keys: {keys}, values: {values}")
+
+            for i in range(n):
                 props.append(Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]))
 
             final_cost = ocr_cost if ocr_cost else cost
@@ -651,11 +656,16 @@ async def phantom_score_ocr_to_char(bot: Bot, ev: Event, char_name: str, extra: 
             if len(ocr_raw_list) >= 5:
                 break
             logger.info(f"[鸣潮][角色评分] 提取结果: cost {ocr_cost}, 词条：{keys}, 数值：{values}")
-            if len(keys) != len(values):
-                logger.warning(f"识别到的词条和值数量不匹配！keys: {keys}, values: {values}")
+
+            n = min(len(keys), len(values))
+            if n == 0:
+                logger.warning(f"[鸣潮][角色评分] 词条或数值为空，跳过: keys={keys}, values={values}")
                 continue
 
-            props = [Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]) for i in range(len(keys))]
+            if len(keys) != len(values):
+                logger.warning(f"识别到的词条和值数量不匹配，按最小匹配组 {n} 条处理！keys: {keys}, values: {values}")
+
+            props = [Props(attributeName=keys[i].replace("小", ""), attributeValue=values[i]) for i in range(n)]
             if len(props) < 2:
                 logger.warning(f"[鸣潮][角色评分] 识别词条不足2个，无法判定cost，跳过: {keys}")
                 continue

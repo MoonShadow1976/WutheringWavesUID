@@ -768,7 +768,7 @@ async def draw_matrix_info_img(param: str = "", mode: str = "matrix") -> str | b
 
     detail = await get_matrix_detail(str(target_season))
     if not detail:
-        return f"获取深塔第 {target_season} 期详情失败。"
+        return f"获取矩阵第 {target_season} 期详情失败。"
 
     target_levels = [lvl for lvl in detail.Levels if lvl.Name == "奇点扩张"]
     if not target_levels:

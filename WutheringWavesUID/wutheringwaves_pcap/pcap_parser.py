@@ -159,20 +159,24 @@ class PcapDataParser:
         self.phantom_index = {}  # 聲骸映射表 {phantom_id: phantom_name}
         self.property_index = {}  # 屬性映射表 {property_id: property_info}
 
-    async def save_pcap_data(self, waves_data: dict):
+    async def save_pcap_data(self, waves_data: dict, raw_pcap_data: dict | None = None):
         """保存 pcap 解析的數據"""
         try:
-            # 創建用戶數據目錄
             user_data_dir = Path("data/pcap_data") / str(self.account_info.id)
             user_data_dir.mkdir(parents=True, exist_ok=True)
 
-            # 保存數據到 JSON 文件
             data_file = user_data_dir / "latest_data.json"
+
+            # 保持原结构不变，额外附加原始数据
+            save_payload = dict(waves_data)
+            if raw_pcap_data is not None:
+                save_payload["raw_pcap_data"] = raw_pcap_data
+
             with open(data_file, "w", encoding="utf-8") as f:
-                json.dump(waves_data, f, ensure_ascii=False, indent=2)
+                # default=str 兜底，防止某些字段无法序列化
+                json.dump(save_payload, f, ensure_ascii=False, indent=2, default=str)
 
             logger.success(f"pcap 數據已保存到：{data_file}")
-
         except Exception as e:
             logger.error(f"保存 pcap 數據失敗: {e}")
 
@@ -348,6 +352,7 @@ class PcapDataParser:
 
             if role_detail_list:
                 waves_data_dict = {"role_detail_list": role_detail_list}
+                # await self.save_pcap_data(waves_data_dict, raw_pcap_data=pcap_data) # debug
                 await self.save_pcap_data(waves_data_dict)
                 # 保存用户基本信息
                 await save_user_info(
@@ -435,8 +440,8 @@ class PcapDataParser:
     def _extract_achievement_info_data_from_wuthery(self, achievement_info: dict[str, Any]):
         """從 Wuthery API 格式提取用户成就數據"""
         try:
-            achievement_count = achievement_info.get("finished_achievement_num", 0)
-            achievement_star = achievement_info.get("achievement_finished_star", 0)
+            achievement_count = achievement_info.get("finish_count", 0) or achievement_info.get("finished_achievement_num", 0)
+            achievement_star = achievement_info.get("star_count", 0) or achievement_info.get("achievement_finished_star", 0)
 
             # 更新用户基本信息中的成就數據
             self.account_info.achievementCount = achievement_count

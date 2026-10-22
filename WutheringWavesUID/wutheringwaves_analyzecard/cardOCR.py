@@ -552,7 +552,7 @@ async def ocr_results_to_dict(chain_num: int, chek_imgs: list[dict], ocr_results
                             "狭玄翎": "玄翎",
                             "銷暝": "锁暝",
                             "銀暝": "锁暝",
-                            "鎻暝": "锁瞑",
+                            "鎻暝": "锁暝",
                         }
                         for old, new in REPLACE_MAP.items():
                             name = name.replace(old, new)

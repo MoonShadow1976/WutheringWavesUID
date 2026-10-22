@@ -519,6 +519,10 @@ def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     # 设置角色伤害类型
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
 
+    title = "共鸣解放"
+    msg = "施放共鸣解放时，锁暝获得同奏"
+    attr.set_env_unison()
+
     # 01守岸人/61散华
     attr.set_teammate((1505, 0, 1), (1102, 6, 1))
 

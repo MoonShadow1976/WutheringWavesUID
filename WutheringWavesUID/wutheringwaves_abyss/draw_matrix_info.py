@@ -269,9 +269,11 @@ async def get_matrix_schedule() -> list[int]:
     return sorted(seasons)
 
 
-async def get_matrix_detail(season_id: str) -> MatrixDetailResponse | None:
+async def get_matrix_detail(season_id: str, need_beta: bool) -> MatrixDetailResponse | None:
     """获取单期矩阵详情"""
-    url = f"{URL}/{season_id}?{QUERY}"
+    url = f"{URL}/{season_id}"
+    if need_beta:
+        url = url + f"?{QUERY}"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             if resp.status != 200:
@@ -766,7 +768,7 @@ async def draw_matrix_info_img(param: str = "", mode: str = "matrix") -> str | b
     if target_season is None:
         return "未查询到有效的矩阵赛季。"
 
-    detail = await get_matrix_detail(str(target_season))
+    detail = await get_matrix_detail(str(target_season), target_season not in season_ids)
     if not detail:
         return f"获取矩阵第 {target_season} 期详情失败。"
 

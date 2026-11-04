@@ -338,16 +338,11 @@ async def sync_non_onebot_user_avatar(ev: Event):
     if ev.bot_id == "discord":
         avatar_url = ev.sender.get("avatar")
         if not avatar_url:
-            logger.warning(
-                f"Discord 事件中缺少 avatar 字段，跳过头像同步: user_id={ev.user_id}"
-            )
+            logger.warning(f"Discord 事件中缺少 avatar 字段，跳过头像同步: user_id={ev.user_id}")
             return
         avatar_hash = _parse_discord_avatar_hash(str(avatar_url), str(ev.user_id))
         if not avatar_hash:
-            logger.warning(
-                "无法解析 Discord 头像 URL，跳过头像同步: "
-                f"user_id={ev.user_id}, avatar_url={avatar_url}"
-            )
+            logger.warning(f"无法解析 Discord 头像 URL，跳过头像同步: user_id={ev.user_id}, avatar_url={avatar_url}")
             return
     elif ev.bot_id in ("qqgroup", "qq_official"):
         avatar_hash = ev.bot_self_id

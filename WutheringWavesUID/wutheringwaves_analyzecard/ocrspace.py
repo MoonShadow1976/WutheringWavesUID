@@ -104,9 +104,11 @@ async def check_ocr_engine_accessible(plan: str) -> int:
             # 根据套餐匹配检查项名称
             plan_upper = plan.upper()
             if plan_upper == "FREE":
-                pattern = re.compile(r"Free - Engine(\d+)", re.IGNORECASE)
+                # 匹配 "Free OCR API (OcrEngine=2)"
+                pattern = re.compile(r"Free OCR API.*?OcrEngine=(\d+)", re.IGNORECASE)
             elif plan_upper == "PRO":
-                pattern = re.compile(r"PRO\d?\s*\-?\s*Engine(\d+)", re.IGNORECASE)
+                # 匹配 "PRO Endpoint 1 - (OcrEngine=2)"
+                pattern = re.compile(r"PRO Endpoint.*?OcrEngine=(\d+)", re.IGNORECASE)
             else:
                 logger.warning(f"[鸣潮][OCRspace Checkly] 不支持的套餐类型: {plan}")
                 return -1
@@ -186,12 +188,12 @@ async def ocrspace(
         else:
             NEGINE_NUM = await check_ocr_engine_accessible("FREE")
 
-        if NEGINE_NUM != 2 and API_KEY == api_key_list[0]:
-            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，可能会导致识别失败，请考虑稍后使用。\n", at_sender)
-        elif NEGINE_NUM == 0:
+        if NEGINE_NUM == 0:
             return "[鸣潮] OCR服务暂时不可用，请稍后再试。\n"
         elif NEGINE_NUM == -1:
             return "[鸣潮] 服务器访问OCR服务失败，请检查服务器网络状态。\n"
+        elif NEGINE_NUM != 2 and API_KEY == api_key_list[0]:
+            await bot.send("[鸣潮] 当前OCR服务器识别准确率不高，可能会导致识别失败，请考虑稍后使用。\n", at_sender)
 
         ocr_results = await images_ocrspace(API_KEY, NEGINE_NUM, cropped_images, language=language, isTable=isTable)
         logger.info(f"[鸣潮][OCRspace]dc卡片识别数据: {ocr_results}")

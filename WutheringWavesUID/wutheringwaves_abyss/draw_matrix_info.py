@@ -309,7 +309,7 @@ def get_target_season_info(season_ids: list[int], param: str = "") -> int | None
 
     if param.isdigit():
         target = int(param)
-        return target if target in season_ids else None
+        return target
 
     offsets = {
         "上上期": -2,

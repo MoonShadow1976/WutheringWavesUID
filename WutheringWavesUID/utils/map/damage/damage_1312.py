@@ -54,6 +54,11 @@ def calc_damage_1(
         attr.set_env_unison_response()
         attr.add_effect(title, msg)
 
+    title = "共鸣解放"
+    msg = "施放共鸣解放时，锁暝获得同奏"
+    attr.set_env_unison()
+    attr.add_effect(title, msg)
+
     if not furled_canopy:
         skillParamId = "26" if attr.env_unison_response else "24"
         title = "变奏技能·拢伞形·锁妄念·同奏" if resonance_intro else "变奏技能·拢伞形·闪裂"
@@ -290,6 +295,11 @@ def calc_damage_3(
         attr.set_env_unison_response()
         attr.add_effect(title, msg)
 
+    title = "共鸣解放"
+    msg = "施放共鸣解放时，锁暝获得同奏"
+    attr.set_env_unison()
+    attr.add_effect(title, msg)
+
     # 技能技能倍率
     skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "7", skillLevel)
     title = "普攻·解伞形第四段"
@@ -414,6 +424,11 @@ def calc_damage_4(
         attr.set_env_unison_response()
         attr.add_effect(title, msg)
 
+    title = "共鸣解放"
+    msg = "施放共鸣解放时，锁暝获得同奏"
+    attr.set_env_unison()
+    attr.add_effect(title, msg)
+
     # 技能技能倍率
     skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "16", skillLevel)
     title = "普攻·暝伞形·刻心念"
@@ -518,10 +533,6 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
 def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = True) -> tuple[str, str]:
     # 设置角色伤害类型
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-
-    title = "共鸣解放"
-    msg = "施放共鸣解放时，锁暝获得同奏"
-    attr.set_env_unison()
 
     # 01守岸人/61散华
     attr.set_teammate((1505, 0, 1), (1102, 6, 1))

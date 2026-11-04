@@ -290,19 +290,69 @@ def get_crop_waves_bg(w: int, h: int, bg: str = "bg") -> Image.Image:
     return crop_center_img(cropped_image, w, h)
 
 
+def _parse_discord_avatar_hash(avatar_url: str, user_id: str) -> str | None:
+    """从 Discord 头像 URL 中解析 avatar hash。
+
+    支持两种格式:
+    - 普通头像: .../avatars/{user_id}/{hash}.{ext}[?...]  -> 返回 hash（不含扩展名）
+    - 默认头像: .../embed/avatars/{index}.png[?...]       -> 返回 "default:{index}"
+
+    解析失败 / URL 中 user_id 与事件不一致时返回 None。
+    """
+    if not avatar_url:
+        return None
+
+    parts = [p for p in avatar_url.split("/") if p]
+    try:
+        i = parts.index("avatars")
+    except ValueError:
+        return None
+
+    # 默认 embed 头像: .../embed/avatars/{index}.png
+    if i > 0 and parts[i - 1] == "embed":
+        if len(parts) <= i + 1:
+            return None
+        idx = parts[i + 1].split(".", 1)[0]
+        return f"default:{idx}" if idx.isdigit() else None
+
+    # 普通头像: .../avatars/{user_id}/{hash}.{ext}
+    if len(parts) <= i + 2:
+        return None
+
+    url_user_id = parts[i + 1]
+    if url_user_id != user_id:
+        return None
+
+    avatar_hash = parts[i + 2].split(".", 1)[0]
+    return avatar_hash or None
+
+
 async def sync_non_onebot_user_avatar(ev: Event):
-    """从事件中提取头像 avatar_hash 并自动更新数据库中的 hash 映射"""
+    """从事件中提取头像 hash 并自动更新数据库中的 hash 映射。
+
+    - Discord: 从 ev.sender['avatar'] 解析 hash（支持默认 embed 头像、gif 头像）
+    - qqgroup / qq_official: 存的是 appid（ev.bot_self_id），供 get_user_avatar 拼接 URL
+    - 其它 bot: 不处理
+    """
     avatar_hash = "error"
     if ev.bot_id == "discord":
         avatar_url = ev.sender.get("avatar")
         if not avatar_url:
-            logger.error("Discord 事件中缺少 avatar 字段")
+            logger.warning(
+                f"Discord 事件中缺少 avatar 字段，跳过头像同步: user_id={ev.user_id}"
+            )
             return
-        parts = avatar_url.split("/")
-        index = parts.index(str(ev.user_id))
-        avatar_hash = parts[index + 1]
-    elif ev.bot_id in ["qqgroup", "qq_official"]:
+        avatar_hash = _parse_discord_avatar_hash(str(avatar_url), str(ev.user_id))
+        if not avatar_hash:
+            logger.warning(
+                "无法解析 Discord 头像 URL，跳过头像同步: "
+                f"user_id={ev.user_id}, avatar_url={avatar_url}"
+            )
+            return
+    elif ev.bot_id in ("qqgroup", "qq_official"):
         avatar_hash = ev.bot_self_id
+    else:
+        avatar_hash = "NotYetSupported"
 
     data = await WavesUserAvatar.select_data(ev.user_id, ev.bot_id)
     old_avatar_hash = data.avatar_hash if data else ""

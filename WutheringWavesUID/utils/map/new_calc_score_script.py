@@ -50,8 +50,8 @@ limit_data = json.loads(LIMIT_DATA_PATH.read_text(encoding="utf-8"))
 # 配置
 # ---------------------------------------------------------------------------
 
-# 目标角色（按名称包含匹配，和 limit.json 里的 name 比较）
-TARGET_CHARS = ["心", "锁暝"]
+# 目标角色（按名称精确匹配，和 limit.json 里的 name 比较）
+TARGET_CHARS = ["莉莉"]
 
 # 需要生成权重的共鸣链数量
 CHAIN_LIST = [0, 1, 2, 3, 4, 5, 6]

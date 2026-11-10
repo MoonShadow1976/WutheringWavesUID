@@ -209,6 +209,7 @@ CHAR_DETAIL = {
     "1212": {"name": "景燃", "fetterDetail": "冥途夜行之灯"},
     "1311": {"name": "心", "fetterDetail": "衔梦照世之心"},
     "1312": {"name": "锁暝", "fetterDetail": "镜影流电之瞬"},
+    "1512": {"name": "莉莉", "fetterDetail": "茜染怀想之花"},
 }
 
 # fmt: off

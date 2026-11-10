@@ -2013,6 +2013,97 @@ class Char_1511(CharAbstract):
             attr.add_dmg_deepen(0.2, title, msg)
 
 
+class Char_1512(CharAbstract):
+    id = 1512
+    teammate_equip = {
+        "sonata": "茜染怀想之花",
+        "weapon": {"id": 21030076},
+    }
+    name = "莉莉"
+    starLevel = 5
+    teammate_states = {
+        "共效": {
+            "type": "int",
+            "min": 190,
+            "max": 400,
+            "default": 260,
+            "desc": "莉莉共鸣效率：超190%后每1%计为0.1%攻击，260%时梦芳/斑白眠梦均到上限",
+        },
+        "梦芳": {
+            "type": "int",
+            "min": 0,
+            "max": 4,
+            "default": 4,
+            "desc": "梦芳层数：摇篮的安魂语期间队友每次变奏+1层（一链+2层），上限4层",
+        },
+        "同奏层数": {
+            "type": "int",
+            "min": 0,
+            "max": 8,
+            "default": 4,
+            "desc": "主C队伍当前同奏增益层数，斑白眠梦的攻击加成按此计（最多4层生效）",
+        },
+    }
+
+    def _do_buff(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        states = states or {}
+        energy_regen = int(states.get("共效", 260)) / 100
+        dreamfang = int(states.get("梦芳", 4))
+        unison_stack = int(states.get("同奏层数", 4))
+
+        # 共鸣解放-摇篮的安魂语/梦芳:每层使队伍中所有角色攻击提升，超190%每1%计为0.1%，单层上限7%
+        per_stack = min(0.07, max(0.0, (energy_regen - 1.9) * 0.1))
+        if per_stack > 0 and dreamfang > 0 and attr.char_template == temp_atk:
+            title = f"{self.name}-梦芳"
+            msg = f"{dreamfang}层,队伍攻击提升{per_stack * dreamfang * 100:.1f}%"
+            attr.add_atk_percent(per_stack * dreamfang, title, msg)
+
+        # 二链:摇篮的安魂语期间，每层梦芳额外提升2%暴击与6%暴击伤害
+        if chain >= 2 and dreamfang > 0:
+            title = f"{self.name}-二链"
+            msg = f"{dreamfang}层梦芳,暴击提升{dreamfang * 2}%"
+            attr.add_crit_rate(0.02 * dreamfang, title, msg)
+            msg = f"{dreamfang}层梦芳,暴击伤害提升{dreamfang * 6}%"
+            attr.add_crit_dmg(0.06 * dreamfang, title, msg)
+
+        # 共鸣回路-斑白眠梦:可响应同奏的登场角色每层同奏增益提升攻击，单层上限7%，最多4层
+        if per_stack > 0 and unison_stack > 0 and attr.char_template == temp_atk:
+            stacks = min(unison_stack, 4)
+            title = f"{self.name}-斑白眠梦"
+            msg = f"同奏{stacks}层,登场角色攻击提升{per_stack * stacks * 100:.1f}%"
+            attr.add_atk_percent(per_stack * stacks, title, msg)
+
+        # 斑白眠梦:队伍中登场角色声骸技能暴击/暴击伤害提升，共效超190%后每0.7%计0.1%/0.2%，上限10%/20%
+        if energy_regen > 1.9 and attr.char_damage == phantom_damage:
+            title = f"{self.name}-斑白眠梦"
+            crit = min(0.1, (energy_regen - 1.9) / 0.7 * 0.1)
+            msg = f"声骸技能暴击提升{crit * 100:.1f}%"
+            attr.add_crit_rate(crit, title, msg)
+            crit_dmg = min(0.2, (energy_regen - 1.9) / 0.7 * 0.2)
+            msg = f"声骸技能暴击伤害提升{crit_dmg * 100:.1f}%"
+            attr.add_crit_dmg(crit_dmg, title, msg)
+
+    def _do_outro(
+        self,
+        attr: DamageAttribute,
+        chain: int = 0,
+        resonLevel: int = 1,
+        isGroup: bool = True,
+        states: dict | None = None,
+    ):
+        # 延奏技能-熏香绽放:队伍中的角色全伤害加深25%，持续30秒
+        title = f"{self.name}-延奏技能"
+        msg = "队伍中的角色全伤害加深25%，持续30秒"
+        attr.add_dmg_deepen(0.25, title, msg)
+
+
 class Char_1601(CharAbstract):
     id = 1601
     name = "桃祈"

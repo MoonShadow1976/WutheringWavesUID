@@ -316,11 +316,12 @@ def build_base_data(char_id, weapon_id, max_sub_props, chain_num: int | None = N
             ]
         elif i == 2:
             main_key_3_2 = "攻击%"
-            if "生命" in max_sub_props:
+            # 按“生命%”这种写法也能命中，生命/防御模板的角色基准面板才不会被攻击%主词条带偏
+            if any("生命" in name for name in max_sub_props):
                 main_key_3_2 = "生命%"
-            elif "防御" in max_sub_props:
+            elif any("防御" in name for name in max_sub_props):
                 main_key_3_2 = "防御%"
-            elif "共鸣效率" in max_sub_props:
+            elif any("共鸣效率" in name for name in max_sub_props):
                 main_key_3_2 = "共鸣效率"
             echo["cost"] = 3
             echo["mainProps"] = [
@@ -329,9 +330,9 @@ def build_base_data(char_id, weapon_id, max_sub_props, chain_num: int | None = N
             ]
         elif i == 3 or i == 4:
             main_key_1 = "攻击%"
-            if "生命" in max_sub_props:
+            if any("生命" in name for name in max_sub_props):
                 main_key_1 = "生命%"
-            elif "防御" in max_sub_props:
+            elif any("防御" in name for name in max_sub_props):
                 main_key_1 = "防御%"
             echo["cost"] = 1
             echo["mainProps"] = [
@@ -403,6 +404,13 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
                 # continue
                 attr_temp = copy.deepcopy(attr)
                 cd, ed = damage_temp["func"](attr_temp, role_obj)
+                # 治疗条目只有治疗量（暴击位为 None）：奶量同样计入总和，权重才会算治疗收益
+                if cd is None:
+                    cd = ed
+                if ed is None:
+                    ed = cd
+                if cd is None:
+                    continue
                 crit_damage += int(cd.replace(",", "")[:6])
                 expected_damage += int(ed.replace(",", "")[:6])
         else:
@@ -454,7 +462,7 @@ def calc_weights(char_name, char_id, calc_data, weapon_id, chain_num: int | None
         #     need_crit = True
         #     base_damage = base_crit_damage
         # else:
-        need_crit = False
+        need_crit = True
         base_damage = base_expected_damage
         new_damage = calc_damage(test_data, need_crit, all_damage=all_damage)
         improvement = (new_damage - base_damage) / base_damage
@@ -527,7 +535,7 @@ if __name__ == "__main__":
 
     for char_limit in limit_data["charList"]:
         char_name = char_limit["name"]
-        for i in ["心"]:
+        for i in ["莉莉"]:
             if i == char_name:
                 print(f"\n角色{char_name} 开始计算")
                 update_calc_json_weights(char_name, char_limit["charId"], char_limit["calcFile"], char_limit["weaponId"])

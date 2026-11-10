@@ -73,7 +73,7 @@ def calc_damage_1(
     skillLevel = role.get_skill_level(skill_type)
 
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "52", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "53", skillLevel)
     title = "重击·应世相·镇红尘"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -205,7 +205,7 @@ def calc_damage_2(
     skillLevel = role.get_skill_level(skill_type)
 
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "55", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "56", skillLevel)
     title = "共鸣技能·照世相·万阙连衡"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -305,7 +305,7 @@ def calc_damage_3(
     skillLevel = role.get_skill_level(skill_type)
 
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "54", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "55", skillLevel)
     title = "重击·照世相·镇寰宇"
     msg = f"技能倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -437,7 +437,7 @@ def calc_damage_4(
     skillLevel = role.get_skill_level(skill_type)
 
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "34", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "35", skillLevel)
     title = "共鸣解放·万阙垂天"
     msg = f"倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)
@@ -578,7 +578,7 @@ def calc_damage_5(
     skillLevel = role.get_skill_level(skill_type)
 
     # 技能技能倍率
-    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "46", skillLevel)
+    skill_multi = skill_damage_calc(char_result.skillTrees, SkillTreeMap[skill_type], "47", skillLevel)
     title = "变奏技能·照世相·诸相同奏"
     msg = f"倍率{skill_multi}"
     attr.add_skill_multi(skill_multi, title, msg)

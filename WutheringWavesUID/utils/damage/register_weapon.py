@@ -993,8 +993,9 @@ class Weapon_21020107(WeaponAbstract):
             msg = f"羁念：全队导电伤害加成提升{dmg}，持续{self.param(3)}秒"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
         elif isSelf:
-            dmg = self.param(4)
-            msg = f"怅念：移除羁念后，自身导电伤害加成提升{dmg}"
+            # 协奏能量消耗且消耗值低于{4}点时获得怅念，{5}为加成、{6}为持续时间
+            dmg = self.param(5)
+            msg = f"怅念：移除羁念后，自身导电伤害加成提升{dmg}，持续{self.param(6)}秒"
             attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
@@ -1316,6 +1317,31 @@ class Weapon_21030074(WeaponAbstract):
         msg = f"造成普攻或重击伤害时，自身共鸣技能伤害加成提升{dmg}"
         attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
         return True
+
+
+class Weapon_21030076(WeaponAbstract):
+    id = 21030076
+    type = 3
+    name = "安魂"
+
+    def do_teammate(self, attr: DamageAttribute, char_name: str = "", isGroup: bool = True):
+        self.cast_hit(attr, isGroup)
+
+    # 生命值提升{0}。施放共鸣解放时，回复{1}点协奏能量，每{2}秒可触发1次。
+    # 重击造成治疗时，队伍中的角色获得【落梦归魂】，持续{4}秒；期间若该角色获得同奏或响应同奏，该角色攻击提升{3}，持续{7}秒。
+    # 重击造成治疗时，队伍中的登场角色获得{5}声骸技能伤害加成，持续{6}秒。
+    def cast_hit(self, attr: DamageAttribute, isGroup: bool = False):
+        """施放重击"""
+        # param(0)生命提升已由面板处理，协奏能量回复不影响伤害。
+        title = self.get_title()
+        if attr.char_template == temp_atk and (attr.env_unison or attr.env_unison_response):
+            dmg = f"{self.param(3)}"
+            msg = f"落梦归魂:获得同奏时攻击提升{dmg},持续{self.param(7)}秒"
+            attr.add_atk_percent(calc_percent_expression(dmg), title, msg)
+        if attr.char_damage == phantom_damage:
+            dmg = f"{self.param(5)}"
+            msg = f"重击治疗后声骸技能伤害加成提升{dmg}"
+            attr.add_dmg_bonus(calc_percent_expression(dmg), title, msg)
 
 
 class Weapon_21030084(WeaponAbstract):

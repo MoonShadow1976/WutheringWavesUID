@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "拢伞形",
-        "desc": "<color=Title>普攻</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>普攻·解伞形</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·解伞形</color>，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>；\n长按<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形第1段</color>、<color=Highlight>普攻·解伞形第2段</color>；\n施放<color=Highlight>普攻·解伞形第2段</color>后一定时间内，按住<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>、<color=Highlight>普攻·解伞形·旋雷破第2段</color>；\n施放<color=Highlight>普攻·解伞形第3段</color>后一定时间内，按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形第4段</color>；\n施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>后一定时间内，短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形·旋雷破第2段</color>。\n\n<color=Title>普攻·解伞形·旋雷破</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·<color=Highlight>念深</color>状态下，<color=Highlight>闪避反击</color>替换为<color=Highlight>闪避反击·解伞形</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻第3段</color>。\n\n<color=Title>闪避反击·解伞形</color>\n成功<color=Highlight>闪避</color>一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形第3段</color>。\n·施放该技能后一定时间内，长按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>，造成<color=Thunder>导电伤害</color>。",
+        "desc": "<color=Title>普攻</color>\n连续短按或按住<color=Highlight>普攻</color>，进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>普攻·解伞形</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>普攻</color>替换为<color=Highlight>普攻·解伞形</color>，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>；\n长按<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形第1段</color>、<color=Highlight>普攻·解伞形第2段</color>；\n施放<color=Highlight>普攻·解伞形第2段</color>后一定时间内，按住<color=Highlight>普攻</color>，可连续施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>、<color=Highlight>普攻·解伞形·旋雷破第2段</color>；\n施放<color=Highlight>普攻·解伞形第3段</color>后一定时间内，按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形第4段</color>；\n施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>后一定时间内，短按或按住<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·解伞形·旋雷破第2段</color>。\n\n<color=Title>普攻·解伞形·旋雷破</color>\n造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击</color>\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·<color=Highlight>念深</color>状态下，<color=Highlight>闪避反击</color>替换为<color=Highlight>闪避反击·解伞形</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻第3段</color>。\n\n<color=Title>闪避反击·解伞形</color>\n成功闪避后一定时间内短按<color=Highlight>普攻</color>，将会攻击目标，造成<color=Thunder>导电伤害</color>。\n·施放该技能后一定时间内，短按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形第3段</color>。\n·施放该技能后一定时间内，长按<color=Highlight>普攻</color>可施放<color=Highlight>普攻·解伞形·旋雷破第1段</color>，造成<color=Thunder>导电伤害</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -830,6 +830,33 @@
                 "103.44%*5"
               ]
             ]
+          },
+          "12-2": {
+            "name": "下落攻击耐力消耗",
+            "param": [
+              [
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30",
+                "30"
+              ]
+            ]
           }
         },
         "consume": {
@@ -910,12 +937,12 @@
               "value": 5
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -928,12 +955,12 @@
               "value": 2
             },
             {
-              "key": 41100024,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 2
             },
             {
               "key": 2,
@@ -946,12 +973,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -964,12 +991,12 @@
               "value": 6
             },
             {
-              "key": 41100024,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 4
             },
             {
               "key": 2,
@@ -1146,12 +1173,12 @@
               "value": 5
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -1164,12 +1191,12 @@
               "value": 2
             },
             {
-              "key": 41100024,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 2
             },
             {
               "key": 2,
@@ -1182,12 +1209,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -1200,12 +1227,12 @@
               "value": 6
             },
             {
-              "key": 41100024,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 4
             },
             {
               "key": 2,
@@ -1218,10 +1245,9 @@
     "3": {
       "skill": {
         "name": "暝伞形·重锁狱瘴",
-        "desc": "<color=Highlight>念深</color>状态下，解锁<color=Highlight>共鸣解放</color>，施放后对范围内目标造成<color=Thunder>导电伤害</color>。\n可在低空中施放。\n·施放<color=Highlight>共鸣解放</color>时，锁暝获得<color=Highlight>同奏</color>，持续{0}秒，每{1}秒内只能获得1次。\n\n<color=Title>凄雨瘴雷</color>\n施放<color=Highlight>延奏技能</color>时，若锁暝拥有<color=Highlight>同奏</color>，队伍中在场角色造成伤害时，会召唤<color=Highlight>雷痕</color>对目标进行协同攻击，造成<color=Thunder>导电伤害</color>。\n·造成伤害的接下来的{2}秒内，每秒可召唤1道<color=Highlight>雷痕</color>，该效果每秒可触发1次。<color=Highlight>雷痕</color>造成的伤害不会触发该效果。\n·<color=Highlight>雷痕</color>每秒最多召唤1道，共可召唤{3}道。\n·效果持续{4}秒，或持续至<color=Highlight>雷痕</color>达到最大召唤数。",
+        "desc": "<color=Highlight>念深</color>状态下，解锁<color=Highlight>共鸣解放</color>，施放后对范围内目标造成<color=Thunder>导电伤害</color>。\n可在低空中施放。\n·施放<color=Highlight>共鸣解放</color>时，锁暝获得<color=Highlight>同奏</color>，持续{0}秒。\n\n<color=Title>凄雨瘴雷</color>\n施放<color=Highlight>延奏技能</color>时，若锁暝拥有<color=Highlight>同奏</color>，队伍中在场角色造成伤害时，会召唤<color=Highlight>雷痕</color>对目标进行协同攻击，造成<color=Thunder>导电伤害</color>。\n·造成伤害的接下来的{1}秒内，每秒可召唤1道<color=Highlight>雷痕</color>，该效果每秒可触发1次。<color=Highlight>雷痕</color>造成的伤害不会触发该效果。\n·<color=Highlight>雷痕</color>每秒最多召唤1道，共可召唤{2}道。\n·效果持续{3}秒，或持续至<color=Highlight>雷痕</color>达到最大召唤数。",
         "param": [
           "5",
-          "25",
           "3",
           "6",
           "8"
@@ -1256,6 +1282,33 @@
             ]
           },
           "20": {
+            "name": "共鸣解放·凄雨瘴雷伤害",
+            "param": [
+              [
+                "30.00%",
+                "32.46%",
+                "34.92%",
+                "38.37%",
+                "40.83%",
+                "43.66%",
+                "47.59%",
+                "51.53%",
+                "55.47%",
+                "59.65%",
+                "64.57%",
+                "69.49%",
+                "74.41%",
+                "79.33%",
+                "84.25%",
+                "89.17%",
+                "94.09%",
+                "99.01%",
+                "103.93%",
+                "108.85%"
+              ]
+            ]
+          },
+          "21": {
             "name": "共鸣解放·暝伞形·重锁狱瘴冷却时间",
             "param": [
               [
@@ -1282,7 +1335,7 @@
               ]
             ]
           },
-          "21": {
+          "22": {
             "name": "消耗共鸣能量",
             "param": [
               [
@@ -1309,7 +1362,7 @@
               ]
             ]
           },
-          "22": {
+          "23": {
             "name": "回复协奏能量",
             "param": [
               [
@@ -1333,33 +1386,6 @@
                 "20",
                 "20",
                 "20"
-              ]
-            ]
-          },
-          "23": {
-            "name": "共鸣解放·凄雨瘴雷伤害",
-            "param": [
-              [
-                "30.00%",
-                "32.46%",
-                "34.92%",
-                "38.37%",
-                "40.83%",
-                "43.66%",
-                "47.59%",
-                "51.53%",
-                "55.47%",
-                "59.65%",
-                "64.57%",
-                "69.49%",
-                "74.41%",
-                "79.33%",
-                "84.25%",
-                "89.17%",
-                "94.09%",
-                "99.01%",
-                "103.93%",
-                "108.85%"
               ]
             ]
           }
@@ -1442,12 +1468,12 @@
               "value": 5
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -1460,12 +1486,12 @@
               "value": 2
             },
             {
-              "key": 41100024,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 2
             },
             {
               "key": 2,
@@ -1478,12 +1504,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -1496,12 +1522,12 @@
               "value": 6
             },
             {
-              "key": 41100024,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 4
             },
             {
               "key": 2,
@@ -1530,12 +1556,12 @@
               "value": 3
             },
             {
-              "key": 41100022,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100022,
+              "value": 3
             },
             {
               "key": 2,
@@ -1548,7 +1574,7 @@
     "5": {
       "skill": {
         "name": "沉契凝锁",
-        "desc": "锁暝拥有<color=Highlight>同奏</color>并切换角色时，获得<color=Highlight>协契</color>效果，持续{0}秒。\n锁暝施放<color=Highlight>共鸣解放</color>或<color=Highlight>普攻·暝伞形·刻心念</color>后{1}秒内，施放<color=Highlight>延奏技能</color>时，如果获得<color=Highlight>协契</color>效果或处于<color=Highlight>协契</color>效果期间，下一个登场的角色导电伤害加成提升{2}，每拥有一层<color=Highlight>【同奏增益】</color>，导电伤害加成额外提升{3}，最多提升{4}，持续{5}秒，若切换至其他角色则该效果提前结束。\n\n锁暝拥有<color=Highlight>同奏</color>时，若施放<color=Highlight>共鸣技能·拢伞形·破隙</color>则移除<color=Highlight>同奏</color>，消耗{6}点协奏能量并清空<color=Highlight>【妄执】</color>，获得<color=Highlight>禁锁契主</color>效果，使<color=Highlight>普攻·解伞形</color>和<color=Highlight>普攻·解伞形·旋雷破</color>的倍率提升{7}，且每段技能命中时额外回复{8}点协奏能量；并使自身暴击伤害提升{9}，持续{10}秒，若切换至其他角色则该效果提前结束。\n·自身获得<color=Highlight>同奏</color>时，该效果提前结束。\n·获得<color=Highlight>协契</color>效果时，该效果提前结束。\n·<color=Highlight>协契</color>效果存在期间，无法获得<color=Highlight>禁锁契主</color>效果。\n·<color=Highlight>禁锁契主</color>效果期间，施放<color=Highlight>普攻·解伞形</color>第四段后，短按<color=Highlight>普攻</color>可衔接<color=Highlight>普攻·解伞形第2段</color>。",
+        "desc": "锁暝拥有<color=Highlight>同奏</color>并施放延奏技能时，锁暝获得<color=Highlight>协契</color>效果，持续{0}秒。\n锁暝施放<color=Highlight>共鸣解放</color>或<color=Highlight>普攻·暝伞形·刻心念</color>后{1}秒内，施放<color=Highlight>延奏技能</color>时，如果获得<color=Highlight>协契</color>效果或处于<color=Highlight>协契</color>效果期间，下一个登场的角色导电伤害加成提升{2}，每拥有一层<color=Highlight>【同奏增益】</color>，导电伤害加成额外提升{3}，最多额外提升{4}，持续{5}秒，若切换至其他角色则该效果提前结束。\n\n锁暝拥有<color=Highlight>同奏</color>时，若施放<color=Highlight>共鸣技能·拢伞形·破隙</color>则移除<color=Highlight>同奏</color>及自身的<color=Highlight>【同奏增益】</color>，消耗{6}点协奏能量并清空<color=Highlight>【妄执】</color>，获得<color=Highlight>禁锁契主</color>效果，使<color=Highlight>普攻·解伞形</color>和<color=Highlight>普攻·解伞形·旋雷破</color>的倍率提升{7}，且每段技能命中时额外回复{8}点协奏能量；并使自身暴击伤害提升{9}，持续{10}秒，若切换至其他角色则该效果提前结束。\n·自身获得<color=Highlight>同奏</color>时，该效果提前结束。\n·获得<color=Highlight>协契</color>效果时，该效果提前结束。\n·<color=Highlight>协契</color>效果存在期间，无法获得<color=Highlight>禁锁契主</color>效果。\n·<color=Highlight>禁锁契主</color>效果期间，施放<color=Highlight>普攻·解伞形第4段</color>后，短按或按住<color=Highlight>普攻</color>可衔接<color=Highlight>普攻·解伞形第2段</color>。",
         "param": [
           "30",
           "8",
@@ -1571,12 +1597,12 @@
               "value": 3
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -1888,12 +1914,12 @@
               "value": 5
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -1906,12 +1932,12 @@
               "value": 2
             },
             {
-              "key": 41100024,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 2
             },
             {
               "key": 2,
@@ -1924,12 +1950,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -1942,12 +1968,12 @@
               "value": 6
             },
             {
-              "key": 41100024,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 4
             },
             {
               "key": 2,
@@ -1960,7 +1986,7 @@
     "7": {
       "skill": {
         "name": "囚执化念",
-        "desc": "<color=Title>共鸣技能·拢伞形·锁妄念</color>\n<color=Highlight>念起</color>状态下，<color=Highlight>【妄执】</color>达到{0}点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·拢伞形·锁妄念</color>，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，锁暝进入<color=Highlight>念深</color>并清空<color=Highlight>【妄执】</color>。\n\n<color=Title>共鸣技能·解伞形·无舍念</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>【妄执】</color>达到{1}点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·解伞形·无舍念</color>，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n\n<color=Title>普攻·暝伞形·刻心念</color>\n施放<color=Highlight>共鸣技能·解伞形·无舍念</color>后，<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>替换为<color=Highlight>普攻·暝伞形·刻心念</color>。点按或长按<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>施放该技能。攻击范围内目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，进入<color=Highlight>念劫</color>并清空<color=Highlight>【妄执】</color>，技能结束后进入<color=Highlight>念起</color>。\n·施放该技能时，按住<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>，可持续攻击目标一定时间。\n·施放该技能时，一定时间内锁暝免疫伤害和受击，期间无法移动、冲刺、跳跃、闪避或施放<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>、<color=Highlight>共鸣解放</color>、<color=Highlight>闪避反击</color>、<color=Highlight>下落攻击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能</color>、且期间不能切换角色。\n\n<color=Title>同奏</color>\n锁暝拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，锁暝则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。锁暝协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n锁暝拥有<color=Highlight>响应同奏</color>的能力\n队伍中的角色拥有<color=Highlight>同奏</color>时，若切换至锁暝，锁暝施放变奏技能时响应同奏，队伍中的角色获得{2}层<color=Highlight>【同奏增益】</color>，持续{3}秒。\n锁暝至多以此方式提供{4}层<color=Highlight>【同奏增益】</color>，重复获得刷新持续时间。\n联机状态下，无法<color=Highlight>响应同奏</color>。\n\n<color=Title>同奏增益</color>\n每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升{5}，可叠加{6}层。\n\n<color=Title>【妄执】获取规则</color>\n【妄执】上限为{7}点。\n·<color=Highlight>普攻</color>、<color=Highlight>普攻·解伞形</color>、<color=Highlight>普攻·解伞形·旋雷破</color>、<color=Highlight>闪避反击</color>或<color=Highlight>闪避反击·解伞形</color>命中目标时，若锁暝为登场角色则获得【妄执】。\n·施放<color=Highlight>共鸣解放</color>时，获得{8}点【妄执】。\n·施放<color=Highlight>变奏技能·解伞形·碎霆</color>或<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>时，获得{9}点【妄执】。",
+        "desc": "<color=Title>共鸣技能·拢伞形·锁妄念</color>\n<color=Highlight>念起</color>状态下，<color=Highlight>【妄执】</color>达到{0}点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·拢伞形·锁妄念</color>，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，锁暝进入<color=Highlight>念深</color>并清空<color=Highlight>【妄执】</color>。\n\n<color=Title>共鸣技能·解伞形·无舍念</color>\n<color=Highlight>念深</color>状态下，<color=Highlight>【妄执】</color>达到{1}点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·解伞形·无舍念</color>，牵引附近目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n\n<color=Title>普攻·暝伞形·刻心念</color>\n施放<color=Highlight>共鸣技能·解伞形·无舍念</color>后一定时间内，<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>替换为<color=Highlight>普攻·暝伞形·刻心念</color>。点按或长按<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>施放该技能。攻击范围内目标，造成<color=Thunder>导电伤害</color>，本次伤害视为<color=Highlight>普攻伤害</color>。\n·施放该技能时，进入<color=Highlight>念劫</color>并清空<color=Highlight>【妄执】</color>，技能结束后进入<color=Highlight>念起</color>。\n·施放该技能时，按住<color=Highlight>普攻</color>或<color=Highlight>共鸣技能</color>，可持续攻击目标一定时间。\n·施放该技能时，一定时间内锁暝免疫伤害和受击。\n·施放该技能期间，锁暝无法移动、冲刺、跳跃、闪避或施放<color=Highlight>普攻</color>、<color=Highlight>共鸣技能</color>、<color=Highlight>共鸣解放</color>、<color=Highlight>闪避反击</color>、<color=Highlight>下落攻击</color>、<color=Highlight>空中攻击</color>、<color=Highlight>变奏技能</color>、且期间不能切换角色。\n\n<color=Title>同奏</color>\n锁暝拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，锁暝则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。锁暝协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n锁暝拥有<color=Highlight>响应同奏</color>的能力\n队伍中的登场角色拥有<color=Highlight>同奏</color>时，若切换至锁暝，锁暝施放变奏技能后响应同奏，队伍中的角色获得{2}层<color=Highlight>【同奏增益】</color>，持续{3}秒。\n锁暝自身可提供的<color=Highlight>【同奏增益】</color>上限{4}层，重复获得时刷新持续时间。\n联机状态下，无法<color=Highlight>响应同奏</color>。\n\n<color=Title>同奏增益</color>\n仅可响应同奏的角色可以获得。每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升{5}，可叠加{6}层。\n\n<color=Title>【妄执】获取规则</color>\n<color=Highlight>【妄执】</color>上限为{7}点。\n·<color=Highlight>普攻</color>、<color=Highlight>普攻·解伞形</color>、<color=Highlight>普攻·解伞形·旋雷破</color>、<color=Highlight>闪避反击</color>、<color=Highlight>闪避反击·解伞形</color>或<color=Highlight>共鸣技能·解伞形·赤芒瞬闪</color>命中目标时，若锁暝为登场角色则获得<color=Highlight>【妄执】</color>。\n·施放<color=Highlight>共鸣解放</color>时，获得{8}点<color=Highlight>【妄执】</color>。\n·施放<color=Highlight>变奏技能·解伞形·碎霆</color>或<color=Highlight>变奏技能·解伞形·旋雷破·同奏</color>时，获得{9}点<color=Highlight>【妄执】</color>。",
         "param": [
           "800",
           "800",
@@ -2033,26 +2059,26 @@
             "name": "普攻·暝伞形·刻心念伤害",
             "param": [
               [
-                "78.04%+39.02%*2+78.04%+78.04%+39.02%*2+19.51%*4+312.13%",
-                "84.44%+42.22%*2+84.44%+84.44%+42.22%*2+21.11%*4+337.73%",
-                "90.83%+45.42%*2+90.83%+90.83%+45.42%*2+22.71%*4+363.32%",
-                "99.79%+49.90%*2+99.79%+99.79%+49.90%*2+24.95%*4+399.16%",
-                "106.19%+53.10%*2+106.19%+106.19%+53.10%*2+26.55%*4+424.75%",
-                "113.55%+56.78%*2+113.55%+113.55%+56.78%*2+28.39%*4+454.18%",
-                "123.79%+61.90%*2+123.79%+123.79%+61.90%*2+30.95%*4+495.13%",
-                "134.03%+67.02%*2+134.03%+134.03%+67.02%*2+33.51%*4+536.09%",
-                "144.26%+72.13%*2+144.26%+144.26%+72.13%*2+36.07%*4+577.04%",
-                "155.14%+77.57%*2+155.14%+155.14%+77.57%*2+38.79%*4+620.55%",
-                "167.94%+83.97%*2+167.94%+167.94%+83.97%*2+41.99%*4+671.74%",
-                "180.74%+90.37%*2+180.74%+180.74%+90.37%*2+45.19%*4+722.93%",
-                "193.53%+96.77%*2+193.53%+193.53%+96.77%*2+48.39%*4+774.12%",
-                "206.33%+103.17%*2+206.33%+206.33%+103.17%*2+51.59%*4+825.30%",
-                "219.13%+109.57%*2+219.13%+219.13%+109.57%*2+54.79%*4+876.49%",
-                "231.92%+115.96%*2+231.92%+231.92%+115.96%*2+57.98%*4+927.68%",
-                "244.72%+122.36%*2+244.72%+244.72%+122.36%*2+61.18%*4+978.87%",
-                "257.52%+128.76%*2+257.52%+257.52%+128.76%*2+64.38%*4+1030.06%",
-                "270.32%+135.16%*2+270.32%+270.32%+135.16%*2+67.58%*4+1081.25%",
-                "283.11%+141.56%*2+283.11%+283.11%+141.56%*2+70.78%*4+1132.44%"
+                "780.37%",
+                "844.37%",
+                "908.33%",
+                "997.93%",
+                "1061.92%",
+                "1135.51%",
+                "1237.90%",
+                "1340.30%",
+                "1442.62%",
+                "1551.41%",
+                "1679.40%",
+                "1807.39%",
+                "1935.35%",
+                "2063.33%",
+                "2191.32%",
+                "2319.20%",
+                "2447.19%",
+                "2575.18%",
+                "2703.17%",
+                "2831.13%"
               ]
             ]
           },
@@ -2189,12 +2215,12 @@
               "value": 5
             },
             {
-              "key": 41100023,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100023,
+              "value": 3
             },
             {
               "key": 2,
@@ -2207,12 +2233,12 @@
               "value": 2
             },
             {
-              "key": 41100024,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 2
             },
             {
               "key": 2,
@@ -2225,12 +2251,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -2243,12 +2269,12 @@
               "value": 6
             },
             {
-              "key": 41100024,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 4
             },
             {
               "key": 2,
@@ -2388,12 +2414,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -2417,12 +2443,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -2446,12 +2472,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -2475,12 +2501,12 @@
               "value": 3
             },
             {
-              "key": 41100024,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100024,
+              "value": 3
             },
             {
               "key": 2,
@@ -2524,9 +2550,10 @@
     },
     "3": {
       "name": "孤伞独行",
-      "desc": "施放<color=Highlight>变奏技能·拢伞形·闪裂</color>或<color=Highlight>变奏技能·解伞形·碎霆</color>时，获得{0}层<color=Highlight>【同奏增益】</color>，该效果每{1}秒生效一次。\n·若锁暝提供过<color=Highlight>【同奏增益】</color>，在<color=Highlight>【同奏增益】</color>存在期间内则仅刷新持续时间。\n\n施放<color=Highlight>共鸣解放</color>时，锁暝自身普攻伤害加深{2}，持续{3}秒。",
+      "desc": "施放<color=Highlight>变奏技能·拢伞形·闪裂</color>或<color=Highlight>变奏技能·解伞形·碎霆</color>时，获得{0}层<color=Highlight>【同奏增益】</color>，持续{1}秒，该效果每{2}秒生效一次。\n·若锁暝提供过<color=Highlight>【同奏增益】</color>，在<color=Highlight>【同奏增益】</color>存在期间内则仅刷新持续时间。\n\n施放<color=Highlight>共鸣解放</color>时，锁暝自身普攻伤害加深{3}，持续{4}秒。",
       "param": [
         "1",
+        "30",
         "25",
         "30%",
         "25"
@@ -2548,7 +2575,7 @@
     },
     "6": {
       "name": "九影相随",
-      "desc": "每层<color=Highlight>【同奏增益】</color>的效果提升{0}，最多对{1}层<color=Highlight>同奏增益</color>生效。\n<color=Highlight>普攻·暝伞形·刻心念</color>的伤害倍率提升{2}。\n拥有<color=Highlight>禁锁契主</color>效果时，锁暝暴击伤害额外提升{3}。",
+      "desc": "队伍中的角色每层<color=Highlight>【同奏增益】</color>的效果提升{0}，最多对{1}层<color=Highlight>【同奏增益】</color>生效。\n<color=Highlight>普攻·暝伞形·刻心念</color>的伤害倍率提升{2}。\n拥有<color=Highlight>禁锁契主</color>效果时，锁暝暴击伤害额外提升{3}。",
       "param": [
         "50%",
         "4",
@@ -2570,12 +2597,12 @@
     ],
     "2": [
       {
-        "key": 41400344,
-        "value": 3
-      },
-      {
         "key": 42601640,
         "value": 4
+      },
+      {
+        "key": 41400344,
+        "value": 3
       },
       {
         "key": 41100022,
@@ -2588,12 +2615,12 @@
     ],
     "3": [
       {
-        "key": 41400344,
-        "value": 6
-      },
-      {
         "key": 42601640,
         "value": 8
+      },
+      {
+        "key": 41400344,
+        "value": 6
       },
       {
         "key": 41100022,
@@ -2606,12 +2633,12 @@
     ],
     "4": [
       {
-        "key": 41400344,
-        "value": 9
-      },
-      {
         "key": 42601640,
         "value": 12
+      },
+      {
+        "key": 41400344,
+        "value": 9
       },
       {
         "key": 41100023,
@@ -2624,12 +2651,12 @@
     ],
     "5": [
       {
-        "key": 41400344,
-        "value": 12
-      },
-      {
         "key": 42601640,
         "value": 16
+      },
+      {
+        "key": 41400344,
+        "value": 12
       },
       {
         "key": 41100023,
@@ -2642,12 +2669,12 @@
     ],
     "6": [
       {
-        "key": 41400344,
-        "value": 16
-      },
-      {
         "key": 42601640,
         "value": 20
+      },
+      {
+        "key": 41400344,
+        "value": 16
       },
       {
         "key": 41100024,

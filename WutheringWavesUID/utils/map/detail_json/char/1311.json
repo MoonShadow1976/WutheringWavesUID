@@ -503,7 +503,7 @@
     "1": {
       "skill": {
         "name": "万相生华",
-        "desc": "<color=Title>普攻·应世相</color>\n处于<color=Highlight>应世相</color>时，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·应世相</color>\n处于<color=Highlight>应世相</color>时，消耗耐力，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>空中攻击·应世相</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，短按<color=Highlight>普攻</color>施放，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>重击·应世相·闲中御</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，按住<color=Highlight>普攻</color>将施放<color=Highlight>重击·应世相·闲中御</color>，持续消耗耐力并对目标造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·应世相·闲中御</color>\n施放<color=Highlight>重击·应世相·闲中御</color>期间抬起<color=Highlight>普攻</color>，将施放<color=Highlight>空中攻击·应世相·闲中御</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>空中攻击·应世相·闲中御</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>闪避反击·应世相</color>\n处于<color=Highlight>应世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第3段</color>。\n\n<color=Title>普攻·照世相</color>\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·照世相第1段</color>时，将在目标位置生成<color=Highlight>活字心锁</color>。施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间将令<color=Highlight>活字心锁</color>崩解，造成<color=Thunder>导电伤害</color>。\n心在空中状态时，施放该技能将消耗耐力。\n\n<color=Title>重击·照世相</color>\n处于<color=Highlight>照世相</color>时，消耗耐力，御使玄方机巧造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>上挑攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，处于地面状态时，短按<color=Highlight>跳跃</color>可施放该技能，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，心在空中状态时，<color=Highlight>共鸣技能·照世相</color>将替换为<color=Highlight>空中攻击·照世相</color>。\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相</color>\n处于<color=Highlight>照世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>普攻·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相·万阙连衡第3段</color>。",
+        "desc": "<color=Title>普攻·应世相</color>\n处于<color=Highlight>应世相</color>时，进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>重击·应世相</color>\n处于<color=Highlight>应世相</color>时，消耗耐力，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>空中攻击·应世相</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，短按<color=Highlight>普攻</color>施放，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>重击·应世相·闲中御</color>\n处于<color=Highlight>应世相</color>时，处于空中状态时，按住<color=Highlight>普攻</color>将施放<color=Highlight>重击·应世相·闲中御</color>，持续消耗耐力并对目标造成<color=Thunder>导电伤害</color>。\n耐力耗尽时或切换至其他角色则提前结束。\n\n<color=Title>空中攻击·应世相·闲中御</color>\n施放<color=Highlight>重击·应世相·闲中御</color>期间松开<color=Highlight>普攻</color>，将施放<color=Highlight>空中攻击·应世相·闲中御</color>，消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>空中攻击·应世相·闲中御</color>后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第2段</color>。\n\n<color=Title>闪避反击·应世相</color>\n处于<color=Highlight>应世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第3段</color>。\n\n<color=Title>普攻·照世相</color>\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多3段的连续攻击，造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>普攻·照世相第1段</color>时，将在目标位置生成<color=Highlight>活字心锁</color>。施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间将令<color=Highlight>活字心锁</color>崩解，造成<color=Thunder>导电伤害</color>。\n心在空中状态时，施放该技能将消耗耐力。\n\n<color=Title>重击·照世相</color>\n处于<color=Highlight>照世相</color>时，消耗耐力，御使玄方机巧造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>上挑攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，处于地面状态时，短按<color=Highlight>跳跃</color>可施放该技能，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>空中攻击·照世相</color>\n处于<color=Highlight>照世相</color>时，心在空中状态时，<color=Highlight>共鸣技能·照世相</color>将替换为<color=Highlight>空中攻击·照世相</color>。\n消耗耐力进行空中下落攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相</color>\n处于<color=Highlight>照世相</color>时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相第3段</color>。\n\n<color=Title>普攻·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，御使玄方机巧进行最多4段的连续攻击，造成<color=Thunder>导电伤害</color>。\n\n<color=Title>闪避反击·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时且处于<color=Highlight>统御众机</color>状态时，成功闪避后一定时间内短按<color=Highlight>普攻</color>，攻击目标造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·照世相·万阙连衡第3段</color>。",
         "param": [],
         "type": "常态攻击",
         "level": {
@@ -1102,7 +1102,7 @@
             ]
           },
           "23": {
-            "name": "重击·应世相·闲中御每秒耐力消耗",
+            "name": "重击·应世相·闲中御耐力消耗",
             "param": [
               [
                 "5",
@@ -1129,6 +1129,33 @@
             ]
           },
           "24": {
+            "name": "重击·应世相·闲中御每秒耐力消耗",
+            "param": [
+              [
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5",
+                "5"
+              ]
+            ]
+          },
+          "25": {
             "name": "空中攻击·应世相·闲中御耐力消耗",
             "param": [
               [
@@ -1155,7 +1182,7 @@
               ]
             ]
           },
-          "25": {
+          "26": {
             "name": "重击·应世相耐力消耗",
             "param": [
               [
@@ -1182,7 +1209,7 @@
               ]
             ]
           },
-          "26": {
+          "27": {
             "name": "空中攻击·应世相耐力消耗",
             "param": [
               [
@@ -1209,7 +1236,7 @@
               ]
             ]
           },
-          "27": {
+          "28": {
             "name": "普攻·照世相空中状态下耐力消耗",
             "param": [
               [
@@ -1236,7 +1263,7 @@
               ]
             ]
           },
-          "28": {
+          "29": {
             "name": "重击·照世相耐力消耗",
             "param": [
               [
@@ -1263,7 +1290,7 @@
               ]
             ]
           },
-          "29": {
+          "30": {
             "name": "空中攻击·照世相耐力消耗",
             "param": [
               [
@@ -1369,12 +1396,12 @@
               "value": 5
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -1387,12 +1414,12 @@
               "value": 2
             },
             {
-              "key": 41100094,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 2
             },
             {
               "key": 2,
@@ -1405,12 +1432,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -1423,12 +1450,12 @@
               "value": 6
             },
             {
-              "key": 41100094,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 4
             },
             {
               "key": 2,
@@ -1441,14 +1468,14 @@
     "2": {
       "skill": {
         "name": "踏月归心",
-        "desc": "<color=Title>共鸣技能·应世相</color>\n处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣技能</color>，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第4段</color>。\n可在空中施放。\n\n施放该技能一定时间内，若心处于地面状态进行移动，则将化作<color=Highlight>心狐</color>。\n·化作<color=Highlight>心狐</color>时，若心处于非战斗状态下，获得<color=Highlight>不惊尘</color>。拥有<color=Highlight>不惊尘</color>时，心进入目标的警戒范围将不会进入战斗状态。心进入战斗、切换至其他角色时，或心进行场景、玩法、功能交互退出<color=Highlight>心狐</color>形态时，将强制移除<color=Highlight>不惊尘</color>。\n·化作<color=Highlight>心狐</color>期间，若心处于非战斗状态下，每{1}秒回复生命上限{0}的生命值。\n·化作<color=Highlight>心狐</color>期间，心受到伤害时、处于地面状态下若未按下方向键进行<color=Highlight>闪避</color>时、处于空中状态下进行<color=Highlight>闪避</color>时将退出<color=Highlight>心狐</color>形态。切换至其他角色或短按<color=Highlight>共鸣技能</color>也会退出<color=Highlight>心狐</color>形态。短按<color=Highlight>普攻</color>则会退出<color=Highlight>心狐</color>形态并施放<color=Highlight>普攻·应世相第4段</color>。\n·化作<color=Highlight>心狐</color>期间，心无法施放<color=Highlight>共鸣解放</color>。\n\n<color=Title>共鸣技能·照世相</color>\n处于<color=Highlight>照世相</color>时，若心在地面状态，短按<color=Highlight>共鸣技能</color>，心将御使巨型玄方机巧，造成<color=Thunder>导电伤害</color>。",
+        "desc": "<color=Title>共鸣技能·应世相</color>\n处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣技能</color>，造成<color=Thunder>导电伤害</color>。\n施放该技能后在一定时间内短按<color=Highlight>普攻</color>，将会施放<color=Highlight>普攻·应世相第4段</color>。\n可在空中施放。\n\n施放该技能后一定时间内，若心处于地面状态进行移动，将化作<color=Highlight>心狐</color>。\n·化作<color=Highlight>心狐</color>时，若心处于非战斗状态下，获得<color=Highlight>不惊尘</color>。拥有<color=Highlight>不惊尘</color>时，心进入目标的警戒范围将不会进入战斗状态。心进入战斗、切换至其他角色时，或心进行场景、玩法、功能交互退出<color=Highlight>心狐</color>形态时，将强制移除<color=Highlight>不惊尘</color>。\n·化作<color=Highlight>心狐</color>期间，若心处于非战斗状态下，每{1}秒回复生命上限{0}的生命值。\n·化作<color=Highlight>心狐</color>期间，心受到伤害时、处于地面状态下若未按下方向键进行<color=Highlight>闪避</color>时、处于空中状态下进行<color=Highlight>闪避</color>时将退出<color=Highlight>心狐</color>形态。切换至其他角色或短按<color=Highlight>共鸣技能</color>也会退出<color=Highlight>心狐</color>形态。短按<color=Highlight>普攻</color>则会退出<color=Highlight>心狐</color>形态并施放<color=Highlight>普攻·应世相第4段</color>。\n·化作<color=Highlight>心狐</color>期间，心处于冲刺状态期间会持续消耗耐力。\n·化作<color=Highlight>心狐</color>期间，心无法施放<color=Highlight>共鸣解放</color>。\n\n<color=Title>共鸣技能·照世相</color>\n处于<color=Highlight>照世相</color>时，若心在地面状态，短按<color=Highlight>共鸣技能</color>，心将御使巨型玄方机巧，造成<color=Thunder>导电伤害</color>。",
         "param": [
           "6%",
           "3"
         ],
         "type": "共鸣技能",
         "level": {
-          "30": {
+          "31": {
             "name": "共鸣技能·应世相伤害",
             "param": [
               [
@@ -1475,7 +1502,7 @@
               ]
             ]
           },
-          "31": {
+          "32": {
             "name": "共鸣技能·照世相伤害",
             "param": [
               [
@@ -1502,7 +1529,7 @@
               ]
             ]
           },
-          "32": {
+          "33": {
             "name": "共鸣技能·应世相冷却时间",
             "param": [
               [
@@ -1529,7 +1556,7 @@
               ]
             ]
           },
-          "33": {
+          "34": {
             "name": "共鸣技能·照世相冷却时间",
             "param": [
               [
@@ -1635,12 +1662,12 @@
               "value": 5
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -1653,12 +1680,12 @@
               "value": 2
             },
             {
-              "key": 41100094,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 2
             },
             {
               "key": 2,
@@ -1671,12 +1698,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -1689,12 +1716,12 @@
               "value": 6
             },
             {
-              "key": 41100094,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 4
             },
             {
               "key": 2,
@@ -1707,7 +1734,7 @@
     "3": {
       "skill": {
         "name": "引枢作清辉",
-        "desc": "<color=Title>转相</color>\n施放<color=Highlight>重击·应世相·步红尘</color>后，解锁<color=Highlight>转相</color>。\n施放<color=Highlight>转相</color>，展开万相神宫，心将转为<color=Highlight>照世相</color>，解锁全新的战斗能力，并进入<color=Highlight>心相心生</color>状态。\n可在低空中施放。\n处于<color=Highlight>照世相</color>时，进行<color=Highlight>任务对话</color>、使用<color=Highlight>附带动作表现的场景交互</color>或<color=Highlight>探索工具</color>时，会切换回<color=Highlight>应世相</color>，并进行对应动作。\n处于<color=Highlight>照世相</color>的心可在水面行走，在深水区时，会持续消耗体力；在步行模式下，处于<color=Highlight>照世相</color>的心可由悬崖步入空中，并在空中缓慢行走，该状态下将持续消耗体力。处于<color=Highlight>照世相</color>的心在空中状态时，无法回复体力。\n\n<color=Title>万阙垂天</color>\n施放<color=Highlight>重击·照世相·临寰宇</color>时，解锁<color=Highlight>万阙垂天</color>。\n施放<color=Highlight>万阙垂天</color>，引导万相神宫坠落，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n可在低空中施放。\n心将回到<color=Highlight>应世相</color>，并退出<color=Highlight>心相心生</color>状态。\n\n<color=Title>敕令</color>\n施放<color=Highlight>转相</color>时，心将同时获得{0}层<color=Highlight>敕令</color>，上限{0}层，持续{2}秒，持续时间结束移除全部层数。\n队伍中在场角色造成伤害后，心将在后续{1}秒内自动消耗<color=Highlight>敕令</color>，该效果每秒至多获得1次，重复获得时刷新该效果持续时间：\n·消耗<color=Highlight>敕令</color>时，从万相神宫召唤<color=Highlight>飞阙</color>对目标进行一次协同攻击，造成<color=Thunder>导电伤害</color>。\n·每秒至多自动消耗1层<color=Highlight>敕令</color>。\n·通过<color=Highlight>飞阙</color>造成的伤害不会获得该效果。\n·心失去意识时，移除全部<color=Highlight>敕令</color>。\n\n<color=Title>心相心生</color>\n提升心自身抗打断能力，持续{2}秒。\n进入<color=Highlight>心相心生</color>状态时，重置心的<color=Highlight>照世相</color>。\n<color=Highlight>心相心生</color>状态下，处于<color=Highlight>照世相</color>时，若未解锁<color=Highlight>万阙垂天</color>，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·应世</color>；处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·照世</color>。\n\n<color=Title>借相·应世</color>\n心临时转变回<color=Highlight>应世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>普攻·应世相第2段</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·应世相</color>。\n\n<color=Title>借相·照世</color>\n心重新转变为<color=Highlight>照世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>上挑攻击·照世相</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·照世相</color>。",
+        "desc": "<color=Title>转相</color>\n施放<color=Highlight>重击·应世相·步红尘</color>或<color=Highlight>重击·应世相·镇红尘</color>后，解锁<color=Highlight>转相</color>。\n施放<color=Highlight>转相</color>，展开万相神宫，心将转为<color=Highlight>照世相</color>，解锁全新的战斗能力，并进入<color=Highlight>心相心生</color>状态。\n可在低空中施放。\n处于<color=Highlight>照世相</color>时，进行<color=Highlight>任务对话</color>、使用<color=Highlight>附带动作表现的场景交互</color>或<color=Highlight>探索工具</color>时，会切换回<color=Highlight>应世相</color>，并进行对应动作。\n处于<color=Highlight>照世相</color>的心可在水面行走，在深水区时，会持续消耗耐力；在步行模式下，处于<color=Highlight>照世相</color>的心可由悬崖步入空中，并在空中缓慢行走，该状态下将持续消耗耐力。处于<color=Highlight>照世相</color>的心在空中状态时，无法回复耐力。\n\n<color=Title>万阙垂天</color>\n施放<color=Highlight>重击·照世相·临寰宇</color>或<color=Highlight>重击·照世相·镇寰宇</color>后，处于<color=Highlight>照世相</color>且共鸣能量满时，解锁<color=Highlight>万阙垂天</color>。\n施放<color=Highlight>万阙垂天</color>，引导万相神宫坠落，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n可在低空中施放。\n心将回到<color=Highlight>应世相</color>，并退出<color=Highlight>心相心生</color>状态。\n\n<color=Title>敕令</color>\n施放<color=Highlight>转相</color>时，心将同时获得{0}层<color=Highlight>敕令</color>，上限{0}层，持续{2}秒，持续时间结束移除全部层数。\n队伍中在场角色造成伤害后，心将在后续{1}秒内自动消耗<color=Highlight>敕令</color>，该效果每秒至多获得1次，重复获得时刷新该效果持续时间：\n·消耗<color=Highlight>敕令</color>时，从万相神宫召唤<color=Highlight>飞阙</color>对目标进行一次协同攻击，造成<color=Thunder>导电伤害</color>。\n·每秒至多自动消耗1层<color=Highlight>敕令</color>。\n·通过<color=Highlight>飞阙</color>造成的伤害不会获得该效果。\n·心失去意识时，移除全部<color=Highlight>敕令</color>。\n\n<color=Title>心相心生</color>\n提升心自身抗打断能力，持续{2}秒。\n进入<color=Highlight>心相心生</color>状态时，重置心的<color=Highlight>照世相</color>。\n<color=Highlight>心相心生</color>状态下，处于<color=Highlight>照世相</color>时，若未解锁<color=Highlight>万阙垂天</color>，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·应世</color>；处于<color=Highlight>应世相</color>时，短按<color=Highlight>共鸣解放</color>，心将施放<color=Highlight>借相·照世</color>。\n此外，若心退出<color=Highlight>心相心生</color>状态后仍处于<color=Highlight>照世相</color>，若未解锁<color=Highlight>万阙垂天</color>，短按<color=Highlight>共鸣解放</color>也将施放<color=Highlight>借相·应世</color>。\n\n<color=Title>借相·应世</color>\n心临时转变回<color=Highlight>应世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>普攻·应世相第2段</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·应世相</color>。\n\n<color=Title>借相·照世</color>\n心重新转变为<color=Highlight>照世相</color>。施放该技能时，若心处于地面状态，将施放<color=Highlight>上挑攻击·照世相</color>；若心处于空中状态，将施放<color=Highlight>空中攻击·照世相</color>。",
         "param": [
           "21",
           "3",
@@ -1715,7 +1742,7 @@
         ],
         "type": "共鸣解放",
         "level": {
-          "34": {
+          "35": {
             "name": "万阙垂天伤害",
             "param": [
               [
@@ -1742,7 +1769,7 @@
               ]
             ]
           },
-          "35": {
+          "36": {
             "name": "飞阙伤害",
             "param": [
               [
@@ -1769,7 +1796,7 @@
               ]
             ]
           },
-          "36": {
+          "37": {
             "name": "转相冷却时间",
             "param": [
               [
@@ -1796,7 +1823,7 @@
               ]
             ]
           },
-          "37": {
+          "38": {
             "name": "借相冷却时间",
             "param": [
               [
@@ -1823,7 +1850,7 @@
               ]
             ]
           },
-          "38": {
+          "39": {
             "name": "万阙垂天消耗共鸣能量",
             "param": [
               [
@@ -1850,7 +1877,7 @@
               ]
             ]
           },
-          "39": {
+          "40": {
             "name": "转相回复协奏能量",
             "param": [
               [
@@ -1877,7 +1904,7 @@
               ]
             ]
           },
-          "40": {
+          "41": {
             "name": "万阙垂天回复协奏能量",
             "param": [
               [
@@ -1983,12 +2010,12 @@
               "value": 5
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -2001,12 +2028,12 @@
               "value": 2
             },
             {
-              "key": 41100094,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 2
             },
             {
               "key": 2,
@@ -2019,12 +2046,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -2037,12 +2064,12 @@
               "value": 6
             },
             {
-              "key": 41100094,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 4
             },
             {
               "key": 2,
@@ -2055,7 +2082,7 @@
     "4": {
       "skill": {
         "name": "循流引兴替",
-        "desc": "处于<color=Highlight>共鸣模态·同奏</color>时，心施放<color=Highlight>变奏技能·应世相·诸相同奏</color>或<color=Highlight>变奏技能·照世相·诸相同奏</color>时，自身攻击提升{0}，持续{1}秒，若切换至其他角色则该效果提前结束。\n\n处于<color=Highlight>共鸣模态·电磁</color>时，队伍中的角色附加<color=Highlight>【电磁效应】</color>后，心导电伤害加成提升{2}，最多可叠加{3}层，该效果每名角色仅可触发1次。此外，若漂泊者·导电处于同一编队中，则漂泊者·导电施放<color=Highlight>变奏技能·不啻惊雷</color>时，心和漂泊者·导电的导电伤害加成提升{6}，持续{7}秒。\n角色编入队伍或切换模态时，重置该效果。",
+        "desc": "处于<color=Highlight>共鸣模态·同奏</color>时，心施放<color=Highlight>变奏技能·应世相·诸相同奏</color>或<color=Highlight>变奏技能·照世相·诸相同奏</color>时，自身攻击提升{0}，持续{1}秒，切换至其他角色或切换模态时该效果提前结束。\n\n处于<color=Highlight>共鸣模态·电磁</color>时，队伍中的角色附加<color=Highlight>【电磁效应】</color>后，心导电伤害加成提升{2}，最多可叠加{3}层，该效果每名角色仅可触发1次。此外，若漂泊者·导电处于同一编队中，则漂泊者·导电施放<color=Highlight>变奏技能·不啻惊雷</color>时，心和漂泊者·导电的导电伤害加成提升{6}，持续{7}秒。\n角色编入队伍或切换模态时，重置该效果。",
         "param": [
           "50%",
           "8",
@@ -2075,12 +2102,12 @@
               "value": 3
             },
             {
-              "key": 41100092,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100092,
+              "value": 3
             },
             {
               "key": 2,
@@ -2093,7 +2120,7 @@
     "5": {
       "skill": {
         "name": "信步拾清欢",
-        "desc": "处于<color=Highlight>共鸣模态·同奏</color>时，队伍中的角色<color=Highlight>【同奏增益】</color>效果的层数上限增加{0}层。队伍中的角色<color=Highlight>响应同奏</color>时，队伍中的角色获得{0}层<color=Highlight>【同奏增益】</color>，持续{2}秒，该效果无法叠加。\n\n处于<color=Highlight>共鸣模态·电磁</color>时，心不处于<color=Highlight>心相心生</color>状态期间，队伍中除心之外的角色附加<color=Highlight>【电磁效应】</color>后，心将获得1层<color=Highlight>霆霓</color>，可叠加{1}层。\n心处于<color=Highlight>心相心生</color>状态期间，一定范围内的目标<color=Highlight>【电磁效应】</color>层数为0时，将对目标附加1层<color=Highlight>【电磁效应】</color>，且若心的<color=Highlight>霆霓</color>层数达到上限，还将为目标附加<color=Highlight>疾霆</color>：\n·为目标附加<color=Highlight>疾霆</color>时，心将为目标附加<color=Highlight>【电磁效应】</color>至其层数上限，至多可附加至{3}层<color=Highlight>【电磁效应】</color>。\n·<color=Highlight>疾霆</color>持续期间，若目标<color=Highlight>【电磁效应】</color>层数上限增加，则心将再次为目标附加<color=Highlight>【电磁效应】</color>至其层数上限，至多可附加至{3}层<color=Highlight>【电磁效应】</color>。\n目标离开心附近一定范围时，移除目标<color=Highlight>疾霆</color>。\n退出<color=Highlight>心相心生</color>状态或切换模态时，移除上述效果。",
+        "desc": "处于<color=Highlight>共鸣模态·同奏</color>时，队伍中的角色<color=Highlight>【同奏增益】</color>效果的层数上限增加{0}层。队伍中的角色<color=Highlight>响应同奏</color>时，队伍中的角色获得{0}层<color=Highlight>【同奏增益】</color>，持续{2}秒，该效果无法叠加。\n\n处于<color=Highlight>共鸣模态·电磁</color>时，心不处于<color=Highlight>心相心生</color>状态期间，队伍中除心之外的角色附加<color=Highlight>【电磁效应】</color>后，每添加1层<color=Highlight>【电磁效应】</color>使心获得1层<color=Highlight>霆霓</color>，可叠加{1}层。\n心处于<color=Highlight>心相心生</color>状态期间，一定范围内的目标<color=Highlight>【电磁效应】</color>层数为0时，将对目标附加1层<color=Highlight>【电磁效应】</color>，且若心的<color=Highlight>霆霓</color>层数达到上限，还将为目标附加<color=Highlight>疾霆</color>：\n·为目标附加<color=Highlight>疾霆</color>时，心将为目标附加<color=Highlight>【电磁效应】</color>至其层数上限，至多可附加至{3}层<color=Highlight>【电磁效应】</color>。\n·<color=Highlight>疾霆</color>持续期间，若目标<color=Highlight>【电磁效应】</color>层数上限增加，则心将再次为目标附加<color=Highlight>【电磁效应】</color>至其层数上限，至多可附加至{3}层<color=Highlight>【电磁效应】</color>。\n目标离开心附近一定范围时，移除目标<color=Highlight>疾霆</color>。\n退出<color=Highlight>心相心生</color>状态或切换模态时，移除上述效果。",
         "param": [
           "1",
           "10",
@@ -2109,12 +2136,12 @@
               "value": 3
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -2133,8 +2160,8 @@
         ],
         "type": "变奏技能",
         "level": {
-          "41": {
-            "name": "变奏技能·应世相·电磁伤害",
+          "42": {
+            "name": "共鸣模态·电磁下变奏技能·应世相伤害",
             "param": [
               [
                 "3.97%*2+3.97%*2+63.39%",
@@ -2160,8 +2187,8 @@
               ]
             ]
           },
-          "42": {
-            "name": "变奏技能·应世相·同奏伤害",
+          "43": {
+            "name": "共鸣模态·同奏下变奏技能·应世相伤害",
             "param": [
               [
                 "5.17%+10.34%+5.17%+10.34%*3",
@@ -2187,7 +2214,7 @@
               ]
             ]
           },
-          "43": {
+          "44": {
             "name": "变奏技能·应世相·诸相同奏伤害",
             "param": [
               [
@@ -2214,8 +2241,8 @@
               ]
             ]
           },
-          "44": {
-            "name": "变奏技能·照世相·电磁伤害",
+          "45": {
+            "name": "共鸣模态·电磁下变奏技能·照世相伤害",
             "param": [
               [
                 "5.75%*4+5.75%*2+20.11%*4",
@@ -2241,8 +2268,8 @@
               ]
             ]
           },
-          "45": {
-            "name": "变奏技能·照世相·同奏伤害",
+          "46": {
+            "name": "共鸣模态·同奏下变奏技能·照世相伤害",
             "param": [
               [
                 "28.47%*4+2.85%+5.70%*2+7.12%*2",
@@ -2268,7 +2295,7 @@
               ]
             ]
           },
-          "46": {
+          "47": {
             "name": "变奏技能·照世相·诸相同奏伤害",
             "param": [
               [
@@ -2295,7 +2322,7 @@
               ]
             ]
           },
-          "47": {
+          "48": {
             "name": "变奏技能·应世相回复协奏能量",
             "param": [
               [
@@ -2322,7 +2349,7 @@
               ]
             ]
           },
-          "48": {
+          "49": {
             "name": "变奏技能·应世相·诸相同奏回复协奏能量",
             "param": [
               [
@@ -2349,7 +2376,7 @@
               ]
             ]
           },
-          "49": {
+          "50": {
             "name": "变奏技能·照世相回复协奏能量",
             "param": [
               [
@@ -2376,7 +2403,7 @@
               ]
             ]
           },
-          "50": {
+          "51": {
             "name": "变奏技能·照世相·诸相同奏回复协奏能量",
             "param": [
               [
@@ -2482,12 +2509,12 @@
               "value": 5
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -2500,12 +2527,12 @@
               "value": 2
             },
             {
-              "key": 41100094,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 2
             },
             {
               "key": 2,
@@ -2518,12 +2545,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -2536,12 +2563,12 @@
               "value": 6
             },
             {
-              "key": 41100094,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 4
             },
             {
               "key": 2,
@@ -2554,7 +2581,7 @@
     "7": {
       "skill": {
         "name": "万相流转，此心自明",
-        "desc": "<color=Title>诸相心生</color>\n处于<color=Highlight>应世相</color>时，心可获得和消耗<color=Highlight>【应世心】</color>。\n处于<color=Highlight>照世相</color>时，心可获得和消耗<color=Highlight>【照世心】</color>。\n\n<color=Title>重击·应世相·步红尘</color>\n处于<color=Highlight>应世相</color>时，心的<color=Highlight>【应世心】</color>达到{0}点时，<color=Highlight>重击·应世相</color>替换为<color=Highlight>重击·应世相·步红尘</color>。\n按住<color=Highlight>普攻</color>，消耗耐力和{0}点<color=Highlight>【应世心】</color>施放，期间免疫打断，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>时，心将获得<color=Highlight>了尘愿</color>。此次<color=Highlight>重击·应世相·步红尘</color>将消耗<color=Highlight>了尘愿</color>替换为<color=Highlight>重击·应世相·镇红尘</color>，造成更高的伤害。每{16}秒仅可获得1次<color=Highlight>了尘愿</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>或<color=Highlight>重击·应世相·镇红尘</color>期间，若不处于<color=Highlight>心相心生</color>状态，解锁<color=Highlight>共鸣解放·转相</color>。\n\n<color=Title>重击·照世相·临寰宇</color>\n处于<color=Highlight>照世相</color>时，且心处于<color=Highlight>统御众机</color>状态期间，消耗全部<color=Highlight>【照世心】</color>时，<color=Highlight>重击·照世相</color>替换为<color=Highlight>重击·照世相·临寰宇</color>。\n按住<color=Highlight>普攻</color>，消耗耐力施放，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>时，心将获得<color=Highlight>承天则</color>。此次<color=Highlight>重击·照世相·临寰宇</color>将消耗<color=Highlight>承天则</color>替换为<color=Highlight>重击·照世相·镇寰宇</color>，造成更高的伤害。每{16}秒仅可获得1次<color=Highlight>承天则</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>或<color=Highlight>重击·照世相·镇寰宇</color>时，退出<color=Highlight>统御众机</color>状态，解锁<color=Highlight>共鸣解放·万阙垂天</color>。\n\n<color=Title>共鸣技能·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时，心的<color=Highlight>【照世心】</color>达到{1}点时，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·照世相·万阙连衡</color>。\n若心在地面状态，短按<color=Highlight>共鸣技能</color>，对周围的目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>共鸣技能·照世相·万阙连衡</color>时，心将进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>统御众机</color>\n<color=Highlight>统御众机</color>状态持续{2}秒。\n该状态持续期间，<color=Highlight>普攻·照世相</color>将进一步强化为<color=Highlight>普攻·照世相·万阙连衡</color>，同时<color=Highlight>闪避反击·照世相</color>替换为<color=Highlight>闪避反击·照世相·万阙连衡</color>。\n<color=Highlight>普攻·照世相·万阙连衡</color>或<color=Highlight>闪避反击·照世相·万阙连衡</color>命中目标时，若心为队伍中登场角色将消耗<color=Highlight>【照世心】</color>。\n退出<color=Highlight>统御众机</color>状态时，清除<color=Highlight>【照世心】</color>。\n\n<color=Title>共鸣模态·同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，获得以下效果：\n·心拥有<color=Highlight>响应同奏</color>的能力，该效果联机状态下不会生效。\n·心施放<color=Highlight>变奏技能·应世相</color>或<color=Highlight>变奏技能·应世相·诸相同奏</color>时，使下一次施放<color=Highlight>共鸣解放·转相</color>时，心获得<color=Highlight>同奏</color>，持续{17}秒。\n·心<color=Highlight>响应同奏</color>时，获得<color=Highlight>溯意</color>，并使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n心施放<color=Highlight>变奏技能</color>时，若未<color=Highlight>响应同奏</color>且拥有<color=Highlight>溯意</color>，则将消耗<color=Highlight>溯意</color>，使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n·心切换模态时，移除自身获得的上述效果。\n·施放<color=Highlight>变奏技能·照世相</color>或<color=Highlight>变奏技能·照世相·诸相同奏</color>时，心将直接进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>共鸣模态·电磁</color>\n处于<color=Highlight>共鸣模态·电磁</color>时，获得以下效果：\n·心进入战斗状态时，一定范围内的目标<color=Highlight>【电磁效应】</color>每次自动进行结算时不再减少层数。\n·队伍中的角色为目标添加<color=Highlight>【电磁爆发】</color>后，每添加{4}层<color=Highlight>【电磁爆发】</color>使心获得{6}层<color=Highlight>霆心域</color>，可叠加{5}层，并消耗目标全部的<color=Highlight>【电磁爆发】</color>层数。心切换模态时移除<color=Highlight>霆心域</color>。\n·<color=Highlight>共鸣技能·踏月归心</color>最后一段攻击时，心将主动触发一次<color=Highlight>【电磁效应】</color>伤害，伤害倍率为{9}*自身<color=Highlight>霆心域</color>层数*目标当前<color=Highlight>【电磁效应】</color>的层数对应的<color=Highlight>【电磁效应】</color>伤害倍率。\n施放<color=Highlight>共鸣技能·踏月归心</color>期间，切换至其他角色或提前结束技能则上述效果提前退出。\n施放<color=Highlight>共鸣技能·踏月归心</color>一定时间后，消耗全部<color=Highlight>霆心域</color>。\n施放<color=Highlight>共鸣技能·照世相</color>时，若心拥有至少{24}层<color=Highlight>霆心域</color>，则<color=Highlight>共鸣技能·照世相</color>将停滞命中的目标，切换至其他角色则提前清除停滞效果。\n·施放<color=Highlight>共鸣解放·转相</color>后，为附近一定范围内的目标附加{18}层<color=Highlight>【电磁效应】</color>，并使<color=Highlight>普攻·照世相·万阙连衡</color>、<color=Highlight>闪避反击·照世相·万阙连衡</color>可为命中的目标附加<color=Highlight>【电磁效应】</color>，至多生效{12}次，施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。\n<color=Highlight>照世相·万阙连衡</color>、<color=Highlight>重击·照世相·镇寰宇</color>为命中的目标附加{18}层<color=Highlight>【电磁效应】</color>，<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·照世相</color>、<color=Highlight>重击·应世相·镇红尘</color>为命中的目标附加{19}层<color=Highlight>【电磁效应】</color>。\n\n<color=Title>同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，心拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，心则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。心协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，队伍中的角色拥有<color=Highlight>同奏</color>时，若切换至心，心施放<color=Highlight>变奏技能</color>时<color=Highlight>响应同奏</color>，队伍中的角色获得{20}层<color=Highlight>【同奏增益】</color>，持续{21}秒。\n心至多以此方式提供{20}层<color=Highlight>【同奏增益】</color>。\n\n<color=Title>同奏增益</color>\n每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升{22}，可叠加{23}层。\n\n<color=Title>【应世心】获取规则</color>\n<color=Highlight>【应世心】</color>上限{0}点。\n处于<color=Highlight>应世相</color>时，<color=Highlight>常态攻击·应世相</color>、<color=Highlight>共鸣技能·应世相</color>、<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【应世心】</color>。\n施放<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>时，获得{13}点<color=Highlight>【应世心】</color>。\n\n<color=Title>【照世心】获取规则</color>\n<color=Highlight>【照世心】</color>上限{1}点。\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，<color=Highlight>常态攻击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·同奏</color>时，施放<color=Highlight>变奏技能·照世相</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>时，将直接进入<color=Highlight>统御众机</color>状态，并获得{10}点<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·电磁</color>时，施放<color=Highlight>共鸣解放·转相</color>后，施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间令<color=Highlight>普攻·照世相第1段</color>生成的<color=Highlight>活字心锁</color>崩解时，若心为队伍中登场角色则获得{11}点<color=Highlight>【照世心】</color>，可生效1次，施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。",
+        "desc": "<color=Title>诸相心生</color>\n处于<color=Highlight>应世相</color>时，心可获得和消耗<color=Highlight>【应世心】</color>。\n处于<color=Highlight>照世相</color>时，心可获得和消耗<color=Highlight>【照世心】</color>。\n\n<color=Title>重击·应世相·步红尘</color>\n处于<color=Highlight>应世相</color>时，心的<color=Highlight>【应世心】</color>达到{0}点时，<color=Highlight>重击·应世相</color>替换为<color=Highlight>重击·应世相·步红尘</color>。\n按住<color=Highlight>普攻</color>，消耗耐力和{0}点<color=Highlight>【应世心】</color>施放，期间免疫打断，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>时，心将获得<color=Highlight>了尘愿</color>。此次<color=Highlight>重击·应世相·步红尘</color>将消耗<color=Highlight>了尘愿</color>替换为<color=Highlight>重击·应世相·镇红尘</color>，造成更高的伤害。每{16}秒仅可获得1次<color=Highlight>了尘愿</color>。\n施放<color=Highlight>重击·应世相·步红尘</color>或<color=Highlight>重击·应世相·镇红尘</color>期间，若不处于<color=Highlight>心相心生</color>状态，解锁<color=Highlight>共鸣解放·转相</color>。\n\n<color=Title>重击·照世相·临寰宇</color>\n处于<color=Highlight>照世相</color>时，且心处于<color=Highlight>统御众机</color>状态期间，<color=Highlight>【照世心】</color>被消耗至0时，<color=Highlight>重击·照世相</color>替换为<color=Highlight>重击·照世相·临寰宇</color>。\n按住<color=Highlight>普攻</color>，消耗耐力施放，对目标造成<color=Thunder>导电伤害</color>，此次伤害为<color=Highlight>共鸣技能伤害</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>时，心将获得<color=Highlight>承天则</color>。此次<color=Highlight>重击·照世相·临寰宇</color>将消耗<color=Highlight>承天则</color>替换为<color=Highlight>重击·照世相·镇寰宇</color>，造成更高的伤害。每{16}秒仅可获得1次<color=Highlight>承天则</color>。\n施放<color=Highlight>重击·照世相·临寰宇</color>或<color=Highlight>重击·照世相·镇寰宇</color>时，退出<color=Highlight>统御众机</color>状态，解锁<color=Highlight>共鸣解放·万阙垂天</color>。\n可在空中施放。\n\n<color=Title>共鸣技能·照世相·万阙连衡</color>\n处于<color=Highlight>照世相</color>时，心的<color=Highlight>【照世心】</color>达到{1}点时，若心在地面状态，<color=Highlight>共鸣技能</color>替换为<color=Highlight>共鸣技能·照世相·万阙连衡</color>。\n短按<color=Highlight>共鸣技能</color>，对周围的目标造成<color=Thunder>导电伤害</color>。\n施放<color=Highlight>共鸣技能·照世相·万阙连衡</color>时，心将进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>统御众机</color>\n<color=Highlight>统御众机</color>状态持续{2}秒。\n该状态持续期间，<color=Highlight>普攻·照世相</color>将替换为<color=Highlight>普攻·照世相·万阙连衡</color>，同时<color=Highlight>闪避反击·照世相</color>替换为<color=Highlight>闪避反击·照世相·万阙连衡</color>。\n<color=Highlight>普攻·照世相·万阙连衡</color>或<color=Highlight>闪避反击·照世相·万阙连衡</color>命中目标时，若心为队伍中登场角色将消耗<color=Highlight>【照世心】</color>。\n退出<color=Highlight>统御众机</color>状态时，清除<color=Highlight>【照世心】</color>。\n\n<color=Title>共鸣模态·同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，获得以下效果：\n·心拥有<color=Highlight>响应同奏</color>的能力，该效果联机状态下不会生效。\n·心施放<color=Highlight>变奏技能·应世相</color>或<color=Highlight>变奏技能·应世相·诸相同奏</color>时，使下一次施放<color=Highlight>共鸣解放·转相</color>时，心获得<color=Highlight>同奏</color>，持续{17}秒。\n·心<color=Highlight>响应同奏</color>时，获得<color=Highlight>溯意</color>，并使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n心施放<color=Highlight>变奏技能</color>时，若未<color=Highlight>响应同奏</color>且拥有<color=Highlight>溯意</color>，则将消耗<color=Highlight>溯意</color>，使本次施放的<color=Highlight>变奏技能</color>替换为<color=Highlight>变奏技能·诸相同奏</color>，造成更高的伤害。\n·心切换模态时，移除自身获得的上述效果。\n·施放<color=Highlight>变奏技能·照世相</color>或<color=Highlight>变奏技能·照世相·诸相同奏</color>时，心将直接进入<color=Highlight>统御众机</color>状态。\n\n<color=Title>共鸣模态·电磁</color>\n处于<color=Highlight>共鸣模态·电磁</color>时，获得以下效果：\n·心进入战斗状态时，一定范围内的目标<color=Highlight>【电磁效应】</color>每次触发时不再减少层数。\n·队伍中的角色为目标添加<color=Highlight>【电磁爆发】</color>后，每添加{4}层<color=Highlight>【电磁爆发】</color>使心获得{6}层<color=Highlight>霆心域</color>，可叠加{5}层，并消耗目标全部的<color=Highlight>【电磁爆发】</color>层数。心切换模态时移除<color=Highlight>霆心域</color>。\n·<color=Highlight>共鸣技能·踏月归心</color>最后一段攻击时，心将主动触发一次<color=Highlight>【电磁效应】</color>伤害，伤害倍率为{9}*自身<color=Highlight>霆心域</color>层数*目标当前<color=Highlight>【电磁效应】</color>的层数对应的<color=Highlight>【电磁效应】</color>伤害倍率。\n施放<color=Highlight>共鸣技能·踏月归心</color>期间，切换至其他角色或提前结束技能则上述效果提前退出。\n施放<color=Highlight>共鸣技能·踏月归心</color>一定时间后，消耗全部<color=Highlight>霆心域</color>。\n心拥有至少{24}层<color=Highlight>霆心域</color>时，施放<color=Highlight>共鸣技能·照世相</color>期间停滞周围目标。\n·施放<color=Highlight>共鸣解放·转相</color>后，为附近一定范围内的目标附加{18}层<color=Highlight>【电磁效应】</color>，并使<color=Highlight>普攻·照世相·万阙连衡</color>、<color=Highlight>闪避反击·照世相·万阙连衡</color>可为命中的目标附加<color=Highlight>【电磁效应】</color>，至多生效{12}次。施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。\n<color=Highlight>共鸣技能·照世相·万阙连衡</color>、<color=Highlight>重击·照世相·镇寰宇</color>为命中的目标附加{18}层<color=Highlight>【电磁效应】</color>，<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·照世相</color>、<color=Highlight>重击·应世相·镇红尘</color>为命中的目标附加{19}层<color=Highlight>【电磁效应】</color>。\n\n<color=Title>同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，心拥有<color=Highlight>同奏</color>时，若切换其他角色，登场角色将施放自身变奏技能，心则施放自身延奏技能，并移除其自身的<color=Highlight>同奏</color>效果。心协奏能量达到最大值，并且拥有<color=Highlight>同奏</color>效果时，只消耗<color=Highlight>同奏</color>效果。\n\n<color=Title>响应同奏</color>\n处于<color=Highlight>共鸣模态·同奏</color>时，队伍中的登场角色拥有<color=Highlight>同奏</color>时，若切换至心，心施放<color=Highlight>变奏技能</color>后<color=Highlight>响应同奏</color>，队伍中的角色获得{20}层<color=Highlight>【同奏增益】</color>，持续{21}秒。\n心至多以此方式提供{20}层<color=Highlight>【同奏增益】</color>。\n\n<color=Title>同奏增益</color>\n仅可响应同奏的角色可以获得该效果。每层<color=Highlight>【同奏增益】</color>使队伍中可<color=Highlight>响应同奏</color>的角色造成的最终伤害提升{22}，可叠加{23}层。\n\n<color=Title>【应世心】获取规则</color>\n<color=Highlight>【应世心】</color>上限{0}点。\n处于<color=Highlight>应世相</color>时，<color=Highlight>常态攻击·应世相</color>、<color=Highlight>共鸣技能·应世相</color>、<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【应世心】</color>。\n施放<color=Highlight>变奏技能·应世相</color>、<color=Highlight>变奏技能·应世相·诸相同奏</color>时，获得{13}点<color=Highlight>【应世心】</color>。\n\n<color=Title>【照世心】获取规则</color>\n<color=Highlight>【照世心】</color>上限{1}点。\n处于<color=Highlight>照世相</color>时且不处于<color=Highlight>统御众机</color>状态时，<color=Highlight>常态攻击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>、<color=Highlight>变奏技能·照世相</color>命中目标时，若心为队伍中登场角色则获得<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·同奏</color>时，施放<color=Highlight>变奏技能·照世相</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>时，将直接进入<color=Highlight>统御众机</color>状态，并获得{10}点<color=Highlight>【照世心】</color>。\n·处于<color=Highlight>共鸣模态·电磁</color>时，施放<color=Highlight>共鸣解放·转相</color>后，施放<color=Highlight>普攻·照世相第2段</color>、<color=Highlight>重击·照世相</color>、<color=Highlight>闪避反击·照世相</color>、<color=Highlight>共鸣技能·照世相</color>期间令<color=Highlight>普攻·照世相第1段</color>生成的<color=Highlight>活字心锁</color>崩解时，若心处于<color=Highlight>照世相</color>且不处于<color=Highlight>统御众机</color>状态，且心为队伍中登场角色则额外获得{11}点<color=Highlight>【照世心】</color>，可生效1次，施放<color=Highlight>共鸣解放·转相</color>重置可生效次数，切换模态时移除可生效次数。",
         "param": [
           "100",
           "300",
@@ -2584,7 +2611,7 @@
         ],
         "type": "共鸣回路",
         "level": {
-          "51": {
+          "52": {
             "name": "重击·应世相·步红尘伤害",
             "param": [
               [
@@ -2611,7 +2638,7 @@
               ]
             ]
           },
-          "52": {
+          "53": {
             "name": "重击·应世相·镇红尘伤害",
             "param": [
               [
@@ -2638,7 +2665,7 @@
               ]
             ]
           },
-          "53": {
+          "54": {
             "name": "重击·照世相·临寰宇伤害",
             "param": [
               [
@@ -2665,7 +2692,7 @@
               ]
             ]
           },
-          "54": {
+          "55": {
             "name": "重击·照世相·镇寰宇伤害",
             "param": [
               [
@@ -2692,7 +2719,7 @@
               ]
             ]
           },
-          "55": {
+          "56": {
             "name": "共鸣技能·照世相·万阙连衡伤害",
             "param": [
               [
@@ -2719,7 +2746,7 @@
               ]
             ]
           },
-          "56": {
+          "57": {
             "name": "共鸣技能·照世相·万阙连衡冷却时间",
             "param": [
               [
@@ -2746,7 +2773,7 @@
               ]
             ]
           },
-          "57": {
+          "58": {
             "name": "重击·应世相·步红尘耐力消耗",
             "param": [
               [
@@ -2773,7 +2800,7 @@
               ]
             ]
           },
-          "58": {
+          "59": {
             "name": "重击·应世相·镇红尘耐力消耗",
             "param": [
               [
@@ -2800,7 +2827,7 @@
               ]
             ]
           },
-          "59": {
+          "60": {
             "name": "重击·照世相·临寰宇耐力消耗",
             "param": [
               [
@@ -2827,7 +2854,7 @@
               ]
             ]
           },
-          "60": {
+          "61": {
             "name": "重击·照世相·镇寰宇耐力消耗",
             "param": [
               [
@@ -2933,12 +2960,12 @@
               "value": 5
             },
             {
-              "key": 41100093,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100093,
+              "value": 3
             },
             {
               "key": 2,
@@ -2951,12 +2978,12 @@
               "value": 2
             },
             {
-              "key": 41100094,
-              "value": 2
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 2
             },
             {
               "key": 2,
@@ -2969,12 +2996,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -2987,12 +3014,12 @@
               "value": 6
             },
             {
-              "key": 41100094,
-              "value": 4
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 4
             },
             {
               "key": 2,
@@ -3134,12 +3161,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -3163,12 +3190,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -3192,12 +3219,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -3221,12 +3248,12 @@
               "value": 3
             },
             {
-              "key": 41100094,
-              "value": 3
-            },
-            {
               "key": 41400354,
               "value": 1
+            },
+            {
+              "key": 41100094,
+              "value": 3
             },
             {
               "key": 2,
@@ -3252,7 +3279,7 @@
   "chains": {
     "1": {
       "name": "授以舟楫渡潮生",
-      "desc": "施放<color=Highlight>共鸣解放·转相</color>时，心获得2层<color=Highlight>敛华障</color>，可叠加{0}层，转变为<color=Highlight>应世相</color>时移除全部层数。心受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>敛华障</color>，使自身免疫打断且受到的伤害降低{1}，持续{2}秒，该效果每{3}秒可触发1次。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率提升{6}。且每有1层<color=Highlight>【同奏增益】</color>，使<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率额外提升{7}，至多叠加{8}层。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n心进入战斗状态时，若<color=Highlight>霆心域</color>层数不足{13}层，则增加至{13}层，每{12}秒可触发一次。\n<color=Highlight>共鸣回路·共鸣技能·踏月归心</color>触发<color=Highlight>【电磁效应】</color>伤害的倍率系数提升至{16}。",
+      "desc": "施放<color=Highlight>共鸣解放·转相</color>时，心获得2层<color=Highlight>敛华障</color>，可叠加{0}层，转变为<color=Highlight>应世相</color>时移除全部层数。心受到敌方怪物攻击造成的伤害时，可消耗1层<color=Highlight>敛华障</color>，使自身免疫打断且受到的伤害降低{1}，持续{2}秒，该效果每{3}秒可触发1次。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率提升{6}。且每有1层<color=Highlight>【同奏增益】</color>，使<color=Highlight>变奏技能·应世相·诸相同奏</color>、<color=Highlight>变奏技能·照世相·诸相同奏</color>的伤害倍率额外提升{7}，至多叠加{8}层。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n心进入战斗状态时，若<color=Highlight>霆心域</color>层数不足{13}层，则增加至{13}层，每{12}秒可触发一次。\n<color=Highlight>共鸣技能·踏月归心</color>触发<color=Highlight>【电磁效应】</color>伤害提升至{16}*自身<color=Highlight>霆心域</color>层数*目标当前<color=Highlight>【电磁效应】</color>的层数对应的<color=Highlight>【电磁效应】</color>伤害倍率。",
       "param": [
         "2",
         "60%",
@@ -3296,7 +3323,7 @@
     },
     "4": {
       "name": "浮灯照水藏微愿",
-      "desc": "队伍中的角色为目标附加<color=Highlight>【电磁效应】</color>、<color=Highlight>【电磁爆发】</color>后，或队伍中的角色获得<color=Highlight>同奏</color>、<color=Highlight>响应同奏</color>时，使队伍中所有角色全属性伤害加成提升{0}，持续{1}秒。",
+      "desc": "队伍中的角色触发以下任意效果时使队伍中所有角色全属性伤害加成提升{0}，持续{1}秒：\n·为目标附加<color=Highlight>【电磁效应】</color>、<color=Highlight>【电磁爆发】</color>后。\n·未拥有并获得<color=Highlight>同奏</color>时。\n·<color=Highlight>响应同奏</color>时。",
       "param": [
         "20%",
         "30"
@@ -3304,7 +3331,7 @@
     },
     "5": {
       "name": "诸相流转由心定",
-      "desc": "处于<color=Highlight>照世相</color>时，心受到的伤害降低{0}。\n心受到致命伤害时，此次伤害不会使心倒下，并回复心{1}生命上限的生命值，同时免疫伤害和打断，持续{2}秒。该效果每{3}分钟可触发1次。",
+      "desc": "处于<color=Highlight>照世相</color>时，心受到的伤害降低{0}。\n心受到致命伤害时，此次伤害不会使心倒下，并回复心{1}生命上限的生命值，同时免疫伤害和受击，持续{2}秒。该效果每{3}分钟可触发1次。",
       "param": [
         "20%",
         "100%",
@@ -3314,7 +3341,7 @@
     },
     "6": {
       "name": "不教朝月负今人",
-      "desc": "目标受到心的共鸣技能伤害提升{0}。\n\n心造成的共鸣技能伤害无视目标{2}防御。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n队伍中的角色<color=Highlight>【同奏增益】</color>效果的层数上限增加{1}层。队伍中的角色<color=Highlight>响应同奏</color>时，队伍中的角色获得{1}层<color=Highlight>【同奏增益】</color>，持续{5}秒，该效果无法叠加。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n处于战斗状态时，心附近一定范围内的目标受到<color=Highlight>【电磁效应】</color>的伤害可暴击，暴击固定为{3}，暴击伤害固定为{4}。",
+      "desc": "目标受到心的共鸣技能伤害提升{0}。\n\n心造成的共鸣技能伤害无视目标{2}防御。\n\n处于<color=Highlight>共鸣模态·同奏</color>时：\n队伍中的角色<color=Highlight>【同奏增益】</color>效果的层数上限额外增加{1}层。队伍中的角色<color=Highlight>响应同奏</color>时，队伍中的角色额外获得{1}层<color=Highlight>【同奏增益】</color>，持续{5}秒，该效果无法叠加。\n\n处于<color=Highlight>共鸣模态·电磁</color>时：\n处于战斗状态时，心附近一定范围内的目标受到<color=Highlight>【电磁效应】</color>的伤害可暴击，暴击固定为{3}，暴击伤害固定为{4}。",
       "param": [
         "40%",
         "1",
@@ -3338,12 +3365,12 @@
     ],
     "2": [
       {
-        "key": 41400334,
-        "value": 3
-      },
-      {
         "key": 42601630,
         "value": 4
+      },
+      {
+        "key": 41400334,
+        "value": 3
       },
       {
         "key": 41100092,
@@ -3356,12 +3383,12 @@
     ],
     "3": [
       {
-        "key": 41400334,
-        "value": 6
-      },
-      {
         "key": 42601630,
         "value": 8
+      },
+      {
+        "key": 41400334,
+        "value": 6
       },
       {
         "key": 41100092,
@@ -3374,12 +3401,12 @@
     ],
     "4": [
       {
-        "key": 41400334,
-        "value": 9
-      },
-      {
         "key": 42601630,
         "value": 12
+      },
+      {
+        "key": 41400334,
+        "value": 9
       },
       {
         "key": 41100093,
@@ -3392,12 +3419,12 @@
     ],
     "5": [
       {
-        "key": 41400334,
-        "value": 12
-      },
-      {
         "key": 42601630,
         "value": 16
+      },
+      {
+        "key": 41400334,
+        "value": 12
       },
       {
         "key": 41100093,
@@ -3410,12 +3437,12 @@
     ],
     "6": [
       {
-        "key": 41400334,
-        "value": 16
-      },
-      {
         "key": 42601630,
         "value": 20
+      },
+      {
+        "key": 41400334,
+        "value": 16
       },
       {
         "key": 41100094,

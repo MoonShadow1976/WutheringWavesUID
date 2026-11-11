@@ -140,6 +140,9 @@ Tune_Strain_Role_Ids = [1413, 1211, 1510, 1509]
 # 协同攻击
 Sync_Strike_Role_Ids = [1302, 1204, 1303, 1105, 1503, 1311, 1312]
 
+# 获得同奏
+Unison_Role_Ids = [1304, 1311, 1312]
+
 # 失序彼岸之梦 套装
 Ancient_Role_Ids = [1608, 1109]
 

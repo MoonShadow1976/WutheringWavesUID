@@ -16,6 +16,7 @@ from .utils import (
     Havoc_Bane_Role_Ids,
     Spectro_Frazzle_Role_Ids,
     Sync_Strike_Role_Ids,
+    Unison_Role_Ids,
     attack_damage,
     cast_attack,
     cast_healing,
@@ -1001,7 +1002,12 @@ class Sonata_茜染怀想之花(SonataAbstract):
 
     def effect(self, attr: DamageAttribute, title: str):
         attr.add_atk_percent(_param(self.name, 0), title, "治疗后队伍攻击提升10%")
-        if attr.env_unison or attr.env_unison_response:
+        if (
+            attr.env_unison
+            or attr.env_unison_response
+            or check_char_id(attr, Unison_Role_Ids)
+            or any(char in Unison_Role_Ids for char in attr.teammate_char_ids)
+        ):
             attr.add_atk_percent(_param(self.name, 2), title, "获得/响应同奏后攻击额外提升15%")
 
 

@@ -22040,12 +22040,12 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "12.4%"
+              "attributeName": "生命",
+              "attributeValue": "580"
             },
             {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
             },
             {
               "attributeName": "暴击伤害",
@@ -22080,8 +22080,8 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "衍射伤害加成",
-              "attributeValue": "30%",
+              "attributeName": "共鸣效率",
+              "attributeValue": "32%",
               "iconUrl": ""
             },
             {
@@ -22096,8 +22096,8 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "12.4%"
+              "attributeName": "生命",
+              "attributeValue": "580"
             },
             {
               "attributeName": "暴击",
@@ -22152,12 +22152,12 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "12.4%"
-            },
-            {
               "attributeName": "暴击",
               "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
             },
             {
               "attributeName": "暴击伤害",
@@ -22208,12 +22208,12 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "12.4%"
+              "attributeName": "生命",
+              "attributeValue": "580"
             },
             {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
             },
             {
               "attributeName": "暴击伤害",
@@ -22264,12 +22264,12 @@
               "attributeValue": "11.6%"
             },
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "12.4%"
+              "attributeName": "生命",
+              "attributeValue": "580"
             },
             {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
             },
             {
               "attributeName": "暴击伤害",

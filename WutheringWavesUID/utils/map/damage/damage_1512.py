@@ -142,7 +142,7 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色伤害类型
     attr.set_char_damage(intro_skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -185,9 +185,9 @@ def calc_damage_3(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -198,7 +198,7 @@ def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色伤害类型
     attr.set_char_damage(skill_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -241,9 +241,9 @@ def calc_damage_4(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -254,7 +254,7 @@ def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色伤害类型
     attr.set_char_damage(hit_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -297,9 +297,9 @@ def calc_damage_5(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -454,7 +454,7 @@ def calc_damage_8(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     # 设置角色伤害类型
     attr.set_char_damage(hit_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -497,9 +497,9 @@ def calc_damage_8(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = F
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -582,7 +582,7 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     # 设置角色伤害类型
     attr.set_char_damage(attack_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -627,9 +627,9 @@ def calc_damage_10(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -640,7 +640,7 @@ def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     # 设置角色伤害类型
     attr.set_char_damage(liberation_damage)
     # 设置角色模板  "temp_atk", "temp_life", "temp_def"
-    attr.set_char_template("temp_life")
+    attr.set_char_template("temp_atk")
 
     # 队友增益默认触发键,配队由配队条目或「换队友」决定
     attr.set_teammate_buff()
@@ -683,9 +683,9 @@ def calc_damage_11(attr: DamageAttribute, role: RoleDetailData, isGroup: bool = 
     weapon_damage(attr, role.weaponData, damage_func, isGroup)
 
     # 暴击伤害
-    crit_damage = f"{attr.calculate_crit_damage(attr.effect_life):,.0f}"
+    crit_damage = f"{attr.calculate_crit_damage():,.0f}"
     # 期望伤害
-    expected_damage = f"{attr.calculate_expected_damage(attr.effect_life):,.0f}"
+    expected_damage = f"{attr.calculate_expected_damage():,.0f}"
     return crit_damage, expected_damage
 
 
@@ -737,4 +737,4 @@ damage_detail = [
     },
 ]
 
-rank = damage_detail[5]
+rank = damage_detail[8]

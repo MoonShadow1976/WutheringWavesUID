@@ -140,8 +140,13 @@ async def draw_challenge_img(ev: Event, uid: str, user_id: str) -> bytes | str:
 
             for role_index, _role in enumerate(_temp.roles):
                 role = next(
-                    (role for role in role_info.roleList if role.roleName == _role.roleName or _role.roleName in role.roleName),
+                    (role for role in role_info.roleList if role.roleName == _role.roleName),
                     None,
+                )
+                if not role:
+                    candidates = [role for role in role_info.roleList if _role.roleName in role.roleName]
+                    if len(candidates) == 1:
+                        role = candidates[0]
                 )
                 if not role:
                     roleId = char_name_to_char_id(_role.roleName)

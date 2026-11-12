@@ -1273,22 +1273,20 @@
                             "cost": 4
                         },
                         {
-                            "phantomId": 6000049,
-                            "mainPropName": "共鸣效率",
+                            "phantomId": 390070067,
                             "subPropName":[
                                 "生命%",
-                                "生命",
                                 "暴击"
                             ],
-                            "cost": 3
+                            "cost": 1
                         },
                         {
-                            "phantomId": 6000058,
+                            "phantomId": 390070076,
                             "subPropName":[
                                 "生命%",
                                 "暴击"
                             ],
-                            "cost": 3
+                            "cost": 1
                         },
                         {
                             "phantomId": 6000051,

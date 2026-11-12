@@ -22024,13 +22024,13 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "暴击伤害",
-              "attributeValue": "44%",
+              "attributeName": "生命",
+              "attributeValue": "33%",
               "iconUrl": ""
             },
             {
-              "attributeName": "生命",
-              "attributeValue": "33%",
+              "attributeName": "攻击",
+              "attributeValue": "150",
               "iconUrl": ""
             }
           ],
@@ -22068,7 +22068,7 @@
           "quality": 5
         },
         {
-          "cost": 3,
+          "cost": 1,
           "fetterDetail": {
             "firstDescription": "",
             "groupId": 0,
@@ -22080,69 +22080,13 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "共鸣效率",
-              "attributeValue": "32%",
+              "attributeName": "生命",
+              "attributeValue": "22.8%",
               "iconUrl": ""
             },
             {
               "attributeName": "生命",
-              "attributeValue": "30%",
-              "iconUrl": ""
-            }
-          ],
-          "subProps": [
-            {
-              "attributeName": "生命",
-              "attributeValue": "11.6%"
-            },
-            {
-              "attributeName": "生命",
-              "attributeValue": "580"
-            },
-            {
-              "attributeName": "暴击",
-              "attributeValue": "10.5%"
-            },
-            {
-              "attributeName": "暴击伤害",
-              "attributeValue": "21.0%"
-            },
-            {
-              "attributeName": "重击伤害加成",
-              "attributeValue": "11.6%"
-            }
-          ],
-          "phantomProp": {
-            "cost": 3,
-            "iconUrl": "",
-            "name": "巡哨机傀",
-            "phantomId": 6000049,
-            "phantomPropId": 0,
-            "quality": 5,
-            "skillDescription": ""
-          },
-          "quality": 5
-        },
-        {
-          "cost": 3,
-          "fetterDetail": {
-            "firstDescription": "",
-            "groupId": 0,
-            "iconUrl": "",
-            "name": "浮星祛暗",
-            "num": 5,
-            "secondDescription": ""
-          },
-          "level": 25,
-          "mainProps": [
-            {
-              "attributeName": "衍射伤害加成",
-              "attributeValue": "30%",
-              "iconUrl": ""
-            },
-            {
-              "attributeName": "生命",
-              "attributeValue": "30%",
+              "attributeValue": "2280",
               "iconUrl": ""
             }
           ],
@@ -22169,10 +22113,66 @@
             }
           ],
           "phantomProp": {
-            "cost": 3,
+            "cost": 1,
             "iconUrl": "",
-            "name": "踏光兽",
-            "phantomId": 6000058,
+            "name": "阿嗞嗞",
+            "phantomId": 390070067,
+            "phantomPropId": 0,
+            "quality": 5,
+            "skillDescription": ""
+          },
+          "quality": 5
+        },
+        {
+          "cost": 1,
+          "fetterDetail": {
+            "firstDescription": "",
+            "groupId": 0,
+            "iconUrl": "",
+            "name": "浮星祛暗",
+            "num": 5,
+            "secondDescription": ""
+          },
+          "level": 25,
+          "mainProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "22.8%",
+              "iconUrl": ""
+            },
+            {
+              "attributeName": "生命",
+              "attributeValue": "2280",
+              "iconUrl": ""
+            }
+          ],
+          "subProps": [
+            {
+              "attributeName": "生命",
+              "attributeValue": "11.6%"
+            },
+            {
+              "attributeName": "暴击",
+              "attributeValue": "10.5%"
+            },
+            {
+              "attributeName": "共鸣效率",
+              "attributeValue": "12.4%"
+            },
+            {
+              "attributeName": "暴击伤害",
+              "attributeValue": "21.0%"
+            },
+            {
+              "attributeName": "重击伤害加成",
+              "attributeValue": "11.6%"
+            }
+          ],
+          "phantomProp": {
+            "cost": 1,
+            "iconUrl": "",
+            "name": "咕咕河豚",
+            "phantomId": 390070076,
             "phantomPropId": 0,
             "quality": 5,
             "skillDescription": ""

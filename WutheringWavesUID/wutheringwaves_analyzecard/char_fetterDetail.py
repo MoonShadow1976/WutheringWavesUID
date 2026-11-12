@@ -113,6 +113,7 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
     # 默认ID配置
     ECHO_ID_COST_ONE = 6000054
     ECHO_ID_COST_THREE = 6000050
+    ECHO_ID_COST_FOUR = 6000042
 
     # ---------- 初始化 ----------
     key = mainProps_first[0]["attributeName"]
@@ -137,6 +138,9 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
     # ---------- 4cost分配id逻辑 ----------
     def select_cost4_id():
         """选择cost4的ID（实现44111逻辑）"""
+        if not cost_4_id_list:
+            # 该套装配置缺失 cost4，返回 ECHO_ID_COST_FOUR 兜底
+            return ECHO_ID_COST_FOUR
         needId = CHAR_DETAIL[char_id].get("needId")  # 指定的声骸id
         if index == 0 and needId and needId in cost_4_id_list:
             return needId
@@ -145,8 +149,7 @@ async def echo_data_to_cost(char_id, mainProps_first, index, cost4_counter=0) ->
             if needId and needId == cost_4_id_list[used_idx]:  # 如果指定了id且在列表之中
                 used_idx = (used_idx + 1) % len(cost_4_id_list)
             return cost_4_id_list[used_idx]
-        else:
-            return cost_4_id_list[0]
+        return cost_4_id_list[0]
 
     def select_cost3_id():
         """选择cost3的ID（实现34311逻辑）"""

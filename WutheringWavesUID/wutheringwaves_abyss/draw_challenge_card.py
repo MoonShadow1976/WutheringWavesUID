@@ -147,7 +147,6 @@ async def draw_challenge_img(ev: Event, uid: str, user_id: str) -> bytes | str:
                     candidates = [role for role in role_info.roleList if _role.roleName in role.roleName]
                     if len(candidates) == 1:
                         role = candidates[0]
-                )
                 if not role:
                     roleId = char_name_to_char_id(_role.roleName)
                     avatar = await draw_pic(roleId)

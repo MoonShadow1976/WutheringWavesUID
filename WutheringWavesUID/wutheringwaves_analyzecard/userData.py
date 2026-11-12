@@ -8,7 +8,7 @@ from gsuid_core.models import Event
 
 from ..utils.ascension.echo import get_echo_model
 from ..utils.ascension.weapon import get_weapon_detail
-from ..utils.name_convert import alias_to_weapon_name, char_id_to_char_name, phantom_id_to_phantom_name, weapon_name_to_weapon_id
+from ..utils.name_convert import alias_to_weapon_name, char_id_to_char_name, weapon_name_to_weapon_id
 from ..utils.refresh_char_detail import save_card_info
 from ..wutheringwaves_config import PREFIX, WutheringWavesConfig
 from .changeEcho import get_local_all_role_detail

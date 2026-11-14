@@ -173,23 +173,20 @@ async def send_waves_bind_uid_msg(bot: Bot, ev: Event):
         )
     elif "切换" in ev.command:
         uid_list = sort_uid_list(await WavesBind.get_uid_list_by_game(qid, ev.bot_id))
-        if not uid_list:
+        current_uid = await WavesBind.get_uid_by_game(qid, ev.bot_id)
+        if not uid_list or not current_uid:
             return await bot.send("[鸣潮] 尚未绑定任何特征码\n", at_sender)
 
         if not uid:
-            return await bot.send(
-                f"[鸣潮] 该命令末尾需要跟序号或特征码!\n例如【{PREFIX}切换1】或【{PREFIX}切换123456789】\n",
-                at_sender,
-            )
+            target_uid = uid_list[(uid_list.index(current_uid) + 1) % len(uid_list)]
+        else:
+            target_uid = resolve_uid_input(uid_list, uid)
+            if not target_uid:
+                return await bot.send(
+                    f"[鸣潮] 未找到序号或特征码[{uid}]\n使用【{PREFIX}查看】查看已绑定的特征码\n",
+                    at_sender,
+                )
 
-        target_uid = resolve_uid_input(uid_list, uid)
-        if not target_uid:
-            return await bot.send(
-                f"[鸣潮] 未找到序号或特征码[{uid}]\n使用【{PREFIX}查看】查看已绑定的特征码\n",
-                at_sender,
-            )
-
-        current_uid = await WavesBind.get_uid_by_game(qid, ev.bot_id)
         if len(uid_list) <= 1 or current_uid == target_uid:
             return await send_uid_card(bot, uid_list, target_uid, f"当前已是特征码[{target_uid}]")
 

@@ -135,9 +135,7 @@ async def send_card_info(bot: Bot, ev: Event):
                 return await bot.send(
                     "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"
                 )
-            return await bot.send(
-                "[鸣潮] 国服用户已禁用刷新所有角色面板功能, 请直接刷新指定角色面板！\n"
-            )
+            return await bot.send("[鸣潮] 国服用户已禁用刷新所有角色面板功能, 请直接刷新指定角色面板！\n")
 
     from .draw_refresh_char_card import draw_refresh_char_detail_img
 

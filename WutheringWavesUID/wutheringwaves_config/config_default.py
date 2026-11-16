@@ -119,18 +119,23 @@ CONFIG_DEFAULT: dict[str, GSC] = {
         "刷新单角色面板间隔，重启生效（单位秒）",
         "刷新单角色面板间隔，重启生效（单位秒）",
         300,
-        600,
+        3600,
     ),
     "RefreshIntervalAll": GsIntConfig(
         "刷新面板间隔，重启生效（单位秒）",
         "刷新面板间隔，重启生效（单位秒）",
         1800,
-        3600,
+        43200,
     ),
     "RefreshIntervalNotify": GsStrConfig(
         "刷新面板间隔通知文案",
         "刷新面板间隔通知文案",
         "请等待{}s后尝试刷新面板！",
+    ),
+    "AllCharCardRefresh": GsBoolConfig(
+        "是否允许刷新全部角色面板",
+        "是否允许刷新全部角色面板",
+        False,
     ),
     "CharCardRefresh": GsBoolConfig(
         "角色面板自动刷新",

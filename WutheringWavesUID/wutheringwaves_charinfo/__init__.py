@@ -130,7 +130,7 @@ async def send_card_info(bot: Bot, ev: Event):
         need_refresh = False
     else:
         need_refresh = True
-        if not waves_api.is_net(uid) and WutheringWavesConfig.get_config("AllCharCardRefresh").data:
+        if not waves_api.is_net(uid) and not WutheringWavesConfig.get_config("AllCharCardRefresh").data:
             if WutheringWavesConfig.get_config("CharCardRefresh").data:
                 return await bot.send(
                     "[鸣潮] 国服用户已启用自动刷新面板功能(可能会有五分钟左右延迟), 请直接查询角色面板！\n声骸评分右上角✦表示刷新成功，左上角✖表示刷新失败，请尝试登录或对外展示角色解决\n"

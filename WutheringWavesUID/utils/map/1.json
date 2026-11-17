@@ -22024,8 +22024,8 @@
           "level": 25,
           "mainProps": [
             {
-              "attributeName": "生命",
-              "attributeValue": "33%",
+              "attributeName": "暴击伤害",
+              "attributeValue": "44%",
               "iconUrl": ""
             },
             {

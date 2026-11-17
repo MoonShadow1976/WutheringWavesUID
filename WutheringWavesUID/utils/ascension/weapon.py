@@ -106,7 +106,7 @@ def get_weapon_detail(
     for i, v in enumerate(fixed_name):
         if result.effect.startswith(v):
             value = weapon_data["param"][0][resonLevel - 1]
-            name = v.replace("提升", "").replace("全", "")
+            name = v.replace("提升", "").replace("全", "").replace("值", "")
             result.sub_effect = {"name": name, "value": f"{value}"}
 
     return result
